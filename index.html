@@ -47,19 +47,18 @@
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; align-items: center; justify-content: center; overflow-y: auto; }
         .modal-content { background: #111; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #222; }
         .modal-content h3 { margin-top: 0; font-size: 1.4rem; text-align: center; margin-bottom: 20px; }
-        .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 0.95rem; outline: none; }
+        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1rem; outline: none; }
         
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 12px; }
-        .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 12px; border-radius: 12px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+        .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
 
-        .quick-order-section { text-align: center; margin-top: 15px; border-top: 1px solid #222; padding-top: 15px; }
-        .quick-btns { display: flex; gap: 8px; margin-top: 10px; }
-        .social-btn { flex: 1; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 0.8rem; text-align: center; border: 1px solid transparent; }
-        .btn-tg { background: #222; color: #24A1DE; border-color: #24A1DE; }
-        .btn-ig { background: #222; color: #E1306C; border-color: #E1306C; }
+        .social-link { display: flex; align-items: center; gap: 15px; background: #1a1a1a; padding: 16px; border-radius: 18px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; border: 1px solid #222; }
+        .social-link.tg { border-left: 4px solid #24A1DE; }
+        .social-link.ig { border-left: 4px solid #E1306C; }
+        .social-link.tt { border-left: 4px solid #fff; }
 
-        .close-btn { text-align: center; color: #666; margin-top: 15px; cursor: pointer; font-weight: bold; display: block; font-size: 0.85rem; }
+        .close-btn { text-align: center; color: #666; margin-top: 15px; cursor: pointer; font-weight: bold; display: block; font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -87,40 +86,28 @@
     <div id="contacts-modal" class="modal">
         <div class="modal-content">
             <h3>Зв'язок</h3>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-                <a href="https://t.me/znahidkawow" target="_blank" class="social-btn btn-tg" style="font-size: 1rem; padding: 15px;">Telegram</a>
-                <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-btn btn-ig" style="font-size: 1rem; padding: 15px;">Instagram</a>
-                <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-btn" style="border: 1px solid #fff; color: #fff; font-size: 1rem; padding: 15px;">TikTok</a>
-            </div>
+            <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg">✈️ Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt">🎵 TikTok</a>
             <span class="close-btn" onclick="closeModals()">Закрити</span>
         </div>
     </div>
 
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-bottom: 15px;">Оформлення</h3>
-            
-            <input type="text" id="fio" placeholder="ПІБ">
-            <input type="tel" id="phone" placeholder="Телефон">
+            <h3>Оформлення</h3>
+            <input type="text" id="fio" placeholder="Ваше ПІБ">
+            <input type="tel" id="phone" placeholder="Ваш телефон">
             <input type="text" id="city" placeholder="Місто">
-            <input type="text" id="social-nick" placeholder="Ваш Telegram або Instagram @">
+            <input type="text" id="social-nick" placeholder="Telegram / Instagram нік">
             
             <div class="delivery-toggle">
                 <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
                 <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
             </div>
-            <input type="text" id="np-number" placeholder="№ відділення/поштомату">
+            <input type="text" id="np-number" placeholder="Номер відділення/поштомату">
             
-            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:16px; border:none; border-radius:12px; font-weight:900; font-size:1rem;">ПІДТВЕРДИТИ</button>
-
-            <div class="quick-order-section">
-                <span style="color: #666; font-size: 0.75rem;">Або швидке замовлення через соцмережі:</span>
-                <div class="quick-btns">
-                    <a href="javascript:void(0)" onclick="quickSocial('tg')" class="social-btn btn-tg">Telegram</a>
-                    <a href="javascript:void(0)" onclick="quickSocial('ig')" class="social-btn btn-ig">Instagram</a>
-                </div>
-            </div>
-            
+            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:1.1rem; margin-top:10px;">ПІДТВЕРДИТИ</button>
             <span class="close-btn" onclick="closeModals()">Скасувати</span>
         </div>
     </div>
@@ -188,7 +175,7 @@
         }
 
         function addToCart(id, name, price) {
-            if (!selectedSizes[id]) { alert("Оберіть розмір!"); return; }
+            if (!selectedSizes[id]) { alert("Спершу оберіть розмір!"); return; }
             cart.push({ name: `${name} (${selectedSizes[id]})`, price: price });
             document.getElementById('cart-panel').style.display = 'flex';
             document.getElementById('cart-count').innerText = cart.length + " ТОВАР(ІВ)";
@@ -204,24 +191,6 @@
         function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
         function closeModals() { document.getElementById('order-modal').style.display = 'none'; document.getElementById('contacts-modal').style.display = 'none'; }
 
-        function quickSocial(platform) {
-            const fio = document.getElementById('fio').value;
-            const city = document.getElementById('city').value;
-            const nick = document.getElementById('social-nick').value;
-            const items = cart.map(i => i.name).join(', ');
-            
-            let message = `Привіт! Хочу замовити: ${items}.\n\nДані:\nПІБ: ${fio || '-'}\nМісто: ${city || '-'}\nНік: ${nick || '-'}`;
-            
-            if(platform === 'tg') {
-                window.open(`https://t.me/znahidkawow?text=${encodeURIComponent(message)}`, '_blank');
-            } else {
-                navigator.clipboard.writeText(message).then(() => {
-                    alert("Дані скопійовано! Вставте їх у Direct Instagram.");
-                    window.open(`https://www.instagram.com/wow.znahidka`, '_blank');
-                });
-            }
-        }
-
         function sendOrder() {
             const fio = document.getElementById('fio').value.trim();
             const phone = document.getElementById('phone').value.trim();
@@ -229,7 +198,7 @@
             const nick = document.getElementById('social-nick').value.trim();
             const np = document.getElementById('np-number').value.trim();
             
-            if (!fio || !phone || !city) { alert("Заповніть основні поля!"); return; }
+            if (!fio || !phone || !city || !np) { alert("Заповніть усі поля!"); return; }
             
             const btn = document.getElementById('submit-order-btn');
             btn.innerText = "ВІДПРАВЛЯЄМО...";
@@ -242,7 +211,7 @@
                     price: cart.reduce((s, i) => s + parseInt(i.price), 0) + " ₴", 
                     fio: `${fio} (${nick})`, phone, city, deliveryType: currentDelivery, npNumber: np
                 })
-            }).then(() => { alert("Замовлення прийнято!"); location.reload(); });
+            }).then(() => { alert("Замовлення прийнято! Очікуйте на зв'язок."); location.reload(); });
         }
         init();
     </script>
