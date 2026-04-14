@@ -22,8 +22,8 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 12px 20px; }
         .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
         
-        .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; cursor: zoom-in; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
 
         .card-info { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; }
         .title { font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; line-height: 1.4; height: 2.8em; overflow: hidden; color: #fff; }
@@ -34,27 +34,34 @@
 
         .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
         .price { color: var(--accent); font-weight: 900; font-size: 1.15rem; }
-        .add-btn { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 14px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
-
-        /* CART ITEMS LIST IN MODAL */
-        .cart-items-list { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #161616; padding: 12px; border-radius: 14px; margin-bottom: 8px; font-size: 0.85rem; border: 1px solid #222; }
-        .cart-item-info { flex: 1; padding-right: 10px; }
-        .remove-item-btn { color: #ff4444; background: none; border: 1px solid #ff4444; border-radius: 8px; padding: 4px 8px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
+        .add-btn { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 14px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.4rem; }
 
         /* MODALS */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: flex-start; justify-content: center; overflow-y: auto; }
-        .modal-content { background: #0f0f0f; padding: 30px 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); margin-top: 50px; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; overflow-y: auto; }
+        .modal-content { background: #0f0f0f; padding: 30px 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); }
         .modal-content h3 { margin: 0 0 20px; text-align: center; }
-        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 16px; border: 1px solid var(--border); background: #161616; color: #fff; outline: none; }
+
+        /* CART LIST */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; background: #161616; padding: 12px; border-radius: 16px; margin-bottom: 10px; border: 1px solid #222; }
+        .cart-item-info b { font-size: 0.9rem; display: block; margin-bottom: 4px; }
+        .cart-item-info span { color: var(--accent); font-weight: 700; font-size: 0.85rem; }
+        .remove-btn { color: #ff4444; background: none; border: 1px solid #ff4444; border-radius: 10px; padding: 6px 10px; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
+
+        /* FORM */
+        .order-form { display: none; }
+        .order-form input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; outline: none; }
         
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 15px; }
-        .delivery-btn { background: #161616; border: 1px solid var(--border); color: #666; padding: 15px; border-radius: 16px; flex: 1; text-align: center; font-weight: 800; cursor: pointer; }
+        .delivery-btn { background: #161616; border: 1px solid var(--border); color: #666; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: 800; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
 
-        .btn-confirm { width: 100%; background: var(--accent); color: #000; padding: 20px; border: none; border-radius: 18px; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
-        .close-btn { text-align: center; color: #555; margin-top: 20px; cursor: pointer; font-weight: 800; display: block; }
+        .payment-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 20px; display: flex; gap: 12px; align-items: center; font-size: 0.85rem; }
+        .payment-card b { color: var(--accent); display: block; }
 
+        .btn-action { width: 100%; background: var(--accent); color: #000; padding: 18px; border: none; border-radius: 16px; font-weight: 900; font-size: 1rem; cursor: pointer; }
+        .close-btn { text-align: center; color: #555; margin-top: 15px; cursor: pointer; font-weight: 800; display: block; }
+
+        /* BOTTOM */
         #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 20px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
         .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; }
@@ -69,7 +76,7 @@
     <div id="page-home" class="page active-page">
         <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()"></div>
         <div id="grid-home" class="catalog-grid"></div>
-        <div id="load-more-home" style="display:none; text-align:center; padding: 20px; cursor:pointer; color:var(--accent);" onclick="loadMore('home')">Показати ще</div>
+        <div id="load-more-home" style="display:none; text-align:center; padding: 20px; color:var(--accent);" onclick="loadMore('home')">Показати ще</div>
     </div>
 
     <div id="page-catalog" class="page">
@@ -86,24 +93,33 @@
 
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <h3>Ваше замовлення</h3>
-            
-            <div id="cart-items-container" class="cart-items-list">
+            <div id="step-cart">
+                <h3>Ваш кошик</h3>
+                <div id="cart-items-list" style="margin-bottom: 20px;"></div>
+                <div class="payment-card">
+                    <span>📦</span>
+                    <p><b>Оплата при отриманні</b>Ви оплачуєте замовлення на пошті після огляду та примірки.</p>
                 </div>
-
-            <input type="text" id="fio" placeholder="Ваше ПІБ">
-            <input type="tel" id="phone" placeholder="Номер телефону">
-            <input type="text" id="city" placeholder="Місто">
-            <input type="text" id="social-nick" placeholder="Telegram / Instagram нік">
-            
-            <div class="delivery-toggle">
-                <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
-                <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
+                <button class="btn-action" onclick="goToForm()">ПІДТВЕРДИТИ СПИСОК</button>
+                <span class="close-btn" onclick="closeModals()">Повернутись до покупок</span>
             </div>
-            <input type="text" id="np-number" placeholder="Номер відділення/поштомату">
-            
-            <button id="submit-order-btn" onclick="sendOrder()" class="btn-confirm">ЗАМОВИТИ</button>
-            <span class="close-btn" onclick="closeModals()">Скасувати</span>
+
+            <div id="step-form" class="order-form">
+                <h3>Дані для доставки</h3>
+                <input type="text" id="fio" placeholder="ПІБ отримувача">
+                <input type="tel" id="phone" placeholder="Номер телефону">
+                <input type="text" id="city" placeholder="Місто">
+                <input type="text" id="social-nick" placeholder="Ваш нік (TG/IG)">
+                
+                <div class="delivery-toggle">
+                    <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
+                    <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
+                </div>
+                <input type="text" id="np-number" placeholder="№ відділення/поштомату">
+                
+                <button id="submit-order-btn" onclick="sendOrder()" class="btn-action">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+                <span class="close-btn" onclick="backToCart()">← Назад до списку</span>
+            </div>
         </div>
     </div>
 
@@ -115,14 +131,13 @@
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
         <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
-        <div class="nav-item" onclick="openContacts()"><span>💬</span>Контакти</div>
+        <div class="nav-item" onclick="alert('TG: @znahidkawow\nIG: @wow.znahidka')"><span>💬</span>Контакти</div>
     </div>
 
     <script>
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOrpI1ESu71wfiV4ThsUX_nVbXpkmfChj-px5UnlSDkTOeg24EdG2TmF4rsBnmuED9sA/exec';
         let allProducts = [], cart = [], selectedSizes = {}, currentDelivery = 'Відділення';
         const ITEMS_PER_PAGE = 10;
-        let currentPageHome = 1;
 
         async function init() {
             try {
@@ -162,58 +177,85 @@
         }
 
         function addToCart(id, name, price) {
-            if (!selectedSizes[id]) { alert("Спершу оберіть розмір!"); return; }
-            cart.push({ id: id + Date.now(), name: name, size: selectedSizes[id], price: parseInt(price) });
+            if (!selectedSizes[id]) { alert("Оберіть розмір!"); return; }
+            cart.push({ cartId: Date.now(), name: name, size: selectedSizes[id], price: parseInt(price) });
             updateCartPanel();
         }
 
         function updateCartPanel() {
-            const count = cart.length;
             const panel = document.getElementById('cart-panel');
-            if (count > 0) {
+            if (cart.length > 0) {
                 panel.style.display = 'flex';
-                document.getElementById('cart-count').innerText = `${count} ТОВАР(И)`;
-                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                document.getElementById('cart-count').innerText = `${cart.length} ТОВАР(И)`;
+                const total = cart.reduce((s, i) => s + i.price, 0);
                 document.getElementById('cart-total').innerText = `${total} ₴ ➔`;
-            } else {
-                panel.style.display = 'none';
-            }
+            } else { panel.style.display = 'none'; }
         }
 
-        function renderCartItems() {
-            const container = document.getElementById('cart-items-container');
-            container.innerHTML = cart.map((item, index) => `
+        function openOrderForm() {
+            renderCartList();
+            document.getElementById('step-cart').style.display = 'block';
+            document.getElementById('step-form').style.display = 'none';
+            document.getElementById('order-modal').style.display = 'flex';
+        }
+
+        function renderCartList() {
+            const list = document.getElementById('cart-items-list');
+            list.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
                     <div class="cart-item-info">
-                        <b>${item.name}</b><br>
-                        Розмір: ${item.size} - ${item.price} ₴
+                        <b>${item.name}</b>
+                        <span>Розмір: ${item.size} - ${item.price} ₴</span>
                     </div>
-                    <button class="remove-item-btn" onclick="removeFromCart(${index})">Видалити</button>
+                    <button class="remove-btn" onclick="removeItem(${index})">Видалити</button>
                 </div>
             `).join('');
         }
 
-        function removeFromCart(index) {
+        function removeItem(index) {
             cart.splice(index, 1);
-            renderCartItems();
+            renderCartList();
             updateCartPanel();
             if (cart.length === 0) closeModals();
         }
 
-        function openOrderForm() {
-            renderCartItems();
-            document.getElementById('order-modal').style.display = 'flex';
+        function goToForm() {
+            document.getElementById('step-cart').style.display = 'none';
+            document.getElementById('step-form').style.display = 'block';
+        }
+
+        function backToCart() {
+            document.getElementById('step-form').style.display = 'none';
+            document.getElementById('step-cart').style.display = 'block';
         }
 
         function closeModals() { document.getElementById('order-modal').style.display = 'none'; }
-        
-        function setDelivery(t) { 
+
+        function setDelivery(t) {
             currentDelivery = t;
             document.getElementById('type-branch').classList.toggle('active', t === 'Відділення');
             document.getElementById('type-post').classList.toggle('active', t === 'Поштомат');
         }
 
-        function openContacts() { alert("Telegram: @znahidkawow\nInstagram: @wow.znahidka"); }
+        function sendOrder() {
+            const fio = document.getElementById('fio').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const np = document.getElementById('np-number').value.trim();
+            if (!fio || !phone || !city || !np) { alert("Заповніть усі поля!"); return; }
+
+            const btn = document.getElementById('submit-order-btn');
+            btn.innerText = "ВІДПРАВЛЯЄМО..."; btn.disabled = true;
+
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors',
+                body: JSON.stringify({ 
+                    productName: cart.map(i => `${i.name} (${i.size})`).join(' | '), 
+                    price: cart.reduce((s, i) => s + i.price, 0) + " ₴", 
+                    fio: `${fio} (${document.getElementById('social-nick').value})`, phone, city, deliveryType: currentDelivery, npNumber: np
+                })
+            }).then(() => { alert("Замовлення прийнято! Очікуйте повідомлення."); location.reload(); });
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
@@ -225,36 +267,13 @@
 
         function renderBrands() {
             const brands = [...new Set(allProducts.map(p => p.name.split(' ')[0]))];
-            document.getElementById('brand-container').innerHTML = brands.map(b => `<div style="background:var(--card); padding:20px; border-radius:15px; border:1px solid var(--border);" onclick="openBrand('${b}')">${b} ➔</div>`).join('');
+            document.getElementById('brand-container').innerHTML = brands.map(b => `<div style="background:var(--card); padding:20px; border-radius:15px; border:1px solid var(--border); font-weight:bold;" onclick="openBrand('${b}')">${b} ➔</div>`).join('');
         }
 
         function openBrand(brand) {
             document.getElementById('brand-title').innerText = brand;
-            const filtered = allProducts.filter(p => p.name.startsWith(brand));
-            renderCards(filtered, 'grid-brand');
+            renderCards(allProducts.filter(p => p.name.startsWith(brand)), 'grid-brand');
             switchTab('brand-results');
-        }
-
-        function sendOrder() {
-            const fio = document.getElementById('fio').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const np = document.getElementById('np-number').value.trim();
-            const nick = document.getElementById('social-nick').value.trim();
-
-            if (!fio || !phone || !city || !np) { alert("Заповніть усі поля!"); return; }
-
-            const btn = document.getElementById('submit-order-btn');
-            btn.innerText = "ВІДПРАВЛЯЄМО..."; btn.disabled = true;
-
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST', mode: 'no-cors',
-                body: JSON.stringify({ 
-                    productName: cart.map(i => `${i.name} (${i.size})`).join(' | '), 
-                    price: cart.reduce((s, i) => s + i.price, 0) + " ₴", 
-                    fio: `${fio} (${nick})`, phone, city, deliveryType: currentDelivery, npNumber: np
-                })
-            }).then(() => { alert("Замовлення прийнято!"); location.reload(); });
         }
 
         init();
