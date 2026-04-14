@@ -50,16 +50,13 @@
         .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; outline: none; font-size: 1rem; }
         
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 15px; }
-        .delivery-btn { background: #161616; border: 1px solid var(--border); color: #666; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: 800; cursor: pointer; }
+        .delivery-btn { background: #161616; border: 1px solid #333; color: #666; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: 800; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
 
         .payment-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 20px; display: flex; gap: 12px; align-items: center; font-size: 0.85rem; }
         .payment-card b { color: var(--accent); display: block; margin-bottom: 2px; }
 
         .social-link { display: flex; align-items: center; gap: 15px; background: #161616; padding: 18px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 800; margin-bottom: 12px; border: 1px solid var(--border); }
-        .social-link.tg { border-left: 5px solid #24A1DE; }
-        .social-link.ig { border-left: 5px solid #E1306C; }
-        .social-link.tt { border-left: 5px solid #fff; }
 
         #cart-panel { position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 600px; background: var(--accent); color: #000; padding: 20px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
@@ -97,9 +94,9 @@
     <div id="contacts-modal" class="modal">
         <div class="modal-content">
             <h3>Зв'язок</h3>
-            <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg">✈️ Telegram</a>
-            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig">📸 Instagram</a>
-            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt">🎵 TikTok</a>
+            <a href="https://t.me/znahidkawow" target="_blank" class="social-link">✈️ Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link">🎵 TikTok</a>
             <span style="text-align:center; display:block; cursor:pointer; color:#555;" onclick="closeModals()">Закрити</span>
         </div>
     </div>
@@ -129,6 +126,7 @@
                     <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
                 </div>
                 <input type="text" id="np-number" placeholder="№ поштомату / відділення">
+                <input type="text" id="promo" placeholder="Промокод (якщо є)" style="border-color: #333;">
                 <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ЗАМОВИТИ</button>
                 <span style="text-align:center; display:block; margin-top:15px; cursor:pointer; color:#555;" onclick="backToCart()">← До списку</span>
             </div>
@@ -244,7 +242,7 @@
             const f = document.getElementById('fio').value.trim(), ph = document.getElementById('phone').value.trim();
             if(!f || !ph) return alert("Заповни ПІБ та телефон!");
             document.getElementById('submit-order-btn').innerText = "...";
-            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ productName: cart.map(i => `${i.name} (${i.size})`).join(' | '), price: cart.reduce((s, i) => s + i.price, 0) + " ₴", fio: f + " (" + document.getElementById('social-nick').value + ")", phone: ph, city: document.getElementById('city').value, deliveryType: currentDelivery, npNumber: document.getElementById('np-number').value }) }).then(() => location.reload());
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ productName: cart.map(i => `${i.name} (${i.size})`).join(' | '), price: cart.reduce((s, i) => s + i.price, 0) + " ₴", fio: f + " (" + document.getElementById('social-nick').value + ") [Код: " + document.getElementById('promo').value + "]", phone: ph, city: document.getElementById('city').value, deliveryType: currentDelivery, npNumber: document.getElementById('np-number').value }) }).then(() => location.reload());
         }
         init();
     </script>
