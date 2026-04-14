@@ -9,79 +9,66 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); padding-bottom: 120px; overflow-x: hidden; }
         
-        header { position: sticky; top: 0; z-index: 100; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); padding: 20px; text-align: center; border-bottom: 1px solid #222; }
+        header { position: sticky; top: 0; z-index: 110; background: #000; padding: 15px; text-align: center; }
         .logo { font-size: 1.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
         .logo span { color: var(--accent); }
 
-        .search-container { padding: 10px 15px; background: #000; }
-        .search-bar { width: 100%; padding: 12px 20px; border-radius: 100px; border: 1px solid #333; background: var(--input-bg); color: #fff; outline: none; font-size: 0.9rem; }
+        .search-container { position: sticky; top: 52px; z-index: 105; background: #000; padding: 10px 15px; }
+        .search-bar { width: 100%; padding: 12px 20px; border-radius: 100px; border: 1px solid #333; background: var(--input-bg); color: #fff; outline: none; }
 
-        .filters-wrapper { position: sticky; top: 65px; z-index: 90; background: #000; padding: 12px 0; border-bottom: 1px solid #222; }
+        .filters-wrapper { position: sticky; top: 112px; z-index: 100; background: #000; padding: 12px 0; border-bottom: 1px solid #222; }
         .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 0 20px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-btn { background: #1a1a1a; color: #fff; border: 1px solid #333; padding: 10px 22px; border-radius: 100px; font-weight: 600; white-space: nowrap; cursor: pointer; font-size: 0.85rem; }
+        .filter-btn { background: #1a1a1a; color: #fff; border: 1px solid #333; padding: 10px 22px; border-radius: 100px; font-weight: 600; white-space: nowrap; cursor: pointer; }
         .filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
         .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; padding: 15px; }
-        .product-card { background: var(--card-bg); border-radius: 28px; overflow: hidden; border: 1px solid #222; transition: 0.3s; }
+        .product-card { background: var(--card-bg); border-radius: 28px; overflow: hidden; border: 1px solid #222; }
         .img-container { width: 100%; aspect-ratio: 1/1; background: #1a1a1a; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.4s; }
+        
         .card-info { padding: 18px; }
         .title { font-size: 0.95rem; font-weight: 600; margin-bottom: 12px; min-height: 2.4em; }
         
-        .price-row { display: flex; justify-content: space-between; align-items: center; min-height: 44px; }
+        .sizes-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        .size-btn { background: #1a1a1a; color: #fff; border: 1px solid #333; padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
+        .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+
+        .price-row { display: flex; justify-content: space-between; align-items: center; }
         .price { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
-        .qty-controls { display: flex; align-items: center; background: var(--accent); border-radius: 14px; height: 44px; }
-        .qty-btn { background: none; border: none; width: 35px; height: 100%; color: #000; font-size: 1.4rem; font-weight: bold; cursor: pointer; }
-        .qty-num { color: #000; font-weight: 900; width: 25px; text-align: center; }
-        .add-btn { background: var(--accent); color: #000; border: none; width: 44px; height: 44px; border-radius: 14px; font-size: 1.6rem; cursor: pointer; font-weight: bold; }
+        .add-btn { background: var(--accent); color: #000; border: none; padding: 10px 20px; border-radius: 14px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
-        #cart-panel { position: fixed; bottom: 100px; left: 20px; right: 20px; background: var(--accent); color: #000; padding: 18px; border-radius: 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; font-weight: 800; box-shadow: 0 10px 30px rgba(212,255,0,0.3); cursor: pointer; }
+        #cart-panel { position: fixed; bottom: 100px; left: 20px; right: 20px; background: var(--accent); color: #000; padding: 18px; border-radius: 20px; display: none; justify-content: space-between; align-items: center; z-index: 1000; font-weight: 800; box-shadow: 0 10px 30px rgba(212,255,0,0.3); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 3000; padding: 20px 10px; overflow-y: auto; align-items: center; }
-        .modal-content { background: #111; padding: 25px; border-radius: 30px; width: 100%; max-width: 450px; border: 1px solid #333; margin: auto; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.97); z-index: 3000; padding: 20px; overflow-y: auto; }
+        .modal-content { background: #111; padding: 25px; border-radius: 30px; width: 100%; max-width: 450px; margin: auto; border: 1px solid #333; }
         .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.7rem; color: #555; margin-bottom: 5px; font-weight: 700; text-transform: uppercase; }
-        .modal-content input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #333; background: var(--input-bg); color: #fff; outline: none; }
-        .send-order-btn { width: 100%; background: var(--accent); color: #000; border: none; padding: 18px; border-radius: 15px; font-weight: 800; cursor: pointer; font-size: 1rem; }
+        .form-group label { display: block; font-size: 0.7rem; color: #555; margin-bottom: 5px; font-weight: 700; }
+        .modal-content input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #fff; outline: none; }
+        .send-order-btn { width: 100%; background: var(--accent); color: #000; border: none; padding: 18px; border-radius: 15px; font-weight: 800; cursor: pointer; }
 
         .bottom-nav { position: fixed; bottom: 25px; left: 20px; right: 20px; background: rgba(25,25,25,0.8); backdrop-filter: blur(25px); display: flex; justify-content: space-around; padding: 15px; border-radius: 26px; border: 1px solid #333; z-index: 1000; }
         .nav-item { color: #666; font-size: 0.75rem; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-item.active { color: var(--accent); }
-        .search-container {
-    padding: 15px 15px 5px 15px; /* Додав відступ зверху */
-    position: sticky;
-    top: 65px; /* Щоб пошук не ховався за логотип */
-    z-index: 101;
-    background: #000;
-}
-.filters-wrapper {
-    top: 125px; /* Трохи опустив фільтри під пошук */
-}
     </style>
 </head>
 <body>
     <header><div class="logo">wow<span>.</span>znahidka</div></header>
-    
-    <div class="search-container">
-        <input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі або розміру..." oninput="handleSearch()">
-    </div>
-
+    <div class="search-container"><input type="text" id="search-input" class="search-bar" placeholder="Пошук..." oninput="handleSearch()"></div>
     <div class="filters-wrapper"><div class="filter-scroll" id="brand-filters"></div></div>
     
-    <div id="loader" style="text-align:center; padding:50px; color:var(--accent); font-weight:800;">ОНОВЛЕННЯ...</div>
+    <div id="loader" style="text-align:center; padding:50px; color:var(--accent);">ЗАВАНТАЖЕННЯ...</div>
     <div id="catalog" class="catalog-grid"></div>
 
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <h3>ЗАМОВЛЕННЯ</h3>
-            <div class="form-group"><label>ПІБ</label><input type="text" id="fio" placeholder="Іванов Іван"></div>
+            <h3>ОФОРМЛЕННЯ</h3>
+            <div class="form-group"><label>ПІБ</label><input type="text" id="fio" placeholder="Іван Іванов"></div>
             <div class="form-group"><label>Телефон</label><input type="tel" id="phone" placeholder="0990000000"></div>
-            <div class="form-group"><label>Розмір(и)</label><input type="text" id="shoe-size" placeholder="41, 44"></div>
             <div class="form-group"><label>Місто</label><input type="text" id="city" placeholder="Київ"></div>
-            <div class="form-group"><label>№ Відділення НП</label><input type="text" id="np-number" placeholder="№1"></div>
-            <button class="send-order-btn" onclick="sendOrder()">ЗАМОВИТИ</button>
-            <p onclick="closeModal()" style="margin-top:20px; color:#444; text-align:center; cursor:pointer; font-size:0.8rem;">Скасувати</p>
+            <div class="form-group"><label>Відділення НП</label><input type="text" id="np" placeholder="№1"></div>
+            <button class="send-order-btn" onclick="sendOrder()">ПІДТВЕРДИТИ</button>
+            <p onclick="closeModal()" style="margin-top:20px; text-align:center; cursor:pointer; font-size:0.8rem;">Назад</p>
         </div>
     </div>
 
@@ -93,8 +80,8 @@
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby6baHyVXNSc0gazYc7tUXC688BmiD0LTA2aqRDa0Nd2w7UHMj41EELZRMsCVzDxJ9BIw/exec';
-        let allProducts = [], cart = [], currentFilter = 'Усі';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpF9b_B7wFt6ISWs_WZFNqP-wp6pN6ET3NVK2OkoBkrdKdOmvtasVG6AHHT4SyPLWm9w/exec';
+        let allProducts = [], cart = [], selectedSizes = {};
 
         async function loadStore() {
             try {
@@ -109,78 +96,56 @@
         function renderFilters() {
             const brands = ['Усі', ...new Set(allProducts.map(p => p.brand))].filter(b => b && b.length > 2);
             document.getElementById('brand-filters').innerHTML = brands.map(b => 
-                `<button class="filter-btn ${b === currentFilter ? 'active' : ''}" onclick="filterByBrand('${b}', this)">${b}</button>`
+                `<button class="filter-btn ${b === 'Усі' ? 'active' : ''}" onclick="filterByBrand('${b}', this)">${b}</button>`
             ).join('');
         }
 
         function filterByBrand(brand, btn) {
-            currentFilter = brand;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             const filtered = (brand === 'Усі') ? allProducts : allProducts.filter(p => p.brand === brand);
             renderProducts(filtered);
         }
 
-       function handleSearch() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    
-    
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  
-    const allBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.innerText === 'Усі');
-    if (allBtn) allBtn.classList.add('active');
-           
-    const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
-    renderProducts(filtered);
-
-    if (query === "") {
-        renderProducts(allProducts);
-    }
-}
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
 
         function renderProducts(products) {
             document.getElementById('catalog').innerHTML = products.map(p => {
-                const item = cart.find(i => i.name === p.name);
-                const q = item ? item.qty : 0;
-                return `<div class="product-card">
+                const sizesHtml = p.sizes.sort().map(s => 
+                    `<button class="size-btn ${selectedSizes[p.name] === s ? 'selected' : ''}" onclick="selectSize(this, '${p.name}', '${s}')">${s}</button>`
+                ).join('');
+
+                return `
+                <div class="product-card">
                     <div class="img-container"><img src="${p.image}" onload="this.style.opacity=1" loading="lazy"></div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
+                        <div class="sizes-container">${sizesHtml}</div>
                         <div class="price-row">
-                            <div class="price">${p.price}</div>
-                            <div id="btn-${p.name.replace(/\s+/g, '')}">
-                                ${q > 0 ? renderQty(p.name, p.price, q) : `<button class="add-btn" onclick="addToCart('${p.name}','${p.price}')">+</button>`}
-                            </div>
+                            <div class="price">${p.price} ₴</div>
+                            <button class="add-btn" onclick="checkAddToCart('${p.name}', '${p.price}')">+</button>
                         </div>
                     </div>
                 </div>`;
             }).join('');
         }
 
-        function renderQty(n, p, q) {
-            return `<div class="qty-controls">
-                <button class="qty-btn" onclick="updateQty('${n}','${p}',-1)">-</button>
-                <div class="qty-num">${q}</div>
-                <button class="qty-btn" onclick="updateQty('${n}','${p}',1)">+</button>
-            </div>`;
+        function selectSize(btn, name, size) {
+            selectedSizes[name] = size;
+            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
         }
 
-        function addToCart(n, p) { cart.push({ name: n, price: p, qty: 1 }); updateUI(n, p, 1); }
-
-        function updateQty(n, p, d) {
-            const i = cart.find(x => x.name === n);
-            if (i) {
-                i.qty += d;
-                if (i.qty <= 0) cart = cart.filter(x => x.name !== n);
-                updateUI(n, p, i ? i.qty : 0);
-            }
-        }
-
-        function updateUI(n, p, q) {
-            const btnBox = document.getElementById(`btn-${n.replace(/\s+/g, '')}`);
-            if (btnBox) btnBox.innerHTML = q > 0 ? renderQty(n, p, q) : `<button class="add-btn" onclick="addToCart('${n}','${p}')">+</button>`;
-            const total = cart.reduce((s, i) => s + i.qty, 0);
-            document.getElementById('cart-panel').style.display = total > 0 ? 'flex' : 'none';
+        function checkAddToCart(name, price) {
+            if (!selectedSizes[name]) { alert("Оберіть розмір!"); return; }
+            cart.push({ name: `${name} (Разм: ${selectedSizes[name]})`, price: price });
+            const total = cart.length;
+            document.getElementById('cart-panel').style.display = 'flex';
             document.getElementById('cart-count').innerText = total + ' ТОВ.';
         }
 
@@ -190,25 +155,18 @@
         function sendOrder() {
             const fio = document.getElementById('fio').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const size = document.getElementById('shoe-size').value.trim();
             const city = document.getElementById('city').value.trim();
-            const np = document.getElementById('np-number').value.trim();
-            if (!fio || !phone || !size || !city || !np) { alert("Заповніть усі дані!"); return; }
+            const np = document.getElementById('np').value.trim();
+            if (!fio || !phone || !city || !np) { alert("Заповніть дані!"); return; }
             
-            let total = 0;
-            const items = cart.map(i => {
-                total += (parseInt(i.price.replace(/\D/g, '')) * i.qty);
-                return `${i.name} (x${i.qty})`;
-            }).join(', ');
-
-            const info = `👤 ${fio}\n📞 ${phone}\n👟 Розміри: ${size}\n📍 ${city}, НП ${np}`;
+            const items = cart.map(i => i.name).join(', ');
+            const total = cart.reduce((s, i) => s + parseInt(i.price), 0);
+            const info = `👤 ${fio}\n📞 ${phone}\n📍 ${city}, НП ${np}`;
             
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST', mode: 'no-cors',
                 body: JSON.stringify({ productName: items, contactInfo: info, price: total + " ₴" })
-            }).then(() => {
-                alert("Замовлення надіслано боту!"); cart = []; location.reload();
-            });
+            }).then(() => { alert("Замовлення прийнято!"); location.reload(); });
         }
         loadStore();
     </script>
