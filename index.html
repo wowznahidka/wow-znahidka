@@ -22,7 +22,6 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px 15px; }
         .product-card { background: var(--card); border-radius: 22px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* ЗОНА КАРТИНКИ */
         .img-container { background: #1a1a1a; position: relative; aspect-ratio: 1/1; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
@@ -32,19 +31,15 @@
         .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
         .add-btn { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 12px; font-weight: bold; cursor: pointer; color: #000; }
 
-        /* ВІКНО ZOOM — ВИПРАВЛЕНО ДЛЯ INSTAGRAM */
-        #zoom-modal { 
-            display: none; 
-            position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.98); 
-            z-index: 10000; 
-            justify-content: center; 
-            align-items: center;
-            touch-action: none; /* Щоб не гортався сайт під картинкою */
-        }
+        /* РОЗМІРИ */
+        .sizes-container { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+        .size-btn { background: #1f1f1f; color: #aaa; border: 1px solid #333; padding: 6px 8px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); }
+
+        /* ZOOM MODAL */
+        #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; justify-content: center; align-items: center; }
         #zoom-modal img { max-width: 98%; max-height: 90vh; border-radius: 5px; object-fit: contain; }
-        .close-zoom { position: absolute; top: 30px; right: 25px; color: #fff; font-size: 3rem; font-weight: 300; cursor: pointer; z-index: 10001; }
+        .close-zoom { position: absolute; top: 30px; right: 25px; color: #fff; font-size: 3rem; cursor: pointer; }
 
         .load-more-btn { display: none; width: calc(100% - 20px); margin: 10px; background: #1a1a1a; color: #fff; padding: 15px; border-radius: 14px; text-align: center; border: 1px solid #333; font-weight: bold; }
 
@@ -61,9 +56,6 @@
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 12px; }
         .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
-        
-        .payment-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 15px; font-size: 0.8rem; line-height: 1.4; color: #bbb; }
-        .payment-card b { color: var(--accent); display: block; }
     </style>
 </head>
 <body>
@@ -106,9 +98,6 @@
                 <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
             </div>
             <input type="text" id="np-number" placeholder="№ відділення/поштомату">
-            <div class="payment-card">
-                <p><b>Оплата при отриманні</b>Накладений платіж «Нова Пошта».</p>
-            </div>
             <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900;">ПІДТВЕРДИТИ</button>
             <p onclick="closeModals()" style="text-align:center; color:#666; margin-top:15px; cursor:pointer;">Скасувати</p>
         </div>
@@ -141,19 +130,22 @@
             } catch (e) { console.error(e); }
         }
 
-        // --- ДЕЛЕГУВАННЯ КЛІКУ НА ЗУМ (ДЛЯ INSTAGRAM) ---
+        // --- ДЕЛЕГУВАННЯ КЛІКІВ (ВИПРАВЛЯЄ ВИБІР РОЗМІРУ ТА ЗУМ) ---
         document.addEventListener('click', function(e) {
-            // Перевіряємо, чи клікнули на картинку всередині img-container
+            // Клік на картинку (Zoom)
             if (e.target.closest('.img-container img')) {
-                const src = e.target.src;
-                const modal = document.getElementById('zoom-modal');
-                const zoomedImg = document.getElementById('zoomed-img');
-                zoomedImg.src = src;
-                modal.style.display = 'flex';
+                document.getElementById('zoomed-img').src = e.target.src;
+                document.getElementById('zoom-modal').style.display = 'flex';
             }
-            // Закриття зуму при кліку на фон або на хрестик
+            // Закриття зуму
             if (e.target.id === 'zoom-modal' || e.target.classList.contains('close-zoom')) {
                 document.getElementById('zoom-modal').style.display = 'none';
+            }
+            // Клік на кнопку розміру
+            if (e.target.classList.contains('size-btn')) {
+                const id = e.target.getAttribute('data-id');
+                const size = e.target.getAttribute('data-size');
+                pickSize(e.target, id, size);
             }
         });
 
@@ -161,15 +153,15 @@
             const container = document.getElementById(containerId);
             const html = products.map(p => {
                 const firstImg = p.image.split(',')[0].trim();
-                const sizesHtml = p.sizes.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`).join('');
+                const sizesHtml = p.sizes.map(s => 
+                    `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" data-id="${p.id}" data-size="${s}">${s}</button>`
+                ).join('');
                 return `
                 <div class="product-card">
-                    <div class="img-container">
-                        <img src="${firstImg}" loading="lazy">
-                    </div>
+                    <div class="img-container"><img src="${firstImg}" loading="lazy"></div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
-                        <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px;">${sizesHtml}</div>
+                        <div class="sizes-container">${sizesHtml}</div>
                         <div class="price-row">
                             <div class="price">${p.price} ₴</div>
                             <button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', '${p.price}')">+</button>
@@ -179,6 +171,13 @@
             }).join('');
             if (append) container.innerHTML += html;
             else container.innerHTML = html;
+        }
+
+        function pickSize(btn, id, size) {
+            selectedSizes[id] = size;
+            // Знаходимо контейнер саме цієї картки, щоб зняти виділення з інших кнопок
+            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
         }
 
         function loadMore(type) {
@@ -230,14 +229,8 @@
             currentPageHome = 1;
         }
 
-        function pickSize(btn, id, size) {
-            selectedSizes[id] = size;
-            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-        }
-
         function addToCart(id, name, price) {
-            if (!selectedSizes[id]) { alert("Оберіть розмір!"); return; }
+            if (!selectedSizes[id]) { alert("Спершу оберіть потрібний розмір!"); return; }
             cart.push({ name: `${name} (${selectedSizes[id]})`, price });
             document.getElementById('cart-panel').style.display = 'flex';
             document.getElementById('cart-count').innerText = cart.length + " ТОВАР(ІВ)";
@@ -251,7 +244,7 @@
             const fio = document.getElementById('fio').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const city = document.getElementById('city').value.trim();
-            if (!fio || !phone || !city) { alert("Заповніть основні поля!"); return; }
+            if (!fio || !phone || !city) { alert("Заповніть поля!"); return; }
             const btn = document.getElementById('submit-order-btn');
             btn.innerText = "ВІДПРАВЛЯЄМО..."; btn.disabled = true;
             fetch(GOOGLE_SCRIPT_URL, {
