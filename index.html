@@ -48,6 +48,16 @@
         .bottom-nav { position: fixed; bottom: 25px; left: 20px; right: 20px; background: rgba(25,25,25,0.8); backdrop-filter: blur(25px); display: flex; justify-content: space-around; padding: 15px; border-radius: 26px; border: 1px solid #333; z-index: 1000; }
         .nav-item { color: #666; font-size: 0.75rem; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav-item.active { color: var(--accent); }
+        .search-container {
+    padding: 15px 15px 5px 15px; /* Додав відступ зверху */
+    position: sticky;
+    top: 65px; /* Щоб пошук не ховався за логотип */
+    z-index: 101;
+    background: #000;
+}
+.filters-wrapper {
+    top: 125px; /* Трохи опустив фільтри під пошук */
+}
     </style>
 </head>
 <body>
@@ -111,11 +121,22 @@
             renderProducts(filtered);
         }
 
-        function handleSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
-            renderProducts(filtered);
-        }
+       function handleSearch() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    
+    
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  
+    const allBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.innerText === 'Усі');
+    if (allBtn) allBtn.classList.add('active');
+           
+    const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+    renderProducts(filtered);
+
+    if (query === "") {
+        renderProducts(allProducts);
+    }
+}
 
         function renderProducts(products) {
             document.getElementById('catalog').innerHTML = products.map(p => {
