@@ -31,12 +31,10 @@
         .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
         .add-btn { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 12px; font-weight: bold; cursor: pointer; color: #000; }
 
-        /* РОЗМІРИ */
         .sizes-container { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
-        .size-btn { background: #1f1f1f; color: #aaa; border: 1px solid #333; padding: 6px 8px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .size-btn { background: #1f1f1f; color: #aaa; border: 1px solid #333; padding: 6px 8px; border-radius: 8px; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
         .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); }
 
-        /* ZOOM MODAL */
         #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; justify-content: center; align-items: center; }
         #zoom-modal img { max-width: 98%; max-height: 90vh; border-radius: 5px; object-fit: contain; }
         .close-zoom { position: absolute; top: 30px; right: 25px; color: #fff; font-size: 3rem; cursor: pointer; }
@@ -53,9 +51,16 @@
         .modal-content { background: #111; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #222; }
         .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid #333; background: #1a1a1a; color: #fff; outline: none; }
         
+        /* СОЦМЕРЕЖІ В КОНТАКТАХ */
+        .social-link { display: flex; align-items: center; gap: 15px; background: #1a1a1a; padding: 16px; border-radius: 18px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; border: 1px solid #222; }
+        .social-link.tg { border-left: 4px solid #24A1DE; }
+        .social-link.ig { border-left: 4px solid #E1306C; }
+        .social-link.tt { border-left: 4px solid #fff; }
+
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 12px; }
         .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
+        .close-btn { text-align: center; color: #666; margin-top: 15px; cursor: pointer; font-weight: bold; display: block; }
     </style>
 </head>
 <body>
@@ -81,6 +86,16 @@
         <div id="load-more-brand" class="load-more-btn" onclick="loadMore('brand')">Показати ще</div>
     </div>
 
+    <div id="contacts-modal" class="modal">
+        <div class="modal-content">
+            <h3>Зв'язок</h3>
+            <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg">✈️ Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt">🎵 TikTok</a>
+            <span class="close-btn" onclick="closeModals()">Закрити</span>
+        </div>
+    </div>
+
     <div id="zoom-modal">
         <span class="close-zoom">&times;</span>
         <img id="zoomed-img" src="">
@@ -99,7 +114,7 @@
             </div>
             <input type="text" id="np-number" placeholder="№ відділення/поштомату">
             <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900;">ПІДТВЕРДИТИ</button>
-            <p onclick="closeModals()" style="text-align:center; color:#666; margin-top:15px; cursor:pointer;">Скасувати</p>
+            <span class="close-btn" onclick="closeModals()">Скасувати</span>
         </div>
     </div>
 
@@ -111,7 +126,7 @@
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
         <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
-        <div class="nav-item" onclick="alert('TG: @znahidkawow\nIG: @wow.znahidka')"><span>💬</span>Контакти</div>
+        <div class="nav-item" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
 
     <script>
@@ -130,22 +145,23 @@
             } catch (e) { console.error(e); }
         }
 
-        // --- ДЕЛЕГУВАННЯ КЛІКІВ (ВИПРАВЛЯЄ ВИБІР РОЗМІРУ ТА ЗУМ) ---
+        // --- ГЛОБАЛЬНІ КЛІКИ (ДЛЯ INSTAGRAM) ---
         document.addEventListener('click', function(e) {
-            // Клік на картинку (Zoom)
+            // ZOOM
             if (e.target.closest('.img-container img')) {
                 document.getElementById('zoomed-img').src = e.target.src;
                 document.getElementById('zoom-modal').style.display = 'flex';
             }
-            // Закриття зуму
             if (e.target.id === 'zoom-modal' || e.target.classList.contains('close-zoom')) {
                 document.getElementById('zoom-modal').style.display = 'none';
             }
-            // Клік на кнопку розміру
+            // ВИБІР РОЗМІРУ
             if (e.target.classList.contains('size-btn')) {
                 const id = e.target.getAttribute('data-id');
                 const size = e.target.getAttribute('data-size');
-                pickSize(e.target, id, size);
+                selectedSizes[id] = size;
+                e.target.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
             }
         });
 
@@ -153,31 +169,17 @@
             const container = document.getElementById(containerId);
             const html = products.map(p => {
                 const firstImg = p.image.split(',')[0].trim();
-                const sizesHtml = p.sizes.map(s => 
-                    `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" data-id="${p.id}" data-size="${s}">${s}</button>`
-                ).join('');
-                return `
-                <div class="product-card">
+                const sizesHtml = p.sizes.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" data-id="${p.id}" data-size="${s}">${s}</button>`).join('');
+                return `<div class="product-card">
                     <div class="img-container"><img src="${firstImg}" loading="lazy"></div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
                         <div class="sizes-container">${sizesHtml}</div>
-                        <div class="price-row">
-                            <div class="price">${p.price} ₴</div>
-                            <button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', '${p.price}')">+</button>
-                        </div>
+                        <div class="price-row"><div class="price">${p.price} ₴</div><button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', '${p.price}')">+</button></div>
                     </div>
                 </div>`;
             }).join('');
-            if (append) container.innerHTML += html;
-            else container.innerHTML = html;
-        }
-
-        function pickSize(btn, id, size) {
-            selectedSizes[id] = size;
-            // Знаходимо контейнер саме цієї картки, щоб зняти виділення з інших кнопок
-            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+            if (append) container.innerHTML += html; else container.innerHTML = html;
         }
 
         function loadMore(type) {
@@ -230,7 +232,7 @@
         }
 
         function addToCart(id, name, price) {
-            if (!selectedSizes[id]) { alert("Спершу оберіть потрібний розмір!"); return; }
+            if (!selectedSizes[id]) { alert("Оберіть розмір!"); return; }
             cart.push({ name: `${name} (${selectedSizes[id]})`, price });
             document.getElementById('cart-panel').style.display = 'flex';
             document.getElementById('cart-count').innerText = cart.length + " ТОВАР(ІВ)";
@@ -238,7 +240,8 @@
 
         function setDelivery(t) { currentDelivery = t; document.getElementById('type-branch').classList.toggle('active', t==='Відділення'); document.getElementById('type-post').classList.toggle('active', t==='Поштомат'); }
         function openOrderForm() { document.getElementById('order-modal').style.display = 'flex'; }
-        function closeModals() { document.getElementById('order-modal').style.display = 'none'; }
+        function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
+        function closeModals() { document.getElementById('order-modal').style.display = 'none'; document.getElementById('contacts-modal').style.display = 'none'; }
 
         function sendOrder() {
             const fio = document.getElementById('fio').value.trim();
