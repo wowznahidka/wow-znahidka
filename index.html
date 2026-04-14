@@ -22,10 +22,8 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px 15px; }
         .product-card { background: var(--card); border-radius: 22px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; }
         
-        /* КОНТЕЙНЕР ФОТО */
-        .img-container { background: #1a1a1a; position: relative; aspect-ratio: 1/1; overflow: hidden; cursor: zoom-in; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-        .img-container:active img { transform: scale(1.05); }
+        .img-container { background: #1a1a1a; position: relative; aspect-ratio: 1/1; overflow: hidden; cursor: pointer; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
 
         .card-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
         .title { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; height: 2.6em; overflow: hidden; color: #eee; }
@@ -33,10 +31,18 @@
         .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
         .add-btn { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 12px; font-weight: bold; cursor: pointer; color: #000; }
 
-        /* ВЕЛИКЕ ВІКНО ZOOM */
-        #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; justify-content: center; align-items: center; padding: 10px; }
-        #zoom-modal img { max-width: 100%; max-height: 90vh; border-radius: 15px; object-fit: contain; }
-        .close-zoom { position: absolute; top: 30px; right: 25px; color: #fff; font-size: 2.5rem; font-weight: bold; cursor: pointer; line-height: 1; }
+        /* --- ВІКНО ZOOM --- */
+        #zoom-modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.95); 
+            z-index: 9999; /* Максимальний пріоритет */
+            justify-content: center; 
+            align-items: center; 
+        }
+        #zoom-modal img { max-width: 95%; max-height: 85vh; border-radius: 10px; object-fit: contain; }
+        .close-zoom { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 3rem; font-weight: bold; cursor: pointer; }
 
         .load-more-btn { display: none; width: calc(100% - 20px); margin: 10px; background: #1a1a1a; color: #fff; padding: 15px; border-radius: 14px; text-align: center; border: 1px solid #333; font-weight: bold; }
 
@@ -49,11 +55,12 @@
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; align-items: center; justify-content: center; overflow-y: auto; }
         .modal-content { background: #111; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #222; }
         .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid #333; background: #1a1a1a; color: #fff; outline: none; }
+        
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 12px; }
         .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
         
-        .payment-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; font-size: 0.8rem; line-height: 1.4; color: #bbb; }
+        .payment-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 15px; font-size: 0.8rem; line-height: 1.4; color: #bbb; }
         .payment-card b { color: var(--accent); display: block; }
     </style>
 </head>
@@ -98,8 +105,7 @@
             </div>
             <input type="text" id="np-number" placeholder="№ відділення/поштомату">
             <div class="payment-card">
-                <span>📦</span>
-                <p><b>Оплата при отриманні</b>Накладений платіж «Нова Пошта». Огляньте перед оплатою.</p>
+                <p><b>Оплата при отриманні</b>Накладений платіж «Нова Пошта».</p>
             </div>
             <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900;">ПІДТВЕРДИТИ</button>
             <p onclick="closeModals()" style="text-align:center; color:#666; margin-top:15px; cursor:pointer;">Скасувати</p>
@@ -114,7 +120,7 @@
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
         <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
-        <div id="contacts-trigger" class="nav-item" onclick="alert('TG: @znahidkawow\nIG: @wow.znahidka')"><span>💬</span>Контакти</div>
+        <div class="nav-item" onclick="alert('TG: @znahidkawow\nIG: @wow.znahidka')"><span>💬</span>Контакти</div>
     </div>
 
     <script>
@@ -157,9 +163,12 @@
             else container.innerHTML = html;
         }
 
+        // --- ВИПРАВЛЕНА ФУНКЦІЯ ZOOM ---
         function openZoom(src) {
-            document.getElementById('zoomed-img').src = src;
-            document.getElementById('zoom-modal').style.display = 'flex';
+            const modal = document.getElementById('zoom-modal');
+            const img = document.getElementById('zoomed-img');
+            img.src = src;
+            modal.style.display = 'flex';
         }
 
         function loadMore(type) {
@@ -178,7 +187,7 @@
 
         function checkLoadMore(type, total, current) {
             const btn = document.getElementById(`load-more-${type}`);
-            btn.style.display = (total > current * ITEMS_PER_PAGE) ? 'block' : 'none';
+            if (btn) btn.style.display = (total > current * ITEMS_PER_PAGE) ? 'block' : 'none';
         }
 
         function switchTab(tabId) {
@@ -232,7 +241,7 @@
             const fio = document.getElementById('fio').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const city = document.getElementById('city').value.trim();
-            if (!fio || !phone || !city) { alert("Заповніть поля!"); return; }
+            if (!fio || !phone || !city) { alert("Заповніть основні поля!"); return; }
             const btn = document.getElementById('submit-order-btn');
             btn.innerText = "ВІДПРАВЛЯЄМО..."; btn.disabled = true;
             fetch(GOOGLE_SCRIPT_URL, {
