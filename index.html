@@ -22,8 +22,9 @@
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 10px 15px; }
         .product-card { background: var(--card); border-radius: 22px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; }
         
-        .img-container { background: #1a1a1a; position: relative; aspect-ratio: 1/1; overflow: hidden; cursor: pointer; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        /* ЗОНА КАРТИНКИ */
+        .img-container { background: #1a1a1a; position: relative; aspect-ratio: 1/1; overflow: hidden; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: pointer; }
 
         .card-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
         .title { font-size: 0.85rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; height: 2.6em; overflow: hidden; color: #eee; }
@@ -31,18 +32,19 @@
         .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
         .add-btn { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 12px; font-weight: bold; cursor: pointer; color: #000; }
 
-        /* --- ВІКНО ZOOM --- */
+        /* ВІКНО ZOOM — ВИПРАВЛЕНО ДЛЯ INSTAGRAM */
         #zoom-modal { 
             display: none; 
             position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.95); 
-            z-index: 9999; /* Максимальний пріоритет */
+            background: rgba(0,0,0,0.98); 
+            z-index: 10000; 
             justify-content: center; 
-            align-items: center; 
+            align-items: center;
+            touch-action: none; /* Щоб не гортався сайт під картинкою */
         }
-        #zoom-modal img { max-width: 95%; max-height: 85vh; border-radius: 10px; object-fit: contain; }
-        .close-zoom { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 3rem; font-weight: bold; cursor: pointer; }
+        #zoom-modal img { max-width: 98%; max-height: 90vh; border-radius: 5px; object-fit: contain; }
+        .close-zoom { position: absolute; top: 30px; right: 25px; color: #fff; font-size: 3rem; font-weight: 300; cursor: pointer; z-index: 10001; }
 
         .load-more-btn { display: none; width: calc(100% - 20px); margin: 10px; background: #1a1a1a; color: #fff; padding: 15px; border-radius: 14px; text-align: center; border: 1px solid #333; font-weight: bold; }
 
@@ -87,7 +89,7 @@
         <div id="load-more-brand" class="load-more-btn" onclick="loadMore('brand')">Показати ще</div>
     </div>
 
-    <div id="zoom-modal" onclick="this.style.display='none'">
+    <div id="zoom-modal">
         <span class="close-zoom">&times;</span>
         <img id="zoomed-img" src="">
     </div>
@@ -139,6 +141,22 @@
             } catch (e) { console.error(e); }
         }
 
+        // --- ДЕЛЕГУВАННЯ КЛІКУ НА ЗУМ (ДЛЯ INSTAGRAM) ---
+        document.addEventListener('click', function(e) {
+            // Перевіряємо, чи клікнули на картинку всередині img-container
+            if (e.target.closest('.img-container img')) {
+                const src = e.target.src;
+                const modal = document.getElementById('zoom-modal');
+                const zoomedImg = document.getElementById('zoomed-img');
+                zoomedImg.src = src;
+                modal.style.display = 'flex';
+            }
+            // Закриття зуму при кліку на фон або на хрестик
+            if (e.target.id === 'zoom-modal' || e.target.classList.contains('close-zoom')) {
+                document.getElementById('zoom-modal').style.display = 'none';
+            }
+        });
+
         function renderCards(products, containerId, append = false) {
             const container = document.getElementById(containerId);
             const html = products.map(p => {
@@ -146,7 +164,7 @@
                 const sizesHtml = p.sizes.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`).join('');
                 return `
                 <div class="product-card">
-                    <div class="img-container" onclick="openZoom('${firstImg}')">
+                    <div class="img-container">
                         <img src="${firstImg}" loading="lazy">
                     </div>
                     <div class="card-info">
@@ -161,14 +179,6 @@
             }).join('');
             if (append) container.innerHTML += html;
             else container.innerHTML = html;
-        }
-
-        // --- ВИПРАВЛЕНА ФУНКЦІЯ ZOOM ---
-        function openZoom(src) {
-            const modal = document.getElementById('zoom-modal');
-            const img = document.getElementById('zoomed-img');
-            img.src = src;
-            modal.style.display = 'flex';
         }
 
         function loadMore(type) {
