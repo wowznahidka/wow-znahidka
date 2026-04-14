@@ -6,130 +6,220 @@
     <title>wow.znahidka</title>
     <style>
         :root { --accent: #d4ff00; --bg: #000; --card: #121212; }
-        body { background: var(--bg); color: #fff; font-family: -apple-system, sans-serif; margin: 0; padding-bottom: 120px; }
-        header { position: sticky; top: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); padding: 15px; text-align: center; z-index: 1000; border-bottom: 1px solid #222; font-weight: 900; }
-        .filter-wrapper { background: #000; padding: 10px 0; border-bottom: 1px solid #222; position: sticky; top: 52px; z-index: 999; }
-        .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 0 15px; scrollbar-width: none; }
-        .filter-scroll::-webkit-scrollbar { display: none; }
-        .filter-item { background: #1a1a1a; color: #888; border: 1px solid #333; padding: 8px 16px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; cursor: pointer; white-space: nowrap; }
-        .filter-item.active { background: var(--accent); color: #000; border-color: var(--accent); }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #fff; font-family: -apple-system, sans-serif; margin: 0; padding-bottom: 110px; }
+        
+        header { position: sticky; top: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); padding: 15px; text-align: center; z-index: 100; border-bottom: 1px solid #222; }
+        .logo { font-size: 1.3rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
+
+        .search-container { padding: 10px 15px; background: var(--bg); }
+        .search-bar { width: 100%; padding: 12px 20px; border-radius: 15px; border: 1px solid #333; background: #1a1a1a; color: #fff; outline: none; }
+
+        /* Вкладки */
+        #page-catalog-menu, #page-home { display: none; }
+        .active-page { display: block !important; }
+
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
-        .product-card { background: var(--card); border-radius: 20px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .img-container { position: relative; width: 100%; aspect-ratio: 1/1; background: #1a1a1a; }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .product-card { background: var(--card); border-radius: 24px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; }
+        .img-container img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
         .card-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
-        .p-name { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; height: 2.4em; overflow: hidden; }
-        .size-tag { font-size: 0.65rem; color: #666; background: #1a1a1a; padding: 2px 5px; border-radius: 4px; margin-right: 4px; border: 1px solid #333; }
-        .size-tag.highlight { background: var(--accent); color: #000; font-weight: bold; }
+        .title { font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; height: 2.6em; overflow: hidden; color: #ccc; }
+        
+        .sizes-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+        .size-btn { background: #1f1f1f; color: #fff; border: 1px solid #333; padding: 5px 8px; border-radius: 8px; font-size: 0.7rem; cursor: pointer; }
+        .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
+        
         .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+        .price { color: var(--accent); font-weight: 900; font-size: 1rem; }
         .add-btn { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
-        .modal-content { background: #161616; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #333; text-align: center; }
-        .btn-tg { background: #24A1DE; color: #fff; padding: 18px; border-radius: 15px; width: 100%; font-weight: bold; border: none; margin-bottom: 12px; }
-        .btn-form { background: #222; color: #fff; padding: 18px; border-radius: 15px; width: 100%; font-weight: bold; border: 1px solid #333; }
-        input { width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #333; background: #222; color: #fff; }
+
+        /* Кнопки категорій у Каталозі */
+        .category-list { padding: 15px; display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .category-item { background: #111; padding: 20px; border-radius: 18px; border: 1px solid #222; font-weight: 800; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .category-item span { color: var(--accent); }
+
+        #cart-panel { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 20px; display: none; justify-content: space-between; font-weight: 900; z-index: 200; box-shadow: 0 10px 30px rgba(212,255,0,0.3); }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0a0a0a; display: flex; justify-content: space-around; padding: 15px 10px 25px; border-top: 1px solid #222; z-index: 300; }
+        .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; }
+        .nav-item span { display: block; font-size: 1.3rem; margin-bottom: 4px; }
+        .nav-item.active { color: var(--accent); }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; display: flex; align-items: center; }
+        .modal-content { background: #161616; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #333; margin: auto; }
+        .modal-content input { width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #333; background: #222; color: #fff; outline: none; }
+        .delivery-btn { background: #222; border: 1px solid #333; color: #888; padding: 12px; border-radius: 12px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
+        .delivery-btn.active { border-color: var(--accent); color: var(--accent); }
     </style>
 </head>
 <body>
-<header>WOW.ZNAHIDKA</header>
-<div class="filter-wrapper"><div class="filter-scroll" id="size-filters"><div class="filter-item active" onclick="filterBySize('all', this)">Всі</div></div></div>
-<div id="catalog" class="catalog-grid"></div>
 
-<div id="choice-modal" class="modal">
-    <div class="modal-content">
-        <h3 id="target-title" style="margin-bottom:20px;">Замовити</h3>
-        <button class="btn-tg" onclick="orderTG()">ЧЕРЕЗ TELEGRAM</button>
-        <button class="btn-form" onclick="showForm()">ЧЕРЕЗ ФОРМУ</button>
-        <p onclick="closeModals()" style="margin-top:20px; color:#555; cursor:pointer;">Скасувати</p>
+    <header><div class="logo">WOW<span>.</span>ZNAHIDKA</div></header>
+
+    <div id="page-home" class="active-page">
+        <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук..." oninput="handleSearch()"></div>
+        <div id="catalog" class="catalog-grid"></div>
     </div>
-</div>
 
-<div id="form-modal" class="modal">
-    <div class="modal-content">
-        <h3>Доставка</h3>
-        <input type="text" id="fio" placeholder="ПІБ">
-        <input type="tel" id="phone" placeholder="Телефон">
-        <input type="text" id="city" placeholder="Місто">
-        <input type="text" id="np" placeholder="№ Відділення">
-        <button onclick="sendForm()" style="width:100%; background:var(--accent); padding:18px; border:none; border-radius:15px; font-weight:900;">ОФОРМИТИ</button>
-        <p onclick="closeModals()" style="text-align:center; color:#555; margin-top:15px; cursor:pointer;">Назад</p>
+    <div id="page-catalog-menu">
+        <h2 style="padding: 20px 20px 0;">Обери бренд</h2>
+        <div id="category-container" class="category-list"></div>
     </div>
-</div>
 
-<script>
-    const GOOGLE_URL = 'https://script.google.com/macros/s/AKfycbya2aC6awPj90fDtkjifAUJbzCfyvkfgLFfqbscAtQrzKoXOcBio3CIa1ZmLXsM5JYBXA/exec'; 
-    const TG_NICK = 'znahidkawow'; 
-    let allProducts = [], currentSize = 'all', activeOrder = {};
+    <div id="page-category-results" style="display:none;">
+        <div style="padding: 15px; display: flex; align-items: center; gap: 10px;">
+            <button onclick="showPage('catalog')" style="background:none; border:none; color:var(--accent); font-size:1.5rem;">←</button>
+            <h2 id="category-title" style="margin:0;"></h2>
+        </div>
+        <div id="category-products" class="catalog-grid"></div>
+    </div>
 
-    async function load() {
-        const res = await fetch(GOOGLE_URL);
-        allProducts = await res.json();
-        renderFilters(); render();
-    }
+    <div id="order-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Оформлення</h3>
+            <input type="text" id="fio" placeholder="ПІБ">
+            <input type="tel" id="phone" placeholder="Телефон">
+            <input type="text" id="city" placeholder="Місто">
+            <div style="display:flex; gap:10px; margin-bottom:10px;">
+                <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
+                <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
+            </div>
+            <input type="text" id="np-number" placeholder="Номер відділення/поштомату">
+            <button onclick="sendOrder()" style="width:100%; background:var(--accent); padding:18px; border:none; border-radius:15px; font-weight:900;">ЗАМОВИТИ</button>
+            <p onclick="closeModal()" style="text-align:center; color:#555; margin-top:15px; cursor:pointer;">Назад</p>
+        </div>
+    </div>
 
-    function renderFilters() {
-        let sizes = [...new Set(allProducts.flatMap(p => p.sizes))].filter(s => s && s.length < 5).sort((a,b)=>a-b);
-        const container = document.getElementById('size-filters');
-        sizes.forEach(s => {
-            const div = document.createElement('div');
-            div.className = 'filter-item'; div.innerText = s;
-            div.onclick = (e) => filterBySize(s, e.target);
-            container.appendChild(div);
-        });
-    }
+    <div id="cart-panel" onclick="openOrderForm()">
+        <span id="cart-count">0 ПАР</span>
+        <span>ОФОРМИТИ ➔</span>
+    </div>
 
-    function filterBySize(s, el) {
-        document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
-        el.classList.add('active'); currentSize = s; render();
-    }
+    <div class="bottom-nav">
+        <a href="javascript:void(0)" class="nav-item active" id="nav-home" onclick="showPage('home')"><span>🏠</span>Головна</a>
+        <a href="javascript:void(0)" class="nav-item" id="nav-catalog" onclick="showPage('catalog')"><span>👟</span>Каталог</a>
+        <a href="https://t.me/znahidkawow" target="_blank" class="nav-item"><span>💬</span>Контакти</a>
+    </div>
 
-    function render() {
-        let sorted = [...allProducts].sort((a,b) => {
-            if(currentSize === 'all') return 0;
-            return b.sizes.includes(currentSize) - a.sizes.includes(currentSize);
-        });
-        document.getElementById('catalog').innerHTML = sorted.map(p => {
-            const isDim = currentSize !== 'all' && !p.sizes.includes(currentSize);
-            return `
-            <div class="product-card" style="opacity: ${isDim ? 0.4 : 1}">
-                <div class="img-container"><img src="${p.image}" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=WOW.ZNAHIDKA'"></div>
-                <div class="card-info">
-                    <div class="p-name">${p.name}</div>
-                    <div class="sizes-row">${p.sizes.map(s => `<span class="size-tag ${s === currentSize ? 'highlight' : ''}">${s}</span>`).join('')}</div>
-                    <div class="price-row"><div class="price">${p.price} ₴</div><button class="add-btn" onclick="startOrder('${p.name}', '${p.price}')">+</button></div>
+    <script>
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHE1QbM3mYTPfHNL8CTmrcM0PYmI10MYLSnEU8BvXLtUgAEz-c8R7NnsOJG8ke3K8YIA/exec'; 
+        let allProducts = [], cart = [], selectedSizes = {}, currentDelivery = 'Відділення';
+
+        async function loadStore() {
+            const res = await fetch(GOOGLE_SCRIPT_URL);
+            allProducts = await res.json();
+            renderProducts(allProducts, 'catalog');
+            renderCategories();
+        }
+
+        function getPairsText(n) {
+            const lastDigit = n % 10;
+            const lastTwoDigits = n % 100;
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return n + ' ПАР';
+            if (lastDigit === 1) return n + ' ПАРА';
+            if (lastDigit >= 2 && lastDigit <= 4) return n + ' ПАРИ';
+            return n + ' ПАР';
+        }
+
+        function showPage(page) {
+            document.querySelectorAll('#page-home, #page-catalog-menu, #page-category-results').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            
+            if(page === 'home') {
+                document.getElementById('page-home').style.display = 'block';
+                document.getElementById('nav-home').classList.add('active');
+            } else if(page === 'catalog') {
+                document.getElementById('page-catalog-menu').style.display = 'block';
+                document.getElementById('nav-catalog').classList.add('active');
+            }
+        }
+
+        function renderCategories() {
+            const brands = [...new Set(allProducts.map(p => p.brand))].filter(b => b);
+            document.getElementById('category-container').innerHTML = brands.map(brand => `
+                <div class="category-item" onclick="showCategory('${brand}')">
+                    ${brand} <span>➔</span>
                 </div>
-            </div>`;
-        }).join('');
-    }
+            `).join('');
+        }
 
-    function startOrder(n, p) {
-        if(currentSize === 'all') { alert("Обери розмір зверху!"); return; }
-        activeOrder = { name: n, price: p, size: currentSize };
-        document.getElementById('target-title').innerText = n + " (р." + currentSize + ")";
-        document.getElementById('choice-modal').style.display = 'flex';
-    }
+        function showCategory(brand) {
+            document.getElementById('page-catalog-menu').style.display = 'none';
+            document.getElementById('page-category-results').style.display = 'block';
+            document.getElementById('category-title').innerText = brand;
+            const filtered = allProducts.filter(p => p.brand === brand);
+            renderProducts(filtered, 'category-products');
+        }
 
-    function orderTG() {
-        const msg = encodeURIComponent(`Привіт! Хочу замовити:\n👟 ${activeOrder.name}\n📏 Розмір: ${activeOrder.size}\n💰 Ціна: ${activeOrder.price} ₴`);
-        window.open(`https://t.me/${TG_NICK}?text=${msg}`, '_blank');
-        closeModals();
-    }
+        function renderProducts(products, containerId) {
+            document.getElementById(containerId).innerHTML = products.map(p => {
+                const sizesHtml = p.sizes.map(s => 
+                    `<button class="size-btn ${selectedSizes[p.name] === s ? 'selected' : ''}" onclick="selectSize(this, '${p.name}', '${s}')">${s}</button>`
+                ).join('');
+                return `<div class="product-card">
+                    <div class="img-container"><img src="${p.image}" loading="lazy" onerror="this.src='https://placehold.co/400x400?text=WOW.ZNAHIDKA'"></div>
+                    <div class="card-info">
+                        <div class="title">${p.name}</div>
+                        <div class="sizes-container">${sizesHtml}</div>
+                        <div class="price-row">
+                            <div class="price">${p.price} ₴</div>
+                            <button class="add-btn" onclick="addToCart('${p.name}', '${p.price}')">+</button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
 
-    function showForm() { document.getElementById('choice-modal').style.display='none'; document.getElementById('form-modal').style.display='flex'; }
-    function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display='none'); }
+        function handleSearch() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            renderProducts(allProducts.filter(p => p.name.toLowerCase().includes(q)), 'catalog');
+        }
 
-    async function sendForm() {
-        const data = {
-            productName: activeOrder.name + " (р." + activeOrder.size + ")",
-            price: activeOrder.price + " ₴",
-            fio: document.getElementById('fio').value, phone: document.getElementById('phone').value,
-            city: document.getElementById('city').value, npNumber: document.getElementById('np').value
-        };
-        await fetch(GOOGLE_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-        alert("Замовлення надіслано!"); location.reload();
-    }
-    load();
-</script>
+        function selectSize(btn, name, size) {
+            selectedSizes[name] = size;
+            btn.parentElement.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function addToCart(name, price) {
+            if (!selectedSizes[name]) { alert("Спершу оберіть розмір!"); return; }
+            cart.push({ name: `${name} (${selectedSizes[name]})`, price: price });
+            document.getElementById('cart-panel').style.display = 'flex';
+            document.getElementById('cart-count').innerText = getPairsText(cart.length);
+        }
+
+        function setDelivery(type) {
+            currentDelivery = type;
+            document.getElementById('type-branch').classList.toggle('active', type === 'Відділення');
+            document.getElementById('type-post').classList.toggle('active', type === 'Поштомат');
+        }
+
+        function openOrderForm() { document.getElementById('order-modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('order-modal').style.display = 'none'; }
+
+        function sendOrder() {
+            const fio = document.getElementById('fio').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!fio || !phone) { alert("Заповніть дані!"); return; }
+            const total = cart.reduce((s, i) => s + parseInt(i.price), 0);
+            
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST', mode: 'no-cors',
+                body: JSON.stringify({ 
+                    productName: cart.map(i => i.name).join(', '), 
+                    price: total + " ₴", 
+                    fio: fio, phone: phone, city: document.getElementById('city').value,
+                    deliveryType: currentDelivery, npNumber: document.getElementById('np-number').value
+                })
+            }).then(() => { 
+                alert("Замовлення успішно надіслано!"); 
+                cart = []; 
+                document.getElementById('cart-panel').style.display = 'none';
+                closeModal();
+            });
+        }
+        loadStore();
+    </script>
 </body>
 </html>
