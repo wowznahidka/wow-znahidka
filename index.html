@@ -38,25 +38,30 @@
         .add-btn { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 12px; font-weight: bold; font-size: 1.2rem; cursor: pointer; color: #000; }
 
         #cart-panel { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px 20px; border-radius: 20px; display: none; justify-content: space-between; font-weight: 900; z-index: 200; box-shadow: 0 5px 25px rgba(212,255,0,0.2); cursor: pointer; }
+        
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 10px 25px; border-top: 1px solid #1a1a1a; z-index: 300; }
-        .nav-item { color: #666; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: bold; }
+        .nav-item { color: #666; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: bold; cursor: pointer; }
         .nav-item span { display: block; font-size: 1.4rem; margin-bottom: 5px; }
         .nav-item.active { color: var(--accent); }
 
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 20px; align-items: center; justify-content: center; overflow-y: auto; }
         .modal-content { background: #111; padding: 25px; border-radius: 25px; width: 100%; max-width: 400px; border: 1px solid #222; }
-        .modal-content h3 { margin-top: 0; font-size: 1.4rem; text-align: center; }
-        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1rem; outline: none; }
+        .modal-content h3 { margin-top: 0; font-size: 1.4rem; text-align: center; margin-bottom: 20px; }
         
+        /* Соцмережі */
+        .social-link { display: flex; align-items: center; gap: 15px; background: #1a1a1a; padding: 16px; border-radius: 18px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; border: 1px solid #222; }
+        .social-link.tg { border-left: 4px solid #24A1DE; }
+        .social-link.ig { border-left: 4px solid #E1306C; }
+        .social-link.tt { border-left: 4px solid #fff; }
+        .social-link span { font-size: 1.5rem; }
+
+        .close-btn { text-align: center; color: #666; margin-top: 20px; cursor: pointer; font-weight: bold; display: block; width: 100%; }
+
+        /* Поля форми */
+        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1rem; outline: none; }
         .delivery-toggle { display: flex; gap: 10px; margin-bottom: 12px; }
         .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
-        
-        .payment-info { background: #1a1a1a; padding: 15px; border-radius: 14px; border: 1px dashed #444; color: #ccc; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        
-        .social-btn { flex: 1; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: bold; font-size: 0.85rem; text-align: center; border: 1px solid transparent; }
-        .tg-btn { background: #222; color: #24A1DE; border-color: #24A1DE; }
-        .ig-btn { background: #222; color: #E1306C; border-color: #E1306C; }
     </style>
 </head>
 <body>
@@ -81,34 +86,29 @@
         <div id="grid-brand" class="catalog-grid"></div>
     </div>
 
+    <div id="contacts-modal" class="modal">
+        <div class="modal-content">
+            <h3>Наші соцмережі</h3>
+            <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg"><span>✈️</span> Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig"><span>📸</span> Instagram</a>
+            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt"><span>🎵</span> TikTok</a>
+            <span class="close-btn" onclick="closeModals()">Закрити</span>
+        </div>
+    </div>
+
     <div id="order-modal" class="modal">
         <div class="modal-content">
             <h3>Оформлення</h3>
             <input type="text" id="fio" placeholder="Ваше ПІБ">
             <input type="tel" id="phone" placeholder="Ваш телефон">
-            <input type="text" id="city" placeholder="Місто / Населений пункт">
-            
+            <input type="text" id="city" placeholder="Місто">
             <div class="delivery-toggle">
                 <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
                 <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
             </div>
-            <input type="text" id="np-number" placeholder="Номер відділення або поштомату">
-            
-            <div class="payment-info">
-                <span style="font-size:1.5rem;">📦</span> 
-                <span><b>Оплата при отриманні</b><br>після огляду товару</span>
-            </div>
-
-            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:1.1rem;">ПІДТВЕРДИТИ</button>
-            
-            <div style="text-align: center; margin-top: 20px; border-top: 1px solid #222; padding-top: 15px;">
-                <p style="color: #888; font-size: 0.75rem; margin-bottom: 10px;">Або швидке замовлення:</p>
-                <div style="display: flex; gap: 8px;">
-                    <a id="quick-tg" href="https://t.me/znahidkawow" target="_blank" class="social-btn tg-btn">Telegram</a>
-                    <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-btn ig-btn">Instagram</a>
-                </div>
-            </div>
-            <p onclick="closeModal()" style="text-align:center; color:#666; margin-top:15px; cursor:pointer; font-size: 0.9rem;">Скасувати</p>
+            <input type="text" id="np-number" placeholder="Номер відділення/поштомату">
+            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:1.1rem; margin-top:10px;">ПІДТВЕРДИТИ</button>
+            <span class="close-btn" onclick="closeModals()">Скасувати</span>
         </div>
     </div>
 
@@ -118,9 +118,9 @@
     </div>
 
     <div class="bottom-nav">
-        <a href="javascript:void(0)" class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</a>
-        <a href="javascript:void(0)" class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</a>
-        <a href="https://t.me/znahidkawow" target="_blank" class="nav-item"><span>💬</span>Контакти</a>
+        <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
+        <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
+        <div class="nav-item" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
 
     <script>
@@ -133,7 +133,7 @@
                 allProducts = await res.json();
                 renderCards(allProducts, 'grid-home');
                 renderBrands();
-            } catch (e) { console.log("Помилка завантаження:", e); }
+            } catch (e) { console.log(e); }
         }
 
         function switchTab(tabId) {
@@ -154,7 +154,6 @@
             document.getElementById('page-brand-results').classList.add('active-page');
             document.getElementById('brand-title').innerText = brand;
             renderCards(allProducts.filter(p => p.brand === brand), 'grid-brand');
-            window.scrollTo(0,0);
         }
 
         function renderBrands() {
@@ -171,21 +170,8 @@
 
         function renderCards(products, containerId) {
             document.getElementById(containerId).innerHTML = products.map(p => {
-                const sizesHtml = p.sizes.map(s => 
-                    `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`
-                ).join('');
-                return `
-                <div class="product-card">
-                    <div class="img-container"><img src="${p.image}" loading="lazy"></div>
-                    <div class="card-info">
-                        <div class="title">${p.name}</div>
-                        <div class="sizes-container">${sizesHtml}</div>
-                        <div class="price-row">
-                            <div class="price">${p.price} ₴</div>
-                            <button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', '${p.price}')">+</button>
-                        </div>
-                    </div>
-                </div>`;
+                const sizesHtml = p.sizes.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`).join('');
+                return `<div class="product-card"><div class="img-container"><img src="${p.image}" loading="lazy"></div><div class="card-info"><div class="title">${p.name}</div><div class="sizes-container">${sizesHtml}</div><div class="price-row"><div class="price">${p.price} ₴</div><button class="add-btn" onclick="addToCart('${p.id}', '${p.name}', '${p.price}')">+</button></div></div></div>`;
             }).join('');
         }
 
@@ -208,22 +194,19 @@
             document.getElementById('type-post').classList.toggle('active', type === 'Поштомат');
         }
 
-        function openOrderForm() { 
-            document.getElementById('order-modal').style.display = 'flex'; 
-            if (cart.length > 0) {
-                const text = encodeURIComponent(`Вітаю! Хочу замовити: ${cart.map(i => i.name).join(', ')}`);
-                document.getElementById('quick-tg').href = `https://t.me/znahidkawow?text=${text}`;
-            }
+        function openOrderForm() { document.getElementById('order-modal').style.display = 'flex'; }
+        function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
+        function closeModals() { 
+            document.getElementById('order-modal').style.display = 'none'; 
+            document.getElementById('contacts-modal').style.display = 'none'; 
         }
-        function closeModal() { document.getElementById('order-modal').style.display = 'none'; }
 
         function sendOrder() {
             const fio = document.getElementById('fio').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const city = document.getElementById('city').value.trim();
             const np = document.getElementById('np-number').value.trim();
-            
-            if (!fio || !phone || !city || !np) { alert("Заповніть усі поля!"); return; }
+            if (!fio || !phone || !city || !np) { alert("Заповніть поля!"); return; }
             
             const btn = document.getElementById('submit-order-btn');
             btn.innerText = "ВІДПРАВЛЯЄМО...";
@@ -236,14 +219,7 @@
                     price: cart.reduce((s, i) => s + parseInt(i.price), 0) + " ₴", 
                     fio, phone, city, deliveryType: currentDelivery, npNumber: np
                 })
-            }).then(() => { 
-                alert("Замовлення прийнято! Очікуйте повідомлення."); 
-                location.reload(); 
-            }).catch(() => {
-                alert("Помилка. Спробуйте ще раз.");
-                btn.innerText = "ПІДТВЕРДИТИ";
-                btn.disabled = false;
-            });
+            }).then(() => { alert("Замовлення прийнято!"); location.reload(); });
         }
 
         init();
