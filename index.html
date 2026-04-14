@@ -53,6 +53,12 @@
         .delivery-btn { background: #1a1a1a; border: 1px solid #333; color: #888; padding: 14px; border-radius: 14px; flex: 1; text-align: center; font-weight: bold; cursor: pointer; }
         .delivery-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
 
+        /* Стильний блок оплати */
+        .payment-card { background: rgba(212, 255, 0, 0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+        .payment-card .icon { font-size: 1.5rem; }
+        .payment-card .text { font-size: 0.85rem; line-height: 1.4; color: #ddd; }
+        .payment-card .text b { color: var(--accent); display: block; margin-bottom: 2px; }
+
         .social-link { display: flex; align-items: center; gap: 15px; background: #1a1a1a; padding: 16px; border-radius: 18px; text-decoration: none; color: #fff; font-weight: bold; margin-bottom: 10px; border: 1px solid #222; }
         .social-link.tg { border-left: 4px solid #24A1DE; }
         .social-link.ig { border-left: 4px solid #E1306C; }
@@ -96,18 +102,28 @@
     <div id="order-modal" class="modal">
         <div class="modal-content">
             <h3>Оформлення</h3>
+            
             <input type="text" id="fio" placeholder="Ваше ПІБ">
             <input type="tel" id="phone" placeholder="Ваш телефон">
-            <input type="text" id="city" placeholder="Місто">
-            <input type="text" id="social-nick" placeholder="Telegram / Instagram нік">
+            <input type="text" id="city" placeholder="Місто / Населений пункт">
+            <input type="text" id="social-nick" placeholder="Telegram / Instagram @нік">
             
             <div class="delivery-toggle">
                 <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
                 <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
             </div>
-            <input type="text" id="np-number" placeholder="Номер відділення/поштомату">
+            <input type="text" id="np-number" placeholder="Номер відділення або поштомату">
             
-            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:1.1rem; margin-top:10px;">ПІДТВЕРДИТИ</button>
+            <div class="payment-card">
+                <div class="icon">📦</div>
+                <div class="text">
+                    <b>Оплата при отриманні</b>
+                    Накладений платіж «Нова Пошта». Оглядайте та приміряйте перед оплатою.
+                </div>
+            </div>
+            
+            <button id="submit-order-btn" onclick="sendOrder()" style="width:100%; background:var(--accent); color:#000; padding:18px; border:none; border-radius:14px; font-weight:900; font-size:1.1rem;">ПІДТВЕРДИТИ</button>
+            
             <span class="close-btn" onclick="closeModals()">Скасувати</span>
         </div>
     </div>
