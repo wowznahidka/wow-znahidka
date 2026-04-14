@@ -5,61 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>wow.znahidka</title>
     <style>
-        :root { --accent: #d4ff00; --bg: #000; --card: #111; }
-        body { background: var(--bg); color: #fff; font-family: -apple-system, sans-serif; margin: 0; padding-bottom: 120px; }
-        header { position: sticky; top: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); padding: 15px; text-align: center; z-index: 100; border-bottom: 1px solid #222; }
-        .search-container { padding: 10px; background: var(--bg); }
-        .search-bar { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #fff; outline: none; }
+        :root { --accent: #d4ff00; --bg: #000; }
+        body { background: var(--bg); color: #fff; font-family: -apple-system, sans-serif; margin: 0; padding-bottom: 110px; }
+        header { position: sticky; top: 0; background: #000; padding: 15px; text-align: center; border-bottom: 1px solid #222; z-index: 100; }
+        .search-container { padding: 10px; background: #000; position: sticky; top: 52px; z-index: 99; }
+        .search-bar { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #333; background: #111; color: #fff; outline: none; }
         .catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; }
-        .product-card { background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid #222; display: flex; flex-direction: column; }
+        .product-card { background: #111; border-radius: 20px; border: 1px solid #222; overflow: hidden; display: flex; flex-direction: column; }
         .img-container img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-        .card-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
-        .title { font-size: 0.85rem; font-weight: 600; line-height: 1.3; height: 2.6em; overflow: hidden; margin-bottom: 8px; }
-        .sizes-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
-        .size-btn { background: #222; color: #fff; border: 1px solid #333; padding: 5px 8px; border-radius: 8px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
+        .card-info { padding: 10px; flex-grow: 1; display: flex; flex-direction: column; }
+        .title { font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; line-height: 1.2; height: 2.4em; overflow: hidden; }
+        .sizes-container { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+        .size-btn { background: #222; color: #fff; border: 1px solid #333; padding: 5px 7px; border-radius: 7px; font-size: 0.7rem; cursor: pointer; }
         .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
         .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { font-weight: 800; color: var(--accent); font-size: 1rem; }
-        .add-btn { background: var(--accent); border: none; width: 35px; height: 35px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
-        #cart-panel { position: fixed; bottom: 90px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 18px; display: none; justify-content: space-between; font-weight: 900; z-index: 200; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 500; padding: 20px; box-sizing: border-box; }
-        .modal-content { background: #111; padding: 25px; border-radius: 25px; max-width: 400px; margin: 10% auto; border: 1px solid #333; }
-        .modal-content input { width: 100%; padding: 14px; margin: 8px 0; border-radius: 12px; border: 1px solid #333; background: #1a1a1a; color: #fff; box-sizing: border-box; }
-        .order-btn { width: 100%; background: var(--accent); padding: 16px; border: none; border-radius: 12px; font-weight: bold; margin-top: 10px; font-size: 1rem; }
-        .bottom-nav { position: fixed; bottom: 20px; left: 20px; right: 20px; background: rgba(26,26,26,0.9); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 15px; border-radius: 20px; border: 1px solid #333; z-index: 100; }
-        .nav-item { color: #888; text-decoration: none; font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; }
+        .price { color: var(--accent); font-weight: 900; }
+        .add-btn { background: var(--accent); border: none; padding: 8px 12px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        
+        /* КНОПКА ЗАМОВИТИ */
+        #cart-panel { position: fixed; bottom: 85px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 15px; border-radius: 15px; display: none; justify-content: space-between; font-weight: bold; z-index: 200; }
+        
+        /* НИЖНЄ МЕНЮ З КОНТАКТАМИ */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #000; display: flex; justify-content: space-around; padding: 15px; border-top: 1px solid #222; z-index: 300; }
+        .nav-item { color: #888; text-decoration: none; font-size: 0.8rem; text-align: center; }
+        .nav-item span { display: block; font-size: 1.2rem; }
+        .nav-item.active { color: var(--accent); }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; padding: 20px; box-sizing: border-box; }
+        .modal-content { background: #111; padding: 25px; border-radius: 20px; max-width: 400px; margin: 15% auto; border: 1px solid #333; }
+        .modal-content input { width: 100%; padding: 12px; margin: 8px 0; border-radius: 10px; border: 1px solid #333; background: #1a1a1a; color: #fff; box-sizing: border-box; }
     </style>
 </head>
 <body>
-    <header><b style="letter-spacing: 2px;">WOW.ZNAHIDKA</b></header>
-    <div class="search-container"><input type="text" id="search-input" class="search-bar" placeholder="Пошук кросівок..." oninput="handleSearch()"></div>
+    <header><b>WOW.ZNAHIDKA</b></header>
+    <div class="search-container"><input type="text" id="search-input" class="search-bar" placeholder="Пошук моделі..." oninput="handleSearch()"></div>
     
     <div id="catalog" class="catalog-grid"></div>
 
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <h2 style="margin-top:0">Оформлення</h2>
+            <h3 style="margin-top:0">Оформлення</h3>
             <input type="text" id="fio" placeholder="ПІБ">
-            <input type="tel" id="phone" placeholder="Номер телефону">
+            <input type="tel" id="phone" placeholder="Телефон">
             <input type="text" id="city" placeholder="Місто">
-            <input type="text" id="np" placeholder="№ Відділення Нової Пошти">
-            <button class="order-btn" onclick="sendOrder()">ПІДТВЕРДИТИ</button>
+            <input type="text" id="np" placeholder="№ Відділення НП">
+            <button onclick="sendOrder()" style="width:100%; background:var(--accent); padding:15px; border:none; border-radius:10px; font-weight:bold; margin-top:10px;">ПІДТВЕРДИТИ</button>
             <p onclick="closeModal()" style="text-align:center; color:#555; margin-top:15px; cursor:pointer;">Назад</p>
         </div>
     </div>
 
     <div id="cart-panel" onclick="openOrderForm()">
         <span id="cart-count">0 ТОВАРІВ</span>
-        <span>ЗАМОВИТИ ➔</span>
+        <span>ОФОРМИТИ ➔</span>
     </div>
 
     <div class="bottom-nav">
-        <a href="#" class="nav-item" onclick="location.reload()" style="color:var(--accent)"><span>🏠</span>Головна</a>
+        <a href="#" class="nav-item active" onclick="location.reload()"><span>🏠</span>Головна</a>
         <a href="https://t.me/znahidkawow" target="_blank" class="nav-item"><span>💬</span>Контакти</a>
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzeqGVRXib5baDd7A9ceM-GeP57QkbyaSSUk0dVl08Yd-rEkMPa4qhJQTWNbQ6vM5kNrw/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwR4cUpgykHLb1_ClXIC3qskLkr3WUi_I_hgJDgRMA0QpKa09VkcojCs5IkLQVpY2CFcw/exec';
         let allProducts = [], cart = [], selectedSizes = {};
 
         async function loadStore() {
@@ -67,7 +73,7 @@
                 const res = await fetch(GOOGLE_SCRIPT_URL);
                 allProducts = await res.json();
                 renderProducts(allProducts);
-            } catch (e) { alert("Помилка завантаження"); }
+            } catch (e) { console.error(e); }
         }
 
         function handleSearch() {
@@ -102,10 +108,10 @@
         }
 
         function addToCart(name, price) {
-            if (!selectedSizes[name]) { alert("Спершу оберіть розмір!"); return; }
-            cart.push({ name: `${name} (Розмір: ${selectedSizes[name]})`, price: price });
+            if (!selectedSizes[name]) { alert("Оберіть розмір!"); return; }
+            cart.push({ name: `${name} (Р-р: ${selectedSizes[name]})`, price: price });
             document.getElementById('cart-panel').style.display = 'flex';
-            document.getElementById('cart-count').innerText = cart.length + ' ТОВ.';
+            document.getElementById('cart-count').innerText = cart.length + ' ТОВАРІВ';
         }
 
         function openOrderForm() { document.getElementById('order-modal').style.display = 'block'; }
@@ -114,19 +120,13 @@
         function sendOrder() {
             const fio = document.getElementById('fio').value;
             const phone = document.getElementById('phone').value;
-            if (!fio || !phone) { alert("Заповніть контактні дані"); return; }
-            
+            if (!fio || !phone) { alert("Вкажіть ПІБ та телефон!"); return; }
             const items = cart.map(i => i.name).join(', ');
             const total = cart.reduce((s, i) => s + parseInt(i.price), 0);
-            
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST', mode: 'no-cors',
-                body: JSON.stringify({
-                    productName: items,
-                    price: total + " ₴",
-                    contactInfo: `👤 ${fio}\n📞 ${phone}\n📍 ${document.getElementById('city').value}, НП ${document.getElementById('np').value}`
-                })
-            }).then(() => { alert("Замовлення надіслано в Telegram!"); location.reload(); });
+                body: JSON.stringify({ productName: items, price: total + " ₴", contactInfo: `👤 ${fio}, 📞 ${phone}, 📍 ${document.getElementById('city').value}, НП ${document.getElementById('np').value}` })
+            }).then(() => { alert("Замовлення надіслано!"); location.reload(); });
         }
         loadStore();
     </script>
