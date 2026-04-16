@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>wow.znahidka</title>
+    <title>wow.znahidka — Твій стиль</title>
     <style>
         :root { --accent: #d4ff00; --bg: #050505; --card: #121212; --border: #222; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -13,10 +13,12 @@
         .logo { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
 
+        /* СТОРІНКИ */
         .page { display: none; animation: fadeIn 0.3s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* ФІЛЬТРИ */
         .filter-wrapper { background: #000; padding: 10px 0; border-bottom: 1px solid #222; position: sticky; top: 54px; z-index: 999; }
         .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 0 15px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
@@ -48,23 +50,27 @@
         .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
         .btn-minus { background: #222; color: #fff; }
 
+        /* MODALS */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
         .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
         .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
 
-        .delivery-toggle { display: flex; gap: 10px; margin-bottom: 15px; }
-        .del-btn { flex: 1; padding: 14px; border-radius: 14px; background: #161616; color: #666; text-align: center; cursor: pointer; font-weight: 700; border: 1px solid #333; }
-        .del-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
+        /* КНОПКИ КОНТАКТІВ */
+        .social-btn { display: flex; align-items: center; gap: 15px; background: #161616; padding: 18px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 800; margin-bottom: 12px; border: 1px solid var(--border); transition: 0.3s; }
+        .social-btn.tg { border-left: 5px solid #24A1DE; }
+        .social-btn.ig { border-left: 5px solid #E1306C; }
+        .social-btn.tt { border-left: 5px solid #fff; }
 
+        /* ZOOM & CART */
         #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; cursor: zoom-out; }
         #zoom-modal img { max-width: 96%; max-height: 85vh; border-radius: 12px; }
+        #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
 
+        /* NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
         .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; flex: 1; }
         .nav-item span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
         .nav-item.active { color: var(--accent); }
-
-        #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
     </style>
 </head>
 <body onscroll="document.getElementById('search-input').blur()">
@@ -87,6 +93,16 @@
         <div id="brands-list"></div>
     </div>
 
+    <div id="contacts-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 20px; text-align: center;">Наші контакти</h3>
+            <a href="https://t.me/znahidkawow" target="_blank" class="social-btn tg">✈️ Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka/" target="_blank" class="social-btn ig">📸 Instagram</a>
+            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-btn tt">🎵 TikTok</a>
+            <span style="text-align:center; display:block; cursor:pointer; color:#555; margin-top:20px; font-weight: bold;" onclick="closeModals()">ЗАКРИТИ</span>
+        </div>
+    </div>
+
     <div id="zoom-modal" onclick="this.style.display='none'"><img id="zoomed-img" src=""></div>
 
     <div id="order-modal" class="modal">
@@ -103,12 +119,12 @@
                 <input type="tel" id="phone" placeholder="Номер телефону">
                 <input type="text" id="city" placeholder="Місто">
                 <input type="text" id="social" placeholder="Нік Telegram / Instagram">
-                <div class="delivery-toggle">
-                    <div id="t1" class="del-btn active" onclick="setDel('Відділення', this)">Відділення</div>
-                    <div id="t2" class="del-btn" onclick="setDel('Поштомат', this)">Поштомат</div>
+                <div style="display:flex; gap:10px; margin-bottom:12px">
+                    <div id="t1" class="filter-item active" style="flex:1; text-align:center;" onclick="setDel('Відділення', this)">Відділення</div>
+                    <div id="t2" class="filter-item" style="flex:1; text-align:center;" onclick="setDel('Поштомат', this)">Поштомат</div>
                 </div>
                 <input type="text" id="np" placeholder="№ відділення / поштомату">
-                <input type="text" id="promo" placeholder="Промокод (якщо є)">
+                <input type="text" id="promo" placeholder="Промокод">
                 <button onclick="sendOrder()" id="submit-btn" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ЗАМОВИТИ</button>
             </div>
         </div>
@@ -121,7 +137,7 @@
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
         <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
-        <div class="nav-item" onclick="window.open('https://t.me/znahidkawow')"><span>💬</span>Контакти</div>
+        <div class="nav-item" id="nav-contacts" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
 
     <script>
@@ -157,8 +173,10 @@
         function switchTab(tab) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('page-' + tab).classList.add('active-page');
-            document.getElementById('nav-' + tab).classList.add('active');
+            if(tab !== 'contacts') {
+                document.getElementById('page-' + tab).classList.add('active-page');
+                document.getElementById('nav-' + tab).classList.add('active');
+            }
             window.scrollTo(0,0);
         }
 
@@ -191,9 +209,12 @@
         function updateUI(id) { const count = cart.filter(i => i.id === id).length; const cont = document.getElementById(`act-${id}`); if(cont) cont.innerHTML = count > 0 ? `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${id}')">−</button><button class="btn-qty" onclick="addToCart('${id}')">+</button></div>` : `<button class="btn-qty" onclick="addToCart('${id}')">+</button>`; }
         function getDeclension(n) { if (n % 10 === 1 && n % 100 !== 11) return "ПАРА"; if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return "ПАРИ"; return "ПАР"; }
         function updateCart() { const p = document.getElementById('cart-panel'); p.style.display = cart.length ? 'flex' : 'none'; document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`; document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`; }
-        function openOrder() { document.getElementById('cart-list').innerHTML = cart.map(i => `<div style="padding:10px;background:#161616;margin-bottom:5px;border-radius:10px;">${i.name} (р. ${i.size})</div>`).join(''); document.getElementById('order-modal').style.display='flex'; }
-        function setDel(t, b) { dType = t; document.querySelectorAll('.del-btn').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
+        function openOrder() { document.getElementById('cart-list').innerHTML = cart.map(i => `<div style="padding:10px;background:#161616;margin-bottom:5px;border-radius:10px; font-size: 0.9rem;">🔹 ${i.name} (р. ${i.size})</div>`).join(''); document.getElementById('order-modal').style.display='flex'; }
+        function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
+        function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+        function setDel(t, b) { dType = t; b.parentElement.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
         function goToForm() { document.getElementById('step-cart').style.display='none'; document.getElementById('step-form').style.display='block'; }
+        function backToCart() { document.getElementById('step-form').style.display='none'; document.getElementById('step-cart').style.display='block'; }
         function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); render(all.filter(p => p.name.toLowerCase().includes(q)).slice(0, 20), 'grid-home'); }
 
         async function sendOrder() {
@@ -201,7 +222,7 @@
             if(!d.fio || !d.phone) return alert("Заповни ПІБ та Телефон!");
             document.getElementById('submit-btn').innerText = "ОБРОБКА...";
             await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
-            document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="location.reload()">ОК</button></div>`;
+            document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900; margin-top: 20px;" onclick="location.reload()">ОК</button></div>`;
         }
         init();
     </script>
