@@ -21,6 +21,7 @@
 
         .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px 20px; }
         @media (min-width: 768px) { .catalog-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .catalog-grid { grid-template-columns: repeat(4, 1fr); } }
 
         .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; height: 100%; }
         .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; cursor: zoom-in; }
@@ -75,7 +76,9 @@
     <header><div class="logo">WOW<span>.</span>ZNAHIDKA</div></header>
 
     <div id="page-home" class="page active-page">
-        <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()"></div>
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()">
+        </div>
         <div id="grid-home" class="catalog-grid"></div>
         <div id="scroll-anchor" style="height: 20px;"></div>
     </div>
@@ -88,7 +91,7 @@
     <div id="page-brand-results" class="page">
         <div style="padding: 15px; display: flex; align-items: center; gap: 15px;">
             <button onclick="switchTab('catalog')" style="background:none; border:none; color:var(--accent); font-size:1.8rem;">←</button>
-            <h2 id="brand-title" style="margin:0;"></h2>
+            <h2 id="brand-title" style="margin:0; text-transform: uppercase;"></h2>
         </div>
         <div id="grid-brand" class="catalog-grid"></div>
     </div>
@@ -99,7 +102,7 @@
             <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg">✈️ Telegram</a>
             <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig">📸 Instagram</a>
             <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt">🎵 TikTok</a>
-            <span style="text-align:center; display:block; cursor:pointer; color:#555; margin-top:15px;" onclick="closeModals()">Закрити</span>
+            <span style="text-align:center; display:block; cursor:pointer; color:#555; margin-top: 15px;" onclick="closeModals()">Закрити</span>
         </div>
     </div>
 
@@ -147,8 +150,7 @@
     </div>
 
     <script>
-        // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ ПІСЛЯ DEPLOY
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx1ps-l0erXfaAw2cLrrgtQf1vldQ6eeaIVHI0YLdil2WS4FM64kHHvefSPd_gIjCiW/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvpi287j7MAY9v6FYk6R9WLdvUfu2X43Wtzlci3U6yI-9rY_fT6Sshn00pXAF/exec';
         
         let allProducts = [], cart = [], selectedSizes = {}, itemsToShow = 10, currentDelivery = 'Відділення';
 
@@ -175,8 +177,8 @@
             const container = document.getElementById(containerId);
             const html = products.map(p => {
                 const firstImg = p.image.split(',')[0].trim();
-                const sizesArray = p.sizes.toString().split(',').map(s => s.trim());
-                const sizesHtml = sizesArray.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`).join('');
+                const sz = p.sizes.toString().split(',').map(s => s.trim());
+                const sizesHtml = sz.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'selected' : ''}" onclick="pickSize(this, '${p.id}', '${s}')">${s}</button>`).join('');
                 const isInCart = cart.some(item => item.productId === p.id);
                 
                 let actionBtn = `<button class="btn-qty" onclick="addToCart('${p.id}', '${p.name.replace(/'/g, "")}', '${p.price}')">+</button>`;
@@ -198,19 +200,27 @@
             if (!selectedSizes[id]) { alert("Обери розмір!"); return; }
             cart.push({ productId: id, name: name, size: selectedSizes[id], price: parseInt(price) });
             updateCartPanel();
-            renderCards(allProducts.filter(p => p.id === id), `card-${id}`, false); // оновлення однієї картки
+            const p = allProducts.find(x => x.id === id);
+            document.getElementById(`action-${id}`).innerHTML = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCartById('${id}')">-</button><button class="btn-qty" onclick="addToCart('${id}', '${name}', '${price}')">+</button></div>`;
         }
 
         function removeFromCartById(productId) {
             const idx = cart.map(item => item.productId).lastIndexOf(productId);
-            if (idx !== -1) { cart.splice(idx, 1); updateCartPanel(); }
+            if (idx !== -1) { 
+                cart.splice(idx, 1); 
+                updateCartPanel(); 
+                if(!cart.some(x => x.productId === productId)) {
+                    const p = allProducts.find(x => x.id === productId);
+                    document.getElementById(`action-${productId}`).innerHTML = `<button class="btn-qty" onclick="addToCart('${productId}', '${p.name}', '${p.price}')">+</button>`;
+                }
+            }
         }
 
         function updateCartPanel() {
             const p = document.getElementById('cart-panel');
             if (cart.length > 0) {
                 p.style.display = 'flex';
-                document.getElementById('cart-count').innerText = `${cart.length} ТОВАР(И)`;
+                document.getElementById('cart-count').innerText = `${cart.length} ПАР(И)`;
                 document.getElementById('cart-total').innerText = `${cart.reduce((s, i) => s + i.price, 0)} ₴ ➔`;
             } else p.style.display = 'none';
         }
@@ -231,10 +241,10 @@
         }
 
         function openBrand(b) { document.getElementById('brand-title').innerText = b; renderCards(allProducts.filter(p => p.brand === b), 'grid-brand'); switchTab('brand-results'); }
-        function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); renderCards(allProducts.filter(p => p.name.toLowerCase().includes(q)).slice(0, 15), 'grid-home'); }
+        function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); renderCards(allProducts.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)).slice(0, 15), 'grid-home'); }
 
         async function sendOrder() {
-            const f = document.getElementById('fio').value.trim(), ph = document.getElementById('phone').value.trim();
+            const f = document.getElementById('fio').value, ph = document.getElementById('phone').value;
             if(!f || !ph) return alert("Заповни ПІБ та телефон!");
             const data = { 
                 action: "new_order", 
