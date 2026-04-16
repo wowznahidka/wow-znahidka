@@ -21,21 +21,28 @@
         .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; }
         .card-info { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; }
-        .title { font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; height: 2.8em; overflow: hidden; }
+        .brand-label { font-size: 0.7rem; font-weight: 800; color: #555; text-transform: uppercase; margin-bottom: 4px; }
+        .title { font-size: 0.85rem; font-weight: 600; margin-bottom: 12px; height: 2.8em; overflow: hidden; line-height: 1.4; }
         .sizes-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
         .size-btn { background: #1a1a1a; color: #888; border: 1px solid #282828; padding: 7px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; cursor: pointer; }
         .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); }
         .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { color: var(--accent); font-weight: 900; font-size: 1.15rem; }
-        .btn-qty { background: var(--accent); border: none; width: 38px; height: 38px; border-radius: 12px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
+        .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; background: #1a1a1a; border-radius: 12px; padding: 2px; }
+        .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
+        .btn-minus { background: #222; color: #fff; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; overflow-y: auto; }
         .modal-content { background: #0f0f0f; padding: 30px 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); }
-        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; outline: none; }
+        .modal-content input { width: 100%; padding: 16px; margin-bottom: 12px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; outline: none; font-size: 1rem; }
+        .delivery-toggle { display: flex; gap: 10px; margin-bottom: 15px; background: #161616; padding: 5px; border-radius: 16px; border: 1px solid var(--border); }
+        .delivery-btn { flex: 1; padding: 12px; text-align: center; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 0.9rem; color: #666; transition: 0.3s; }
+        .delivery-btn.active { background: var(--accent); color: #000; }
+        .info-card { background: rgba(212,255,0,0.05); border: 1px dashed var(--accent); border-radius: 18px; padding: 15px; margin-bottom: 20px; font-size: 0.85rem; display: flex; gap: 10px; align-items: center; }
         .social-link { display: flex; align-items: center; gap: 15px; background: #161616; padding: 18px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 800; margin-bottom: 12px; border: 1px solid var(--border); }
         .social-link.tg { border-left: 5px solid #24A1DE; }
         .social-link.ig { border-left: 5px solid #E1306C; }
         .social-link.tt { border-left: 5px solid #fff; }
-        #cart-panel { position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 600px; background: var(--accent); color: #000; padding: 20px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
+        #cart-panel { position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 600px; background: var(--accent); color: #000; padding: 20px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
         .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; }
         .nav-item span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
@@ -45,33 +52,50 @@
 <body>
     <header><div class="logo">WOW<span>.</span>ZNAHIDKA</div></header>
     <div id="page-home" class="page active-page">
-        <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук..." oninput="handleSearch()"></div>
+        <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()"></div>
         <div id="grid-home" class="catalog-grid"></div>
         <div id="scroll-anchor" style="height: 50px;"></div>
     </div>
     <div id="page-catalog" class="page">
-        <h3 style="padding: 20px; color: #444;">БРЕНДИ</h3>
+        <h3 style="padding: 20px; color: #444; text-transform: uppercase;">Бренди</h3>
         <div id="brand-container" class="catalog-grid"></div>
     </div>
     <div id="contacts-modal" class="modal">
         <div class="modal-content">
-            <h3>Зв'язок</h3>
+            <h3>Контакти</h3>
             <a href="https://t.me/znahidkawow" target="_blank" class="social-link tg">✈️ Telegram</a>
-            <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="social-link ig">📸 Instagram</a>
+            <a href="https://www.instagram.com/wow.znahidka/" target="_blank" class="social-link ig">📸 Instagram</a>
             <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="social-link tt">🎵 TikTok</a>
             <span style="text-align:center; display:block; cursor:pointer; color:#555; margin-top:20px;" onclick="closeModals()">Закрити</span>
         </div>
     </div>
     <div id="order-modal" class="modal">
         <div class="modal-content">
-            <h3>Оформлення</h3>
-            <div id="cart-list" style="margin-bottom:20px"></div>
-            <input type="text" id="fio" placeholder="ПІБ">
-            <input type="tel" id="phone" placeholder="Телефон">
-            <input type="text" id="city" placeholder="Місто">
-            <input type="text" id="np" placeholder="№ Відділення">
-            <button onclick="sendOrder()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ЗАМОВИТИ</button>
-            <span style="text-align:center; display:block; margin-top:15px; color:#555; cursor:pointer" onclick="closeModals()">Назад</span>
+            <div id="step-cart">
+                <h3>Твій кошик</h3>
+                <div id="cart-items-list" style="margin-bottom: 20px; max-height: 250px; overflow-y: auto;"></div>
+                <div class="info-card">
+                    <span style="font-size: 1.5rem;">📦</span>
+                    <p><b>Оплата при отриманні</b><br>Накладений платіж у відділенні Нової Пошти.</p>
+                </div>
+                <button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="goToForm()">ДАЛІ ➔</button>
+                <span style="text-align:center; display:block; margin-top:15px; cursor:pointer; color:#555;" onclick="closeModals()">Назад</span>
+            </div>
+            <div id="step-form" style="display:none;">
+                <h3>Доставка</h3>
+                <input type="text" id="fio" placeholder="ПІБ отримувача">
+                <input type="tel" id="phone" placeholder="Номер телефону">
+                <input type="text" id="city" placeholder="Місто">
+                <input type="text" id="social-nick" placeholder="Нік Telegram / Instagram">
+                <div class="delivery-toggle">
+                    <div id="type-branch" class="delivery-btn active" onclick="setDelivery('Відділення')">Відділення</div>
+                    <div id="type-post" class="delivery-btn" onclick="setDelivery('Поштомат')">Поштомат</div>
+                </div>
+                <input type="text" id="np-number" placeholder="№ відділення / поштомату">
+                <input type="text" id="promo" placeholder="Промокод (якщо є)">
+                <button id="submit-btn" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="sendOrder()">ЗАМОВИТИ</button>
+                <span style="text-align:center; display:block; margin-top:15px; cursor:pointer; color:#555;" onclick="backToCart()">← До списку</span>
+            </div>
         </div>
     </div>
     <div id="cart-panel" onclick="openOrder()">
@@ -83,39 +107,107 @@
         <div class="nav-item" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
     <script>
-        const URL = 'https://script.google.com/macros/s/AKfycbw0jCGNoB8UABVctldqXi4Onty6Hbrk_5yWuyk5HrqgCi8Vgyoh9TSt-m01VAnW9pS8/exec';
-        let all = [], cart = [], selected = {}, limit = 10;
+        const URL = 'https://script.google.com/macros/s/AKfycbwQHW-hLQbWxknZ1lnbykfLiVWzkQMqxHyZ4e4RbP2Nn7rPoCIeVqt4qcnsj3-82EDJ/exec';
+        let all = [], cart = [], selected = {}, limit = 12, delType = 'Відділення';
+
         async function init() {
             try {
                 const r = await fetch(URL); all = await r.json(); all.reverse();
                 render(all.slice(0, limit), 'grid-home');
-                const brands = [...new Set(all.map(p => p.brand))];
+                const brands = [...new Set(all.map(p => p.brand))].filter(b => b);
                 document.getElementById('brand-container').innerHTML = brands.map(b => `<div style="background:#121212;padding:25px;border-radius:20px;border:1px solid #222;font-weight:900;text-align:center" onclick="openBrand('${b}')">${b}</div>`).join('');
-                new IntersectionObserver(e => { if(e[0].isIntersecting && limit < all.length) render(all.slice(limit, limit += 10), 'grid-home', true); }).observe(document.getElementById('scroll-anchor'));
+                new IntersectionObserver(e => { if(e[0].isIntersecting && limit < all.length) render(all.slice(limit, limit += 12), 'grid-home', true); }).observe(document.getElementById('scroll-anchor'));
             } catch(e) { document.getElementById('scroll-anchor').innerText = "Помилка зв'язку."; }
         }
+
         function render(items, id, append = false) {
             const h = items.map(p => {
+                const img = p.image;
                 const sz = p.sizes.split(',').map(s => `<button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" onclick="pickSize(this,'${p.id}','${s.trim()}')">${s.trim()}</button>`).join('');
-                return `<div class="product-card"><div class="img-container" onclick="window.open('${p.image}')"><img src="${p.image}"></div><div class="card-info"><div class="brand-name">${p.brand}</div><div class="title">${p.name}</div><div class="sizes-container">${sz}</div><div class="price-row"><div class="price">${p.price} ₴</div><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div></div></div>`;
+                const inCartCount = cart.filter(i => i.id === p.id).length;
+                let btnHtml = `<button class="btn-qty" onclick="addToCart('${p.id}')">+</button>`;
+                if (inCartCount > 0) {
+                    btnHtml = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${p.id}')">−</button><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div>`;
+                }
+                return `<div class="product-card"><div class="img-container" onclick="window.open('${img}')"><img src="${img}"></div><div class="card-info"><div class="brand-label">${p.brand}</div><div class="title">${p.name}</div><div class="sizes-container">${sz}</div><div class="price-row"><div class="price">${p.price} ₴</div><div id="act-${p.id}">${btnHtml}</div></div></div></div>`;
             }).join('');
             document.getElementById(id).innerHTML = append ? document.getElementById(id).innerHTML + h : h;
         }
+
         function pickSize(b, id, s) { selected[id] = s; b.parentElement.querySelectorAll('.size-btn').forEach(x => x.classList.remove('selected')); b.classList.add('selected'); }
-        function addToCart(id) { if(!selected[id]) return alert("Обери розмір!"); const p = all.find(x => x.id === id); cart.push({...p, size: selected[id]}); updateCart(); }
-        function updateCart() { const p = document.getElementById('cart-panel'); p.style.display = cart.length ? 'flex' : 'none'; document.getElementById('cart-count').innerText = `${cart.length} ТОВАРІВ`; document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`; }
-        function openOrder() { document.getElementById('cart-list').innerHTML = cart.map(i => `<div style="padding:10px;background:#161616;margin-bottom:5px;border-radius:10px">${i.name} (${i.size})</div>`).join(''); document.getElementById('order-modal').style.display='flex'; }
+        
+        function addToCart(id) {
+            if(!selected[id]) return alert("Обери розмір!");
+            const p = all.find(x => x.id === id);
+            cart.push({...p, size: selected[id]});
+            updateUI(id); updateCartPanel();
+        }
+
+        function removeFromCart(id) {
+            const idx = cart.map(i => i.id).lastIndexOf(id);
+            if (idx !== -1) cart.splice(idx, 1);
+            updateUI(id); updateCartPanel();
+        }
+
+        function updateUI(id) {
+            const inCartCount = cart.filter(i => i.id === id).length;
+            const container = document.getElementById(`act-${id}`);
+            if(!container) return;
+            if (inCartCount > 0) {
+                container.innerHTML = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${id}')">−</button><button class="btn-qty" onclick="addToCart('${id}')">+</button></div>`;
+            } else {
+                container.innerHTML = `<button class="btn-qty" onclick="addToCart('${id}')">+</button>`;
+            }
+        }
+
+        function getDeclension(n) {
+            if (n % 10 === 1 && n % 100 !== 11) return "ПАРА";
+            if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return "ПАРИ";
+            return "ПАР";
+        }
+
+        function updateCartPanel() {
+            const p = document.getElementById('cart-panel');
+            if(cart.length) {
+                p.style.display = 'flex';
+                document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`;
+                document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`;
+            } else p.style.display = 'none';
+        }
+
+        function openOrder() { 
+            document.getElementById('cart-items-list').innerHTML = cart.map(i => `<div style="padding:12px;background:#161616;margin-bottom:8px;border-radius:12px;font-size:0.9rem">🔹 ${i.name} (р. ${i.size}) — <b>${i.price} ₴</b></div>`).join('');
+            document.getElementById('step-cart').style.display='block'; document.getElementById('step-form').style.display='none'; document.getElementById('order-modal').style.display='flex'; 
+        }
+
+        async function sendOrder() {
+            const d = { 
+                action: "new_order", 
+                fio: document.getElementById('fio').value, 
+                phone: document.getElementById('phone').value, 
+                city: document.getElementById('city').value, 
+                socialNick: document.getElementById('social-nick').value,
+                deliveryType: delType,
+                npNumber: document.getElementById('np-number').value,
+                items: cart.map(i => `${i.name} (${i.size})`).join(', '), 
+                total: cart.reduce((s, x) => s + parseInt(x.price), 0),
+                promo: document.getElementById('promo').value
+            };
+            if(!d.fio || !d.phone || !d.city || !d.npNumber) return alert("Заповни всі дані!");
+            document.getElementById('submit-btn').innerText = "ОБРОБКА...";
+            await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
+            window.open(`https://t.me/znahidkawow?text=Замовив: ${d.items} на суму ${d.total} грн.`);
+            location.reload();
+        }
+
+        function setDelivery(t) { delType = t; document.getElementById('type-branch').classList.toggle('active', t==='Відділення'); document.getElementById('type-post').classList.toggle('active', t==='Поштомат'); }
+        function goToForm() { document.getElementById('step-cart').style.display='none'; document.getElementById('step-form').style.display='block'; }
+        function backToCart() { document.getElementById('step-form').style.display='none'; document.getElementById('step-cart').style.display='block'; }
         function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
         function switchTab(t) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page')); document.getElementById('page-'+t).classList.add('active-page'); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); if(t==='home'||t==='catalog') document.getElementById('nav-'+t).classList.add('active'); window.scrollTo(0,0); }
         function openBrand(b) { render(all.filter(p => p.brand === b), 'grid-home'); switchTab('home'); }
-        function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); render(all.filter(p => p.name.toLowerCase().includes(q)).slice(0, 15), 'grid-home'); }
-        async function sendOrder() {
-            const d = { action: "new_order", fio: document.getElementById('fio').value, phone: document.getElementById('phone').value, city: document.getElementById('city').value, delivery: document.getElementById('np').value, items: cart.map(i => `${i.name} (${i.size})`).join(', '), total: cart.reduce((s, x) => s + parseInt(x.price), 0) };
-            await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
-            window.open(`https://t.me/znahidkawow?text=Замовив: ${d.items}`);
-            location.reload();
-        }
+        function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); render(all.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)).slice(0, 15), 'grid-home'); }
         init();
     </script>
 </body>
