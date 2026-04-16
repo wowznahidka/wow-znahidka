@@ -188,16 +188,36 @@
         }
 
         async function sendOrder() {
-            const d = { 
-                action: "new_order", 
-                fio: document.getElementById('fio').value, 
-                phone: document.getElementById('phone').value,
-                city: document.getElementById('city').value,
-                socialNick: document.getElementById('social-nick').value,
-                delivery: `${currentDelivery} №${document.getElementById('np-number').value}`,
-                productName: cart.map(i => `${i.name} (${i.size})`).join(', '),
-                price: cart.reduce((s, x) => s + parseInt(x.price), 0) + " ₴"
-            };
+    const d = { 
+        action: "new_order", 
+        fio: document.getElementById('fio').value, 
+        phone: document.getElementById('phone').value,
+        city: document.getElementById('city').value,
+        socialNick: document.getElementById('social-nick').value,
+        deliveryType: currentDelivery,
+        npNumber: document.getElementById('np-number').value,
+        items: cart.map(i => `${i.name} (${i.size})`).join(', '),
+        total: cart.reduce((s, x) => s + parseInt(x.price), 0),
+        promo: document.getElementById('promo').value
+    };
+
+    if(!d.fio || !d.phone) return alert("Заповни дані!");
+    document.getElementById('submit-order-btn').innerText = "ОБРОБКА...";
+
+    try {
+        await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: JSON.stringify(d) });
+        document.getElementById('modal-body').innerHTML = `
+            <div style="text-align:center; padding: 40px 0;">
+                <span style="font-size: 5rem;">✅</span>
+                <h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2>
+                <p style="color:#888; margin-bottom:30px;">Бот уже сповістив Машу. Чекайте на дзвінок!</p>
+                <button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="location.reload()">ОК</button>
+            </div>`;
+    } catch (e) {
+        alert("Помилка! Спробуй ще раз.");
+        document.getElementById('submit-order-btn').innerText = "ЗАМОВИТИ";
+    }
+}
             if(!d.fio || !d.phone) return alert("Заповни дані!");
             
             document.getElementById('submit-order-btn').innerText = "ОБРОБКА...";
