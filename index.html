@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>wow.znahidka — Магазин кросівок</title>
+    <title>wow.znahidka</title>
     <style>
         :root { --accent: #d4ff00; --bg: #050505; --card: #121212; --border: #222; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
@@ -13,12 +13,10 @@
         .logo { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.5px; }
         .logo span { color: var(--accent); }
 
-        /* СТОРІНКИ */
         .page { display: none; animation: fadeIn 0.3s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* ГОРІЗОНТАЛЬНІ ФІЛЬТРИ (на головній) */
         .filter-wrapper { background: #000; padding: 10px 0; border-bottom: 1px solid #222; position: sticky; top: 54px; z-index: 999; }
         .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 0 15px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
@@ -31,11 +29,9 @@
         .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px 20px; }
         @media (min-width: 768px) { .catalog-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        /* ПЛИТКА БРЕНДІВ (у вкладці Каталог) */
-        .brands-list { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .brand-card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid var(--border); text-align: center; font-weight: 900; text-transform: uppercase; cursor: pointer; }
+        .brand-card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid var(--border); text-align: center; font-weight: 900; text-transform: uppercase; cursor: pointer; margin: 10px 15px; }
 
-        .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
+        .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; height: 100%; }
         .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; cursor: zoom-in; }
         .img-container img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -48,22 +44,25 @@
 
         .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
         .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
-        .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; display: flex; align-items: center; justify-content: center; }
+        .qty-controls { display: flex; align-items: center; gap: 8px; background: #1a1a1a; border-radius: 12px; padding: 2px; }
+        .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
+        .btn-minus { background: #222; color: #fff; }
 
-        /* ЗУМ */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
+        .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
+        .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
+
+        .delivery-toggle { display: flex; gap: 10px; margin-bottom: 15px; }
+        .del-btn { flex: 1; padding: 14px; border-radius: 14px; background: #161616; color: #666; text-align: center; cursor: pointer; font-weight: 700; border: 1px solid #333; }
+        .del-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,255,0,0.05); }
+
         #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; cursor: zoom-out; }
         #zoom-modal img { max-width: 96%; max-height: 85vh; border-radius: 12px; }
 
-        /* МЕНЮ */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
         .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; flex: 1; }
         .nav-item span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
         .nav-item.active { color: var(--accent); }
-
-        /* МОДАЛКИ */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
-        .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
-        .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
 
         #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
     </style>
@@ -85,17 +84,7 @@
 
     <div id="page-catalog" class="page">
         <h2 style="padding: 20px 20px 0;">Каталог брендів</h2>
-        <div id="brands-list" class="brands-list"></div>
-    </div>
-
-    <div id="contacts-modal" class="modal">
-        <div class="modal-content">
-            <h3>Зв'язок</h3>
-            <a href="https://t.me/znahidkawow" target="_blank" style="display:block; background:#161616; padding:18px; border-radius:15px; color:#fff; text-decoration:none; margin-bottom:10px; border-left:4px solid #24A1DE;">✈️ Telegram</a>
-            <a href="https://www.instagram.com/wow.znahidka/" target="_blank" style="display:block; background:#161616; padding:18px; border-radius:15px; color:#fff; text-decoration:none; margin-bottom:10px; border-left:4px solid #E1306C;">📸 Instagram</a>
-            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" style="display:block; background:#161616; padding:18px; border-radius:15px; color:#fff; text-decoration:none; border-left:4px solid #fff;">🎵 TikTok</a>
-            <span style="text-align:center; display:block; cursor:pointer; color:#555; margin-top:20px;" onclick="closeModals()">Закрити</span>
-        </div>
+        <div id="brands-list"></div>
     </div>
 
     <div id="zoom-modal" onclick="this.style.display='none'"><img id="zoomed-img" src=""></div>
@@ -105,15 +94,21 @@
             <div id="step-cart">
                 <h3>Твій кошик</h3>
                 <div id="cart-list" style="margin-bottom: 20px;"></div>
+                <div style="background:rgba(212,255,0,0.1); padding:15px; border-radius:15px; font-size:0.8rem; margin-bottom:15px">📦 <b>Накладний платіж</b> при отриманні на пошті.</div>
                 <button onclick="goToForm()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ДАЛІ ➔</button>
             </div>
             <div id="step-form" style="display:none;">
                 <h3>Доставка</h3>
-                <input type="text" id="fio" placeholder="ПІБ">
-                <input type="tel" id="phone" placeholder="Телефон">
+                <input type="text" id="fio" placeholder="ПІБ отримувача">
+                <input type="tel" id="phone" placeholder="Номер телефону">
                 <input type="text" id="city" placeholder="Місто">
-                <input type="text" id="social" placeholder="Нік Telegram/IG">
-                <input type="text" id="np" placeholder="Відділення/Поштомат">
+                <input type="text" id="social" placeholder="Нік Telegram / Instagram">
+                <div class="delivery-toggle">
+                    <div id="t1" class="del-btn active" onclick="setDel('Відділення', this)">Відділення</div>
+                    <div id="t2" class="del-btn" onclick="setDel('Поштомат', this)">Поштомат</div>
+                </div>
+                <input type="text" id="np" placeholder="№ відділення / поштомату">
+                <input type="text" id="promo" placeholder="Промокод (якщо є)">
                 <button onclick="sendOrder()" id="submit-btn" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ЗАМОВИТИ</button>
             </div>
         </div>
@@ -126,21 +121,21 @@
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home" onclick="switchTab('home')"><span>🏠</span>Головна</div>
         <div class="nav-item" id="nav-catalog" onclick="switchTab('catalog')"><span>👟</span>Каталог</div>
-        <div class="nav-item" onclick="openContacts()"><span>💬</span>Контакти</div>
+        <div class="nav-item" onclick="window.open('https://t.me/znahidkawow')"><span>💬</span>Контакти</div>
     </div>
 
     <script>
-        const URL = 'https://script.google.com/macros/s/AKfycbxGjWZFYAmbhNEvibQyTRrk3JivJjatJmlgO7nAzzjDX8ni0opXvrz28rg7oAk2S9mF/exec';
-        let all = [], cart = [], selected = {}, limit = 12, currentBrand = 'all';
+        const URL = 'https://script.google.com/macros/s/AKfycbxrDQV_sCJYEEyPPjgkodNCKpmO60PSjMH8HTNje-Jt6CabXlqZSHH07j_K1boy57TQ/exec';
+        let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
 
         async function init() {
             try {
-                const r = await fetch(URL); all = await r.json(); all.reverse();
+                const res = await fetch(URL); all = await res.json(); all.reverse();
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
                 new IntersectionObserver(e => { 
-                    if(e[0].isIntersecting && limit < (currentBrand === 'all' ? all.length : all.filter(p => p.brand === currentBrand).length)) {
-                        const list = currentBrand === 'all' ? all : all.filter(p => p.brand === currentBrand);
+                    if(e[0].isIntersecting && limit < (curBrand === 'all' ? all.length : all.filter(p => p.brand === curBrand).length)) {
+                        const list = curBrand === 'all' ? all : all.filter(p => p.brand === curBrand);
                         render(list.slice(limit, limit += 12), 'grid-home', true);
                     }
                 }).observe(document.getElementById('scroll-anchor'));
@@ -149,7 +144,6 @@
 
         function renderBrands() {
             const brands = [...new Set(all.map(p => p.brand))].sort();
-            // Фільтри на головній
             const filterCont = document.getElementById('brand-filters-home');
             brands.forEach(b => {
                 const div = document.createElement('div');
@@ -157,10 +151,7 @@
                 div.onclick = (e) => filterByBrand(b, e.target);
                 filterCont.appendChild(div);
             });
-            // Плитка у вкладці Каталог
-            document.getElementById('brands-list').innerHTML = brands.map(b => 
-                `<div class="brand-card" onclick="openBrandPage('${b}')">${b}</div>`
-            ).join('');
+            document.getElementById('brands-list').innerHTML = brands.map(b => `<div class="brand-card" onclick="openBrandPage('${b}')">${b}</div>`).join('');
         }
 
         function switchTab(tab) {
@@ -171,47 +162,46 @@
             window.scrollTo(0,0);
         }
 
-        function openBrandPage(brand) {
-            switchTab('home');
-            const items = document.querySelectorAll('#brand-filters-home .filter-item');
-            items.forEach(i => {
-                if(i.innerText === brand) filterByBrand(brand, i);
-            });
-        }
+        function openBrandPage(b) { switchTab('home'); const its = document.querySelectorAll('#brand-filters-home .filter-item'); its.forEach(i => { if(i.innerText === b) filterByBrand(b, i); }); }
 
         function filterByBrand(brand, el) {
             document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
             el.classList.add('active');
-            currentBrand = brand; limit = 12;
-            const filtered = brand === 'all' ? all : all.filter(p => p.brand === brand);
-            render(filtered.slice(0, limit), 'grid-home', false);
+            curBrand = brand; limit = 12;
+            const f = brand === 'all' ? all : all.filter(p => p.brand === brand);
+            render(f.slice(0, limit), 'grid-home', false);
             window.scrollTo(0,0);
         }
 
         function render(items, id, append = false) {
             const h = items.map(p => {
-                const img = p.image.split(',')[0].trim();
                 const sz = p.sizes.split(',').map(s => `<button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" onclick="pickSize(this,'${p.id}','${s.trim()}')">${s.trim()}</button>`).join('');
-                return `<div class="product-card"><div class="img-container" onclick="zoom('${img}')"><img src="${img}"></div><div class="card-info"><div class="title">${p.name}</div><div class="sizes-container">${sz}</div><div class="price-row"><div class="price">${p.price} ₴</div><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div></div></div>`;
+                const count = cart.filter(i => i.id === p.id).length;
+                let btn = `<button class="btn-qty" onclick="addToCart('${p.id}')">+</button>`;
+                if(count > 0) btn = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${p.id}')">−</button><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div>`;
+                return `<div class="product-card"><div class="img-container" onclick="zoom('${p.image}')"><img src="${p.image}"></div><div class="card-info"><div class="title">${p.name}</div><div class="sizes-container">${sz}</div><div class="price-row"><div class="price">${p.price} ₴</div><div id="act-${p.id}">${btn}</div></div></div></div>`;
             }).join('');
             if(append) document.getElementById(id).innerHTML += h; else document.getElementById(id).innerHTML = h;
         }
 
-        function zoom(src) { document.getElementById('zoomed-img').src = src; document.getElementById('zoom-modal').style.display = 'flex'; }
+        function zoom(s) { document.getElementById('zoomed-img').src = s; document.getElementById('zoom-modal').style.display='flex'; }
         function pickSize(b, id, s) { selected[id] = s; b.parentElement.querySelectorAll('.size-btn').forEach(x => x.classList.remove('selected')); b.classList.add('selected'); }
-        function addToCart(id) { if(!selected[id]) return alert("Обери розмір!"); const p = all.find(x => x.id === id); cart.push({...p, size: selected[id]}); updateCart(); }
-        function updateCart() { const p = document.getElementById('cart-panel'); p.style.display = cart.length ? 'flex' : 'none'; document.getElementById('cart-count').innerText = `${cart.length} ПАР`; document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`; }
+        function addToCart(id) { if(!selected[id]) return alert("Обери розмір!"); const p = all.find(x => x.id === id); cart.push({...p, size: selected[id]}); updateUI(id); updateCart(); }
+        function removeFromCart(id) { const idx = cart.map(i => i.id).lastIndexOf(id); if(idx !== -1) cart.splice(idx, 1); updateUI(id); updateCart(); }
+        function updateUI(id) { const count = cart.filter(i => i.id === id).length; const cont = document.getElementById(`act-${id}`); if(cont) cont.innerHTML = count > 0 ? `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${id}')">−</button><button class="btn-qty" onclick="addToCart('${id}')">+</button></div>` : `<button class="btn-qty" onclick="addToCart('${id}')">+</button>`; }
+        function getDeclension(n) { if (n % 10 === 1 && n % 100 !== 11) return "ПАРА"; if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return "ПАРИ"; return "ПАР"; }
+        function updateCart() { const p = document.getElementById('cart-panel'); p.style.display = cart.length ? 'flex' : 'none'; document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`; document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`; }
         function openOrder() { document.getElementById('cart-list').innerHTML = cart.map(i => `<div style="padding:10px;background:#161616;margin-bottom:5px;border-radius:10px;">${i.name} (р. ${i.size})</div>`).join(''); document.getElementById('order-modal').style.display='flex'; }
-        function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
-        function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
+        function setDel(t, b) { dType = t; document.querySelectorAll('.del-btn').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
         function goToForm() { document.getElementById('step-cart').style.display='none'; document.getElementById('step-form').style.display='block'; }
         function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); render(all.filter(p => p.name.toLowerCase().includes(q)).slice(0, 20), 'grid-home'); }
 
         async function sendOrder() {
-            const d = { action: "new_order", fio: document.getElementById('fio').value, phone: document.getElementById('phone').value, city: document.getElementById('city').value, socialNick: document.getElementById('social').value, delivery: document.getElementById('np').value, items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), total: cart.reduce((s, x) => s + parseInt(x.price), 0) + " ₴" };
-            if(!d.fio || !d.phone) return alert("Заповни дані!");
+            const d = { action: "new_order", fio: document.getElementById('fio').value, phone: document.getElementById('phone').value, city: document.getElementById('city').value, socialNick: document.getElementById('social').value, delivery: `${dType} №${document.getElementById('np').value}`, items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), total: cart.reduce((s, x) => s + parseInt(x.price), 0) + " ₴", promo: document.getElementById('promo').value };
+            if(!d.fio || !d.phone) return alert("Заповни ПІБ та Телефон!");
+            document.getElementById('submit-btn').innerText = "ОБРОБКА...";
             await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
-            document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="location.reload()">ОК</button></div>`;
+            document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;" onclick="location.reload()">ОК</button></div>`;
         }
         init();
     </script>
