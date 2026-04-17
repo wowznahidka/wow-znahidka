@@ -292,21 +292,49 @@
                 phone: document.getElementById('phone').value, 
                 city: document.getElementById('city').value, 
                 socialNick: document.getElementById('social').value, 
-                // Я додав сюди підпис про накладний платіж, щоб ти бачив це в боті
                 delivery: `${dType} №${document.getElementById('np').value} (Накладний платіж)`, 
                 items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), 
                 total: total + " ₴", 
                 promo: document.getElementById('promo').value 
             };
             
-            if(!d.fio || !d.phone) return alert("Заповни ПІБ та Телефон!");
+            // Перевірка на порожні поля
+            if(!d.fio || !d.phone || !document.getElementById('np').value) {
+                return alert("Будь ласка, заповніть ПІБ, Телефон та № відділення!");
+            }
+
             document.getElementById('submit-btn').innerText = "ОБРОБКА...";
             
             try {
-                await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
-                document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900; margin-top: 20px;" onclick="location.reload()">ОК</button></div>`;
+                // Відправляємо запит миттєво, без блокувань браузера
+                await fetch(URL, { 
+                    method: 'POST', 
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8',
+                    },
+                    body: JSON.stringify(d) 
+                });
+
+                // Миттєво очищаємо кошик
+                cart = [];
+                updateCart();
+
+                // Малюємо екран успіху
+                document.getElementById('modal-body').innerHTML = `
+                    <div style="text-align:center; padding:35px 10px;">
+                        <div style="font-size:5rem; margin-bottom:15px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0);">✅</div>
+                        <h2 style="color:var(--accent); margin:0 0 10px 0; font-size:1.6rem;">Замовлення оформлено успішно!</h2>
+                        <p style="color:#aaa; font-size:0.9rem; line-height:1.5; margin-bottom:25px;">
+                            Дякуємо! Найближчим часом ми зв'яжемося з вами для підтвердження деталей відправки.
+                        </p>
+                        <button onclick="location.reload()" style="width:100%; padding:18px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:900; font-size:1.1rem; cursor:pointer;">НА ГОЛОВНУ</button>
+                    </div>
+                    <style>@keyframes popIn { to { transform: scale(1); } }</style>
+                `;
+
             } catch(e) { 
-                alert("Помилка при відправці. Спробуйте ще раз.");
+                alert("Помилка при відправці. Перевірте інтернет-з'єднання.");
                 document.getElementById('submit-btn').innerText = "ЗАМОВИТИ";
             }
         }
