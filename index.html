@@ -210,7 +210,6 @@
             window.scrollTo(0,0);
         }
 
-        // --- ТУТ ОНОВЛЕНА ФУНКЦІЯ RENDER ---
         function render(items, id, append = false) {
             const h = items.map(p => {
                 const sz = p.sizes.split(',').map(s => `
@@ -226,8 +225,9 @@
                 // Логіка для фотографій: якщо пуста або тг - ставимо заглушку
                 const imgSrc = (p.image.includes('t.me') || !p.image) ? 'https://via.placeholder.com/400x400/1a1a1a/d4ff00?text=ФОТО+В+TELEGRAM' : p.image;
                 
-                // Логіка кнопки Телеграм
-                const tgBtn = p.tgPost ? `<a href="${p.tgPost}" target="_blank" class="tg-photo-btn">📸 Більше фото та відео</a>` : '';
+                // --- ВИПРАВЛЕНА ЛОГІКА КНОПКИ TELEGRAM ---
+                const link = p['Telegram Post'] || p.TelegramPost || p.Telegram_Post || p.tgPost;
+                const tgBtn = link ? `<a href="${link}" target="_blank" class="tg-photo-btn">📸 Більше фото та відео</a>` : '';
 
                 return `
                 <div class="product-card">
