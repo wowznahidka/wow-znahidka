@@ -55,13 +55,12 @@
         .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
         .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
 
-        /* КНОПКИ КОНТАКТІВ */
+        /* CONTACTS */
         .social-btn { display: flex; align-items: center; gap: 15px; background: #161616; padding: 18px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 800; margin-bottom: 12px; border: 1px solid var(--border); transition: 0.3s; }
         .social-btn.tg { border-left: 5px solid #24A1DE; }
         .social-btn.ig { border-left: 5px solid #E1306C; }
         .social-btn.tt { border-left: 5px solid #fff; }
 
-        /* ZOOM & CART */
         #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; cursor: zoom-out; }
         #zoom-modal img { max-width: 96%; max-height: 85vh; border-radius: 12px; }
         #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
@@ -83,7 +82,9 @@
                 <div class="filter-item active" onclick="filterByBrand('all', this)">Всі</div>
             </div>
         </div>
-        <div class="search-container"><input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()"></div>
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()">
+        </div>
         <div id="grid-home" class="catalog-grid"></div>
         <div id="scroll-anchor" style="height: 50px;"></div>
     </div>
@@ -141,21 +142,26 @@
     </div>
 
     <script>
+        // Твоя адреса Google Apps Script
         const URL = 'https://script.google.com/macros/s/AKfycbxrDQV_sCJYEEyPPjgkodNCKpmO60PSjMH8HTNje-Jt6CabXlqZSHH07j_K1boy57TQ/exec';
         let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
 
         async function init() {
             try {
-                const res = await fetch(URL); all = await res.json(); all.reverse();
+                const res = await fetch(URL); 
+                all = await res.json(); 
+                all.reverse();
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
+                
+                // Автозавантаження при скролі
                 new IntersectionObserver(e => { 
                     if(e[0].isIntersecting && limit < (curBrand === 'all' ? all.length : all.filter(p => p.brand === curBrand).length)) {
                         const list = curBrand === 'all' ? all : all.filter(p => p.brand === curBrand);
                         render(list.slice(limit, limit += 12), 'grid-home', true);
                     }
                 }).observe(document.getElementById('scroll-anchor'));
-            } catch(e) { console.log(e); }
+            } catch(e) { console.log("Помилка завантаження:", e); }
         }
 
         function renderBrands() {
@@ -180,7 +186,11 @@
             window.scrollTo(0,0);
         }
 
-        function openBrandPage(b) { switchTab('home'); const its = document.querySelectorAll('#brand-filters-home .filter-item'); its.forEach(i => { if(i.innerText === b) filterByBrand(b, i); }); }
+        function openBrandPage(b) { 
+            switchTab('home'); 
+            const its = document.querySelectorAll('#brand-filters-home .filter-item'); 
+            its.forEach(i => { if(i.innerText === b) filterByBrand(b, i); }); 
+        }
 
         function filterByBrand(brand, el) {
             document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
@@ -191,16 +201,65 @@
             window.scrollTo(0,0);
         }
 
+        // --- ОНОВЛЕНІ ФУНКЦІЇ ---
+
         function render(items, id, append = false) {
             const h = items.map(p => {
-                const sz = p.sizes.split(',').map(s => `<button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" onclick="pickSize(this,'${p.id}','${s.trim()}')">${s.trim()}</button>`).join('');
+                const sz = p.sizes.split(',').map(s => `
+                    <button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" 
+                            onclick="pickSize(this,'${p.id}','${s.trim()}')">
+                        ${s.trim()}
+                    </button>`).join('');
+                
                 const count = cart.filter(i => i.id === p.id).length;
                 let btn = `<button class="btn-qty" onclick="addToCart('${p.id}')">+</button>`;
                 if(count > 0) btn = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${p.id}')">−</button><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div>`;
-                return `<div class="product-card"><div class="img-container" onclick="zoom('${p.image}')"><img src="${p.image}"></div><div class="card-info"><div class="title">${p.name}</div><div class="sizes-container">${sz}</div><div class="price-row"><div class="price">${p.price} ₴</div><div id="act-${p.id}">${btn}</div></div></div></div>`;
+                
+                return `
+                <div class="product-card">
+                    <div class="img-container" onclick="zoom('${p.image}')">
+                        <img src="${p.image}">
+                    </div>
+                    <div class="card-info">
+                        <div class="title">${p.name}</div>
+                        <div class="sizes-container">${sz}</div>
+                        <div class="price-row">
+                            <div class="price">${p.price} ₴</div>
+                            <div id="act-${p.id}">${btn}</div>
+                        </div>
+                    </div>
+                </div>`;
             }).join('');
             if(append) document.getElementById(id).innerHTML += h; else document.getElementById(id).innerHTML = h;
         }
+
+        function handleSearch() {
+            const q = document.getElementById('search-input').value.toLowerCase().trim();
+            if (!q) {
+                render(all.slice(0, 12), 'grid-home');
+                return;
+            }
+            
+            // Розумний пошук: кожне слово із запиту має бути в назві
+            const words = q.split(' ').filter(w => w.length > 0);
+            const filtered = all.filter(p => {
+                const name = p.name.toLowerCase();
+                return words.every(w => name.includes(w));
+            });
+            
+            render(filtered.slice(0, 24), 'grid-home');
+        }
+
+        function updateCart() {
+            const p = document.getElementById('cart-panel');
+            p.style.display = cart.length ? 'flex' : 'none';
+            document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`;
+            // Рахуємо ціну безпосередньо з об'єктів (які вже мають ціну з таблиці)
+            const total = cart.reduce((s, x) => s + parseInt(x.price), 0);
+            document.getElementById('cart-total').innerText = `${total} ₴ ➔`;
+        }
+
+        // --- ІНШІ СИСТЕМНІ ФУНКЦІЇ ---
 
         function zoom(s) { document.getElementById('zoomed-img').src = s; document.getElementById('zoom-modal').style.display='flex'; }
         function pickSize(b, id, s) { selected[id] = s; b.parentElement.querySelectorAll('.size-btn').forEach(x => x.classList.remove('selected')); b.classList.add('selected'); }
@@ -208,22 +267,38 @@
         function removeFromCart(id) { const idx = cart.map(i => i.id).lastIndexOf(id); if(idx !== -1) cart.splice(idx, 1); updateUI(id); updateCart(); }
         function updateUI(id) { const count = cart.filter(i => i.id === id).length; const cont = document.getElementById(`act-${id}`); if(cont) cont.innerHTML = count > 0 ? `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${id}')">−</button><button class="btn-qty" onclick="addToCart('${id}')">+</button></div>` : `<button class="btn-qty" onclick="addToCart('${id}')">+</button>`; }
         function getDeclension(n) { if (n % 10 === 1 && n % 100 !== 11) return "ПАРА"; if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return "ПАРИ"; return "ПАР"; }
-        function updateCart() { const p = document.getElementById('cart-panel'); p.style.display = cart.length ? 'flex' : 'none'; document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`; document.getElementById('cart-total').innerText = `${cart.reduce((s, x) => s + parseInt(x.price), 0)} ₴ ➔`; }
         function openOrder() { document.getElementById('cart-list').innerHTML = cart.map(i => `<div style="padding:10px;background:#161616;margin-bottom:5px;border-radius:10px; font-size: 0.9rem;">🔹 ${i.name} (р. ${i.size})</div>`).join(''); document.getElementById('order-modal').style.display='flex'; }
         function openContacts() { document.getElementById('contacts-modal').style.display = 'flex'; }
         function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
         function setDel(t, b) { dType = t; b.parentElement.querySelectorAll('.filter-item').forEach(x => x.classList.remove('active')); b.classList.add('active'); }
         function goToForm() { document.getElementById('step-cart').style.display='none'; document.getElementById('step-form').style.display='block'; }
-        function backToCart() { document.getElementById('step-form').style.display='none'; document.getElementById('step-cart').style.display='block'; }
-        function handleSearch() { const q = document.getElementById('search-input').value.toLowerCase(); render(all.filter(p => p.name.toLowerCase().includes(q)).slice(0, 20), 'grid-home'); }
-
+        
         async function sendOrder() {
-            const d = { action: "new_order", fio: document.getElementById('fio').value, phone: document.getElementById('phone').value, city: document.getElementById('city').value, socialNick: document.getElementById('social').value, delivery: `${dType} №${document.getElementById('np').value}`, items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), total: cart.reduce((s, x) => s + parseInt(x.price), 0) + " ₴", promo: document.getElementById('promo').value };
+            const total = cart.reduce((s, x) => s + parseInt(x.price), 0);
+            const d = { 
+                action: "new_order", 
+                fio: document.getElementById('fio').value, 
+                phone: document.getElementById('phone').value, 
+                city: document.getElementById('city').value, 
+                socialNick: document.getElementById('social').value, 
+                delivery: `${dType} №${document.getElementById('np').value}`, 
+                items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), 
+                total: total + " ₴", 
+                promo: document.getElementById('promo').value 
+            };
+            
             if(!d.fio || !d.phone) return alert("Заповни ПІБ та Телефон!");
             document.getElementById('submit-btn').innerText = "ОБРОБКА...";
-            await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
-            document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900; margin-top: 20px;" onclick="location.reload()">ОК</button></div>`;
+            
+            try {
+                await fetch(URL, { method: 'POST', body: JSON.stringify(d) });
+                document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:40px 0;"><span style="font-size:5rem;">✅</span><h2 style="color:var(--accent); margin-top:20px;">ПРИЙНЯТО!</h2><p>Маша вже готує замовлення.</p><button style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900; margin-top: 20px;" onclick="location.reload()">ОК</button></div>`;
+            } catch(e) { 
+                alert("Помилка при відправці. Спробуйте ще раз.");
+                document.getElementById('submit-btn').innerText = "ЗАМОВИТИ";
+            }
         }
+
         init();
     </script>
 </body>
