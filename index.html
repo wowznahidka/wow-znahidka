@@ -50,6 +50,10 @@
         .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
         .btn-minus { background: #222; color: #fff; }
 
+        /* НОВА КНОПКА TELEGRAM */
+        .tg-photo-btn { display: block; width: 100%; padding: 10px; margin-top: 12px; background: #2AABEE; color: #fff; text-align: center; text-decoration: none; border-radius: 12px; font-size: 0.8rem; font-weight: 800; transition: 0.2s; }
+        .tg-photo-btn:hover { opacity: 0.8; }
+
         /* MODALS */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
         .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
@@ -111,7 +115,12 @@
             <div id="step-cart">
                 <h3>Твій кошик</h3>
                 <div id="cart-list" style="margin-bottom: 20px;"></div>
-                <div style="background:rgba(212,255,0,0.1); padding:15px; border-radius:15px; font-size:0.8rem; margin-bottom:15px">📦 <b>Накладний платіж</b> при отриманні на пошті.</div>
+                
+                <div style="background:rgba(212,255,0,0.08); padding:18px; border-radius:16px; margin-bottom:15px; border: 1px dashed rgba(212,255,0,0.3);">
+                    <div style="color:var(--accent); font-weight:900; font-size:1.1rem; margin-bottom:5px;">📦 Накладний платіж</div>
+                    <div style="font-size:0.8rem; color:#aaa; line-height:1.4;">Оплата здійснюється виключно після огляду та примірки на пошті. Жодних передоплат!</div>
+                </div>
+
                 <button onclick="goToForm()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900;">ДАЛІ ➔</button>
             </div>
             <div id="step-form" style="display:none;">
@@ -201,8 +210,7 @@
             window.scrollTo(0,0);
         }
 
-        // --- ОНОВЛЕНІ ФУНКЦІЇ ---
-
+        // --- ТУТ ОНОВЛЕНА ФУНКЦІЯ RENDER ---
         function render(items, id, append = false) {
             const h = items.map(p => {
                 const sz = p.sizes.split(',').map(s => `
@@ -215,10 +223,16 @@
                 let btn = `<button class="btn-qty" onclick="addToCart('${p.id}')">+</button>`;
                 if(count > 0) btn = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${p.id}')">−</button><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div>`;
                 
+                // Логіка для фотографій: якщо пуста або тг - ставимо заглушку
+                const imgSrc = (p.image.includes('t.me') || !p.image) ? 'https://via.placeholder.com/400x400/1a1a1a/d4ff00?text=ФОТО+В+TELEGRAM' : p.image;
+                
+                // Логіка кнопки Телеграм
+                const tgBtn = p.tgPost ? `<a href="${p.tgPost}" target="_blank" class="tg-photo-btn">📸 Більше фото та відео</a>` : '';
+
                 return `
                 <div class="product-card">
-                    <div class="img-container" onclick="zoom('${p.image}')">
-                        <img src="${p.image}">
+                    <div class="img-container" onclick="zoom('${imgSrc}')">
+                        <img src="${imgSrc}">
                     </div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
@@ -227,6 +241,7 @@
                             <div class="price">${p.price} ₴</div>
                             <div id="act-${p.id}">${btn}</div>
                         </div>
+                        ${tgBtn}
                     </div>
                 </div>`;
             }).join('');
@@ -240,7 +255,6 @@
                 return;
             }
             
-            // Розумний пошук: кожне слово із запиту має бути в назві
             const words = q.split(' ').filter(w => w.length > 0);
             const filtered = all.filter(p => {
                 const name = p.name.toLowerCase();
@@ -254,12 +268,9 @@
             const p = document.getElementById('cart-panel');
             p.style.display = cart.length ? 'flex' : 'none';
             document.getElementById('cart-count').innerText = `${cart.length} ${getDeclension(cart.length)}`;
-            // Рахуємо ціну безпосередньо з об'єктів (які вже мають ціну з таблиці)
             const total = cart.reduce((s, x) => s + parseInt(x.price), 0);
             document.getElementById('cart-total').innerText = `${total} ₴ ➔`;
         }
-
-        // --- ІНШІ СИСТЕМНІ ФУНКЦІЇ ---
 
         function zoom(s) { document.getElementById('zoomed-img').src = s; document.getElementById('zoom-modal').style.display='flex'; }
         function pickSize(b, id, s) { selected[id] = s; b.parentElement.querySelectorAll('.size-btn').forEach(x => x.classList.remove('selected')); b.classList.add('selected'); }
@@ -281,7 +292,8 @@
                 phone: document.getElementById('phone').value, 
                 city: document.getElementById('city').value, 
                 socialNick: document.getElementById('social').value, 
-                delivery: `${dType} №${document.getElementById('np').value}`, 
+                // Я додав сюди підпис про накладний платіж, щоб ти бачив це в боті
+                delivery: `${dType} №${document.getElementById('np').value} (Накладний платіж)`, 
                 items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), 
                 total: total + " ₴", 
                 promo: document.getElementById('promo').value 
