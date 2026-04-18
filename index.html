@@ -225,24 +225,19 @@
         }
 
         function render(items, id, append = false) {
-    // Шукаємо або за артикулом, або за шматочком назви
-    const priorityID = "NB0059";
-    const priorityName = "New Balance 530 Silver"; 
+    // Вказуємо назву моделі, яку треба винести в топ
+    const priorityName = "New Balance 530 Silver Gold"; 
 
     if (!append) {
-        // Шукаємо індекс товару
-        const pIdx = items.findIndex(x => 
-            String(x.id).trim() === priorityID || 
-            (x.name && x.name.includes(priorityName))
-        );
+        // Шукаємо індекс за назвою (це найнадійніше)
+        const pIdx = items.findIndex(x => x.name && x.name.includes(priorityName));
         
         if (pIdx !== -1) {
-            // Вирізаємо і ставимо на початок
-            const [pItem] = items.splice(pIdx, 1);
-            items.unshift(pItem);
-            console.log("Пріоритетний товар встановлено першим:", pItem.name);
-        } else {
-            console.log("Товар для пріоритету не знайдено в масиві");
+            // Вирізаємо товар зі списку
+            const [priorityItem] = items.splice(pIdx, 1);
+            // Ставимо його на самий початок масиву
+            items.unshift(priorityItem);
+            console.log("🔥 Пріоритетний товар знайдено і виведено в ТОП!");
         }
     }
 
