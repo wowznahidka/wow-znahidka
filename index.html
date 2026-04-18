@@ -154,27 +154,26 @@
 
         async function init() {
             try {
+                // Вбивалка кешу: сайт завжди завантажує свіжі дані!
                 const res = await fetch(URL + "?v=" + new Date().getTime()); 
-                let rawData = await res.json(); 
+                all = await res.json(); 
                 
-                // --- ГЛОБАЛЬНЕ СОРТУВАННЯ ---
-                
-                // 1. Спочатку сортуємо за кількістю розмірів (базова логіка)
-                rawData.sort((a, b) => {
+                // --- РОЗУМНЕ СОРТУВАННЯ З ПРІОРІТЕТОМ ---
+                // 1. Сортуємо за кількістю розмірів (базова логіка)
+                all.sort((a, b) => {
                     const countA = a.sizes ? a.sizes.toString().split(',').filter(s => s.trim() !== '').length : 0;
                     const countB = b.sizes ? b.sizes.toString().split(',').filter(s => s.trim() !== '').length : 0;
                     return countB - countA;
                 });
 
-                // 2. Витягуємо ПРІОРИТЕТ (ID: 637) на самий верх, ігноруючи все інше
-                const priorityId = "637";
-                const priorityItems = rawData.filter(p => p.id == priorityId);
-                const otherItems = rawData.filter(p => p.id != priorityId);
-                
-                // Об'єднуємо: пріоритетні спочатку, потім решта
-                all = [...priorityItems, ...otherItems];
-
-                // ВАЖЛИВО: Видалено all.reverse(), щоб не ламати порядок!
+                // 2. Витягуємо ПРІОРИТЕТ (ID: 637) на самий початок
+                const pID = "637";
+                const priorityIdx = all.findIndex(p => p.id == pID);
+                if (priorityIdx !== -1) {
+                    const item = all.splice(priorityIdx, 1)[0];
+                    all.unshift(item);
+                }
+                // --------------------------------
 
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
@@ -226,6 +225,14 @@
         }
 
         function render(items, id, append = false) {
+            // Примусова перевірка пріоритету перед малюванням
+            const pID = "637";
+            if (!append && items.some(x => x.id == pID)) {
+                const pItem = items.find(x => x.id == pID);
+                const others = items.filter(x => x.id != pID);
+                items = [pItem, ...others];
+            }
+
             const h = items.map(p => {
                 const sz = (p.sizes || "").toString().split(',').map(s => `
                     <button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" 
@@ -249,9 +256,13 @@
                     }
                 }
 
-                let tgBtn = tgLink ? 
-                    `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>` : 
-                    `<a href="https://t.me/znahidkawow?text=${encodeURIComponent('Привіт! Хочу фото: ' + p.name)}" target="_blank" class="tg-photo-btn">✈️ Запросити фото</a>`;
+                let tgBtn = '';
+                if (tgLink) {
+                    tgBtn = `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>`;
+                } else {
+                    const message = encodeURIComponent(`Привіт! Хочу побачити додаткові фото цієї моделі: ${p.name}`);
+                    tgBtn = `<a href="https://t.me/znahidkawow?text=${message}" target="_blank" class="tg-photo-btn" style="background: #24A1DE; border: 1px solid #1a88bd;">✈️ Запросити додаткові фото</a>`;
+                }
 
                 return `
                 <div class="product-card">
@@ -269,15 +280,20 @@
                     </div>
                 </div>`;
             }).join('');
-            const target = document.getElementById(id);
-            if(append) target.innerHTML += h; else target.innerHTML = h;
+            if(append) document.getElementById(id).innerHTML += h; else document.getElementById(id).innerHTML = h;
         }
 
         function handleSearch() {
             const q = document.getElementById('search-input').value.toLowerCase().trim();
-            if (!q) { render(all.slice(0, 12), 'grid-home'); return; }
+            if (!q) {
+                render(all.slice(0, 12), 'grid-home');
+                return;
+            }
             const words = q.split(' ').filter(w => w.length > 0);
-            const filtered = all.filter(p => words.every(w => p.name.toLowerCase().includes(w)));
+            const filtered = all.filter(p => {
+                const name = p.name.toLowerCase();
+                return words.every(w => name.includes(w));
+            });
             render(filtered.slice(0, 24), 'grid-home');
         }
 
@@ -336,9 +352,12 @@
                     <div style="text-align:center; padding:35px 10px;">
                         <div style="font-size:5rem; margin-bottom:15px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0);">✅</div>
                         <h2 style="color:var(--accent); margin:0 0 10px 0; font-size:1.6rem;">Замовлення успішне!</h2>
-                        <p style="color:#aaa; font-size:0.9rem; line-height:1.5; margin-bottom:25px;">Найближчим часом ми зв'яжемося з вами.</p>
+                        <p style="color:#aaa; font-size:0.9rem; line-height:1.5; margin-bottom:25px;">
+                            Дякуємо! Найближчим часом ми зв'яжемося з вами.
+                        </p>
                         <button onclick="location.reload()" style="width:100%; padding:18px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:900; font-size:1.1rem; cursor:pointer;">НА ГОЛОВНУ</button>
                     </div>
+                    <style>@keyframes popIn { to { transform: scale(1); } }</style>
                 `;
             } catch(e) { 
                 alert("Помилка. Перевірте інтернет.");
