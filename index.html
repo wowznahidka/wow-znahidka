@@ -225,14 +225,17 @@
         }
 
         function render(items, id, append = false) {
-            // Примусова перевірка пріоритету перед малюванням
             const pID = "63721";
+
+            // Якщо ми малюємо головну сторінку (не дозавантаження)
             if (!append) {
-                // Витягуємо модель 637 на перше місце
-                const priorityItem = items.find(x => String(x.id).trim() === pID);
-                if (priorityItem) {
-                    const others = items.filter(x => String(x.id).trim() !== pID);
-                    items = [priorityItem, ...others];
+                // Шукаємо індекс нашої моделі
+                const priorityIdx = items.findIndex(x => String(x.id).trim() === pID);
+                
+                if (priorityIdx !== -1) {
+                    // Вирізаємо її з масиву і ставимо на 0-ве місце
+                    const [priorityItem] = items.splice(priorityIdx, 1);
+                    items.unshift(priorityItem);
                 }
             }
 
