@@ -146,19 +146,17 @@
         <div class="nav-item" id="nav-contacts" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
 
-    <script>
-        // ТУТ ВСТАВ СВОЄ ПОСИЛАННЯ З GOOGLE APPS SCRIPT
-        const URL = 'https://script.google.com/macros/s/AKfycbwYbTMkUE5MqiMn2DwewcysSh4NFvqSF6bKPpehlPFcslcrOy27yH72xokuMp1TJ6Z_/exec';
+    let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
         
-        let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
+        // Назва товару для ПРІОРІТЕТУ (для твого таргету)
+        const PRIORITY_NAME = "New Balance 530 Silver Gold";
 
         async function init() {
             try {
-                // Вбивалка кешу: сайт завжди завантажує свіжі дані!
                 const res = await fetch(URL + "?v=" + new Date().getTime()); 
                 all = await res.json(); 
                 
-                // --- РОЗУМНЕ СОРТУВАННЯ З ПРІОРІТЕТОМ ---
+                // --- РОЗУМНЕ СОРТУВАННЯ ---
                 // 1. Сортуємо за кількістю розмірів (базова логіка)
                 all.sort((a, b) => {
                     const countA = a.sizes ? a.sizes.toString().split(',').filter(s => s.trim() !== '').length : 0;
@@ -166,12 +164,12 @@
                     return countB - countA;
                 });
 
-                // 2. Витягуємо ПРІОРИТЕТ (ID: 637) на самий початок
-                const pID = "63721";
-                const priorityIdx = all.findIndex(p => p.id == pID);
-                if (priorityIdx !== -1) {
-                    const item = all.splice(priorityIdx, 1)[0];
+                // 2. Витягуємо ПРІОРІТЕТ за НАЗВОЮ на самий початок
+                const pIdx = all.findIndex(p => p.name && p.name.includes(PRIORITY_NAME));
+                if (pIdx !== -1) {
+                    const item = all.splice(pIdx, 1)[0];
                     all.unshift(item);
+                    console.log("🔥 Товар для таргету встановлено на 1-ше місце");
                 }
                 // --------------------------------
 
@@ -225,21 +223,14 @@
         }
 
         function render(items, id, append = false) {
-    // Вказуємо назву моделі, яку треба винести в топ
-    const priorityName = "New Balance 530 Silver Gold"; 
-
-    if (!append) {
-        // Шукаємо індекс за назвою (це найнадійніше)
-        const pIdx = items.findIndex(x => x.name && x.name.includes(priorityName));
-        
-        if (pIdx !== -1) {
-            // Вирізаємо товар зі списку
-            const [priorityItem] = items.splice(pIdx, 1);
-            // Ставимо його на самий початок масиву
-            items.unshift(priorityItem);
-            console.log("🔥 Пріоритетний товар знайдено і виведено в ТОП!");
-        }
-    }
+            // Додаткова перевірка пріоритету при рендері (для надійності)
+            if (!append) {
+                const pIdx = items.findIndex(x => x.name && x.name.includes(PRIORITY_NAME));
+                if (pIdx !== -1) {
+                    const [priorityItem] = items.splice(pIdx, 1);
+                    items.unshift(priorityItem);
+                }
+            }
 
             const h = items.map(p => {
                 const sz = (p.sizes || "").toString().split(',').map(s => `
@@ -264,13 +255,9 @@
                     }
                 }
 
-                let tgBtn = '';
-                if (tgLink) {
-                    tgBtn = `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>`;
-                } else {
-                    const message = encodeURIComponent(`Привіт! Хочу побачити додаткові фото цієї моделі: ${p.name}`);
-                    tgBtn = `<a href="https://t.me/znahidkawow?text=${message}" target="_blank" class="tg-photo-btn" style="background: #24A1DE; border: 1px solid #1a88bd;">✈️ Запросити додаткові фото</a>`;
-                }
+                let tgBtn = tgLink ? 
+                    `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>` : 
+                    `<a href="https://t.me/znahidkawow?text=${encodeURIComponent('Привіт! Хочу фото: ' + p.name)}" target="_blank" class="tg-photo-btn">✈️ Запросити фото</a>`;
 
                 return `
                 <div class="product-card">
@@ -293,15 +280,9 @@
 
         function handleSearch() {
             const q = document.getElementById('search-input').value.toLowerCase().trim();
-            if (!q) {
-                render(all.slice(0, 12), 'grid-home');
-                return;
-            }
+            if (!q) { render(all.slice(0, 12), 'grid-home'); return; }
             const words = q.split(' ').filter(w => w.length > 0);
-            const filtered = all.filter(p => {
-                const name = p.name.toLowerCase();
-                return words.every(w => name.includes(w));
-            });
+            const filtered = all.filter(p => words.every(w => p.name.toLowerCase().includes(w)));
             render(filtered.slice(0, 24), 'grid-home');
         }
 
@@ -365,7 +346,6 @@
                         </p>
                         <button onclick="location.reload()" style="width:100%; padding:18px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:900; font-size:1.1rem; cursor:pointer;">НА ГОЛОВНУ</button>
                     </div>
-                    <style>@keyframes popIn { to { transform: scale(1); } }</style>
                 `;
             } catch(e) { 
                 alert("Помилка. Перевірте інтернет.");
