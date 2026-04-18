@@ -50,16 +50,13 @@
         .btn-qty { background: var(--accent); border: none; width: 34px; height: 34px; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; font-size: 1.2rem; }
         .btn-minus { background: #222; color: #fff; }
 
-        /* НОВА КНОПКА TELEGRAM */
         .tg-photo-btn { display: block; width: 100%; padding: 10px; margin-top: 12px; background: #2AABEE; color: #fff; text-align: center; text-decoration: none; border-radius: 12px; font-size: 0.8rem; font-weight: 800; transition: 0.2s; }
         .tg-photo-btn:hover { opacity: 0.8; }
 
-        /* MODALS */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
         .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
         .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
 
-        /* CONTACTS */
         .social-btn { display: flex; align-items: center; gap: 15px; background: #161616; padding: 18px; border-radius: 20px; text-decoration: none; color: #fff; font-weight: 800; margin-bottom: 12px; border: 1px solid var(--border); transition: 0.3s; }
         .social-btn.tg { border-left: 5px solid #24A1DE; }
         .social-btn.ig { border-left: 5px solid #E1306C; }
@@ -69,7 +66,6 @@
         #zoom-modal img { max-width: 96%; max-height: 85vh; border-radius: 12px; }
         #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; }
 
-        /* NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
         .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; flex: 1; }
         .nav-item span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
@@ -151,19 +147,20 @@
     </div>
 
     <script>
-        // Твоя адреса Google Apps Script
+        // ТУТ ВСТАВ СВОЄ ПОСИЛАННЯ З GOOGLE APPS SCRIPT
         const URL = 'https://script.google.com/macros/s/AKfycbwRlSkTkGtaVvlNUt0QBWFKKW8Q-YeKYv1fzPR0OCTGrXG8diIrvFxKPvy8u2Z_625a/exec';
+        
         let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
 
         async function init() {
             try {
-                const res = await fetch(URL); 
+                // Вбивалка кешу: сайт завжди завантажує свіжі дані!
+                const res = await fetch(URL + "?v=" + new Date().getTime()); 
                 all = await res.json(); 
                 all.reverse();
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
                 
-                // Автозавантаження при скролі
                 new IntersectionObserver(e => { 
                     if(e[0].isIntersecting && limit < (curBrand === 'all' ? all.length : all.filter(p => p.brand === curBrand).length)) {
                         const list = curBrand === 'all' ? all : all.filter(p => p.brand === curBrand);
@@ -212,7 +209,7 @@
 
         function render(items, id, append = false) {
             const h = items.map(p => {
-                const sz = p.sizes.split(',').map(s => `
+                const sz = (p.sizes || "").toString().split(',').map(s => `
                     <button class="size-btn ${selected[p.id] === s.trim() ? 'selected' : ''}" 
                             onclick="pickSize(this,'${p.id}','${s.trim()}')">
                         ${s.trim()}
@@ -222,12 +219,29 @@
                 let btn = `<button class="btn-qty" onclick="addToCart('${p.id}')">+</button>`;
                 if(count > 0) btn = `<div class="qty-controls"><button class="btn-qty btn-minus" onclick="removeFromCart('${p.id}')">−</button><button class="btn-qty" onclick="addToCart('${p.id}')">+</button></div>`;
                 
-                // Логіка для фотографій: якщо пуста або тг - ставимо заглушку
-                const imgSrc = (p.image.includes('t.me') || !p.image) ? 'https://via.placeholder.com/400x400/1a1a1a/d4ff00?text=ФОТО+В+TELEGRAM' : p.image;
+                const imgSrc = (p.image && !p.image.includes('t.me')) ? p.image : 'https://via.placeholder.com/400x400/1a1a1a/d4ff00?text=ФОТО+В+TELEGRAM';
                 
-                // --- ВИПРАВЛЕНА ЛОГІКА КНОПКИ TELEGRAM ---
-                const link = p['Telegram Post'] || p.TelegramPost || p.Telegram_Post || p.tgPost;
-                const tgBtn = link ? `<a href="${link}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>` : '';
+                // --- РОЗУМНИЙ ПОШУК ПОСИЛАННЯ ТА КНОПКА ---
+                let tgLink = p.telegramLink || p.tgPost || "";
+                
+                if (!tgLink) {
+                    for (let key in p) {
+                        if (typeof p[key] === 'string' && p[key].includes('t.me') && !p[key].includes('znahidkawow')) {
+                            tgLink = p[key];
+                            break;
+                        }
+                    }
+                }
+
+                let tgBtn = '';
+                if (tgLink) {
+                    // Кнопка на фото
+                    tgBtn = `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>`;
+                } else {
+                    // Кнопка на запит до менеджера (з готовим текстом)
+                    const message = encodeURIComponent(`Привіт! Хочу побачити додаткові фото цієї моделі: ${p.name}`);
+                    tgBtn = `<a href="https://t.me/znahidkawow?text=${message}" target="_blank" class="tg-photo-btn" style="background: #24A1DE; border: 1px solid #1a88bd;">✈️ Запросити додаткові фото</a>`;
+                }
 
                 return `
                 <div class="product-card">
@@ -254,13 +268,11 @@
                 render(all.slice(0, 12), 'grid-home');
                 return;
             }
-            
             const words = q.split(' ').filter(w => w.length > 0);
             const filtered = all.filter(p => {
                 const name = p.name.toLowerCase();
                 return words.every(w => name.includes(w));
             });
-            
             render(filtered.slice(0, 24), 'grid-home');
         }
 
@@ -298,7 +310,6 @@
                 promo: document.getElementById('promo').value 
             };
             
-            // Перевірка на порожні поля
             if(!d.fio || !d.phone || !document.getElementById('np').value) {
                 return alert("Будь ласка, заповніть ПІБ, Телефон та № відділення!");
             }
@@ -306,35 +317,29 @@
             document.getElementById('submit-btn').innerText = "ОБРОБКА...";
             
             try {
-                // Відправляємо запит миттєво, без блокувань браузера
                 await fetch(URL, { 
                     method: 'POST', 
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(d) 
                 });
 
-                // Миттєво очищаємо кошик
                 cart = [];
                 updateCart();
 
-                // Малюємо екран успіху
                 document.getElementById('modal-body').innerHTML = `
                     <div style="text-align:center; padding:35px 10px;">
                         <div style="font-size:5rem; margin-bottom:15px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0);">✅</div>
-                        <h2 style="color:var(--accent); margin:0 0 10px 0; font-size:1.6rem;">Замовлення оформлено успішно!</h2>
+                        <h2 style="color:var(--accent); margin:0 0 10px 0; font-size:1.6rem;">Замовлення успішне!</h2>
                         <p style="color:#aaa; font-size:0.9rem; line-height:1.5; margin-bottom:25px;">
-                            Дякуємо! Найближчим часом ми зв'яжемося з вами для підтвердження деталей відправки.
+                            Дякуємо! Найближчим часом ми зв'яжемося з вами.
                         </p>
                         <button onclick="location.reload()" style="width:100%; padding:18px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:900; font-size:1.1rem; cursor:pointer;">НА ГОЛОВНУ</button>
                     </div>
                     <style>@keyframes popIn { to { transform: scale(1); } }</style>
                 `;
-
             } catch(e) { 
-                alert("Помилка при відправці. Перевірте інтернет-з'єднання.");
+                alert("Помилка. Перевірте інтернет.");
                 document.getElementById('submit-btn').innerText = "ЗАМОВИТИ";
             }
         }
