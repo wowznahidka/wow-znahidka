@@ -261,7 +261,7 @@
                 return `
                 <div class="product-card">
                     <div class="img-container" onclick="zoom('${imgSrc}')">
-                        <img src="${imgSrc}">
+                        <img src="${imgSrc}" loading="lazy" alt="${p.name}">
                     </div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
