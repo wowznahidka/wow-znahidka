@@ -225,19 +225,19 @@
         }
 
         function render(items, id, append = false) {
-            const pID = "63721";
+    // Твій РЕАЛЬНИЙ ID, який ми побачили в консолі
+    const pID = "NB0082"; 
 
-            // Якщо ми малюємо головну сторінку (не дозавантаження)
-            if (!append) {
-                // Шукаємо індекс нашої моделі
-                const priorityIdx = items.findIndex(x => String(x.id).trim() === pID);
-                
-                if (priorityIdx !== -1) {
-                    // Вирізаємо її з масиву і ставимо на 0-ве місце
-                    const [priorityItem] = items.splice(priorityIdx, 1);
-                    items.unshift(priorityItem);
-                }
-            }
+    if (!append) {
+        // Знаходимо товар за його реальним ID ("NB0082")
+        const pIdx = items.findIndex(x => String(x.id).trim() === pID);
+        
+        if (pIdx !== -1) {
+            // Вирізаємо його та ставимо на перше місце
+            const [priorityItem] = items.splice(pIdx, 1);
+            items.unshift(priorityItem);
+        }
+    }
 
             const h = items.map(p => {
                 const sz = (p.sizes || "").toString().split(',').map(s => `
