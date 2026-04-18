@@ -227,10 +227,13 @@
         function render(items, id, append = false) {
             // Примусова перевірка пріоритету перед малюванням
             const pID = "63721";
-            if (!append && items.some(x => x.id == pID)) {
-                const pItem = items.find(x => x.id == pID);
-                const others = items.filter(x => x.id != pID);
-                items = [pItem, ...others];
+            if (!append) {
+                // Витягуємо модель 637 на перше місце
+                const priorityItem = items.find(x => String(x.id).trim() === pID);
+                if (priorityItem) {
+                    const others = items.filter(x => String(x.id).trim() !== pID);
+                    items = [priorityItem, ...others];
+                }
             }
 
             const h = items.map(p => {
