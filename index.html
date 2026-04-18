@@ -154,24 +154,28 @@
 
         async function init() {
             try {
-                // Вбивалка кешу: сайт завжди завантажує свіжі дані!
                 const res = await fetch(URL + "?v=" + new Date().getTime()); 
                 all = await res.json(); 
                 
-                // --- НОВЕ РОЗУМНЕ СОРТУВАННЯ ---
-                // 1. Спочатку перевертаємо, щоб найновіші були зверху (як було)
-                all.reverse(); 
+                // --- ОНОВЛЕНЕ РОЗУМНЕ СОРТУВАННЯ З ПРІОРІТЕТОМ ---
                 
-                // 2. А тепер сортуємо за кількістю розмірів (від більшого до меншого)
+                // 1. Спочатку базове сортування (за кількістю розмірів)
                 all.sort((a, b) => {
-                    // Рахуємо скільки розмірів є в товарі А
                     const countA = a.sizes ? a.sizes.split(',').filter(s => s.trim() !== '').length : 0;
-                    // Рахуємо скільки розмірів є в товарі Б
                     const countB = b.sizes ? b.sizes.split(',').filter(s => s.trim() !== '').length : 0;
-                    
-                    return countB - countA; // Ставимо товар з більшою кількістю нагору
+                    return countB - countA;
                 });
-                // --------------------------------
+
+                // 2. ПРИМУСОВИЙ ПРІОРИТЕТ ДЛЯ ТАРГЕТУ (ID: 637)
+                // Витягуємо модель 637 зі списку і ставимо її на самий початок
+                const priorityId = "637";
+                const priorityItemIndex = all.findIndex(p => p.id == priorityId);
+                
+                if (priorityItemIndex !== -1) {
+                    const priorityItem = all.splice(priorityItemIndex, 1)[0];
+                    all.unshift(priorityItem); // Ставимо на 1-ше місце
+                }
+                // ------------------------------------------------
 
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
