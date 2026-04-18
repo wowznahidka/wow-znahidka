@@ -146,9 +146,12 @@
         <div class="nav-item" id="nav-contacts" onclick="openContacts()"><span>💬</span>Контакти</div>
     </div>
 
-    let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
+    <script>
+        const URL = 'https://script.google.com/macros/s/AKfycbwYbTMkUE5MqiMn2DwewcysSh4NFvqSF6bKPpehlPFcslcrOy27yH72xokuMp1TJ6Z_/exec';
         
-        // Назва товару для ПРІОРІТЕТУ (для твого таргету)
+        let all = [], cart = [], selected = {}, limit = 12, curBrand = 'all', dType = 'Відділення';
+        
+        // Пріоритетна назва для твого таргету
         const PRIORITY_NAME = "New Balance 530 Silver Gold";
 
         async function init() {
@@ -156,22 +159,19 @@
                 const res = await fetch(URL + "?v=" + new Date().getTime()); 
                 all = await res.json(); 
                 
-                // --- РОЗУМНЕ СОРТУВАННЯ ---
-                // 1. Сортуємо за кількістю розмірів (базова логіка)
+                // 1. Сортуємо за кількістю розмірів
                 all.sort((a, b) => {
                     const countA = a.sizes ? a.sizes.toString().split(',').filter(s => s.trim() !== '').length : 0;
                     const countB = b.sizes ? b.sizes.toString().split(',').filter(s => s.trim() !== '').length : 0;
                     return countB - countA;
                 });
 
-                // 2. Витягуємо ПРІОРІТЕТ за НАЗВОЮ на самий початок
+                // 2. Пріоритет за назвою на 1-ше місце
                 const pIdx = all.findIndex(p => p.name && p.name.includes(PRIORITY_NAME));
                 if (pIdx !== -1) {
                     const item = all.splice(pIdx, 1)[0];
                     all.unshift(item);
-                    console.log("🔥 Товар для таргету встановлено на 1-ше місце");
                 }
-                // --------------------------------
 
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
@@ -223,12 +223,11 @@
         }
 
         function render(items, id, append = false) {
-            // Додаткова перевірка пріоритету при рендері (для надійності)
             if (!append) {
                 const pIdx = items.findIndex(x => x.name && x.name.includes(PRIORITY_NAME));
                 if (pIdx !== -1) {
-                    const [priorityItem] = items.splice(pIdx, 1);
-                    items.unshift(priorityItem);
+                    const [pItem] = items.splice(pIdx, 1);
+                    items.unshift(pItem);
                 }
             }
 
@@ -249,21 +248,16 @@
                 if (!tgLink) {
                     for (let key in p) {
                         if (typeof p[key] === 'string' && p[key].includes('t.me') && !p[key].includes('znahidkawow')) {
-                            tgLink = p[key];
-                            break;
+                            tgLink = p[key]; break;
                         }
                     }
                 }
 
-                let tgBtn = tgLink ? 
-                    `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>` : 
-                    `<a href="https://t.me/znahidkawow?text=${encodeURIComponent('Привіт! Хочу фото: ' + p.name)}" target="_blank" class="tg-photo-btn">✈️ Запросити фото</a>`;
+                let tgBtn = tgLink ? `<a href="${tgLink}" target="_blank" class="tg-photo-btn">📸 Більше фото</a>` : `<a href="https://t.me/znahidkawow?text=${encodeURIComponent('Запит фото: ' + p.name)}" target="_blank" class="tg-photo-btn">✈️ Запросити фото</a>`;
 
                 return `
                 <div class="product-card">
-                    <div class="img-container" onclick="zoom('${imgSrc}')">
-                        <img src="${imgSrc}" loading="lazy" alt="${p.name}">
-                    </div>
+                    <div class="img-container" onclick="zoom('${imgSrc}')"><img src="${imgSrc}" loading="lazy" alt="${p.name}"></div>
                     <div class="card-info">
                         <div class="title">${p.name}</div>
                         <div class="sizes-container">${sz}</div>
@@ -275,7 +269,8 @@
                     </div>
                 </div>`;
             }).join('');
-            if(append) document.getElementById(id).innerHTML += h; else document.getElementById(id).innerHTML = h;
+            const t = document.getElementById(id);
+            if(append) t.innerHTML += h; else t.innerHTML = h;
         }
 
         function handleSearch() {
@@ -309,50 +304,19 @@
         async function sendOrder() {
             const total = cart.reduce((s, x) => s + parseInt(x.price), 0);
             const d = { 
-                action: "new_order", 
-                fio: document.getElementById('fio').value, 
-                phone: document.getElementById('phone').value, 
-                city: document.getElementById('city').value, 
-                socialNick: document.getElementById('social').value, 
+                action: "new_order", fio: document.getElementById('fio').value, phone: document.getElementById('phone').value, 
+                city: document.getElementById('city').value, socialNick: document.getElementById('social').value, 
                 delivery: `${dType} №${document.getElementById('np').value} (Накладний платіж)`, 
-                items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), 
-                total: total + " ₴", 
-                promo: document.getElementById('promo').value 
+                items: cart.map(i => `${i.name} (р. ${i.size})`).join(', '), total: total + " ₴", promo: document.getElementById('promo').value 
             };
-            
-            if(!d.fio || !d.phone || !document.getElementById('np').value) {
-                return alert("Будь ласка, заповніть ПІБ, Телефон та № відділення!");
-            }
-
+            if(!d.fio || !d.phone || !document.getElementById('np').value) return alert("Заповніть дані!");
             document.getElementById('submit-btn').innerText = "ОБРОБКА...";
-            
             try {
-                await fetch(URL, { 
-                    method: 'POST', 
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(d) 
-                });
-
-                cart = [];
-                updateCart();
-
-                document.getElementById('modal-body').innerHTML = `
-                    <div style="text-align:center; padding:35px 10px;">
-                        <div style="font-size:5rem; margin-bottom:15px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform: scale(0);">✅</div>
-                        <h2 style="color:var(--accent); margin:0 0 10px 0; font-size:1.6rem;">Замовлення успішне!</h2>
-                        <p style="color:#aaa; font-size:0.9rem; line-height:1.5; margin-bottom:25px;">
-                            Дякуємо! Найближчим часом ми зв'яжемося з вами.
-                        </p>
-                        <button onclick="location.reload()" style="width:100%; padding:18px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:900; font-size:1.1rem; cursor:pointer;">НА ГОЛОВНУ</button>
-                    </div>
-                `;
-            } catch(e) { 
-                alert("Помилка. Перевірте інтернет.");
-                document.getElementById('submit-btn').innerText = "ЗАМОВИТИ";
-            }
+                await fetch(URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(d) });
+                cart = []; updateCart();
+                document.getElementById('modal-body').innerHTML = `<div style="text-align:center; padding:35px 10px;"><h2>✅ Успішно!</h2><p>Скоро зв'яжемося.</p><button onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
+            } catch(e) { alert("Помилка!"); document.getElementById('submit-btn').innerText = "ЗАМОВИТИ"; }
         }
-
         init();
     </script>
 </body>
