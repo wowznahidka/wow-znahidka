@@ -157,7 +157,22 @@
                 // Вбивалка кешу: сайт завжди завантажує свіжі дані!
                 const res = await fetch(URL + "?v=" + new Date().getTime()); 
                 all = await res.json(); 
-                all.reverse();
+                
+                // --- НОВЕ РОЗУМНЕ СОРТУВАННЯ ---
+                // 1. Спочатку перевертаємо, щоб найновіші були зверху (як було)
+                all.reverse(); 
+                
+                // 2. А тепер сортуємо за кількістю розмірів (від більшого до меншого)
+                all.sort((a, b) => {
+                    // Рахуємо скільки розмірів є в товарі А
+                    const countA = a.sizes ? a.sizes.split(',').filter(s => s.trim() !== '').length : 0;
+                    // Рахуємо скільки розмірів є в товарі Б
+                    const countB = b.sizes ? b.sizes.split(',').filter(s => s.trim() !== '').length : 0;
+                    
+                    return countB - countA; // Ставимо товар з більшою кількістю нагору
+                });
+                // --------------------------------
+
                 renderBrands();
                 render(all.slice(0, limit), 'grid-home');
                 
