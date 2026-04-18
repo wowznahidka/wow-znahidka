@@ -225,17 +225,24 @@
         }
 
         function render(items, id, append = false) {
-    // Твій РЕАЛЬНИЙ ID, який ми побачили в консолі
-    const pID = "NB0059"; 
+    // Шукаємо або за артикулом, або за шматочком назви
+    const priorityID = "NB0059";
+    const priorityName = "New Balance 530 Silver"; 
 
     if (!append) {
-        // Знаходимо товар за його реальним ID ("NB0082")
-        const pIdx = items.findIndex(x => String(x.id).trim() === pID);
+        // Шукаємо індекс товару
+        const pIdx = items.findIndex(x => 
+            String(x.id).trim() === priorityID || 
+            (x.name && x.name.includes(priorityName))
+        );
         
         if (pIdx !== -1) {
-            // Вирізаємо його та ставимо на перше місце
-            const [priorityItem] = items.splice(pIdx, 1);
-            items.unshift(priorityItem);
+            // Вирізаємо і ставимо на початок
+            const [pItem] = items.splice(pIdx, 1);
+            items.unshift(pItem);
+            console.log("Пріоритетний товар встановлено першим:", pItem.name);
+        } else {
+            console.log("Товар для пріоритету не знайдено в масиві");
         }
     }
 
