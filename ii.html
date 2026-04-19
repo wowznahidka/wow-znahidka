@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WOW.ZNAHIDKA | Luxury Sneakers Boutique 2026</title>
-    
+    <title>WOW.ZNAHIDKA | Premium Sneakers Boutique</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-
     <style>
-        /* ============================================================
-           💎 1. ЦЕНТРАЛЬНІ НАЛАШТУВАННЯ ТА ЗМІННІ (THEME)
-           ============================================================ 
-        */
         :root {
             --accent: #d4ff00;
             --accent-glow: rgba(212, 255, 0, 0.45);
@@ -25,15 +19,10 @@
             --text-main: #ffffff;
             --text-dim: #888888;
             --glass: rgba(5, 5, 5, 0.9);
-            --shadow-premium: 0 30px 60px rgba(0, 0, 0, 0.8);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.8);
             --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-
-        /* ============================================================
-           ⚙️ 2. ГЛОБАЛЬНЕ СКИДАННЯ (GLOBAL RESET)
-           ============================================================ 
-        */
         * {
             margin: 0;
             padding: 0;
@@ -41,29 +30,18 @@
             -webkit-tap-highlight-color: transparent;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
         body {
             background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.6;
-            overflow: hidden; /* Важливо для навігації додатку */
+            overflow: hidden;
             height: 100vh;
             width: 100vw;
             position: fixed;
             overscroll-behavior: none;
         }
-
-        /* Стилізація скролбару контенту */
-        .custom-scroll::-webkit-scrollbar { width: 3px; }
-        .custom-scroll::-webkit-scrollbar-track { background: var(--bg); }
-        .custom-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-
-        /* ============================================================
-           🚀 3. ЕКРАН ВХОДУ (DYNAMIC SPLASH SCREEN)
-           ============================================================ 
-        */
+        .custom-scroll::-webkit-scrollbar { width: 0px; }
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -74,8 +52,7 @@
             transition: transform 1.1s cubic-bezier(0.8, 0, 0.2, 1);
             will-change: transform;
         }
-
-        .splash-logo-wrapper {
+        .splash-logo-box {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -88,8 +65,13 @@
             text-align: center;
             box-shadow: 0 0 70px var(--accent-glow);
             pointer-events: none;
+            animation: splashPulse 2s infinite ease-in-out;
         }
-
+        @keyframes splashPulse {
+            0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 40px var(--accent-glow); }
+            50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 80px var(--accent-glow); }
+            100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 40px var(--accent-glow); }
+        }
         .premium-font {
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
@@ -98,8 +80,7 @@
             text-transform: uppercase;
         }
         .premium-font span { color: var(--accent); text-shadow: 0 0 25px var(--accent-glow); }
-
-        .gender-split-panel {
+        .gender-panel {
             flex: 1;
             position: relative;
             overflow: hidden;
@@ -107,10 +88,8 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition-smooth);
         }
-
-        .gender-split-panel img {
+        .gender-panel img {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -118,12 +97,7 @@
             opacity: 0.35;
             transition: 2.5s transform cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .gender-split-panel:hover img {
-            transform: scale(1.18);
-            opacity: 0.55;
-        }
-
+        .gender-panel:hover img { transform: scale(1.18); opacity: 0.55; }
         .gender-text {
             position: relative;
             z-index: 10;
@@ -134,18 +108,8 @@
             transition: var(--transition-smooth);
             text-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
-
-        .gender-split-panel:hover .gender-text {
-            transform: scale(1.1);
-            color: var(--accent);
-        }
-
-        .men-bg-panel { border-bottom: 1px solid var(--border); }
-
-        /* ============================================================
-           📱 4. ГОЛОВНИЙ ХЕДЕР ТА ТОР БАР
-           ============================================================ 
-        */
+        .gender-panel:hover .gender-text { transform: scale(1.1); color: var(--accent); }
+        .men-bg { border-bottom: 1px solid var(--border); }
         header {
             position: absolute;
             top: 0;
@@ -161,10 +125,8 @@
             align-items: center;
             border-bottom: 1px solid var(--border);
         }
-
-        .header-controls { display: flex; align-items: center; gap: 15px; }
-        
-        .btn-action-round {
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .btn-back {
             background: var(--surface-light);
             width: 40px;
             height: 40px;
@@ -175,13 +137,9 @@
             border: 1px solid var(--border);
             color: #fff;
             cursor: pointer;
-            transition: var(--transition-fast);
         }
-        .btn-action-round:active { transform: scale(0.9); }
-
-        .cart-icon-container { position: relative; cursor: pointer; padding: 5px; }
-        
-        #cart-badge-val {
+        .cart-trigger { position: relative; cursor: pointer; padding: 5px; }
+        #badge-cart {
             position: absolute;
             top: -10px;
             right: -10px;
@@ -189,15 +147,10 @@
             color: #000;
             font-size: 0.65rem;
             font-weight: 900;
-            padding: 3px 7px;
+            padding: 2px 6px;
             border-radius: 8px;
             box-shadow: 0 0 20px var(--accent-glow);
         }
-
-        /* ============================================================
-           📑 5. СИСТЕМА СТОРІНОК (SPA ARCHITECTURE)
-           ============================================================ 
-        */
         .view-page {
             position: absolute;
             inset: 0;
@@ -207,35 +160,85 @@
             flex-direction: column;
             overflow-y: auto;
             opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            transform: translateY(10px);
+            transition: opacity 0.5s ease;
         }
-        .view-page.active {
+        .view-page.active { display: flex; opacity: 1; }
+        .sticky-tools {
+            position: sticky;
+            top: 0;
+            z-index: 1500;
+            background: var(--bg);
+            padding: 15px 20px;
+        }
+        .search-wrap { display: flex; gap: 10px; }
+        .luxe-input {
+            flex: 1;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 16px 22px;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .luxe-input:focus { border-color: var(--accent); background: var(--surface-light); }
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 10px 15px 50px;
+        }
+        @media (min-width: 768px) { .main-grid { grid-template-columns: repeat(4, 1fr); gap: 25px; padding: 20px 40px; } }
+        .sneaker-card {
+            background: var(--surface);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            overflow: hidden;
             display: flex;
-            opacity: 1;
-            transform: translateY(0);
+            flex-direction: column;
+            height: 100%;
+            transition: var(--transition-smooth);
         }
-
-        /* ============================================================
-           🔥 6. WOW.MATCH (ULTIMATE TINDER ENGINE)
-           ============================================================ 
-        */
-        .match-environment {
+        .sneaker-card:hover { border-color: var(--accent); transform: translateY(-8px); }
+        .img-wrap {
+            position: relative;
+            aspect-ratio: 1/1;
+            background: #111;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+        .sneaker-card:hover .img-wrap img { transform: scale(1.12); }
+        .card-content { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+        .neon-tag { font-size: 0.65rem; font-weight: 900; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; }
+        .model-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; height: 2.8em; overflow: hidden; color: #fff; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .price-val { font-size: 1.25rem; font-weight: 900; color: #fff; }
+        .btn-pick {
+            background: var(--surface-light);
+            color: #fff;
+            border: 1px solid var(--border);
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+        .btn-pick:active { background: var(--accent); color: #000; }
+        .match-screen {
             justify-content: center;
             align-items: center;
             background: radial-gradient(circle at top, #181818 0%, #050505 100%);
         }
-
-        .tinder-box {
+        .deck {
             position: relative;
             width: 92vw;
-            height: 62vh;
+            height: 60vh;
             max-width: 400px;
             z-index: 100;
-            perspective: 1200px;
         }
-
-        .tinder-card {
+        .t-card {
             position: absolute;
             inset: 0;
             border-radius: 40px;
@@ -246,226 +249,39 @@
             cursor: grab;
             touch-action: none;
             will-change: transform, opacity;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .tinder-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-
-        .tinder-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,1) 25%, transparent 60%);
-            z-index: 2;
-        }
-
-        .tinder-card-data {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 45px 30px;
-            z-index: 5;
-        }
-
-        .t-brand-neon {
-            color: var(--accent);
-            font-weight: 900;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .t-model-name { font-size: 1.7rem; font-weight: 900; line-height: 1.2; margin-bottom: 12px; }
-
-        .tinder-ui-controls {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin-top: 40px;
-            z-index: 500;
-        }
-
-        .swipe-trigger {
-            width: 80px;
-            height: 80px;
+        .t-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .t-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,1) 30%, transparent 65%); z-index: 2; }
+        .t-data { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 30px; z-index: 5; }
+        .swipe-controls { display: flex; justify-content: center; gap: 30px; margin-top: 30px; z-index: 1000; position: relative; }
+        .btn-swipe {
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             border: 2px solid var(--border);
             background: var(--glass);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             transition: var(--transition-bounce);
         }
-        .swipe-trigger:active { transform: scale(0.85); }
-        .swipe-trigger.nope { color: #ff4757; border-color: rgba(255, 71, 87, 0.3); }
-        .swipe-trigger.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 30px var(--accent-soft); }
-
-        /* ============================================================
-           👟 7. КАТАЛОГ ТА СКРОЛЛ (THE SCROLL)
-           ============================================================ 
-        */
-        .scroll-section { padding: 20px; overflow-y: auto; scrollbar-width: none; }
-        .scroll-section::-webkit-scrollbar { display: none; }
-
-        .sticky-search-wrap {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: var(--bg);
-            padding-bottom: 25px;
-        }
-
-        .input-luxe {
-            width: 100%;
+        .btn-swipe.nope { color: #ff4757; border-color: rgba(255, 71, 87, 0.3); }
+        .btn-swipe.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 25px var(--accent-glow); }
+        .catalog-screen { padding: 20px; }
+        .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .brand-card {
             background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 18px 25px;
-            border-radius: 22px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: var(--transition-smooth);
-        }
-        .input-luxe:focus { border-color: var(--accent); background: var(--surface-light); }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding-bottom: 50px;
-        }
-
-        @media (min-width: 768px) { .grid-layout { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
-
-        .sneaker-item-card {
-            background: var(--surface);
+            padding: 40px 20px;
             border-radius: 35px;
             border: 1px solid var(--border);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            transition: var(--transition-smooth);
-        }
-        .sneaker-item-card:hover { border-color: var(--accent); transform: translateY(-8px); }
-
-        .sneaker-img-wrap {
-            position: relative;
-            aspect-ratio: 1/1;
-            background: #111;
-            overflow: hidden;
-            cursor: zoom-in;
-        }
-        .sneaker-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
-        .sneaker-item-card:hover .sneaker-img-wrap img { transform: scale(1.12); }
-
-        .sneaker-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        
-        .brand-neon-label { font-size: 0.65rem; font-weight: 900; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; }
-        .sneaker-model-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; height: 2.8em; overflow: hidden; color: #fff; }
-
-        .price-buy-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .sneaker-price { font-size: 1.3rem; font-weight: 900; color: #fff; }
-
-        .btn-trigger-sheet {
-            background: var(--surface-light);
-            color: #fff;
-            border: 1px solid var(--border);
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            transition: 0.3s;
-        }
-        .btn-trigger-sheet:active { background: var(--accent); color: #000; }
-
-        /* ============================================================
-           📐 8. СИСТЕМА ШТОРОК (BOTTOM SHEETS)
-           ============================================================ 
-        */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.94);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 8000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .sheet-element {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            right: 0;
-            background: #080808;
-            border-radius: 50px 50px 0 0;
-            padding: 45px 25px;
-            z-index: 8500;
-            transition: bottom 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-            border-top: 1px solid var(--border);
-            max-height: 94vh;
-            overflow-y: auto;
-        }
-        .sheet-element.active { bottom: 0; }
-
-        .sheet-drag-handle {
-            width: 55px;
-            height: 6px;
-            background: #222;
-            border-radius: 10px;
-            margin: 0 auto 35px;
-        }
-
-        /* Матриця розмірів (Multi-select) */
-        .size-grid-box {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 45px;
-        }
-
-        .size-pill {
-            background: #121212;
-            border: 1px solid var(--border);
-            padding: 25px 5px;
-            border-radius: 25px;
             text-align: center;
-            font-weight: 800;
-            color: #555;
-            transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: var(--transition-smooth);
+            cursor: pointer;
         }
-        .size-pill.selected {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px var(--accent-soft);
-        }
-
-        .cta-button-main {
-            width: 100%;
-            background: var(--accent);
-            color: #000;
-            padding: 26px;
-            border-radius: 30px;
-            font-weight: 900;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 20px 50px var(--accent-soft);
-        }
-
-        /* ============================================================
-           🧭 9. НИЖНЯ НАВІГАЦІЯ (BOTTOM DOCK)
-           ============================================================ 
-        */
-        .dock-bar {
+        .brand-card h3 { font-size: 0.9rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .brand-card:active { background: var(--accent); color: #000; transform: scale(0.95); }
+        .bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -474,12 +290,11 @@
             -webkit-backdrop-filter: blur(35px);
             display: flex;
             justify-content: space-around;
-            padding: 18px 10px 45px;
+            padding: 15px 10px 42px;
             border-top: 1px solid var(--border);
             z-index: 7000;
         }
-
-        .dock-tab {
+        .nav-tab {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -487,544 +302,418 @@
             color: #444;
             font-size: 0.72rem;
             font-weight: 800;
-            transition: 0.35s ease;
-        }
-        .dock-tab.active { color: var(--accent); }
-        .dock-tab i { font-style: normal; font-size: 1.7rem; margin-bottom: 6px; }
-
-        /* ============================================================
-           🚚 10. ОФОРМЛЕННЯ ТА ЛОГІСТИКА
-           ============================================================ 
-        */
-        .segmented-logistics-bar {
-            display: flex;
-            background: #121212;
-            padding: 8px;
-            border-radius: 25px;
-            margin-bottom: 35px;
-            border: 1px solid var(--border);
-        }
-
-        .log-segment {
-            flex: 1;
-            padding: 18px;
-            border-radius: 18px;
-            color: #666;
-            font-weight: 800;
-            font-size: 1rem;
-            text-align: center;
             transition: 0.3s;
         }
-        .log-segment.active {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .luxe-input-field {
-            width: 100%;
-            background: #0f0f0f;
-            border: 1px solid var(--border);
-            padding: 22px 28px;
-            border-radius: 28px;
-            color: #fff;
-            font-size: 1.05rem;
-            margin-bottom: 20px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .luxe-input-field:focus { border-color: var(--accent); background: #141414; }
-
-        /* ============================================================
-           🖼️ 11. ZOOM ТА ДОДАТКОВІ МОДАЛКИ
-           ============================================================ 
-        */
-        #zoom-portal {
+        .nav-tab.active { color: var(--accent); }
+        .nav-tab i { font-style: normal; font-size: 1.6rem; margin-bottom: 5px; }
+        .modal-mask {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.98);
-            z-index: 20000;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 8000;
             display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            border-radius: 45px 45px 0 0;
+            padding: 40px 25px;
+            z-index: 8500;
+            transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-top: 1px solid var(--border);
+            max-height: 92vh;
+            overflow-y: auto;
+        }
+        .sheet.active { bottom: 0; }
+        .handle { width: 50px; height: 5px; background: #222; border-radius: 10px; margin: 0 auto 35px; }
+        .sz-matrix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 40px; }
+        .sz-pill {
+            background: #141414;
+            border: 1px solid var(--border);
+            padding: 24px 5px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 800;
+            color: #555;
+            transition: 0.2s;
+        }
+        .sz-pill.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px var(--accent-soft);
+        }
+        .cta-btn {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            padding: 24px;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            box-shadow: 0 15px 40px var(--accent-soft);
+        }
+        .cart-row {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .cart-row img { width: 85px; height: 85px; border-radius: 20px; object-fit: cover; }
+        .cart-body { flex: 1; }
+        .cart-name { font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+        .cart-meta { font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
+        .btn-del {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
             align-items: center;
             justify-content: center;
-            cursor: zoom-out;
-            animation: zoomInFade 0.3s ease;
+            font-size: 1.1rem;
         }
-        @keyframes zoomInFade { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        #zoom-portal img { max-width: 96%; max-height: 86vh; border-radius: 20px; box-shadow: var(--shadow-premium); }
-
+        .wish-box { margin-top: 30px; padding: 20px; background: #0c0c0c; border-radius: 25px; border: 1px solid var(--border); }
+        .wish-head { font-size: 0.8rem; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .wish-list { display: flex; overflow-x: auto; gap: 15px; scrollbar-width: none; }
+        .wish-list::-webkit-scrollbar { display: none; }
+        .wish-item { min-width: 110px; text-align: center; }
+        .wish-item img { width: 110px; height: 110px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border); }
+        .wish-item span { font-size: 0.65rem; font-weight: 800; color: #555; display: block; margin-top: 8px; text-transform: uppercase; }
+        .logistics-box { display: flex; background: #141414; padding: 7px; border-radius: 22px; margin-bottom: 30px; border: 1px solid var(--border); }
+        .log-btn { flex: 1; padding: 16px; border-radius: 16px; color: #555; font-weight: 800; font-size: 0.95rem; text-align: center; }
+        .log-btn.active { background: var(--accent); color: #000; }
+        .premium-field {
+            width: 100%;
+            background: #111;
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 22px;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            outline: none;
+        }
+        .premium-field:focus { border-color: var(--accent); }
+        .pop-menu {
+            position: fixed;
+            bottom: 110px;
+            right: 20px;
+            background: #0f0f0f;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 12px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 20px 50px #000;
+            z-index: 9000;
+            width: 250px;
+            animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+        @keyframes popIn { from { opacity: 0; transform: translateY(20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .pop-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .pop-btn.tg { background: rgba(36, 161, 222, 0.1); color: #24A1DE; }
+        .pop-btn.ig { background: rgba(225, 48, 108, 0.1); color: #E1306C; }
+        #zoom-view { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 20000; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+        #zoom-view img { max-width: 95%; max-height: 85vh; border-radius: 25px; box-shadow: var(--shadow-xl); }
     </style>
 </head>
 <body>
-
     <div id="splash-screen">
-        <div class="splash-logo-wrapper premium-font">WOW<span>.</span>ZNAHIDKA</div>
-        
-        <div class="gender-split-panel men-bg-panel" onclick="launchExperience('Чоловік')">
-            <img id="splash-img-men" src="" alt="Men Sneakers Collection">
+        <div class="splash-logo-box premium-font">WOW<span>.</span>ZNAHIDKA</div>
+        <div class="gender-panel men-bg" onclick="boot('Чоловік')">
+            <img id="m-splash" src="" alt="">
             <span class="gender-text">ЧОЛОВІКАМ</span>
         </div>
-        
-        <div class="gender-split-panel women-bg-panel" onclick="launchExperience('Жінка')">
-            <img id="splash-img-women" src="" alt="Women Sneakers Collection">
+        <div class="gender-panel" onclick="boot('Жінка')">
+            <img id="w-splash" src="" alt="">
             <span class="gender-text">ЖІНКАМ</span>
         </div>
     </div>
-
     <header id="app-header" style="display:none;">
-        <div class="header-controls">
-            <button class="btn-action-round" onclick="location.reload()">↩</button>
+        <div class="header-left">
+            <button class="btn-back" onclick="location.reload()">↩</button>
             <div class="premium-font" style="font-size: 1.1rem;">WOW<span>.</span>ZNAHIDKA</div>
         </div>
-        
-        <div class="cart-icon-container" onclick="openPanel('cart-sheet')">
+        <div class="cart-trigger" onclick="openPanel('cart-sheet')">
             <span style="font-size: 1.8rem;">🛒</span>
-            <span id="cart-badge-val" style="display: none;">0</span>
+            <span id="badge-cart" style="display: none;">0</span>
         </div>
     </header>
-
     <main>
-        <section id="page-home" class="view-page active scroll-section custom-scroll">
-            <div class="sticky-search-wrap">
-                <input type="text" id="liveSearchInput" class="input-luxe" placeholder="Шукай по назві (напр. Jordan)..." oninput="handleMasterFiltering()">
+        <section id="p-home" class="view-page active custom-scroll">
+            <div class="sticky-tools">
+                <div class="search-wrap">
+                    <input type="text" id="liveSearch" class="luxe-input" placeholder="Шукай модель (Jordan, NB...)" oninput="applyFilters()">
+                </div>
             </div>
-            
-            <div class="grid-layout" id="sneaker-main-grid">
-                </div>
-            
-            <div id="infinite-scroll-trigger-node" style="height: 60px;"></div>
+            <div class="main-grid" id="grid-root"></div>
+            <div id="scroll-anchor" style="height: 50px;"></div>
         </section>
-
-        <section id="page-match" class="view-page match-environment">
-            <h2 style="font-weight: 900; font-size: 1.8rem; margin-bottom: 10px;">WOW.MATCH 🔥</h2>
-            
-            <div class="tinder-box" id="tinder-deck-root">
-                </div>
-
-            <div class="tinder-ui-controls">
-                <button class="swipe-trigger nope" onclick="processSwipe('left')">✕</button>
-                <button class="swipe-trigger yep" onclick="processSwipe('right')">❤</button>
+        <section id="p-match" class="view-page match-screen">
+            <div class="deck" id="deck-root"></div>
+            <div class="swipe-controls">
+                <button class="btn-swipe nope" onclick="handleSwipe('left')">✕</button>
+                <button class="btn-swipe yep" onclick="handleSwipe('right')">❤</button>
             </div>
         </section>
-
-        <section id="page-catalog" class="view-page scroll-section">
-            <h2 style="font-weight: 900; font-size: 2rem; margin-bottom: 30px; padding: 10px;">Каталог <span style="color:var(--accent)">.</span></h2>
-            <div class="catalog-grid-row" id="brand-tiles-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 10px;">
-                </div>
-        </section>
-
-        <section id="page-contacts" class="view-page" style="padding: 35px;">
-            <h2 style="text-align: center; margin-bottom: 45px; font-weight: 900; font-size: 2.2rem;">WOW.ZNAHIDKA</h2>
-            
-            <a href="https://t.me/znahidkawow" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:22px; background:#24A1DE; padding:28px; border-radius:32px; color:#fff; font-weight:900; margin-bottom:18px;"><i>✈️</i> Написати менеджеру</a>
-            
-            <a href="https://www.instagram.com/wow.znahidka" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:22px; background:linear-gradient(45deg, #f09433, #dc2743, #cc2366, #bc1888); padding:28px; border-radius:32px; color:#fff; font-weight:900; margin-bottom:18px;"><i>📸</i> Наш Instagram</a>
-            
-            <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:22px; background:#000; border: 1px solid var(--border); padding:28px; border-radius:32px; color:#fff; font-weight:900;"><i>🎵</i> Наш TikTok</a>
-            
-            <div style="margin-top: 50px; text-align: center; color: #333; font-weight: 800; font-size: 0.8rem; letter-spacing: 2px;">PREMIUM SNEAKERS • 2026</div>
+        <section id="p-catalog" class="view-page scroll-section custom-scroll">
+            <h2 style="font-weight: 900; font-size: 2rem; margin-bottom: 35px; padding-left: 10px;">Каталог <span style="color:var(--accent)">.</span></h2>
+            <div class="cat-grid" id="brand-root"></div>
         </section>
     </main>
-
-    <nav class="dock-bar" id="bottom-dock-unit" style="display:none;">
-        <div class="dock-tab active" onclick="switchNav('home', this)"><i>🏠</i>Головна</div>
-        <div class="dock-tab" onclick="switchNav('match', this)"><i>🔥</i>Match</div>
-        <div class="dock-tab" onclick="switchNav('catalog', this)"><i>👟</i>Каталог</div>
-        <div class="dock-tab" onclick="switchNav('contacts', this)"><i>💬</i>Контакти</div>
+    <div class="pop-menu" id="pop-contact">
+        <div style="padding: 10px; font-weight: 900; font-size: 0.75rem; color: #444; text-transform: uppercase; letter-spacing: 1px;">Підтримка клієнтів</div>
+        <a href="https://t.me/znahidkawow" target="_blank" class="pop-btn tg">✈️ Менеджер Telegram</a>
+        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="pop-btn ig">📸 Наш Instagram</a>
+    </div>
+    <nav class="bottom-nav" id="app-nav" style="display:none;">
+        <div class="nav-tab active" id="tab-home" onclick="nav('home', this)"><i>🏠</i>Головна</div>
+        <div class="nav-tab" id="tab-match" onclick="nav('match', this)"><i>🔥</i>Match</div>
+        <div class="nav-tab" id="tab-catalog" onclick="nav('catalog', this)"><i>👟</i>Каталог</div>
+        <div class="nav-tab" onclick="togglePop()"><i>💬</i>Контакти</div>
     </nav>
-
-    <div class="modal-overlay" id="sheet-dimmer" onclick="closeAllActivePanels()"></div>
-
-    <div class="sheet-element" id="size-picker-panel">
-        <div class="sheet-drag-handle"></div>
-        <h2 id="sheet-product-title" style="margin-bottom: 12px;">Вибір моделі</h2>
-        <p style="color: #666; font-size: 0.95rem; margin-bottom: 35px;">Оберіть розміри для замовлення (можна декілька):</p>
-        
-        <div class="size-grid-box" id="size-matrix-container"></div>
-        
-        <button class="cta-button-main" onclick="finalizeSelectionsToCart()">ПІДТВЕРДИТИ ВИБІР</button>
+    <div class="modal-mask" id="ui-mask" onclick="closeAll()"></div>
+    <div class="sheet" id="size-sheet">
+        <div class="handle"></div>
+        <h2 id="sz-name" style="margin-bottom: 12px; font-size: 1.3rem;">Назва моделі</h2>
+        <p style="color: #555; font-size: 0.9rem; margin-bottom: 35px; font-weight: 600;">Оберіть розміри (можна декілька):</p>
+        <div class="sz-matrix" id="sz-render"></div>
+        <button class="cta-btn" onclick="saveToCart()">ПІДТВЕРДИТИ</button>
     </div>
-
-    <div class="sheet-element" id="cart-sheet">
-        <div class="sheet-drag-handle"></div>
-        
-        <div id="cart-phase-1">
-            <h2 style="margin-bottom: 25px;">Твій кошик 🛍️</h2>
-            <div class="cart-items-scroller" id="cart-rendering-list"></div>
-            
-            <div style="background: rgba(212,255,0,0.06); padding: 22px; border-radius: 25px; margin-bottom: 30px; border: 1px dashed var(--accent);">
-                <p style="color: var(--accent); font-weight: 800; font-size: 0.9rem; text-align: center;">📦 Накладний платіж. Оплата після примірки.</p>
+    <div class="sheet" id="cart-sheet">
+        <div class="handle"></div>
+        <div id="step-1">
+            <h2 style="margin-bottom: 25px;">Твій вибір 🛍️</h2>
+            <div class="cart-items-scroller" id="cart-render"></div>
+            <div id="wish-render"></div>
+            <div style="margin-top: 30px; padding-top: 25px; border-top: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; font-size: 1.6rem; font-weight: 900; margin-bottom: 30px;">
+                    <span>Всього:</span><span id="sum-val" style="color: var(--accent);">0 ₴</span>
+                </div>
+                <button class="cta-btn" style="background: #fff; color: #000;" onclick="goStep2()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
             </div>
-            
-            <div style="display: flex; justify-content: space-between; font-size: 1.6rem; font-weight: 900; margin-bottom: 35px;">
-                <span>Разом:</span><span id="cart-total-value-label" style="color: var(--accent);">0 ₴</span>
-            </div>
-            <button class="cta-button-main" style="background: #fff; color: #000;" onclick="showCheckoutPhase()">ОФОРМИТИ ➔</button>
         </div>
-
-        <div id="cart-phase-2" style="display: none;">
-            <h2 style="margin-bottom: 35px;">Дані доставки</h2>
-            <input type="text" id="order-fio" class="luxe-input-field" placeholder="ПІБ отримувача">
-            <input type="tel" id="order-phone" class="luxe-input-field" placeholder="Номер телефону">
-            <input type="text" id="order-city" class="luxe-input-field" placeholder="Місто">
-            
-            <div class="segmented-logistics-bar">
-                <div class="log-segment active" id="log-vidd-btn" onclick="setLogistics('Відділення')">Відділення</div>
-                <div class="log-segment" id="log-post-btn" onclick="setLogistics('Поштомат')">Поштомат</div>
+        <div id="step-2" style="display: none;">
+            <h2 style="margin-bottom: 35px;">Оформлення</h2>
+            <input type="text" id="f-fio" class="premium-field" placeholder="ПІБ отримувача">
+            <input type="tel" id="f-phone" class="premium-field" placeholder="Номер телефону">
+            <input type="text" id="f-city" class="premium-field" placeholder="Місто">
+            <div class="logistics-box">
+                <div class="log-btn active" id="lv" onclick="setLog('Відділення')">Відділення</div>
+                <div class="log-btn" id="lp" onclick="setLog('Поштомат')">Поштомат</div>
             </div>
-            
-            <input type="text" id="order-np-num" class="luxe-input-field" placeholder="№ Відділення / Поштомату">
-            <input type="text" id="order-promo" class="luxe-input-field" placeholder="Промокод (якщо є)">
-            
-            <button class="cta-button-main" id="btn-submit-order" onclick="processOrderDispatch()">ЗАМОВИТИ ЗАРАЗ</button>
-            <p style="text-align: center; margin-top: 30px; color: #444; font-weight: 900; cursor: pointer;" onclick="hideCheckoutPhase()">← Повернутись до списку</p>
+            <input type="text" id="f-np" class="premium-field" placeholder="№ Пошти">
+            <input type="text" id="f-promo" class="premium-field" placeholder="Промокод">
+            <button class="cta-btn" id="f-send" onclick="send()">ЗАМОВИТИ ЗАРАЗ</button>
+            <p onclick="goStep1()" style="text-align: center; margin-top: 30px; color: #444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
         </div>
     </div>
-
-    <div id="zoom-portal" onclick="this.style.display='none'"><img id="zoom-img-target" src=""></div>
-
+    <div id="zoom-view" onclick="this.style.display='none'"><img id="z-img" src=""></div>
     <script>
-        // --- GLOBAL CONFIGURATION ---
-        const GOOGLE_API = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
-        
-        let masterDatabase = [];   // Оригінальна база
-        let sessionStore = [];     // База під вибрану стать
-        let shoppingCart = [];     // Кошик
-        let currentGender = '';    // Обрана стать
-        let promoMap = {};         // Словник промокодів
-        let logisticsMode = 'Відділення';
-        
-        let tinderPointer = 0;     // Індекс для Match
-        let activeTempProductId = '';
-        let activeTempSizes = [];
-
-        // --- 1. ПРЕД-ЗАВАНТАЖЕННЯ ДЛЯ СПЛЕШУ ---
-        async function preloadGraphics() {
+        const URL = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
+        let all = [], db = [], cart = [], wish = [], gender = '', brand = 'all', method = 'Відділення', ptr = 0, tempId = '', tempSz = [];
+        async function load() {
             try {
-                const response = await fetch(GOOGLE_API + "?v=" + Date.now());
-                const data = await response.json();
-                masterDatabase = data.products || data;
-                promoMap = data.promo || {};
-
-                // Рандомізація фото для входу
-                const menPool = masterDatabase.filter(p => p.gender === 'Чоловік');
-                const womenPool = masterDatabase.filter(p => p.gender === 'Жінка');
-                
-                if(menPool.length) {
-                    const randMen = menPool[Math.floor(Math.random() * menPool.length)];
-                    document.getElementById('splash-img-men').src = randMen.image;
-                }
-                
-                if(womenPool.length) {
-                    const randWomen = womenPool[Math.floor(Math.random() * womenPool.length)];
-                    document.getElementById('splash-img-women').src = randWomen.image;
-                }
-            } catch(err) {
-                console.error("Critical: Database sync failed.", err);
-            }
+                const res = await fetch(URL + "?v=" + Date.now());
+                const data = await res.json();
+                all = data.products || data;
+                const m = all.filter(p => p.gender === 'Чоловік');
+                const w = all.filter(p => p.gender === 'Жінка');
+                if(m.length) document.getElementById('m-splash').src = m[Math.floor(Math.random()*m.length)].image;
+                if(w.length) document.getElementById('w-splash').src = w[Math.floor(Math.random()*w.length)].image;
+            } catch(e) { alert("База даних недоступна."); }
         }
-
-        // --- 2. ЗАПУСК ДОДАТКУ ---
-        async function launchExperience(gender) {
-            currentGender = gender;
-            
-            // Плавне згортання сплеш-екрану
+        function boot(g) {
+            gender = g;
             document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
-            
-            // Активуємо UI
             document.getElementById('app-header').style.display = 'flex';
-            document.getElementById('bottom-dock-unit').style.display = 'flex';
-
-            // Підготовка даних
-            sessionStore = masterDatabase
-                .filter(p => p.gender === currentGender)
-                .sort(() => Math.random() - 0.5); // Random Shuffle при кожному вході
-
-            renderMasterCatalog();
-            renderTinderDeck();
-            renderCatalogTiles();
-            initInfiniteScrollSystem();
-            
-            console.log("WOW Application initialized for:", gender);
+            document.getElementById('app-nav').style.display = 'flex';
+            db = all.filter(p => p.gender === gender).sort(() => Math.random() - 0.5);
+            renderGrid();
+            renderMatch();
+            renderBrands();
+            new IntersectionObserver(e => { if(e[0].isIntersecting) renderGrid(true); }).observe(document.getElementById('scroll-anchor'));
         }
-
-        // --- 3. THE CATALOG ENGINE (INFINITE SCROLL) ---
-        function renderMasterCatalog(append = false) {
-            const grid = document.getElementById('sneaker-main-grid');
-            if(!append) grid.innerHTML = "";
-            
-            const currentCount = append ? grid.children.length : 0;
-            const batch = sessionStore.slice(currentCount, currentCount + 12);
-            
-            const html = batch.map(p => {
-                // Розумна чистка назви
-                const displayTitle = p.name.replace(new RegExp(p.brand, 'gi'), '').trim();
-                
-                return `
-                <div class="sneaker-item-card">
-                    <div class="sneaker-img-wrap" onclick="triggerZoom('${p.image}')">
-                        <img src="${p.image}" loading="lazy">
-                    </div>
-                    <div class="sneaker-content">
-                        <div class="brand-neon-label">${p.brand}</div>
-                        <div class="sneaker-model-title">${displayTitle}</div>
-                        <div class="price-buy-row">
-                            <span class="sneaker-price">${p.price} ₴</span>
-                            <button class="btn-trigger-sheet" onclick="openSizePickerFor('${p.id}')">ВИБРАТИ</button>
+        function clean(n, b) {
+            const p = new RegExp(`^${b}\\s+${b}`, 'i');
+            return p.test(n) ? n.replace(new RegExp(`^${b}\\s+`, 'i'), '').trim() : n;
+        }
+        function renderGrid(append = false) {
+            const root = document.getElementById('grid-root');
+            if(!append) root.innerHTML = "";
+            const q = document.getElementById('liveSearch').value.toLowerCase();
+            let data = db;
+            if(brand !== 'all') data = data.filter(p => p.brand === brand);
+            if(q) data = data.filter(p => p.name.toLowerCase().includes(q));
+            const chunk = data.slice(append ? root.children.length : 0, append ? root.children.length + 12 : 12);
+            root.innerHTML += chunk.map(p => `
+                <div class="sneaker-card">
+                    <div class="img-wrap" onclick="zoom('${p.image}')"><img src="${p.image}" loading="lazy"></div>
+                    <div class="card-content">
+                        <div class="neon-tag">${p.brand}</div>
+                        <div class="model-title">${clean(p.name, p.brand)}</div>
+                        <div class="price-row">
+                            <span class="price-val">${p.price} ₴</span>
+                            <button class="btn-pick" onclick="openSizes('${p.id}')">ВИБРАТИ</button>
                         </div>
                     </div>
-                </div>`;
-            }).join('');
-
-            grid.innerHTML += html;
-        }
-
-        // --- 4. TINDER ENGINE (WOW.MATCH) ---
-        function renderTinderDeck() {
-            const root = document.getElementById('tinder-deck-root');
-            const stack = sessionStore.slice(tinderPointer, tinderPointer + 3);
-            
-            root.innerHTML = stack.map((p, i) => {
-                const cleanName = p.name.replace(new RegExp(p.brand, 'gi'), '').trim();
-                return `
-                <div class="tinder-card" style="z-index:${10-i}; transform: scale(${1 - i*0.05}) translateY(${i*20}px)">
-                    <img src="${p.image}" alt="${p.name}">
-                    <div class="tinder-card-overlay"></div>
-                    <div class="tinder-card-data">
-                        <span class="t-brand-neon">${p.brand}</span>
-                        <div class="t-model-name">${cleanName}</div>
-                        <div class="t-price-tag">${p.price} ₴</div>
-                    </div>
-                </div>`;
-            }).join('');
-
-            if(!stack.length) root.innerHTML = "<div style='text-align:center; padding-top:100px;'>Новинки закінчилися 👟</div>";
-        }
-
-        function processSwipe(dir) {
-            const cards = document.querySelectorAll('.tinder-card');
-            if(!cards.length) return;
-
-            const top = cards[0];
-            const moveOut = window.innerWidth * 1.6;
-
-            if(dir === 'right') {
-                top.style.transform = `translateX(${moveOut}px) rotate(40deg)`;
-                top.style.opacity = '0';
-                // При лайку - відкриваємо розміри
-                setTimeout(() => openSizePickerFor(sessionStore[tinderPointer].id), 200);
-            } else {
-                top.style.transform = `translateX(-${moveOut}px) rotate(-40deg)`;
-                top.style.opacity = '0';
-            }
-
-            setTimeout(() => {
-                tinderPointer++;
-                renderTinderDeck();
-            }, 450);
-        }
-
-        // --- 5. MULTI-SIZE SELECTION LOGIC ---
-        function openSizePickerFor(id) {
-            activeTempProductId = id;
-            activeTempSizes = [];
-            
-            const product = masterDatabase.find(x => x.id === id);
-            const cleanTitle = product.name.replace(new RegExp(product.brand, 'gi'), '').trim();
-            
-            document.getElementById('sheet-product-title').innerText = cleanTitle;
-            const sizes = product.sizes.split(',').map(s => s.trim()).filter(s => s);
-            const container = document.getElementById('size-matrix-container');
-            
-            container.innerHTML = sizes.map(s => `
-                <div class="size-pill" onclick="toggleSizeInList(this, '${s}')">
-                    ${s.split('(')[0]}
-                    <div style="font-size:0.55rem; opacity:0.3; margin-top:3px;">${s.includes('(') ? s.split('(')[1].replace(')','') : ''}</div>
-                </div>
-            `).join('');
-
-            openPanel('size-picker-panel');
-        }
-
-        function toggleSizeInList(element, size) {
-            const pos = activeTempSizes.indexOf(size);
-            if(pos > -1) {
-                activeTempSizes.splice(pos, 1);
-                element.classList.remove('selected');
-            } else {
-                activeTempSizes.push(size);
-                element.classList.add('selected');
-            }
-        }
-
-        function finalizeSelectionsToCart() {
-            if(!activeTempSizes.length) return alert("Будь ласка, оберіть хоча б один розмір!");
-            const product = masterDatabase.find(p => p.id === activeTempId || p.id === activeTempProductId);
-            
-            activeTempSizes.forEach(sz => {
-                shoppingCart.push({
-                    uid: Math.random().toString(36).substr(2, 9),
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    size: sz,
-                    img: product.image
-                });
-            });
-
-            refreshBadge();
-            closeAllActivePanels();
-            console.log("Added to cart:", activeTempSizes.length, "items");
-        }
-
-        // --- 6. CATALOG VITRINE ---
-        function renderCatalogTiles() {
-            const brands = [...new Set(sessionStore.map(p => p.brand))].sort();
-            const container = document.getElementById('brand-tiles-container');
-            container.innerHTML = brands.map(b => {
-                const count = sessionStore.filter(p => p.brand === b).length;
-                return `
-                <div class="brand-tile-card" onclick="filterByBrandShortcut('${b}')">
-                    <h3 style="font-weight:900;">${b}</h3>
-                    <div style="font-size:0.6rem; opacity:0.4; margin-top:5px;">${count} МОДЕЛЕЙ</div>
-                </div>`;
-            }).join('');
-        }
-
-        function filterByBrandShortcut(b) {
-            document.getElementById('liveSearchInput').value = b;
-            handleMasterFiltering();
-            switchNav('home', document.querySelectorAll('.dock-tab')[0]);
-        }
-
-        // --- 7. CHECKOUT ENGINE ---
-        function setLogistics(mode) {
-            logisticsMode = mode;
-            document.querySelectorAll('.log-segment').forEach(s => s.classList.remove('active'));
-            document.getElementById(mode === 'Відділення' ? 'log-vidd-btn' : 'log-post-btn').classList.add('active');
-            document.getElementById('order-np-num').placeholder = mode === 'Відділення' ? '№ Відділення Нової Пошти' : '№ Поштомату';
-        }
-
-        async function processOrderDispatch() {
-            const fio = document.getElementById('order-fio').value.trim();
-            const phone = document.getElementById('order-phone').value.trim();
-            const city = document.getElementById('order-city').value.trim();
-            const np = document.getElementById('order-np-num').value.trim();
-            const promo = document.getElementById('order-promo').value.toUpperCase().trim();
-
-            if(!fio || !phone || !np) return alert("Заповніть обов'язкові поля!");
-
-            const btn = document.getElementById('btn-submit-order');
-            btn.innerText = "ОБРОБКА...";
-            btn.disabled = true;
-
-            // Розрахунок ціни
-            let total = shoppingCart.reduce((s, i) => s + parseInt(i.price), 0);
-            if(promo && promoMap[promo]) {
-                const disc = promoMap[promo];
-                total = disc < 1 ? total * (1 - disc) : total - disc;
-            }
-
-            const itemsStr = shoppingCart.map(i => `- ${i.name} (Розмір: ${i.size})`).join('\n');
-            const payload = {
-                action: "new_order",
-                fio, phone, city,
-                delivery: `${logisticsMode} №${np} (Накладний платіж)`,
-                items: itemsStr,
-                total: Math.round(total) + " ₴",
-                promo: promo || "Немає"
-            };
-
-            try {
-                await fetch(GOOGLE_API, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-                document.getElementById('cart-phase-2').innerHTML = `
-                    <div style="text-align:center; padding:60px 0;">
-                        <div style="font-size:6rem; margin-bottom:25px;">✅</div>
-                        <h2 style="color:var(--accent); margin-bottom:15px;">Дякуємо!</h2>
-                        <p style="color:#666; line-height:1.7;">Замовлення прийнято. Наш менеджер скоро зв'яжеться з Вами для підтвердження.</p>
-                        <button class="cta-button-main" style="margin-top:40px;" onclick="location.reload()">НА ГОЛОВНУ</button>
-                    </div>`;
-                shoppingCart = []; refreshBadge();
-            } catch(e) {
-                alert("Помилка зв'язку. Напишіть нам у Telegram.");
-                btn.innerText = "ЗАМОВИТИ ЗАРАЗ"; btn.disabled = false;
-            }
-        }
-
-        // --- 8. UTILITIES (NAV, MODALS, SCROLL) ---
-        function switchNav(page, el) {
-            document.querySelectorAll('.view-page').forEach(p => p.classList.remove('active'));
-            document.querySelectorAll('.dock-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('page-' + page).classList.add('active');
-            el.classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        function openPanel(id) {
-            document.getElementById('sheet-dimmer').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('sheet-dimmer').style.opacity = '1';
-                document.getElementById(id).classList.add('active');
-            }, 10);
-            if(id === 'cart-sheet') renderCartItemsUI();
-        }
-
-        function closeAllActivePanels() {
-            document.querySelectorAll('.sheet-element').forEach(s => s.classList.remove('active'));
-            document.getElementById('sheet-dimmer').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('sheet-dimmer').style.display = 'none';
-                hideCheckoutPhase();
-            }, 500);
-        }
-
-        function renderCartItemsUI() {
-            const list = document.getElementById('cart-rendering-list');
-            if(!shoppingCart.length) {
-                list.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:700;'>Кошик порожній 🛒</p>";
-                return;
-            }
-            list.innerHTML = shoppingCart.map((item, index) => `
-                <div class="cart-entry">
-                    <img src="${item.img}">
-                    <div class="cart-entry-body">
-                        <div class="cart-entry-name">${item.name}</div>
-                        <div class="cart-entry-meta">Розмір: ${item.size}</div>
-                    </div>
-                    <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
-                    <button class="btn-trash" onclick="removePosition(${index})">✕</button>
                 </div>`).join('');
-            const sum = shoppingCart.reduce((a, b) => a + parseInt(b.price), 0);
-            document.getElementById('cart-total-value-label').innerText = sum + " ₴";
         }
-
-        function removePosition(idx) {
-            shoppingCart.splice(idx, 1);
-            renderCartItemsUI(); refreshBadge();
-            if(!shoppingCart.length) closeAllActivePanels();
+        function renderMatch() {
+            const root = document.getElementById('deck-root');
+            const chunk = db.slice(ptr, ptr + 3);
+            root.innerHTML = chunk.map((p, i) => `
+                <div class="t-card" style="z-index:${10-i}; transform: scale(${1-i*0.05}) translateY(${i*20}px)">
+                    <img src="${p.image}">
+                    <div class="t-overlay"></div>
+                    <div class="t-data">
+                        <span class="neon-tag">${p.brand}</span>
+                        <div class="t-model-name" style="font-size:1.6rem; font-weight:900;">${clean(p.name, p.brand)}</div>
+                        <div style="font-weight:900; color:var(--accent); font-size:1.2rem;">${p.price} ₴</div>
+                    </div>
+                </div>`).join('');
+            if(!chunk.length) root.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Новинки закінчились 👟</div>";
+            setupSwipe();
         }
-
-        function refreshBadge() {
-            const b = document.getElementById('cart-badge-val');
-            if(shoppingCart.length) { b.innerText = shoppingCart.length; b.style.display = 'block'; }
-            else b.style.display = 'none';
+        function setupSwipe() {
+            const cards = document.querySelectorAll('.t-card');
+            if(!cards.length) return;
+            const el = cards[0];
+            let sx = 0, cx = 0;
+            el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; el.style.transition = 'none'; });
+            el.addEventListener('touchmove', e => { cx = e.touches[0].clientX; let d = cx - sx; el.style.transform = `translateX(${d}px) rotate(${d/15}deg)`; });
+            el.addEventListener('touchend', () => { let d = cx - sx; if(Math.abs(d) > 120) swipe(d > 0 ? 'right' : 'left'); else { el.style.transition = '0.5s'; el.style.transform = 'translateX(0) rotate(0)'; } });
         }
-
-        function triggerZoom(src) { document.getElementById('zoom-img-target').src = src; document.getElementById('zoom-portal').style.display = 'flex'; }
-        function showCheckoutPhase() { if(!shoppingCart.length) return; document.getElementById('cart-phase-1').style.display = 'none'; document.getElementById('cart-phase-2').style.display = 'block'; }
-        function hideCheckoutPhase() { document.getElementById('cart-phase-2').style.display = 'none'; document.getElementById('cart-phase-1').style.display = 'block'; }
-        function handleMasterFiltering() { renderMasterCatalog(); }
-        
-        function initInfiniteScrollSystem() {
-            const obs = new IntersectionObserver(e => {
-                if(e[0].isIntersecting) renderMasterCatalog(true);
-            }, {threshold: 0.1});
-            obs.observe(document.getElementById('infinite-scroll-trigger-node'));
+        function swipe(dir) {
+            const cards = document.querySelectorAll('.t-card');
+            if(!cards.length) return;
+            const el = cards[0], m = window.innerWidth * 1.5;
+            el.style.transition = '0.5s';
+            el.style.transform = `translateX(${dir==='right'?m:-m}px) rotate(${dir==='right'?40:-40}deg)`;
+            el.style.opacity = '0';
+            if(dir === 'right') {
+                const p = db[ptr];
+                if(!wish.find(x => x.id === p.id)) wish.push(p);
+            }
+            setTimeout(() => { ptr++; renderMatch(); }, 350);
         }
-
-        // INITIAL DATA CALL
-        preloadGraphics();
-
+        function renderBrands() {
+            const brands = [...new Set(db.map(p => p.brand))].sort();
+            document.getElementById('brand-root').innerHTML = brands.map(b => `
+                <div class="brand-card" onclick="shortcut('${b}')">
+                    <h3>${b}</h3>
+                    <div style="font-size:0.6rem; opacity:0.4; margin-top:10px; font-weight:900;">${db.filter(x=>x.brand===b).length} МОДЕЛЕЙ</div>
+                </div>`).join('');
+        }
+        function shortcut(b) {
+            brand = b; renderGrid(); nav('home', document.getElementById('tab-home'));
+        }
+        function openSizes(id) {
+            tempId = id; tempSz = [];
+            const p = all.find(x => x.id === id);
+            document.getElementById('sz-name').innerText = clean(p.name, p.brand);
+            const s = p.sizes.split(',').map(x => x.trim()).filter(x => x);
+            document.getElementById('sz-render').innerHTML = s.map(x => `<div class="sz-pill" onclick="toggleSz(this, '${x}')">${x.split('(')[0]}</div>`).join('');
+            openPanel('size-sheet');
+        }
+        function toggleSz(el, s) {
+            const i = tempSz.indexOf(s);
+            if(i > -1) { tempSz.splice(i, 1); el.classList.remove('active'); }
+            else { tempSz.push(s); el.classList.add('active'); }
+        }
+        function saveToCart() {
+            if(!tempSz.length) return alert("Оберіть розмір!");
+            const p = all.find(x => x.id === tempId);
+            tempSz.forEach(s => cart.push({...p, size: s, uid: Math.random()}));
+            updateBadge(); closeAll(); nav('home', document.getElementById('tab-home'));
+        }
+        function updateBadge() {
+            const b = document.getElementById('badge-cart');
+            b.innerText = cart.length; b.style.display = cart.length ? 'block' : 'none';
+        }
+        function renderCart() {
+            const root = document.getElementById('cart-render');
+            if(!cart.length) { root.innerHTML = "<p style='text-align:center; padding:40px; color:#333; font-weight:700;'>Кошик порожній 🛒</p>"; return; }
+            root.innerHTML = cart.map((item, idx) => `
+                <div class="cart-row">
+                    <img src="${item.image}">
+                    <div class="cart-body"><div class="cart-name">${item.name}</div><div class="cart-meta">Розмір: ${item.size}</div></div>
+                    <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
+                    <button class="btn-del" onclick="del(${idx})">✕</button>
+                </div>`).join('');
+            const sum = cart.reduce((a, b) => a + parseInt(b.price), 0);
+            document.getElementById('sum-val').innerText = sum + " ₴";
+            const wRoot = document.getElementById('wish-render');
+            if(wish.length) {
+                wRoot.innerHTML = `<div class="wish-box"><div class="wish-head">🔥 Обране в Match:</div><div class="wish-list">
+                    ${wish.map(p => `<div class="wish-item" onclick="openSizes('${p.id}')"><img src="${p.image}"><span>${p.brand}</span></div>`).join('')}
+                </div></div>`;
+            } else wRoot.innerHTML = "";
+        }
+        function del(idx) { cart.splice(idx, 1); renderCart(); updateBadge(); if(!cart.length) closeAll(); }
+        async function send() {
+            const fio = document.getElementById('f-fio').value.trim(), phone = document.getElementById('f-phone').value.trim();
+            if(!fio || !phone) return alert("Заповніть дані!");
+            const btn = document.getElementById('f-send'); btn.innerText = "ОБРОБКА..."; btn.disabled = true;
+            const data = { action: "new_order", fio, phone, city: document.getElementById('f-city').value, delivery: `${method} №${document.getElementById('f-np').value}`, items: cart.map(i => `${i.name} (${i.size})`).join('\n'), total: document.getElementById('sum-val').innerText };
+            await fetch(URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+            document.getElementById('step-2').innerHTML = `<div style="text-align:center; padding:50px 0;"><div style="font-size:6rem;">✅</div><h2>Успішно!</h2><p>Менеджер скоро зв'яжеться з Вами.</p><button class="cta-btn" style="margin-top:40px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
+            cart = []; updateBadge();
+        }
+        function nav(p, el) {
+            document.querySelectorAll('.view-page').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('p-'+p).classList.add('active'); el.classList.add('active');
+            document.getElementById('pop-contact').style.display = 'none';
+        }
+        function togglePop() {
+            const p = document.getElementById('pop-contact');
+            p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
+        }
+        function openPanel(id) {
+            document.getElementById('ui-mask').style.display = 'block';
+            setTimeout(() => { document.getElementById('ui-mask').style.opacity = '1'; document.getElementById(id).classList.add('active'); }, 10);
+            if(id === 'cart-sheet') renderCart();
+        }
+        function closeAll() {
+            document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
+            document.getElementById('ui-mask').style.opacity = '0';
+            setTimeout(() => { document.getElementById('ui-mask').style.display = 'none'; goStep1(); document.getElementById('pop-contact').style.display = 'none'; }, 500);
+        }
+        function setLog(t) {
+            method = t; document.querySelectorAll('.log-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(t==='Відділення'?'lv':'lp').classList.add('active');
+        }
+        function goStep2() { document.getElementById('step-1').style.display='none'; document.getElementById('step-2').style.display='block'; }
+        function goStep1() { document.getElementById('step-2').style.display='none'; document.getElementById('step-1').style.display='block'; }
+        function applyFilters() { renderGrid(); }
+        function zoom(s) { document.getElementById('z-img').src = s; document.getElementById('zoom-view').style.display='flex'; }
+        function handleSwipe(dir) { swipe(dir === 'right' ? 'right' : 'left'); }
+        load();
     </script>
 </body>
 </html>
