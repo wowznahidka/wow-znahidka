@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WOW.ZNAHIDKA | Premium Experience</title>
-    
+    <title>WOW.ZNAHIDKA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-
     <style>
-        /* ============================================================
-           🎨 ЦЕНТРАЛЬНА ПАЛІТРА ТА ЗМІННІ
-           ============================================================ */
         :root {
             --accent: #d4ff00;
             --accent-glow: rgba(212, 255, 0, 0.45);
-            --accent-soft: rgba(212, 255, 0, 0.12);
-            --bg: #050505;
-            --surface: #0f0f0f;
-            --surface-light: #161616;
-            --border: rgba(255, 255, 255, 0.1);
+            --accent-soft: rgba(212, 255, 0, 0.1);
+            --bg: #000;
+            --surface: #0a0a0a;
+            --surface-light: #121212;
             --text-main: #ffffff;
             --text-dim: #888888;
-            --glass: rgba(10, 10, 10, 0.95);
+            --glass: rgba(10, 10, 10, 0.9);
+            --border: rgba(255, 255, 255, 0.08);
             --red: #ff4757;
-            --red-glow: rgba(255, 71, 87, 0.45);
-            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --red-glow: rgba(255, 71, 87, 0.4);
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-
-        /* ============================================================
-           ⚙️ ГЛОБАЛЬНІ НАЛАШТУВАННЯ
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -41,25 +32,16 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             background-color: var(--bg);
             color: var(--text-main);
-            line-height: 1.6;
             overflow: hidden;
             height: 100vh;
             width: 100vw;
             position: fixed;
             overscroll-behavior: none;
         }
-
-        /* Прихований скролбар для чистоти дизайну */
         .custom-scroll::-webkit-scrollbar { width: 0px; display: none; }
-        .custom-scroll { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* ============================================================
-           🚀 ЕКРАН ВХОДУ (SPLASH SCREEN)
-           ============================================================ */
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -67,42 +49,40 @@
             z-index: 10000;
             display: flex;
             flex-direction: column;
-            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
-            will-change: transform;
+            transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
         }
-
-        .splash-logo-box {
+        .splash-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .logo-breathing-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 1000;
-            background: #000;
-            padding: 35px 70px;
-            border-radius: 100px;
-            border: 1px solid var(--border);
+            z-index: 100;
             text-align: center;
-            box-shadow: 0 0 60px var(--accent-glow);
-            animation: pulseNeon 2.5s infinite ease-in-out;
             pointer-events: none;
+            width: 100%;
         }
-
-        @keyframes pulseNeon {
-            0% { box-shadow: 0 0 30px var(--accent-glow); transform: translate(-50%, -50%) scale(1); }
-            50% { box-shadow: 0 0 80px var(--accent-glow); transform: translate(-50%, -50%) scale(1.05); }
-            100% { box-shadow: 0 0 30px var(--accent-glow); transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .premium-logo-font {
+        .logo-breathing {
             font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
             font-size: 1.6rem;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            animation: breathe 3.5s infinite ease-in-out;
+            display: inline-block;
         }
-        .premium-logo-font span { color: var(--accent); }
-
-        .gender-split-panel {
+        .logo-breathing span { color: var(--accent); }
+        @keyframes breathe {
+            0%, 100% { opacity: 0.2; filter: blur(3px); transform: scale(0.97); }
+            50% { opacity: 0.8; filter: blur(0px); transform: scale(1.03); }
+        }
+        .gender-panel {
             flex: 1;
             position: relative;
             overflow: hidden;
@@ -110,39 +90,29 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            background: #0a0a0a;
+            background: #050505;
         }
-
-        .gender-split-panel img {
+        .gender-panel img {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: 1.5s opacity ease, 3s transform ease;
+            transition: opacity 1.5s ease, transform 4s ease;
+            filter: grayscale(100%) brightness(0.3);
         }
-
-        .gender-split-panel.img-ready img { opacity: 0.4; }
-        .gender-split-panel:hover img { transform: scale(1.1); opacity: 0.6; }
-
-        .gender-label-splash {
+        .gender-panel.loaded img { opacity: 0.45; }
+        .gender-panel:hover img { transform: scale(1.1); filter: grayscale(0%) brightness(0.5); }
+        .gender-label {
             position: relative;
             z-index: 10;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 900;
             letter-spacing: -1.5px;
-            text-shadow: 0 10px 40px #000;
-            transition: var(--transition-smooth);
+            color: #fff;
+            transition: var(--transition);
         }
-
-        .gender-split-panel:hover .gender-label-splash {
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-
-        /* ============================================================
-           📱 HEADER UNIT
-           ============================================================ */
+        .gender-panel:hover .gender-label { transform: scale(1.1); color: var(--accent); }
         header {
             position: absolute;
             top: 0;
@@ -158,64 +128,54 @@
             align-items: center;
             border-bottom: 1px solid var(--border);
         }
-
-        .header-left { display: flex; align-items: center; gap: 12px; }
-        
-        .btn-back-main {
-            background: #161616;
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
+        .nav-back-container { display: flex; align-items: center; gap: 12px; }
+        .btn-circle-back {
+            width: 44px;
+            height: 44px;
+            background: var(--surface-light);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid var(--border);
             color: #fff;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
         }
-        .btn-back-main:active { transform: scale(0.9); background: var(--accent); color: #000; }
-
-        .header-right { display: flex; align-items: center; gap: 15px; }
-
-        .action-icon-btn {
+        .btn-circle-back:active { transform: scale(0.85); background: var(--accent); color: #000; }
+        .header-controls { display: flex; align-items: center; gap: 12px; }
+        .header-icon-btn {
             position: relative;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
+            background: var(--surface-light);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--surface-light);
-            border-radius: 16px;
             border: 1px solid var(--border);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            transition: 0.3s;
         }
-
-        .action-icon-btn:active { transform: scale(0.85); }
-
-        .btn-badge {
+        .header-icon-btn:active { transform: scale(0.85); }
+        .nav-badge {
             position: absolute;
             top: -6px;
             right: -6px;
             background: var(--accent);
             color: #000;
-            font-size: 0.7rem;
+            font-size: 10px;
             font-weight: 900;
-            padding: 2px 7px;
-            border-radius: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 0 15px var(--accent-glow);
         }
-
-        #badge-wish {
-            background: var(--red);
-            color: #fff;
-            box-shadow: 0 0 15px var(--red-glow);
-        }
-
-        /* ============================================================
-           📑 PAGES SYSTEM
-           ============================================================ */
-        .page-node {
+        #badge-heart { background: var(--red); color: #fff; box-shadow: 0 0 15px var(--red-glow); }
+        .page-view {
             position: absolute;
             inset: 0;
             padding-top: 75px;
@@ -226,55 +186,37 @@
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
         }
-
-        .page-node.active {
-            display: flex;
-            animation: pageFadeIn 0.5s ease forwards;
-        }
-
-        @keyframes pageFadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ============================================================
-           👟 HOME: INFINITE SCROLL CATALOG
-           ============================================================ */
-        .search-area-sticky {
+        .page-view.active { display: flex; animation: viewFadeIn 0.5s ease; }
+        @keyframes viewFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .search-container-sticky {
             position: sticky;
             top: 0;
             z-index: 100;
             background: var(--bg);
             padding: 15px 20px;
         }
-
-        .input-luxe-search {
+        .premium-search-input {
             width: 100%;
             background: #111;
             border: 1px solid var(--border);
-            padding: 20px 25px;
-            border-radius: 25px;
+            padding: 18px 25px;
+            border-radius: 22px;
             color: #fff;
             font-size: 1rem;
             outline: none;
             transition: 0.3s;
         }
-        .input-luxe-search:focus { border-color: var(--accent); box-shadow: 0 0 20px rgba(212, 255, 0, 0.1); }
-
-        .catalog-grid-system {
+        .premium-search-input:focus { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-soft); }
+        .product-main-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             padding: 0 15px 40px;
         }
-
-        @media (min-width: 768px) {
-            .catalog-grid-system { grid-template-columns: repeat(4, 1fr); }
-        }
-
+        @media (min-width: 768px) { .product-main-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 40px 50px; } }
         .sneaker-card-premium {
             background: var(--surface);
-            border-radius: 35px;
+            border-radius: 30px;
             border: 1px solid var(--border);
             overflow: hidden;
             display: flex;
@@ -282,96 +224,28 @@
             height: 100%;
             transition: 0.4s;
         }
-
-        .sneaker-card-premium:hover { border-color: var(--accent); transform: translateY(-8px); }
-
-        .sneaker-image-box {
+        .sneaker-card-premium:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card-img-wrap {
             position: relative;
             aspect-ratio: 1/1;
-            background: #000;
+            background: #0a0a0a;
             overflow: hidden;
             cursor: zoom-in;
         }
-
-        .sneaker-image-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.8s transform ease;
-        }
-
-        .sneaker-card-premium:hover .sneaker-image-box img { transform: scale(1.1); }
-
-        .sneaker-details-box {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sneaker-neon-tag {
-            font-size: 0.65rem;
-            font-weight: 900;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 1.5px;
-        }
-
-        .sneaker-title-main {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            height: 2.8em;
-            overflow: hidden;
-            color: #fff;
-        }
-
-        .sneaker-price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .sneaker-price-text { font-size: 1.3rem; font-weight: 900; }
-
-        .btn-open-size-sheet {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* ============================================================
-           🔥 MATCH: TINDER ENGINE
-           ============================================================ */
-        .match-view-page {
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            padding-bottom: 120px;
-        }
-
-        .tinder-deck-root {
-            position: relative;
-            width: 92vw;
-            height: 60vh;
-            max-width: 400px;
-            z-index: 10;
-            perspective: 1500px;
-        }
-
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .card-content-wrap { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+        .card-brand-tag { font-size: 0.65rem; font-weight: 900; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; }
+        .card-model-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 15px; line-height: 1.4; height: 2.8em; overflow: hidden; color: #fff; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .card-price-val { font-size: 1.25rem; font-weight: 900; }
+        .btn-size-selector { background: var(--surface-light); color: #fff; border: 1px solid var(--border); padding: 12px 18px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-size-selector:active { background: var(--accent); color: #000; }
+        .match-view-page { justify-content: center; align-items: center; background: radial-gradient(circle at center, #151515 0%, #000 100%); }
+        .tinder-deck-container { position: relative; width: 92vw; height: 58vh; max-width: 400px; z-index: 10; perspective: 1000px; }
         .tinder-card-unit {
             position: absolute;
             inset: 0;
-            border-radius: 45px;
+            border-radius: 40px;
             background: var(--surface);
             border: 1px solid var(--border);
             overflow: hidden;
@@ -380,88 +254,30 @@
             will-change: transform, opacity;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .tinder-card-unit img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-        }
-
-        .t-card-info-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 45px 30px;
-            background: linear-gradient(to top, rgba(0,0,0,1) 35%, transparent 70%);
-            z-index: 5;
-        }
-
-        .t-card-price { font-size: 1.4rem; font-weight: 900; color: var(--accent); margin-top: 8px; }
-
-        .swipe-controls-row {
-            display: flex;
-            gap: 30px;
-            margin-top: 40px;
-            z-index: 100;
-        }
-
+        .tinder-card-unit img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .t-overlay-data { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 25px; background: linear-gradient(to top, rgba(0,0,0,1) 30%, transparent 70%); }
+        .tinder-controls-row { display: flex; gap: 30px; margin-top: 40px; z-index: 100; }
         .btn-swipe-circle {
-            width: 80px;
-            height: 80px;
+            width: 75px;
+            height: 75px;
             border-radius: 50%;
             border: 2px solid var(--border);
             background: var(--glass);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.8rem;
             transition: var(--transition-bounce);
         }
-
         .btn-swipe-circle.nope { color: var(--red); border-color: rgba(255, 71, 87, 0.2); }
-        .btn-swipe-circle.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow); }
-
-        /* ============================================================
-           👟 CATALOG: BRAND VITRINE
-           ============================================================ */
-        .catalog-page-container { padding: 20px; }
-        
-        .brand-vitrine-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .brand-vitrine-tile {
-            background: linear-gradient(135deg, #111 0%, #070707 100%);
-            padding: 45px 25px;
-            border-radius: 35px;
-            border: 1px solid var(--border);
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .brand-vitrine-tile:active { background: var(--accent); transform: scale(0.96); }
-        .brand-vitrine-tile:active h3 { color: #000; }
-
-        .brand-vitrine-tile h3 {
-            font-size: 1.1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* ============================================================
-           🧭 NAVIGATION BAR (BOTTOM DOCK)
-           ============================================================ */
-        .app-navigation-bar {
+        .btn-swipe-circle.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 25px var(--accent-glow); }
+        .brand-catalog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .brand-catalog-item { background: linear-gradient(135deg, #111 0%, #080808 100%); padding: 40px 20px; border-radius: 35px; border: 1px solid var(--border); text-align: center; cursor: pointer; transition: 0.3s; }
+        .brand-catalog-item h3 { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
+        .brand-catalog-item span { color: var(--text-dim); font-size: 0.7rem; font-weight: 700; margin-top: 8px; display: block; }
+        .brand-catalog-item:active { background: var(--accent); transform: scale(0.96); }
+        .brand-catalog-item:active h3, .brand-catalog-item:active span { color: #000; }
+        .dock-navigation {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -470,677 +286,323 @@
             -webkit-backdrop-filter: blur(35px);
             display: flex;
             justify-content: space-around;
-            padding: 18px 10px 45px;
+            padding: 15px 10px 42px;
             border-top: 1px solid var(--border);
             z-index: 7000;
         }
-
-        .nav-tab-unit {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #444;
-            font-size: 0.72rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .nav-tab-unit.active { color: var(--accent); }
-        .nav-tab-unit i { font-style: normal; font-size: 1.7rem; margin-bottom: 6px; }
-
-        /* ============================================================
-           📐 SYSTEM SHEETS (MODALS)
-           ============================================================ */
-        .global-overlay-mask {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.92);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 8000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .ui-bottom-sheet {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            right: 0;
-            background: #0a0a0a;
-            border-radius: 50px 50px 0 0;
-            padding: 45px 25px;
-            z-index: 8500;
-            transition: bottom 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-            border-top: 1px solid var(--border);
-            max-height: 94vh;
-            overflow-y: auto;
-        }
-
-        .ui-bottom-sheet.active { bottom: 0; }
-
-        .sheet-handle-bar {
-            width: 55px;
-            height: 6px;
-            background: #222;
-            border-radius: 10px;
-            margin: 0 auto 35px;
-        }
-
-        /* Матриця розмірів (Multi-select) */
-        .size-selection-matrix {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 45px;
-        }
-
-        .size-variant-pill {
-            background: #121212;
-            border: 1px solid var(--border);
-            padding: 25px 5px;
-            border-radius: 25px;
-            text-align: center;
-            font-weight: 900;
-            color: #555;
-            font-size: 1rem;
-            transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .size-variant-pill.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px var(--accent-soft);
-        }
-
-        .btn-premium-cta {
-            width: 100%;
-            background: var(--accent);
-            color: #000;
-            padding: 26px;
-            border-radius: 30px;
-            font-weight: 900;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 20px 50px var(--accent-soft);
-        }
-
-        /* ============================================================
-           🛒 CART & WISHLIST UI
-           ============================================================ */
-        .cart-rendering-list { margin-bottom: 30px; }
-        
-        .cart-line-product {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 22px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .cart-line-product img { width: 90px; height: 90px; border-radius: 22px; object-fit: cover; }
-        
+        .dock-tab { flex: 1; display: flex; flex-direction: column; align-items: center; color: #444; font-size: 0.7rem; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .dock-tab.active { color: var(--accent); }
+        .dock-tab i { font-style: normal; font-size: 1.6rem; margin-bottom: 5px; }
+        .modal-overlay-mask { position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 8000; display: none; opacity: 0; transition: 0.4s ease; }
+        .bottom-sheet-ui { position: fixed; bottom: -100%; left: 0; right: 0; background: #0a0a0a; border-radius: 45px 45px 0 0; padding: 40px 25px; z-index: 8500; transition: bottom 0.6s cubic-bezier(0.16, 1, 0.3, 1); border-top: 1px solid var(--border); max-height: 94vh; overflow-y: auto; }
+        .bottom-sheet-ui.active { bottom: 0; }
+        .sheet-handle { width: 50px; height: 5px; background: #222; border-radius: 10px; margin: 0 auto 35px; }
+        .matrix-size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 40px; }
+        .size-variant-pill { background: #121212; border: 1px solid var(--border); padding: 22px 5px; border-radius: 20px; text-align: center; font-weight: 900; color: #555; transition: 0.2s; }
+        .size-variant-pill.active { background: var(--accent); color: #000; border-color: var(--accent); transform: scale(1.05); box-shadow: 0 10px 20px var(--accent-soft); }
+        .cta-btn-premium { width: 100%; background: var(--accent); color: #000; padding: 24px; border-radius: 25px; font-weight: 900; font-size: 1.1rem; border: none; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 15px 40px var(--accent-soft); }
+        .cart-line-item { display: flex; align-items: center; gap: 18px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+        .cart-line-item img { width: 85px; height: 85px; border-radius: 20px; object-fit: cover; }
         .cart-line-info { flex: 1; }
-        .cart-line-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+        .cart-line-title { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
         .cart-line-meta { font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
-
-        .btn-remove-pos {
-            background: rgba(255, 71, 87, 0.1);
-            color: var(--red);
-            width: 44px;
-            height: 44px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-
-        /* SMART WISHLIST IN CART */
-        .wish-upsell-container {
-            margin-top: 40px;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #0c0c0c 0%, #070707 100%);
-            border-radius: 40px;
-            border: 1px solid var(--border);
-        }
-
-        .wish-upsell-header {
-            font-size: 0.9rem;
-            font-weight: 900;
-            color: var(--red);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .wish-upsell-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            scrollbar-width: none;
-            padding-bottom: 5px;
-        }
-        .wish-upsell-scroll::-webkit-scrollbar { display: none; }
-
-        .wish-mini-card { min-width: 140px; text-align: center; }
-
-        .wish-mini-card img {
-            width: 140px;
-            height: 140px;
-            border-radius: 30px;
-            object-fit: cover;
-            border: 1px solid var(--border);
-            margin-bottom: 12px;
-            box-shadow: 0 10px 30px #000;
-        }
-
-        .wish-mini-card h4 {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #666;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* ============================================================
-           🚚 CHECKOUT LOGISTICS
-           ============================================================ */
-        .segmented-log-switcher {
-            display: flex;
-            background: #111;
-            padding: 8px;
-            border-radius: 25px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-        }
-
-        .log-choice-btn {
-            flex: 1;
-            padding: 18px;
-            border-radius: 18px;
-            color: #555;
-            font-weight: 900;
-            font-size: 1rem;
-            text-align: center;
-            transition: 0.3s;
-        }
-
-        .log-choice-btn.active {
-            background: var(--accent);
-            color: #000;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        .form-luxe-input {
-            width: 100%;
-            background: #0f0f0f;
-            border: 1px solid var(--border);
-            padding: 24px 28px;
-            border-radius: 28px;
-            color: #fff;
-            font-size: 1.05rem;
-            margin-bottom: 18px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .form-luxe-input:focus { border-color: var(--accent); background: #141414; }
-
-        /* ============================================================
-           💬 LUXE CONTACTS WINDOW
-           ============================================================ */
-        .luxe-pop-window {
-            position: fixed;
-            bottom: 120px;
-            left: 20px;
-            right: 20px;
-            background: rgba(15, 15, 15, 0.98);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            border-radius: 45px;
-            padding: 15px;
-            display: none;
-            flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 30px 100px #000;
-            z-index: 9000;
-            animation: luxePopUp 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        }
-
-        @keyframes luxePopUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .luxe-pop-btn {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 26px;
-            border-radius: 30px;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .luxe-pop-btn.tg { background: rgba(36, 161, 222, 0.12); color: #24A1DE; }
-        .luxe-pop-btn.ig { background: rgba(225, 48, 108, 0.12); color: #E1306C; }
-        .luxe-pop-btn.tt { background: rgba(255, 255, 255, 0.05); color: #fff; }
-
-        #zoom-portal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.99);
-            z-index: 25000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: zoom-out;
-        }
-        #zoom-portal-overlay img { max-width: 98%; max-height: 88vh; border-radius: 30px; box-shadow: 0 0 100px #000; }
-
+        .btn-delete-cart { color: var(--red); background: rgba(255, 71, 87, 0.1); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .upsell-wish-container { margin-top: 35px; padding: 25px; background: linear-gradient(180deg, #0c0c0c, #050505); border-radius: 40px; border: 1px solid var(--border); }
+        .upsell-wish-header { font-size: 0.85rem; font-weight: 900; color: var(--red); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .upsell-wish-scroll { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .upsell-wish-scroll::-webkit-scrollbar { display: none; }
+        .upsell-mini-card { min-width: 135px; position: relative; }
+        .upsell-mini-card img { width: 135px; height: 135px; border-radius: 28px; object-fit: cover; border: 1px solid var(--border); }
+        .btn-upsell-add { position: absolute; bottom: 8px; right: 8px; width: 38px; height: 38px; background: var(--accent); color: #000; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.3rem; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .luxe-popup-menu { position: fixed; bottom: 115px; left: 20px; right: 20px; background: rgba(15, 15, 15, 0.98); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 42px; padding: 15px; display: none; flex-direction: column; gap: 10px; box-shadow: 0 30px 100px #000; z-index: 9000; animation: luxePop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+        @keyframes luxePop { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .luxe-pop-link { display: flex; align-items: center; gap: 18px; padding: 24px; border-radius: 28px; color: #fff; text-decoration: none; font-weight: 800; font-size: 1.05rem; transition: 0.3s; border: 1px solid rgba(255,255,255,0.04); }
+        .luxe-pop-link.tg { background: rgba(36, 161, 222, 0.12); color: #24A1DE; }
+        .luxe-pop-link.ig { background: rgba(225, 48, 108, 0.12); color: #E1306C; }
+        .luxe-pop-link.tt { background: rgba(255, 255, 255, 0.06); color: #fff; }
+        .checkout-luxe-input { width: 100%; background: #0f0f0f; border: 1px solid var(--border); padding: 22px 28px; border-radius: 25px; color: #fff; font-size: 1.05rem; margin-bottom: 18px; outline: none; transition: 0.3s; }
+        .checkout-luxe-input:focus { border-color: var(--accent); background: #141414; }
+        .seg-log-bar { display: flex; background: #111; padding: 7px; border-radius: 22px; margin-bottom: 30px; border: 1px solid var(--border); }
+        .seg-log-btn { flex: 1; padding: 16px; border-radius: 16px; color: #555; font-weight: 900; text-align: center; }
+        .seg-log-btn.active { background: var(--accent); color: #000; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        #zoom-portal { position: fixed; inset: 0; background: rgba(0,0,0,0.99); z-index: 25000; display: none; align-items: center; justify-content: center; cursor: zoom-out; }
+        #zoom-portal img { max-width: 98%; max-height: 86vh; border-radius: 28px; box-shadow: 0 0 100px #000; }
     </style>
 </head>
 <body class="custom-scroll">
 
     <div id="splash-screen">
-        <div class="splash-logo-box premium-logo-font">WOW<span>.</span>ZNAHIDKA</div>
-        
-        <div class="gender-split-panel men-bg" id="panel-men" onclick="launchWOW('Чоловік')">
-            <img id="splash-img-men" src="" alt="Men Sneakers">
-            <span class="gender-label-splash">ЧОЛОВІКАМ</span>
+        <div class="splash-overlay"></div>
+        <div class="logo-breathing-container"><div class="logo-breathing">WOW<span>.</span>ZNAHIDKA</div></div>
+        <div class="gender-panel" id="p-men" onclick="launchApp('Чоловік')">
+            <img id="img-men" src=""><span class="gender-label">ЧОЛОВІКАМ</span>
         </div>
-        
-        <div class="gender-split-panel women-bg" id="panel-women" onclick="launchWOW('Жінка')">
-            <img id="splash-img-women" src="" alt="Women Sneakers">
-            <span class="gender-label-splash">ЖІНКАМ</span>
+        <div class="gender-panel" id="p-women" onclick="launchApp('Жінка')">
+            <img id="img-women" src=""><span class="gender-label">ЖІНКАМ</span>
         </div>
     </div>
 
-    <header id="app-header" style="display:none;">
+    <header id="app-header-unit" style="display:none;">
         <div class="header-left">
-            <button class="btn-universal-back" onclick="location.reload()">↩</button>
-            <div class="premium-logo-font" style="font-size: 1.1rem;">WOW<span>.</span>ZNAHIDKA</div>
+            <button class="btn-circle-back" onclick="handleNavigationBack()">←</button>
+            <div class="premium-logo-font" style="font-size: 1.05rem; letter-spacing: 2px;">WOW<span>.</span>ZNAHIDKA</div>
         </div>
-        
         <div class="header-right">
-            <div class="action-icon-btn" onclick="openPanel('wishlist-sheet')">
-                <span style="font-size: 1.8rem; color: var(--red);">❤</span>
-                <span class="btn-badge" id="badge-wish" style="display: none;">0</span>
+            <div class="header-icon-btn" onclick="openPanel('wish-sheet')">
+                <span style="font-size: 1.7rem; color: var(--red);">❤</span>
+                <span class="nav-badge" id="badge-heart">0</span>
             </div>
-            <div class="action-icon-btn" onclick="openPanel('cart-sheet')">
-                <span style="font-size: 1.8rem;">🛒</span>
-                <span class="btn-badge" id="badge-cart" style="display: none;">0</span>
+            <div class="header-icon-btn" onclick="openPanel('cart-sheet')">
+                <span style="font-size: 1.7rem;">🛒</span>
+                <span class="nav-badge" id="badge-cart">0</span>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="view-home" class="page-node active custom-scroll">
-            <div class="search-area-sticky">
-                <input type="text" id="globalLiveSearch" class="input-luxe-search" placeholder="Шукай свій стиль..." oninput="handleMasterFiltering()">
+        <section id="view-home" class="page-view active custom-scroll">
+            <div class="search-container-sticky">
+                <input type="text" id="liveSearchInput" class="premium-search-input" placeholder="Шукай по назві (напр. NB 530)..." oninput="handleMasterFiltering()">
             </div>
-            
-            <div class="catalog-grid-system" id="main-product-grid">
-                </div>
-            
-            <div id="infinite-anchor-point" style="height: 60px;"></div>
+            <div class="product-main-grid" id="grid-node-root"></div>
+            <div id="infinite-scroll-anchor" style="height: 60px;"></div>
         </section>
 
-        <section id="view-match" class="page-node match-view-page">
-            <div class="tinder-deck-root" id="deck-node-root">
-                </div>
-
-            <div class="swipe-controls-row">
-                <button class="btn-swipe-circle nope" onclick="executeSwipeAction('left')">✕</button>
-                <button class="btn-swipe-circle yep" onclick="executeSwipeAction('right')">❤</button>
+        <section id="view-match" class="page-view match-view-page">
+            <div class="tinder-deck-container" id="tinder-deck-node"></div>
+            <div class="tinder-controls-row">
+                <button class="btn-swipe-circle nope" onclick="executeSwipe('left')">✕</button>
+                <button class="btn-swipe-circle yep" onclick="executeSwipe('right')">❤</button>
             </div>
         </section>
 
-        <section id="view-catalog" class="page-node">
-            <h2 style="padding: 30px 25px 15px; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px;">Каталог <span style="color:var(--accent)">.</span></h2>
-            <div class="brand-vitrine-grid" id="brand-tiles-node">
-                </div>
+        <section id="view-catalog" class="page-view">
+            <h2 style="padding: 30px 25px 10px; font-weight: 900; font-size: 2rem;">Каталог <span style="color:var(--accent)">.</span></h2>
+            <div class="brand-catalog-grid" id="brand-tiles-node"></div>
         </section>
     </main>
 
-    <nav class="app-navigation-bar" id="app-dock-unit" style="display:none;">
-        <div class="nav-tab-unit active" id="tab-btn-home" onclick="navToView('home', this)"><i>🏠</i>Головна</div>
-        <div class="nav-tab-unit" id="tab-btn-match" onclick="navToView('match', this)"><i>🔥</i>Match</div>
-        <div class="nav-tab-unit" id="tab-btn-catalog" onclick="navToView('catalog', this)"><i>👟</i>Каталог</div>
-        <div class="nav-tab-unit" onclick="toggleContactsPop()"><i>💬</i>Контакти</div>
+    <div class="luxe-popup-menu" id="luxe-contacts-pop">
+        <div style="padding: 5px 5px 15px; font-weight: 900; font-size: 0.85rem; color: #333; text-transform: uppercase; letter-spacing: 2px;">Контакт-центр WOW</div>
+        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-pop-link tg">✈️ Telegram Менеджер</a>
+        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-pop-link ig">📸 Наш Instagram</a>
+        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-pop-link tt">🎵 Наш TikTok</a>
+    </div>
+
+    <nav class="dock-navigation" id="app-dock-navigation" style="display:none;">
+        <div class="dock-tab active" id="tab-btn-home" onclick="navTo('home', this)"><i>🏠</i>Головна</div>
+        <div class="dock-tab" id="tab-btn-match" onclick="navTo('match', this)"><i>🔥</i>Match</div>
+        <div class="dock-tab" id="tab-btn-catalog" onclick="navTo('catalog', this)"><i>👟</i>Каталог</div>
+        <div class="dock-tab" onclick="toggleContacts()"><i>💬</i>Зв'язок</div>
     </nav>
 
-    <div class="luxe-pop-window" id="luxe-contacts-pop">
-        <div style="padding: 10px 5px; font-weight: 900; font-size: 0.85rem; color: #333; text-transform: uppercase; letter-spacing: 2px;">Support WOW</div>
-        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-pop-btn tg">✈️ Менеджер Telegram</a>
-        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-pop-btn ig">📸 Instagram Shop</a>
-        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-pop-btn tt">🎵 TikTok Channel</a>
+    <div class="modal-overlay-mask" id="ui-mask-overlay" onclick="closeAllActivePanels()"></div>
+
+    <div class="bottom-sheet-ui" id="size-sheet">
+        <div class="sheet-handle"></div>
+        <h2 id="sz-display-model" style="margin-bottom: 12px; font-size: 1.5rem; font-weight: 900;"></h2>
+        <p style="color: #666; font-size: 0.95rem; margin-bottom: 35px; font-weight: 600;">Оберіть розміри для замовлення:</p>
+        <div class="matrix-size-grid" id="sz-matrix-render"></div>
+        <button class="cta-btn-premium" onclick="finalizeSizeSelection()">ПІДТВЕРДИТИ ВИБІР</button>
     </div>
 
-    <div class="global-overlay-mask" id="global-mask" onclick="closeAllActiveSheets()"></div>
-
-    <div class="ui-bottom-sheet" id="size-picker-sheet">
-        <div class="sheet-handle-bar"></div>
-        <h2 id="sz-display-title" style="margin-bottom: 12px; font-size: 1.6rem; font-weight: 900;"></h2>
-        <p style="color: #666; font-size: 1rem; margin-bottom: 40px; font-weight: 600;">Оберіть розміри для замовлення:</p>
-        <div class="size-selection-matrix" id="sz-matrix-container"></div>
-        <button class="btn-premium-cta" onclick="confirmSizesAndAddToCart()">ПІДТВЕРДИТИ</button>
+    <div class="bottom-sheet-ui" id="wish-sheet">
+        <div class="sheet-handle"></div>
+        <h2 style="margin-bottom: 15px; font-size: 1.7rem; font-weight: 900;">Твій Match 🔥</h2>
+        <p style="color: #666; margin-bottom: 30px; line-height: 1.5;">Це твої ідеальні пари! Не дозволяй іншим забрати твій стиль.</p>
+        <div id="wish-list-full-render" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:35px;"></div>
+        <button class="cta-btn-premium" style="background:#fff; color:#000;" onclick="navTo('home', document.getElementById('tab-btn-home')); closeAllActivePanels();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
     </div>
 
-    <div class="ui-bottom-sheet" id="wishlist-sheet">
-        <div class="sheet-handle-bar"></div>
-        <h2 style="margin-bottom: 15px; font-size: 1.8rem; font-weight: 900;">Твій Match 🔥</h2>
-        <p style="color: #666; margin-bottom: 30px; line-height: 1.5;">Це твої ідеальні пари! Вибери розмір та додай у кошик прямо зараз.</p>
-        <div id="wishlist-rendering-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:35px;"></div>
-        <button class="btn-premium-cta" style="background:#fff; color:#000;" onclick="navToView('home', document.getElementById('tab-btn-home')); closeAllActiveSheets();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
-    </div>
-
-    <div class="ui-bottom-sheet" id="cart-sheet">
-        <div class="sheet-handle-bar"></div>
-        <div id="cart-step-1">
-            <h2 style="margin-bottom: 30px; font-size: 1.7rem;">Твій кошик</h2>
-            <div class="cart-rendering-list" id="cart-items-rendering-node"></div>
-            <div id="wish-upsell-rendering-area"></div>
+    <div class="bottom-sheet-ui" id="cart-sheet">
+        <div class="sheet-handle"></div>
+        <div id="cart-phase-1">
+            <h2 style="margin-bottom: 25px; font-size: 1.6rem;">Твій кошик 🛍️</h2>
+            <div class="cart-rendering-list" id="cart-items-node"></div>
+            <div id="wish-upsell-node"></div>
             <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border);">
-                <div style="display: flex; justify-content: space-between; font-size: 1.7rem; font-weight: 900; margin-bottom: 35px;">
-                    <span>Разом:</span><span id="label-cart-sum" style="color: var(--accent);">0 ₴</span>
+                <div style="display: flex; justify-content: space-between; font-size: 1.7rem; font-weight: 900; margin-bottom: 30px;">
+                    <span>Разом:</span><span id="label-final-sum" style="color: var(--accent);">0 ₴</span>
                 </div>
-                <button class="btn-premium-cta" onclick="proceedToCheckoutForm()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
+                <button class="cta-btn-premium" onclick="showCheckoutPhase()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
             </div>
         </div>
-        <div id="cart-step-2" style="display: none;">
-            <h2 style="margin-bottom: 35px;">Доставка</h2>
-            <input type="text" id="order-fio" class="form-luxe-input" placeholder="ПІБ">
-            <input type="tel" id="order-phone" class="form-luxe-input" placeholder="Телефон">
-            <input type="text" id="order-city" class="form-luxe-input" placeholder="Місто">
-            <div class="segmented-log-switcher">
-                <div class="log-choice-btn active" id="log-vidd-tab" onclick="updateLogisticsType('Відділення')">Відділення</div>
-                <div class="log-choice-btn" id="log-post-tab" onclick="updateLogisticsType('Поштомат')">Поштомат</div>
+        <div id="cart-phase-2" style="display: none;">
+            <h2 style="margin-bottom: 35px;">Оформлення</h2>
+            <input type="text" id="inp-fio" class="checkout-luxe-input" placeholder="ПІБ отримувача">
+            <input type="tel" id="inp-phone" class="checkout-luxe-input" placeholder="Номер телефону (+380...)">
+            <input type="text" id="inp-city" class="checkout-luxe-input" placeholder="Місто">
+            <div class="seg-log-bar">
+                <div class="seg-log-btn active" id="seg-log-vidd" onclick="setAppLogistics('Відділення')">Відділення</div>
+                <div class="seg-log-btn" id="seg-log-post" onclick="setAppLogistics('Поштомат')">Поштомат</div>
             </div>
-            <input type="text" id="order-np" class="form-luxe-input" placeholder="№ Відділення">
-            <input type="text" id="order-promo" class="form-luxe-input" placeholder="Промокод">
-            <button class="btn-premium-cta" id="btn-final-dispatch" onclick="dispatchFinalOrder()">ЗАМОВИТИ ЗАРАЗ</button>
-            <p onclick="rollbackToCartList()" style="text-align: center; margin-top: 30px; color: #444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
+            <input type="text" id="inp-np" class="checkout-luxe-input" placeholder="№ Відділення Нової Пошти">
+            <input type="text" id="inp-promo" class="checkout-luxe-input" placeholder="Промокод (якщо є)">
+            <button class="cta-btn-premium" id="btn-order-dispatch" onclick="processOrderSend()">ЗАМОВИТИ ЗАРАЗ</button>
+            <p onclick="backToCartList()" style="text-align: center; margin-top: 30px; color: #444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
         </div>
     </div>
 
-    <div id="zoom-portal-overlay" onclick="this.style.display='none'"><img id="zoom-portal-img" src=""></div>
+    <div id="zoom-portal" onclick="this.style.display='none'"><img id="zoom-img-target" src=""></div>
 
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
-        
-        let allItems = [];      // Оригінал
-        let sessionDb = [];     // Фільтр по статі
-        let cartArray = [];     // Кошик
-        let wishArray = [];     // Лайки
-        let chosenGender = '';  
-        let activeBrand = 'all'; 
-        let deliveryWay = 'Відділення';
-        
-        let matchIndex = 0;
-        let activeTempId = '';
-        let activeTempSizes = [];
-
-        // --- 1. DATA PRELOADING ---
-        async function preloadLuxeData() {
+        const GOOGLE_API = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
+        let masterDb = [], sessionDb = [], cartArray = [], wishArray = [], chosenGender = '', activeBrand = 'all', deliveryMode = 'Відділення', matchPtr = 0, historyLog = ['home'], activeTempId = '', activeTempSizes = [];
+        async function loadStore() {
             try {
-                const response = await fetch(API_URL + "?v=" + Date.now());
-                const result = await response.json();
-                allItems = result.products || result;
-
-                const mPool = allItems.filter(p => p.gender === 'Чоловік');
-                const wPool = allItems.filter(p => p.gender === 'Жінка');
-
-                if(mPool.length) {
-                    const mImg = document.getElementById('splash-img-men');
-                    mImg.src = mPool[Math.floor(Math.random() * mPool.length)].image;
-                    mImg.onload = () => document.getElementById('panel-men').classList.add('img-ready');
-                }
-                
-                if(wPool.length) {
-                    const wImg = document.getElementById('splash-img-women');
-                    wImg.src = wPool[Math.floor(Math.random() * wPool.length)].image;
-                    wImg.onload = () => document.getElementById('panel-women').classList.add('img-ready');
-                }
-            } catch(e) { console.error("Database connection lost."); }
+                const response = await fetch(GOOGLE_API + "?v=" + Date.now());
+                const data = await response.json();
+                masterDb = data.products || data;
+                const mP = masterDb.filter(p => p.gender === 'Чоловік'), wP = masterDb.filter(p => p.gender === 'Жінка');
+                if(mP.length) { const img = document.getElementById('img-men'); img.src = mP[Math.floor(Math.random() * mP.length)].image; img.onload = () => document.getElementById('p-men').classList.add('loaded'); }
+                if(wP.length) { const img = document.getElementById('img-women'); img.src = wP[Math.floor(Math.random() * wP.length)].image; img.onload = () => document.getElementById('p-women').classList.add('loaded'); }
+            } catch(e) { console.error("API error"); }
         }
-
-        // --- 2. LAUNCH ENGINE ---
-        function launchWOW(gender) {
-            chosenGender = gender;
+        function launchApp(g) {
+            chosenGender = g;
             document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
-            document.getElementById('app-header').style.display = 'flex';
-            document.getElementById('app-dock-unit').style.display = 'flex';
-
-            sessionDb = allItems
-                .filter(p => p.gender === chosenGender)
-                .sort(() => Math.random() - 0.5);
-
-            renderMasterCatalog();
-            renderTinderDeck();
-            renderCatalogBrands();
-            
-            const observer = new IntersectionObserver(entries => {
-                if(entries[0].isIntersecting) renderMasterCatalog(true);
-            }, { threshold: 0.1 });
-            observer.observe(document.getElementById('infinite-anchor-point'));
+            document.getElementById('app-header-unit').style.display = 'flex';
+            document.getElementById('app-dock-navigation').style.display = 'flex';
+            sessionDb = masterDb.filter(p => p.gender === chosenGender).sort(() => Math.random() - 0.5);
+            renderGrid(); renderMatch(); renderCatalogTiles();
+            const obs = new IntersectionObserver(e => { if(e[0].isIntersecting) renderGrid(true); }, { threshold: 0.1 });
+            obs.observe(document.getElementById('infinite-scroll-anchor'));
+            if(window.navigator.vibrate) window.navigator.vibrate(40);
         }
-
-        // --- 3. CLEANING & DE-DUPLICATION ---
         function cleanName(n, b) {
             const p = new RegExp(`^${b}\\s+${b}`, 'i');
             return p.test(n) ? n.replace(new RegExp(`^${b}\\s+`, 'i'), '').trim() : n;
         }
-
-        // --- 4. CATALOG (THE SCROLL) ---
-        function renderMasterCatalog(append = false) {
-            const grid = document.getElementById('main-product-grid');
-            if(!append) grid.innerHTML = "";
-            const q = document.getElementById('globalLiveSearch').value.toLowerCase();
-            let filtered = sessionDb;
-            if(activeBrand !== 'all') filtered = filtered.filter(p => p.brand === activeBrand);
-            if(q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
-
-            const batchSize = 12;
-            const start = append ? grid.children.length : 0;
-            const slice = filtered.slice(start, start + batchSize);
-            
-            grid.innerHTML += slice.map(p => `
+        function renderGrid(append = false) {
+            const root = document.getElementById('grid-node-root'); if(!append) root.innerHTML = "";
+            const q = document.getElementById('liveSearchInput').value.toLowerCase();
+            let data = sessionDb;
+            if(activeBrand !== 'all') data = data.filter(p => p.brand === activeBrand);
+            if(q) data = data.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q));
+            const slice = data.slice(append ? root.children.length : 0, append ? root.children.length + 12 : 12);
+            root.innerHTML += slice.map(p => `
                 <div class="sneaker-card-premium">
-                    <div class="sneaker-image-box" onclick="triggerZoom('${p.image}')">
-                        <img src="${p.image}" loading="lazy">
-                    </div>
-                    <div class="sneaker-details-box">
-                        <div class="sneaker-neon-tag">${p.brand}</div>
-                        <div class="sneaker-title-main">${cleanName(p.name, p.brand)}</div>
-                        <div class="sneaker-price-row">
-                            <span class="sneaker-price-text">${p.price} ₴</span>
-                            <button class="btn-open-size-sheet" onclick="openSizePicker('${p.id}')">ВИБРАТИ</button>
+                    <div class="card-img-wrap" onclick="triggerZoom('${p.image}')"><img src="${p.image}" loading="lazy"></div>
+                    <div class="card-content-wrap">
+                        <div class="card-brand-tag">${p.brand} | ${p.name.split(' ')[1] || 'Edition'}</div>
+                        <div class="card-model-title">${cleanName(p.name, p.brand)}</div>
+                        <div class="card-footer">
+                            <span class="card-price-val">${p.price} ₴</span>
+                            <button class="btn-size-selector" onclick="openPicker('${p.id}')">ВИБРАТИ</button>
                         </div>
                     </div>
                 </div>`).join('');
         }
-
-        // --- 5. TINDER ENGINE (SWIPE PHYSICS) ---
-        function renderTinderDeck() {
-            const node = document.getElementById('deck-node-root');
-            const stack = sessionDb.slice(matchIndex, matchIndex + 3);
-            
+        function renderMatch() {
+            const node = document.getElementById('tinder-deck-node');
+            const stack = sessionDb.slice(matchPtr, matchPtr + 3);
             node.innerHTML = stack.map((p, i) => `
                 <div class="tinder-card-unit" style="z-index:${10-i}; transform: scale(${1 - i*0.05}) translateY(${i*20}px)">
                     <img src="${p.image}">
-                    <div class="t-card-info-overlay">
-                        <div class="sneaker-neon-tag">${p.brand}</div>
+                    <div class="t-overlay-data">
+                        <div class="card-brand-tag">${p.brand}</div>
                         <div style="font-size:1.7rem; font-weight:900; line-height:1.2;">${cleanName(p.name, p.brand)}</div>
-                        <div class="t-card-price">${p.price} ₴</div>
+                        <div class="t-card-price" style="font-weight:900; color:var(--accent); font-size:1.3rem; margin-top:10px;">${p.price} ₴</div>
                     </div>
                 </div>`).join('');
-
             if(!stack.length) node.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Новинки закінчились 👟</div>";
-            
-            initSwipeHandlers();
+            initTinderTouch();
         }
-
-        function initSwipeHandlers() {
-            const card = document.querySelector('.tinder-card-unit');
-            if(!card) return;
-            let sx = 0, cx = 0;
-            card.addEventListener('touchstart', e => { sx = e.touches[0].clientX; card.style.transition = 'none'; }, {passive:true});
-            card.addEventListener('touchmove', e => { cx = e.touches[0].clientX; let d = cx - sx; card.style.transform = `translateX(${d}px) rotate(${d/18}deg)`; }, {passive:true});
-            card.addEventListener('touchend', () => { let d = cx - sx; if(Math.abs(d) > 130) executeSwipeAction(d > 0 ? 'right' : 'left'); else { card.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; card.style.transform = 'translateX(0) rotate(0)'; } });
+        function initTinderTouch() {
+            const el = document.querySelector('.tinder-card-unit'); if(!el) return;
+            let sx=0, cx=0;
+            el.addEventListener('touchstart', e => { sx = e.touches[0].clientX; el.style.transition = 'none'; }, {passive:true});
+            el.addEventListener('touchmove', e => { cx = e.touches[0].clientX; let d = cx - sx; el.style.transform = `translateX(${d}px) rotate(${d/18}deg)`; }, {passive:true});
+            el.addEventListener('touchend', () => { let d = cx - sx; if(Math.abs(d) > 130) executeSwipe(d > 0 ? 'right' : 'left'); else { el.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; el.style.transform = 'translateX(0) rotate(0)'; } });
         }
-
-        function executeSwipeAction(dir) {
-            const card = document.querySelector('.tinder-card-unit');
-            if(!card) return;
-            const dist = window.innerWidth * 1.6;
-            card.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
-            card.style.transform = `translateX(${dir === 'right' ? dist : -dist}px) rotate(${dir === 'right' ? 45 : -45}deg)`;
-            card.style.opacity = '0';
-            
-            if(dir === 'right') {
-                const item = sessionDb[matchIndex];
-                if(!wishArray.find(x => x.id === item.id)) {
-                    wishArray.push(item);
-                    syncWishlistUI();
-                }
-            }
-            setTimeout(() => { matchIndex++; renderTinderDeck(); }, 400);
+        function executeSwipe(dir) {
+            const el = document.querySelector('.tinder-card-unit'); if(!el) return;
+            const move = window.innerWidth * 1.6; el.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
+            el.style.transform = `translateX(${dir === 'right' ? move : -move}px) rotate(${dir === 'right' ? 45 : -45}deg)`; el.style.opacity = '0';
+            if(dir === 'right') { const item = sessionDb[matchPtr]; if(!wishArray.find(x => x.id === item.id)) { wishArray.push(item); syncWishUI(); if(window.navigator.vibrate) window.navigator.vibrate([30, 20, 30]); } }
+            setTimeout(() => { matchPtr++; renderMatch(); }, 400);
         }
-
-        // --- 6. WISHLIST & CART LOGIC ---
-        function syncWishlistUI() {
-            const b = document.getElementById('badge-wish');
-            b.innerText = wishArray.length; b.style.display = wishArray.length ? 'block' : 'none';
+        function syncWishUI() {
+            const b = document.getElementById('badge-heart'); b.innerText = wishArray.length; b.style.display = wishArray.length ? 'flex' : 'none';
             document.getElementById('wishlist-rendering-grid').innerHTML = wishArray.map(p => `
-                <div class="sneaker-card-premium" onclick="openSizePicker('${p.id}')">
-                    <div class="sneaker-image-box"><img src="${p.image}"></div>
-                    <div class="sneaker-details-box">
-                        <div class="sneaker-neon-tag">${p.brand}</div>
-                        <div class="sneaker-title-main" style="font-size:0.75rem;">${cleanName(p.name, p.brand)}</div>
-                        <button class="btn-open-size-sheet" style="width:100%; margin-top:10px;">КУПИТИ</button>
+                <div class="sneaker-card-premium" onclick="openPicker('${p.id}')">
+                    <div class="card-img-wrap"><img src="${p.image}"></div>
+                    <div class="card-content-wrap">
+                        <div class="card-brand-tag">${p.brand}</div>
+                        <div class="card-model-title" style="font-size:0.75rem; height:2.4em;">${cleanName(p.name, p.brand)}</div>
+                        <button class="btn-size-selector" style="width:100%; margin-top:10px;">КУПИТИ</button>
                     </div>
                 </div>`).join('');
         }
-
-        function openSizePicker(id) {
+        function openPicker(id) {
             activeTempId = id; activeTempSizes = [];
-            const p = allItems.find(x => x.id === id);
+            const p = masterDb.find(x => x.id === id);
             document.getElementById('sz-display-title').innerText = cleanName(p.name, p.brand);
-            const sizes = p.sizes.split(',').map(s => s.trim()).filter(s => s);
-            document.getElementById('sz-matrix-container').innerHTML = sizes.map(s => `
-                <div class="size-variant-pill" onclick="toggleSizeNode(this, '${s}')">${s.split('(')[0]}</div>
-            `).join('');
+            const s = p.sizes.split(',').map(x => x.trim()).filter(x => x);
+            document.getElementById('sz-matrix-render').innerHTML = s.map(x => `<div class="size-variant-pill" onclick="toggleSizeNode(this, '${x}')">${x.split('(')[0]}</div>`).join('');
             openPanel('size-picker-sheet');
         }
-
-        function toggleSizeNode(el, s) {
-            const idx = activeTempSizes.indexOf(s);
-            if(idx > -1) { activeTempSizes.splice(idx, 1); el.classList.remove('active'); }
-            else { activeTempSizes.push(s); el.classList.add('active'); }
-        }
-
-        function confirmSizesAndAddToCart() {
+        function toggleSizeNode(el, s) { const idx = activeTempSizes.indexOf(s); if(idx > -1) { activeTempSizes.splice(idx, 1); el.classList.remove('active'); } else { activeTempSizes.push(s); el.classList.add('active'); } }
+        function finalizeSizeSelection() {
             if(!activeTempSizes.length) return alert("Оберіть розмір!");
-            const p = allItems.find(x => x.id === activeTempId);
-            activeTempSizes.forEach(sz => cartArray.push({...p, selectedSize: sz, uid: Math.random()}));
-            syncCartBadge(); closeAllActiveSheets();
-            navToView('home', document.getElementById('tab-btn-home'));
+            const p = masterDb.find(x => x.id === activeTempId);
+            activeTempSizes.forEach(sz => cartArray.push({...p, selSz: sz, uid: Math.random()}));
+            syncCartBadge(); closeAllActivePanels(); navTo('home', document.getElementById('tab-btn-home'));
         }
-
-        function syncCartBadge() {
-            const b = document.getElementById('badge-cart');
-            b.innerText = cartArray.length; b.style.display = cartArray.length ? 'block' : 'none';
-        }
-
-        function renderCartContents() {
-            const node = document.getElementById('cart-items-rendering-node');
-            if(!cartArray.length) { node.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Кошик порожній 🛒</p>"; }
-            else {
-                node.innerHTML = cartArray.map((item, idx) => `
-                    <div class="cart-line-product">
-                        <img src="${item.image}">
-                        <div class="cart-line-info">
-                            <div class="cart-line-title">${item.name}</div>
-                            <div class="cart-line-meta">Розмір: ${item.selectedSize}</div>
-                        </div>
-                        <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
-                        <div class="btn-remove-pos" onclick="removeFromCart(${idx})">✕</div>
-                    </div>`).join('');
-            }
-            const total = cartArray.reduce((s, i) => s + parseInt(i.price), 0);
-            document.getElementById('label-cart-sum').innerText = total + " ₴";
-
-            const upsell = document.getElementById('wish-upsell-rendering-area');
-            if(wishArray.length && !cartArray.find(c => wishArray.some(w => w.id === c.id))) {
-                upsell.innerHTML = `<div class="wish-upsell-container">
-                    <div class="wish-upsell-header">❤️ Твої фаворити з Match:</div>
-                    <div class="wish-upsell-scroll">
-                        ${wishArray.map(p => `<div class="wish-mini-card" onclick="openSizePicker('${p.id}')"><img src="${p.image}"><h4>${p.brand}</h4></div>`).join('')}
-                    </div></div>`;
+        function syncCartBadge() { const b = document.getElementById('badge-cart'); b.innerText = cartArray.length; b.style.display = cartArray.length ? 'flex' : 'none'; }
+        function renderCart() {
+            const root = document.getElementById('cart-items-node');
+            if(!cartArray.length) root.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Кошик порожній 🛒</p>";
+            else root.innerHTML = cartArray.map((i, idx) => `
+                <div class="cart-line-item">
+                    <img src="${i.image}">
+                    <div class="cart-line-info"><div class="cart-line-title">${i.name}</div><div class="cart-line-meta">Розмір: ${i.selSz}</div></div>
+                    <div style="font-weight:900; margin-right:15px;">${i.price} ₴</div>
+                    <div class="btn-delete-cart" onclick="removeFromCart(${idx})">✕</div>
+                </div>`).join('');
+            document.getElementById('label-final-sum').innerText = cartArray.reduce((a, b) => a + parseInt(b.price), 0) + " ₴";
+            const upsell = document.getElementById('wish-upsell-node');
+            if(wishArray.length && !cartArray.some(c => wishArray.some(w => w.id === c.id))) {
+                upsell.innerHTML = `<div class="upsell-wish-container"><div class="upsell-wish-header">❤️ Твої фаворити з Match:</div><div class="upsell-wish-scroll">
+                    ${wishArray.map(p => `<div class="upsell-mini-card"><img src="${p.image}"><div class="btn-upsell-add" onclick="openPicker('${p.id}')">+</div><h4>${p.brand}</h4></div>`).join('')}
+                </div></div>`;
             } else upsell.innerHTML = "";
         }
-
-        // --- 7. CATALOG TILES ---
-        function renderCatalogBrands() {
-            const brands = [...new Set(sessionDb.map(p => p.brand))].sort();
-            document.getElementById('brand-tiles-node').innerHTML = brands.map(b => `
-                <div class="brand-vitrine-tile" onclick="filterByBrandShortcut('${b}')">
-                    <h3>${b}</h3>
-                    <span>${sessionDb.filter(x => x.brand === b).length} МОДЕЛЕЙ ➔</span>
+        function removeFromCart(idx) { cartArray.splice(idx, 1); renderCart(); syncCartBadge(); if(!cartArray.length) closeAllActivePanels(); }
+        function renderCatalogTiles() {
+            const b = [...new Set(sessionDb.map(p => p.brand))].sort();
+            document.getElementById('brand-tiles-node').innerHTML = b.map(x => `
+                <div class="brand-catalog-item" onclick="filterByCatalog('${x}')">
+                    <h3>${x}</h3><span>${sessionDb.filter(p => p.brand === x).length} МОДЕЛЕЙ ➔</span>
                 </div>`).join('');
         }
-
-        function filterByBrandShortcut(b) {
-            activeBrand = b; renderMasterCatalog();
-            navToView('home', document.getElementById('tab-btn-home'));
-        }
-
-        // --- 8. ORDERING ---
-        async function dispatchFinalOrder() {
-            const fio = document.getElementById('order-fio').value.trim(), phone = document.getElementById('order-phone').value.trim();
+        function filterByCatalog(b) { activeBrand = b; renderGrid(); navTo('home', document.getElementById('tab-btn-home')); }
+        async function processOrderSend() {
+            const fio = document.getElementById('inp-fio').value.trim(), phone = document.getElementById('inp-phone').value.trim();
             if(!fio || !phone) return alert("Заповніть ПІБ та Телефон!");
-            const btn = document.getElementById('btn-final-dispatch'); btn.innerText = "ВІДПРАВКА..."; btn.disabled = true;
-            const data = { action: "new_order", fio, phone, city: document.getElementById('order-city').value, delivery: deliveryWay + " №" + document.getElementById('order-np').value, items: cartArray.map(i => `${i.name} (р. ${i.selectedSize})`).join('\n'), total: document.getElementById('label-cart-sum').innerText };
-            await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            document.getElementById('cart-step-2').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent);">Успішно!</h2><p style="color:#666;">Замовлення прийнято. Менеджер зв'яжеться з Вами.</p><button class="btn-premium-cta" style="margin-top:40px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
+            const btn = document.getElementById('btn-order-dispatch'); btn.innerText = "ВІДПРАВКА..."; btn.disabled = true;
+            const data = { action: "new_order", fio, phone, city: document.getElementById('inp-city').value, delivery: deliveryMode + " №" + document.getElementById('inp-np').value, items: cartArray.map(i => `${i.name} (р. ${i.selSz})`).join('\n'), total: document.getElementById('label-final-sum').innerText, promo: document.getElementById('inp-promo').value };
+            await fetch(GOOGLE_API, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+            document.getElementById('cart-phase-2').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent);">Успішно!</h2><p style="color:#666;">Замовлення прийнято. Менеджер зв'яжеться з Вами.</p><button class="cta-btn-premium" style="margin-top:50px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
             cartArray = []; syncCartBadge();
         }
-
-        // --- 9. INTERFACE CONTROL ---
-        function navToView(p, el) {
-            document.querySelectorAll('.page-node').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-tab-unit').forEach(t => t.classList.remove('active'));
-            document.getElementById('view-'+p).classList.add('active'); el.classList.add('active');
+        function navTo(v, el) {
+            document.querySelectorAll('.page-view').forEach(x => x.classList.remove('active'));
+            document.querySelectorAll('.dock-tab').forEach(x => x.classList.remove('active'));
+            document.getElementById('view-'+v).classList.add('active'); el.classList.add('active');
+            if(historyLog[historyLog.length-1] !== v) historyLog.push(v);
             document.getElementById('luxe-contacts-pop').style.display = 'none';
         }
-
-        function toggleContactsPop() { const p = document.getElementById('luxe-contacts-pop'); p.style.display = p.style.display === 'flex' ? 'none' : 'flex'; }
-        function openPanel(id) { document.getElementById('global-mask').style.display = 'block'; setTimeout(() => { document.getElementById('global-mask').style.opacity = '1'; document.getElementById(id).classList.add('active'); }, 15); if(id === 'cart-sheet') renderCartContents(); if(id === 'wishlist-sheet') syncWishlistUI(); }
-        function closeAllActiveSheets() { document.querySelectorAll('.ui-bottom-sheet').forEach(s => s.classList.remove('active')); document.getElementById('global-mask').style.opacity = '0'; setTimeout(() => { document.getElementById('global-mask').style.display = 'none'; rollbackToCartList(); document.getElementById('luxe-contacts-pop').style.display = 'none'; }, 500); }
-        function updateLogisticsType(t) { deliveryWay = t; document.querySelectorAll('.log-choice-btn').forEach(b => b.classList.remove('active')); document.getElementById(t==='Відділення'?'log-vidd-tab':'log-post-tab').classList.add('active'); document.getElementById('order-np').placeholder = t==='Відділення'?'№ Відділення':'№ Поштомату'; }
-        function proceedToCheckoutForm() { if(!cartArray.length) return; document.getElementById('cart-step-1').style.display='none'; document.getElementById('cart-step-2').style.display='block'; }
-        function rollbackToCartList() { document.getElementById('cart-step-2').style.display='none'; document.getElementById('cart-step-1').style.display='block'; }
-        function triggerZoom(s) { document.getElementById('zoom-portal-img').src = s; document.getElementById('zoom-portal-overlay').style.display='flex'; }
-        function handleMasterFiltering() { renderMasterCatalog(); }
-        function removeFromCart(idx) { cartArray.splice(idx, 1); renderCartContents(); syncCartBadge(); if(!cartArray.length) closeAllActiveSheets(); }
-
-        preloadLuxeData();
+        function handleNavigationBack() { if(historyLog.length > 1) { historyLog.pop(); const prev = historyLog[historyLog.length-1]; navTo(prev, document.querySelectorAll('.dock-tab')[['home','match','catalog'].indexOf(prev)]); } else location.reload(); }
+        function toggleContacts() { const p = document.getElementById('luxe-contacts-pop'); p.style.display = p.style.display === 'flex' ? 'none' : 'flex'; }
+        function openPanel(id) { document.getElementById('ui-mask-overlay').style.display = 'block'; setTimeout(() => { document.getElementById('ui-mask-overlay').style.opacity = '1'; document.getElementById(id).classList.add('active'); }, 15); if(id === 'cart-sheet') renderCart(); if(id === 'wish-sheet') syncWishUI(); }
+        function closeAllActivePanels() { document.querySelectorAll('.bottom-sheet-ui').forEach(s => s.classList.remove('active')); document.getElementById('ui-mask-overlay').style.opacity = '0'; setTimeout(() => { document.getElementById('ui-mask-overlay').style.display = 'none'; backToCartList(); document.getElementById('luxe-contacts-pop').style.display = 'none'; }, 500); }
+        function setAppLogistics(t) { deliveryMode = t; document.querySelectorAll('.seg-log-btn').forEach(b => b.classList.remove('active')); document.getElementById(t==='Відділення'?'seg-log-vidd':'seg-log-post').classList.add('active'); document.getElementById('inp-np').placeholder = t==='Відділення'?'№ Відділення':'№ Поштомату'; }
+        function showCheckoutPhase() { if(!cartArray.length) return; document.getElementById('cart-phase-1').style.display='none'; document.getElementById('cart-phase-2').style.display='block'; }
+        function backToCartList() { document.getElementById('cart-phase-2').style.display='none'; document.getElementById('cart-phase-1').style.display='block'; }
+        function triggerZoom(s) { document.getElementById('zoom-img-target').src = s; document.getElementById('zoom-portal').style.display='flex'; }
+        function handleMasterFiltering() { renderGrid(); }
+        loadStore();
     </script>
 </body>
 </html>
