@@ -3,390 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WOW.ZNAHIDKA | Premium sneakers</title>
+    <title>WOW.ZNAHIDKA — Premium Sneakers</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        :root { --accent: #d4ff00; --bg: #050505; --card: #121212; --border: #222; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: #fff; margin: 0; padding-bottom: 120px; overflow-x: hidden; }
 
-        :root {
-            --bg: #050505; --surface: #111111; --surface-light: #1a1a1a;
-            --accent: #d4ff00; --accent-hover: #b8e600;
-            --text: #ffffff; --text-dim: #888888;
-            --border: rgba(255, 255, 255, 0.05);
-            --glass: rgba(5, 5, 5, 0.85);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; padding-bottom: 120px; }
-
-        /* --- СКРОЛБАР --- */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: var(--surface-light); border-radius: 10px; }
-
-        /* --- SPLASH SCREEN --- */
-        #splash-screen {
-            position: fixed; inset: 0; background: var(--bg); z-index: 9999;
-            display: flex; flex-direction: column; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .logo-splash {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 2.5rem; font-weight: 900; z-index: 10; background: var(--bg);
-            padding: 15px 30px; border-radius: 40px; border: 1px solid var(--border);
-            box-shadow: 0 0 50px rgba(212, 255, 0, 0.1);
-        }
-        .logo-splash span { color: var(--accent); }
-        
-        .gender-split { flex: 1; display: flex; flex-direction: column; }
-        .gender-btn {
-            flex: 1; display: flex; align-items: center; justify-content: center;
-            font-size: 2.2rem; font-weight: 900; letter-spacing: -1px;
-            color: #fff; border: none; cursor: pointer; transition: var(--transition);
-            background-size: cover; background-position: center; position: relative;
-        }
-        .gender-btn::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.7); transition: var(--transition); }
-        .gender-btn span { position: relative; z-index: 2; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
-        .gender-btn:hover::before { background: rgba(0,0,0,0.4); }
+        /* СПЛЕШ-ЕКРАН */
+        #splash-screen { position: fixed; inset: 0; background: var(--bg); z-index: 10000; display: flex; flex-direction: column; transition: 0.6s; }
+        .gender-btn { flex: 1; border: none; cursor: pointer; position: relative; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
+        .gender-btn::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+        .gender-btn span { position: relative; font-size: 2rem; font-weight: 900; color: #fff; z-index: 2; }
         .gender-btn.men { background-image: url('https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=1000'); border-bottom: 1px solid var(--border); }
         .gender-btn.women { background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1000'); }
 
-        /* --- ХЕДЕР --- */
-        header {
-            position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border);
-            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.5px; }
+        header { position: sticky; top: 0; background: rgba(5,5,5,0.85); backdrop-filter: blur(15px); padding: 15px; text-align: center; z-index: 1000; border-bottom: 1px solid var(--border); }
+        .logo { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
         .logo span { color: var(--accent); }
 
-        /* --- ПОШУК ТА ФІЛЬТРИ --- */
-        .tools-bar { padding: 15px 20px; background: var(--bg); position: sticky; top: 60px; z-index: 990; display: flex; gap: 10px; }
-        .search-input { flex: 1; background: var(--surface); border: 1px solid var(--border); color: #fff; padding: 12px 18px; border-radius: 14px; outline: none; transition: var(--transition); }
-        .search-input:focus { border-color: var(--accent); }
-        .filter-trigger { background: var(--surface); border: 1px solid var(--border); padding: 12px; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        /* ФІЛЬТРИ */
+        .filter-wrapper { background: #000; padding: 10px 0; border-bottom: 1px solid #222; position: sticky; top: 54px; z-index: 999; }
+        .filter-scroll { display: flex; overflow-x: auto; gap: 8px; padding: 0 15px; scrollbar-width: none; }
+        .filter-scroll::-webkit-scrollbar { display: none; }
+        .filter-item { background: #1a1a1a; color: #888; border: 1px solid #333; padding: 8px 16px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; white-space: nowrap; cursor: pointer; }
+        .filter-item.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-        /* --- КАТАЛОГ --- */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 0 20px 40px; }
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 40px 60px; } }
+        .search-container { padding: 15px; display: flex; gap: 10px; }
+        .search-bar { flex: 1; padding: 16px 20px; border-radius: 20px; border: 1px solid var(--border); background: #161616; color: #fff; }
+        .price-btn { background: #161616; border: 1px solid var(--border); border-radius: 20px; padding: 0 15px; cursor: pointer; font-size: 1.2rem; }
 
-        .card { background: var(--surface); border-radius: 24px; overflow: hidden; border: 1px solid var(--border); transition: var(--transition); }
-        .img-wrap { position: relative; aspect-ratio: 1/1; background: var(--surface-light); }
-        .img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        /* КАТАЛОГ */
+        .catalog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 12px 20px; }
+        @media (min-width: 768px) { .catalog-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .product-card { background: var(--card); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; height: 100%; transition: 0.3s; }
+        .img-container { position: relative; aspect-ratio: 1/1; background: #1a1a1a; overflow: hidden; cursor: zoom-in; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-info { padding: 14px; flex-grow: 1; display: flex; flex-direction: column; }
+        .title { font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; height: 2.8em; overflow: hidden; line-height: 1.4; color: #fff; }
         
-        .info { padding: 16px; display: flex; flex-direction: column; flex: 1; }
-        .brand-tag { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800; margin-bottom: 6px; }
-        .name { font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; min-height: 2.6em; }
-        
-        .sizes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-        .sz-btn { background: var(--surface-light); border: none; color: #777; font-size: 0.75rem; font-weight: 700; padding: 8px 10px; border-radius: 10px; cursor: pointer; transition: 0.2s; }
-        .sz-btn.active { background: var(--accent); color: #000; }
+        /* МУЛЬТИВИБІР РОЗМІРІВ */
+        .sizes-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+        .size-btn { background: #1a1a1a; color: #888; border: 1px solid #282828; padding: 7px 10px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .size-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); transform: scale(1.05); }
 
-        .price-line { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
-        .price { font-size: 1.25rem; font-weight: 900; color: var(--accent); }
-        
-        .add-btn { background: #fff; color: #000; border: none; width: 44px; height: 44px; border-radius: 14px; font-size: 1.4rem; font-weight: 600; cursor: pointer; transition: var(--transition); }
-        .add-btn.success { background: var(--accent); transform: rotate(360deg); }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .price { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+        .add-btn-circle { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 14px; font-weight: 900; cursor: pointer; color: #000; font-size: 1.4rem; transition: 0.2s; }
+        .add-btn-circle:active { transform: scale(0.9); }
 
-        .more-photo-btn { width: 100%; background: rgba(0, 174, 255, 0.1); color: #00aeff; border: none; padding: 12px; border-radius: 14px; font-weight: 800; font-size: 0.85rem; margin-top: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .tg-photo-btn { display: block; width: 100%; padding: 10px; margin-top: 12px; background: rgba(42, 171, 238, 0.1); color: #2AABEE; border: 1px solid rgba(42, 171, 238, 0.2); text-align: center; text-decoration: none; border-radius: 12px; font-size: 0.8rem; font-weight: 800; }
 
-        /* --- НИЖНЯ ПАНЕЛЬ (NAV) --- */
-        .nav-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass);
-            backdrop-filter: blur(25px); border-top: 1px solid var(--border);
-            display: flex; justify-content: space-around; padding: 12px 0 30px; z-index: 1000;
-        }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #666; text-decoration: none; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        /* МОДАЛКИ */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; align-items: center; justify-content: center; }
+        .modal-content { background: #0f0f0f; padding: 25px; border-radius: 32px; width: 100%; max-width: 400px; border: 1px solid var(--border); overflow-y: auto; max-height: 90vh; }
+        .modal-content input { width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 14px; border: 1px solid var(--border); background: #161616; color: #fff; }
+
+        #cart-panel { position: fixed; bottom: 95px; left: 15px; right: 15px; background: var(--accent); color: #000; padding: 18px; border-radius: 22px; display: none; justify-content: space-between; font-weight: 900; z-index: 500; cursor: pointer; box-shadow: 0 10px 30px rgba(212,255,0,0.2); }
+
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10,10,10,0.95); backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 15px 10px 30px; border-top: 1px solid var(--border); z-index: 600; }
+        .nav-item { color: #555; text-decoration: none; font-size: 0.75rem; text-align: center; font-weight: 700; cursor: pointer; flex: 1; }
+        .nav-item span { display: block; font-size: 1.5rem; margin-bottom: 6px; }
         .nav-item.active { color: var(--accent); }
-        .nav-icon { font-size: 1.4rem; margin-bottom: 2px; }
 
-        /* --- BOTTOM SHEETS --- */
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; opacity: 0; transition: 0.4s; }
-        .sheet { position: fixed; bottom: -100%; left: 0; right: 0; background: var(--surface); border-radius: 32px 32px 0 0; padding: 32px 24px; z-index: 2001; transition: bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1); max-height: 85vh; overflow-y: auto; }
-        .sheet.active { bottom: 0; }
-        .sheet-handle { width: 45px; height: 5px; background: #333; border-radius: 10px; margin: 0 auto 25px; }
+        #zoom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; align-items: center; justify-content: center; cursor: zoom-out; }
+        #zoom-modal img { max-width: 96%; max-height: 85vh; border-radius: 12px; }
 
-        /* --- КОШИК --- */
-        .cart-item { display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--border); align-items: center; }
-        .cart-item img { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; }
-        .qty-box { display: flex; align-items: center; gap: 12px; background: var(--surface-light); padding: 6px 12px; border-radius: 12px; }
-        .qty-btn { background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
-
-        /* --- ФОРМА --- */
-        .f-input { width: 100%; background: var(--surface-light); border: 1px solid var(--border); color: #fff; padding: 18px; border-radius: 16px; margin-bottom: 12px; font-size: 1rem; outline: none; }
-        .f-input:focus { border-color: var(--accent); }
-        .btn-main { width: 100%; background: var(--accent); color: #000; border: none; padding: 20px; border-radius: 18px; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
-
-        #cart-count-badge { position: absolute; top: -8px; right: -12px; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 900; padding: 2px 7px; border-radius: 8px; }
+        .cart-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
-        <div class="logo-splash">WOW.<span>ZNAHIDKA</span></div>
-        <div class="gender-split">
-            <button class="gender-btn men" onclick="initApp('Чоловік')"><span>ЧОЛОВІКАМ</span></button>
-            <button class="gender-btn women" onclick="initApp('Жінка')"><span>ЖІНКАМ</span></button>
-        </div>
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:10; background:black; padding:15px 25px; border-radius:40px; font-weight:900; border:1px solid var(--border)">WOW<span>.</span>ZNAHIDKA</div>
+        <button class="gender-btn men" onclick="initApp('Чоловік')"><span>ЧОЛОВІКАМ</span></button>
+        <button class="gender-btn women" onclick="initApp('Жінка')"><span>ЖІНКАМ</span></button>
     </div>
 
-    <div id="app" style="display:none; opacity:0; transition: 0.5s;">
-        <header>
-            <div class="logo">WOW.<span>ZNAHIDKA</span></div>
-            <div style="position:relative; cursor:pointer" onclick="openSheet('cart-sheet')">
-                <span style="font-size: 1.6rem;">🛒</span>
-                <span id="cart-count-badge">0</span>
-            </div>
-        </header>
+    <header><div class="logo">WOW<span>.</span>ZNAHIDKA</div></header>
 
-        <div class="tools-bar">
-            <input type="text" id="searchInput" class="search-input" placeholder="Пошук кросівок..." oninput="applyFilters()">
-            <div class="filter-trigger" onclick="openSheet('filter-sheet')">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6m2-6h6m2 8h6"/></svg>
+    <div id="app-main" style="display:none">
+        <div class="filter-wrapper">
+            <div class="filter-scroll" id="brand-filters">
+                <div class="filter-item active" onclick="filterBrand('all', this)">Всі</div>
             </div>
         </div>
 
-        <div id="brands-container" style="display:flex; overflow-x:auto; padding: 0 20px 15px; gap:10px;"></div>
+        <div class="search-container">
+            <input type="text" class="search-bar" id="search-input" placeholder="Пошук моделі..." oninput="handleSearch()">
+            <button class="price-btn" onclick="openPriceFilter()">⚙️</button>
+        </div>
 
-        <div class="grid" id="catalog-grid"></div>
-
-        <nav class="nav-bar">
-            <div class="nav-item active" onclick="location.reload()">
-                <span class="nav-icon">🏠</span><span>Головна</span>
-            </div>
-            <div class="nav-item" onclick="openSheet('filter-sheet')">
-                <span class="nav-icon">👟</span><span>Каталог</span>
-            </div>
-            <div class="nav-item" onclick="openSheet('contact-sheet')">
-                <span class="nav-icon">💬</span><span>Контакти</span>
-            </div>
-        </nav>
+        <div id="grid-home" class="catalog-grid"></div>
+        <div id="scroll-anchor" style="height: 50px;"></div>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closeSheets()"></div>
-
-    <div class="sheet" id="filter-sheet">
-        <div class="sheet-handle"></div>
-        <h2 style="margin-bottom:20px;">Фільтри</h2>
-        <p style="margin-bottom:10px; font-weight:700;">Ціна до: <span id="p-val" style="color:var(--accent);">5000</span> ₴</p>
-        <input type="range" min="1500" max="10000" step="100" value="5000" style="width:100%; accent-color:var(--accent); margin-bottom:30px;" oninput="updatePrice(this.value)">
-        
-        <p style="margin-bottom:15px; font-weight:700;">Розмір:</p>
-        <div id="size-filter-grid" style="display:grid; grid-template-columns: repeat(5, 1fr); gap:8px; margin-bottom:30px;"></div>
-        
-        <button class="btn-main" onclick="closeSheets()">ЗАСТОСУВАТИ</button>
+    <div id="price-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom:20px">Фільтр ціни</h3>
+            <p>До: <span id="p-label" style="color:var(--accent)">5000</span> ₴</p>
+            <input type="range" min="1500" max="10000" step="100" value="5000" style="width:100%; accent-color:var(--accent)" oninput="updatePrice(this.value)">
+            <button onclick="closeModals()" style="width:100%; padding:15px; margin-top:20px; background:var(--accent); border:none; border-radius:15px; font-weight:900">ЗАСТОСУВАТИ</button>
+        </div>
     </div>
 
-    <div class="sheet" id="contact-sheet">
-        <div class="sheet-handle"></div>
-        <h2 style="margin-bottom:25px; text-align:center;">Наші контакти</h2>
-        <a href="https://t.me/znahidkawow" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:15px; background:#24A1DE; padding:20px; border-radius:20px; color:white; font-weight:800; margin-bottom:12px;"><span>✈️</span> Telegram Канал</a>
-        <a href="https://www.instagram.com/wow.znahidka" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:15px; background:linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); padding:20px; border-radius:20px; color:white; font-weight:800; margin-bottom:12px;"><span>📸</span> Instagram</a>
-        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" style="text-decoration:none; display:flex; align-items:center; gap:15px; background:#000; border:1px solid #333; padding:20px; border-radius:20px; color:white; font-weight:800;"><span>🎵</span> TikTok</a>
+    <div id="cart-panel" onclick="openOrder()">
+        <span id="cart-count">0 ПАР</span><span id="cart-total">ОФОРМИТИ ➔</span>
     </div>
 
-    <div class="sheet" id="cart-sheet">
-        <div class="sheet-handle"></div>
-        <div id="cart-content">
-            <h2 style="margin-bottom:20px;">Твій кошик</h2>
-            <div id="cart-items-list"></div>
-            <div style="margin-top:25px; padding-top:20px; border-top:1px solid var(--border);">
-                <div style="display:flex; justify-content:space-between; font-size:1.4rem; font-weight:900; margin-bottom:25px;">
-                    <span>Всього:</span><span id="final-sum" style="color:var(--accent);">0 ₴</span>
-                </div>
-                <button class="btn-main" onclick="showCheckout()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
+    <div id="order-modal" class="modal">
+        <div class="modal-content" id="modal-body">
+            <div id="step-cart">
+                <h3>Твій кошик</h3>
+                <div id="cart-list" style="margin-bottom:20px"></div>
+                <button onclick="goToForm()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900">ДАЛІ ➔</button>
+            </div>
+            <div id="step-form" style="display:none">
+                <h3>Доставка</h3>
+                <input type="text" id="fio" placeholder="ПІБ отримувача">
+                <input type="tel" id="phone" placeholder="Номер телефону">
+                <input type="text" id="city" placeholder="Місто та № пошти">
+                <input type="text" id="promo" placeholder="Промокод">
+                <button onclick="sendOrder()" id="submit-btn" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:16px; font-weight:900">ЗАМОВИТИ</button>
             </div>
         </div>
-        <div id="checkout-form" style="display:none;">
-            <h2 style="margin-bottom:20px;">Доставка</h2>
-            <input type="text" id="f-fio" class="f-input" placeholder="ПІБ отримувача">
-            <input type="tel" id="f-phone" class="f-input" placeholder="Номер телефону">
-            <input type="text" id="f-city" class="f-input" placeholder="Місто та відділення НП">
-            <button class="btn-main" id="submit-order-btn" onclick="sendFinalOrder()">ПІДТВЕРДИТИ</button>
-            <p style="text-align:center; margin-top:20px; color:var(--text-dim); cursor:pointer;" onclick="hideCheckout()">← Назад до кошика</p>
+    </div>
+
+    <div id="contacts-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom:20px; text-align:center">Наші контакти</h3>
+            <a href="https://t.me/znahidkawow" target="_blank" style="display:block; background:#24A1DE; padding:15px; border-radius:15px; color:white; text-align:center; text-decoration:none; font-weight:bold; margin-bottom:10px">✈️ Telegram</a>
+            <a href="https://www.instagram.com/wow.znahidka" target="_blank" style="display:block; background:#E1306C; padding:15px; border-radius:15px; color:white; text-align:center; text-decoration:none; font-weight:bold; margin-bottom:10px">📸 Instagram</a>
+            <span onclick="closeModals()" style="display:block; text-align:center; cursor:pointer; color:#555; margin-top:20px">ЗАКРИТИ</span>
         </div>
+    </div>
+
+    <div id="zoom-modal" onclick="this.style.display='none'"><img id="zoomed-img" src=""></div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="location.reload()"><span>🏠</span>Головна</div>
+        <div class="nav-item" onclick="openPriceFilter()"><span>⚙️</span>Фільтри</div>
+        <div class="nav-item" onclick="document.getElementById('contacts-modal').style.display='flex'"><span>💬</span>Контакти</div>
     </div>
 
     <script>
-        const API_URL = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
-        let db = [], cart = [], activeGender = '', activeSize = null, maxPrice = 5000, selectedSizes = {};
+        const URL = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
+        let all = [], db = [], cart = [], selected = {}, limit = 12, curBrand = 'all', activeGender = '', activeMaxPrice = 5000, promoCodes = {};
 
-        // 1. СТАРТ
         async function initApp(gender) {
             activeGender = gender;
-            const splash = document.getElementById('splash-screen');
-            splash.style.opacity = '0';
+            document.getElementById('splash-screen').style.opacity = '0';
             setTimeout(() => {
-                splash.style.display = 'none';
-                const app = document.getElementById('app');
-                app.style.display = 'block';
-                setTimeout(() => app.style.opacity = '1', 50);
+                document.getElementById('splash-screen').style.display = 'none';
+                document.getElementById('app-main').style.display = 'block';
             }, 600);
 
             try {
-                const r = await fetch(API_URL + "?v=" + Date.now());
-                const data = await r.json();
-                db = data.products || data;
-                setupFilterSizes();
-                applyFilters();
-            } catch(e) { alert("Помилка зв'язку з базою"); }
+                const res = await fetch(URL + "?v=" + Date.now());
+                const data = await res.json();
+                all = data.products || data;
+                promoCodes = data.promo || {};
+                
+                db = all.filter(p => p.gender === activeGender);
+                renderBrands();
+                render(db.slice(0, limit), 'grid-home');
+
+                // Intersection Observer (твій нескінченний скрол)
+                new IntersectionObserver(e => {
+                    if(e[0].isIntersecting && limit < db.length) {
+                        render(db.slice(limit, limit += 12), 'grid-home', true);
+                    }
+                }).observe(document.getElementById('scroll-anchor'));
+            } catch(e) { alert("Помилка завантаження"); }
         }
 
-        // 2. ФІЛЬТРАЦІЯ
-        function updatePrice(v) { document.getElementById('p-val').innerText = v; maxPrice = v; applyFilters(); }
-
-        function setupFilterSizes() {
-            let sizes = [36,37,38,39,40,41,42,43,44,45];
-            document.getElementById('size-filter-grid').innerHTML = sizes.map(s => 
-                `<button class="sz-btn" id="fsz-${s}" onclick="toggleSizeFilter(${s})">${s}</button>`
-            ).join('');
+        function renderBrands() {
+            const brands = [...new Set(db.map(p => p.brand))].sort();
+            const cont = document.getElementById('brand-filters');
+            brands.forEach(b => {
+                const d = document.createElement('div');
+                d.className = 'filter-item'; d.innerText = b;
+                d.onclick = (e) => filterBrand(b, e.target);
+                cont.appendChild(d);
+            });
         }
 
-        function toggleSizeFilter(s) {
-            if(activeSize === s) activeSize = null;
-            else activeSize = s;
-            document.querySelectorAll('#size-filter-grid .sz-btn').forEach(b => b.classList.remove('active'));
-            if(activeSize) document.getElementById(`fsz-${s}`).classList.add('active');
+        function filterBrand(brand, el) {
+            document.querySelectorAll('.filter-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            curBrand = brand; limit = 12;
             applyFilters();
         }
 
+        function updatePrice(v) { document.getElementById('p-label').innerText = v; activeMaxPrice = v; applyFilters(); }
+
         function applyFilters() {
-            let query = document.getElementById('searchInput').value.toLowerCase();
-            let filtered = db.filter(p => {
-                let matchGender = p.gender === activeGender;
-                let matchPrice = p.price <= maxPrice;
-                let matchQuery = p.name.toLowerCase().includes(query) || p.brand.toLowerCase().includes(query);
-                let matchSize = activeSize ? p.sizes.includes(activeSize.toString()) : true;
-                return matchGender && matchPrice && matchQuery && matchSize;
-            });
-            renderGrid(filtered);
+            let filtered = db.filter(p => p.price <= activeMaxPrice);
+            if(curBrand !== 'all') filtered = filtered.filter(p => p.brand === curBrand);
+            const q = document.getElementById('search-input').value.toLowerCase();
+            if(q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
+            
+            render(filtered.slice(0, limit), 'grid-home', false);
         }
 
-        // 3. РЕНДЕР
-        function renderGrid(data) {
-            const grid = document.getElementById('catalog-grid');
-            grid.innerHTML = data.map(p => {
-                const sArr = p.sizes.split(',').map(s => s.trim());
-                const sizesHTML = sArr.map(s => {
-                    const clean = s.split('(')[0];
-                    return `<button class="sz-btn" id="sz-${p.id}-${clean}" onclick="selectSize('${p.id}','${clean}','${s}',this)">${clean}</button>`;
+        function render(items, id, append = false) {
+            const h = items.map(p => {
+                const sizes = p.sizes.split(',').map(s => {
+                    const clean = s.trim().split('(')[0];
+                    const isSel = selected[p.id] && selected[p.id].includes(s.trim());
+                    return `<button class="size-btn ${isSel ? 'selected' : ''}" onclick="toggleSize(this, '${p.id}', '${s.trim()}')">${clean}</button>`;
                 }).join('');
 
                 return `
-                <div class="card">
-                    <div class="img-wrap"><img src="${p.image}" loading="lazy"></div>
-                    <div class="info">
-                        <div class="brand-tag">${p.brand}</div>
-                        <div class="name">${p.name}</div>
-                        <div class="sizes" id="szbox-${p.id}">${sizesHTML}</div>
-                        <div class="price-line">
+                <div class="product-card">
+                    <div class="img-container" onclick="zoom('${p.image}')"><img src="${p.image}" loading="lazy"></div>
+                    <div class="card-info">
+                        <div class="title">${p.name}</div>
+                        <div class="sizes-container">${sizes}</div>
+                        <div class="price-row">
                             <div class="price">${p.price} ₴</div>
-                            <button class="add-btn" id="add-${p.id}" onclick="addToCart('${p.id}','${p.name}',${p.price},'${p.image}')">+</button>
+                            <button class="add-btn-circle" onclick="add('${p.id}')">+</button>
                         </div>
-                        <button class="more-photo-btn" onclick="reqPhoto('${p.name}','${p.id}')">📸 Більше фото</button>
+                        <a href="https://t.me/znahidkawow?text=${encodeURIComponent('Запит фото: '+p.name)}" target="_blank" class="tg-photo-btn">📸 Живі фото</a>
                     </div>
                 </div>`;
             }).join('');
+            const t = document.getElementById(id);
+            if(append) t.innerHTML += h; else t.innerHTML = h;
         }
 
-        function selectSize(id, clean, full, btn) {
-            selectedSizes[id] = full;
-            document.querySelectorAll(`#szbox-${id} .sz-btn`).forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        function toggleSize(btn, id, sz) {
+            if(!selected[id]) selected[id] = [];
+            const idx = selected[id].indexOf(sz);
+            if(idx > -1) { selected[id].splice(idx, 1); btn.classList.remove('selected'); }
+            else { selected[id].push(sz); btn.classList.add('selected'); }
         }
 
-        function reqPhoto(name, id) {
-            const msg = `Привіт! Хочу живі фото пари:\n👟 ${name}\n🆔 Артикул: ${id}\n📏 Розмір: ${selectedSizes[id] || "не обрано"}`;
-            navigator.clipboard.writeText(msg).then(() => {
-                alert("Запит скопійовано! Зараз відкриється Telegram — просто вставте текст.");
-                window.open('https://t.me/znahidkawow', '_blank');
-            });
-        }
-
-        // 4. КОШИК
-        function addToCart(id, name, price, img) {
-            if(!selectedSizes[id]) { alert("Спершу оберіть розмір!"); return; }
-            const s = selectedSizes[id];
-            const cId = id + s;
-            let exist = cart.find(i => i.cId === cId);
-            if(exist) exist.qty++;
-            else cart.push({ cId, name, price, img, size: s, qty: 1 });
+        function add(id) {
+            const p = db.find(x => x.id === id);
+            const chosen = selected[id] || [];
+            if(!chosen.length) return alert("Обери розмір!");
             
-            const btn = document.getElementById(`add-${id}`);
-            btn.classList.add('success'); btn.innerText = '✓';
-            setTimeout(() => { btn.classList.remove('success'); btn.innerText = '+'; }, 1000);
-            updateUI();
+            chosen.forEach(s => cart.push({...p, size: s, cartId: Date.now()+Math.random()}));
+            selected[id] = [];
+            applyFilters(); updateCartUI();
         }
 
-        function updateUI() {
-            document.getElementById('cart-count-badge').innerText = cart.reduce((a,b) => a+b.qty, 0);
-            const sum = cart.reduce((a,b) => a + (b.price * b.qty), 0);
-            document.getElementById('final-sum').innerText = sum + " ₴";
-            
-            document.getElementById('cart-items-list').innerHTML = cart.map(i => `
-                <div class="cart-item">
-                    <img src="${i.img}">
-                    <div style="flex:1;">
-                        <div class="cart-item-title">${i.name}</div>
-                        <div style="font-size:0.8rem; color:var(--accent);">Р-р: ${i.size}</div>
-                    </div>
-                    <div class="qty-box">
-                        <button class="qty-btn" onclick="changeQty('${i.cId}', -1)">-</button>
-                        <span style="font-weight:900;">${i.qty}</span>
-                        <button class="qty-btn" onclick="changeQty('${i.cId}', 1)">+</button>
-                    </div>
+        function updateCartUI() {
+            const p = document.getElementById('cart-panel');
+            p.style.display = cart.length ? 'flex' : 'none';
+            const total = cart.reduce((s, x) => s + parseInt(x.price), 0);
+            document.getElementById('cart-count').innerText = `${cart.length} ${getDecl(cart.length)}`;
+            document.getElementById('cart-total').innerText = `${total} ₴ ➔`;
+        }
+
+        function getDecl(n) { 
+            if (n % 10 === 1 && n % 100 !== 11) return "ПАРА"; 
+            if ([2,3,4].includes(n % 10) && ![12,13,14].includes(n % 100)) return "ПАРИ"; 
+            return "ПАР"; 
+        }
+
+        function openOrder() {
+            document.getElementById('cart-list').innerHTML = cart.map((i, idx) => `
+                <div class="cart-row">
+                    <span>${i.name} (${i.size})</span>
+                    <span onclick="cart.splice(${idx},1);updateCartUI();openOrder()" style="color:red">✕</span>
                 </div>
             `).join('');
+            document.getElementById('order-modal').style.display = 'flex';
         }
 
-        function changeQty(id, d) {
-            let i = cart.find(x => x.cId === id);
-            if(i) { i.qty += d; if(i.qty <= 0) cart = cart.filter(x => x.cId !== id); }
-            updateUI();
+        async function sendOrder() {
+            const btn = document.getElementById('submit-btn');
+            const promo = document.getElementById('promo').value.toUpperCase().trim();
+            let total = cart.reduce((s, x) => s + parseInt(x.price), 0);
+            
+            if(promoCodes[promo]) {
+                const val = promoCodes[promo];
+                total = val < 1 ? total * (1-val) : total - val;
+            }
+
+            const d = {
+                action: "new_order", fio: document.getElementById('fio').value,
+                phone: document.getElementById('phone').value, city: document.getElementById('city').value,
+                items: cart.map(i => `${i.name} (${i.size})`).join(', '), total: total + " ₴", promo: promo || "Немає"
+            };
+
+            if(!d.fio || !d.phone) return alert("Заповніть дані!");
+            btn.innerText = "ОБРОБКА...";
+            await fetch(URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) });
+            alert("Успішно!"); location.reload();
         }
 
-        // 5. ПАНЕЛІ ТА ЗАМОВЛЕННЯ
-        function openSheet(id) {
-            document.getElementById('overlay').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('overlay').style.opacity = '1';
-                document.getElementById(id).classList.add('active');
-            }, 10);
-        }
-
-        function closeSheets() {
-            document.querySelectorAll('.sheet').forEach(s => s.classList.remove('active'));
-            document.getElementById('overlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('overlay').style.display = 'none', 400);
-        }
-
-        function showCheckout() {
-            if(cart.length === 0) return;
-            document.getElementById('cart-content').style.display = 'none';
-            document.getElementById('checkout-form').style.display = 'block';
-        }
-
-        function hideCheckout() {
-            document.getElementById('checkout-form').style.display = 'none';
-            document.getElementById('cart-content').style.display = 'block';
-        }
-
-        async function sendFinalOrder() {
-            const fio = document.getElementById('f-fio').value.trim();
-            const phone = document.getElementById('f-phone').value.trim();
-            const city = document.getElementById('f-city').value.trim();
-            if(!fio || !phone) { alert("Заповніть ПІБ та Телефон!"); return; }
-
-            const btn = document.getElementById('submit-order-btn');
-            btn.innerText = "ОБРОБКА..."; btn.disabled = true;
-
-            const items = cart.map(i => `- ${i.name} (${i.size}) x${i.qty}`).join('\n');
-            const data = { action: "new_order", fio, phone, city, items, total: document.getElementById('final-sum').innerText };
-
-            try {
-                await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-                alert("Замовлення відправлено! Менеджер скоро зв'яжеться.");
-                location.reload();
-            } catch(e) { alert("Помилка. Спробуйте ще раз."); btn.innerText = "ПІДТВЕРДИТИ"; btn.disabled = false; }
-        }
+        function handleSearch() { applyFilters(); }
+        function zoom(s) { document.getElementById('zoomed-img').src = s; document.getElementById('zoom-modal').style.display='flex'; }
+        function openPriceFilter() { document.getElementById('price-modal').style.display='flex'; }
+        function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display='none'); }
+        function goToForm() { document.getElementById('step-cart').style.display='none'; document.getElementById('step-form').style.display='block'; }
     </script>
 </body>
 </html>
