@@ -1,1264 +1,1146 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WOW.ZNAHIDKA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #d4ff00;
-            --accent-glow: rgba(212, 255, 0, 0.45);
-            --accent-soft: rgba(212, 255, 0, 0.15);
-            --bg: #050505;
-            --surface: #0f0f0f;
-            --surface-light: #161616;
-            --border: rgba(255, 255, 255, 0.08);
-            --text-main: #ffffff;
-            --text-dim: #888888;
-            --glass: rgba(10, 10, 10, 0.95);
-            --red: #ff4757;
-            --red-glow: rgba(255, 71, 87, 0.5);
-            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --shadow-premium: 0 35px 70px rgba(0, 0, 0, 0.9);
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            position: fixed;
-            overscroll-behavior: none;
-        }
-        .custom-scroll::-webkit-scrollbar {
-            width: 0px;
-            display: none;
-        }
-        .custom-scroll {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            background-color: var(--bg);
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
-            will-change: transform;
-        }
-        .splash-overlay-premium {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-        .logo-breathing-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            text-align: center;
-            pointer-events: none;
-            width: 100%;
-        }
-        .logo-breathing-text {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.7rem;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.5);
-            animation: logoBreathAnim 3.5s infinite ease-in-out;
-            display: inline-block;
-        }
-        .logo-breathing-text span {
-            color: var(--accent);
-            text-shadow: 0 0 30px var(--accent-glow);
-        }
-        @keyframes logoBreathAnim {
-            0%, 100% {
-                opacity: 0.2;
-                filter: blur(4px);
-                transform: scale(0.97);
-            }
-            50% {
-                opacity: 0.9;
-                filter: blur(0px);
-                transform: scale(1.04);
-            }
-        }
-        .gender-panel-full {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background-color: #080808;
-            margin: 0;
-            padding: 0;
-        }
-        .gender-panel-full img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: 2s opacity ease, 4.5s transform ease;
-            filter: brightness(0.5);
-            will-change: opacity, transform;
-        }
-        .gender-panel-full.ready img {
-            opacity: 0.6;
-        }
-        .gender-panel-full:hover img {
-            transform: scale(1.15);
-            filter: brightness(0.8);
-            opacity: 0.85;
-        }
-        .gender-label-splash-premium {
-            position: relative;
-            z-index: 10;
-            font-size: 2.8rem;
-            font-weight: 900;
-            letter-spacing: -1.5px;
-            color: #ffffff;
-            text-shadow: 0 10px 40px #000000;
-            transition: var(--transition-smooth);
-        }
-        .gender-panel-full:hover .gender-label-splash-premium {
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-        .men-panel-fix {
-            border-bottom: none;
-        }
-        header {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 75px;
-            z-index: 5000;
-            background-color: var(--glass);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            padding-left: 20px;
-            padding-right: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
-        .header-left-group {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .btn-header-back-arrow {
-            background-color: #161616;
-            width: 44px;
-            height: 44px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-            color: #ffffff;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-header-back-arrow:active {
-            transform: scale(0.85);
-            background-color: var(--accent);
-            color: #000000;
-        }
-        .header-logo-premium {
-            font-family: 'Syncopate', sans-serif;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .header-logo-premium span {
-            color: var(--accent);
-        }
-        .header-right-group {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .header-action-icon-box {
-            position: relative;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--surface-light);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .header-action-icon-box:active {
-            transform: scale(0.85);
-        }
-        .nav-pill-badge-indicator {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background-color: var(--accent);
-            color: #000000;
-            font-size: 10px;
-            font-weight: 900;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px var(--accent-glow);
-            z-index: 10;
-        }
-        #badge-heart-match-node {
-            background-color: var(--red);
-            color: #ffffff;
-            box-shadow: 0 0 15px var(--red-glow);
-            animation: pulseHeartBadge 2s infinite;
-        }
-        @keyframes pulseHeartBadge {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-        .app-view-page-node {
-            position: absolute;
-            inset: 0;
-            padding-top: 75px;
-            padding-bottom: 95px;
-            display: none;
-            flex-direction: column;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            background-color: var(--bg);
-        }
-        .app-view-page-node.active {
-            display: flex;
-            opacity: 1;
-            animation: viewEntrySlideAnim 0.5s ease forwards;
-        }
-        @keyframes viewEntrySlideAnim {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .search-area-sticky-box {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: var(--bg);
-            padding: 15px 20px;
-        }
-        .premium-luxe-input-search {
-            width: 100%;
-            background-color: #111111;
-            border: 1px solid var(--border);
-            padding: 22px 28px;
-            border-radius: 28px;
-            color: #ffffff;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-        .premium-luxe-input-search:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(212, 255, 0, 0.1);
-        }
-        .product-main-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding-left: 15px;
-            padding-right: 15px;
-            padding-bottom: 40px;
-        }
-        @media (min-width: 768px) {
-            .product-main-grid-layout {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 25px;
-                padding-left: 40px;
-                padding-right: 40px;
-                padding-bottom: 50px;
-            }
-        }
-        .sneaker-premium-luxe-card {
-            background-color: var(--surface);
-            border-radius: 35px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            transition: 0.4s;
-            position: relative;
-        }
-        .sneaker-premium-luxe-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-8px);
-        }
-        .card-img-viewport-container {
-            position: relative;
-            aspect-ratio: 1/1;
-            background-color: #0a0a0a;
-            overflow: hidden;
-            cursor: zoom-in;
-        }
-        .card-img-viewport-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.8s transform cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform;
-        }
-        .sneaker-premium-luxe-card:hover .card-img-viewport-container img {
-            transform: scale(1.12);
-        }
-        .card-details-info-rendering {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .label-neon-tag-brand-premium {
-            font-size: 0.65rem;
-            font-weight: 900;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-        }
-        .text-model-title-main-rendering {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            height: 2.8em;
-            overflow: hidden;
-            color: #ffffff;
-        }
-        .card-footer-price-action-unit {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-        .text-price-bold-value {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: #ffffff;
-        }
-        .btn-open-size-picker-action {
-            background-color: var(--surface-light);
-            color: #ffffff;
-            border: 1px solid var(--border);
-            padding: 12px 18px;
-            border-radius: 14px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-open-size-picker-action:active {
-            background-color: var(--accent);
-            color: #000000;
-        }
-        .match-environment-luxe-viewport {
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            padding-bottom: 120px;
-        }
-        .tinder-stack-rendering-viewport-unit {
-            position: relative;
-            width: 92vw;
-            height: 60vh;
-            max-width: 400px;
-            z-index: 10;
-            perspective: 1500px;
-        }
-        .tinder-swipe-card-premium-box {
-            position: absolute;
-            inset: 0;
-            border-radius: 45px;
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            overflow: hidden;
-            box-shadow: 0 35px 75px rgba(0,0,0,0.85);
-            touch-action: none;
-            will-change: transform, opacity;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .tinder-swipe-card-premium-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-        }
-        .tinder-info-overlay-details-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 45px 30px;
-            background: linear-gradient(to top, rgba(0,0,0,1) 35%, transparent 75%);
-            z-index: 5;
-        }
-        .social-proof-message-neon-tag {
-            font-size: 0.75rem;
-            color: var(--accent);
-            font-weight: 800;
-            margin-top: 10px;
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.9;
-        }
-        .tinder-price-label-match-value-rendering {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin-top: 10px;
-        }
-        .swipe-controls-footer-action-row {
-            display: flex;
-            gap: 35px;
-            margin-top: 45px;
-            z-index: 100;
-        }
-        .btn-swipe-circle-premium-action {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid var(--border);
-            background-color: var(--glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            transition: var(--transition-bounce);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-        .btn-swipe-circle-premium-action.nope { color: var(--red); border-color: rgba(255, 71, 87, 0.2); }
-        .btn-swipe-circle-premium-action.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 35px var(--accent-glow); }
-        .brand-catalog-grid-rendering-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding: 25px;
-        }
-        .brand-tile-premium-luxury-unit {
-            background: linear-gradient(135deg, #111 0%, #080808 100%);
-            padding: 50px 20px;
-            border-radius: 40px;
-            border: 1px solid var(--border);
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .brand-tile-premium-luxury-unit:active {
-            background-color: var(--accent);
-            transform: scale(0.96);
-        }
-        .brand-tile-premium-luxury-unit h3 {
-            font-size: 1.2rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ffffff;
-        }
-        .brand-tile-premium-luxury-unit span {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-top: 10px;
-        }
-        .bottom-app-dock-navigation-premium-bar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: var(--glass);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            display: flex;
-            justify-content: space-around;
-            padding-top: 18px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 48px;
-            border-top: 1px solid var(--border);
-            z-index: 7000;
-        }
-        .dock-navigation-tab-id-element {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #444444;
-            font-size: 0.72rem;
-            font-weight: 800;
-            transition: color 0.35s ease;
-            cursor: pointer;
-        }
-        .dock-navigation-tab-id-element.active {
-            color: var(--accent);
-        }
-        .dock-navigation-tab-id-element i {
-            font-style: normal;
-            font-size: 1.7rem;
-            margin-bottom: 6px;
-        }
-        .ui-global-overlay-mask-rendering-node {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.92);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 8000;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .premium-ui-bottom-sheet-id-element-box {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            right: 0;
-            background-color: #0a0a0a;
-            border-radius: 50px 50px 0 0;
-            padding: 45px 30px;
-            z-index: 8500;
-            transition: bottom 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-            border-top: 1px solid var(--border);
-            max-height: 94vh;
-            overflow-y: auto;
-        }
-        .premium-ui-bottom-sheet-id-element-box.active {
-            bottom: 0;
-        }
-        .sheet-drag-handle-unit-rendering {
-            width: 65px;
-            height: 6px;
-            background-color: #252525;
-            border-radius: 10px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 35px;
-        }
-        .grid-sizes-selection-logic-matrix {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 45px;
-        }
-        .size-variant-pill-rendering-node-box {
-            background-color: #121212;
-            border: 1px solid var(--border);
-            padding: 25px 5px;
-            border-radius: 25px;
-            text-align: center;
-            font-weight: 900;
-            color: #555555;
-            font-size: 1.1rem;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .size-variant-pill-rendering-node-box.active {
-            background-color: var(--accent);
-            color: #000000;
-            border-color: var(--accent);
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px var(--accent-soft);
-        }
-        .btn-luxury-cta-action-rendering-final {
-            width: 100%;
-            background-color: var(--accent);
-            color: #000000;
-            padding: 28px;
-            border-radius: 35px;
-            font-weight: 900;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            box-shadow: 0 20px 50px var(--accent-soft);
-            border: none;
-        }
-        .btn-request-photo-secondary-link-rendering {
-            width: 100%;
-            background-color: transparent;
-            color: var(--text-dim);
-            padding: 22px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid var(--border);
-            margin-top: 15px;
-            text-align: center;
-        }
-        .cart-items-rendering-container-unit-rendering {
-            margin-bottom: 30px;
-        }
-        .cart-line-product-rendering-row-node {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding-top: 22px;
-            padding-bottom: 22px;
-            border-bottom: 1px solid var(--border);
-        }
-        .cart-line-product-rendering-row-node img {
-            width: 95px;
-            height: 95px;
-            border-radius: 28px;
-            object-fit: cover;
-        }
-        .cart-line-product-info-details-rendering-box {
-            flex: 1;
-        }
-        .cart-line-name-label-rendering-text-final {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #ffffff;
-        }
-        .cart-line-meta-label-tag-details-rendering-node {
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        .btn-item-delete-action-luxe-premium-trigger {
-            background-color: rgba(255, 71, 87, 0.1);
-            color: var(--red);
-            width: 46px;
-            height: 46px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-        .wishlist-smart-upsell-rendering-container-unit-box {
-            margin-top: 45px;
-            padding-top: 35px;
-            padding-bottom: 25px;
-            padding-left: 25px;
-            padding-right: 25px;
-            background: linear-gradient(180deg, #0c0c0c 0%, #050505 100%);
-            border-radius: 45px;
-            border: 1px solid var(--border);
-        }
-        .upsell-header-text-label-row-final {
-            font-size: 0.95rem;
-            font-weight: 900;
-            color: var(--red);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .upsell-horizontal-scroll-list-node-unit-box {
-            display: flex;
-            gap: 22px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            scrollbar-width: none;
-        }
-        .upsell-horizontal-scroll-list-node-unit-box::-webkit-scrollbar {
-            display: none;
-        }
-        .upsell-item-unit-mini-rendering-card-element-unit {
-            min-width: 150px;
-            position: relative;
-        }
-        .upsell-item-unit-mini-rendering-card-element-unit img {
-            width: 150px;
-            height: 150px;
-            border-radius: 35px;
-            object-fit: cover;
-            border: 1px solid var(--border);
-            box-shadow: 0 15px 30px #000000;
-        }
-        .btn-quick-plus-add-fav-interaction-trigger {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            width: 44px;
-            height: 44px;
-            background-color: var(--accent);
-            color: #000000;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.8rem;
-            box-shadow: 0 8px 25px #000000;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-quick-plus-add-fav-interaction-trigger:active {
-            transform: scale(0.8);
-        }
-        .pop-contacts-luxe-premium-rendering-window {
-            position: fixed;
-            bottom: 125px;
-            left: 20px;
-            right: 20px;
-            background-color: rgba(15, 15, 15, 0.98);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--border);
-            border-radius: 48px;
-            padding: 20px;
-            display: none;
-            flex-direction: column;
-            gap: 12px;
-            box-shadow: 0 40px 140px #000000;
-            z-index: 9000;
-            animation: popUpAnimationEngineCoreSet 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        }
-        @keyframes popUpAnimationEngineCoreSet {
-            from { opacity: 0; transform: translateY(60px) scale(0.92); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .luxe-contact-btn-link-action-rendering-node {
-            display: flex;
-            align-items: center;
-            gap: 22px;
-            padding: 26px;
-            border-radius: 35px;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1.15rem;
-            transition: 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .luxe-contact-btn-link-action-rendering-node.tg-theme-box { background-color: rgba(36, 161, 222, 0.12); color: #24A1DE; border-color: rgba(36, 161, 222, 0.25); }
-        .luxe-contact-btn-link-action-rendering-node.ig-theme-box { background-color: rgba(225, 48, 108, 0.12); color: #E1306C; border-color: rgba(225, 48, 108, 0.25); }
-        .luxe-contact-btn-link-action-rendering-node.tt-theme-box { background-color: rgba(255, 255, 255, 0.06); color: #ffffff; border-color: rgba(255, 255, 255, 0.15); }
-        .form-luxe-checkout-input-field-rendering {
-            width: 100%;
-            background-color: #0f0f0f;
-            border: 1px solid var(--border);
-            padding: 25px 32px;
-            border-radius: 32px;
-            color: #ffffff;
-            font-size: 1.1rem;
-            margin-bottom: 22px;
-            outline: none;
-            transition: 0.3s ease;
-        }
-        .form-luxe-checkout-input-field-rendering:focus { border-color: var(--accent); background-color: #141414; }
-        .segmented-delivery-control-bar-unit-rendering {
-            display: flex;
-            background-color: #111111;
-            padding: 10px;
-            border-radius: 32px;
-            margin-bottom: 35px;
-            border: 1px solid var(--border);
-        }
-        .delivery-choice-segment-tab-id-node {
-            flex: 1;
-            padding: 20px;
-            border-radius: 22px;
-            color: #555555;
-            font-weight: 900;
-            text-align: center;
-            transition: 0.3s ease;
-            cursor: pointer;
-        }
-        .delivery-choice-segment-tab-id-node.active { background-color: var(--accent); color: #000000; box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
-        #zoom-portal-rendering-unit-element {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.99);
-            z-index: 25000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: zoom-out;
-        }
-        #zoom-portal-rendering-unit-element img {
-            max-width: 98%;
-            max-height: 88vh;
-            border-radius: 35px;
-            box-shadow: 0 0 140px #000000;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WOW.ZNAHIDKA | Premium Experience</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           🎨 ЦЕНТРАЛЬНА ПАЛІТРА ТА ЗМІННІ
+           ============================================================ */
+        :root {
+            --accent: #d4ff00;
+            --accent-glow: rgba(212, 255, 0, 0.45);
+            --accent-soft: rgba(212, 255, 0, 0.12);
+            --bg: #050505;
+            --surface: #0f0f0f;
+            --surface-light: #161616;
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #888888;
+            --glass: rgba(10, 10, 10, 0.95);
+            --red: #ff4757;
+            --red-glow: rgba(255, 71, 87, 0.45);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ============================================================
+           ⚙️ ГЛОБАЛЬНІ НАЛАШТУВАННЯ
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+            overscroll-behavior: none;
+        }
+
+        /* Прихований скролбар для чистоти дизайну */
+        .custom-scroll::-webkit-scrollbar { width: 0px; display: none; }
+        .custom-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ============================================================
+           🚀 ЕКРАН ВХОДУ (SPLASH SCREEN)
+           ============================================================ */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .splash-logo-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: #000;
+            padding: 35px 70px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            text-align: center;
+            box-shadow: 0 0 60px var(--accent-glow);
+            animation: pulseNeon 2.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulseNeon {
+            0% { box-shadow: 0 0 30px var(--accent-glow); transform: translate(-50%, -50%) scale(1); }
+            50% { box-shadow: 0 0 80px var(--accent-glow); transform: translate(-50%, -50%) scale(1.05); }
+            100% { box-shadow: 0 0 30px var(--accent-glow); transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .premium-logo-font {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+        .premium-logo-font span { color: var(--accent); }
+
+        .gender-split-panel {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: #0a0a0a;
+        }
+
+        .gender-split-panel img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: 1.5s opacity ease, 3s transform ease;
+        }
+
+        .gender-split-panel.img-ready img { opacity: 0.4; }
+        .gender-split-panel:hover img { transform: scale(1.1); opacity: 0.6; }
+
+        .gender-label-splash {
+            position: relative;
+            z-index: 10;
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            text-shadow: 0 10px 40px #000;
+            transition: var(--transition-smooth);
+        }
+
+        .gender-split-panel:hover .gender-label-splash {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* ============================================================
+           📱 HEADER UNIT
+           ============================================================ */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 75px;
+            z-index: 5000;
+            background: var(--glass);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        .btn-back-main {
+            background: #161616;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            color: #fff;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-back-main:active { transform: scale(0.9); background: var(--accent); color: #000; }
+
+        .header-right { display: flex; align-items: center; gap: 15px; }
+
+        .action-icon-btn {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface-light);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .action-icon-btn:active { transform: scale(0.85); }
+
+        .btn-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 900;
+            padding: 2px 7px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        #badge-wish {
+            background: var(--red);
+            color: #fff;
+            box-shadow: 0 0 15px var(--red-glow);
+        }
+
+        /* ============================================================
+           📑 PAGES SYSTEM
+           ============================================================ */
+        .page-node {
+            position: absolute;
+            inset: 0;
+            padding-top: 75px;
+            padding-bottom: 95px;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page-node.active {
+            display: flex;
+            animation: pageFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           👟 HOME: INFINITE SCROLL CATALOG
+           ============================================================ */
+        .search-area-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg);
+            padding: 15px 20px;
+        }
+
+        .input-luxe-search {
+            width: 100%;
+            background: #111;
+            border: 1px solid var(--border);
+            padding: 20px 25px;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-luxe-search:focus { border-color: var(--accent); box-shadow: 0 0 20px rgba(212, 255, 0, 0.1); }
+
+        .catalog-grid-system {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 15px 40px;
+        }
+
+        @media (min-width: 768px) {
+            .catalog-grid-system { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .sneaker-card-premium {
+            background: var(--surface);
+            border-radius: 35px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: 0.4s;
+        }
+
+        .sneaker-card-premium:hover { border-color: var(--accent); transform: translateY(-8px); }
+
+        .sneaker-image-box {
+            position: relative;
+            aspect-ratio: 1/1;
+            background: #000;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .sneaker-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s transform ease;
+        }
+
+        .sneaker-card-premium:hover .sneaker-image-box img { transform: scale(1.1); }
+
+        .sneaker-details-box {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sneaker-neon-tag {
+            font-size: 0.65rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+        }
+
+        .sneaker-title-main {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            height: 2.8em;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .sneaker-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .sneaker-price-text { font-size: 1.3rem; font-weight: 900; }
+
+        .btn-open-size-sheet {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* ============================================================
+           🔥 MATCH: TINDER ENGINE
+           ============================================================ */
+        .match-view-page {
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            padding-bottom: 120px;
+        }
+
+        .tinder-deck-root {
+            position: relative;
+            width: 92vw;
+            height: 60vh;
+            max-width: 400px;
+            z-index: 10;
+            perspective: 1500px;
+        }
+
+        .tinder-card-unit {
+            position: absolute;
+            inset: 0;
+            border-radius: 45px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            touch-action: none;
+            will-change: transform, opacity;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tinder-card-unit img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .t-card-info-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 45px 30px;
+            background: linear-gradient(to top, rgba(0,0,0,1) 35%, transparent 70%);
+            z-index: 5;
+        }
+
+        .t-card-price { font-size: 1.4rem; font-weight: 900; color: var(--accent); margin-top: 8px; }
+
+        .swipe-controls-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            z-index: 100;
+        }
+
+        .btn-swipe-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: var(--transition-bounce);
+        }
+
+        .btn-swipe-circle.nope { color: var(--red); border-color: rgba(255, 71, 87, 0.2); }
+        .btn-swipe-circle.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 30px var(--accent-glow); }
+
+        /* ============================================================
+           👟 CATALOG: BRAND VITRINE
+           ============================================================ */
+        .catalog-page-container { padding: 20px; }
+        
+        .brand-vitrine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .brand-vitrine-tile {
+            background: linear-gradient(135deg, #111 0%, #070707 100%);
+            padding: 45px 25px;
+            border-radius: 35px;
+            border: 1px solid var(--border);
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-vitrine-tile:active { background: var(--accent); transform: scale(0.96); }
+        .brand-vitrine-tile:active h3 { color: #000; }
+
+        .brand-vitrine-tile h3 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ============================================================
+           🧭 NAVIGATION BAR (BOTTOM DOCK)
+           ============================================================ */
+        .app-navigation-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            display: flex;
+            justify-content: space-around;
+            padding: 18px 10px 45px;
+            border-top: 1px solid var(--border);
+            z-index: 7000;
+        }
+
+        .nav-tab-unit {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #444;
+            font-size: 0.72rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-tab-unit.active { color: var(--accent); }
+        .nav-tab-unit i { font-style: normal; font-size: 1.7rem; margin-bottom: 6px; }
+
+        /* ============================================================
+           📐 SYSTEM SHEETS (MODALS)
+           ============================================================ */
+        .global-overlay-mask {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 8000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .ui-bottom-sheet {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: #0a0a0a;
+            border-radius: 50px 50px 0 0;
+            padding: 45px 25px;
+            z-index: 8500;
+            transition: bottom 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            border-top: 1px solid var(--border);
+            max-height: 94vh;
+            overflow-y: auto;
+        }
+
+        .ui-bottom-sheet.active { bottom: 0; }
+
+        .sheet-handle-bar {
+            width: 55px;
+            height: 6px;
+            background: #222;
+            border-radius: 10px;
+            margin: 0 auto 35px;
+        }
+
+        /* Матриця розмірів (Multi-select) */
+        .size-selection-matrix {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 45px;
+        }
+
+        .size-variant-pill {
+            background: #121212;
+            border: 1px solid var(--border);
+            padding: 25px 5px;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 900;
+            color: #555;
+            font-size: 1rem;
+            transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .size-variant-pill.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px var(--accent-soft);
+        }
+
+        .btn-premium-cta {
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            padding: 26px;
+            border-radius: 30px;
+            font-weight: 900;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 20px 50px var(--accent-soft);
+        }
+
+        /* ============================================================
+           🛒 CART & WISHLIST UI
+           ============================================================ */
+        .cart-rendering-list { margin-bottom: 30px; }
+        
+        .cart-line-product {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-line-product img { width: 90px; height: 90px; border-radius: 22px; object-fit: cover; }
+        
+        .cart-line-info { flex: 1; }
+        .cart-line-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+        .cart-line-meta { font-size: 0.8rem; color: var(--accent); font-weight: 800; text-transform: uppercase; }
+
+        .btn-remove-pos {
+            background: rgba(255, 71, 87, 0.1);
+            color: var(--red);
+            width: 44px;
+            height: 44px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        /* SMART WISHLIST IN CART */
+        .wish-upsell-container {
+            margin-top: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #0c0c0c 0%, #070707 100%);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .wish-upsell-header {
+            font-size: 0.9rem;
+            font-weight: 900;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wish-upsell-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            scrollbar-width: none;
+            padding-bottom: 5px;
+        }
+        .wish-upsell-scroll::-webkit-scrollbar { display: none; }
+
+        .wish-mini-card { min-width: 140px; text-align: center; }
+
+        .wish-mini-card img {
+            width: 140px;
+            height: 140px;
+            border-radius: 30px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            margin-bottom: 12px;
+            box-shadow: 0 10px 30px #000;
+        }
+
+        .wish-mini-card h4 {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ============================================================
+           🚚 CHECKOUT LOGISTICS
+           ============================================================ */
+        .segmented-log-switcher {
+            display: flex;
+            background: #111;
+            padding: 8px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .log-choice-btn {
+            flex: 1;
+            padding: 18px;
+            border-radius: 18px;
+            color: #555;
+            font-weight: 900;
+            font-size: 1rem;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .log-choice-btn.active {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .form-luxe-input {
+            width: 100%;
+            background: #0f0f0f;
+            border: 1px solid var(--border);
+            padding: 24px 28px;
+            border-radius: 28px;
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-luxe-input:focus { border-color: var(--accent); background: #141414; }
+
+        /* ============================================================
+           💬 LUXE CONTACTS WINDOW
+           ============================================================ */
+        .luxe-pop-window {
+            position: fixed;
+            bottom: 120px;
+            left: 20px;
+            right: 20px;
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border);
+            border-radius: 45px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 30px 100px #000;
+            z-index: 9000;
+            animation: luxePopUp 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes luxePopUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .luxe-pop-btn {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 26px;
+            border-radius: 30px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .luxe-pop-btn.tg { background: rgba(36, 161, 222, 0.12); color: #24A1DE; }
+        .luxe-pop-btn.ig { background: rgba(225, 48, 108, 0.12); color: #E1306C; }
+        .luxe-pop-btn.tt { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+        #zoom-portal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.99);
+            z-index: 25000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+        }
+        #zoom-portal-overlay img { max-width: 98%; max-height: 88vh; border-radius: 30px; box-shadow: 0 0 100px #000; }
+
+    </style>
 </head>
 <body class="custom-scroll">
 
-    <div id="splash-screen">
-        <div class="splash-overlay"></div>
-        <div class="logo-breathing-container">
-            <div class="logo-breathing-text">WOW<span>.</span>ZNAHIDKA</div>
-        </div>
-        <div class="gender-panel-full men-panel-fix" id="panel-men-id-trigger" onclick="launchExperience('Чоловік')">
-            <img id="img-men-preloader-unit-node" src="">
-            <span class="gender-label-splash-premium">ЧОЛОВІКАМ</span>
-        </div>
-        <div class="gender-panel-full" id="panel-women-id-trigger" onclick="launchExperience('Жінка')">
-            <img id="img-women-preloader-unit-node" src="">
-            <span class="gender-label-splash-premium">ЖІНКАМ</span>
-        </div>
-    </div>
+    <div id="splash-screen">
+        <div class="splash-logo-box premium-logo-font">WOW<span>.</span>ZNAHIDKA</div>
+        
+        <div class="gender-split-panel men-bg" id="panel-men" onclick="launchWOW('Чоловік')">
+            <img id="splash-img-men" src="" alt="Men Sneakers">
+            <span class="gender-label-splash">ЧОЛОВІКАМ</span>
+        </div>
+        
+        <div class="gender-split-panel women-bg" id="panel-women" onclick="launchWOW('Жінка')">
+            <img id="splash-img-women" src="" alt="Women Sneakers">
+            <span class="gender-label-splash">ЖІНКАМ</span>
+        </div>
+    </div>
 
-    <header id="main-app-header-unit-rendering-node" style="display:none;">
-        <div class="header-left-area">
-            <button class="btn-header-back-arrow" onclick="navigateHistoryBackLog()">←</button>
-            <div class="header-logo-premium">WOW<span>.</span>ZNAHIDKA</div>
-        </div>
-        <div class="header-right-area">
-            <div class="header-action-icon-box" onclick="openPanelSheetAction('wish-sheet-id-rendering-node-box')">
-                <span style="font-size: 1.8rem; color: var(--red);">❤</span>
-                <span class="nav-pill-badge-indicator" id="badge-heart-wishlist-node-rendering">0</span>
-            </div>
-            <div class="header-action-icon-box" onclick="openPanelSheetAction('cart-sheet-id-rendering-node-box')">
-                <span style="font-size: 1.8rem;">🛒</span>
-                <span class="nav-pill-badge-indicator" id="badge-cart-main-count-node-rendering">0</span>
-            </div>
-        </div>
-    </header>
+    <header id="app-header" style="display:none;">
+        <div class="header-left">
+            <button class="btn-universal-back" onclick="location.reload()">↩</button>
+            <div class="premium-logo-font" style="font-size: 1.1rem;">WOW<span>.</span>ZNAHIDKA</div>
+        </div>
+        
+        <div class="header-right">
+            <div class="action-icon-btn" onclick="openPanel('wishlist-sheet')">
+                <span style="font-size: 1.8rem; color: var(--red);">❤</span>
+                <span class="btn-badge" id="badge-wish" style="display: none;">0</span>
+            </div>
+            <div class="action-icon-btn" onclick="openPanel('cart-sheet')">
+                <span style="font-size: 1.8rem;">🛒</span>
+                <span class="btn-badge" id="badge-cart" style="display: none;">0</span>
+            </div>
+        </div>
+    </header>
 
-    <main>
-        <section id="view-home" class="app-view-page-node active custom-scroll">
-            <div class="search-area-sticky-box">
-                <input type="text" id="liveSearchInput" class="premium-luxe-input-search" placeholder="NB 530, Jordan 4, Nike..." oninput="runMasterFilteringEngineLogicSystem()">
-            </div>
-            <div class="product-main-grid-layout" id="main-catalog-rendering-node-grid-area"></div>
-            <div id="infinite-scroll-anchor-point-element-logic" style="height: 75px;"></div>
-        </section>
+    <main>
+        <section id="view-home" class="page-node active custom-scroll">
+            <div class="search-area-sticky">
+                <input type="text" id="globalLiveSearch" class="input-luxe-search" placeholder="Шукай свій стиль..." oninput="handleMasterFiltering()">
+            </div>
+            
+            <div class="catalog-grid-system" id="main-product-grid">
+                </div>
+            
+            <div id="infinite-anchor-point" style="height: 60px;"></div>
+        </section>
 
-        <section id="view-match" class="app-view-page-node match-view-environment-luxe-container">
-            <div class="tinder-stack-viewport-rendering-root" id="tinder-deck-rendering-root-unit-node"></div>
-            <div class="swipe-controls-footer-action-row">
-                <button class="btn-swipe-circle-premium-action nope" onclick="processSwipeActionTrigger('left')">✕</button>
-                <button class="btn-swipe-circle-premium-action yep" onclick="processSwipeActionTrigger('right')">❤</button>
-            </div>
-        </section>
+        <section id="view-match" class="page-node match-view-page">
+            <div class="tinder-deck-root" id="deck-node-root">
+                </div>
 
-        <section id="view-catalog" class="app-view-page-node">
-            <h2 style="padding: 35px 25px 15px; font-weight: 900; font-size: 2.2rem; letter-spacing: -2.5px;">Каталог <span style="color:var(--accent)">.</span></h2>
-            <div class="brand-catalog-rendering-tiles-container" id="brand-tiles-rendering-area-node-grid-unit"></div>
-        </section>
-    </main>
+            <div class="swipe-controls-row">
+                <button class="btn-swipe-circle nope" onclick="executeSwipeAction('left')">✕</button>
+                <button class="btn-swipe-circle yep" onclick="executeSwipeAction('right')">❤</button>
+            </div>
+        </section>
 
-    <nav class="bottom-app-navigation-dock-luxe-bar" id="app-dock-navigation-id-rendering-unit" style="display:none;">
-        <div class="dock-navigation-tab-id-element active" id="tab-btn-home-node-unit" onclick="navToViewPageSPA('home', this)"><i>🏠</i>Головна</div>
-        <div class="dock-navigation-tab-id-element" id="tab-btn-match-node-unit" onclick="navToViewPageSPA('match', this)"><i>🔥</i>Match</div>
-        <div class="dock-navigation-tab-id-element" id="tab-btn-catalog-node-unit" onclick="navToViewPageSPA('catalog', this)"><i>👟</i>Каталог</div>
-        <div class="dock-navigation-tab-id-element" onclick="toggleLuxeContactsPopWindowActionControl()"><i>💬</i>Контакти</div>
-    </nav>
+        <section id="view-catalog" class="page-node">
+            <h2 style="padding: 30px 25px 15px; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px;">Каталог <span style="color:var(--accent)">.</span></h2>
+            <div class="brand-vitrine-grid" id="brand-tiles-node">
+                </div>
+        </section>
+    </main>
 
-    <div class="pop-contacts-luxe-premium-rendering-window" id="luxe-contacts-pop-window-unit-id-rendering">
-        <div style="padding: 5px 5px 18px; font-weight: 900; font-size: 0.85rem; color: #333; text-transform: uppercase;">WOW Support Center</div>
-        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-contact-btn-link-action-rendering-node tg-theme-box">✈️ Telegram Менеджер</a>
-        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-rendering-node ig-theme-box">📸 Instagram Shop</a>
-        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-rendering-node tt-theme-box">🎵 TikTok Channel</a>
-    </div>
+    <nav class="app-navigation-bar" id="app-dock-unit" style="display:none;">
+        <div class="nav-tab-unit active" id="tab-btn-home" onclick="navToView('home', this)"><i>🏠</i>Головна</div>
+        <div class="nav-tab-unit" id="tab-btn-match" onclick="navToView('match', this)"><i>🔥</i>Match</div>
+        <div class="nav-tab-unit" id="tab-btn-catalog" onclick="navToView('catalog', this)"><i>👟</i>Каталог</div>
+        <div class="nav-tab-unit" onclick="toggleContactsPop()"><i>💬</i>Контакти</div>
+    </nav>
 
-    <div class="ui-global-overlay-mask-rendering-node" id="ui-overlay-mask-unit-id-node" onclick="closeAllActiveUISheetsActionControl()"></div>
+    <div class="luxe-pop-window" id="luxe-contacts-pop">
+        <div style="padding: 10px 5px; font-weight: 900; font-size: 0.85rem; color: #333; text-transform: uppercase; letter-spacing: 2px;">Support WOW</div>
+        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-pop-btn tg">✈️ Менеджер Telegram</a>
+        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-pop-btn ig">📸 Instagram Shop</a>
+        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-pop-btn tt">🎵 TikTok Channel</a>
+    </div>
 
-    <div class="premium-ui-bottom-sheet-id-element-box" id="size-picker-sheet-unit-rendering-node">
-        <div class="sheet-handle-unit-rendering"></div>
-        <h2 id="display-product-title-text-unit-rendering" style="margin-bottom: 18px; font-size: 1.6rem; font-weight: 900;"></h2>
-        <p style="color: #666; font-size: 1rem; margin-bottom: 40px; font-weight: 600;">Оберіть розміри для замовлення:</p>
-        <div class="grid-sizes-selection-logic-matrix" id="size-matrix-rendering-area-box-rendering"></div>
-        <button class="btn-luxury-cta-main-action-rendering" onclick="finalizeSizeSelectionAndAddToCartSessionAction()">ПІДТВЕРДИТИ ВИБІР</button>
-        <button class="btn-request-photo-secondary-link-rendering" onclick="requestAdditionalPhotosFromManager()">📸 Запросити дод. фото моделі</button>
-    </div>
+    <div class="global-overlay-mask" id="global-mask" onclick="closeAllActiveSheets()"></div>
 
-    <div class="premium-ui-bottom-sheet-id-element-box" id="wish-sheet-rendering-id-node-box">
-        <div class="sheet-handle-unit-rendering"></div>
-        <h2 style="margin-bottom: 15px; font-size: 1.8rem; font-weight: 900;">Твій Match 🔥</h2>
-        <p style="color: #666; margin-bottom: 35px; line-height: 1.6; font-size: 1.1rem;">Твої ідеальні пари вже тут! Не дозволяй іншим забрати твій стиль. Вибери розмір прямо зараз.</p>
-        <div id="wishlist-full-rendering-grid-node-area-box-rendering" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:45px;"></div>
-        <button class="btn-luxury-cta-main-action-rendering" style="background-color:#ffffff; color:#000000;" onclick="navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit')); closeAllActiveUISheetsActionControl();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
-    </div>
+    <div class="ui-bottom-sheet" id="size-picker-sheet">
+        <div class="sheet-handle-bar"></div>
+        <h2 id="sz-display-title" style="margin-bottom: 12px; font-size: 1.6rem; font-weight: 900;"></h2>
+        <p style="color: #666; font-size: 1rem; margin-bottom: 40px; font-weight: 600;">Оберіть розміри для замовлення:</p>
+        <div class="size-selection-matrix" id="sz-matrix-container"></div>
+        <button class="btn-premium-cta" onclick="confirmSizesAndAddToCart()">ПІДТВЕРДИТИ</button>
+    </div>
 
-    <div class="premium-ui-bottom-sheet-id-element-box" id="cart-sheet-id-rendering-node-box">
-        <div class="sheet-handle-unit-rendering"></div>
-        <div id="cart-phase-step-1-rendering-unit">
-            <h2 style="margin-bottom: 30px; font-size: 1.8rem; font-weight: 900;">Твій кошик 🛍️</h2>
-            <div class="cart-items-rendering-container-unit-rendering" id="cart-items-rendering-container-node-unit-box"></div>
-            
-            <div id="wishlist-upsell-rendering-area-node-box-unit-rendering-final"></div>
+    <div class="ui-bottom-sheet" id="wishlist-sheet">
+        <div class="sheet-handle-bar"></div>
+        <h2 style="margin-bottom: 15px; font-size: 1.8rem; font-weight: 900;">Твій Match 🔥</h2>
+        <p style="color: #666; margin-bottom: 30px; line-height: 1.5;">Це твої ідеальні пари! Вибери розмір та додай у кошик прямо зараз.</p>
+        <div id="wishlist-rendering-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:35px;"></div>
+        <button class="btn-premium-cta" style="background:#fff; color:#000;" onclick="navToView('home', document.getElementById('tab-btn-home')); closeAllActiveSheets();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
+    </div>
 
-            <div style="margin-top: 50px; padding-top: 35px; border-top: 1px solid var(--border);">
-                <div style="display: flex; justify-content: space-between; font-size: 1.85rem; font-weight: 900; margin-bottom: 40px;">
-                    <span>Всього:</span><span id="label-cart-final-total-sum-node-rendering-val" style="color: var(--accent);">0 ₴</span>
-                </div>
-                <button class="btn-luxury-cta-main-action-rendering" onclick="proceedToCheckoutFormPhaseControl()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
-            </div>
-        </div>
-        <div id="cart-phase-step-2-rendering-unit" style="display: none;">
-            <h2 style="margin-bottom: 45px; font-size: 1.85rem; font-weight: 900;">Доставка</h2>
-            <input type="text" id="inp-order-name-id-field-rendering-node" class="form-luxe-checkout-rendering-input-field" placeholder="Прізвище та Ім'я">
-            <input type="tel" id="inp-order-phone-id-field-rendering-node" class="form-luxe-checkout-rendering-input-field" placeholder="Номер телефону (+380...)">
-            <input type="text" id="inp-order-city-id-field-rendering-node" class="form-luxe-checkout-rendering-input-field" placeholder="Місто доставки">
-            <div class="segmented-delivery-control-luxe-rendering-bar">
-                <div class="delivery-choice-segment-tab-id-node active" id="btn-log-vidd-tab-id-rendering" onclick="updateAppLogisticsSelection('Відділення')">Відділення</div>
-                <div class="delivery-choice-segment-tab-id-node" id="btn-log-post-tab-id-rendering" onclick="updateAppLogisticsSelection('Поштомат')">Поштомат</div>
-            </div>
-            <input type="text" id="inp-order-np-id-field-rendering-node" class="form-luxe-checkout-rendering-input-field" placeholder="№ Відділення Нової Пошти">
-            <input type="text" id="inp-order-promo-id-field-rendering-node" class="form-luxe-checkout-rendering-input-field" placeholder="Секретний промокод">
-            <button class="btn-luxury-cta-main-action-rendering" id="btn-final-dispatch-trigger-id-rendering-unit" onclick="processFinalOrderDispatchActionLogicCoreEngine()">ПІДТВЕРДИТИ ЗАМОВЛЕННЯ</button>
-            <p onclick="rollbackToPhaseOneListControl()" style="text-align: center; margin-top: 40px; color: #444444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
-        </div>
-    </div>
+    <div class="ui-bottom-sheet" id="cart-sheet">
+        <div class="sheet-handle-bar"></div>
+        <div id="cart-step-1">
+            <h2 style="margin-bottom: 30px; font-size: 1.7rem;">Твій кошик</h2>
+            <div class="cart-rendering-list" id="cart-items-rendering-node"></div>
+            <div id="wish-upsell-rendering-area"></div>
+            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; font-size: 1.7rem; font-weight: 900; margin-bottom: 35px;">
+                    <span>Разом:</span><span id="label-cart-sum" style="color: var(--accent);">0 ₴</span>
+                </div>
+                <button class="btn-premium-cta" onclick="proceedToCheckoutForm()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
+            </div>
+        </div>
+        <div id="cart-step-2" style="display: none;">
+            <h2 style="margin-bottom: 35px;">Доставка</h2>
+            <input type="text" id="order-fio" class="form-luxe-input" placeholder="ПІБ">
+            <input type="tel" id="order-phone" class="form-luxe-input" placeholder="Телефон">
+            <input type="text" id="order-city" class="form-luxe-input" placeholder="Місто">
+            <div class="segmented-log-switcher">
+                <div class="log-choice-btn active" id="log-vidd-tab" onclick="updateLogisticsType('Відділення')">Відділення</div>
+                <div class="log-choice-btn" id="log-post-tab" onclick="updateLogisticsType('Поштомат')">Поштомат</div>
+            </div>
+            <input type="text" id="order-np" class="form-luxe-input" placeholder="№ Відділення">
+            <input type="text" id="order-promo" class="form-luxe-input" placeholder="Промокод">
+            <button class="btn-premium-cta" id="btn-final-dispatch" onclick="dispatchFinalOrder()">ЗАМОВИТИ ЗАРАЗ</button>
+            <p onclick="rollbackToCartList()" style="text-align: center; margin-top: 30px; color: #444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
+        </div>
+    </div>
 
-    <div id="zoom-portal-rendering-unit-element" onclick="this.style.display='none'"><img id="zoom-img-target-node-portal-rendering-element" src=""></div>
+    <div id="zoom-portal-overlay" onclick="this.style.display='none'"><img id="zoom-portal-img" src=""></div>
 
-    <script>
-        const GOOGLE_API_ENDPOINT_URL_CORE = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
-        
-        let masterDatabaseRawStorageUnit = [], sessionStoreDisplayDbArrayNodeSet = [], shoppingCartArraySessionObjectStore = [], favoritesWishlistCollectionArrayFinalList = [], activeGenderChoiceTagLabelIdNameVal = '', activeBrandFilterTagLabelValueIdNameVal = 'all', activeLogisticsModeTagLabelValueIdNameVal = 'Відділення', matchPtrIndexValuePointerIdValCoord = 0, historyNavigationStackLogArrayIdNodeUnit = ['home'], activeTempProductIdValuePointerIdValCoord = '', activeTempSizesLogCollectionArrayIdNodeUnit = [];
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
+        
+        let allItems = [];      // Оригінал
+        let sessionDb = [];     // Фільтр по статі
+        let cartArray = [];     // Кошик
+        let wishArray = [];     // Лайки
+        let chosenGender = '';  
+        let activeBrand = 'all'; 
+        let deliveryWay = 'Відділення';
+        
+        let matchIndex = 0;
+        let activeTempId = '';
+        let activeTempSizes = [];
 
-        async function preloadLuxeExperienceCoreEngineLogicSystemHandlingProcess() {
-            try {
-                const responseDataStreamResultFinal = await fetch(GOOGLE_API_ENDPOINT_URL_CORE + "?v=" + Date.now());
-                const resultDataParsedOutputFinal = await responseDataStreamResultFinal.json();
-                masterDatabaseRawStorageUnit = resultDataParsedOutputFinal.products || resultDataParsedOutputFinal;
-                
-                const poolMenSetRawDataListFinal = masterDatabaseRawStorageUnit.filter(p => p.gender === 'Чоловік'), 
-                      poolWomenSetRawDataListFinal = masterDatabaseRawStorageUnit.filter(p => p.gender === 'Жінка');
-                
-                if(poolMenSetRawDataListFinal.length) { 
-                    const mImgNodeElementUnitHandling = document.getElementById('img-men-preloader-unit-node'); 
-                    mImgNodeElementUnitHandling.src = poolMenSetRawDataListFinal[Math.floor(Math.random() * poolMenSetRawDataListFinal.length)].image; 
-                    mImgNodeElementUnitHandling.onload = function() { document.getElementById('panel-men-id-trigger').classList.add('ready'); };
-                }
-                
-                if(poolWomenSetRawDataListFinal.length) { 
-                    const wImgNodeElementUnitHandling = document.getElementById('img-women-preloader-unit-node'); 
-                    wImgNodeElementUnitHandling.src = poolWomenSetRawDataListFinal[Math.floor(Math.random() * poolWomenSetRawDataListFinal.length)].image; 
-                    wImgNodeElementUnitHandling.onload = function() { document.getElementById('panel-women-id-trigger').classList.add('ready'); };
-                }
-            } catch(errorDetailsLogCritical) { console.error("Database initialization aborted."); }
-        }
+        // --- 1. DATA PRELOADING ---
+        async function preloadLuxeData() {
+            try {
+                const response = await fetch(API_URL + "?v=" + Date.now());
+                const result = await response.json();
+                allItems = result.products || result;
 
-        function launchExperience(gender) {
-            activeGenderChoiceTagLabelIdNameVal = gender;
-            document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
-            document.getElementById('main-app-header-unit-rendering-node').style.display = 'flex';
-            document.getElementById('app-dock-navigation-unit-node-id-rendering').style.display = 'flex';
-            
-            sessionStoreDisplayDbArrayNodeSet = masterDatabaseRawStorageUnit.filter(p => p.gender === activeGenderChoiceTagLabelIdNameVal).sort(() => Math.random() - 0.5);
-            
-            renderMainCatalogScrollGridEngineSystemHandling(); 
-            renderTinderMatchEngineDeckLogicEngineCore(); 
-            renderBrandCatalogTilesGridLogicSystemHandling();
-            
-            const intersectionObserverNodeElementUnitHandlingProcess = new IntersectionObserver(entries => { if(entries[0].isIntersecting) renderMainCatalogScrollGridEngineSystemHandling(true); }, { threshold: 0.1 });
-            intersectionObserverNodeElementUnitHandlingProcess.observe(document.getElementById('infinite-scroll-anchor-point-logic-trigger-node'));
-            
-            if(window.navigator.vibrate) window.navigator.vibrate(60);
-        }
+                const mPool = allItems.filter(p => p.gender === 'Чоловік');
+                const wPool = allItems.filter(p => p.gender === 'Жінка');
 
-        function cleanBrandDuplicatesInNameStringEngineSystemHandling(nameStringValueDataInfoDetails, brandStringValueDataInfoDetails) {
-            const regexPatternRuleMatchLogicSystem = new RegExp(`^${brandStringValueDataInfoDetails}\\s+${brandStringValueDataInfoDetails}`, 'i');
-            if (regexPatternRuleMatchLogicSystem.test(nameStringValueDataInfoDetails)) {
-                return nameStringValueDataInfoDetails.replace(new RegExp(`^${brandStringValueDataInfoDetails}\\s+`, 'i'), '').trim();
-            }
-            return nameStringValueDataInfoDetails;
-        }
+                if(mPool.length) {
+                    const mImg = document.getElementById('splash-img-men');
+                    mImg.src = mPool[Math.floor(Math.random() * mPool.length)].image;
+                    mImg.onload = () => document.getElementById('panel-men').classList.add('img-ready');
+                }
+                
+                if(wPool.length) {
+                    const wImg = document.getElementById('splash-img-women');
+                    wImg.src = wPool[Math.floor(Math.random() * wPool.length)].image;
+                    wImg.onload = () => document.getElementById('panel-women').classList.add('img-ready');
+                }
+            } catch(e) { console.error("Database connection lost."); }
+        }
 
-        function renderMainCatalogScrollGridEngineSystemHandling(appendModeStateActionTriggerPoint = false) {
-            const gridRootNodeElementUnitHandling = document.getElementById('main-catalog-rendering-node-grid-unit-element'); 
-            if(!appendModeStateActionTriggerPoint) gridRootNodeElementUnitHandling.innerHTML = "";
-            
-            const queryValueInputDataParsedFinal = document.getElementById('liveSearchInput').value.toLowerCase();
-            let dataFilteredArrayResultListFinal = sessionStoreDisplayDbArrayNodeSet;
-            
-            if(activeBrandFilterTagLabelValueIdNameVal !== 'all') dataFilteredArrayResultListFinal = dataFilteredArrayResultListFinal.filter(p => p.brand === activeBrandFilterTagLabelValueIdNameVal);
-            if(queryValueInputDataParsedFinal) dataFilteredArrayResultListFinal = dataFilteredArrayResultListFinal.filter(p => p.name.toLowerCase().includes(queryValueInputDataParsedFinal) || p.brand.toLowerCase().includes(queryValueInputDataParsedFinal));
-            
-            const batchLimitCountValueDataInfo = 12;
-            const startPointerIndexValCoord = appendModeStateActionTriggerPoint ? gridRootNodeElementUnitHandling.children.length : 0;
-            const sliceDataArrayResultFinalListOutput = dataFilteredArrayResultListFinal.slice(startPointerIndexValCoord, startPointerIndexValCoord + batchLimitCountValueDataInfo);
-            
-            gridRootNodeElementUnitHandling.innerHTML += sliceDataArrayResultFinalListOutput.map(p => `
-                <div class="sneaker-premium-luxe-card">
-                    <div class="card-img-viewport-container" onclick="triggerZoomPortal('${p.image}')">
-                        <img src="${p.image}" loading="lazy">
-                    </div>
-                    <div class="card-details-info-rendering">
-                        <div class="label-neon-tag-brand-premium">${p.brand} | ${p.name.split(' ')[1] || 'Edition'}</div>
-                        <div class="text-model-title-main-rendering">${cleanBrandDuplicatesInNameStringEngineSystemHandling(p.name, p.brand)}</div>
-                        <div class="card-footer-price-action-unit">
-                            <span class="text-price-bold-value">${p.price} ₴</span>
-                            <button class="btn-open-size-picker-action" onclick="openSizePickerForProductNodeElementUnitHandling('${p.id}')">ВИБРАТИ</button>
-                        </div>
-                    </div>
-                </div>`).join('');
-        }
+        // --- 2. LAUNCH ENGINE ---
+        function launchWOW(gender) {
+            chosenGender = gender;
+            document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
+            document.getElementById('app-header').style.display = 'flex';
+            document.getElementById('app-dock-unit').style.display = 'flex';
 
-        function renderTinderMatchEngineDeckLogicEngineCore() {
-            const deckRootNodeElementUnitHandlingProcess = document.getElementById('tinder-deck-rendering-root-unit-node');
-            const stackDataSliceArrayResultListFinal = sessionStoreDisplayDbArrayNodeSet.slice(matchPtrIndexValuePointerIdValCoord, matchPtrIndexValuePointerIdValCoord + 3);
-            
-            deckRootNodeElementUnitHandlingProcess.innerHTML = stackDataSliceArrayResultListFinal.map((p, i) => `
-                <div class="tinder-swipe-card-premium-box" style="z-index:${10-i}; transform: scale(${1 - i*0.05}) translateY(${i*20}px)">
-                    <img src="${p.image}">
-                    <div class="tinder-info-overlay-details-container">
-                        <div class="label-neon-tag-brand-premium">${p.brand}</div>
-                        <div style="font-size:1.85rem; font-weight:900; line-height:1.2;">${cleanBrandDuplicatesInNameStringEngineSystemHandling(p.name, p.brand)}</div>
-                        <div class="tinder-price-label-match-value-rendering">${p.price} ₴</div>
-                        <div class="social-proof-message-neon-tag">🔥 ${Math.floor(Math.random() * 30) + 15} людей лайкнули цю пару сьогодні</div>
-                    </div>
-                </div>`).join('');
-            
-            if(!stackDataSliceArrayResultListFinal.length) deckRootNodeElementUnitHandlingProcess.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Більше новинок немає 👟</div>";
-            
-            initSwipeInteractionLogicHandlingSystemCoreEngine();
-        }
+            sessionDb = allItems
+                .filter(p => p.gender === chosenGender)
+                .sort(() => Math.random() - 0.5);
 
-        function initSwipeInteractionLogicHandlingSystemCoreEngine() {
-            const cardElementNodeBoxUnitHandling = document.querySelector('.tinder-swipe-card-premium-box'); if(!cardElementNodeBoxUnitHandling) return;
-            let startPointCoordXPosCoord=0, currentPointCoordXPosCoord=0;
-            
-            cardElementNodeBoxUnitHandling.addEventListener('touchstart', function(e) { startPointCoordXPosCoord = e.touches[0].clientX; cardElementNodeBoxUnitHandling.style.transition = 'none'; }, {passive:true});
-            cardElementNodeBoxUnitHandling.addEventListener('touchmove', function(e) { 
-                currentPointCoordXPosCoord = e.touches[0].clientX; 
-                let differenceValueDistanceValCoord = currentPointCoordXPosCoord - startPointCoordXPosCoord; 
-                cardElementNodeBoxUnitHandling.style.transform = `translateX(${differenceValueDistanceValCoord}px) rotate(${differenceValueDistanceValCoord/18}deg)`; 
-            }, {passive:true});
-            
-            cardElementNodeBoxUnitHandling.addEventListener('touchend', function() { 
-                let finalDiffValCoordPosCoord = currentPointCoordXPosCoord - startPointCoordXPosCoord; 
-                if(Math.abs(finalDiffValCoordPosCoord) > 130) executeSwipeActionTrigger(finalDiffValCoordPosCoord > 0 ? 'right' : 'left'); 
-                else { cardElementNodeBoxUnitHandling.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; cardElementNodeBoxUnitHandling.style.transform = 'translateX(0) rotate(0)'; } 
-            });
-        }
+            renderMasterCatalog();
+            renderTinderDeck();
+            renderCatalogBrands();
+            
+            const observer = new IntersectionObserver(entries => {
+                if(entries[0].isIntersecting) renderMasterCatalog(true);
+            }, { threshold: 0.1 });
+            observer.observe(document.getElementById('infinite-anchor-point'));
+        }
 
-        function executeSwipeActionTrigger(directionStringLabelTagLabel) {
-            const cardNodeElementBoxUnitRenderingFinal = document.querySelector('.tinder-swipe-card-premium-box'); if(!cardNodeElementBoxUnitRenderingFinal) return;
-            const screenExitDistanceValueDataInfoDetails = window.innerWidth * 1.6;
-            
-            cardNodeElementBoxUnitRenderingFinal.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
-            cardNodeElementBoxUnitRenderingFinal.style.transform = `translateX(${directionStringLabelTagLabel === 'right' ? screenExitDistanceValueDataInfoDetails : -screenExitDistanceValueDataInfoDetails}px) rotate(${directionStringLabelTagLabel === 'right' ? 45 : -45}deg)`;
-            cardNodeElementBoxUnitRenderingFinal.style.opacity = '0';
-            
-            if(directionStringLabelTagLabel === 'right') { 
-                const targetItemObjectDataFinal = sessionStoreDisplayDbArrayNodeSet[matchPtrIndexValuePointerIdValCoord]; 
-                if(!favoritesWishlistCollectionArrayFinalList.find(x => x.id === targetItemObjectDataFinal.id)) { 
-                    favoritesWishlistCollectionArrayFinalList.push(targetItemObjectDataFinal); 
-                    syncFavoritesWishlistInterfaceLogicEngineSystemHandling(); 
-                    if(window.navigator.vibrate) window.navigator.vibrate([45, 30, 45]); 
-                } 
-            }
-            setTimeout(function() { matchPtrIndexValuePointerIdValCoord++; renderTinderMatchEngineDeckLogicEngineCore(); }, 400);
-        }
+        // --- 3. CLEANING & DE-DUPLICATION ---
+        function cleanName(n, b) {
+            const p = new RegExp(`^${b}\\s+${b}`, 'i');
+            return p.test(n) ? n.replace(new RegExp(`^${b}\\s+`, 'i'), '').trim() : n;
+        }
 
-        function syncFavoritesWishlistInterfaceLogicEngineSystemHandling() {
-            const heartBadgeNodeElementValueValFinal = document.getElementById('badge-heart-wishlist-node-rendering'); 
-            heartBadgeNodeElementValueValFinal.innerText = favoritesWishlistCollectionArrayFinalList.length; 
-            heartBadgeNodeElementValueValFinal.style.display = favoritesWishlistCollectionArrayFinalList.length ? 'flex' : 'none';
-            
-            document.getElementById('wishlist-full-rendering-grid-node-area-box-rendering').innerHTML = favoritesWishlistCollectionArrayFinalList.map(p => `
-                <div class="sneaker-premium-luxe-card" onclick="openSizePickerForProductNodeElementUnitHandling('${p.id}')">
-                    <div class="card-img-viewport-container"><img src="${p.image}"></div>
-                    <div class="card-details-info-rendering">
-                        <div class="label-neon-tag-brand-premium">${p.brand}</div>
-                        <div class="text-model-title-main-rendering" style="font-size:0.75rem; height:2.4em;">${cleanBrandDuplicatesInNameStringEngineSystemHandling(p.name, p.brand)}</div>
-                        <button class="btn-open-size-picker-action" style="width:100%; margin-top:12px; background-color:var(--accent); color:#000000; font-weight:900;">КУПИТИ</button>
-                    </div>
-                </div>`).join('');
-        }
+        // --- 4. CATALOG (THE SCROLL) ---
+        function renderMasterCatalog(append = false) {
+            const grid = document.getElementById('main-product-grid');
+            if(!append) grid.innerHTML = "";
+            const q = document.getElementById('globalLiveSearch').value.toLowerCase();
+            let filtered = sessionDb;
+            if(activeBrand !== 'all') filtered = filtered.filter(p => p.brand === activeBrand);
+            if(q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q));
 
-        function openSizePickerForProductNodeElementUnitHandling(productIdValueDataInfoDetails) {
-            activeTempProductIdValuePointerIdValCoord = productIdValueDataInfoDetails; activeTempSizesLogCollectionArrayIdNodeUnit = [];
-            const productMatchObjectDataResultFinal = masterDatabaseRawStorageUnit.find(x => x.id === productIdValueDataInfoDetails);
-            document.getElementById('display-product-title-text-rendering-node-box').innerText = cleanBrandDuplicatesInNameStringEngineSystemHandling(productMatchObjectDataResultFinal.name, productMatchObjectDataResultFinal.brand);
-            
-            const sizesSplitArrayResultsListOutputFinal = productMatchObjectDataResultFinal.sizes.split(',').map(s => s.trim()).filter(s => s);
-            document.getElementById('size-matrix-rendering-area-box-rendering-node-unit').innerHTML = sizesSplitArrayResultsListOutputFinal.map(s => `<div class="size-variant-pill-rendering-node-box" onclick="toggleSizeChoiceNodeInteractionTriggerPoint(this, '${s}')">${s.split('(')[0]}</div>`).join('');
-            openPanelSheetUI('size-picker-sheet-unit-rendering-node');
-        }
+            const batchSize = 12;
+            const start = append ? grid.children.length : 0;
+            const slice = filtered.slice(start, start + batchSize);
+            
+            grid.innerHTML += slice.map(p => `
+                <div class="sneaker-card-premium">
+                    <div class="sneaker-image-box" onclick="triggerZoom('${p.image}')">
+                        <img src="${p.image}" loading="lazy">
+                    </div>
+                    <div class="sneaker-details-box">
+                        <div class="sneaker-neon-tag">${p.brand}</div>
+                        <div class="sneaker-title-main">${cleanName(p.name, p.brand)}</div>
+                        <div class="sneaker-price-row">
+                            <span class="sneaker-price-text">${p.price} ₴</span>
+                            <button class="btn-open-size-sheet" onclick="openSizePicker('${p.id}')">ВИБРАТИ</button>
+                        </div>
+                    </div>
+                </div>`).join('');
+        }
 
-        function toggleSizeChoiceNodeInteractionTriggerPoint(elementNodeUnitBoxHandling, sizeValueLabelTagLabelTag) { 
-            const indexPosValIdNameVal = activeTempSizesLogCollectionArrayIdNodeUnit.indexOf(sizeValueLabelTagLabelTag); 
-            if(indexPosValIdNameVal > -1) { activeTempSizesLogCollectionArrayIdNodeUnit.splice(indexPosValIdNameVal, 1); elementNodeUnitBoxHandling.classList.remove('active'); } 
-            else { activeTempSizesLogCollectionArrayIdNodeUnit.push(sizeValueLabelTagLabelTag); elementNodeUnitBoxHandling.classList.add('active'); } 
-        }
+        // --- 5. TINDER ENGINE (SWIPE PHYSICS) ---
+        function renderTinderDeck() {
+            const node = document.getElementById('deck-node-root');
+            const stack = sessionDb.slice(matchIndex, matchIndex + 3);
+            
+            node.innerHTML = stack.map((p, i) => `
+                <div class="tinder-card-unit" style="z-index:${10-i}; transform: scale(${1 - i*0.05}) translateY(${i*20}px)">
+                    <img src="${p.image}">
+                    <div class="t-card-info-overlay">
+                        <div class="sneaker-neon-tag">${p.brand}</div>
+                        <div style="font-size:1.7rem; font-weight:900; line-height:1.2;">${cleanName(p.name, p.brand)}</div>
+                        <div class="t-card-price">${p.price} ₴</div>
+                    </div>
+                </div>`).join('');
 
-        async function requestAdditionalPhotosFromManager() {
-            const targetProdObjectDataFinal = masterDatabaseRawStorageUnit.find(p => p.id === activeTempProductIdValuePointerIdValCoord);
-            const messagePayload = { action: "request_photo", product_id: targetProdObjectDataFinal.id, product_name: targetProdObjectDataFinal.name, link: "https://t.me/znahidkawow" };
-            if(window.navigator.vibrate) window.navigator.vibrate(100);
-            alert("Ваш запит надіслано! Менеджер надішле додаткові фото обраної моделі в Telegram.");
-            await fetch(GOOGLE_API_ENDPOINT_URL_CORE, { method: 'POST', mode: 'no-cors', body: JSON.stringify(messagePayload) });
-            closeAllActiveUISheetsActionControl();
-        }
+            if(!stack.length) node.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Новинки закінчились 👟</div>";
+            
+            initSwipeHandlers();
+        }
 
-        function finalizeSizeSelectionAndAddToCartSessionAction() {
-            if(!activeTempSizesLogCollectionArrayIdNodeUnit.length) return alert("Будь ласка, оберіть розмір!");
-            const productToCommitFinalDataInfoDetails = masterDatabaseRawStorageUnit.find(p => p.id === activeTempProductIdValuePointerIdValCoord);
-            activeTempSizesLogCollectionArrayIdNodeUnit.forEach(function(sizeTagLabelIdName) { 
-                shoppingCartArraySessionObjectStore.push({...productToCommitFinalDataInfoDetails, selectedSizeTagLabelIdNameVal: sizeTagLabelIdName, cartUniqueIdKeyTokenValCoord: Math.random()}); 
-            });
-            syncMainCartBadgeDisplayInterfaceLogicSystemHandling(); closeAllActiveUISheetsActionControl(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit'));
-            if(window.navigator.vibrate) window.navigator.vibrate(65);
-        }
+        function initSwipeHandlers() {
+            const card = document.querySelector('.tinder-card-unit');
+            if(!card) return;
+            let sx = 0, cx = 0;
+            card.addEventListener('touchstart', e => { sx = e.touches[0].clientX; card.style.transition = 'none'; }, {passive:true});
+            card.addEventListener('touchmove', e => { cx = e.touches[0].clientX; let d = cx - sx; card.style.transform = `translateX(${d}px) rotate(${d/18}deg)`; }, {passive:true});
+            card.addEventListener('touchend', () => { let d = cx - sx; if(Math.abs(d) > 130) executeSwipeAction(d > 0 ? 'right' : 'left'); else { card.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; card.style.transform = 'translateX(0) rotate(0)'; } });
+        }
 
-        function syncMainCartBadgeDisplayInterfaceLogicSystemHandling() { 
-            const cartBadgeNodeElementValueValFinalNode = document.getElementById('badge-cart-main-count-node-rendering'); 
-            cartBadgeNodeElementValueValFinalNode.innerText = shoppingCartArraySessionObjectStore.length; 
-            cartBadgeNodeElementValueValFinalNode.style.display = shoppingCartArraySessionObjectStore.length ? 'flex' : 'none'; 
-        }
+        function executeSwipeAction(dir) {
+            const card = document.querySelector('.tinder-card-unit');
+            if(!card) return;
+            const dist = window.innerWidth * 1.6;
+            card.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
+            card.style.transform = `translateX(${dir === 'right' ? dist : -dist}px) rotate(${dir === 'right' ? 45 : -45}deg)`;
+            card.style.opacity = '0';
+            
+            if(dir === 'right') {
+                const item = sessionDb[matchIndex];
+                if(!wishArray.find(x => x.id === item.id)) {
+                    wishArray.push(item);
+                    syncWishlistUI();
+                }
+            }
+            setTimeout(() => { matchIndex++; renderTinderDeck(); }, 400);
+        }
 
-        function renderCartContentsInterfaceHandlingSystemCoreEngine() {
-            const cartListNodeElementRootBoxUnit = document.getElementById('cart-items-rendering-container-node-grid-unit-area');
-            if(!shoppingCartArraySessionObjectStore.length) cartListNodeElementRootBoxUnit.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Твій кошик порожній 🛒</p>";
-            else cartListNodeElementRootBoxUnit.innerHTML = shoppingCartArraySessionObjectStore.map((item, idx) => `
-                <div class="cart-line-product-rendering-row-node">
-                    <img src="${item.image}">
-                    <div class="cart-line-product-info-details-rendering-box"><div class="cart-line-name-label-rendering-text-final">${item.name}</div><div class="cart-line-meta-label-tag-details-rendering-node">Розмір: ${item.selectedSizeTagLabelIdNameVal}</div></div>
-                    <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
-                    <div class="btn-item-delete-action-luxe-premium-trigger" onclick="removePositionFromCartSessionArrayObjectDataStore(${idx})">✕</div>
-                </div>`).join('');
-            
-            document.getElementById('label-cart-final-total-sum-value-node-rendering-element').innerText = shoppingCartArraySessionObjectStore.reduce((sum, item) => sum + parseInt(item.price), 0) + " ₴";
-            
-            const upsellContainerNodeElementBoxUnitRendering = document.getElementById('wishlist-upsell-rendering-area-node-box-unit-element-rendering-final');
-            if(favoritesWishlistCollectionArrayFinalList.length && !shoppingCartArraySessionObjectStore.some(cartItem => favoritesWishlistCollectionArrayFinalList.some(wishItem => wishItem.id === cartItem.id))) {
-                upsellContainerNodeElementBoxUnitRendering.innerHTML = `<div class="wishlist-smart-upsell-rendering-container-unit-box"><div class="upsell-header-text-label-row-final">❤️ Твої фаворити з Match:</div><div class="upsell-horizontal-rendering-scroll-list">
-                    ${favoritesWishlistCollectionArrayFinalList.map(p => `<div class="upsell-item-unit-mini-rendering-card-element-unit"><img src="${p.image}"><div class="btn-quick-plus-add-fav-interaction-trigger" onclick="openSizePickerForProductNodeElementUnitHandling('${p.id}')">+</div><h4>${p.brand}</h4></div>`).join('')}
-                </div></div>`;
-            } else upsellContainerNodeElementBoxUnitRendering.innerHTML = "";
-        }
+        // --- 6. WISHLIST & CART LOGIC ---
+        function syncWishlistUI() {
+            const b = document.getElementById('badge-wish');
+            b.innerText = wishArray.length; b.style.display = wishArray.length ? 'block' : 'none';
+            document.getElementById('wishlist-rendering-grid').innerHTML = wishArray.map(p => `
+                <div class="sneaker-card-premium" onclick="openSizePicker('${p.id}')">
+                    <div class="sneaker-image-box"><img src="${p.image}"></div>
+                    <div class="sneaker-details-box">
+                        <div class="sneaker-neon-tag">${p.brand}</div>
+                        <div class="sneaker-title-main" style="font-size:0.75rem;">${cleanName(p.name, p.brand)}</div>
+                        <button class="btn-open-size-sheet" style="width:100%; margin-top:10px;">КУПИТИ</button>
+                    </div>
+                </div>`).join('');
+        }
 
-        function removePositionFromCartSessionArrayObjectDataStore(indexPositionValueDataInfo) { shoppingCartArraySessionObjectStore.splice(indexPositionValueDataInfo, 1); renderCartContentsInterfaceHandlingSystemCoreEngine(); syncMainCartBadgeDisplayInterfaceLogicSystemHandling(); if(!shoppingCartArraySessionObjectStore.length) closeAllActiveUISheetsActionControl(); }
+        function openSizePicker(id) {
+            activeTempId = id; activeTempSizes = [];
+            const p = allItems.find(x => x.id === id);
+            document.getElementById('sz-display-title').innerText = cleanName(p.name, p.brand);
+            const sizes = p.sizes.split(',').map(s => s.trim()).filter(s => s);
+            document.getElementById('sz-matrix-container').innerHTML = sizes.map(s => `
+                <div class="size-variant-pill" onclick="toggleSizeNode(this, '${s}')">${s.split('(')[0]}</div>
+            `).join('');
+            openPanel('size-picker-sheet');
+        }
 
-        function renderBrandCatalogTilesGridLogicSystemHandling() {
-            const brandTagsArrayCollectionListResultsFinal = [...new Set(sessionStoreDisplayDbArrayNodeSet.map(p => p.brand))].sort();
-            document.getElementById('brand-tiles-rendering-area-node-grid-unit-box').innerHTML = brandTagsArrayCollectionListResultsFinal.map(brand => `
-                <div class="brand-tile-premium-luxury-unit" onclick="filterByBrandShortcutTriggerActionHandling('${brand}')"><h3>${brand}</h3><span>${sessionStoreDisplayDbArrayNodeSet.filter(p => p.brand === brand).length} МОДЕЛЕЙ ➔</span></div>`).join('');
-        }
+        function toggleSizeNode(el, s) {
+            const idx = activeTempSizes.indexOf(s);
+            if(idx > -1) { activeTempSizes.splice(idx, 1); el.classList.remove('active'); }
+            else { activeTempSizes.push(s); el.classList.add('active'); }
+        }
 
-        function filterByBrandShortcutTriggerActionHandling(brandNameStringDataInfoDetails) { activeBrandFilterTagLabelValueIdNameVal = brandNameStringDataInfoDetails; renderMainCatalogScrollGridEngineSystemHandling(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit')); }
+        function confirmSizesAndAddToCart() {
+            if(!activeTempSizes.length) return alert("Оберіть розмір!");
+            const p = allItems.find(x => x.id === activeTempId);
+            activeTempSizes.forEach(sz => cartArray.push({...p, selectedSize: sz, uid: Math.random()}));
+            syncCartBadge(); closeAllActiveSheets();
+            navToView('home', document.getElementById('tab-btn-home'));
+        }
 
-        async function processFinalOrderDispatchActionLogicCoreEngine() {
-            const fioValueStringDataInfoDetails = document.getElementById('inp-order-name-id-field-rendering-node').value.trim(), 
-                  phoneValueStringDataInfoDetails = document.getElementById('inp-order-phone-id-field-rendering-node').value.trim();
-            if(!fioValueStringDataInfoDetails || !phoneValueStringDataInfoDetails) return alert("Будь ласка, заповніть ПІБ та Номер телефону!");
-            
-            const btnSubmitNodeElementUnitHandling = document.getElementById('btn-final-dispatch-trigger-id-rendering-unit'); 
-            btnSubmitNodeElementUnitHandling.innerText = "ОБРОБКА..."; btnSubmitNodeElementUnitHandling.disabled = true;
-            
-            const payloadObjectDataResultsOutputFinal = { action: "new_order", fio: fioValueStringDataInfoDetails, phone: phoneValueStringDataInfoDetails, city: document.getElementById('inp-order-city-id-field-rendering-node').value || 'Не вказано', delivery: activeLogisticsModeTagLabelValueIdNameVal + " №" + (document.getElementById('inp-order-np-id-field-rendering-node').value || '0'), items: shoppingCartArraySessionObjectStore.map(item => `${item.name} (${item.selectedSizeTagLabelIdNameVal})`).join('\n'), total: document.getElementById('label-cart-final-total-sum-value-node-rendering-element').innerText, promo: document.getElementById('inp-order-promo-id-field-rendering-node').value || 'Ні' };
-            
-            await fetch(GOOGLE_API_ENDPOINT_URL_CORE, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payloadObjectDataResultsOutputFinal) });
-            document.getElementById('cart-phase-step-2-rendering-unit').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent); font-size:2.2rem;">Успішно!</h2><p style="color:#666666; margin-top:20px; font-weight:800;">Замовлення прийнято. Менеджер зв'яжеться з Вами.</p><button class="btn-luxury-cta-main-action-rendering" style="margin-top:60px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
-            shoppingCartArraySessionObjectStore = []; syncMainCartBadgeDisplayInterfaceLogicSystemHandling();
-        }
+        function syncCartBadge() {
+            const b = document.getElementById('badge-cart');
+            b.innerText = cartArray.length; b.style.display = cartArray.length ? 'block' : 'none';
+        }
 
-        function navToViewPageSPA(viewIdStringKeyNameVal, elementNodeBoxUnitAreaBox) {
-            document.querySelectorAll('.app-view-page-node').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.dock-navigation-tab-id-element').forEach(tab => tab.classList.remove('active'));
-            document.getElementById('view-' + viewIdStringKeyNameVal).classList.add('active'); 
-            elementNodeBoxUnitAreaBox.classList.add('active');
-            
-            if(historyNavigationStackLogArrayIdNodeUnit[historyNavigationStackLogArrayIdNodeUnit.length-1] !== viewIdStringKeyNameVal) historyNavigationStackLogArrayIdNodeUnit.push(viewIdStringKeyNameVal);
-            document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element').style.display = 'none';
-        }
+        function renderCartContents() {
+            const node = document.getElementById('cart-items-rendering-node');
+            if(!cartArray.length) { node.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Кошик порожній 🛒</p>"; }
+            else {
+                node.innerHTML = cartArray.map((item, idx) => `
+                    <div class="cart-line-product">
+                        <img src="${item.image}">
+                        <div class="cart-line-info">
+                            <div class="cart-line-title">${item.name}</div>
+                            <div class="cart-line-meta">Розмір: ${item.selectedSize}</div>
+                        </div>
+                        <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
+                        <div class="btn-remove-pos" onclick="removeFromCart(${idx})">✕</div>
+                    </div>`).join('');
+            }
+            const total = cartArray.reduce((s, i) => s + parseInt(i.price), 0);
+            document.getElementById('label-cart-sum').innerText = total + " ₴";
 
-        function navigateHistoryBackLog() { 
-            if(historyNavigationStackLogArrayIdNodeUnit.length > 1) { 
-                historyNavigationStackLogArrayIdNodeUnit.pop(); 
-                const previousViewIdKeyNameVal = historyNavigationStackLogArrayIdNodeUnit[historyNavigationStackLogArrayIdNodeUnit.length-1]; 
-                navToViewPageSPA(previousViewIdKeyNameVal, document.querySelectorAll('.dock-navigation-tab-id-element')[['home','match','catalog'].indexOf(previousViewIdKeyNameVal)]); 
-            } else location.reload(); 
-        }
+            const upsell = document.getElementById('wish-upsell-rendering-area');
+            if(wishArray.length && !cartArray.find(c => wishArray.some(w => w.id === c.id))) {
+                upsell.innerHTML = `<div class="wish-upsell-container">
+                    <div class="wish-upsell-header">❤️ Твої фаворити з Match:</div>
+                    <div class="wish-upsell-scroll">
+                        ${wishArray.map(p => `<div class="wish-mini-card" onclick="openSizePicker('${p.id}')"><img src="${p.image}"><h4>${p.brand}</h4></div>`).join('')}
+                    </div></div>`;
+            } else upsell.innerHTML = "";
+        }
 
-        function toggleLuxeContactsPopWindowActionControl() { 
-            const nodePopWindowBoxUnitArea = document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element'); 
-            nodePopWindowBoxUnitArea.style.display = nodePopWindowBoxUnitArea.style.display === 'flex' ? 'none' : 'flex'; 
-        }
+        // --- 7. CATALOG TILES ---
+        function renderCatalogBrands() {
+            const brands = [...new Set(sessionDb.map(p => p.brand))].sort();
+            document.getElementById('brand-tiles-node').innerHTML = brands.map(b => `
+                <div class="brand-vitrine-tile" onclick="filterByBrandShortcut('${b}')">
+                    <h3>${b}</h3>
+                    <span>${sessionDb.filter(x => x.brand === b).length} МОДЕЛЕЙ ➔</span>
+                </div>`).join('');
+        }
 
-        function openPanelSheetAction(sheetIdStringNameLabelTag) { 
-            document.getElementById('ui-overlay-mask-unit-id-node').style.display = 'block'; 
-            setTimeout(function() { 
-                document.getElementById('ui-overlay-mask-unit-id-node').style.opacity = '1'; 
-                document.getElementById(sheetIdStringNameLabelTag).classList.add('active'); 
-            }, 15); 
-            if(sheetIdStringNameLabelTag === 'cart-sheet-id-rendering-node-box') renderCartContentsInterfaceHandlingSystemCoreEngine(); 
-            if(sheetIdStringNameLabelTag === 'wish-sheet-rendering-id-node-box') syncFavoritesWishlistInterfaceLogicEngineSystemHandling(); 
-        }
+        function filterByBrandShortcut(b) {
+            activeBrand = b; renderMasterCatalog();
+            navToView('home', document.getElementById('tab-btn-home'));
+        }
 
-        function closeAllActiveUISheetsActionControl() { 
-            document.querySelectorAll('.premium-ui-bottom-sheet-id-rendering-box').forEach(sheet => sheet.classList.remove('active')); 
-            document.getElementById('ui-overlay-mask-unit-id-node').style.opacity = '0'; 
-            setTimeout(function() { 
-                document.getElementById('ui-overlay-mask-unit-id-node').style.display = 'none'; 
-                rollbackToPhaseOneListControl(); 
-                document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element').style.display = 'none'; 
-            }, 500); 
-        }
+        // --- 8. ORDERING ---
+        async function dispatchFinalOrder() {
+            const fio = document.getElementById('order-fio').value.trim(), phone = document.getElementById('order-phone').value.trim();
+            if(!fio || !phone) return alert("Заповніть ПІБ та Телефон!");
+            const btn = document.getElementById('btn-final-dispatch'); btn.innerText = "ВІДПРАВКА..."; btn.disabled = true;
+            const data = { action: "new_order", fio, phone, city: document.getElementById('order-city').value, delivery: deliveryWay + " №" + document.getElementById('order-np').value, items: cartArray.map(i => `${i.name} (р. ${i.selectedSize})`).join('\n'), total: document.getElementById('label-cart-sum').innerText };
+            await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
+            document.getElementById('cart-step-2').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent);">Успішно!</h2><p style="color:#666;">Замовлення прийнято. Менеджер зв'яжеться з Вами.</p><button class="btn-premium-cta" style="margin-top:40px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
+            cartArray = []; syncCartBadge();
+        }
 
-        function updateAppLogisticsSelection(typeLabelStringNameLabelTag) { 
-            activeLogisticsModeTagLabelValueIdNameVal = typeLabelStringNameLabelTag; 
-            document.querySelectorAll('.delivery-choice-segment-tab-id-node').forEach(btn => btn.classList.remove('active')); 
-            document.getElementById(typeLabelStringNameLabelTag==='Відділення'?'btn-log-vidd-tab-id-rendering':'btn-log-post-tab-id-rendering').classList.add('active'); 
-            document.getElementById('inp-order-np-id-field-rendering-node').placeholder = typeLabelStringNameLabelTag==='Відділення'?'№ Відділення':'№ Поштомату'; 
-        }
+        // --- 9. INTERFACE CONTROL ---
+        function navToView(p, el) {
+            document.querySelectorAll('.page-node').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-unit').forEach(t => t.classList.remove('active'));
+            document.getElementById('view-'+p).classList.add('active'); el.classList.add('active');
+            document.getElementById('luxe-contacts-pop').style.display = 'none';
+        }
 
-        function proceedToCheckoutFormPhaseControl() { 
-            if(!shoppingCartArraySessionObjectStore.length) return; 
-            document.getElementById('cart-phase-step-1-id-node-element').style.display='none'; 
-            document.getElementById('cart-phase-step-2-id-node-element').style.display='block'; 
-        }
+        function toggleContactsPop() { const p = document.getElementById('luxe-contacts-pop'); p.style.display = p.style.display === 'flex' ? 'none' : 'flex'; }
+        function openPanel(id) { document.getElementById('global-mask').style.display = 'block'; setTimeout(() => { document.getElementById('global-mask').style.opacity = '1'; document.getElementById(id).classList.add('active'); }, 15); if(id === 'cart-sheet') renderCartContents(); if(id === 'wishlist-sheet') syncWishlistUI(); }
+        function closeAllActiveSheets() { document.querySelectorAll('.ui-bottom-sheet').forEach(s => s.classList.remove('active')); document.getElementById('global-mask').style.opacity = '0'; setTimeout(() => { document.getElementById('global-mask').style.display = 'none'; rollbackToCartList(); document.getElementById('luxe-contacts-pop').style.display = 'none'; }, 500); }
+        function updateLogisticsType(t) { deliveryWay = t; document.querySelectorAll('.log-choice-btn').forEach(b => b.classList.remove('active')); document.getElementById(t==='Відділення'?'log-vidd-tab':'log-post-tab').classList.add('active'); document.getElementById('order-np').placeholder = t==='Відділення'?'№ Відділення':'№ Поштомату'; }
+        function proceedToCheckoutForm() { if(!cartArray.length) return; document.getElementById('cart-step-1').style.display='none'; document.getElementById('cart-step-2').style.display='block'; }
+        function rollbackToCartList() { document.getElementById('cart-step-2').style.display='none'; document.getElementById('cart-step-1').style.display='block'; }
+        function triggerZoom(s) { document.getElementById('zoom-portal-img').src = s; document.getElementById('zoom-portal-overlay').style.display='flex'; }
+        function handleMasterFiltering() { renderMasterCatalog(); }
+        function removeFromCart(idx) { cartArray.splice(idx, 1); renderCartContents(); syncCartBadge(); if(!cartArray.length) closeAllActiveSheets(); }
 
-        function rollbackToPhaseOneListControl() { 
-            document.getElementById('cart-phase-step-2-id-node-element').style.display='none'; 
-            document.getElementById('cart-phase-step-1-id-node-element').style.display='block'; 
-        }
-
-        function triggerZoomPortal(imgSrcValueDataInfoDetails) { 
-            document.getElementById('zoom-img-target-node-portal-rendering-element').src = imgSrcValueDataInfoDetails; 
-            document.getElementById('zoom-portal-rendering-unit-element').style.display='flex'; 
-        }
-
-        function runMasterFilteringEngineLogicSystem() { renderMainCatalogScrollGridEngineSystemHandling(); }
-        
-        preloadLuxeExperienceCoreEngineLogicSystemHandlingProcess();
-    </script>
+        preloadLuxeData();
+    </script>
 </body>
 </html>
