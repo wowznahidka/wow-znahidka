@@ -82,10 +82,13 @@ a { text-decoration:none; color:inherit; }
    ============================================================ */
 #splash {
     position:fixed; inset:0; background:var(--bg); z-index:10000;
-    display:flex; flex-direction:column;
+    display:flex; flex-direction:column; gap:0;
     transition:transform 1s cubic-bezier(.8,0,.2,1);
 }
 #splash.off { transform:translateY(-100%); pointer-events:none; }
+/* No stripe between gender panels */
+#gp-men { border-bottom: none !important; }
+#gp-women { border-top: none !important; }
 
 .splash-logo-wrap {
     position:absolute; top:50%; left:50%;
@@ -107,6 +110,7 @@ a { text-decoration:none; color:inherit; }
 .g-panel {
     flex:1; position:relative; overflow:hidden;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
+    border:none; outline:none;
 }
 .g-img {
     position:absolute; inset:0; width:100%; height:100%;
@@ -604,7 +608,7 @@ a { text-decoration:none; color:inherit; }
 <div id="toast-wrap"></div>
 
 <!-- LOADER -->
-<div id="loader" class="on">
+<div id="loader">
     <div class="loader-ring"></div>
     <p class="loader-txt">Завантаження...</p>
 </div>
@@ -656,7 +660,7 @@ a { text-decoration:none; color:inherit; }
 <div id="app">
 
     <!-- ГОЛОВНА -->
-    <section id="page-home" class="page active">
+    <section id="page-home" class="page">
         <div class="home-hero">
             <p class="home-greeting" id="home-greeting">Привіт 👋</p>
             <h1 class="home-headline">Знайди свою<br><span>ідеальну пару</span></h1>
