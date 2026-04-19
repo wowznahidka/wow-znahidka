@@ -67,6 +67,9 @@ async function initWOW(gender) {
         document.getElementById('nav').style.display  = 'flex';
         document.getElementById('loader').classList.remove('on');
 
+        // Activate home page and tab
+        changeTab('home', document.getElementById('tab-home'));
+
         if (CART.length > 0) toast('♻️ Твій кошик відновлено!');
 
     } catch(e) {
@@ -368,18 +371,19 @@ function calcEU() {
 }
 
 /* ── Photo request ── */
-async function reqPhoto() {
+function reqPhoto() {
     const btn = document.getElementById('btn-photo');
-    btn.disabled = true; btn.textContent = '⏳ Відправляємо...'; haptic(30);
-    try {
-        await fetch(API_URL, { method:'POST', mode:'no-cors', body:JSON.stringify({ action:'request_photo', id:ACT_ID, name:ACT_NAME }) });
-        btn.textContent = '✅ Запит надіслано';
-        toast('📸 Запит на фото надіслано!', true);
-        setTimeout(() => { btn.textContent = '📸 Запросити додаткові фото'; btn.disabled = false; }, 4000);
-    } catch(e) {
-        btn.textContent = '📸 Запросити додаткові фото'; btn.disabled = false;
-        toast('❌ Помилка. Напишіть нам у Telegram.');
-    }
+    btn.disabled = true;
+    haptic(30);
+
+    // Build Telegram message with product details
+    const p = DB.find(x => x.id === ACT_ID);
+    const displayName = p ? `${p.brand} ${cleanName(p.name, p.brand)}` : ACT_NAME;
+    const msg = encodeURIComponent(`📸 Привіт! Прошу додаткові фото:\n👟 ${displayName}\n🆔 Артикул: ${ACT_ID}`);
+    window.open(`https://t.me/znahidkawow?text=${msg}`, '_blank');
+
+    toast('📸 Відкриваємо Telegram з запитом!', true);
+    setTimeout(() => { btn.textContent = '📸 Запросити додаткові фото'; btn.disabled = false; }, 3000);
 }
 
 /* ============================================================
