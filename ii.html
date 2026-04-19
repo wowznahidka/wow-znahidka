@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>WOW.ZNAHIDKA</title>
-    
+    <title>WOW.ZNAHIDKA | Exclusive Sneaker Boutique</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --accent: #d4ff00;
@@ -25,9 +23,8 @@
             --red-glow: rgba(255, 71, 87, 0.5);
             --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            --shadow-premium: 0 35px 70px rgba(0, 0, 0, 0.9);
+            --shadow-xl: 0 35px 70px rgba(0, 0, 0, 0.9);
         }
-
         * {
             margin: 0;
             padding: 0;
@@ -36,7 +33,6 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             background-color: var(--bg);
             color: var(--text-main);
@@ -47,31 +43,8 @@
             position: fixed;
             overscroll-behavior: none;
         }
-
-        button {
-            cursor: pointer;
-            border: none;
-            background: none;
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        img {
-            -webkit-user-drag: none;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        .custom-scroll::-webkit-scrollbar {
-            width: 0px;
-            display: none;
-        }
-
-        .custom-scroll {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
+        .custom-scroll::-webkit-scrollbar { width: 0px; display: none; }
+        .custom-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         #splash-screen {
             position: fixed;
             inset: 0;
@@ -82,15 +55,13 @@
             transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
             will-change: transform;
         }
-
-        .splash-overlay-luxe {
+        .splash-overlay-gradient {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
+            background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
             z-index: 2;
             pointer-events: none;
         }
-
         .logo-breathing-container {
             position: absolute;
             top: 50%;
@@ -101,36 +72,24 @@
             pointer-events: none;
             width: 100%;
         }
-
         .logo-breathing-text {
             font-family: 'Syncopate', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             letter-spacing: 8px;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.5);
             animation: logoBreathEffect 3.5s infinite ease-in-out;
             display: inline-block;
         }
-
         .logo-breathing-text span {
             color: var(--accent);
             text-shadow: 0 0 30px var(--accent-glow);
         }
-
         @keyframes logoBreathEffect {
-            0%, 100% {
-                opacity: 0.3;
-                filter: blur(4px);
-                transform: scale(0.97);
-            }
-            50% {
-                opacity: 0.9;
-                filter: blur(0px);
-                transform: scale(1.04);
-            }
+            0%, 100% { opacity: 0.3; filter: blur(4px); transform: scale(0.97); }
+            50% { opacity: 0.9; filter: blur(0px); transform: scale(1.04); }
         }
-
-        .gender-panel-interactive {
+        .splash-gender-panel {
             flex: 1;
             position: relative;
             overflow: hidden;
@@ -141,29 +100,25 @@
             background-color: #080808;
             transition: background-color 0.5s ease;
         }
-
-        .gender-panel-interactive img {
+        .splash-gender-panel img {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: 2s opacity ease, 4s transform ease;
-            filter: grayscale(100%) brightness(0.3);
+            transition: 2s opacity ease, 4.5s transform ease;
+            filter: brightness(0.4);
             will-change: opacity, transform;
         }
-
-        .gender-panel-interactive.ready img {
-            opacity: 0.45;
+        .splash-gender-panel.ready img {
+            opacity: 0.55;
         }
-
-        .gender-panel-interactive:hover img {
-            transform: scale(1.12);
-            filter: grayscale(0%) brightness(0.5);
-            opacity: 0.7;
+        .splash-gender-panel:hover img {
+            transform: scale(1.15);
+            filter: brightness(0.65);
+            opacity: 0.8;
         }
-
-        .gender-label-splash {
+        .gender-label-splash-text {
             position: relative;
             z-index: 10;
             font-size: 2.8rem;
@@ -173,16 +128,13 @@
             text-shadow: 0 10px 40px #000000;
             transition: var(--transition-smooth);
         }
-
-        .gender-panel-interactive:hover .gender-label-splash {
+        .splash-gender-panel:hover .gender-label-splash-text {
             color: var(--accent);
             transform: scale(1.1);
         }
-
         .men-panel-border {
             border-bottom: 1px solid var(--border);
         }
-
         header {
             position: absolute;
             top: 0;
@@ -199,14 +151,12 @@
             align-items: center;
             border-bottom: 1px solid var(--border);
         }
-
-        .header-left-part {
+        .header-left-area {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .btn-header-universal-back {
+        .btn-header-back-action {
             background-color: #161616;
             width: 44px;
             height: 44px;
@@ -219,32 +169,27 @@
             cursor: pointer;
             transition: 0.3s;
         }
-
-        .btn-header-universal-back:active {
+        .btn-header-back-action:active {
             transform: scale(0.85);
             background-color: var(--accent);
             color: #000000;
         }
-
-        .header-branding-logo {
+        .header-branding-logo-text {
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
             font-size: 1.05rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
-
-        .header-branding-logo span {
+        .header-branding-logo-text span {
             color: var(--accent);
         }
-
-        .header-right-part {
+        .header-right-area {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
-        .header-icon-action-btn {
+        .header-action-button-unit {
             position: relative;
             width: 48px;
             height: 48px;
@@ -257,11 +202,9 @@
             cursor: pointer;
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .header-icon-action-btn:active {
+        .header-action-button-unit:active {
             transform: scale(0.85);
         }
-
         .nav-status-badge-pill {
             position: absolute;
             top: -6px;
@@ -279,21 +222,18 @@
             box-shadow: 0 0 15px var(--accent-glow);
             z-index: 10;
         }
-
-        #badge-heart-wish-node {
+        #badge-heart-wishlist-node {
             background-color: var(--red);
             color: #ffffff;
             box-shadow: 0 0 15px var(--red-glow);
-            animation: badgeHeartbeat 2s infinite;
+            animation: badgeHeartbeatAction 2s infinite;
         }
-
-        @keyframes badgeHeartbeat {
+        @keyframes badgeHeartbeatAction {
             0% { transform: scale(1); }
             50% { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
-
-        .app-view-page {
+        .page-view-container-element {
             position: absolute;
             inset: 0;
             padding-top: 75px;
@@ -305,27 +245,23 @@
             -webkit-overflow-scrolling: touch;
             background-color: var(--bg);
         }
-
-        .app-view-page.active {
+        .page-view-container-element.active {
             display: flex;
             opacity: 1;
-            animation: viewEntryFade 0.5s ease forwards;
+            animation: viewEntryFadeEffect 0.5s ease forwards;
         }
-
-        @keyframes viewEntryFade {
+        @keyframes viewEntryFadeEffect {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .search-area-sticky-node {
+        .search-area-sticky-box {
             position: sticky;
             top: 0;
             z-index: 100;
             background-color: var(--bg);
             padding: 15px 20px;
         }
-
-        .input-luxe-premium-search {
+        .premium-input-luxe-search {
             width: 100%;
             background-color: #111111;
             border: 1px solid var(--border);
@@ -334,26 +270,30 @@
             color: #ffffff;
             font-size: 1rem;
             outline: none;
-            transition: 0.3s;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .input-luxe-premium-search:focus {
+        .premium-input-luxe-search:focus {
             border-color: var(--accent);
             box-shadow: 0 0 20px rgba(212, 255, 0, 0.1);
         }
-
-        .main-catalog-grid-system {
+        .main-product-grid-rendering-area {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            padding: 0 15px 40px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 40px;
         }
-
         @media (min-width: 768px) {
-            .main-catalog-grid-system { grid-template-columns: repeat(4, 1fr); gap: 25px; padding: 0 40px 50px; }
+            .main-product-grid-rendering-area {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 25px;
+                padding-left: 40px;
+                padding-right: 40px;
+                padding-bottom: 50px;
+            }
         }
-
-        .sneaker-card-premium-unit {
+        .sneaker-card-premium-luxe-unit {
             background-color: var(--surface);
             border-radius: 35px;
             border: 1px solid var(--border);
@@ -361,43 +301,37 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            transition: 0.4s;
+            transition: transform 0.4s ease, border-color 0.4s ease;
             position: relative;
         }
-
-        .sneaker-card-premium-unit:hover {
+        .sneaker-card-premium-luxe-unit:hover {
             border-color: var(--accent);
             transform: translateY(-8px);
         }
-
-        .card-visual-image-viewport {
+        .card-image-viewport-box {
             position: relative;
             aspect-ratio: 1/1;
             background-color: #0a0a0a;
             overflow: hidden;
             cursor: zoom-in;
         }
-
-        .card-visual-image-viewport img {
+        .card-image-viewport-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.8s transform cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform;
         }
-
-        .sneaker-card-premium-unit:hover .card-visual-image-viewport img {
+        .sneaker-card-premium-luxe-unit:hover .card-image-viewport-box img {
             transform: scale(1.12);
         }
-
-        .card-info-details-rendering {
+        .card-info-details-box-unit {
             padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-
-        .label-neon-tag-brand {
+        .label-neon-tag-brand-text {
             font-size: 0.65rem;
             font-weight: 900;
             color: var(--accent);
@@ -405,8 +339,7 @@
             margin-bottom: 8px;
             letter-spacing: 2px;
         }
-
-        .text-model-title-premium {
+        .text-model-title-main-rendering {
             font-size: 0.95rem;
             font-weight: 700;
             margin-bottom: 15px;
@@ -415,21 +348,18 @@
             overflow: hidden;
             color: #ffffff;
         }
-
-        .card-footer-price-action-row {
+        .card-footer-price-rendering-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
         }
-
-        .text-price-bold-luxe {
+        .text-price-bold-luxe-value {
             font-size: 1.3rem;
             font-weight: 900;
             color: #ffffff;
         }
-
-        .btn-open-size-picker-luxe {
+        .btn-open-size-picker-trigger-luxe {
             background-color: var(--surface-light);
             color: #ffffff;
             border: 1px solid var(--border);
@@ -438,23 +368,19 @@
             font-size: 0.75rem;
             font-weight: 800;
             cursor: pointer;
-            transition: 0.3s;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        .btn-open-size-picker-luxe:active {
+        .btn-open-size-picker-trigger-luxe:active {
             background-color: var(--accent);
             color: #000000;
         }
-
-        /* --- 🔥 MATCH ENGINE SYSTEM --- */
-        .match-environment-luxe-box {
+        .match-view-environment-luxe-container {
             justify-content: center;
             align-items: center;
             background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
             padding-bottom: 120px;
         }
-
-        .tinder-stack-viewport-rendering {
+        .tinder-stack-viewport-rendering-root {
             position: relative;
             width: 92vw;
             height: 60vh;
@@ -462,28 +388,25 @@
             z-index: 10;
             perspective: 1500px;
         }
-
-        .tinder-swipe-card-premium-node {
+        .tinder-swipe-card-premium-element {
             position: absolute;
             inset: 0;
             border-radius: 45px;
             background-color: var(--surface);
             border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.85);
             touch-action: none;
             will-change: transform, opacity;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .tinder-swipe-card-premium-node img {
+        .tinder-swipe-card-premium-element img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             pointer-events: none;
         }
-
-        .tinder-info-overlay-rendering-details {
+        .tinder-info-overlay-rendering-box {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -492,8 +415,7 @@
             background: linear-gradient(to top, rgba(0,0,0,1) 35%, transparent 75%);
             z-index: 5;
         }
-
-        .social-proof-indicator-text {
+        .social-proof-message-indicator-neon {
             font-size: 0.75rem;
             color: var(--accent);
             font-weight: 800;
@@ -503,22 +425,19 @@
             letter-spacing: 1px;
             opacity: 0.9;
         }
-
-        .tinder-price-label-match-unit {
+        .tinder-price-label-match-value {
             font-size: 1.6rem;
             font-weight: 900;
             color: var(--accent);
             margin-top: 10px;
         }
-
-        .swipe-controls-action-footer-row {
+        .swipe-controls-action-footer-unit {
             display: flex;
             gap: 35px;
             margin-top: 45px;
             z-index: 100;
         }
-
-        .btn-swipe-circle-luxe-action {
+        .btn-swipe-circle-luxe-action-node {
             width: 80px;
             height: 80px;
             border-radius: 50%;
@@ -531,19 +450,15 @@
             transition: var(--transition-bounce);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
-
-        .btn-swipe-circle-luxe-action.nope { color: var(--red); border-color: rgba(255, 71, 87, 0.2); }
-        .btn-swipe-circle-luxe-action.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 35px var(--accent-glow); }
-
-        /* --- 👟 CATALOG: LUXE VITRINE --- */
-        .brand-catalog-rendering-tiles-grid {
+        .btn-swipe-circle-luxe-action-node.nope { color: var(--red); border-color: rgba(255, 71, 87, 0.2); }
+        .btn-swipe-circle-luxe-action-node.yep { color: var(--accent); border-color: var(--accent); box-shadow: 0 0 35px var(--accent-glow); }
+        .brand-catalog-rendering-tiles-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             padding: 25px;
         }
-
-        .brand-tile-premium-card-unit {
+        .brand-tile-luxe-unit-card {
             background: linear-gradient(135deg, #111 0%, #080808 100%);
             padding: 50px 20px;
             border-radius: 40px;
@@ -556,37 +471,25 @@
             justify-content: center;
             align-items: center;
         }
-
-        .brand-tile-premium-card-unit:active {
+        .brand-tile-luxe-unit-card:active {
             background-color: var(--accent);
             transform: scale(0.96);
         }
-
-        .brand-tile-premium-card-unit h3 {
+        .brand-tile-luxe-unit-card h3 {
             font-size: 1.2rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 3px;
             color: #ffffff;
         }
-
-        .brand-tile-premium-card-unit span {
+        .brand-tile-luxe-unit-card span {
             font-size: 0.75rem;
             font-weight: 800;
             color: var(--accent);
             text-transform: uppercase;
             margin-top: 10px;
         }
-
-        .brand-tile-premium-card-unit:active h3,
-        .brand-tile-premium-card-unit:active span {
-            color: #000000;
-        }
-
-        /* ============================================================
-           🧭 6. BOTTOM NAVIGATION DOCK
-           ============================================================ */
-        .bottom-navigation-dock-luxe-bar {
+        .bottom-app-navigation-dock-luxe-unit {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -602,8 +505,7 @@
             border-top: 1px solid var(--border);
             z-index: 7000;
         }
-
-        .dock-navigation-tab-luxe-unit {
+        .dock-navigation-tab-unit-element {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -614,21 +516,15 @@
             transition: color 0.35s ease;
             cursor: pointer;
         }
-
-        .dock-navigation-tab-luxe-unit.active {
+        .dock-navigation-tab-unit-element.active {
             color: var(--accent);
         }
-
-        .dock-navigation-tab-luxe-unit i {
+        .dock-navigation-tab-unit-element i {
             font-style: normal;
             font-size: 1.7rem;
             margin-bottom: 6px;
         }
-
-        /* ============================================================
-           📐 7. SYSTEM SHEETS & MODALS
-           ============================================================ */
-        .luxe-global-ui-mask-overlay {
+        .luxe-global-overlay-mask-rendering {
             position: fixed;
             inset: 0;
             background-color: rgba(0,0,0,0.92);
@@ -639,8 +535,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        
-        .premium-ui-bottom-sheet-id-node {
+        .premium-ui-bottom-sheet-id-rendering-box {
             position: fixed;
             bottom: -100%;
             left: 0;
@@ -654,12 +549,10 @@
             max-height: 94vh;
             overflow-y: auto;
         }
-
-        .premium-ui-bottom-sheet-id-node.active {
+        .premium-ui-bottom-sheet-id-rendering-box.active {
             bottom: 0;
         }
-
-        .sheet-drag-handle-pill-ui {
+        .sheet-handle-pill-drag-element {
             width: 65px;
             height: 6px;
             background-color: #252525;
@@ -668,15 +561,13 @@
             margin-right: auto;
             margin-bottom: 35px;
         }
-
-        .grid-sizes-selection-rendering-matrix {
+        .grid-sizes-selection-rendering-matrix-area {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-bottom: 45px;
         }
-        
-        .size-variant-pill-rendering-element {
+        .size-variant-pill-rendering-node-box {
             background-color: #121212;
             border: 1px solid var(--border);
             padding: 25px 5px;
@@ -687,16 +578,14 @@
             font-size: 1.1rem;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .size-variant-pill-rendering-element.active {
+        .size-variant-pill-rendering-node-box.active {
             background-color: var(--accent);
             color: #000000;
             border-color: var(--accent);
             transform: scale(1.08);
             box-shadow: 0 15px 30px var(--accent-soft);
         }
-
-        .btn-premium-cta-action-luxe {
+        .btn-luxury-cta-main-action-rendering {
             width: 100%;
             background-color: var(--accent);
             color: #000000;
@@ -709,8 +598,7 @@
             box-shadow: 0 20px 50px var(--accent-soft);
             border: none;
         }
-
-        .btn-request-photo-secondary-link {
+        .btn-request-photo-secondary-link-rendering {
             width: 100%;
             background-color: transparent;
             color: var(--text-dim);
@@ -724,13 +612,10 @@
             margin-top: 15px;
             text-align: center;
         }
-
-        /* 🛒 8. CART & WISHLIST UI LOGIC */
-        .cart-items-rendering-container-box {
+        .cart-items-rendering-container-unit {
             margin-bottom: 30px;
         }
-        
-        .cart-line-product-rendering-row {
+        .cart-line-product-rendering-row-element {
             display: flex;
             align-items: center;
             gap: 20px;
@@ -738,33 +623,28 @@
             padding-bottom: 22px;
             border-bottom: 1px solid var(--border);
         }
-
-        .cart-line-product-rendering-row img {
+        .cart-line-product-rendering-row-element img {
             width: 95px;
             height: 95px;
             border-radius: 28px;
             object-fit: cover;
         }
-
-        .cart-line-product-info-details-box {
+        .cart-line-product-info-body-details-rendering {
             flex: 1;
         }
-
-        .cart-line-name-label-text-rendering {
+        .cart-line-name-label-text-rendering-value {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 6px;
             color: #ffffff;
         }
-
-        .cart-line-meta-label-tag-details {
+        .cart-line-meta-label-tag-details-rendering {
             font-size: 0.85rem;
             color: var(--accent);
             font-weight: 800;
             text-transform: uppercase;
         }
-
-        .btn-item-delete-action-luxe-rendering {
+        .btn-item-delete-action-luxe-rendering-trigger {
             background-color: rgba(255, 71, 87, 0.1);
             color: var(--red);
             width: 46px;
@@ -776,8 +656,7 @@
             font-size: 1.4rem;
             cursor: pointer;
         }
-
-        .wishlist-smart-upsell-rendering-container {
+        .upsell-wishlist-luxury-rendering-container-unit {
             margin-top: 45px;
             padding-top: 35px;
             padding-bottom: 25px;
@@ -787,8 +666,7 @@
             border-radius: 45px;
             border: 1px solid var(--border);
         }
-
-        .upsell-header-text-label-row {
+        .upsell-wishlist-header-text-row-rendering {
             font-size: 0.95rem;
             font-weight: 900;
             color: var(--red);
@@ -799,25 +677,21 @@
             align-items: center;
             gap: 15px;
         }
-
-        .upsell-horizontal-rendering-scroll-list {
+        .upsell-horizontal-scroll-list-node-element {
             display: flex;
             gap: 22px;
             overflow-x: auto;
             padding-bottom: 15px;
             scrollbar-width: none;
         }
-
-        .upsell-horizontal-rendering-scroll-list::-webkit-scrollbar {
+        .upsell-horizontal-scroll-list-node-element::-webkit-scrollbar {
             display: none;
         }
-
-        .upsell-item-unit-mini-rendering-card {
+        .upsell-item-unit-mini-rendering-card-element {
             min-width: 150px;
             position: relative;
         }
-
-        .upsell-item-unit-mini-rendering-card img {
+        .upsell-item-unit-mini-rendering-card-element img {
             width: 150px;
             height: 150px;
             border-radius: 35px;
@@ -825,8 +699,7 @@
             border: 1px solid var(--border);
             box-shadow: 0 15px 30px #000000;
         }
-        
-        .btn-quick-plus-add-favorites-action {
+        .btn-quick-plus-add-favorites-action-node {
             position: absolute;
             bottom: 12px;
             right: 12px;
@@ -844,13 +717,7 @@
             cursor: pointer;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .btn-quick-plus-add-favorites-action:active {
-            transform: scale(0.8);
-        }
-
-        /* --- 💬 9. LUXE CONTACTS POPUP --- */
-        .pop-contacts-luxe-interactive-window {
+        .pop-contacts-luxe-premium-window-node {
             position: fixed;
             bottom: 125px;
             left: 20px;
@@ -866,15 +733,13 @@
             gap: 12px;
             box-shadow: 0 40px 140px #000000;
             z-index: 9000;
-            animation: popUpAnimationEngine 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            animation: popUpAnimationEngineCore 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
-
-        @keyframes popUpAnimationEngine {
+        @keyframes popUpAnimationEngineCore {
             from { opacity: 0; transform: translateY(60px) scale(0.92); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
-        .luxe-contact-btn-link-action-element {
+        .luxe-contact-btn-link-action-rendering-element {
             display: flex;
             align-items: center;
             gap: 22px;
@@ -887,12 +752,10 @@
             transition: 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .luxe-contact-btn-link-action-element.tg-brand-set { background-color: rgba(36, 161, 222, 0.12); color: #24A1DE; border-color: rgba(36, 161, 222, 0.25); }
-        .luxe-contact-btn-link-action-element.ig-brand-set { background-color: rgba(225, 48, 108, 0.12); color: #E1306C; border-color: rgba(225, 48, 108, 0.25); }
-        .luxe-contact-btn-link-action-element.tt-brand-set { background-color: rgba(255, 255, 255, 0.06); color: #ffffff; border-color: rgba(255, 255, 255, 0.15); }
-
-        /* --- 🚚 10. CHECKOUT FORM --- */
-        .form-luxe-checkout-rendering-input {
+        .luxe-contact-btn-link-action-rendering-element.tg-brand-set-raw { background-color: rgba(36, 161, 222, 0.12); color: #24A1DE; border-color: rgba(36, 161, 222, 0.25); }
+        .luxe-contact-btn-link-action-rendering-element.ig-brand-set-raw { background-color: rgba(225, 48, 108, 0.12); color: #E1306C; border-color: rgba(225, 48, 108, 0.25); }
+        .luxe-contact-btn-link-action-rendering-element.tt-brand-set-raw { background-color: rgba(255, 255, 255, 0.06); color: #ffffff; border-color: rgba(255, 255, 255, 0.15); }
+        .form-luxe-checkout-rendering-input-field {
             width: 100%;
             background-color: #0f0f0f;
             border: 1px solid var(--border);
@@ -904,9 +767,8 @@
             outline: none;
             transition: 0.3s ease;
         }
-        .form-luxe-checkout-rendering-input:focus { border-color: var(--accent); background-color: #141414; }
-
-        .segmented-delivery-control-luxe-bar {
+        .form-luxe-checkout-rendering-input-field:focus { border-color: var(--accent); background-color: #141414; }
+        .segmented-delivery-control-luxe-rendering-bar {
             display: flex;
             background-color: #111111;
             padding: 10px;
@@ -914,8 +776,7 @@
             margin-bottom: 35px;
             border: 1px solid var(--border);
         }
-
-        .delivery-choice-segment-tab-btn {
+        .delivery-choice-segment-tab-btn-rendering {
             flex: 1;
             padding: 20px;
             border-radius: 22px;
@@ -925,10 +786,8 @@
             transition: 0.3s ease;
             cursor: pointer;
         }
-
-        .delivery-choice-segment-tab-btn.active { background-color: var(--accent); color: #000000; box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
-
-        #premium-zoom-overlay-target-portal {
+        .delivery-choice-segment-tab-btn-rendering.active { background-color: var(--accent); color: #000000; box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
+        #premium-zoom-overlay-portal-unit-rendering {
             position: fixed;
             inset: 0;
             background-color: rgba(0,0,0,0.99);
@@ -938,8 +797,7 @@
             justify-content: center;
             cursor: zoom-out;
         }
-
-        #premium-zoom-overlay-target-portal img {
+        #premium-zoom-overlay-portal-unit-rendering img {
             max-width: 98%;
             max-height: 88vh;
             border-radius: 35px;
@@ -954,442 +812,435 @@
         <div class="logo-breathing-container">
             <div class="logo-breathing-text">WOW<span>.</span>ZNAHIDKA</div>
         </div>
-        <div class="gender-panel-interactive men-panel-border" id="panel-men-node-element" onclick="bootApplicationExperience('Чоловік')">
-            <img id="img-men-preloader-rendering-node" src="">
+        <div class="splash-gender-panel men-panel-border" id="panel-men-trigger-node" onclick="launchWOWApp('Чоловік')">
+            <img id="img-men-preloader-target-node" src="">
             <span class="gender-label-splash">ЧОЛОВІКАМ</span>
         </div>
-        <div class="gender-panel-interactive" id="panel-women-node-element" onclick="bootApplicationExperience('Жінка')">
-            <img id="img-women-preloader-rendering-node" src="">
+        <div class="splash-gender-panel" id="panel-women-trigger-node" onclick="launchWOWApp('Жінка')">
+            <img id="img-women-preloader-target-node" src="">
             <span class="gender-label-splash">ЖІНКАМ</span>
         </div>
     </div>
 
-    <header id="main-app-header-unit-id-node" style="display:none;">
+    <header id="main-app-header-unit-node" style="display:none;">
         <div class="header-left-area">
-            <button class="btn-header-universal-back" onclick="navigateHistoryBackActionControl()">←</button>
-            <div class="header-branding-logo">WOW<span>.</span>ZNAHIDKA</div>
+            <button class="btn-header-back-action" onclick="navigateHistoryBackActionControlTrigger()">←</button>
+            <div class="header-branding-logo-text">WOW<span>.</span>ZNAHIDKA</div>
         </div>
         <div class="header-right-area">
-            <div class="header-icon-action-btn" onclick="openPanelSheetUI('wish-sheet-id-rendering-area-unit')">
+            <div class="header-action-button-unit" onclick="openPanelSheetUI('wish-sheet-rendering-id-node')">
                 <span style="font-size: 1.8rem; color: var(--red);">❤</span>
-                <span class="nav-status-badge-pill" id="badge-heart-wishlist-node-value-rendering">0</span>
+                <span class="nav-status-badge-pill" id="badge-heart-wishlist-node-value-rendering-element">0</span>
             </div>
-            <div class="header-icon-action-btn" onclick="openPanelSheetUI('cart-sheet-id-rendering-area-unit')">
+            <div class="header-action-button-unit" onclick="openPanelSheetUI('cart-sheet-rendering-id-node')">
                 <span style="font-size: 1.8rem;">🛒</span>
-                <span class="nav-status-badge-pill" id="badge-cart-main-count-node-value-rendering">0</span>
+                <span class="nav-status-badge-pill" id="badge-cart-main-count-node-value-rendering-element">0</span>
             </div>
         </div>
     </header>
 
     <main>
-        <section id="view-home" class="app-view-page active custom-scroll">
-            <div class="search-area-sticky-node">
-                <input type="text" id="liveSearchInput" class="input-luxe-premium-search" placeholder="Шукай по назві (NB 530, Nike)..." oninput="runMasterFilteringEngineLogicSystem()">
+        <section id="view-home" class="page-view-node page-view-container-element active custom-scroll">
+            <div class="search-area-sticky-box">
+                <input type="text" id="liveSearchInput" class="premium-input-luxe-search" placeholder="NB 530, Jordan 4, Nike..." oninput="runMasterFilteringEngineLogicSystem()">
             </div>
-            <div class="main-catalog-grid-system" id="main-catalog-rendering-node-grid-unit"></div>
-            <div id="infinite-scroll-anchor-point-logic-trigger" style="height: 75px;"></div>
+            <div class="main-product-grid-rendering-area" id="main-catalog-rendering-node-grid-unit-element"></div>
+            <div id="infinite-scroll-anchor-point-logic-trigger-node" style="height: 75px;"></div>
         </section>
 
-        <section id="view-match" class="app-view-page match-environment-luxe-box">
-            <div class="tinder-stack-viewport-rendering" id="tinder-deck-rendering-root-node-unit"></div>
-            <div class="swipe-controls-action-footer-row">
-                <button class="btn-swipe-circle-luxe-action nope" onclick="executeSwipeActionTriggerAction('left')">✕</button>
-                <button class="btn-swipe-circle-luxe-action yep" onclick="executeSwipeActionTriggerAction('right')">❤</button>
+        <section id="view-match" class="page-view-node match-view-environment-luxe-container">
+            <div class="tinder-stack-viewport-rendering-root" id="tinder-deck-rendering-root-node-unit-box"></div>
+            <div class="swipe-controls-action-footer-unit">
+                <button class="btn-swipe-circle-luxe-action-node nope" onclick="executeSwipeActionTriggerAction('left')">✕</button>
+                <button class="btn-swipe-circle-luxe-action-node yep" onclick="executeSwipeActionTriggerAction('right')">❤</button>
             </div>
         </section>
 
-        <section id="view-catalog" class="app-view-page">
+        <section id="view-catalog" class="page-view-node">
             <h2 style="padding: 35px 25px 15px; font-weight: 900; font-size: 2.2rem; letter-spacing: -2.5px;">Каталог <span style="color:var(--accent)">.</span></h2>
-            <div class="brand-catalog-rendering-tiles-grid" id="brand-tiles-rendering-area-node-grid-unit"></div>
+            <div class="brand-catalog-rendering-tiles-container" id="brand-tiles-rendering-area-node-grid-unit-box"></div>
         </section>
     </main>
 
-    <nav class="bottom-app-navigation-dock-luxe-bar" id="app-dock-navigation-unit-id-node-box" style="display:none;">
-        <div class="dock-navigation-tab-luxe-unit active" id="tab-btn-home-node-id" onclick="navToViewPageSPA('home', this)"><i>🏠</i>Головна</div>
-        <div class="dock-navigation-tab-luxe-unit" id="tab-btn-match-node-id" onclick="navToViewPageSPA('match', this)"><i>🔥</i>Match</div>
-        <div class="dock-navigation-tab-luxe-unit" id="tab-btn-catalog-node-id" onclick="navToViewPageSPA('catalog', this)"><i>👟</i>Каталог</div>
-        <div class="dock-navigation-tab-luxe-unit" onclick="toggleLuxeContactsPopWindowAction()"><i>💬</i>Контакти</div>
+    <nav class="bottom-app-navigation-dock-luxe-bar" id="app-dock-navigation-unit-node-id-rendering" style="display:none;">
+        <div class="dock-navigation-tab-unit-element active" id="tab-btn-home-node-unit" onclick="navToViewPageSPA('home', this)"><i>🏠</i>Головна</div>
+        <div class="dock-navigation-tab-unit-element" id="tab-btn-match-node-unit" onclick="navToViewPageSPA('match', this)"><i>🔥</i>Match</div>
+        <div class="dock-navigation-tab-unit-element" id="tab-btn-catalog-node-unit" onclick="navToViewPageSPA('catalog', this)"><i>👟</i>Каталог</div>
+        <div class="dock-navigation-tab-unit-element" onclick="toggleLuxeContactsPopWindowActionControl()"><i>💬</i>Контакти</div>
     </nav>
 
-    <div class="pop-contacts-luxe-interactive-window" id="luxe-contacts-pop-window-rendering-node-box">
+    <div class="pop-contacts-luxe-premium-window-node" id="luxe-contacts-pop-window-rendering-node-unit-element">
         <div style="padding: 5px 5px 18px; font-weight: 900; font-size: 0.85rem; color: #333; text-transform: uppercase; letter-spacing: 2px;">Support Center WOW</div>
-        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-contact-btn-link-action-element tg-brand-set">✈️ Telegram Менеджер</a>
-        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-element ig-brand-set">📸 Instagram Shop</a>
-        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-element tt-brand-set">🎵 TikTok Channel</a>
+        <a href="https://t.me/znahidkawow" target="_blank" class="luxe-contact-btn-link-action-rendering-element tg-brand-set-raw">✈️ Telegram Менеджер</a>
+        <a href="https://www.instagram.com/wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-rendering-element ig-brand-set-raw">📸 Instagram Shop</a>
+        <a href="https://www.tiktok.com/@wow.znahidka" target="_blank" class="luxe-contact-btn-link-action-rendering-element tt-brand-set-raw">🎵 TikTok Channel</a>
     </div>
 
-    <div class="luxe-global-ui-mask-overlay" id="ui-overlay-mask-node-element-rendering-box" onclick="closeAllActiveUISheetsAction()"></div>
+    <div class="luxe-global-overlay-mask-rendering" id="ui-overlay-mask-node-element-rendering-id-unit" onclick="closeAllActiveUISheetsActionControl()"></div>
 
-    <div class="premium-ui-bottom-sheet-id-node" id="size-picker-sheet-unit-id-rendering">
-        <div class="sheet-handle-pill-ui"></div>
-        <h2 id="display-product-title-text-rendering-node" style="margin-bottom: 18px; font-size: 1.6rem; font-weight: 900;"></h2>
+    <div class="premium-ui-bottom-sheet-id-rendering-box" id="size-picker-sheet-unit-id-rendering-area">
+        <div class="sheet-handle-pill-drag-element"></div>
+        <h2 id="display-product-title-text-rendering-node-box" style="margin-bottom: 18px; font-size: 1.6rem; font-weight: 900;"></h2>
         <p style="color: #666; font-size: 1rem; margin-bottom: 40px; font-weight: 600;">Оберіть розміри для замовлення:</p>
-        <div class="grid-sizes-selection-rendering-matrix" id="size-matrix-rendering-area-box-rendering-node"></div>
-        <button class="btn-premium-cta-action-luxe" onclick="finalizeSizeSelectionAndAddToCartSessionAction()">ПІДТВЕРДИТИ ВИБІР</button>
-        <button class="btn-request-photo-secondary-link" onclick="requestMorePhotosFromManager()">📸 Запросити дод. фото моделі</button>
+        <div class="grid-sizes-selection-rendering-matrix-area" id="size-matrix-rendering-area-box-rendering-node-unit"></div>
+        <button class="btn-luxury-cta-main-action-rendering" onclick="finalizeSizeSelectionAndAddToCartSessionActionControl()">ПІДТВЕРДИТИ ВИБІР</button>
+        <button class="btn-request-photo-secondary-link-rendering" onclick="requestMorePhotosActionControlTrigger()">📸 Запросити дод. фото моделі</button>
     </div>
 
-    <div class="premium-ui-bottom-sheet-id-node" id="wish-sheet-id-rendering-area-unit">
-        <div class="sheet-handle-pill-ui"></div>
+    <div class="premium-ui-bottom-sheet-id-rendering-box" id="wish-sheet-rendering-id-node">
+        <div class="sheet-handle-pill-drag-element"></div>
         <h2 style="margin-bottom: 15px; font-size: 1.8rem; font-weight: 900;">Твій Match 🔥</h2>
         <p style="color: #666; margin-bottom: 35px; line-height: 1.6; font-size: 1.1rem;">Це твої ідеальні пари! Не дозволяй іншим забрати твій стиль. Вибери розмір прямо зараз.</p>
-        <div id="wishlist-full-rendering-grid-node-area-box-unit" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:45px;"></div>
-        <button class="btn-premium-cta-action-luxe" style="background-color:#ffffff; color:#000000;" onclick="navToViewPageSPA('home', document.getElementById('tab-btn-home-node-id')); closeAllActiveUISheetsAction();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
+        <div id="wishlist-full-rendering-grid-node-area-box-unit-rendering" style="display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-bottom:45px;"></div>
+        <button class="btn-luxury-cta-main-action-rendering" style="background-color:#ffffff; color:#000000;" onclick="navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit')); closeAllActiveUISheetsActionControl();">ДИВИТИСЬ ВСІ НОВИНКИ</button>
     </div>
 
-    <div class="premium-ui-bottom-sheet-id-node" id="cart-sheet-id-rendering-area-unit">
-        <div class="sheet-handle-pill-ui"></div>
-        <div id="cart-phase-step-1-id-node">
+    <div class="premium-ui-bottom-sheet-id-rendering-box" id="cart-sheet-rendering-id-node">
+        <div class="sheet-handle-pill-drag-element"></div>
+        <div id="cart-phase-step-1-rendering-node-element">
             <h2 style="margin-bottom: 30px; font-size: 1.8rem; font-weight: 900;">Твій кошик 🛍️</h2>
-            <div class="cart-items-rendering-container-box" id="cart-items-rendering-container-node-unit"></div>
+            <div class="cart-items-rendering-container-unit" id="cart-items-rendering-container-node-grid-unit-area"></div>
             
-            <div id="wishlist-upsell-rendering-area-node-box-unit-rendering"></div>
+            <div id="wishlist-upsell-rendering-area-node-box-unit-element-rendering"></div>
 
             <div style="margin-top: 50px; padding-top: 35px; border-top: 1px solid var(--border);">
                 <div style="display: flex; justify-content: space-between; font-size: 1.85rem; font-weight: 900; margin-bottom: 40px;">
-                    <span>Всього:</span><span id="label-cart-final-total-sum-value-node" style="color: var(--accent);">0 ₴</span>
+                    <span>Всього:</span><span id="label-cart-final-total-sum-value-node-rendering-element" style="color: var(--accent);">0 ₴</span>
                 </div>
-                <button class="btn-premium-cta-action-luxe" onclick="proceedToCheckoutFormPhaseAction()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
+                <button class="btn-luxury-cta-main-action-rendering" onclick="proceedToCheckoutFormPhaseActionControl()">ОФОРМИТИ ЗАМОВЛЕННЯ ➔</button>
             </div>
         </div>
-        <div id="cart-phase-step-2-id-node" style="display: none;">
+        <div id="cart-phase-step-2-rendering-node-element" style="display: none;">
             <h2 style="margin-bottom: 45px; font-size: 1.85rem; font-weight: 900;">Доставка</h2>
-            <input type="text" id="inp-order-name-id-field" class="form-luxe-checkout-rendering-input" placeholder="Прізвище та Ім'я">
-            <input type="tel" id="inp-order-phone-id-field" class="form-luxe-checkout-rendering-input" placeholder="Номер телефону (+380...)">
-            <input type="text" id="inp-order-city-id-field" class="form-luxe-checkout-rendering-input" placeholder="Місто доставки">
-            <div class="segmented-delivery-control-luxe-bar">
-                <div class="delivery-choice-segment-tab-btn active" id="btn-log-vidd-tab-id-node" onclick="updateAppLogisticsSelection('Відділення')">Відділення</div>
-                <div class="delivery-choice-segment-tab-btn" id="btn-log-post-tab-id-node" onclick="updateAppLogisticsSelection('Поштомат')">Поштомат</div>
+            <input type="text" id="inp-order-name-id-field-rendering" class="form-luxe-checkout-rendering-input-field" placeholder="Прізвище та Ім'я">
+            <input type="tel" id="inp-order-phone-id-field-rendering" class="form-luxe-checkout-rendering-input-field" placeholder="Номер телефону (+380...)">
+            <input type="text" id="inp-order-city-id-field-rendering" class="form-luxe-checkout-rendering-input-field" placeholder="Місто доставки">
+            <div class="segmented-delivery-control-luxe-rendering-bar">
+                <div class="delivery-choice-segment-tab-btn-rendering active" id="btn-log-vidd-tab-id-node-rendering-element" onclick="updateAppLogisticsSelectionControl('Відділення')">Відділення</div>
+                <div class="delivery-choice-segment-tab-btn-rendering" id="btn-log-post-tab-id-node-rendering-element" onclick="updateAppLogisticsSelectionControl('Поштомат')">Поштомат</div>
             </div>
-            <input type="text" id="inp-order-np-id-field" class="form-luxe-checkout-rendering-input" placeholder="№ Відділення Нової Пошти">
-            <input type="text" id="inp-order-promo-id-field" class="form-luxe-checkout-rendering-input" placeholder="Секретний промокод">
-            <button class="btn-premium-cta-action-luxe" id="btn-final-dispatch-trigger-id-node" onclick="processFinalOrderDispatchActionLogic()">ПІДТВЕРДИТИ ЗАМОВЛЕННЯ</button>
-            <p onclick="rollbackToPhaseOneListAction()" style="text-align: center; margin-top: 40px; color: #444444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
+            <input type="text" id="inp-order-np-id-field-rendering" class="form-luxe-checkout-rendering-input-field" placeholder="№ Відділення Нової Пошти">
+            <input type="text" id="inp-order-promo-id-field-rendering" class="form-luxe-checkout-rendering-input-field" placeholder="Промокод (якщо є)">
+            <button class="btn-luxury-cta-main-action-rendering" id="btn-final-dispatch-trigger-id-node-rendering-element" onclick="processFinalOrderDispatchActionLogicCore()">ПІДТВЕРДИТИ ЗАМОВЛЕННЯ</button>
+            <p onclick="rollbackToPhaseOneListActionControl()" style="text-align: center; margin-top: 40px; color: #444444; font-weight: 900; cursor: pointer;">← Повернутись до списку</p>
         </div>
     </div>
 
-    <div id="premium-zoom-overlay-target-portal" onclick="this.style.display='none'"><img id="zoom-img-target-node-portal-unit" src=""></div>
+    <div id="premium-zoom-overlay-portal-unit-rendering" onclick="this.style.display='none'"><img id="zoom-img-target-node-portal-rendering-element" src=""></div>
 
     <script>
-        const GOOGLE_API_ENDPOINT_URL_MASTER_SET = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
+        const GOOGLE_API_ENDPOINT_URL_MASTER_CORE_SET = 'https://script.google.com/macros/s/AKfycbx-Z8U9xDNV6Y2vZQvu9XfAxx0_PWanARk1Tgaq5JZ8hLXXR3EGyyKbDwGoyY7U_bxjEA/exec';
         
-        let masterDatabaseRawDataObjectsSet = [], sessionStoreDisplayDbArrayNodeBox = [], shoppingCartArraySessionObjectData = [], favoritesWishlistCollectionArrayUnit = [], activeGenderChoiceTagLabelId = '', activeBrandFilterTagLabelValueId = 'all', activeLogisticsModeTagLabelValueId = 'Відділення', matchPtrIndexValuePointerId = 0, historyNavigationStackLogArrayId = ['home'], activeTempProductIdValuePointerId = '', activeTempSizesLogCollectionArrayId = [];
+        let masterDatabaseRawDataObjectsStorage = [], sessionStoreDisplayDbArrayNodeBoxUnit = [], shoppingCartArraySessionObjectDataStore = [], favoritesWishlistCollectionArrayUnitElement = [], activeGenderChoiceTagLabelIdName = '', activeBrandFilterTagLabelValueIdName = 'all', activeLogisticsModeTagLabelValueIdName = 'Відділення', matchPtrIndexValuePointerIdVal = 0, historyNavigationStackLogArrayIdNode = ['home'], activeTempProductIdValuePointerIdVal = '', activeTempSizesLogCollectionArrayIdNode = [];
 
-        // --- 1. BOOTING & IMAGE PRELOADING CORE ---
-        async function preloadLuxeExperienceCoreEngineLogicSystem() {
+        async function preloadLuxeExperienceCoreEngineLogicSystemHandling() {
             try {
-                const responseDataStream = await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_SET + "?v=" + Date.now());
-                const resultDataParsed = await responseDataStream.json();
-                masterDatabaseRawDataObjectsSet = resultDataParsed.products || resultDataParsed;
+                const responseDataStreamResult = await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_CORE_SET + "?v=" + Date.now());
+                const resultDataParsedOutput = await responseDataStreamResult.json();
+                masterDatabaseRawDataObjectsStorage = resultDataParsedOutput.products || resultDataParsedOutput;
                 
-                const poolMenSetRawData = masterDatabaseRawDataObjectsSet.filter(p => p.gender === 'Чоловік'), 
-                      poolWomenSetRawData = masterDatabaseRawDataObjectsSet.filter(p => p.gender === 'Жінка');
+                const poolMenSetRawDataList = masterDatabaseRawDataObjectsStorage.filter(p => p.gender === 'Чоловік'), 
+                      poolWomenSetRawDataList = masterDatabaseRawDataObjectsStorage.filter(p => p.gender === 'Жінка');
                 
-                if(poolMenSetRawData.length) { 
-                    const mImgNodeElement = document.getElementById('img-men-preloader-rendering-node'); 
-                    mImgNodeElement.src = poolMenSetRawData[Math.floor(Math.random() * poolMenSetRawData.length)].image; 
-                    mImgNodeElement.onload = function() { document.getElementById('panel-men-node-element').classList.add('ready'); };
+                if(poolMenSetRawDataList.length) { 
+                    const mImgNodeElementUnit = document.getElementById('img-men-preloader-target-node'); 
+                    mImgNodeElementUnit.src = poolMenSetRawDataList[Math.floor(Math.random() * poolMenSetRawDataList.length)].image; 
+                    mImgNodeElementUnit.onload = function() { document.getElementById('panel-men-node-element').classList.add('ready'); };
                 }
                 
-                if(poolWomenSetRawData.length) { 
-                    const wImgNodeElement = document.getElementById('img-women-preloader-rendering-node'); 
-                    wImgNodeElement.src = poolWomenSetRawData[Math.floor(Math.random() * poolWomenSetRawData.length)].image; 
-                    wImgNodeElement.onload = function() { document.getElementById('panel-women-node-element').classList.add('ready'); };
+                if(poolWomenSetRawDataList.length) { 
+                    const wImgNodeElementUnit = document.getElementById('img-women-preloader-target-node'); 
+                    wImgNodeElementUnit.src = poolWomenSetRawDataList[Math.floor(Math.random() * poolWomenSetRawDataList.length)].image; 
+                    wImgNodeElementUnit.onload = function() { document.getElementById('panel-women-node-element').classList.add('ready'); };
                 }
-            } catch(errorDetails) { console.error("Database initialization failed."); }
+            } catch(errorDetailsLog) { console.error("Database initialization aborted."); }
         }
 
-        function bootApplicationExperience(gender) {
-            activeGenderChoiceTagLabelId = gender;
+        function launchWOWApp(gender) {
+            activeGenderChoiceTagLabelIdName = gender;
             document.getElementById('splash-screen').style.transform = 'translateY(-100%)';
             document.getElementById('main-app-header-unit-id-node').style.display = 'flex';
-            document.getElementById('app-dock-navigation-unit-id-node-box').style.display = 'flex';
+            document.getElementById('app-dock-navigation-unit-node-id-rendering').style.display = 'flex';
             
-            sessionStoreDisplayDbArrayNodeBox = masterDatabaseRawDataObjectsSet.filter(p => p.gender === activeGenderChoiceTagLabelId).sort(() => Math.random() - 0.5);
+            sessionStoreDisplayDbArrayNodeBoxUnit = masterDatabaseRawDataObjectsStorage.filter(p => p.gender === activeGenderChoiceTagLabelIdName).sort(() => Math.random() - 0.5);
             
-            renderMainCatalogScrollGridEngine(); 
-            renderTinderMatchEngineDeckLogic(); 
-            renderBrandCatalogTilesGridLogic();
+            renderMainCatalogScrollGridEngineSystem(); 
+            renderTinderMatchEngineDeckLogicEngine(); 
+            renderBrandCatalogTilesGridLogicSystem();
             
-            const intersectionObserverNodeElementUnit = new IntersectionObserver(entries => { if(entries[0].isIntersecting) renderMainCatalogScrollGridEngine(true); }, { threshold: 0.1 });
-            intersectionObserverNodeElementUnit.observe(document.getElementById('infinite-scroll-anchor-point-logic-trigger'));
+            const intersectionObserverNodeElementUnitHandling = new IntersectionObserver(entries => { if(entries[0].isIntersecting) renderMainCatalogScrollGridEngineSystem(true); }, { threshold: 0.1 });
+            intersectionObserverNodeElementUnitHandling.observe(document.getElementById('infinite-scroll-anchor-point-logic-trigger-node'));
             
             if(window.navigator.vibrate) window.navigator.vibrate(60);
         }
 
-        function cleanBrandDuplicatesInNameStringEngine(nameStringValueData, brandStringValueData) {
-            const regexPatternRuleMatch = new RegExp(`^${brandStringValueData}\\s+${brandStringValueData}`, 'i');
-            if (regexPatternRuleMatch.test(nameStringValueData)) {
-                return nameStringValueData.replace(new RegExp(`^${brandStringValueData}\\s+`, 'i'), '').trim();
+        function cleanBrandDuplicatesInNameStringEngineSystem(nameStringValueDataInfo, brandStringValueDataInfo) {
+            const regexPatternRuleMatchLogic = new RegExp(`^${brandStringValueDataInfo}\\s+${brandStringValueDataInfo}`, 'i');
+            if (regexPatternRuleMatchLogic.test(nameStringValueDataInfo)) {
+                return nameStringValueDataInfo.replace(new RegExp(`^${brandStringValueDataInfo}\\s+`, 'i'), '').trim();
             }
-            return nameStringValueData;
+            return nameStringValueDataInfo;
         }
 
-        // --- 2. GRID RENDERING (HOME) ---
-        function renderMainCatalogScrollGridEngine(appendModeStateAction = false) {
-            const gridRootNodeElement = document.getElementById('main-catalog-rendering-node-grid-unit'); 
-            if(!appendModeStateAction) gridRootNodeElement.innerHTML = "";
+        function renderMainCatalogScrollGridEngineSystem(appendModeStateActionTrigger = false) {
+            const gridRootNodeElementUnit = document.getElementById('main-catalog-rendering-node-grid-unit-element'); 
+            if(!appendModeStateActionTrigger) gridRootNodeElementUnit.innerHTML = "";
             
-            const queryValueInputData = document.getElementById('liveSearchInput').value.toLowerCase();
-            let dataFilteredArrayResult = sessionStoreDisplayDbArrayNodeBox;
+            const queryValueInputDataParsed = document.getElementById('liveSearchInput').value.toLowerCase();
+            let dataFilteredArrayResultList = sessionStoreDisplayDbArrayNodeBoxUnit;
             
-            if(activeBrandFilterTagLabelValueId !== 'all') dataFilteredArrayResult = dataFilteredArrayResult.filter(p => p.brand === activeBrandFilterTagLabelValueId);
-            if(queryValueInputData) dataFilteredArrayResult = dataFilteredArrayResult.filter(p => p.name.toLowerCase().includes(queryValueInputData) || p.brand.toLowerCase().includes(queryValueInputData));
+            if(activeBrandFilterTagLabelValueIdName !== 'all') dataFilteredArrayResultList = dataFilteredArrayResultList.filter(p => p.brand === activeBrandFilterTagLabelValueIdName);
+            if(queryValueInputDataParsed) dataFilteredArrayResultList = dataFilteredArrayResultList.filter(p => p.name.toLowerCase().includes(queryValueInputDataParsed) || p.brand.toLowerCase().includes(queryValueInputDataParsed));
             
-            const batchLimitCountValue = 12;
-            const startPointerIndex = appendModeStateAction ? gridRootNodeElement.children.length : 0;
-            const sliceDataArrayResultFinal = dataFilteredArrayResult.slice(startPointerIndex, startPointerIndex + batchLimitCountValue);
+            const batchLimitCountValueData = 12;
+            const startPointerIndexVal = appendModeStateActionTrigger ? gridRootNodeElementUnit.children.length : 0;
+            const sliceDataArrayResultFinalList = dataFilteredArrayResultList.slice(startPointerIndexVal, startPointerIndexVal + batchLimitCountValueData);
             
-            gridRootNodeElement.innerHTML += sliceDataArrayResultFinal.map(p => `
+            gridRootNodeElementUnit.innerHTML += sliceDataArrayResultFinalList.map(p => `
                 <div class="sneaker-card-premium-unit">
                     <div class="card-visual-image-viewport" onclick="triggerZoomPortal('${p.image}')">
                         <img src="${p.image}" loading="lazy">
                     </div>
                     <div class="card-info-details-rendering">
                         <div class="label-neon-tag-brand">${p.brand} | ${p.name.split(' ')[1] || 'Premium'}</div>
-                        <div class="text-model-title-premium">${cleanBrandDuplicatesInNameStringEngine(p.name, p.brand)}</div>
+                        <div class="text-model-title-premium">${cleanBrandDuplicatesInNameStringEngineSystem(p.name, p.brand)}</div>
                         <div class="card-footer-price-action-row">
                             <span class="text-price-bold-luxe">${p.price} ₴</span>
-                            <button class="btn-open-size-picker-luxe" onclick="openSizePickerForProductNodeElement('${p.id}')">ВИБРАТИ</button>
+                            <button class="btn-open-size-picker-trigger-luxe" onclick="openSizePickerForProductNodeElementUnit('${p.id}')">ВИБРАТИ</button>
                         </div>
                     </div>
                 </div>`).join('');
         }
 
-        // --- 3. TINDER ENGINE (MATCH) ---
-        function renderTinderMatchEngineDeckLogic() {
-            const deckRootNodeElementUnit = document.getElementById('tinder-deck-rendering-root-node-unit');
-            const stackDataSliceArrayResult = sessionStoreDisplayDbArrayNodeBox.slice(matchPtrIndexValuePointerId, matchPtrIndexValuePointerId + 3);
+        function renderTinderMatchEngineDeckLogicEngine() {
+            const deckRootNodeElementUnitHandling = document.getElementById('tinder-deck-rendering-root-node-unit-box');
+            const stackDataSliceArrayResultList = sessionStoreDisplayDbArrayNodeBoxUnit.slice(matchPtrIndexValuePointerIdVal, matchPtrIndexValuePointerIdVal + 3);
             
-            deckRootNodeElementUnit.innerHTML = stackDataSliceArrayResult.map((p, i) => `
+            deckRootNodeElementUnitHandling.innerHTML = stackDataSliceArrayResultList.map((p, i) => `
                 <div class="tinder-card-unit-premium" style="z-index:${10-i}; transform: scale(${1 - i*0.05}) translateY(${i*20}px)">
                     <img src="${p.image}">
                     <div class="tinder-info-overlay-rendering-details">
                         <div class="label-neon-tag-brand">${p.brand}</div>
-                        <div style="font-size:1.85rem; font-weight:900; line-height:1.2;">${cleanBrandDuplicatesInNameStringEngine(p.name, p.brand)}</div>
+                        <div style="font-size:1.85rem; font-weight:900; line-height:1.2;">${cleanBrandDuplicatesInNameStringEngineSystem(p.name, p.brand)}</div>
                         <div class="tinder-price-label-match-unit">${p.price} ₴</div>
-                        <div class="social-proof-indicator-text">🔥 ${Math.floor(Math.random() * 30) + 12} людей лайкнули цю пару за останню годину</div>
+                        <div class="social-proof-indicator-text">🔥 ${Math.floor(Math.random() * 30) + 12} людей лайкнули цю пару сьогодні</div>
                     </div>
                 </div>`).join('');
             
-            if(!stackDataSliceArrayResult.length) deckRootNodeElementUnit.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Більше новинок немає 👟</div>";
+            if(!stackDataSliceArrayResultList.length) deckRootNodeElementUnitHandling.innerHTML = "<div style='text-align:center; padding-top:150px; font-weight:900;'>Більше новинок немає 👟</div>";
             
-            initSwipeInteractionLogicHandlingSystem();
+            initSwipeInteractionLogicHandlingSystemCore();
         }
 
-        function initSwipeInteractionLogicHandlingSystem() {
-            const cardElementNodeBox = document.querySelector('.tinder-card-unit-premium'); if(!cardElementNodeBox) return;
-            let startPointCoordX=0, currentPointCoordX=0;
+        function initSwipeInteractionLogicHandlingSystemCore() {
+            const cardElementNodeBoxUnit = document.querySelector('.tinder-card-unit-premium'); if(!cardElementNodeBoxUnit) return;
+            let startPointCoordXPos=0, currentPointCoordXPos=0;
             
-            cardElementNodeBox.addEventListener('touchstart', function(e) { startPointCoordX = e.touches[0].clientX; cardElementNodeBox.style.transition = 'none'; }, {passive:true});
-            cardElementNodeBox.addEventListener('touchmove', function(e) { 
-                currentPointCoordX = e.touches[0].clientX; 
-                let differenceValueDistance = currentPointCoordX - startPointCoordX; 
-                cardElementNodeBox.style.transform = `translateX(${differenceValueDistance}px) rotate(${differenceValueDistance/18}deg)`; 
+            cardElementNodeBoxUnit.addEventListener('touchstart', function(e) { startPointCoordXPos = e.touches[0].clientX; cardElementNodeBoxUnit.style.transition = 'none'; }, {passive:true});
+            cardElementNodeBoxUnit.addEventListener('touchmove', function(e) { 
+                currentPointCoordXPos = e.touches[0].clientX; 
+                let differenceValueDistanceVal = currentPointCoordXPos - startPointCoordXPos; 
+                cardElementNodeBoxUnit.style.transform = `translateX(${differenceValueDistanceVal}px) rotate(${differenceValueDistanceVal/18}deg)`; 
             }, {passive:true});
             
-            cardElementNodeBox.addEventListener('touchend', function() { 
-                let finalDiffValCoord = currentPointCoordX - startPointCoordX; 
-                if(Math.abs(finalDiffValCoord) > 130) executeSwipeActionTriggerAction(finalDiffValCoord > 0 ? 'right' : 'left'); 
-                else { cardElementNodeBox.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; cardElementNodeBox.style.transform = 'translateX(0) rotate(0)'; } 
+            cardElementNodeBoxUnit.addEventListener('touchend', function() { 
+                let finalDiffValCoordPos = currentPointCoordXPos - startPointCoordXPos; 
+                if(Math.abs(finalDiffValCoordPos) > 130) executeSwipeActionTriggerAction(finalDiffValCoordPos > 0 ? 'right' : 'left'); 
+                else { cardElementNodeBoxUnit.style.transition = '0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'; cardElementNodeBoxUnit.style.transform = 'translateX(0) rotate(0)'; } 
             });
         }
 
-        function executeSwipeActionTriggerAction(directionStringLabel) {
-            const cardNodeElementBoxUnit = document.querySelector('.tinder-card-unit-premium'); if(!cardNodeElementBoxUnit) return;
-            const screenExitDistanceValueData = window.innerWidth * 1.6;
+        function executeSwipeActionTriggerAction(directionStringLabelTag) {
+            const cardNodeElementBoxUnitRendering = document.querySelector('.tinder-card-unit-premium'); if(!cardNodeElementBoxUnitRendering) return;
+            const screenExitDistanceValueDataInfo = window.innerWidth * 1.6;
             
-            cardNodeElementBoxUnit.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
-            cardNodeElementBoxUnit.style.transform = `translateX(${directionStringLabel === 'right' ? screenExitDistanceValueData : -screenExitDistanceValueData}px) rotate(${directionStringLabel === 'right' ? 45 : -45}deg)`;
-            cardNodeElementBoxUnit.style.opacity = '0';
+            cardNodeElementBoxUnitRendering.style.transition = '0.6s cubic-bezier(0.8, 0, 0.2, 1)';
+            cardNodeElementBoxUnitRendering.style.transform = `translateX(${directionStringLabelTag === 'right' ? screenExitDistanceValueDataInfo : -screenExitDistanceValueDataInfo}px) rotate(${directionStringLabelTag === 'right' ? 45 : -45}deg)`;
+            cardNodeElementBoxUnitRendering.style.opacity = '0';
             
-            if(directionStringLabel === 'right') { 
-                const targetItemObject = sessionStoreDisplayDbArrayNodeBox[matchPtrIndexValuePointerId]; 
-                if(!favoritesWishlistCollectionArrayUnit.find(x => x.id === targetItemObject.id)) { 
-                    favoritesWishlistCollectionArrayUnit.push(targetItemObject); 
-                    syncFavoritesWishlistInterfaceLogicEngine(); 
+            if(directionStringLabelTag === 'right') { 
+                const targetItemObjectData = sessionStoreDisplayDbArrayNodeBoxUnit[matchPtrIndexValuePointerIdVal]; 
+                if(!favoritesWishlistCollectionArrayUnitElement.find(x => x.id === targetItemObjectData.id)) { 
+                    favoritesWishlistCollectionArrayUnitElement.push(targetItemObjectData); 
+                    syncFavoritesWishlistInterfaceLogicEngineSystem(); 
                     if(window.navigator.vibrate) window.navigator.vibrate([45, 30, 45]); 
                 } 
             }
-            setTimeout(function() { matchPtrIndexValuePointerId++; renderTinderMatchEngineDeckLogic(); }, 400);
+            setTimeout(function() { matchPtrIndexValuePointerIdVal++; renderTinderMatchEngineDeckLogicEngine(); }, 400);
         }
 
-        function syncFavoritesWishlistInterfaceLogicEngine() {
-            const heartBadgeNodeElementValue = document.getElementById('badge-heart-wishlist-node-value-rendering'); 
-            heartBadgeNodeElementValue.innerText = favoritesWishlistCollectionArrayUnit.length; 
-            heartBadgeNodeElementValue.style.display = favoritesWishlistCollectionArrayUnit.length ? 'flex' : 'none';
+        function syncFavoritesWishlistInterfaceLogicEngineSystem() {
+            const heartBadgeNodeElementValueVal = document.getElementById('badge-heart-wishlist-node-value-rendering-element'); 
+            heartBadgeNodeElementValueVal.innerText = favoritesWishlistCollectionArrayUnitElement.length; 
+            heartBadgeNodeElementValueVal.style.display = favoritesWishlistCollectionArrayUnitElement.length ? 'flex' : 'none';
             
-            document.getElementById('wishlist-full-rendering-grid-node-area-box-unit').innerHTML = favoritesWishlistCollectionArrayUnit.map(p => `
-                <div class="sneaker-card-premium-unit" onclick="openSizePickerForProductNodeElement('${p.id}')">
+            document.getElementById('wishlist-full-rendering-grid-node-area-box-unit-rendering').innerHTML = favoritesWishlistCollectionArrayUnitElement.map(p => `
+                <div class="sneaker-card-premium-unit" onclick="openSizePickerForProductNodeElementUnit('${p.id}')">
                     <div class="card-visual-image-viewport"><img src="${p.image}"></div>
                     <div class="card-info-details-rendering">
                         <div class="label-neon-tag-brand">${p.brand}</div>
-                        <div class="text-model-title-premium" style="font-size:0.75rem; height:2.4em;">${cleanBrandDuplicatesInNameStringEngine(p.name, p.brand)}</div>
-                        <button class="btn-open-size-picker-luxe" style="width:100%; margin-top:12px; background-color:var(--accent); color:#000000; font-weight:900;">КУПИТИ</button>
+                        <div class="text-model-title-premium" style="font-size:0.75rem; height:2.4em;">${cleanBrandDuplicatesInNameStringEngineSystem(p.name, p.brand)}</div>
+                        <button class="btn-open-size-picker-trigger-luxe" style="width:100%; margin-top:12px; background-color:var(--accent); color:#000000; font-weight:900;">КУПИТИ</button>
                     </div>
                 </div>`).join('');
         }
 
-        // --- 4. PICKER, CART & REQUESTS ---
-        function openSizePickerForProductNodeElement(productIdValueData) {
-            activeTempProductIdValuePointerId = productIdValueData; activeTempSizesLogCollectionArrayId = [];
-            const productMatchObjectData = masterDatabaseRawDataObjectsSet.find(x => x.id === productIdValueData);
-            document.getElementById('display-product-title-text-rendering-node').innerText = cleanBrandDuplicatesInNameStringEngine(productMatchObjectData.name, productMatchObjectData.brand);
+        function openSizePickerForProductNodeElementUnit(productIdValueDataInfo) {
+            activeTempProductIdValuePointerIdVal = productIdValueDataInfo; activeTempSizesLogCollectionArrayIdNode = [];
+            const productMatchObjectDataResult = masterDatabaseRawDataObjectsStorage.find(x => x.id === productIdValueDataInfo);
+            document.getElementById('display-product-title-text-rendering-node-box').innerText = cleanBrandDuplicatesInNameStringEngineSystem(productMatchObjectDataResult.name, productMatchObjectDataResult.brand);
             
-            const sizesSplitArrayResultsList = productMatchObjectData.sizes.split(',').map(s => s.trim()).filter(s => s);
-            document.getElementById('size-matrix-rendering-area-box-rendering-node').innerHTML = sizesSplitArrayResultsList.map(s => `<div class="size-variant-pill-rendering-element" onclick="toggleSizeChoiceNodeInteractionTriggerAction(this, '${s}')">${s.split('(')[0]}</div>`).join('');
-            openPanelSheetUI('size-picker-sheet-unit-id-rendering');
+            const sizesSplitArrayResultsListOutput = productMatchObjectDataResult.sizes.split(',').map(s => s.trim()).filter(s => s);
+            document.getElementById('size-matrix-rendering-area-box-rendering-node-unit').innerHTML = sizesSplitArrayResultsListOutput.map(s => `<div class="size-variant-pill-rendering-node-box" onclick="toggleSizeChoiceNodeInteractionTriggerActionControl(this, '${s}')">${s.split('(')[0]}</div>`).join('');
+            openPanelSheetUI('size-picker-sheet-unit-id-rendering-area');
         }
 
-        function toggleSizeChoiceNodeInteractionTriggerAction(elementNodeUnit, sizeValueLabelTag) { 
-            const indexPosValId = activeTempSizesLogCollectionArrayId.indexOf(sizeValueLabelTag); 
-            if(indexPosValId > -1) { activeTempSizesLogCollectionArrayId.splice(indexPosValId, 1); elementNodeUnit.classList.remove('active'); } 
-            else { activeTempSizesLogCollectionArrayId.push(sizeValueLabelTag); elementNodeUnit.classList.add('active'); } 
+        function toggleSizeChoiceNodeInteractionTriggerActionControl(elementNodeUnitBox, sizeValueLabelTagLabel) { 
+            const indexPosValIdName = activeTempSizesLogCollectionArrayIdNode.indexOf(sizeValueLabelTagLabel); 
+            if(indexPosValIdName > -1) { activeTempSizesLogCollectionArrayIdNode.splice(indexPosValIdName, 1); elementNodeUnitBox.classList.remove('active'); } 
+            else { activeTempSizesLogCollectionArrayIdNode.push(sizeValueLabelTagLabel); elementNodeUnitBox.classList.add('active'); } 
         }
 
-        async function requestMorePhotosFromManager() {
-            const targetProdObject = masterDatabaseRawDataObjectsSet.find(p => p.id === activeTempProductIdValuePointerId);
-            const dataRequestPayload = { action: "request_photo", product_id: targetProdObject.id, product_name: targetProdObject.name };
+        async function requestMorePhotosActionControlTrigger() {
+            const targetProdObjectData = masterDatabaseRawDataObjectsStorage.find(p => p.id === activeTempProductIdValuePointerIdVal);
+            const dataRequestPayloadInfo = { action: "request_photo", product_id: targetProdObjectData.id, product_name: targetProdObjectData.name, contact: "https://t.me/znahidkawow" };
             if(window.navigator.vibrate) window.navigator.vibrate(100);
-            alert("Запит надіслано! Менеджер надішле додаткові фото у Telegram.");
-            await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_SET, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dataRequestPayload) });
-            closeAllActiveUISheetsAction();
+            alert("Ваш запит надіслано! Менеджер надішле додаткові фото обраної моделі у Telegram.");
+            await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_CORE_SET, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dataRequestPayloadInfo) });
+            closeAllActiveUISheetsActionControl();
         }
 
-        function finalizeSizeSelectionAndAddToCartSessionAction() {
-            if(!activeTempSizesLogCollectionArrayId.length) return alert("Будь ласка, оберіть хоча б один розмір!");
-            const productToCommitFinalData = masterDatabaseRawDataObjectsSet.find(p => p.id === activeTempProductIdValuePointerId);
-            activeTempSizesLogCollectionArrayId.forEach(function(sizeTagLabel) { 
-                shoppingCartArraySessionObjectData.push({...productToCommitFinalData, selectedSizeTagLabelId: sizeTagLabel, cartUniqueIdKeyToken: Math.random()}); 
+        function finalizeSizeSelectionAndAddToCartSessionActionControl() {
+            if(!activeTempSizesLogCollectionArrayIdNode.length) return alert("Будь ласка, оберіть хоча б один розмір!");
+            const productToCommitFinalDataInfo = masterDatabaseRawDataObjectsStorage.find(p => p.id === activeTempProductIdValuePointerIdVal);
+            activeTempSizesLogCollectionArrayIdNode.forEach(function(sizeTagLabelId) { 
+                shoppingCartArraySessionObjectDataStore.push({...productToCommitFinalDataInfo, selectedSizeTagLabelIdName: sizeTagLabelId, cartUniqueIdKeyTokenVal: Math.random()}); 
             });
-            syncMainCartBadgeDisplayInterfaceLogic(); closeAllActiveUISheetsAction(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-id'));
+            syncMainCartBadgeDisplayInterfaceLogicSystem(); closeAllActiveUISheetsActionControl(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit'));
             if(window.navigator.vibrate) window.navigator.vibrate(65);
         }
 
-        function syncMainCartBadgeDisplayInterfaceLogic() { 
-            const cartBadgeNodeElementVal = document.getElementById('badge-cart-main-count-node-value-rendering'); 
-            cartBadgeNodeElementVal.innerText = shoppingCartArraySessionObjectData.length; 
-            cartBadgeNodeElementVal.style.display = shoppingCartArraySessionObjectData.length ? 'flex' : 'none'; 
+        function syncMainCartBadgeDisplayInterfaceLogicSystem() { 
+            const cartBadgeNodeElementValueVal = document.getElementById('badge-cart-main-count-node-value-rendering-element'); 
+            cartBadgeNodeElementValueVal.innerText = shoppingCartArraySessionObjectDataStore.length; 
+            cartBadgeNodeElementValueVal.style.display = shoppingCartArraySessionObjectDataStore.length ? 'flex' : 'none'; 
         }
 
-        function renderCartContentsInterfaceHandlingSystem() {
-            const cartListNodeElementRoot = document.getElementById('cart-items-rendering-container-node-unit');
-            if(!shoppingCartArraySessionObjectData.length) cartListNodeElementRoot.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Твій кошик порожній 🛒</p>";
-            else cartListNodeElementRoot.innerHTML = shoppingCartArraySessionObjectData.map((item, idx) => `
-                <div class="cart-line-product-rendering-row">
+        function renderCartContentsInterfaceHandlingSystemCore() {
+            const cartListNodeElementRootBox = document.getElementById('cart-items-rendering-container-node-grid-unit-area');
+            if(!shoppingCartArraySessionObjectDataStore.length) cartListNodeElementRootBox.innerHTML = "<p style='text-align:center; padding:50px; color:#333; font-weight:800;'>Твій кошик порожній 🛒</p>";
+            else cartListNodeElementRootBox.innerHTML = shoppingCartArraySessionObjectDataStore.map((item, idx) => `
+                <div class="cart-line-product-rendering-row-element">
                     <img src="${item.image}">
-                    <div class="cart-line-product-info-details-box"><div class="cart-line-name-label-text-rendering">${item.name}</div><div class="cart-line-meta-label-tag-details">Розмір: ${item.selectedSizeTagLabelId}</div></div>
+                    <div class="cart-line-product-info-body-details-rendering"><div class="cart-line-name-label-text-rendering-value">${item.name}</div><div class="cart-line-meta-label-tag-details-rendering">Розмір: ${item.selectedSizeTagLabelIdName}</div></div>
                     <div style="font-weight:900; margin-right:15px;">${item.price} ₴</div>
-                    <div class="btn-item-delete-action-luxe-rendering" onclick="removePositionFromCartSessionArrayObject(${idx})">✕</div>
+                    <div class="btn-item-delete-action-luxe-rendering-trigger" onclick="removePositionFromCartSessionArrayObjectData(${idx})">✕</div>
                 </div>`).join('');
             
-            document.getElementById('label-cart-final-total-sum-value-node').innerText = shoppingCartArraySessionObjectData.reduce((sum, item) => sum + parseInt(item.price), 0) + " ₴";
+            document.getElementById('label-cart-final-total-sum-value-node-rendering-element').innerText = shoppingCartArraySessionObjectDataStore.reduce((sum, item) => sum + parseInt(item.price), 0) + " ₴";
             
-            const upsellContainerNodeElementBox = document.getElementById('wishlist-upsell-rendering-area-node-box-unit-rendering');
-            if(favoritesWishlistCollectionArrayUnit.length && !shoppingCartArraySessionObjectData.some(cartItem => favoritesWishlistCollectionArrayUnit.some(wishItem => wishItem.id === cartItem.id))) {
-                upsellContainerNodeElementBox.innerHTML = `<div class="wishlist-upsell-luxe-box"><div class="upsell-header-text-label-row">❤️ Твої фаворити з Match:</div><div class="upsell-horizontal-rendering-scroll-list">
-                    ${favoritesWishlistCollectionArrayUnit.map(p => `<div class="upsell-item-unit-mini-rendering-card"><img src="${p.image}"><div class="btn-quick-plus-add-favorites-action" onclick="openSizePickerForProductNodeElement('${p.id}')">+</div><h4>${p.brand}</h4></div>`).join('')}
+            const upsellContainerNodeElementBoxUnit = document.getElementById('wishlist-upsell-rendering-area-node-box-unit-element-rendering');
+            if(favoritesWishlistCollectionArrayUnitElement.length && !shoppingCartArraySessionObjectDataStore.some(cartItem => favoritesWishlistCollectionArrayUnitElement.some(wishItem => wishItem.id === cartItem.id))) {
+                upsellContainerNodeElementBoxUnit.innerHTML = `<div class="wishlist-upsell-luxe-box"><div class="upsell-header-text-label-row-rendering">❤️ Твої фаворити з Match:</div><div class="wishlist-upsell-horizontal-list">
+                    ${favoritesWishlistCollectionArrayUnitElement.map(p => `<div class="upsell-item-unit-mini-rendering-card-element"><img src="${p.image}"><div class="btn-quick-plus-add-favorites-action-node" onclick="openSizePickerForProductNodeElementUnit('${p.id}')">+</div><h4>${p.brand}</h4></div>`).join('')}
                 </div></div>`;
-            } else upsellContainerNodeElementBox.innerHTML = "";
+            } else upsellContainerNodeElementBoxUnit.innerHTML = "";
         }
 
-        function removePositionFromCartSessionArrayObject(indexPositionValue) { shoppingCartArraySessionObjectData.splice(indexPositionValue, 1); renderCartContentsInterfaceHandlingSystem(); syncMainCartBadgeDisplayInterfaceLogic(); if(!shoppingCartArraySessionObjectData.length) closeAllActiveUISheetsAction(); }
+        function removePositionFromCartSessionArrayObjectData(indexPositionValueData) { shoppingCartArraySessionObjectDataStore.splice(indexPositionValueData, 1); renderCartContentsInterfaceHandlingSystemCore(); syncMainCartBadgeDisplayInterfaceLogicSystem(); if(!shoppingCartArraySessionObjectDataStore.length) closeAllActiveUISheetsActionControl(); }
 
-        // --- 5. CATALOG & TILES LOGIC ---
-        function renderBrandCatalogTilesGridLogic() {
-            const brandTagsArrayCollectionList = [...new Set(sessionStoreDisplayDbArrayNodeBox.map(p => p.brand))].sort();
-            document.getElementById('brand-tiles-rendering-area-node-grid-unit').innerHTML = brandTagsArrayCollectionList.map(brand => `
-                <div class="brand-tile-premium-card-unit" onclick="filterByBrandShortcutTriggerAction('${brand}')"><h3>${brand}</h3><span>${sessionStoreDisplayDbArrayNodeBox.filter(p => p.brand === brand).length} МОДЕЛЕЙ ➔</span></div>`).join('');
+        function renderBrandCatalogTilesGridLogicSystem() {
+            const brandTagsArrayCollectionListResults = [...new Set(sessionStoreDisplayDbArrayNodeBoxUnit.map(p => p.brand))].sort();
+            document.getElementById('brand-tiles-rendering-area-node-grid-unit-box').innerHTML = brandTagsArrayCollectionListResults.map(brand => `
+                <div class="brand-tile-luxe-unit-card" onclick="filterByBrandShortcutTriggerActionControl('${brand}')"><h3>${brand}</h3><span>${sessionStoreDisplayDbArrayNodeBoxUnit.filter(p => p.brand === brand).length} МОДЕЛЕЙ ➔</span></div>`).join('');
         }
 
-        function filterByBrandShortcutTriggerAction(brandNameStringData) { activeBrandFilterTagLabelValueId = brandNameStringData; renderMainCatalogScrollGridEngine(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-id')); }
+        function filterByBrandShortcutTriggerActionControl(brandNameStringDataInfo) { activeBrandFilterTagLabelValueIdName = brandNameStringDataInfo; renderMainCatalogScrollGridEngineSystem(); navToViewPageSPA('home', document.getElementById('tab-btn-home-node-unit')); }
 
-        // --- 6. CHECKOUT ACTION DISPATCH CORE ---
-        async function processFinalOrderDispatchActionLogic() {
-            const fioValueStringData = document.getElementById('inp-order-name-id-field').value.trim(), 
-                  phoneValueStringData = document.getElementById('inp-order-phone-id-field').value.trim();
-            if(!fioValueStringData || !phoneValueStringData) return alert("Будь ласка, заповніть ПІБ та Номер телефону!");
+        async function processFinalOrderDispatchActionLogicCore() {
+            const fioValueStringDataInfo = document.getElementById('inp-order-name-id-field-rendering').value.trim(), 
+                  phoneValueStringDataInfo = document.getElementById('inp-order-phone-id-field-rendering').value.trim();
+            if(!fioValueStringDataInfo || !phoneValueStringDataInfo) return alert("Будь ласка, заповніть ПІБ та Номер телефону!");
             
-            const btnSubmitNodeElement = document.getElementById('btn-final-dispatch-trigger-id-node'); 
-            btnSubmitNodeElement.innerText = "ОБРОБКА..."; btnSubmitNodeElement.disabled = true;
+            const btnSubmitNodeElementUnit = document.getElementById('btn-final-dispatch-trigger-id-node-rendering-element'); 
+            btnSubmitNodeElementUnit.innerText = "ОБРОБКА..."; btnSubmitNodeElementUnit.disabled = true;
             
-            const payloadObjectDataResults = { action: "new_order", fio: fioValueStringData, phone: phoneValueStringData, city: document.getElementById('inp-order-city-id-field').value || 'Не вказано', delivery: activeLogisticsModeTagLabelValueId + " №" + (document.getElementById('inp-order-np-id-field').value || '0'), items: shoppingCartArraySessionObjectData.map(item => `${item.name} (${item.selectedSizeTagLabelId})`).join('\n'), total: document.getElementById('label-cart-final-total-sum-value-node').innerText, promo: document.getElementById('inp-order-promo-id-field').value || 'Ні' };
+            const payloadObjectDataResultsOutput = { action: "new_order", fio: fioValueStringDataInfo, phone: phoneValueStringDataInfo, city: document.getElementById('inp-order-city-id-field-rendering').value || 'Не вказано', delivery: activeLogisticsModeTagLabelValueIdName + " №" + (document.getElementById('inp-order-np-id-field-rendering').value || '0'), items: shoppingCartArraySessionObjectDataStore.map(item => `${item.name} (${item.selectedSizeTagLabelIdName})`).join('\n'), total: document.getElementById('label-cart-final-total-sum-value-node-rendering-element').innerText, promo: document.getElementById('inp-order-promo-id-field-rendering').value || 'Ні' };
             
-            await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_SET, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payloadObjectDataResults) });
-            document.getElementById('cart-phase-step-2-id-node').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent); font-size:2.2rem;">Успішно!</h2><p style="color:#666666; margin-top:20px; font-weight:800;">Замовлення прийнято. Менеджер скоро зв'яжеться з Вами.</p><button class="btn-premium-cta-action-luxe" style="margin-top:60px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
-            shoppingCartArraySessionObjectData = []; syncMainCartBadgeDisplayInterfaceLogic();
+            await fetch(GOOGLE_API_ENDPOINT_URL_MASTER_CORE_SET, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payloadObjectDataResultsOutput) });
+            document.getElementById('cart-phase-step-2-id-node-element').innerHTML = `<div style="text-align:center; padding:60px 0;"><div style="font-size:7rem;">✅</div><h2 style="color:var(--accent); font-size:2.2rem;">Успішно!</h2><p style="color:#666666; margin-top:20px; font-weight:800;">Замовлення прийнято. Менеджер скоро зв'яжеться з Вами.</p><button class="btn-luxury-cta-main-action-rendering" style="margin-top:60px;" onclick="location.reload()">НА ГОЛОВНУ</button></div>`;
+            shoppingCartArraySessionObjectDataStore = []; syncMainCartBadgeDisplayInterfaceLogicSystem();
         }
 
-        // --- 7. NAVIGATION & SPA INTERFACE CONTROL ---
-        function navToViewPageSPA(viewIdStringKey, elementNodeBoxUnit) {
-            document.querySelectorAll('.app-view-page').forEach(view => view.classList.remove('active'));
-            document.querySelectorAll('.dock-navigation-tab-luxe-unit').forEach(tab => tab.classList.remove('active'));
-            document.getElementById('view-' + viewIdStringKey).classList.add('active'); 
-            elementNodeBoxUnit.classList.add('active');
+        function navToViewPageSPA(viewIdStringKeyName, elementNodeBoxUnitArea) {
+            document.querySelectorAll('.page-view-node').forEach(view => view.classList.remove('active'));
+            document.querySelectorAll('.dock-navigation-tab-unit-element').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('view-' + viewIdStringKeyName).classList.add('active'); 
+            elementNodeBoxUnitArea.classList.add('active');
             
-            if(historyNavigationStackLogArrayId[historyNavigationStackLogArrayId.length-1] !== viewIdStringKey) historyNavigationStackLogArrayId.push(viewIdStringKey);
-            document.getElementById('luxe-contacts-pop-window-rendering-node-box').style.display = 'none';
+            if(historyNavigationStackLogArrayIdNode[historyNavigationStackLogArrayIdNode.length-1] !== viewIdStringKeyName) historyNavigationStackLogArrayIdNode.push(viewIdStringKeyName);
+            document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element').style.display = 'none';
         }
 
-        function navigateHistoryBackActionControl() { 
-            if(historyNavigationStackLogArrayId.length > 1) { 
-                historyNavigationStackLogArrayId.pop(); 
-                const previousViewIdKey = historyNavigationStackLogArrayId[historyNavigationStackLogArrayId.length-1]; 
-                navToViewPageSPA(previousViewIdKey, document.querySelectorAll('.dock-navigation-tab-luxe-unit')[['home','match','catalog'].indexOf(previousViewIdKey)]); 
+        function navigateHistoryBackActionControlTrigger() { 
+            if(historyNavigationStackLogArrayIdNode.length > 1) { 
+                historyNavigationStackLogArrayIdNode.pop(); 
+                const previousViewIdKeyName = historyNavigationStackLogArrayIdNode[historyNavigationStackLogArrayIdNode.length-1]; 
+                navToViewPageSPA(previousViewIdKeyName, document.querySelectorAll('.dock-navigation-tab-unit-element')[['home','match','catalog'].indexOf(previousViewIdKeyName)]); 
             } else location.reload(); 
         }
 
-        function toggleLuxeContactsPopWindowAction() { 
-            const nodePopWindowBox = document.getElementById('luxe-contacts-pop-window-rendering-node-box'); 
-            nodePopWindowBox.style.display = nodePopWindowBox.style.display === 'flex' ? 'none' : 'flex'; 
+        function toggleLuxeContactsPopWindowActionControl() { 
+            const nodePopWindowBoxUnit = document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element'); 
+            nodePopWindowBoxUnit.style.display = nodePopWindowBoxUnit.style.display === 'flex' ? 'none' : 'flex'; 
         }
 
-        function openPanelSheetUI(sheetIdStringName) { 
-            document.getElementById('ui-overlay-mask-node-element-rendering-box').style.display = 'block'; 
+        function openPanelSheetUI(sheetIdStringNameLabel) { 
+            document.getElementById('ui-overlay-mask-node-element-rendering-id-unit').style.display = 'block'; 
             setTimeout(function() { 
-                document.getElementById('ui-overlay-mask-node-element-rendering-box').style.opacity = '1'; 
-                document.getElementById(sheetIdStringName).classList.add('active'); 
+                document.getElementById('ui-overlay-mask-node-element-rendering-id-unit').style.opacity = '1'; 
+                document.getElementById(sheetIdStringNameLabel).classList.add('active'); 
             }, 15); 
-            if(sheetIdStringName === 'cart-sheet-id-rendering-area-unit') renderCartContentsInterfaceHandlingSystem(); 
-            if(sheetIdStringName === 'wish-sheet-id-rendering-area-unit') syncFavoritesWishlistInterfaceLogicEngine(); 
+            if(sheetIdStringNameLabel === 'cart-sheet-rendering-id-node') renderCartContentsInterfaceHandlingSystemCore(); 
+            if(sheetIdStringNameLabel === 'wish-sheet-rendering-id-node') syncFavoritesWishlistInterfaceLogicEngineSystem(); 
         }
 
-        function closeAllActiveUISheetsAction() { 
+        function closeAllActiveUISheetsActionControl() { 
             document.querySelectorAll('.premium-ui-bottom-sheet-id-node').forEach(sheet => sheet.classList.remove('active')); 
-            document.getElementById('ui-overlay-mask-node-element-rendering-box').style.opacity = '0'; 
+            document.getElementById('ui-overlay-mask-node-element-rendering-id-unit').style.opacity = '0'; 
             setTimeout(function() { 
-                document.getElementById('ui-overlay-mask-node-element-rendering-box').style.display = 'none'; 
-                rollbackToPhaseOneListAction(); 
-                document.getElementById('luxe-contacts-pop-window-rendering-node-box').style.display = 'none'; 
+                document.getElementById('ui-overlay-mask-node-element-rendering-id-unit').style.display = 'none'; 
+                rollbackToPhaseOneListActionControl(); 
+                document.getElementById('luxe-contacts-pop-window-rendering-node-unit-element').style.display = 'none'; 
             }, 500); 
         }
 
-        function updateAppLogisticsSelection(typeLabelStringName) { 
-            activeLogisticsModeTagLabelValueId = typeLabelStringName; 
-            document.querySelectorAll('.delivery-choice-segment-tab-btn').forEach(btn => btn.classList.remove('active')); 
-            document.getElementById(typeLabelStringName==='Відділення'?'btn-log-vidd-tab-id-node':'btn-log-post-tab-id-node').classList.add('active'); 
-            document.getElementById('inp-order-np-id-field').placeholder = typeLabelStringName==='Відділення'?'№ Відділення':'№ Поштомату'; 
+        function updateAppLogisticsSelectionControl(typeLabelStringNameLabel) { 
+            activeLogisticsModeTagLabelValueIdName = typeLabelStringNameLabel; 
+            document.querySelectorAll('.delivery-choice-segment-tab-btn-rendering').forEach(btn => btn.classList.remove('active')); 
+            document.getElementById(typeLabelStringNameLabel==='Відділення'?'btn-log-vidd-tab-id-node-rendering-element':'btn-log-post-tab-id-node-rendering-element').classList.add('active'); 
+            document.getElementById('inp-order-np-id-field-rendering').placeholder = typeLabelStringNameLabel==='Відділення'?'№ Відділення':'№ Поштомату'; 
         }
 
-        function proceedToCheckoutFormPhaseAction() { 
-            if(!shoppingCartArraySessionObjectData.length) return; 
-            document.getElementById('cart-phase-step-1-id-node').style.display='none'; 
-            document.getElementById('cart-phase-step-2-id-node').style.display='block'; 
+        function proceedToCheckoutFormPhaseActionControl() { 
+            if(!shoppingCartArraySessionObjectDataStore.length) return; 
+            document.getElementById('cart-phase-step-1-id-node-element').style.display='none'; 
+            document.getElementById('cart-phase-step-2-id-node-element').style.display='block'; 
         }
 
-        function rollbackToPhaseOneListAction() { 
-            document.getElementById('cart-phase-step-2-id-node').style.display='none'; 
-            document.getElementById('cart-phase-step-1-id-node').style.display='block'; 
+        function rollbackToPhaseOneListActionControl() { 
+            document.getElementById('cart-phase-step-2-id-node-element').style.display='none'; 
+            document.getElementById('cart-phase-step-1-id-node-element').style.display='block'; 
         }
 
-        function triggerZoomPortal(imgSrcValueData) { 
-            document.getElementById('zoom-img-target-node-portal-unit').src = imgSrcValueData; 
-            document.getElementById('premium-zoom-overlay-target-portal').style.display='flex'; 
+        function triggerZoomPortal(imgSrcValueDataInfo) { 
+            document.getElementById('zoom-img-target-node-portal-rendering-element').src = imgSrcValueDataInfo; 
+            document.getElementById('premium-zoom-overlay-portal-unit-rendering').style.display='flex'; 
         }
 
-        function runMasterFilteringEngineLogicSystem() { renderMainCatalogScrollGridEngine(); }
+        function runMasterFilteringEngineLogicSystem() { renderMainCatalogScrollGridEngineSystem(); }
         
-        preloadLuxeExperienceCoreEngineLogicSystem();
+        preloadLuxeExperienceCoreEngineLogicSystemHandling();
     </script>
 </body>
 </html>
