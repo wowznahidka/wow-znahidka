@@ -367,17 +367,28 @@
         }
 
         function applyPromo() {
-            const code = document.getElementById('c-promo').value.toUpperCase().trim();
-            if(code === 'WOW100') {
-                discount = 0.05; // 5% знижка
-                alert('Промокод застосовано! Знижка 5%');
-            } else {
-                discount = 0;
-                alert('Невірний промокод');
-            }
-            updateCartUI();
-        }
+    const input = document.getElementById('c-promo');
+    const code = input.value.toUpperCase().trim();
+    
+    if (code === "") {
+        discount = 0;
+        updateCartUI();
+        return;
+    }
 
+    if (activePromoCodes[code]) {
+        let val = activePromoCodes[code];
+        // Якщо знижка в базі > 1, то це гривні, якщо < 1 - це відсоток
+        discount = val; 
+        input.style.borderColor = 'var(--accent)';
+        alert(`✅ Код активовано!`);
+    } else {
+        discount = 0; // Скидаємо знижку, якщо код неправильний
+        input.style.borderColor = '#ff4444';
+        alert('❌ Такого коду не існує');
+    }
+    updateCartUI();
+}
         function openSheet(id) {
             if(cart.length === 0 && id === 'cart-sheet') return;
             document.getElementById('overlay').classList.add('active');
