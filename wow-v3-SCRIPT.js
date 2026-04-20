@@ -1,12 +1,7 @@
-/* ============================================================
-   WOW.ZNAHIDKA | JAVASCRIPT V.3 | 2026
-   ============================================================ */
-
-/* ── CONFIG ── */
 const API_URL    = 'https://script.google.com/macros/s/AKfycbxfIZzXaIZjAOB3rqnUjVAk68eUVPshJyy2AArBUZsxVjnKm2-2yKyMgFUfmdvu--Au5A/exec';
 const IMG_MEN    = 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=1000';
 const IMG_WOMEN  = 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1000';
-
+ 
 /* ── СТАН ── */
 let DB           = [];
 let SESSION      = [];
@@ -19,13 +14,13 @@ let MATCH_PTR    = 0;
 let HISTORY      = [];
 let FEED_PAGE    = 0;
 const FEED_SIZE  = 12;
-
+ 
 let ACT_ID       = null;
 let ACT_NAME     = '';
 let ACT_SIZES    = [];
-
+ 
 const SOCIAL_MAP = {};
-
+ 
 /* ============================================================
    СТАРТ
    ============================================================ */
@@ -40,44 +35,43 @@ const SOCIAL_MAP = {};
     load('gi-men',   IMG_MEN);
     load('gi-women', IMG_WOMEN);
 })();
-
+ 
 async function initWOW(gender) {
     GENDER = gender;
     document.getElementById('loader').classList.add('on');
     setTimeout(() => document.getElementById('splash').classList.add('off'), 80);
-
-    // ✅ правильне вітання
+ 
     const greet = document.getElementById('home-greeting');
     if (greet) greet.textContent = gender === 'Чоловік' ? 'Привіт, чоловіче 👋' : 'Привіт, красуне 👋';
-
+ 
     try {
         const res  = await fetch(API_URL + '?v=' + Date.now());
         const data = await res.json();
-
+ 
         DB          = data.products || data;
         PROMO_RULES = data.promo   || {};
         SESSION     = DB.filter(p => p.gender === GENDER).sort(() => Math.random() - .5);
-
+ 
         restoreLS();
         renderHome();
         renderMatchDeck();
         renderCatalog();
         syncBadges();
-
+ 
         document.getElementById('hdr').style.display = 'flex';
         document.getElementById('nav').style.display = 'flex';
         document.getElementById('loader').classList.remove('on');
         changeTab('home', document.getElementById('tab-home'));
-
+ 
         if (CART.length > 0) toast('♻️ Твій кошик відновлено!');
-
+ 
     } catch(e) {
         document.getElementById('loader').classList.remove('on');
         toast('❌ Помилка з\'єднання. Оновіть сторінку.');
         console.error(e);
     }
 }
-
+ 
 /* ============================================================
    LOCAL STORAGE
    ============================================================ */
@@ -104,27 +98,36 @@ function clearLS() {
         localStorage.removeItem('wow_gender');
     } catch(e) {}
 }
-
+ 
+/* ============================================================
+   УТИЛІТА — чи лайкнута пара
+   ============================================================ */
+function isLiked(id) {
+    return LIKED.some(x => x.id === id);
+}
+ 
 /* ============================================================
    ГОЛОВНА (HOME)
    ============================================================ */
 function renderHome() {
     const allG   = DB.filter(p => p.gender === GENDER);
     const brands = [...new Set(allG.map(p => p.brand))].sort();
-
+ 
     const sm = document.getElementById('stat-models');
     const sb = document.getElementById('stat-brands');
     if (sm) sm.textContent = allG.length;
     if (sb) sb.textContent = brands.length;
-
+ 
     /* горизонтальний скрол новинок */
     const newItems  = allG.filter(p => p.is_new === 'TRUE' || p.is_new === true).slice(0, 8);
     const showItems = newItems.length > 0 ? newItems : allG.slice(0, 8);
     const scroll    = document.getElementById('home-new-scroll');
     if (scroll) {
         scroll.innerHTML = showItems.map(p => {
-            const cn = cleanName(p.name, p.brand);
-            return `<div class="home-card" onclick="quickAddFromHome('${esc(p.id)}')">
+            const cn      = cleanName(p.name, p.brand);
+            const liked   = isLiked(p.id);
+            return `<div class="home-card${liked ? ' home-card--liked' : ''}" onclick="quickAddFromHome('${esc(p.id)}')">
+                ${liked ? '<span class="card-heart-badge">❤️</span>' : ''}
                 <img class="home-card-img" src="${p.image}" alt="${cn}" loading="lazy">
                 <div class="home-card-body">
                     <div class="home-card-brand">${p.brand}</div>
@@ -134,16 +137,16 @@ function renderHome() {
             </div>`;
         }).join('');
     }
-
+ 
     /* бренди quick-scroll */
     const bq = document.getElementById('home-brands-quick');
     if (bq) {
         bq.innerHTML = brands.map(b =>
-            `<div class="brand-chip" onclick="filterBrand('${esc(b)}')">${b}</div>`
+            `<div class="brand-chip" onclick="openBrandPage('${esc(b)}')">${b}</div>`
         ).join('');
     }
-
-    /* ── ІНСТА-СТРІЧКА (нескінченний скрол) ── */
+ 
+    /* інста-стрічка */
     FEED_PAGE = 0;
     const feed = document.getElementById('home-feed');
     if (feed) {
@@ -154,12 +157,12 @@ function renderHome() {
         page.addEventListener('scroll', onHomeScroll);
     }
 }
-
+ 
 function onHomeScroll() {
     const page = document.getElementById('page-home');
     if (page.scrollHeight - page.scrollTop - page.clientHeight < 300) renderFeedPage();
 }
-
+ 
 function renderFeedPage() {
     const allG  = DB.filter(p => p.gender === GENDER);
     const start = FEED_PAGE * FEED_SIZE;
@@ -169,14 +172,17 @@ function renderFeedPage() {
     const feed = document.getElementById('home-feed');
     if (!feed) return;
     slice.forEach(p => {
-        const cn  = cleanName(p.name, p.brand);
-        const sc  = socialProof(p.id);
-        const isN = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
-        const card = document.createElement('div');
-        card.className = 'feed-card';
+        const cn    = cleanName(p.name, p.brand);
+        const sc    = socialProof(p.id);
+        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
+        const liked = isLiked(p.id);
+        const card  = document.createElement('div');
+        card.className = 'feed-card' + (liked ? ' feed-card--liked' : '');
+        card.dataset.pid = p.id;
         card.innerHTML = `
             <div class="feed-img-wrap" onclick="quickAddFromHome('${esc(p.id)}')">
                 ${isN ? '<span class="feed-new-badge">🔥 НОВИНКА</span>' : ''}
+                ${liked ? '<span class="feed-heart-badge">❤️</span>' : ''}
                 <img class="feed-img" src="${p.image}" alt="${cn}" loading="lazy">
             </div>
             <div class="feed-body">
@@ -195,12 +201,57 @@ function renderFeedPage() {
         feed.appendChild(card);
     });
 }
-
+ 
 function quickAddFromHome(id) {
     const p = DB.find(x => x.id === id);
     if (p) openSizePicker(p);
 }
-
+ 
+/* ============================================================
+   СТОРІНКА БРЕНДУ (НОВА!)
+   ============================================================ */
+function openBrandPage(brand) {
+    const items = DB.filter(p => p.gender === GENDER && p.brand === brand);
+    if (!items.length) return;
+ 
+    // Показуємо сторінку бренду
+    const page = document.getElementById('page-brand');
+    if (!page) return;
+ 
+    // Заголовок
+    document.getElementById('brand-page-title').textContent = brand;
+    document.getElementById('brand-page-count').textContent = `${items.length} моделей`;
+ 
+    // Сітка товарів 2×N
+    const grid = document.getElementById('brand-grid');
+    grid.innerHTML = items.map(p => {
+        const cn    = cleanName(p.name, p.brand);
+        const liked = isLiked(p.id);
+        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
+        return `
+        <div class="brand-product-card${liked ? ' brand-product-card--liked' : ''}" onclick="quickAddFromHome('${esc(p.id)}')">
+            <div class="bpc-img-wrap">
+                ${isN ? '<span class="bpc-new">NEW</span>' : ''}
+                ${liked ? '<span class="bpc-heart">❤️</span>' : ''}
+                <img class="bpc-img" src="${p.image}" alt="${cn}" loading="lazy">
+            </div>
+            <div class="bpc-body">
+                <div class="bpc-name">${cn}</div>
+                <div class="bpc-bottom">
+                    <span class="bpc-price">${p.price} ₴</span>
+                    <button class="bpc-btn" onclick="event.stopPropagation();quickAddFromHome('${esc(p.id)}')">+</button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+ 
+    HISTORY.push('catalog');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    page.classList.add('active');
+    document.getElementById('tab-catalog').classList.add('active');
+}
+ 
 /* ============================================================
    MATCH ENGINE
    ============================================================ */
@@ -209,15 +260,17 @@ function renderMatchDeck() {
     const slice = SESSION.slice(MATCH_PTR, MATCH_PTR + 3);
     if (!slice.length) { renderEmptyDeck(); return; }
     deck.innerHTML = slice.map((p, i) => {
-        const cn  = cleanName(p.name, p.brand);
-        const sc  = socialProof(p.id);
-        const isN = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
+        const cn    = cleanName(p.name, p.brand);
+        const sc    = socialProof(p.id);
+        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
+        const liked = isLiked(p.id);
         return `
-        <div class="t-card" data-i="${i}" data-pid="${p.id}"
+        <div class="t-card${liked ? ' t-card--liked' : ''}" data-i="${i}" data-pid="${p.id}"
              style="z-index:${10-i};transform:scale(${1-i*.05}) translateY(${i*18}px);opacity:${1-i*.15};">
             <img class="t-img" src="${p.image}" alt="${cn}" draggable="false">
             <div class="t-grad"></div>
             ${isN ? '<span class="new-tag">🔥 НОВИНКА</span>' : ''}
+            ${liked ? '<span class="t-liked-badge">❤️ В улюблених</span>' : ''}
             <div class="ov-like"><span class="sw-lbl sw-like">ЛАЙК</span></div>
             <div class="ov-nope"><span class="sw-lbl sw-nope">ПРОПУСК</span></div>
             <div class="t-info">
@@ -232,7 +285,7 @@ function renderMatchDeck() {
     }).join('');
     attachSwipe();
 }
-
+ 
 function attachSwipe() {
     const top = document.querySelector('.t-card[data-i="0"]');
     if (!top) return;
@@ -264,7 +317,7 @@ function attachSwipe() {
     top.addEventListener('touchmove',  move, { passive:true });
     top.addEventListener('touchend',   up);
 }
-
+ 
 function flyOut(card, dir) {
     const dist = window.innerWidth * 1.6;
     const rot  = dir === 'right' ? 42 : -42;
@@ -278,12 +331,12 @@ function flyOut(card, dir) {
     }
     setTimeout(() => { MATCH_PTR++; renderMatchDeck(); }, 400);
 }
-
+ 
 function swipeCard(dir) {
     const top = document.querySelector('.t-card[data-i="0"]');
     if (top) flyOut(top, dir);
 }
-
+ 
 function renderEmptyDeck() {
     const deck = document.getElementById('deck');
     if (!LIKED.length) {
@@ -292,15 +345,66 @@ function renderEmptyDeck() {
     }
     deck.innerHTML = `<div class="empty-deck"><span class="empty-deck-ico">🏁</span><div class="empty-deck-t">Ти переглянув усе!</div><p class="empty-deck-s">Ось твої фаворити:</p><div class="fav-mini-list">${LIKED.slice(0,5).map(p => `<div class="fav-row"><img class="fav-img" src="${p.image}" alt="${p.brand}"><div class="fav-info"><div class="fav-name">${p.brand} ${cleanName(p.name, p.brand)}</div><div class="fav-price">${p.price} ₴</div></div><button class="btn-fav-add" onclick="openSizePicker(LIKED.find(x=>x.id==='${esc(p.id)}'))">+</button></div>`).join('')}</div></div>`;
 }
-
+ 
 function addLiked(p) {
-    if (!LIKED.some(x => x.id === p.id)) { LIKED.push(p); saveLS(); syncBadges(); heartPulse(); }
+    if (!LIKED.some(x => x.id === p.id)) {
+        LIKED.push(p);
+        saveLS();
+        syncBadges();
+        heartPulse();
+        refreshLikedUI(); // оновлюємо відмітки скрізь
+    }
 }
+ 
+/* Оновлює відмітки лайку на всіх видимих картках без перерендеру */
+function refreshLikedUI() {
+    // Feed cards
+    document.querySelectorAll('.feed-card').forEach(card => {
+        const pid = card.dataset.pid;
+        if (!pid) return;
+        const liked = isLiked(pid);
+        card.classList.toggle('feed-card--liked', liked);
+        let badge = card.querySelector('.feed-heart-badge');
+        if (liked && !badge) {
+            badge = document.createElement('span');
+            badge.className = 'feed-heart-badge';
+            badge.textContent = '❤️';
+            card.querySelector('.feed-img-wrap')?.prepend(badge);
+        } else if (!liked && badge) {
+            badge.remove();
+        }
+    });
+ 
+    // Home cards
+    document.querySelectorAll('.home-card').forEach(card => {
+        const pid = card.dataset?.pid;
+        if (!pid) return;
+        card.classList.toggle('home-card--liked', isLiked(pid));
+    });
+ 
+    // Brand page cards
+    document.querySelectorAll('.brand-product-card').forEach(card => {
+        const pid = card.dataset?.pid;
+        if (!pid) return;
+        const liked = isLiked(pid);
+        card.classList.toggle('brand-product-card--liked', liked);
+        let badge = card.querySelector('.bpc-heart');
+        if (liked && !badge) {
+            badge = document.createElement('span');
+            badge.className = 'bpc-heart';
+            badge.textContent = '❤️';
+            card.querySelector('.bpc-img-wrap')?.prepend(badge);
+        } else if (!liked && badge) {
+            badge.remove();
+        }
+    });
+}
+ 
 function heartPulse() {
     const h = document.getElementById('heart-btn');
     h.classList.remove('pulse'); void h.offsetWidth; h.classList.add('pulse');
 }
-
+ 
 /* ============================================================
    SIZE PICKER
    ============================================================ */
@@ -317,7 +421,7 @@ function openSizePicker(p) {
     buildSizeGrid(p.sizes);
     openSheet('size-sheet');
 }
-
+ 
 function buildSizeGrid(raw) {
     const sizes = String(raw || '').split(',').map(s => s.trim()).filter(Boolean);
     document.getElementById('sz-grid').innerHTML = sizes.map(s => {
@@ -328,13 +432,13 @@ function buildSizeGrid(raw) {
         return `<div class="sz-wrap">${low ? '<div class="low-dot"></div>' : ''}<div class="sz-cell" onclick="toggleSz(this,'${s}')" data-s="${s}">${eu}${ex ? `<span class="sz-sub">${ex}</span>` : ''}${low ? '<span class="low-lbl">мало</span>' : ''}</div></div>`;
     }).join('');
 }
-
+ 
 function toggleSz(el, v) {
     const idx = ACT_SIZES.indexOf(v);
     if (idx > -1) { ACT_SIZES.splice(idx, 1); el.classList.remove('sel'); }
     else          { ACT_SIZES.push(v);         el.classList.add('sel'); }
 }
-
+ 
 function confirmSizes() {
     if (!ACT_SIZES.length) { toast('⚠️ Оберіть розмір!'); return; }
     const p = DB.find(x => x.id === ACT_ID);
@@ -344,12 +448,12 @@ function confirmSizes() {
     });
     saveLS(); syncBadges(); closeSheets(); haptic(40); toast('✅ Додано до кошика!', true);
 }
-
+ 
 function toggleAdvisor() {
     const b = document.getElementById('advisor-box');
     if (b) b.classList.toggle('on');
 }
-
+ 
 function calcEU() {
     const mm  = parseInt(document.getElementById('adv-mm').value);
     const res = document.getElementById('adv-res');
@@ -361,8 +465,7 @@ function calcEU() {
         if ((c.dataset.s || '').includes(String(eu))) c.classList.add('hint');
     });
 }
-
-/* ── Запит фото → відкриває TG з готовим повідомленням ── */
+ 
 function reqPhoto() {
     const btn = document.getElementById('btn-photo');
     btn.disabled = true; haptic(30);
@@ -373,9 +476,9 @@ function reqPhoto() {
     toast('📸 Відкриваємо Telegram!', true);
     setTimeout(() => { btn.textContent = '📸 Запросити додаткові фото'; btn.disabled = false; }, 3000);
 }
-
+ 
 /* ============================================================
-   КАТАЛОГ — з фото брендів
+   КАТАЛОГ
    ============================================================ */
 function renderCatalog() {
     const gp     = DB.filter(p => p.gender === GENDER);
@@ -388,7 +491,7 @@ function renderCatalog() {
     document.getElementById('cat-label').textContent = `Всі бренди (${brands.length})`;
     document.getElementById('brands-node').innerHTML = brands.map(b => brandTileHTML(b, counts[b], photos[b])).join('');
 }
-
+ 
 function filterCatalog() {
     const q      = document.getElementById('cat-search').value.toLowerCase();
     const gp     = DB.filter(p => p.gender === GENDER);
@@ -405,9 +508,9 @@ function filterCatalog() {
         ? '<p style="color:var(--text-dim);font-size:.85rem;padding:20px 0;grid-column:1/-1;">Нічого не знайдено 😔</p>'
         : brands.map(b => brandTileHTML(b, counts[b], photos[b])).join('');
 }
-
+ 
 function brandTileHTML(b, count, photo) {
-    return `<div class="brand-tile" onclick="filterBrand('${esc(b)}')">
+    return `<div class="brand-tile" onclick="openBrandPage('${esc(b)}')">
         ${photo ? `<img class="brand-tile-img" src="${photo}" alt="${b}" loading="lazy">` : ''}
         <div class="brand-tile-body">
             <div class="bt-name">${b}</div>
@@ -415,15 +518,12 @@ function brandTileHTML(b, count, photo) {
         </div>
     </div>`;
 }
-
+ 
+/* filterBrand залишаємо для сумісності але тепер відкриває сторінку бренду */
 function filterBrand(brand) {
-    SESSION = DB.filter(p => p.gender === GENDER && p.brand === brand);
-    MATCH_PTR = 0;
-    renderMatchDeck();
-    changeTab('match', document.getElementById('tab-match'));
-    toast(`👟 Показую: ${brand}`);
+    openBrandPage(brand);
 }
-
+ 
 /* ============================================================
    КОШИК
    ============================================================ */
@@ -457,24 +557,24 @@ function renderCart() {
     </div>`).join('');
     if (total) total.textContent = cartSum() + ' ₴';
 }
-
+ 
 function renderFavBlock() {
     document.getElementById('fav-list').innerHTML = LIKED.slice(0,4).map(p =>
         `<div class="fav-row"><img class="fav-img" src="${p.image}" alt="${p.brand}"><div class="fav-info"><div class="fav-name">${p.brand} ${cleanName(p.name, p.brand)}</div><div class="fav-price">${p.price} ₴</div></div><button class="btn-fav-add" onclick="openSizePicker(LIKED.find(x=>x.id==='${esc(p.id)}')); closeSheets()">+</button></div>`
     ).join('');
 }
-
+ 
 function changeQty(i, d) { if (!CART[i]) return; CART[i].qty = Math.max(1, CART[i].qty + d); saveLS(); renderCart(); }
 function delItem(i)       { CART.splice(i, 1); saveLS(); syncBadges(); renderCart(); }
 function cartSum()        { return CART.reduce((s, it) => s + it.price * it.qty, 0); }
-
+ 
 function setDel(t) {
     DELIVERY = t;
     document.querySelectorAll('.d-opt').forEach(b => b.classList.remove('on'));
     document.getElementById(t === 'Відділення' ? 'opt-branch' : 'opt-poshtamat').classList.add('on');
     document.getElementById('inp-np').placeholder = t === 'Відділення' ? '№ Відділення' : '№ Поштомату';
 }
-
+ 
 function previewPromo() {
     const code = document.getElementById('inp-promo').value.toUpperCase().trim();
     const box  = document.getElementById('promo-prev');
@@ -484,30 +584,30 @@ function previewPromo() {
     box.textContent = `Знижка: −${disc} ₴ → Разом: ${Math.max(0, base - disc)} ₴`;
     box.style.display = 'block';
 }
-
+ 
 async function sendOrder() {
     const fio   = document.getElementById('inp-fio').value.trim();
     const phone = document.getElementById('inp-phone').value.trim();
     const city  = document.getElementById('inp-city').value.trim();
     const np    = document.getElementById('inp-np').value.trim();
     const promo = document.getElementById('inp-promo').value.toUpperCase().trim();
-
+ 
     if (!fio)   { toast('⚠️ Введіть ПІБ'); return; }
     if (!phone || !/^(\+380|0)\d{9}$/.test(phone.replace(/\s/g,''))) { toast('⚠️ Некоректний телефон'); return; }
     if (!np)    { toast('⚠️ Вкажіть № відділення'); return; }
     if (!CART.length) { toast('⚠️ Кошик порожній'); return; }
-
+ 
     const btn = document.getElementById('btn-order');
     btn.textContent = 'ВІДПРАВКА...'; btn.disabled = true;
-
+ 
     let total = cartSum();
     if (promo && PROMO_RULES[promo]) {
         const v = PROMO_RULES[promo];
         total = v < 1 ? Math.round(total * (1-v)) : Math.max(0, total - v);
     }
-
+ 
     const items = CART.map(it => `- ${it.brand} ${cleanName(it.name, it.brand)} (р.${it.size.replace('(last)','').replace('(1)','')}) × ${it.qty}`).join('\n');
-
+ 
     try {
         await fetch(API_URL, { method:'POST', mode:'no-cors', body: JSON.stringify({ action:'new_order', fio, phone, city, delivery:`${DELIVERY} №${np} (Накладний платіж)`, items, total: total + ' ₴', promo: promo || 'Немає' }) });
         haptic([100,50,100,50,200]);
@@ -519,7 +619,7 @@ async function sendOrder() {
         btn.textContent = 'ЗАМОВИТИ'; btn.disabled = false;
     }
 }
-
+ 
 /* ============================================================
    WISHLIST SHARE
    ============================================================ */
@@ -536,7 +636,7 @@ function fallbackCopy(txt) {
     document.body.appendChild(a); a.select(); document.execCommand('copy');
     document.body.removeChild(a); toast('✅ Список скопійовано!', true);
 }
-
+ 
 /* ============================================================
    НАВІГАЦІЯ
    ============================================================ */
@@ -549,10 +649,26 @@ function changeTab(id, el) {
     if (el) el.classList.add('active');
 }
 function navBack() {
-    if (HISTORY.length) { const prev = HISTORY.pop(); changeTab(prev, document.getElementById('tab-' + prev)); }
-    else location.reload();
+    if (HISTORY.length) {
+        const prev = HISTORY.pop();
+        // Якщо повертаємось зі сторінки бренду
+        if (prev === 'brand') {
+            openBrandPage._last && openBrandPage(_last);
+            return;
+        }
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        const prevPage = document.getElementById('page-' + prev);
+        if (prevPage) {
+            prevPage.classList.add('active');
+            const tab = document.getElementById('tab-' + prev);
+            if (tab) tab.classList.add('active');
+        }
+    } else {
+        location.reload();
+    }
 }
-
+ 
 /* ============================================================
    SHEETS
    ============================================================ */
@@ -575,7 +691,7 @@ function closeSheets() {
 }
 function showCheckout() { if (!CART.length) { toast('🛒 Кошик порожній'); return; } haptic([50,30,50]); document.getElementById('view-cart').style.display = 'none'; document.getElementById('view-form').style.display = 'block'; }
 function hideCheckout() { document.getElementById('view-form').style.display = 'none'; document.getElementById('view-cart').style.display = 'block'; }
-
+ 
 /* ============================================================
    SYNC BADGES
    ============================================================ */
@@ -586,7 +702,7 @@ function syncBadges() {
     if (cb) { cb.style.display = tc > 0 ? 'block' : 'none'; cb.textContent = tc; }
     if (mb) { mb.style.display = LIKED.length > 0 ? 'block' : 'none'; mb.textContent = LIKED.length; }
 }
-
+ 
 /* ============================================================
    TOAST
    ============================================================ */
@@ -598,7 +714,7 @@ function toast(msg, accent) {
     requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
     setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.parentNode && t.parentNode.removeChild(t), 360); }, 2800);
 }
-
+ 
 /* ============================================================
    УТИЛІТИ
    ============================================================ */
@@ -607,3 +723,4 @@ function cleanName(name, brand) { if (!name || !brand) return name || ''; return
 function socialProof(id) { if (!SOCIAL_MAP[id]) SOCIAL_MAP[id] = Math.floor(Math.random() * 18) + 3; return SOCIAL_MAP[id]; }
 function uid() { return Math.random().toString(36).substr(2,9); }
 function esc(s) { return String(s).replace(/'/g,"\\'"); }
+ 
