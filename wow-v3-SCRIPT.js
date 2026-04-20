@@ -1,11 +1,8 @@
-/* ============================================================
-   WOW.ZNAHIDKA | JAVASCRIPT V.3.2 | 2026
-   ============================================================ */
-
 const API_URL    = 'https://script.google.com/macros/s/AKfycbxfIZzXaIZjAOB3rqnUjVAk68eUVPshJyy2AArBUZsxVjnKm2-2yKyMgFUfmdvu--Au5A/exec';
 const IMG_MEN    = 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=1000';
 const IMG_WOMEN  = 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=1000';
 
+/* ── СТАН ── */
 let DB           = [];
 let SESSION      = [];
 let CART         = [];
@@ -24,7 +21,9 @@ let ACT_SIZES    = [];
 
 const SOCIAL_MAP = {};
 
-/* ── PRELOAD SPLASH ── */
+/* ============================================================
+   СТАРТ
+   ============================================================ */
 (function preloadSplash() {
     function load(id, src) {
         const img = document.getElementById(id);
@@ -37,14 +36,12 @@ const SOCIAL_MAP = {};
     load('gi-women', IMG_WOMEN);
 })();
 
-/* ============================================================
-   СТАРТ
-   ============================================================ */
 async function initWOW(gender) {
     GENDER = gender;
     document.getElementById('loader').classList.add('on');
     setTimeout(() => document.getElementById('splash').classList.add('off'), 80);
 
+    // ✅ правильне вітання
     const greet = document.getElementById('home-greeting');
     if (greet) greet.textContent = gender === 'Чоловік' ? 'Привіт, чоловіче 👋' : 'Привіт, красуне 👋';
 
@@ -54,9 +51,7 @@ async function initWOW(gender) {
 
         DB          = data.products || data;
         PROMO_RULES = data.promo   || {};
-        // Перемішуємо кожен раз по-новому
         SESSION     = DB.filter(p => p.gender === GENDER).sort(() => Math.random() - .5);
-        MATCH_PTR   = 0;
 
         restoreLS();
         renderHome();
@@ -105,12 +100,8 @@ function clearLS() {
     } catch(e) {}
 }
 
-function isLiked(id) {
-    return LIKED.some(x => x.id === id);
-}
-
 /* ============================================================
-   ГОЛОВНА
+   ГОЛОВНА (HOME)
    ============================================================ */
 function renderHome() {
     const allG   = DB.filter(p => p.gender === GENDER);
@@ -121,15 +112,14 @@ function renderHome() {
     if (sm) sm.textContent = allG.length;
     if (sb) sb.textContent = brands.length;
 
+    /* горизонтальний скрол новинок */
     const newItems  = allG.filter(p => p.is_new === 'TRUE' || p.is_new === true).slice(0, 8);
     const showItems = newItems.length > 0 ? newItems : allG.slice(0, 8);
     const scroll    = document.getElementById('home-new-scroll');
     if (scroll) {
         scroll.innerHTML = showItems.map(p => {
-            const cn    = cleanName(p.name, p.brand);
-            const liked = isLiked(p.id);
-            return `<div class="home-card${liked ? ' home-card--liked' : ''}" data-pid="${esc(p.id)}" onclick="quickAddFromHome('${esc(p.id)}')">
-                ${liked ? '<span class="card-heart-badge">❤️</span>' : ''}
+            const cn = cleanName(p.name, p.brand);
+            return `<div class="home-card" onclick="quickAddFromHome('${esc(p.id)}')">
                 <img class="home-card-img" src="${p.image}" alt="${cn}" loading="lazy">
                 <div class="home-card-body">
                     <div class="home-card-brand">${p.brand}</div>
@@ -140,13 +130,15 @@ function renderHome() {
         }).join('');
     }
 
+    /* бренди quick-scroll */
     const bq = document.getElementById('home-brands-quick');
     if (bq) {
         bq.innerHTML = brands.map(b =>
-            `<div class="brand-chip" onclick="openBrandPage('${esc(b)}')">${b}</div>`
+            `<div class="brand-chip" onclick="filterBrand('${esc(b)}')">${b}</div>`
         ).join('');
     }
 
+    /* ── ІНСТА-СТРІЧКА (нескінченний скрол) ── */
     FEED_PAGE = 0;
     const feed = document.getElementById('home-feed');
     if (feed) {
@@ -172,17 +164,14 @@ function renderFeedPage() {
     const feed = document.getElementById('home-feed');
     if (!feed) return;
     slice.forEach(p => {
-        const cn    = cleanName(p.name, p.brand);
-        const sc    = socialProof(p.id);
-        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
-        const liked = isLiked(p.id);
-        const card  = document.createElement('div');
-        card.className = 'feed-card' + (liked ? ' feed-card--liked' : '');
-        card.dataset.pid = p.id;
+        const cn  = cleanName(p.name, p.brand);
+        const sc  = socialProof(p.id);
+        const isN = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
+        const card = document.createElement('div');
+        card.className = 'feed-card';
         card.innerHTML = `
             <div class="feed-img-wrap" onclick="quickAddFromHome('${esc(p.id)}')">
                 ${isN ? '<span class="feed-new-badge">🔥 НОВИНКА</span>' : ''}
-                ${liked ? '<span class="feed-heart-badge">❤️</span>' : ''}
                 <img class="feed-img" src="${p.image}" alt="${cn}" loading="lazy">
             </div>
             <div class="feed-body">
@@ -208,53 +197,6 @@ function quickAddFromHome(id) {
 }
 
 /* ============================================================
-   СТОРІНКА БРЕНДУ
-   ============================================================ */
-function openBrandPage(brand) {
-    const items = DB.filter(p => p.gender === GENDER && p.brand === brand);
-    if (!items.length) return;
-
-    const page = document.getElementById('page-brand');
-    if (!page) return;
-
-    const titleEl = document.getElementById('brand-page-title');
-    const countEl = document.getElementById('brand-page-count');
-    if (titleEl) titleEl.textContent = brand;
-    if (countEl) countEl.textContent = `${items.length} моделей`;
-
-    const grid = document.getElementById('brand-grid');
-    if (!grid) return;
-    grid.innerHTML = items.map(p => {
-        const cn    = cleanName(p.name, p.brand);
-        const liked = isLiked(p.id);
-        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
-        return `
-        <div class="brand-product-card${liked ? ' brand-product-card--liked' : ''}" data-pid="${esc(p.id)}" onclick="quickAddFromHome('${esc(p.id)}')">
-            <div class="bpc-img-wrap">
-                ${isN ? '<span class="bpc-new">NEW</span>' : ''}
-                ${liked ? '<span class="bpc-heart">❤️</span>' : ''}
-                <img class="bpc-img" src="${p.image}" alt="${cn}" loading="lazy">
-            </div>
-            <div class="bpc-body">
-                <div class="bpc-name">${cn}</div>
-                <div class="bpc-bottom">
-                    <span class="bpc-price">${p.price} ₴</span>
-                    <button class="bpc-btn" onclick="event.stopPropagation();quickAddFromHome('${esc(p.id)}')">+</button>
-                </div>
-            </div>
-        </div>`;
-    }).join('');
-
-    HISTORY.push('catalog');
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    page.classList.add('active');
-    document.getElementById('tab-catalog').classList.add('active');
-}
-
-function filterBrand(brand) { openBrandPage(brand); }
-
-/* ============================================================
    MATCH ENGINE
    ============================================================ */
 function renderMatchDeck() {
@@ -262,17 +204,15 @@ function renderMatchDeck() {
     const slice = SESSION.slice(MATCH_PTR, MATCH_PTR + 3);
     if (!slice.length) { renderEmptyDeck(); return; }
     deck.innerHTML = slice.map((p, i) => {
-        const cn    = cleanName(p.name, p.brand);
-        const sc    = socialProof(p.id);
-        const isN   = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
-        const liked = isLiked(p.id);
+        const cn  = cleanName(p.name, p.brand);
+        const sc  = socialProof(p.id);
+        const isN = p.is_new === true || p.is_new === 'TRUE' || p.is_new === 'true';
         return `
-        <div class="t-card${liked ? ' t-card--liked' : ''}" data-i="${i}" data-pid="${p.id}"
+        <div class="t-card" data-i="${i}" data-pid="${p.id}"
              style="z-index:${10-i};transform:scale(${1-i*.05}) translateY(${i*18}px);opacity:${1-i*.15};">
             <img class="t-img" src="${p.image}" alt="${cn}" draggable="false">
             <div class="t-grad"></div>
             ${isN ? '<span class="new-tag">🔥 НОВИНКА</span>' : ''}
-            ${liked ? '<span class="t-liked-badge">❤️ В улюблених</span>' : ''}
             <div class="ov-like"><span class="sw-lbl sw-like">ЛАЙК</span></div>
             <div class="ov-nope"><span class="sw-lbl sw-nope">ПРОПУСК</span></div>
             <div class="t-info">
@@ -349,55 +289,8 @@ function renderEmptyDeck() {
 }
 
 function addLiked(p) {
-    if (!LIKED.some(x => x.id === p.id)) {
-        LIKED.push(p);
-        saveLS();
-        syncBadges();
-        heartPulse();
-        refreshLikedUI();
-    }
+    if (!LIKED.some(x => x.id === p.id)) { LIKED.push(p); saveLS(); syncBadges(); heartPulse(); }
 }
-
-function refreshLikedUI() {
-    document.querySelectorAll('.feed-card').forEach(card => {
-        const pid = card.dataset.pid;
-        if (!pid) return;
-        const liked = isLiked(pid);
-        card.classList.toggle('feed-card--liked', liked);
-        let badge = card.querySelector('.feed-heart-badge');
-        if (liked && !badge) {
-            badge = document.createElement('span');
-            badge.className = 'feed-heart-badge';
-            badge.textContent = '❤️';
-            card.querySelector('.feed-img-wrap')?.prepend(badge);
-        } else if (!liked && badge) badge.remove();
-    });
-
-    document.querySelectorAll('.home-card[data-pid]').forEach(card => {
-        const liked = isLiked(card.dataset.pid);
-        card.classList.toggle('home-card--liked', liked);
-        let badge = card.querySelector('.card-heart-badge');
-        if (liked && !badge) {
-            badge = document.createElement('span');
-            badge.className = 'card-heart-badge';
-            badge.textContent = '❤️';
-            card.prepend(badge);
-        } else if (!liked && badge) badge.remove();
-    });
-
-    document.querySelectorAll('.brand-product-card[data-pid]').forEach(card => {
-        const liked = isLiked(card.dataset.pid);
-        card.classList.toggle('brand-product-card--liked', liked);
-        let badge = card.querySelector('.bpc-heart');
-        if (liked && !badge) {
-            badge = document.createElement('span');
-            badge.className = 'bpc-heart';
-            badge.textContent = '❤️';
-            card.querySelector('.bpc-img-wrap')?.prepend(badge);
-        } else if (!liked && badge) badge.remove();
-    });
-}
-
 function heartPulse() {
     const h = document.getElementById('heart-btn');
     h.classList.remove('pulse'); void h.offsetWidth; h.classList.add('pulse');
@@ -464,6 +357,7 @@ function calcEU() {
     });
 }
 
+/* ── Запит фото → відкриває TG з готовим повідомленням ── */
 function reqPhoto() {
     const btn = document.getElementById('btn-photo');
     btn.disabled = true; haptic(30);
@@ -476,13 +370,9 @@ function reqPhoto() {
 }
 
 /* ============================================================
-   КАТАЛОГ
+   КАТАЛОГ — з фото брендів
    ============================================================ */
 function renderCatalog() {
-    const catLabel   = document.getElementById('cat-label');
-    const brandsNode = document.getElementById('brands-node');
-    if (!catLabel || !brandsNode) return;
-
     const gp     = DB.filter(p => p.gender === GENDER);
     const counts = {}, photos = {};
     gp.forEach(p => {
@@ -490,15 +380,11 @@ function renderCatalog() {
         if (!photos[p.brand] && p.image) photos[p.brand] = p.image;
     });
     const brands = Object.keys(counts).sort();
-    catLabel.textContent   = `Всі бренди (${brands.length})`;
-    brandsNode.innerHTML   = brands.map(b => brandTileHTML(b, counts[b], photos[b])).join('');
+    document.getElementById('cat-label').textContent = `Всі бренди (${brands.length})`;
+    document.getElementById('brands-node').innerHTML = brands.map(b => brandTileHTML(b, counts[b], photos[b])).join('');
 }
 
 function filterCatalog() {
-    const catLabel   = document.getElementById('cat-label');
-    const brandsNode = document.getElementById('brands-node');
-    if (!catLabel || !brandsNode) return;
-
     const q      = document.getElementById('cat-search').value.toLowerCase();
     const gp     = DB.filter(p => p.gender === GENDER);
     const counts = {}, photos = {};
@@ -509,20 +395,28 @@ function filterCatalog() {
         }
     });
     const brands = Object.keys(counts).sort();
-    catLabel.textContent = `Результати (${brands.length})`;
-    brandsNode.innerHTML = !brands.length
+    document.getElementById('cat-label').textContent = `Результати (${brands.length})`;
+    document.getElementById('brands-node').innerHTML = !brands.length
         ? '<p style="color:var(--text-dim);font-size:.85rem;padding:20px 0;grid-column:1/-1;">Нічого не знайдено 😔</p>'
         : brands.map(b => brandTileHTML(b, counts[b], photos[b])).join('');
 }
 
 function brandTileHTML(b, count, photo) {
-    return `<div class="brand-tile" onclick="openBrandPage('${esc(b)}')">
+    return `<div class="brand-tile" onclick="filterBrand('${esc(b)}')">
         ${photo ? `<img class="brand-tile-img" src="${photo}" alt="${b}" loading="lazy">` : ''}
         <div class="brand-tile-body">
             <div class="bt-name">${b}</div>
             <div class="bt-cnt">${count} моделей</div>
         </div>
     </div>`;
+}
+
+function filterBrand(brand) {
+    SESSION = DB.filter(p => p.gender === GENDER && p.brand === brand);
+    MATCH_PTR = 0;
+    renderMatchDeck();
+    changeTab('match', document.getElementById('tab-match'));
+    toast(`👟 Показую: ${brand}`);
 }
 
 /* ============================================================
@@ -646,23 +540,12 @@ function changeTab(id, el) {
     if (cur && cur.id !== 'page-' + id) HISTORY.push(cur.id.replace('page-',''));
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    const target = document.getElementById('page-' + id);
-    if (target) target.classList.add('active');
+    document.getElementById('page-' + id).classList.add('active');
     if (el) el.classList.add('active');
 }
-
 function navBack() {
-    if (HISTORY.length) {
-        const prev = HISTORY.pop();
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-        const prevPage = document.getElementById('page-' + prev);
-        if (prevPage) prevPage.classList.add('active');
-        const tab = document.getElementById('tab-' + prev);
-        if (tab) tab.classList.add('active');
-    } else {
-        location.reload();
-    }
+    if (HISTORY.length) { const prev = HISTORY.pop(); changeTab(prev, document.getElementById('tab-' + prev)); }
+    else location.reload();
 }
 
 /* ============================================================
