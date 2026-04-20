@@ -762,17 +762,19 @@ a { text-decoration:none; color:inherit; }
         </div>
     </section>
 
-    <!-- КАТАЛОГ -->
-    <section id="page-catalog" class="page">
-        <div class="search-sticky">
-            <div class="search-wrap">
-                <span class="search-ico">🔍</span>
-                <input type="text" id="cat-search" class="search-field" placeholder="Бренд або модель..." oninput="filterCatalog()" autocomplete="off">
+    
+    <section id="page-brand" class="page">
+    <div class="search-sticky" style="padding-bottom:0;">
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 16px 14px;">
+            <button class="btn-back" onclick="navBack()">←</button>
+            <div>
+                <div id="brand-page-title" style="font-size:1.1rem;font-weight:900;letter-spacing:-.5px;"></div>
+                <div id="brand-page-count" style="font-size:.68rem;color:var(--text-dim);font-weight:700;margin-top:1px;"></div>
             </div>
         </div>
-        <p class="cat-label" id="cat-label">Всі бренди</p>
-        <div class="brands-grid" id="brands-node"></div>
-    </section>
+    </div>
+    <div id="brand-grid" class="brand-products-grid"></div>
+</section>
 
     <!-- КОНТАКТИ -->
     <section id="page-contacts" class="page">
