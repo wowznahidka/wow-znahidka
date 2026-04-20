@@ -642,7 +642,127 @@ a { text-decoration:none; color:inherit; }
     margin-bottom:12px; transition:all .4s var(--ease-bounce);
 }
 .btn-tg:active { transform:scale(.97); }
+/* ============================================================
+   СТОРІНКА БРЕНДУ — додати в <style> в HTML файлі
+   ============================================================ */
 
+/* Сітка товарів бренду 2×N */
+.brand-products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 12px 16px 24px;
+    overflow-y: auto;
+    max-height: calc(100vh - 140px);
+}
+
+.brand-product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .3s var(--ease-out);
+    position: relative;
+}
+.brand-product-card:active { transform: scale(.96); }
+.brand-product-card--liked {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 24px var(--accent-soft);
+}
+
+.bpc-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+}
+.bpc-img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform .5s ease;
+}
+.brand-product-card:active .bpc-img { transform: scale(1.06); }
+
+.bpc-new {
+    position: absolute; top: 8px; left: 8px; z-index: 5;
+    background: var(--accent); color: #000;
+    font-size: .5rem; font-weight: 900;
+    padding: 4px 9px; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: 1px;
+}
+.bpc-heart {
+    position: absolute; top: 8px; right: 8px; z-index: 5;
+    font-size: 1rem;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.6));
+    animation: heartPop .32s var(--ease-bounce);
+}
+
+.bpc-body { padding: 10px 12px 12px; }
+.bpc-name {
+    font-size: .78rem; font-weight: 700;
+    line-height: 1.3; margin-bottom: 8px;
+    display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+}
+.bpc-bottom {
+    display: flex; align-items: center;
+    justify-content: space-between;
+}
+.bpc-price { font-size: .88rem; font-weight: 900; color: var(--accent); }
+.bpc-btn {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: var(--accent); color: #000;
+    font-size: 1.1rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .35s var(--ease-bounce); flex-shrink: 0;
+}
+.bpc-btn:active { transform: scale(.78); }
+
+/* ============================================================
+   ВІДМІТКИ ЛАЙКУ — скрізь на сайті
+   ============================================================ */
+
+/* Home card — лайкнута */
+.home-card { position: relative; }
+.home-card--liked {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent), 0 6px 20px var(--accent-soft);
+}
+.card-heart-badge {
+    position: absolute; top: 10px; right: 10px; z-index: 10;
+    font-size: .95rem;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,.7));
+    animation: heartPop .32s var(--ease-bounce);
+}
+
+/* Feed card — лайкнута */
+.feed-card--liked {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 28px var(--accent-soft);
+}
+.feed-heart-badge {
+    position: absolute; top: 14px; right: 14px; z-index: 10;
+    font-size: 1.2rem;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,.7));
+    animation: heartPop .32s var(--ease-bounce);
+}
+
+/* Match card — лайкнута */
+.t-card--liked {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 2px var(--accent), 0 28px 65px rgba(0,0,0,.9);
+}
+.t-liked-badge {
+    position: absolute; bottom: 110px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: var(--accent); color: #000;
+    font-size: .65rem; font-weight: 900;
+    padding: 6px 16px; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: 1px;
+    animation: shimmer 2.5s ease infinite;
+}
 </style>
 </head>
 <body>
@@ -773,7 +893,18 @@ a { text-decoration:none; color:inherit; }
         <p class="cat-label" id="cat-label">Всі бренди</p>
         <div class="brands-grid" id="brands-node"></div>
     </section>
-
+<section id="page-brand" class="page">
+    <div class="search-sticky" style="padding-bottom:0;">
+        <div style="display:flex;align-items:center;gap:14px;padding:16px 16px 14px;">
+            <button class="btn-back" onclick="navBack()">←</button>
+            <div>
+                <div id="brand-page-title" style="font-size:1.1rem;font-weight:900;letter-spacing:-.5px;"></div>
+                <div id="brand-page-count" style="font-size:.68rem;color:var(--text-dim);font-weight:700;margin-top:1px;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="brand-grid" class="brand-products-grid"></div>
+</section>
     <!-- КОНТАКТИ -->
     <section id="page-contacts" class="page">
         <div class="contacts-logo">
