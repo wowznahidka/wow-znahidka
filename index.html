@@ -1790,5 +1790,54 @@ function socialProof(id) { if (!SOCIAL_MAP[id]) SOCIAL_MAP[id] = Math.floor(Math
 function uid() { return Math.random().toString(36).substr(2,9); }
 function esc(s) { return String(s).replace(/'/g,"\\'"); }
 </script>
+    <!-- PWA Install Banner -->
+<div id="pwa-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#0a0a0a; border-top:2px solid #c8ff00; padding:14px 16px; z-index:9999; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+  <div style="display:flex; align-items:center; gap:10px;">
+    <span style="font-size:28px;">👟</span>
+    <div>
+      <div style="color:#c8ff00; font-weight:700; font-size:13px;">Додай на головний екран!</div>
+      <div style="color:#888; font-size:11px;">Каталог завжди під рукою 📱</div>
+    </div>
+  </div>
+  <div style="display:flex; gap:8px;">
+    <button onclick="installPWA()" style="background:#c8ff00; color:#000; border:none; padding:8px 14px; border-radius:20px; font-weight:700; font-size:12px; cursor:pointer;">Встановити</button>
+    <button onclick="closeBanner()" style="background:transparent; color:#555; border:1px solid #333; padding:8px 10px; border-radius:20px; font-size:12px; cursor:pointer;">✕</button>
+  </div>
+</div>
+
+<script>
+let deferredPrompt;
+const banner = document.getElementById('pwa-banner');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  banner.style.display = 'flex';
+});
+
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      banner.style.display = 'none';
+    });
+  } else {
+    // iOS підказка
+    alert('📱 Щоб додати:\nSafari → кнопка "Поділитись" → "На початковий екран"');
+    banner.style.display = 'none';
+  }
+}
+
+function closeBanner() {
+  banner.style.display = 'none';
+  localStorage.setItem('pwa-banner-closed', '1');
+}
+
+// Не показувати якщо вже закрив
+if (localStorage.getItem('pwa-banner-closed')) {
+  banner.style.display = 'none';
+}
+</script>
 </body>
 </html>
