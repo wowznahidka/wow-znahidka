@@ -1603,6 +1603,7 @@ async function sendOrder(){
     await fetch(API_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({action:'new_order',fio,phone:normalizePhone(phone),city,delivery:`${DELIVERY} №${np} (Накладний платіж)`,items,total:total+' ₴',promo:promo||'Немає'})});
     haptic([100,50,100,50,200]);
     try{fbq('track','Purchase',{value:total,currency:'UAH',num_items:CART.reduce((s,i)=>s+i.qty,0)});}catch(e){}
+    try{ttq.track('PlaceAnOrder',{value:total,currency:'UAH',quantity:CART.reduce((s,i)=>s+i.qty,0)});}catch(e){}
     CART=[];LIKED=[];clearLS();syncBadges();
     document.getElementById('view-form').style.display='none';
     document.getElementById('view-success').style.display='block';
