@@ -271,6 +271,15 @@ img{display:block;max-width:100%;}
 .sw-nope-btn:active{background:var(--danger);color:#fff;}
 .sw-like-btn{width:76px;height:76px;font-size:1.45rem;color:var(--accent);border-color:var(--accent);box-shadow:0 0 18px var(--accent-soft);}
 .sw-like-btn:active{background:var(--accent);color:#000;}
+  .sw-undo-btn {
+  width: 54px;
+  height: 54px;
+  font-size: 1.15rem;
+  color: #aaa;
+  border-color: rgba(255,255,255,.15);
+}
+.sw-undo-btn:active { background: rgba(255,255,255,.12); color: #fff; }
+.sw-undo-btn:disabled { opacity: .22; pointer-events: none; }
 .empty-deck{text-align:center;padding:22px 16px;width:min(88vw,375px);}
 .empty-deck-ico{font-size:4rem;display:block;margin-bottom:14px;}
 .empty-deck-t{font-size:1.15rem;font-weight:900;margin-bottom:7px;}
@@ -694,9 +703,10 @@ img{display:block;max-width:100%;}
     <div class="match-top"><div class="match-counter-badge" id="match-counter">0 / 0</div></div>
     <div class="tinder-vp" id="deck"></div>
     <div class="swipe-btns">
-      <button class="sw-btn sw-nope-btn" onclick="swipeCard('left')">✕</button>
-      <button class="sw-btn sw-like-btn" onclick="swipeCard('right')">❤</button>
-    </div>
+  <button class="sw-btn sw-nope-btn" onclick="swipeCard('left')">✕</button>
+  <button class="sw-btn sw-undo-btn" id="undo-btn" onclick="undoSwipe()" disabled>↩️</button>
+  <button class="sw-btn sw-like-btn" onclick="swipeCard('right')">❤</button>
+</div>
   </section>
 
   <!-- КАТАЛОГ -->
@@ -934,6 +944,7 @@ const SOCIAL_MAP={};
 let _moveH=null,_upH=null;
 let deferredPrompt=null,pwaShown=false;
 let _feedObserver=null,_filterTimer=null;
+let UNDO_STACK = []; // { ptr, product, dir }
 
 /* ── PRELOAD SPLASH IMAGES ── */
 (function(){
@@ -1271,6 +1282,10 @@ function attachSwipe(){
 }
 
 function flyOut(card,dir){
+  UNDO_STACK.push({ ptr: MATCH_PTR, dir });
+  if (UNDO_STACK.length > 1) UNDO_STACK.shift(); // зберігаємо лише 1 крок
+  const undoBtn = document.getElementById('undo-btn');
+  if (undoBtn) undoBtn.disabled = false;
   const dist=window.innerWidth*1.55;const rot=dir==='right'?40:-40;
   card.style.transition='transform .4s cubic-bezier(.5,0,.7,0),opacity .4s ease';
   card.style.transform=`translateX(${dir==='right'?dist:-dist}px) rotate(${rot}deg)`;
@@ -1279,7 +1294,40 @@ function flyOut(card,dir){
   setTimeout(()=>{MATCH_PTR++;renderMatchDeck();},380);
 }
 function swipeCard(dir){const top=document.querySelector('.t-card[data-i="0"]');if(top)flyOut(top,dir);}
-
+function undoSwipe() {
+  if (!UNDO_STACK.length) return;
+  const { ptr } = UNDO_STACK.pop();
+  MATCH_PTR = ptr;
+  
+  const undoBtn = document.getElementById('undo-btn');
+  if (undoBtn) undoBtn.disabled = true;
+  
+  // Якщо була лайкнута — прибираємо з LIKED
+  const p = SESSION[MATCH_PTR];
+  if (p && isLiked(p.id)) {
+    removeLiked(p.id);
+  }
+  
+  // Рендеримо колоду з анімацією повернення
+  renderMatchDeck();
+  
+  // Анімація — картка "вилітає" з-за краю назад на місце
+  requestAnimationFrame(() => {
+    const top = document.querySelector('.t-card[data-i="0"]');
+    if (!top) return;
+    top.style.transition = 'none';
+    top.style.transform = 'translateX(-120vw) rotate(-25deg)';
+    top.style.opacity = '0';
+    requestAnimationFrame(() => {
+      top.style.transition = 'transform .45s var(--ease-out), opacity .35s ease';
+      top.style.transform = 'scale(1) translateY(0) rotate(0)';
+      top.style.opacity = '1';
+    });
+  });
+  
+  haptic(30);
+  toast('↩️ Повернено!');
+}
 function renderEmptyDeck(){
   const deck=document.getElementById('deck');
   if(!LIKED.length){
