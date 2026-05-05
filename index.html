@@ -1408,6 +1408,7 @@ function openSizePicker(p){
   const res=document.getElementById('adv-res');if(res)res.textContent='';
   const btnP=document.getElementById('btn-photo');if(btnP){btnP.textContent='📸 Запросити додаткові фото';btnP.disabled=false;}
   try{fbq('track','ViewContent',{content_name:p.brand+' '+cleanName(p.name,p.brand),content_category:p.brand,value:+p.price||0,currency:'UAH'});}catch(e){}
+  try{ttq.track('ViewContent',{content_id:String(p.id),content_name:p.brand+' '+cleanName(p.name,p.brand),content_type:'product',value:+p.price||0,currency:'UAH'});}catch(e){}
   buildSizeGrid(p.sizes);
   openSheet('size-sheet');
 }
@@ -1430,6 +1431,7 @@ function confirmSizes(){
   ACT_SIZES.forEach(sz=>{CART.push({uid:uid(),id:p.id,name:p.name,brand:p.brand,price:+p.price||0,size:sz,img:p.image,qty:1});});
   saveLS();syncBadges();closeSheets();haptic(40);toast('✅ Додано до кошика!',true);
   try{fbq('track','AddToCart',{content_name:p.brand+' '+cleanName(p.name,p.brand),value:+p.price||0,currency:'UAH',num_items:ACT_SIZES.length});}catch(e){}
+  try{ttq.track('AddToCart',{content_id:String(ACT_ID),value:+DB.find(x=>x.id===ACT_ID)?.price||0,currency:'UAH'});}catch(e){}
 }
 function toggleAdvisor(){const b=document.getElementById('advisor-box');if(b)b.classList.toggle('on');}
 function calcEU(){
@@ -1620,6 +1622,7 @@ try{
 }catch(e){}
 
 CART=[];LIKED=[];clearLS();syncBadges();
+    try{ttq.track('CompletePayment',{value:total,currency:'UAH'});}catch(e){}
     document.getElementById('view-form').style.display='none';
     document.getElementById('view-success').style.display='block';
   }catch(e){toast('❌ Помилка. Напишіть нам у Telegram.');btn.textContent='ЗАМОВИТИ 🚀';btn.disabled=false;}
@@ -1672,7 +1675,10 @@ function openSheet(id){
     document.getElementById('view-form').style.display='none';
     document.getElementById('view-success').style.display='none';
     renderCart();
-    if(CART.length>0){try{fbq('track','InitiateCheckout',{value:cartSum(),currency:'UAH',num_items:CART.reduce((s,i)=>s+i.qty,0)});}catch(e){}}
+    if(CART.length>0){
+  try{fbq('track','InitiateCheckout',{value:cartSum(),currency:'UAH',num_items:CART.reduce((s,i)=>s+i.qty,0)});}catch(e){}
+  try{ttq.track('InitiateCheckout',{value:cartSum(),currency:'UAH'});}catch(e){}
+}
   }
   if(id==='liked-sheet')renderLikedSheet();
 }
