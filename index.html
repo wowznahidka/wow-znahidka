@@ -1615,14 +1615,22 @@ try{
     price: it.price
   }));
   ttq.track('PlaceAnOrder',{
+  contents: cartSnapshot,
+  content_type: 'product',
+  value: total,
+  currency: 'UAH'
+});
+}catch(e){}
+
+CART=[];LIKED=[];clearLS();syncBadges();
+    try{
+  ttq.track('CompletePayment',{
     contents: cartSnapshot,
+    content_type: 'product',
     value: total,
     currency: 'UAH'
   });
 }catch(e){}
-
-CART=[];LIKED=[];clearLS();syncBadges();
-    try{ttq.track('CompletePayment',{value:total,currency:'UAH'});}catch(e){}
     document.getElementById('view-form').style.display='none';
     document.getElementById('view-success').style.display='block';
   }catch(e){toast('❌ Помилка. Напишіть нам у Telegram.');btn.textContent='ЗАМОВИТИ 🚀';btn.disabled=false;}
@@ -1677,7 +1685,13 @@ function openSheet(id){
     renderCart();
     if(CART.length>0){
   try{fbq('track','InitiateCheckout',{value:cartSum(),currency:'UAH',num_items:CART.reduce((s,i)=>s+i.qty,0)});}catch(e){}
-  try{ttq.track('InitiateCheckout',{value:cartSum(),currency:'UAH'});}catch(e){}
+  try{
+  ttq.track('InitiateCheckout',{
+    contents: CART.map(it=>({content_id:String(it.id),content_name:it.brand+' '+it.name,quantity:it.qty,price:it.price})),
+    value: cartSum(),
+    currency: 'UAH'
+  });
+}catch(e){}
 }
   }
   if(id==='liked-sheet')renderLikedSheet();
