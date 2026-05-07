@@ -700,7 +700,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
     <!-- Бренди -->
     <div class="home-section">
-      <div class="section-head"><span class="section-title">👟 Бренди</span><span class="section-more" onclick="changeTab('catalog',document.getElementById('tab-catalog'))">Каталог →</span></div>
+      <div class="section-head"><span class="section-title">👟 Всі модел</span><span class="section-more" onclick="changeTab('catalog',document.getElementById('tab-catalog'))">Каталог →</span></div>
       <div class="brands-quick" id="home-brands-quick"></div>
       <div style="height:12px;"></div>
     </div>
@@ -748,7 +748,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
       </div>
       <span class="cat-update-time" id="cat-update-time"></span>
     </div>
-    <p class="cat-label" id="cat-label">Всі бренди</p>
+    <p class="cat-label" id="cat-label">Всі модел</p>
     <div id="brands-node"></div>
   </section>
 
@@ -1098,7 +1098,7 @@ function renderHome(){
     const brand=cardBrand(p);const cn=cleanName(p.name,p.brand);const liked=isLiked(p.id);
     return`<div class="home-card${liked?' home-card--liked':''}" data-pid="${esc(p.id)}" onclick="quickAdd('${esc(p.id)}');addToRecent('${esc(p.id)}')">${liked?'<span class="card-heart-badge">❤️</span>':''}<img class="home-card-img" src="${p.image}" alt="${cn}" loading="lazy" width="148" height="148"><div class="home-card-body"><div class="home-card-brand">${brand}</div><div class="home-card-name">${cn}</div><div class="home-card-price">${p.price} ₴</div></div></div>`;
   }).join('');
-  // Бренди
+  
   const bq=document.getElementById('home-brands-quick');
   if(bq)bq.innerHTML=brands.map(b=>`<div class="brand-chip" onclick="openBrandPage('${esc(b)}')">${b}</div>`).join('');
   // Recently viewed
@@ -1524,7 +1524,7 @@ function _applyCatalogFilter(){
     counts[p.brand]=(counts[p.brand]||0)+1;if(!photos[p.brand]&&p.image)photos[p.brand]=p.image;
   });
   const brands=Object.keys(counts).sort();
-  catLabel.textContent=brands.length?`Бренди (${brands.length})`:'Результати (0)';
+  catLabel.textContent=brands.length?`Всі модел (${brands.length})`:'Результати (0)';
   if(!brands.length){
     brandsNode.innerHTML=`<div class="cat-no-results"><p>😕 Нічого не знайдено</p><a href="${TG}" target="_blank">✈️ Написати нам</a></div>`;return;
   }
