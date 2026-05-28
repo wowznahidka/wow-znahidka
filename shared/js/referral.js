@@ -103,6 +103,13 @@ const REF = {
 // ── Open sheet ────────────────────────────────────── */
 function openRefSheet() {
   REF.initSheet();
+  if (typeof postData === 'function') {
+    postData({
+      action:   'ref_sheet_opened',
+      ref_code: REF.getMyCode(),
+      tg:       REF.getMyTg() || '',
+    }).catch(() => {});
+  }
   if (typeof openSheet === 'function') openSheet('sheet-ref');
 }
 

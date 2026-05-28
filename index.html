@@ -118,9 +118,18 @@
     </div>
 
     <div id="gender-toggle" role="group" aria-label="Стать" data-active="mixed">
-      <button class="g-btn active" data-gender="mixed"  onclick="setGender('mixed')"  aria-pressed="true" ><span class="g-lbl">Всі</span><span class="g-cnt" id="g-cnt-all"></span></button>
-      <button class="g-btn"        data-gender="male"   onclick="setGender('male')"   aria-pressed="false"><span class="g-lbl">Чоловіки</span><span class="g-cnt" id="g-cnt-male"></span></button>
-      <button class="g-btn"        data-gender="female" onclick="setGender('female')" aria-pressed="false"><span class="g-lbl">Жінки</span><span class="g-cnt" id="g-cnt-female"></span></button>
+      <button class="g-btn active" data-gender="mixed"  onclick="setGender('mixed')"  aria-pressed="true">
+        <svg class="g-ico" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="7" r="3.2"/><path d="M1 19c0-2.8 3.1-4.8 7-4.8s7 2 7 4.8H1z"/><circle cx="17" cy="7" r="2.5" opacity=".55"/><path d="M17 14.2c1.8 0 4.5 1 4.5 3.8h-3.5" opacity=".6"/></svg>
+        <span class="g-lbl">Всі</span>
+      </button>
+      <button class="g-btn" data-gender="male" onclick="setGender('male')" aria-pressed="false">
+        <svg class="g-ico" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-3 3.6-5 8-5s8 2 8 5H4z"/></svg>
+        <span class="g-lbl">Чоловіки</span>
+      </button>
+      <button class="g-btn" data-gender="female" onclick="setGender('female')" aria-pressed="false">
+        <svg class="g-ico" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7" r="4"/><path d="M5 21h14l-2.5-6.2c.9-.9 1.5-2.2 1.5-3.8H6c0 1.6.6 2.9 1.5 3.8L5 21z"/></svg>
+        <span class="g-lbl">Жінки</span>
+      </button>
     </div>
 
     <!-- Daily Deals -->
@@ -198,9 +207,9 @@
       </div>
     </div>
     <div class="g-compact" role="group" aria-label="Стать">
-      <button class="g-chip" data-gender="mixed"  onclick="setGender('mixed')" >Всі</button>
-      <button class="g-chip" data-gender="male"   onclick="setGender('male')"  >Чоловіки</button>
-      <button class="g-chip" data-gender="female" onclick="setGender('female')">Жінки</button>
+      <button class="g-chip" data-gender="mixed"  onclick="setGender('mixed')" ><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="8" cy="7" r="3"/><path d="M1 18c0-2.5 3-4.5 7-4.5s7 2 7 4.5H1z"/><circle cx="16.5" cy="7.5" r="2.4" opacity=".5"/></svg> Всі</button>
+      <button class="g-chip" data-gender="male"   onclick="setGender('male')"  ><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-3 3.6-5 8-5s8 2 8 5H4z"/></svg> Чоловіки</button>
+      <button class="g-chip" data-gender="female" onclick="setGender('female')"><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="12" cy="7" r="4"/><path d="M5 21h14l-2.5-6.2c.9-.9 1.5-2.2 1.5-3.8H6c0 1.6.6 2.9 1.5 3.8L5 21z"/></svg> Жінки</button>
     </div>
     <p class="match-hint">Свайп вправо — ❤️ в Улюблені · вліво — пропустити</p>
     <div class="card-stage" id="card-stage" role="region" aria-label="Картка товару">
@@ -215,9 +224,9 @@
   <!-- ── CATALOG ── -->
   <section id="page-catalog" class="page" aria-label="Каталог">
     <div class="g-compact" role="group" aria-label="Стать" style="padding:10px 16px 0">
-      <button class="g-chip" data-gender="mixed"  onclick="setGender('mixed')" >Всі</button>
-      <button class="g-chip" data-gender="male"   onclick="setGender('male')"  >Чоловіки</button>
-      <button class="g-chip" data-gender="female" onclick="setGender('female')">Жінки</button>
+      <button class="g-chip" data-gender="mixed"  onclick="setGender('mixed')" ><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="8" cy="7" r="3"/><path d="M1 18c0-2.5 3-4.5 7-4.5s7 2 7 4.5H1z"/><circle cx="16.5" cy="7.5" r="2.4" opacity=".5"/></svg> Всі</button>
+      <button class="g-chip" data-gender="male"   onclick="setGender('male')"  ><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="12" cy="7" r="4"/><path d="M4 21c0-3 3.6-5 8-5s8 2 8 5H4z"/></svg> Чоловіки</button>
+      <button class="g-chip" data-gender="female" onclick="setGender('female')"><svg class="g-ico" viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><circle cx="12" cy="7" r="4"/><path d="M5 21h14l-2.5-6.2c.9-.9 1.5-2.2 1.5-3.8H6c0 1.6.6 2.9 1.5 3.8L5 21z"/></svg> Жінки</button>
     </div>
     <div class="cat-search-wrap" role="search">
       <div class="cat-search-inner">

@@ -129,6 +129,13 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   box-shadow: 0 0 0 3px rgba(255,62,62,0.2) !important;
 }
 
+.g-ico {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.g-btn .g-ico { width: 15px; height: 15px; margin-right: 4px; }
+
 #gender-toggle {
   background: var(--bg3, #ebebed) !important;
   border-radius: 100px !important;
