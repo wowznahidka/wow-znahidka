@@ -165,22 +165,61 @@ function toggleFaq(el) {
 // ── IDLE NUDGE ────────────────────────────────────── */
 let _idleTimer     = null;
 let _idleNudgeDone = false;
+let _partnerNudgeDone = false;
 
 function resetIdleTimer() {
   clearTimeout(_idleTimer);
   if (_idleNudgeDone) return;
-  _idleTimer = setTimeout(_fireIdleNudge, 9000);
+  _idleTimer = setTimeout(_fireIdleNudge, 11000);
 }
 
 function _fireIdleNudge() {
   if (_idleNudgeDone || S.activeTab !== 'home') return;
   _idleNudgeDone = true;
-  const icon = document.querySelector('.nav-item[data-tab="match"] .nav-icon');
-  if (icon) {
-    icon.style.display = 'inline-block';
-    icon.style.animation = 'nudgePulse .55s cubic-bezier(.34,1.56,.64,1) 3';
-    setTimeout(() => { icon.style.animation = ''; }, 2200);
-  }
+
+  const nudge = document.createElement('div');
+  nudge.id = 'match-nudge';
+  nudge.innerHTML = `
+    <div class="mn-ico">🔥</div>
+    <div class="mn-body">
+      <div class="mn-title">Спробуй Match</div>
+      <div class="mn-sub">Свайпай кросівки — як Tinder, але для взуття</div>
+    </div>
+    <button class="mn-btn" onclick="changeTab('match');document.getElementById('match-nudge')?.remove()">Спробувати</button>
+    <button class="mn-close" onclick="this.closest('#match-nudge').remove()" aria-label="Закрити">✕</button>`;
+  document.body.appendChild(nudge);
+  requestAnimationFrame(() => nudge.classList.add('mn-in'));
+  setTimeout(() => { nudge.classList.remove('mn-in'); setTimeout(() => nudge.remove(), 400); }, 7000);
+
+  _maybeShowPartnerNudge();
+}
+
+function _maybeShowPartnerNudge() {
+  if (_partnerNudgeDone) return;
+  const isFromRef = !!(typeof REF !== 'undefined' && REF.getReferrer());
+  if (isFromRef) return;
+
+  const visits = Number(localStorage.getItem('wow_visit_count') || 0) + 1;
+  localStorage.setItem('wow_visit_count', visits);
+  if (visits < 2) return;
+
+  _partnerNudgeDone = true;
+  setTimeout(() => {
+    if (S.activeTab !== 'home') return;
+    const nudge = document.createElement('div');
+    nudge.id = 'partner-nudge';
+    nudge.innerHTML = `
+      <div class="mn-ico">🔗</div>
+      <div class="mn-body">
+        <div class="mn-title">Поділись — заробляй</div>
+        <div class="mn-sub">Приводь друзів і отримуй з кожного їх замовлення</div>
+      </div>
+      <button class="mn-btn" onclick="openRefSheet();document.getElementById('partner-nudge')?.remove()">Детальніше</button>
+      <button class="mn-close" onclick="this.closest('#partner-nudge').remove()" aria-label="Закрити">✕</button>`;
+    document.body.appendChild(nudge);
+    requestAnimationFrame(() => nudge.classList.add('mn-in'));
+    setTimeout(() => { nudge.classList.remove('mn-in'); setTimeout(() => nudge.remove(), 400); }, 8000);
+  }, 9000);
 }
 
 // ── PWA ───────────────────────────────────────────── */
