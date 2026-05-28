@@ -39,6 +39,10 @@ const CFG = {
 
   GRID_BATCH: 24,
   MATCH_HISTORY_KEY: 'wow_match_seen',
+
+  PROMO_FIXED: {
+    'WOW100': 100,
+  },
 };
 
 const STATIC_REVIEWS = [

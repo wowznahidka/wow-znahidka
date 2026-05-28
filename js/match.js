@@ -103,9 +103,9 @@ function _renderMatchDone(stage, counter) {
 function attachSwipeListeners(card, product) {
   cleanupSwipe();
   let startX = 0, deltaX = 0, startTime = 0, dragging = false;
-  const DIST_THRESHOLD = 80;
-  const FLING_DIST     = 36;
-  const FLING_VEL      = 0.42;
+  const DIST_THRESHOLD = Math.min(60, window.innerWidth * 0.14);
+  const FLING_DIST     = 24;
+  const FLING_VEL      = 0.30;
 
   const onDown = e => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
@@ -120,12 +120,13 @@ function attachSwipeListeners(card, product) {
   _moveHandler = e => {
     if (!dragging) return;
     deltaX = e.clientX - startX;
-    const rot = deltaX / 14;
-    card.style.transform = `translateX(${deltaX}px) rotate(${rot}deg)`;
+    const rot   = (deltaX / window.innerWidth) * 22;
+    const scale = 1 - Math.min(0.04, Math.abs(deltaX) / (window.innerWidth * 8));
+    card.style.transform = `translateX(${deltaX}px) rotate(${rot}deg) scale(${scale})`;
     const likeEl = document.getElementById('sw-like');
     const nopeEl = document.getElementById('sw-nope');
-    const lr = Math.min(1, Math.max(0, (deltaX  - 16) / 72));
-    const nr = Math.min(1, Math.max(0, (-deltaX - 16) / 72));
+    const lr = Math.min(1, Math.max(0, (deltaX  - 10) / 55));
+    const nr = Math.min(1, Math.max(0, (-deltaX - 10) / 55));
     if (likeEl) likeEl.style.opacity = lr;
     if (nopeEl) nopeEl.style.opacity = nr;
     if (likeEl) likeEl.classList.toggle('visible', lr > 0.12);
@@ -170,9 +171,9 @@ function swipeCard(dir) {
   card.style.pointerEvents = 'none';
   cleanupSwipe();
 
-  const flyX  = (dir === 'right' ? 1 : -1) * (window.innerWidth * 1.3);
-  card.style.transition = 'transform .38s cubic-bezier(.4,0,1,1), opacity .28s ease';
-  card.style.transform  = `translateX(${flyX}px) rotate(${dir === 'right' ? 24 : -24}deg)`;
+  const flyX  = (dir === 'right' ? 1 : -1) * (window.innerWidth * 1.5 + 200);
+  card.style.transition = 'transform .32s cubic-bezier(.55,0,.7,.4), opacity .22s ease';
+  card.style.transform  = `translateX(${flyX}px) rotate(${dir === 'right' ? 30 : -30}deg) scale(0.9)`;
   card.style.opacity    = '0';
 
   if (dir === 'right') {
