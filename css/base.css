@@ -126,6 +126,23 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+@media (pointer: fine) {
+  html { cursor: default; }
+  .product-card:hover { transform: translateY(-5px) scale(1.01); }
+  .hdr-btn:hover { background: var(--bg4) !important; }
+  .nav-item:hover { color: var(--text-dim); }
+  .g-btn:hover:not(.active), .g-chip:hover:not(.active) {
+    color: var(--text) !important;
+    background: rgba(0,0,0,0.07) !important;
+  }
+  .sec-link:hover { opacity: .7; }
+  .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
 }
 
 body {
