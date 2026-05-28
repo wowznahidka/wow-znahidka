@@ -1,5 +1,5 @@
-const C = 'wow-v6';
-const SHELL = ['/'];
+const C = 'wow-v7';
+const SHELL = ['./', './index.html'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(C).then(c => c.addAll(SHELL)));

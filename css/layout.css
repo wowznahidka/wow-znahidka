@@ -67,7 +67,7 @@ body { background: #f0f0f2; }
 /* ── BOTTOM NAV ────────────────────────────────── */
 #bottom-nav {
   position: fixed;
-  bottom: calc(var(--gender-h) + var(--safe-bottom));
+  bottom: var(--safe-bottom);
   left: max(0px, calc(50% - var(--half-max)));
   right: max(0px, calc(50% - var(--half-max)));
   z-index: 200;
@@ -96,19 +96,10 @@ body { background: #f0f0f2; }
   box-shadow: 0 0 8px rgba(255,51,82,.5);
 }
 
-/* ── GENDER BAR — fixed, below bottom nav ────────── */
+/* ── GENDER TOGGLE — inline block under hero ────────── */
 #gender-toggle {
-  position: fixed;
-  bottom: var(--safe-bottom);
-  left: max(0px, calc(50% - var(--half-max)));
-  right: max(0px, calc(50% - var(--half-max)));
-  z-index: var(--z-gender);
-  height: var(--gender-h);
   display: flex; align-items: center;
-  gap: 6px; padding: 0 10px;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border);
+  gap: 6px; padding: 6px 12px 14px;
 }
 .g-btn {
   flex: 1; height: 32px;
@@ -131,12 +122,12 @@ body { background: #f0f0f2; }
 /* ── PAGES ─────────────────────────────────────── */
 #pages {
   padding-top: calc(var(--header-h) + var(--safe-top));
-  padding-bottom: calc(var(--nav-h) + var(--gender-h) + var(--safe-bottom) + 8px);
+  padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px);
   -webkit-overflow-scrolling: touch;
   background: var(--bg2);
 }
 .page { display: none; }
-.page.active { display: block; animation: pgIn .22s var(--ease) both; }
+.page.active { display: block; animation: pgSlideIn .28s cubic-bezier(.16,1,.3,1) both; }
 
 /* ── OVERLAY & SHEETS ──────────────────────────── */
 .overlay {
@@ -553,7 +544,7 @@ body { background: #f0f0f2; }
 /* ── PWA BANNERS ────────────────────────────────── */
 #pwa-android, #pwa-ios {
   position: fixed;
-  bottom: calc(var(--gender-h) + var(--nav-h) + var(--safe-bottom) + 10px);
+  bottom: calc(var(--nav-h) + var(--safe-bottom) + 10px);
   left: max(12px, calc(50% - var(--half-inset)));
   right: max(12px, calc(50% - var(--half-inset)));
   z-index: 400;
@@ -589,7 +580,7 @@ body { background: #f0f0f2; }
 /* ── STICKY CART BAR ────────────────────────────── */
 #cart-sticky-bar {
   position: fixed;
-  bottom: calc(var(--gender-h) + var(--nav-h) + var(--safe-bottom) + 8px);
+  bottom: calc(var(--nav-h) + var(--safe-bottom) + 8px);
   left: max(12px, calc(50% - var(--half-inset)));
   right: max(12px, calc(50% - var(--half-inset)));
   z-index: 199;

@@ -95,10 +95,8 @@ function changeTab(tab) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('page-' + tab)?.classList.add('active');
   document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
-  // Scroll to top
   document.getElementById('pages').scrollTop = 0;
   window.scrollTo(0, 0);
-  // Init tab
   if (tab === 'home')    renderHome();
   if (tab === 'match')   initMatch();
   if (tab === 'catalog') renderCatalog();
@@ -116,7 +114,7 @@ function setGender(g, skipFade) {
   S.gender = g;
   localStorage.setItem('wow_gender', g);
   _scrollNudgeFired = false;
-  document.querySelectorAll('.g-btn').forEach(b => {
+  document.querySelectorAll('.g-btn, .g-chip').forEach(b => {
     b.classList.toggle('active', b.dataset.gender === g);
     b.setAttribute('aria-pressed', b.dataset.gender === g ? 'true' : 'false');
   });

@@ -110,7 +110,6 @@ function requestPhoto() {
   const szText = S.spSelectedSize ? `Розмір: ${S.spSelectedSize}` : 'Розмір: уточнимо';
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n${szText}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  postData({ action: 'photo_request', product: p, size: S.spSelectedSize });
   openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
 }
 
@@ -151,7 +150,6 @@ function _pdPhotoTg() {
   if (!p) return;
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  postData({ action: 'photo_request', product: p, size: null });
   openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
 }
 

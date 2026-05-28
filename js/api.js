@@ -126,8 +126,11 @@ async function fetchCatalog() {
 }
 
 async function bgRefreshCatalog() {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 10000);
   try {
-    const res  = await fetch(CFG.GAS_URL);
+    const res  = await fetch(CFG.GAS_URL, { signal: ctrl.signal });
+    clearTimeout(timer);
     const json = await res.json();
     const raw  = json.products || json.data || (Array.isArray(json) ? json : []);
     const normalized = raw.map(normalizeProduct);
@@ -142,14 +145,15 @@ async function bgRefreshCatalog() {
     }
     S.lastFetchTime = new Date();
     updateTimestamp();
-    // Refresh UI if already mounted
     if (S.activeTab === 'home')    renderHome();
     if (S.activeTab === 'catalog') renderCatalog();
     return getCatalog();
   } catch(e) {
-    console.warn('[WOW] fetch failed', e);
+    clearTimeout(timer);
     if (!S.catalog.all || !S.catalog.all.length) {
       S.catalog.all = [...getDemoProducts('male'), ...getDemoProducts('female')];
+      if (S.activeTab === 'home')    renderHome();
+      if (S.activeTab === 'catalog') renderCatalog();
     }
     S.lastFetchTime = new Date();
     updateTimestamp();

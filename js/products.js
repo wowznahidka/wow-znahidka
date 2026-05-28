@@ -11,6 +11,10 @@ function esc(str) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function fmtPrice(n) {
+  return (Math.round(Number(n) || 0)) + '₴';
+}
+
 function hashStr(s) {
   let h = 0;
   for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) | 0;
@@ -56,8 +60,8 @@ function prodCardHtml(p, opts = {}) {
       : '';
 
   const pricePart = p.oldPrice && p.oldPrice > p.price
-    ? `${p.price}₴<span class="prod-card-old">${p.oldPrice}₴</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
-    : `${p.price}₴`;
+    ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
+    : `${fmtPrice(p.price)}`;
 
   const maxSz  = 5;
   const szList = p.sizes[0] === 'ONE SIZE'

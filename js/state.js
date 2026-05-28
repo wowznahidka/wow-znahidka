@@ -46,6 +46,8 @@ const S = {
   starRating:    0,
   delivType:     'dept',
   promoDiscount: 0,
+  promoFixed:    0,
+  promoCode:     '',
 
   // ── UTM attribution ──
   utm: _loadUtm(),
