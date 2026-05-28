@@ -86,11 +86,11 @@
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .card-price {
-  font-size: 16px; font-weight: var(--fw-black);
-  color: var(--text); letter-spacing: -.3px;
+  font-size: 15px; font-weight: var(--fw-bold);
+  color: var(--text);
   margin-top: 4px;
   display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
-  line-height: 1; letter-spacing: var(--ls-tight);
+  line-height: 1;
 }
 
 /* Sizes preview strip */
@@ -264,7 +264,7 @@
 }
 .m-card-brand { font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.4px; }
 .m-card-name  { font-size: 19px; font-weight: 900; margin-top: 3px; line-height: 1.2; color: var(--text); }
-.m-card-price { font-size: 24px; font-weight: 900; color: var(--text); margin-top: 4px; }
+.m-card-price { font-size: 22px; font-weight: var(--fw-bold); color: var(--text); margin-top: 4px; }
 .m-card-sizes { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
 
 /* Combo badge */
@@ -362,7 +362,7 @@
 .fav-body  { flex: 1; min-width: 0; }
 .fav-brand { font-size: 9px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: .8px; }
 .fav-name  { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-.fav-price { font-size: 15px; font-weight: 900; margin-top: 5px; }
+.fav-price { font-size: 14px; font-weight: var(--fw-bold); margin-top: 5px; }
 .fav-acts  { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
 .fav-to-cart {
   background: var(--text); color: var(--accent-inv);
@@ -420,7 +420,7 @@
   border: 1px solid var(--border-hover); border-radius: var(--r-xs);
   padding: 2px 9px; font-size: 12px; font-weight: 800; color: var(--text-dim); margin-top: 6px;
 }
-.cart-price { font-size: 16px; font-weight: 900; margin-top: 5px; }
+.cart-price { font-size: 15px; font-weight: var(--fw-bold); margin-top: 5px; }
 .cart-item-controls {
   display: flex; flex-direction: column; align-items: center;
   gap: 8px; flex-shrink: 0; padding-left: 6px;
@@ -488,7 +488,7 @@
 .sp-info  { flex: 1; }
 .sp-brand { font-size: 9px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: .8px; }
 .sp-name  { font-size: 15px; font-weight: 800; margin-top: 2px; line-height: 1.3; }
-.sp-price { font-size: 18px; font-weight: 900; margin-top: 4px; }
+.sp-price { font-size: 17px; font-weight: var(--fw-bold); margin-top: 4px; }
 .sp-sublabel {
   padding: 0 20px 10px; font-size: 10px; font-weight: 800; color: var(--text-muted);
   text-transform: uppercase; letter-spacing: .8px;
@@ -777,7 +777,7 @@
   display: flex; align-items: baseline; gap: 9px;
   margin-top: 10px; flex-wrap: wrap;
 }
-.pd-price { font-size: 28px; font-weight: 900; color: var(--text); }
+.pd-price { font-size: 24px; font-weight: var(--fw-bold); color: var(--text); }
 .pd-old   {
   font-size: 14px; color: var(--text-muted);
   text-decoration: line-through; font-weight: 400;

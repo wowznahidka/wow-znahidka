@@ -227,12 +227,6 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   color: var(--accent) !important;
 }
 
-.card-price {
-  font-family: 'Barlow Condensed', sans-serif !important;
-  font-weight: 900 !important;
-  font-size: 18px !important;
-  color: #0d0d0d !important;
-}
 
 .badge-hot {
   background: var(--accent) !important;
