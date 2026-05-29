@@ -3,7 +3,7 @@
    Strategy: pre-cache shell → network-first nav → stale-while-revalidate assets
    ============================================================ */
 
-const V = 'wow-v8';
+const V = 'wow-v9';
 
 // Critical shell — install fails if these are missing (intentional)
 const SHELL = [
@@ -101,10 +101,17 @@ function networkFirst(req, timeoutMs) {
 async function staleWhileRevalidate(req) {
   const cache  = await caches.open(V);
   const cached = await cache.match(req);
-  const fresh  = fetch(req.clone())
+
+  const fetchPromise = fetch(req.clone())
     .then(res => { if (res && res.ok) cache.put(req, res.clone()).catch(() => null); return res; })
     .catch(() => null);
-  return cached || fresh;
+
+  if (cached) {
+    fetchPromise.catch(() => null);
+    return cached;
+  }
+  const fresh = await fetchPromise;
+  return fresh || new Response('', { status: 503, statusText: 'Offline' });
 }
 
 async function offlineFallback(req) {
