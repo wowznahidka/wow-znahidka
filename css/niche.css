@@ -124,6 +124,63 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   z-index: 1;
 }
 
+/* ── HERO TRUST CHIPS ──────────────────────────────── */
+.hero-trust {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+  margin-top: 12px !important;
+  flex-wrap: nowrap !important;
+  position: relative;
+  z-index: 1;
+}
+.hero-trust-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: rgba(13,13,13,0.65) !important;
+  white-space: nowrap !important;
+}
+.hero-trust-item svg { color: var(--accent) !important; flex-shrink: 0; }
+.hero-trust-sep {
+  width: 3px !important; height: 3px !important;
+  border-radius: 50% !important;
+  background: rgba(0,0,0,0.2) !important;
+  margin: 0 10px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ── DAILY DEAL — eyebrow layout fix ──────────────── */
+.dd-title-wrap {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+}
+
+/* ── SECTION EYEBROW ───────────────────────────────── */
+.sec-eyebrow {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--accent) !important;
+  margin-bottom: 4px !important;
+}
+.sec-eyebrow-dot {
+  width: 6px !important; height: 6px !important;
+  border-radius: 50% !important;
+  background: var(--accent) !important;
+  flex-shrink: 0 !important;
+  animation: pulseGlow 2.5s ease-in-out infinite !important;
+}
+
 .live-dot {
   background: var(--accent) !important;
   box-shadow: 0 0 0 3px rgba(255,62,62,0.2) !important;

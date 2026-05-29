@@ -1,14 +1,43 @@
 {
   "name": "WOW.ZNAHIDKA — Преміум кросівки",
-  "short_name": "WOW.ZNAHIDKA",
+  "short_name": "WOW",
   "description": "Преміум кросівки без передоплати. Оплата після примірки на Новій Пошті.",
-  "start_url": "./index.html",
+  "lang": "uk",
+  "start_url": "./index.html?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "portrait-primary",
+  "background_color": "#0d0d0d",
   "theme_color": "#ffffff",
+  "categories": ["shopping", "lifestyle"],
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Match — свайп кросівки",
+      "short_name": "Match",
+      "description": "Свайп вправо — в Улюблені, вліво — пропустити",
+      "url": "./index.html?tab=match&source=shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Каталог кросівок",
+      "short_name": "Каталог",
+      "description": "Пошук, фільтри, всі бренди",
+      "url": "./index.html?tab=catalog&source=shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Мій кошик",
+      "short_name": "Кошик",
+      "description": "Перейти до кошика",
+      "url": "./index.html?tab=cart&source=shortcut",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
   ]
 }
