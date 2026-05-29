@@ -939,3 +939,46 @@ body { background: #f0eded; }
   .brd-card { width: 155px; height: 220px; }
   .dd-row { padding: 0 16px 20px; gap: 12px; grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ── PHONE FRAME (desktop ≥ 860px) ───────────────── */
+@media (min-width: 860px) {
+  :root {
+    --half-max:   210px;
+    --half-inset: 198px;
+  }
+
+  body {
+    padding: 52px 0 64px;
+    align-items: flex-start;
+  }
+
+  /* Richer aurora background behind phone */
+  body::after {
+    background:
+      radial-gradient(ellipse 50vw 70vh at 10% 20%, rgba(255,62,62,.30) 0%, transparent 55%),
+      radial-gradient(ellipse 40vw 60vh at 90% 80%, rgba(255,120,26,.24) 0%, transparent 55%),
+      radial-gradient(ellipse 35vw 50vh at 50%  5%, rgba(255,62,62,.16) 0%, transparent 50%),
+      radial-gradient(ellipse 30vw 45vh at 15% 90%, rgba(255,160,60,.20) 0%, transparent 50%),
+      radial-gradient(ellipse 28vw 40vh at 85% 10%, rgba(255,62,62,.22) 0%, transparent 48%);
+    animation: auroraA 16s ease-in-out infinite, auroraB 22s ease-in-out infinite reverse;
+  }
+
+  #app-root {
+    border-radius: 54px;
+    /* phone frame layers: outer ring → highlight → inner dark ring → ambient shadow */
+    box-shadow:
+      0 0 0 11px #1c1c1e,
+      0 0 0 12px rgba(255,255,255,.07),
+      0 0 0 13px #0d0d0f,
+      /* volume up */
+      -25px 112px 0 -5px #1c1c1e,
+      /* volume down */
+      -25px 158px 0 -5px #1c1c1e,
+      /* power / side button */
+      24px 136px 0 -4px #1c1c1e,
+      /* depth shadow */
+      0 60px 130px rgba(0,0,0,.55),
+      0 20px 48px  rgba(0,0,0,.25);
+  }
+
+}
