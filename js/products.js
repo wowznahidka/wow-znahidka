@@ -15,6 +15,27 @@ function fmtPrice(n) {
   return (Math.round(Number(n) || 0)) + '₴';
 }
 
+function _fomoViewers(id) {
+  const slot = Math.floor(Date.now() / 30000);
+  const h    = Math.abs(hashStr(id + slot));
+  return 2 + (h % 5);
+}
+
+function quickGridSize(productId, size) {
+  const p = findProd(productId);
+  if (!p) return;
+  if (p.sizes.length === 1 || String(size).toUpperCase() === 'ONE SIZE') {
+    S.cart.push({ ...p, size: String(size).toUpperCase() === 'ONE SIZE' ? 'ONE SIZE' : Number(size), qty: 1 });
+    saveCart();
+    updateBadges();
+    _haptic(20);
+    toast(`✅ ${esc(p.brand)} ${esc(p.name)} — в кошику! <a onclick="openSheet('sheet-cart')">Кошик →</a>`);
+  } else {
+    S.spProduct = p;
+    openSizePicker(p);
+  }
+}
+
 function hashStr(s) {
   let h = 0;
   for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) | 0;
@@ -63,11 +84,20 @@ function prodCardHtml(p, opts = {}) {
     ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
     : `${fmtPrice(p.price)}`;
 
-  const maxSz  = 5;
+  const maxSz  = grid ? 4 : 5;
   const szList = p.sizes[0] === 'ONE SIZE'
-    ? `<span>ONE SIZE</span>`
-    : p.sizes.slice(0, maxSz).map(s => `<span>${s}</span>`).join('') +
+    ? (grid
+        ? `<button class="sz-quick-btn" onclick="event.stopPropagation();quickGridSize('${p.id}','ONE SIZE')" aria-label="ONE SIZE">ONE SIZE</button>`
+        : `<span>ONE SIZE</span>`)
+    : p.sizes.slice(0, maxSz).map(s => grid
+        ? `<button class="sz-quick-btn" data-sz="${s}" onclick="event.stopPropagation();quickGridSize('${p.id}',${s})" aria-label="${s}">${s}</button>`
+        : `<span>${s}</span>`).join('') +
       (p.sizes.length > maxSz ? `<span class="sz-more">+${p.sizes.length - maxSz}</span>` : '');
+
+  const fomoCount = _fomoViewers(p.id);
+  const fomoHtml  = (grid && p.sizes.length <= 3)
+    ? `<div class="card-fomo">🔴 ${fomoCount} зараз дивляться</div>`
+    : '';
 
   return `<article class="product-card${gridCls}"
     onclick="openProductDetail(findProd('${p.id}'))"
@@ -81,8 +111,10 @@ function prodCardHtml(p, opts = {}) {
       <div class="card-brand">${esc(p.brand)}</div>
       <div class="card-name">${esc(p.name)}</div>
       <div class="card-price">${pricePart}</div>
-      <div class="card-sizes-preview">${szList}</div>
+      <div class="card-cod">✅ Після примірки</div>
+      <div class="card-sizes-preview${grid ? ' sz-quick-row' : ''}">${szList}</div>
       ${_scarcityText(p)}
+      ${fomoHtml}
     </div>
   </article>`;
 }
