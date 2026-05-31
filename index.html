@@ -88,6 +88,12 @@
     WOW<span class="dot">.</span>ZNAHIDKA
     <small id="hdr-sub">ПРЕМІУМ КРОСІВКИ</small>
   </div>
+  <nav id="desktop-nav" aria-label="Навігація">
+    <button class="dsk-nav-btn active" onclick="changeTab('home')"    id="dsk-btn-home">Головна</button>
+    <button class="dsk-nav-btn"        onclick="changeTab('catalog')" id="dsk-btn-catalog">Каталог</button>
+    <button class="dsk-nav-btn"        onclick="changeTab('match')"   id="dsk-btn-match">Match</button>
+    <button class="dsk-nav-btn"        onclick="changeTab('contacts')" id="dsk-btn-contacts">Контакти</button>
+  </nav>
   <div class="header-actions" role="toolbar" aria-label="Дії">
     <button class="hdr-btn" onclick="openRefSheet()" aria-label="Поширити">🔗</button>
     <button class="hdr-btn hdr-lang" onclick="toggleLang()" id="lang-btn" aria-label="Змінити мову">UA</button>
@@ -101,6 +107,34 @@
     </button>
   </div>
 </header>
+
+<div id="desktop-filter-sidebar" style="display:none">
+  <div class="dsf-section">
+    <div class="dsf-title">Стать</div>
+    <div class="dsf-chips">
+      <button class="dsf-chip active" onclick="dsfGender('mixed')">Усі</button>
+      <button class="dsf-chip" onclick="dsfGender('male')">♂ Чоловічі</button>
+      <button class="dsf-chip" onclick="dsfGender('female')">♀ Жіночі</button>
+    </div>
+  </div>
+  <div class="dsf-section" style="margin-top:14px">
+    <div class="dsf-title">Розмір</div>
+    <div class="dsf-chips" style="flex-wrap:wrap">
+      <button class="dsf-chip" onclick="dsfSize(35)">35</button>
+      <button class="dsf-chip" onclick="dsfSize(36)">36</button>
+      <button class="dsf-chip" onclick="dsfSize(37)">37</button>
+      <button class="dsf-chip" onclick="dsfSize(38)">38</button>
+      <button class="dsf-chip" onclick="dsfSize(39)">39</button>
+      <button class="dsf-chip" onclick="dsfSize(40)">40</button>
+      <button class="dsf-chip" onclick="dsfSize(41)">41</button>
+      <button class="dsf-chip" onclick="dsfSize(42)">42</button>
+      <button class="dsf-chip" onclick="dsfSize(43)">43</button>
+      <button class="dsf-chip" onclick="dsfSize(44)">44</button>
+      <button class="dsf-chip" onclick="dsfSize(45)">45</button>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:0 2px" id="price-filter-wrap-dsf"></div>
+</div>
 
 <!-- ════════════════════════════════════════════════
      PAGES
@@ -302,6 +336,18 @@
           <div class="ci-title">Повернення безкоштовно</div>
           <div class="ci-sub">Не підійшло — просто відмовся на відділенні, без витрат</div>
         </div>
+      </div>
+    </div>
+
+    <div class="wow-stores-block">
+      <div class="wow-stores-title">🛍️ Інші WOW магазини</div>
+      <div class="wow-stores-grid">
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-parfum/"   onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">🌸</span><span class="ws-name">Парфуми</span></a>
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-wear/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">👗</span><span class="ws-name">Одяг</span></a>
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-bags/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">👜</span><span class="ws-name">Сумки</span></a>
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-beauty/"   onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">💄</span><span class="ws-name">Б'юті</span></a>
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-tech/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">📱</span><span class="ws-name">Техніка</span></a>
+        <a class="wow-store-card" href="https://wowznahidka.github.io/wow-tactical/" onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">🪖</span><span class="ws-name">Тактика</span></a>
       </div>
     </div>
 
@@ -542,7 +588,7 @@
   <h1 class="success-title">Замовлення прийнято!</h1>
   <p class="success-sub">Ми зв'яжемося з вами найближчим часом. Слідкуйте за статусом у Telegram.</p>
   <div class="success-order" id="success-order-info" aria-live="polite"></div>
-  <a class="success-tg-btn" href="https://t.me/znahidkawow" onclick="return openLink(this.href)" rel="noopener noreferrer">
+  <a class="success-tg-btn" href="https://t.me/znahidkawow" onclick="return openTgLink(this.href)" rel="noopener noreferrer">
     ✈️ Telegram WOW.ZNAHIDKA
   </a>
   <button class="success-home-btn" onclick="goHome()"><span class="i-arr-back" aria-hidden="true"></span> На головну</button>
@@ -550,6 +596,17 @@
     onclick="document.getElementById('view-success').classList.remove('on');changeTab('match')">
     🔥 Свайпати ще <span class="i-arr-lg" aria-hidden="true"></span>
   </button>
+  <div class="success-stores">
+    <div class="success-stores-lbl">Глянь ще наші магазини 👇</div>
+    <div class="wow-stores-grid">
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-parfum/"   onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">🌸</span><span class="ws-name">Парфуми</span></a>
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-wear/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">👗</span><span class="ws-name">Одяг</span></a>
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-bags/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">👜</span><span class="ws-name">Сумки</span></a>
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-beauty/"   onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">💄</span><span class="ws-name">Б'юті</span></a>
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-tech/"     onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">📱</span><span class="ws-name">Техніка</span></a>
+      <a class="wow-store-card" href="https://wowznahidka.github.io/wow-tactical/" onclick="return openLink(this.href)" rel="noopener noreferrer"><span class="ws-ico">🪖</span><span class="ws-name">Тактика</span></a>
+    </div>
+  </div>
 </div>
 
 <!-- TOASTS -->

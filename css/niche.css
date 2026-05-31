@@ -576,3 +576,84 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   display: flex; align-items: center; justify-content: center;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* ── DESKTOP LAYOUT 1280px+ ──────────────────────────── */
+@media (min-width: 1024px) {
+  #desktop-nav { display: flex !important; }
+  #bottom-nav  { display: none !important; }
+
+  #desktop-filter-sidebar {
+    display: block !important;
+    position: fixed; left: 0; top: 60px;
+    width: 220px; height: calc(100vh - 60px);
+    background: var(--bg2, #fff);
+    border-right: 1px solid var(--border, rgba(0,0,0,0.08));
+    padding: 20px 16px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+
+  #app-root { padding-left: 220px; }
+
+  .dsf-title {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--text-muted, #999);
+    margin-bottom: 8px;
+  }
+  .dsf-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dsf-chip {
+    padding: 5px 12px; border-radius: 16px;
+    border: 1px solid var(--border, rgba(0,0,0,0.1));
+    background: transparent; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all .15s; color: inherit;
+  }
+  .dsf-chip.active,
+  .dsf-chip:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .dsf-push-btn {
+    margin-top: 12px; width: 100%; padding: 9px; border-radius: 10px;
+    background: var(--accent); color: #fff; border: none;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+}
+
+@media (min-width: 1280px) {
+  #desktop-filter-sidebar { width: 240px; }
+  #app-root { padding-left: 240px; }
+}
+
+/* ── ІНШІ МАГАЗИНИ ──────────────────────────────────── */
+.wow-stores-block {
+  margin: 20px 16px 4px; background: var(--bg2, #f8f8f8);
+  border: 1px solid var(--border, rgba(0,0,0,0.08));
+  border-radius: 16px; padding: 16px;
+}
+.wow-stores-title {
+  font-size: 13px; font-weight: 600; color: var(--text-muted, #999);
+  letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px;
+}
+.wow-stores-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.wow-store-card {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 10px 4px; background: var(--bg3, #f0f0f0);
+  border: 1px solid var(--border, rgba(0,0,0,0.06));
+  border-radius: 12px; text-decoration: none; cursor: pointer;
+  transition: background .15s;
+}
+.wow-store-card:active { opacity: .8; }
+.ws-ico  { font-size: 22px; line-height: 1; }
+.ws-name { font-size: 11px; color: var(--text-muted, #888); font-weight: 500; text-align: center; }
+.success-stores { margin-top: 20px; width: 100%; }
+.success-stores-lbl { font-size: 13px; color: var(--text-muted, #888); text-align: center; margin-bottom: 10px; }
+
+/* ── DESKTOP NAV ────────────────────────────────────── */
+#desktop-nav {
+  display: none;
+  gap: 4px;
+  align-items: center;
+}
+.dsk-nav-btn {
+  background: none; border: none; font-size: 13px; font-weight: 600;
+  cursor: pointer; padding: 6px 14px; border-radius: 8px;
+  transition: all .15s; color: inherit; opacity: .65;
+}
+.dsk-nav-btn.active, .dsk-nav-btn:hover { opacity: 1; background: rgba(255,62,62,0.08); color: var(--accent); }

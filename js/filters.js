@@ -163,7 +163,7 @@ function _resetPriceSlider() {
 
 function filterByPrice(products) {
   const min = S.priceMin || 0;
-  const max = (S.priceMax !== undefined && S.priceMax < PRICE_MAX) ? S.priceMax : PRICE_MAX;
+  const max = (S.priceMax !== undefined && S.priceMax <= PRICE_MAX) ? S.priceMax : PRICE_MAX;
   if (min <= 0 && max >= PRICE_MAX) return products;
   return products.filter(p => {
     const price = Number(p.price) || 0;
@@ -441,3 +441,22 @@ function openBrand(brand) {
 function backToBrands() {
   _selectBrandStory(null);
 }
+
+function dsfGender(gender) {
+  document.querySelectorAll('#desktop-filter-sidebar .dsf-section:nth-child(1) .dsf-chip')
+    .forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${gender}'`)));
+  if (typeof setGender === 'function') setGender(gender, false);
+}
+function dsfSize(sz) {
+  if (typeof toggleSizeFilter === 'function') toggleSizeFilter(sz);
+  document.querySelectorAll('#desktop-filter-sidebar .dsf-section:nth-child(2) .dsf-chip')
+    .forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(String(sz)+')')
+      ? !b.classList.contains('active') : b.classList.contains('active')));
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const dsf = document.getElementById('desktop-filter-sidebar');
+  if (window.innerWidth >= 1024 && dsf) dsf.style.display = 'block';
+  window.addEventListener('resize', () => {
+    if (dsf) dsf.style.display = window.innerWidth >= 1024 ? 'block' : 'none';
+  });
+});
