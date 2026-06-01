@@ -107,6 +107,8 @@ function selectSize(sz) {
 function requestPhoto() {
   if (!S.spProduct) return;
   const p = S.spProduct;
+  // Якщо в товара є посилання на пост в каналі — там вже альбом фото, кидаємо туди
+  if (p.tgLink) { openTgLink(p.tgLink); return; }
   const szText = S.spSelectedSize ? `Розмір: ${S.spSelectedSize}` : 'Розмір: уточнимо';
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n${szText}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
@@ -148,6 +150,8 @@ function confirmSize() {
 function _pdPhotoTg() {
   const p = S.pdProduct;
   if (!p) return;
+  // Якщо в товара є пост в каналі — там альбом, відкриваємо напряму
+  if (p.tgLink) { openTgLink(p.tgLink); return; }
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
   openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
