@@ -1,16 +1,3 @@
-/* ============================================================
-   WOW.ZNAHIDKA — LAYOUT
-   Splash · Header · Nav · Gender · Pages · Sheets · Overlay
-   ============================================================ */
-
-/* ── APP CONTAINER — centered at 480px on all viewports ── */
-/*
-   Fixed elements can't be constrained by a parent, so we use
-   max(0px, calc(50% - 240px)) as both left and right. This computes to:
-     • 0px  when viewport ≤ 480px  → element fills the full screen (mobile)
-     • >0px when viewport  > 480px → element auto-centers at 480px (desktop)
-   No transform needed, so no conflict with translateY animations on sheets.
-*/
 :root {
   --half-max: 240px; --half-inset: 228px;
 }
