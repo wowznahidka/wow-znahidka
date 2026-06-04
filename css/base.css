@@ -21,9 +21,9 @@
   /* ── Accents ── */
   --accent:      #1d1d1f;
   --accent-inv:  #ffffff;
-  --red:         #ff3352;
-  --red-dim:     rgba(255,51,82,0.08);
-  --red-glow:    rgba(255,51,82,0.20);
+  --red:         #ff3e3e;
+  --red-dim:     rgba(255,62,62,0.08);
+  --red-glow:    rgba(255,62,62,0.22);
   --orange:      #ff4500;
   --orange-dim:  rgba(255,69,0,0.08);
   --green:       #00a86b;
@@ -41,7 +41,7 @@
   --shadow-sm:  0 1px 4px  rgba(0,0,0,0.08);
   --shadow:     0 2px 16px rgba(0,0,0,0.10);
   --shadow-lg:  0 8px 40px rgba(0,0,0,0.16);
-  --shadow-red: 0 6px 24px rgba(255,51,82,0.22);
+  --shadow-red: 0 6px 24px rgba(255,62,62,0.22);
   --shadow-glow:0 0 0 1px rgba(0,0,0,0.05);
 
   /* ── Radius ── */
@@ -129,7 +129,7 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-@media (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   html { cursor: default; }
   .product-card:hover { transform: translateY(-5px) scale(1.01); }
   .hdr-btn:hover { background: var(--bg4) !important; }
@@ -140,9 +140,10 @@ html {
   }
   .sec-link:hover { opacity: .7; }
   .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
 }
 
 body {
@@ -153,8 +154,10 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
+  /* Дозволяємо select на тексті (назви/ціни товарів);
+     для chrome-елементів (кнопки, navs) — окремо в layout.css */
+  user-select: text;
+  -webkit-user-select: text;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -267,3 +270,35 @@ a     { text-decoration: none; color: inherit; }
   line-height: 1.4;
 }
 .toast a { color: #ffffff; font-weight: 800; text-decoration: underline; }
+
+/* ── CHROME — без виділення (header, nav, кнопки) ── */
+#header, #bottom-nav, #desktop-nav, .header-actions,
+.nav-item, .hdr-btn, .g-btn, .g-chip,
+.m-action, .sz-btn, .sz-chip, .price-chip,
+.dd-timer, .sh-handle, .badge, .cat-story {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── FOCUS-VISIBLE (тільки клавіатура) ─────────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent, #ff3e3e);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent, #ff3e3e);
+  outline-offset: 3px;
+}
+
+/* ── REDUCED MOTION ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  body::before, body::after { animation: none !important; }
+}

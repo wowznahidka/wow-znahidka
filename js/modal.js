@@ -220,6 +220,11 @@ function openProductDetail(product) {
       <div class="pd-brand">${esc(product.brand)}</div>
       <h2 class="pd-name">${esc(product.name)}</h2>
       <div class="pd-price-row">${priceHtml}</div>
+      <p class="pd-lead">
+        ${product.isFreeShipping
+          ? `<b>Безкоштовна доставка</b> по Україні. Оплата після примірки на відділенні Нової Пошти — без передоплати, без ризику.`
+          : `Замовляй <b>без передоплати</b> — оплата після примірки на відділенні Нової Пошти. Не підійшло — відмов без зайвих питань.`}
+      </p>
       ${sizeChips}
       <div class="pd-trust">
         <span class="pd-trust-item">✅ Без передоплати</span>

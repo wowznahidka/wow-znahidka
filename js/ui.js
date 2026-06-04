@@ -100,6 +100,7 @@ function changeTab(tab) {
   document.getElementById(tabMap[tab])?.classList.add('active');
   document.getElementById('pages').scrollTop = 0;
   window.scrollTo(0, 0);
+  document.body.classList.toggle('show-sidebar', tab === 'catalog');
   if (tab === 'home')    renderHome();
   if (tab === 'match')   initMatch();
   if (tab === 'catalog') renderCatalog();

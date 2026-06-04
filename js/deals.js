@@ -130,6 +130,70 @@ function openDealDetail(productId) {
 // ── RENDER SECTION ───────────────────────────────── */
 let _ddTimerID = null;
 
+function _isGiftOpenedToday() {
+  try { return !!localStorage.getItem('wow_gift_opened_' + _getDateSeed()); }
+  catch (_) { return false; }
+}
+function _markGiftOpened() {
+  try {
+    localStorage.setItem('wow_gift_opened_' + _getDateSeed(), '1');
+    // прибираємо застарілі ключі
+    Object.keys(localStorage).forEach(k => {
+      if (k.startsWith('wow_gift_opened_') && k !== 'wow_gift_opened_' + _getDateSeed()) {
+        localStorage.removeItem(k);
+      }
+    });
+  } catch (_) {}
+}
+
+function _giftBoxHtml() {
+  return `<div class="dd-gift-wrap" onclick="openDailyGift(event)" role="button" tabindex="0"
+       aria-label="Відкрити подарунок дня"
+       onkeydown="if(event.key==='Enter'||event.key===' ')openDailyGift(event)">
+    <div class="dd-gift">
+      <div class="dd-gift-box">
+        <div class="dd-gift-lid">
+          <div class="dd-gift-bow" aria-hidden="true"></div>
+        </div>
+        <div class="dd-gift-base">
+          <div class="dd-gift-ribbon-v" aria-hidden="true"></div>
+        </div>
+        <div class="dd-gift-shine" aria-hidden="true"></div>
+        <div class="dd-confetti" aria-hidden="true">
+          ${Array.from({length:14}).map((_,i)=>`<span style="--i:${i}"></span>`).join('')}
+        </div>
+      </div>
+      <div class="dd-gift-cta">
+        <strong>🎁 Відкрий подарунок дня</strong>
+        <span>3 пари з <b>безкоштовною доставкою</b> · лише сьогодні</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openDailyGift(evt) {
+  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+  const sec  = document.getElementById('daily-deals-section');
+  if (!sec) return;
+  const wrap = sec.querySelector('.dd-gift-wrap');
+  const row  = sec.querySelector('.dd-row');
+  if (!wrap || wrap.classList.contains('dd-opening')) return;
+
+  wrap.classList.add('dd-opening');
+  // легка вібрація для мобільних
+  try { if (navigator.vibrate) navigator.vibrate([18, 22, 30]); } catch (_) {}
+
+  setTimeout(() => {
+    row && row.classList.add('dd-revealed');
+    wrap.style.display = 'none';
+    _markGiftOpened();
+    try {
+      if (typeof gtag === 'function') gtag('event', 'gift_opened', { event_category: 'engagement' });
+      if (typeof fbq  === 'function') fbq('trackCustom', 'GiftOpened');
+    } catch (_) {}
+  }, 1100);
+}
+
 function renderDailyDeals(catalog) {
   const sec = document.getElementById('daily-deals-section');
   if (!sec) return;
@@ -142,6 +206,20 @@ function renderDailyDeals(catalog) {
 
   const row = sec.querySelector('.dd-row');
   if (row) row.innerHTML = deals.map(_dealCardHtml).join('');
+
+  // Gift-box перед розкриттям
+  const opened = _isGiftOpenedToday();
+  let existingGift = sec.querySelector('.dd-gift-wrap');
+  if (!opened) {
+    if (!existingGift) {
+      const header = sec.querySelector('.dd-header');
+      header && header.insertAdjacentHTML('afterend', _giftBoxHtml());
+    }
+    row && row.classList.remove('dd-revealed');
+  } else {
+    if (existingGift) existingGift.remove();
+    row && row.classList.add('dd-revealed');
+  }
 
   const timerEl = sec.querySelector('.dd-timer');
 
