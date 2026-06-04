@@ -80,6 +80,30 @@ const STRINGS = {
       {q:'Як обрати правильний розмір?', a:'Напиши нам у Telegram — підберемо розмір за довжиною стопи або звичним розміром. Також можна примірювати прямо на відділенні: відкрив посилку, виміряв — і вирішив. Ніяких ризиків!'},
       {q:'Що якщо не підійшли?', a:'Просто відмовся від посилки на відділенні або поверни назад — без жодних витрат з твого боку. Ми покриваємо зворотню доставку. Ніяких питань, ніяких проблем.'},
     ],
+    // ── 2026 нові рядки ──
+    trustNoPrepay:'0₴ передоплати', trustTopQuality:'Топ якість', trustFast:'1–3 дні',
+    counterTpl:'моделей в наявності',
+    ddEyebrow:'Випадкові 3 пари', ddTitle:'Знахідка дня', ddTimerLbl:'До оновлення:',
+    ddSubtitle:'3 моделі щодня <b>з безкоштовною доставкою</b>',
+    giftCtaTitle:'🎁 Відкрий подарунок дня',
+    giftCtaSub:'3 пари з <b>безкоштовною доставкою</b> · лише сьогодні',
+    catQAll:'Всі', catQDiscount:'🔥 Знижки', catQNew:'✨ Новинки', catQFree:'🚚 Безкоштовна',
+    sortLabel:'Сортувати', sortPopular:'🔥 Популярне', sortNew:'✨ Новинки',
+    sortPriceAsc:'↑ Ціна: дешевше', sortPriceDesc:'↓ Ціна: дорожче', sortDiscount:'🎁 Найбільша знижка',
+    afClearAll:'Скинути все',
+    rvTitle:'Нещодавно переглянуті', rvClear:'Очистити',
+    findYourPair:'Знайди свою пару 🔥',
+    bannerTag:'PREMIUM SNEAKER STORE',
+    bannerStat1:'моделей', bannerStat2:'передоплати', bannerStat3:'дні доставка',
+    refTag:'🤝 РЕФЕРАЛЬНА', refTitle:'Поділись і заробляй',
+    refSub:'Поширюй своє посилання у соцмережах. <b>Винагороду уточни в менеджера</b> — рахуємо персонально під твою активність.',
+    refStat1Lbl:'уточни в TG', refStat2Lbl:'друзів', refStat3Lbl:'cookie життя',
+    refBtn:'🔗 Отримати моє посилання', refHint:'Пиши менеджеру в Telegram — обговоримо умови',
+    tgCtaEyebrow:'ЕКСКЛЮЗИВНО В TELEGRAM', tgCtaTitle:'Підпишись на канал',
+    tgCtaSub:'Перші — про знижки, дропи нових моделей, ексклюзивні розіграші',
+    ciDelivery:'Доставка по Україні', ciDeliverySub:'Нова Пошта · 1–3 дні · ~50–80₴ · Оплата після примірки',
+    ciIntl:'Міжнародна доставка', ciIntlSub:'Польща, Чехія, Словаччина та інші країни ЄС',
+    ciReturn:'Повернення безкоштовно', ciReturnSub:'Не підійшло — просто відмовся на відділенні, без витрат',
   },
   en: {
     splashYear:'NO PREPAYMENT', splashTag:'PREMIUM SNEAKERS',
@@ -157,6 +181,30 @@ const STRINGS = {
       {q:'How to choose the right size?', a:'Message us on Telegram — we\'ll recommend a size based on foot length or your usual size. You can also try on at the branch: open the parcel, check the fit — and decide. Zero risk!'},
       {q:'What if it doesn\'t fit?', a:'Simply refuse the parcel at the branch or return it — at no cost to you. We cover return shipping. No questions asked, no hassle.'},
     ],
+    // ── 2026 strings ──
+    trustNoPrepay:'₴0 prepayment', trustTopQuality:'Top quality', trustFast:'1–3 days',
+    counterTpl:'models in stock',
+    ddEyebrow:'3 random pairs', ddTitle:'Daily find', ddTimerLbl:'Updates in:',
+    ddSubtitle:'3 models daily <b>with free shipping</b>',
+    giftCtaTitle:'🎁 Open today\'s gift',
+    giftCtaSub:'3 pairs with <b>free shipping</b> · today only',
+    catQAll:'All', catQDiscount:'🔥 Sale', catQNew:'✨ New', catQFree:'🚚 Free shipping',
+    sortLabel:'Sort by', sortPopular:'🔥 Popular', sortNew:'✨ Newest',
+    sortPriceAsc:'↑ Price: low to high', sortPriceDesc:'↓ Price: high to low', sortDiscount:'🎁 Biggest discount',
+    afClearAll:'Clear all',
+    rvTitle:'Recently viewed', rvClear:'Clear',
+    findYourPair:'Find your pair 🔥',
+    bannerTag:'PREMIUM SNEAKER STORE',
+    bannerStat1:'models', bannerStat2:'prepayment', bannerStat3:'days delivery',
+    refTag:'🤝 REFERRAL', refTitle:'Share & earn',
+    refSub:'Share your link on social. <b>Ask the manager about reward</b> — calculated per your activity.',
+    refStat1Lbl:'ask in TG', refStat2Lbl:'friends', refStat3Lbl:'cookie days',
+    refBtn:'🔗 Get my link', refHint:'Message the manager on Telegram for terms',
+    tgCtaEyebrow:'EXCLUSIVE ON TELEGRAM', tgCtaTitle:'Subscribe to channel',
+    tgCtaSub:'First to know about sales, drops, exclusive giveaways',
+    ciDelivery:'Delivery in Ukraine', ciDeliverySub:'Nova Poshta · 1–3 days · ~₴50–80 · Pay after try-on',
+    ciIntl:'International delivery', ciIntlSub:'Poland, Czech Republic, Slovakia and other EU countries',
+    ciReturn:'Free returns', ciReturnSub:'Not a fit — just refuse at the branch, no costs',
   }
 };
 
@@ -181,20 +229,145 @@ function applyLang() {
   [['home','navHome'],['match','navMatch'],['catalog','navCatalog'],['contacts','navContacts']].forEach(([tab,key]) => {
     const el = document.querySelector(`.nav-item[data-tab="${tab}"] .nav-label`);
     if (el) el.textContent = L[key];
+    const dsk = document.getElementById('dsk-btn-' + tab);
+    if (dsk) dsk.textContent = L[key];
   });
 
-  // Gender toggle
-  const gm = document.querySelector('.g-btn[data-gender="male"] .g-lbl');
-  const gf = document.querySelector('.g-btn[data-gender="female"] .g-lbl');
-  if (gm) gm.textContent = L.gMale;
-  if (gf) gf.textContent = L.gFemale;
+  // Gender toggle (home) + g-chip (match/catalog)
+  document.querySelectorAll('.g-btn[data-gender="male"] .g-lbl, .g-chip[data-gender="male"]').forEach(el => el.textContent = L.gMale);
+  document.querySelectorAll('.g-btn[data-gender="female"] .g-lbl, .g-chip[data-gender="female"]').forEach(el => el.textContent = L.gFemale);
 
-  // Catalog search placeholder
+  // Catalog
   const search = document.getElementById('cat-search');
   if (search) search.placeholder = L.searchPh;
+  document.querySelectorAll('.cat-quick[data-quick="all"] span').forEach(el => el.textContent = L.catQAll);
+  document.querySelectorAll('.cat-quick[data-quick="discount"] span').forEach(el => el.textContent = L.catQDiscount);
+  document.querySelectorAll('.cat-quick[data-quick="new"] span').forEach(el => el.textContent = L.catQNew);
+  document.querySelectorAll('.cat-quick[data-quick="free"] span').forEach(el => el.textContent = L.catQFree);
+
+  // Sort dropdown
+  const sortSel = document.getElementById('cat-sort');
+  if (sortSel) {
+    const opts = sortSel.options;
+    if (opts.length >= 5) {
+      opts[0].text = L.sortPopular; opts[1].text = L.sortNew;
+      opts[2].text = L.sortPriceAsc; opts[3].text = L.sortPriceDesc;
+      opts[4].text = L.sortDiscount;
+    }
+  }
+
+  // Daily Find
+  _setTextSel('#daily-deals-section .sec-eyebrow', '', L.ddEyebrow, true);
+  _setTextSel('#daily-deals-section .dd-title', '', L.ddTitle);
+  const ddSub = document.querySelector('#daily-deals-section .dd-subtitle');
+  if (ddSub) ddSub.innerHTML = L.ddSubtitle;
+  _setTextSel('#daily-deals-section .dd-timer-lbl', '', L.ddTimerLbl);
+
+  // Hero trust chips
+  const trustItems = document.querySelectorAll('.hero-trust-item');
+  if (trustItems.length >= 3) {
+    _replaceTextNode(trustItems[0], L.trustNoPrepay);
+    _replaceTextNode(trustItems[1], L.trustTopQuality);
+    _replaceTextNode(trustItems[2], L.trustFast);
+  }
+
+  // Home counter — keep number, change suffix
+  const counterChip = document.querySelector('.home-counter-chip');
+  if (counterChip) {
+    const txt = counterChip.childNodes;
+    for (const n of txt) {
+      if (n.nodeType === 3 && n.textContent.trim() && !/^\d+/.test(n.textContent.trim())) {
+        n.textContent = ' ' + L.counterTpl;
+        break;
+      }
+    }
+  }
+
+  // Section headings
+  document.querySelectorAll('.sec-title').forEach(el => {
+    const txt = el.textContent.trim();
+    if (txt.includes('Популярне') || txt.includes('Trending')) el.textContent = L.popular;
+    else if (txt.includes('Новинки') || txt.includes('New arrivals')) el.textContent = L.newIn;
+    else if (txt.includes('Бренди') || txt.includes('Brands')) el.textContent = L.brands;
+    else if (txt.includes('Нещодавно') || txt.includes('Recently')) el.textContent = L.rvTitle;
+    else if (txt.includes('Що кажуть') || txt.includes('Customer reviews')) el.textContent = L.reviewsTitle;
+    else if (txt.includes('Весь асортимент') || txt.includes('Full catalog')) el.textContent = L.allModels;
+  });
+
+  // Recently viewed clear button
+  const rvClear = document.querySelector('.rv-clear');
+  if (rvClear) rvClear.textContent = L.rvClear;
+
+  // "Знайди свою пару"
+  _setTextSel('.cat-vibe-line', '', L.findYourPair.replace(' 🔥','').trim());
+
+  // Contacts banner
+  _setTextSel('.contacts-banner-tag', '', L.bannerTag);
+  const stats = document.querySelectorAll('.cb-stat-lbl');
+  if (stats.length >= 3) {
+    stats[0].textContent = L.bannerStat1;
+    stats[1].textContent = L.bannerStat2;
+    stats[2].textContent = L.bannerStat3;
+  }
+
+  // Contacts list (delivery/intl/return)
+  const ciTitles = document.querySelectorAll('.contact-item .ci-title');
+  const ciSubs   = document.querySelectorAll('.contact-item .ci-sub');
+  const ciData = [[L.ciDelivery,L.ciDeliverySub],[L.ciIntl,L.ciIntlSub],[L.ciReturn,L.ciReturnSub]];
+  ciTitles.forEach((el,i) => { if (ciData[i]) el.textContent = ciData[i][0]; });
+  ciSubs.forEach((el,i) => { if (ciData[i]) el.textContent = ciData[i][1]; });
+
+  // Referral section
+  _setTextSel('.ref-section-tag', '', L.refTag);
+  _setTextSel('.ref-section-title', '', L.refTitle);
+  const refSub = document.querySelector('.ref-section-sub');
+  if (refSub) refSub.innerHTML = L.refSub;
+  const refLbls = document.querySelectorAll('.ref-stat-lbl');
+  if (refLbls.length >= 3) {
+    refLbls[0].textContent = L.refStat1Lbl;
+    refLbls[1].textContent = L.refStat2Lbl;
+    refLbls[2].textContent = L.refStat3Lbl;
+  }
+  const refBtn = document.querySelector('.ref-section-btn > span:first-child');
+  if (refBtn) refBtn.textContent = L.refBtn;
+  _setTextSel('.ref-section-hint', '', L.refHint);
+
+  // TG Channel CTA
+  _setTextSel('.tg-cta-eyebrow', 'dot', L.tgCtaEyebrow);
+  _setTextSel('.tg-cta-title', '', L.tgCtaTitle);
+  _setTextSel('.tg-cta-sub', '', L.tgCtaSub);
+
+  // Match
+  _setTextSel('.match-hint', '', L.matchHint);
+
+  // Cart
+  _setTextSel('.sh-title-cart', '', L.cartTitle);
 
   updateTimestamp();
   if (typeof renderFaq === 'function') renderFaq();
+}
+
+// Helper: set text of element matched by selector. ignoreChild = class name to preserve (sets only LAST text node)
+function _setTextSel(sel, ignoreChild, val, addIcon) {
+  const el = document.querySelector(sel);
+  if (!el) return;
+  // знаходимо текстовий вузол, не зачіпаючи дочірні елементи (іконки/SVG)
+  let txtNode = null;
+  for (const n of el.childNodes) {
+    if (n.nodeType === 3 && n.textContent.trim()) { txtNode = n; break; }
+  }
+  if (txtNode) txtNode.textContent = (txtNode.textContent.startsWith(' ') ? ' ' : '') + val;
+  else el.appendChild(document.createTextNode(val));
+}
+
+function _replaceTextNode(el, val) {
+  for (const n of el.childNodes) {
+    if (n.nodeType === 3 && n.textContent.trim()) {
+      n.textContent = val;
+      return;
+    }
+  }
+  el.appendChild(document.createTextNode(val));
 }
 
 function _setText(id, val) {

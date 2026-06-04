@@ -180,8 +180,8 @@ function _giftBoxHtml() {
         </div>
       </div>
       <div class="dd-gift-cta">
-        <strong>🎁 Відкрий подарунок дня</strong>
-        <span>3 пари з <b>безкоштовною доставкою</b> · лише сьогодні</span>
+        <strong>${(typeof L !== 'undefined' && L.giftCtaTitle) || '🎁 Відкрий подарунок дня'}</strong>
+        <span>${(typeof L !== 'undefined' && L.giftCtaSub) || '3 пари з <b>безкоштовною доставкою</b> · лише сьогодні'}</span>
       </div>
     </div>
   </div>`;
@@ -227,14 +227,24 @@ function renderDailyDeals(catalog) {
 
   const row = sec.querySelector('.dd-row');
   if (row) {
-    row.classList.add('dd-revealed');
     row.classList.remove('dd-single');
     row.innerHTML = deals.map(_dealCardHtml).join('');
   }
 
-  // Прибираємо застарілий gift-wrap якщо є
-  const existingGift = sec.querySelector('.dd-gift-wrap');
-  if (existingGift) existingGift.remove();
+  // Gift-box: розпаковка раз на день (per seed дати).
+  // Опен → mark у localStorage → реveal cards. Новий день = новий gift.
+  const opened = _isGiftOpenedToday();
+  let existingGift = sec.querySelector('.dd-gift-wrap');
+  if (!opened) {
+    if (!existingGift) {
+      const header = sec.querySelector('.dd-header');
+      header && header.insertAdjacentHTML('afterend', _giftBoxHtml());
+    }
+    row && row.classList.remove('dd-revealed');
+  } else {
+    if (existingGift) existingGift.remove();
+    row && row.classList.add('dd-revealed');
+  }
 
   const timerEl = sec.querySelector('.dd-timer');
 
