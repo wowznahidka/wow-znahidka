@@ -21,7 +21,7 @@ function _getDateSeed() {
 
 // ── DEAL SELECTION ───────────────────────────────── */
 function getDailyDeals(catalog, count) {
-  count = count || 3;
+  count = count || 1;
   const seed     = _getDateSeed();
   const cacheKey = 'wow_deals_' + seed;
 
@@ -221,26 +221,20 @@ function renderDailyDeals(catalog) {
 
   if (_ddTimerID) { clearInterval(_ddTimerID); _ddTimerID = null; }
 
-  const deals = getDailyDeals(catalog);
+  const deals = getDailyDeals(catalog, 1);
   if (!deals.length) { sec.hidden = true; return; }
   sec.hidden = false;
 
   const row = sec.querySelector('.dd-row');
-  if (row) row.innerHTML = deals.map(_dealCardHtml).join('');
-
-  // Gift-box перед розкриттям
-  const opened = _isGiftOpenedToday();
-  let existingGift = sec.querySelector('.dd-gift-wrap');
-  if (!opened) {
-    if (!existingGift) {
-      const header = sec.querySelector('.dd-header');
-      header && header.insertAdjacentHTML('afterend', _giftBoxHtml());
-    }
-    row && row.classList.remove('dd-revealed');
-  } else {
-    if (existingGift) existingGift.remove();
-    row && row.classList.add('dd-revealed');
+  if (row) {
+    row.classList.add('dd-revealed');
+    row.classList.add('dd-single');
+    row.innerHTML = deals.map(_dealCardHtml).join('');
   }
+
+  // Прибираємо застарілий gift-wrap якщо є
+  const existingGift = sec.querySelector('.dd-gift-wrap');
+  if (existingGift) existingGift.remove();
 
   const timerEl = sec.querySelector('.dd-timer');
 
