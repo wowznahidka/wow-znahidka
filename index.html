@@ -66,18 +66,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=11">
-<link rel="stylesheet" href="css/layout.css?v=11">
-<link rel="stylesheet" href="css/cards.css?v=11">
-<link rel="stylesheet" href="css/animations.css?v=11">
-<link rel="stylesheet" href="css/mobile.css?v=11">
+<link rel="stylesheet" href="css/base.css?v=12">
+<link rel="stylesheet" href="css/layout.css?v=12">
+<link rel="stylesheet" href="css/cards.css?v=12">
+<link rel="stylesheet" href="css/animations.css?v=12">
+<link rel="stylesheet" href="css/mobile.css?v=12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=11">
-<link rel="stylesheet" href="css/niche.css?v=11">
+<link rel="stylesheet" href="shared/css/premium.css?v=12">
+<link rel="stylesheet" href="css/niche.css?v=12">
 </head>
 <body>
 
@@ -330,7 +330,24 @@
   <section id="page-contacts" class="page" aria-label="Контакти">
     <div class="contacts-banner">
       <div class="contacts-banner-tag" aria-hidden="true">PREMIUM SNEAKER STORE</div>
-      <div class="contacts-banner-art" aria-hidden="true">
+
+      <!-- Реальний кросівок з каталогу (рандомний — JS набиває) -->
+      <div class="contacts-hero-shoe" id="contacts-hero-shoe" aria-hidden="true">
+        <div class="ch-shoe-shape">
+          <div class="ch-shoe-orb-1"></div>
+          <div class="ch-shoe-orb-2"></div>
+          <div class="ch-shoe-orb-3"></div>
+          <img class="ch-shoe-img" id="contacts-hero-shoe-img" alt="" loading="lazy" decoding="async">
+          <div class="ch-shoe-shadow"></div>
+        </div>
+        <div class="ch-shoe-meta">
+          <span class="ch-shoe-meta-brand" id="contacts-hero-shoe-brand">NIKE</span>
+          <span class="ch-shoe-meta-tag">2026 EDITION</span>
+        </div>
+      </div>
+
+      <!-- Fallback SVG (показується якщо каталог не завантажився) -->
+      <div class="contacts-banner-art" id="contacts-hero-fallback" aria-hidden="true">
         <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="hero-shoe-body" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -907,20 +924,20 @@
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=11"             defer></script>
-<script src="js/state.js?v=11"              defer></script>
-<script src="js/lang.js?v=11"               defer></script>
-<script src="js/api.js?v=11"                defer></script>
-<script src="js/products.js?v=11"           defer></script>
-<script src="js/ui.js?v=11"                 defer></script>
-<script src="js/match.js?v=11"              defer></script>
-<script src="js/filters.js?v=11"            defer></script>
-<script src="js/cart.js?v=11"               defer></script>
-<script src="js/modal.js?v=11"              defer></script>
-<script src="js/deals.js?v=11"              defer></script>
-<script src="shared/js/referral.js?v=11" defer></script>
-<script src="js/app.js?v=11"                defer></script>
-<script src="shared/js/motion.js?v=11" defer></script>
+<script src="js/config.js?v=12"             defer></script>
+<script src="js/state.js?v=12"              defer></script>
+<script src="js/lang.js?v=12"               defer></script>
+<script src="js/api.js?v=12"                defer></script>
+<script src="js/products.js?v=12"           defer></script>
+<script src="js/ui.js?v=12"                 defer></script>
+<script src="js/match.js?v=12"              defer></script>
+<script src="js/filters.js?v=12"            defer></script>
+<script src="js/cart.js?v=12"               defer></script>
+<script src="js/modal.js?v=12"              defer></script>
+<script src="js/deals.js?v=12"              defer></script>
+<script src="shared/js/referral.js?v=12" defer></script>
+<script src="js/app.js?v=12"                defer></script>
+<script src="shared/js/motion.js?v=12" defer></script>
 
 </body>
 </html>
