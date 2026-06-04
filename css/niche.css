@@ -639,9 +639,63 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   }
   .header-logo small { display: none !important; }
 
-  #desktop-nav { display: flex !important; flex: 1; gap: 4px; }
-  #bottom-nav  { display: none !important; }
+  #desktop-nav { display: none !important; } /* прибираємо текстовий nav у шапці */
   #cart-sticky-bar { display: none !important; }
+
+  /* Premium floating bottom-nav на десктопі — як на телефоні, але стильніше */
+  #bottom-nav {
+    display: flex !important;
+    position: fixed !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 24px !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+    max-width: 520px !important;
+    height: 64px !important;
+    padding: 0 12px !important;
+    background: rgba(13,13,13,0.92) !important;
+    backdrop-filter: blur(22px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(180%) !important;
+    border-radius: 100px !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    box-shadow:
+      0 20px 50px rgba(0,0,0,0.32),
+      0 8px 20px rgba(0,0,0,0.16),
+      inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    z-index: 250 !important;
+  }
+  #bottom-nav .nav-item {
+    color: rgba(255,255,255,0.55) !important;
+    flex: 0 0 auto !important;
+    padding: 8px 18px !important;
+    border-radius: 100px !important;
+    transition: all .2s cubic-bezier(.16,1,.3,1);
+  }
+  #bottom-nav .nav-item:hover {
+    color: rgba(255,255,255,0.85) !important;
+  }
+  #bottom-nav .nav-item.active {
+    color: #fff !important;
+    background: linear-gradient(135deg, #ff3e3e, #cc1a1a) !important;
+    box-shadow: 0 4px 14px rgba(255,62,62,0.4) !important;
+  }
+  #bottom-nav .nav-item.active::before {
+    display: none !important; /* прибираємо червоний акцент згори, тепер вся pill червона */
+  }
+  #bottom-nav .nav-item.active .nav-icon {
+    filter: none !important;
+  }
+  #bottom-nav .nav-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: .02em;
+  }
+  #bottom-nav .nav-icon { font-size: 20px !important; }
+
+  /* Додатковий padding знизу щоб контент не залазив під nav */
+  #pages { padding-bottom: 120px !important; }
   #pwa-android, #pwa-ios { display: none !important; }
   /* mobile gender toggle/chips ховаємо — у sidebar є свій */
   #page-home > #gender-toggle,
@@ -659,13 +713,32 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
     background: rgba(255,62,62,0.08);
   }
 
-  .header-actions { flex: 0 0 auto; gap: 8px; }
-  .hdr-btn {
-    width: 40px; height: 40px;
-    background: transparent !important;
-    border: 1px solid rgba(0,0,0,0.08) !important;
+  .header-actions {
+    flex: 1 1 auto !important;
+    justify-content: flex-end !important;
+    gap: 10px !important;
   }
-  .hdr-btn:hover { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.14) !important; }
+  .hdr-btn {
+    width: 42px; height: 42px;
+    background: rgba(0,0,0,0.04) !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+    border-radius: 14px !important;
+    transition: all .18s ease;
+    position: relative;
+  }
+  .hdr-btn:hover {
+    background: #0d0d0d !important;
+    border-color: #0d0d0d !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  }
+  .hdr-btn:hover .badge { background: #ff3e3e !important; }
+  .hdr-btn .badge {
+    border: 2px solid #fff;
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+  }
 
   /* ── PAGES container ── */
   #pages {

@@ -281,6 +281,16 @@ function renderRecentlyViewed(data) {
   if (!items.length) { sec.classList.add('hidden'); return; }
   sec.classList.remove('hidden');
   row.innerHTML = items.map((p, i) => prodCardHtml(p, { eager: i < 4 })).join('');
+  const cnt = document.getElementById('rv-count');
+  if (cnt) cnt.textContent = `· ${items.length}`;
+}
+
+function clearRecentlyViewed() {
+  S.recent = [];
+  try { localStorage.setItem('wow_recent', '[]'); } catch (_) {}
+  const sec = document.getElementById('recently-viewed-section');
+  if (sec) sec.classList.add('hidden');
+  if (typeof toast === 'function') toast('🧹 Історію очищено');
 }
 
 function renderReviews() {
