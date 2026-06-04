@@ -101,9 +101,46 @@ function changeTab(tab) {
   document.getElementById('pages').scrollTop = 0;
   window.scrollTo(0, 0);
   document.body.classList.toggle('show-sidebar', tab === 'catalog');
-  if (tab === 'home')    renderHome();
-  if (tab === 'match')   initMatch();
-  if (tab === 'catalog') renderCatalog();
+  if (tab === 'home')     renderHome();
+  if (tab === 'match')    initMatch();
+  if (tab === 'catalog')  renderCatalog();
+  if (tab === 'contacts') _renderContactsHeroShoe();
+}
+
+// ── CONTACTS HERO — рандомна фотка крос з каталогу ──
+function _renderContactsHeroShoe() {
+  const imgEl   = document.getElementById('contacts-hero-shoe-img');
+  const brandEl = document.getElementById('contacts-hero-shoe-brand');
+  const fallback = document.getElementById('contacts-hero-fallback');
+  if (!imgEl) return;
+
+  const cat = S.catalog && S.catalog.all;
+  if (!cat || !cat.length) {
+    // Каталог ще не вантажиться — спробуємо за 1.5с
+    setTimeout(_renderContactsHeroShoe, 1500);
+    return;
+  }
+
+  // Беремо популярні бренди з фото
+  const TOP_BRANDS = ['Nike','Adidas','New Balance','Jordan','Asics','Balenciaga','Salomon'];
+  const candidates = cat.filter(p =>
+    p.image && p.image.startsWith('http') &&
+    TOP_BRANDS.some(b => p.brand && p.brand.toLowerCase().includes(b.toLowerCase()))
+  );
+  const pool = candidates.length ? candidates : cat.filter(p => p.image && p.image.startsWith('http'));
+  if (!pool.length) return;
+
+  // Стабільна рандомізація на годину — щоб не миготіло при перемиканні
+  const hour = new Date().getHours();
+  const seed = (hour * 31 + new Date().getDate()) | 0;
+  const idx  = ((seed % pool.length) + pool.length) % pool.length;
+  const pick = pool[idx];
+
+  imgEl.src = pick.image;
+  imgEl.alt = `${pick.brand} ${pick.name}`;
+  imgEl.onload = () => imgEl.classList.add('loaded');
+  if (brandEl) brandEl.textContent = (pick.brand || 'PREMIUM').toUpperCase();
+  if (fallback) fallback.style.display = 'none';
 }
 
 function refreshCurrentTab() {
