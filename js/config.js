@@ -23,7 +23,7 @@ const CFG = {
 
   // ── OG Image ─────────────────────────────────── */
   // Абсолютний URL банера 1200×630 для превʼю посилань
-  OG_IMAGE: '',
+  OG_IMAGE: 'https://wowznahidka.github.io/wow-znahidka/og-cover.png',
 
 
   CACHE_KEY:    'wow_catalog_v3',

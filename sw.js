@@ -1,9 +1,9 @@
 /* ============================================================
-   WOW.ZNAHIDKA — Service Worker  (wow-v8)
+   WOW.ZNAHIDKA — Service Worker  (wow-v10)
    Strategy: pre-cache shell → network-first nav → stale-while-revalidate assets
    ============================================================ */
 
-const V = 'wow-v9';
+const V = 'wow-v10';
 
 // Critical shell — install fails if these are missing (intentional)
 const SHELL = [
@@ -12,6 +12,7 @@ const SHELL = [
   './offline.html',
   './css/base.css',
   './css/layout.css',
+  './css/cards.css',
   './css/animations.css',
   './css/niche.css',
   './manifest.json',
@@ -22,7 +23,6 @@ const SHELL = [
 
 // Best-effort warm cache — individual failures are silently ignored
 const WARM = [
-  './css/cards.css',
   './css/mobile.css',
   './shared/css/premium.css',
   './js/config.js',
