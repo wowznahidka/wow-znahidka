@@ -460,3 +460,141 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dsf) dsf.style.display = window.innerWidth >= 1024 ? 'block' : 'none';
   });
 });
+
+/* ============================================================
+   CATALOG 2026 — QUICK FILTERS / SORT / ACTIVE CHIPS / COUNTER
+   ============================================================ */
+
+// ── QUICK FILTERS (all / discount / new / free) ─────
+function setQuickFilter(mode) {
+  S.quickFilter = mode || 'all';
+  _haptic(8);
+  document.querySelectorAll('.cat-quick').forEach(b => {
+    const on = b.dataset.quick === S.quickFilter;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  _applyFilters();
+}
+
+function filterByQuick(products) {
+  const q = S.quickFilter || 'all';
+  if (q === 'all')      return products;
+  if (q === 'discount') return products.filter(p => p.oldPrice && p.oldPrice > p.price);
+  if (q === 'new')      return products.filter(p => p.isNew);
+  if (q === 'free')     return products.filter(p => p.isFreeShipping);
+  return products;
+}
+
+// ── SORT ─────────────────────────────────────────────
+function setSortMode(mode) {
+  S.sortMode = mode || 'popular';
+  _applyFilters();
+}
+
+function sortProducts(products) {
+  const m = S.sortMode || 'popular';
+  const arr = [...products];
+  switch (m) {
+    case 'price_asc':  return arr.sort((a, b) => (a.price || 0) - (b.price || 0));
+    case 'price_desc': return arr.sort((a, b) => (b.price || 0) - (a.price || 0));
+    case 'new':        return arr.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+    case 'discount':   return arr.sort((a, b) => {
+      const da = (a.oldPrice || 0) - (a.price || 0);
+      const db = (b.oldPrice || 0) - (b.price || 0);
+      return db - da;
+    });
+    default: return arr; // popular = catalog default order (seeded shuffle elsewhere)
+  }
+}
+
+// ── ACTIVE FILTERS CHIPS (видно які фільтри активні) ──
+function updateActiveFiltersChips() {
+  const box = document.getElementById('cat-active-filters');
+  if (!box) return;
+  const chips = [];
+  if (S.gender && S.gender !== 'mixed') {
+    chips.push({ k: 'gender', label: S.gender === 'male' ? '♂ Чоловіки' : '♀ Жінки' });
+  }
+  if (S.sizeFilters && S.sizeFilters.length) {
+    chips.push({ k: 'size', label: `Розмір ${S.sizeFilters.join(', ')}` });
+  }
+  if (S.catBrand) {
+    chips.push({ k: 'brand', label: S.catBrand });
+  }
+  if (S.quickFilter && S.quickFilter !== 'all') {
+    const ql = { discount: '🔥 Знижки', new: '✨ Новинки', free: '🚚 Безкоштовна' }[S.quickFilter] || '';
+    if (ql) chips.push({ k: 'quick', label: ql });
+  }
+  if ((S.priceMin > 0) || (S.priceMax && S.priceMax < 6000)) {
+    chips.push({ k: 'price', label: _priceLabel(S.priceMin || 0, S.priceMax || 6000) });
+  }
+  if (!chips.length) { box.innerHTML = ''; box.classList.remove('vis'); return; }
+  box.innerHTML = chips.map(c =>
+    `<button class="cat-af-chip" onclick="clearOneFilter('${c.k}')">${esc(c.label)} <span aria-hidden="true">×</span></button>`
+  ).join('') + `<button class="cat-af-clear" onclick="clearAllFilters()">Скинути все</button>`;
+  box.classList.add('vis');
+}
+
+function clearOneFilter(kind) {
+  if      (kind === 'gender') setGender('mixed');
+  else if (kind === 'size')   clearSizeFilters();
+  else if (kind === 'brand')  _selectBrandStory(null);
+  else if (kind === 'quick')  setQuickFilter('all');
+  else if (kind === 'price')  { S.priceMin = 0; S.priceMax = 6000; renderPriceSlider(); _applyFilters(); }
+  updateActiveFiltersChips();
+}
+
+function clearAllFilters() {
+  S.gender = 'mixed';
+  S.sizeFilters = [];
+  S.catBrand = null;
+  S.quickFilter = 'all';
+  S.priceMin = 0;
+  S.priceMax = 6000;
+  document.querySelectorAll('.g-chip').forEach(b => b.classList.toggle('active', b.dataset.gender === 'mixed'));
+  document.querySelectorAll('.cat-quick').forEach(b => b.classList.toggle('on', b.dataset.quick === 'all'));
+  renderSizeChips();
+  renderPriceSlider();
+  _applyFilters();
+  updateActiveFiltersChips();
+}
+
+// ── RESULTS COUNTER ──────────────────────────────────
+function updateResultsCount(n) {
+  const el = document.getElementById('cat-count');
+  if (!el) return;
+  if (n == null || n === undefined) { el.textContent = ''; return; }
+  const word = (n % 10 === 1 && n % 100 !== 11) ? 'модель' :
+               (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'моделі' : 'моделей';
+  el.innerHTML = `<b>${n}</b> ${word}`;
+}
+
+// ── INTEGRATE WITH FILTER CHAIN ──────────────────────
+// Override the existing _renderUnifiedCatalog to include quick + sort + counter + active chips
+const __origUnified = _renderUnifiedCatalog;
+_renderUnifiedCatalog = function(data) {
+  const filtered = filterByPrice(filterBySize(filterByQuick(data)));
+  __origUnified(filtered);
+  // After unified render, _renderCatalogGrid was called inside; show count of products after brand filter
+  const finalCount = (S.catBrand ? filtered.filter(p => p.brand === S.catBrand) : filtered).length;
+  updateResultsCount(finalCount);
+  updateActiveFiltersChips();
+};
+
+const __origUpdateGrid = _updateCatalogGrid;
+_updateCatalogGrid = function(data) {
+  const filtered = filterByPrice(filterBySize(filterByQuick(data)));
+  __origUpdateGrid(filtered);
+  const finalCount = (S.catBrand ? filtered.filter(p => p.brand === S.catBrand) : filtered).length;
+  updateResultsCount(finalCount);
+  updateActiveFiltersChips();
+};
+
+// Restore sort if any
+const __origRenderCatalogGrid = typeof _renderCatalogGrid === 'function' ? _renderCatalogGrid : null;
+if (__origRenderCatalogGrid) {
+  _renderCatalogGrid = function(container, products) {
+    return __origRenderCatalogGrid(container, sortProducts(products));
+  };
+}

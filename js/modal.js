@@ -112,7 +112,7 @@ function requestPhoto() {
   const szText = S.spSelectedSize ? `Розмір: ${S.spSelectedSize}` : 'Розмір: уточнимо';
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n${szText}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
+  openTgLink(`https://t.me/topznahidka?text=${encodeURIComponent(msg)}`);
 }
 
 function confirmSize() {
@@ -154,7 +154,7 @@ function _pdPhotoTg() {
   if (p.tgLink) { openTgLink(p.tgLink); return; }
   const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
   const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
+  openTgLink(`https://t.me/topznahidka?text=${encodeURIComponent(msg)}`);
 }
 
 function openProductDetail(product) {

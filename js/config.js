@@ -5,9 +5,9 @@
 
 const CFG = {
   GAS_URL:  'https://script.google.com/macros/s/AKfycbxnbKNfrT38T4c7drhOI5IomuFzLNCeXZPykGwBSQpgtZUkme6Ip91Zio9weRgQYs-mCw/exec',
-  TG_URL:   'https://t.me/znahidkawow',
-  IG_URL:   'https://instagram.com/wow.znahidka',
-  TT_URL:   'https://www.tiktok.com/@wowznahidka',
+  TG_URL:   'https://t.me/topznahidka',
+  IG_URL:   'https://www.instagram.com/wow.znahidka/',
+  TT_URL:   'https://www.tiktok.com/@wow.znahidka',
 
   // ── Google Analytics 4 ───────────────────────── */
   // Вставте свій Measurement ID з analytics.google.com (вигляд: G-XXXXXXXXXX)
