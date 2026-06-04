@@ -854,6 +854,99 @@ body { background: #f0eded; }
   margin-top: 12px;
 }
 
+/* ── TG CHANNEL CTA — Main UBT funnel ─────────── */
+.tg-channel-cta {
+  display: flex; align-items: center;
+  gap: 14px;
+  margin: 4px 16px 18px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+  color: #fff;
+  border-radius: 18px;
+  text-decoration: none;
+  box-shadow:
+    0 4px 14px rgba(0,136,204,0.28),
+    0 1px 3px rgba(0,0,0,0.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.tg-channel-cta::after {
+  /* sheen highlight */
+  content: '';
+  position: absolute;
+  top: 0; left: -50%;
+  width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: tgCtaSheen 4s ease-in-out infinite;
+}
+@keyframes tgCtaSheen {
+  0%,80%,100% { transform: translateX(0); opacity: 0; }
+  90% { transform: translateX(420%); opacity: 1; }
+}
+.tg-channel-cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 22px rgba(0,136,204,0.38),
+    0 2px 6px rgba(0,0,0,0.10);
+}
+.tg-channel-cta:active { transform: scale(.97); }
+
+.tg-cta-icon {
+  width: 44px; height: 44px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.16);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.tg-cta-icon svg { width: 26px; height: 26px; }
+
+.tg-cta-body { flex: 1; min-width: 0; }
+.tg-cta-eyebrow {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; font-weight: 800;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,0.78);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.tg-cta-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #6dffa3;
+  box-shadow: 0 0 0 0 rgba(109,255,163,.6);
+  animation: tgDotPulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes tgDotPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(109,255,163,.55); }
+  50%      { box-shadow: 0 0 0 5px rgba(109,255,163,0); }
+}
+.tg-cta-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px; font-weight: 800;
+  color: #fff;
+  letter-spacing: -.01em;
+  line-height: 1.1;
+}
+.tg-cta-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.4;
+  margin-top: 3px;
+}
+.tg-cta-arrow {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  transition: transform .18s ease;
+}
+.tg-channel-cta:hover .tg-cta-arrow { transform: translateX(4px); }
+
 @keyframes heroFloat {
   0%,100% { transform: translateY(0); }
   50%      { transform: translateY(-5px); }
