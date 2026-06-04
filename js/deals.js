@@ -21,7 +21,7 @@ function _getDateSeed() {
 
 // ── DEAL SELECTION ───────────────────────────────── */
 function getDailyDeals(catalog, count) {
-  count = count || 1;
+  count = count || 3;
   const seed     = _getDateSeed();
   const cacheKey = 'wow_deals_' + seed;
 
@@ -221,14 +221,14 @@ function renderDailyDeals(catalog) {
 
   if (_ddTimerID) { clearInterval(_ddTimerID); _ddTimerID = null; }
 
-  const deals = getDailyDeals(catalog, 1);
+  const deals = getDailyDeals(catalog, 3);
   if (!deals.length) { sec.hidden = true; return; }
   sec.hidden = false;
 
   const row = sec.querySelector('.dd-row');
   if (row) {
     row.classList.add('dd-revealed');
-    row.classList.add('dd-single');
+    row.classList.remove('dd-single');
     row.innerHTML = deals.map(_dealCardHtml).join('');
   }
 
