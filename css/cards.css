@@ -1316,6 +1316,36 @@
   pointer-events: none;
 }
 
+/* Brand strip — WOW.ZNAHIDKA logo + Free delivery badge above the gift box */
+.dd-gift-brand {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+.dd-gift-brand-logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px; font-weight: 900;
+  color: #0d0d0d;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.dd-gift-brand-dot { color: var(--accent, #ff3e3e); }
+.dd-gift-brand-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 9px;
+  background: rgba(24,199,90,0.10);
+  color: #0e9b46;
+  border: 1px solid rgba(24,199,90,0.22);
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 800;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  line-height: 1;
+}
+
 .dd-gift-cta { text-align: center; font-family: 'Sora', 'Inter', sans-serif; }
 .dd-gift-cta strong {
   display: block;

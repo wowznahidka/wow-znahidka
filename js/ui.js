@@ -199,31 +199,10 @@ function _fireIdleNudge() {
 }
 
 function _maybeShowPartnerNudge() {
-  if (_partnerNudgeDone) return;
-  const isFromRef = !!(typeof REF !== 'undefined' && REF.getReferrer());
-  if (isFromRef) return;
-
+  // Partner-nudge popup прибраний — реферальна програма тепер у Контактах.
+  // Залишаємо лічильник відвідувань для майбутньої аналітики.
   const visits = Number(localStorage.getItem('wow_visit_count') || 0) + 1;
   localStorage.setItem('wow_visit_count', visits);
-  if (visits < 2) return;
-
-  _partnerNudgeDone = true;
-  setTimeout(() => {
-    if (S.activeTab !== 'home') return;
-    const nudge = document.createElement('div');
-    nudge.id = 'partner-nudge';
-    nudge.innerHTML = `
-      <div class="mn-ico">🔗</div>
-      <div class="mn-body">
-        <div class="mn-title">Поділись — заробляй</div>
-        <div class="mn-sub">Приводь друзів і отримуй з кожного їх замовлення</div>
-      </div>
-      <button class="mn-btn" onclick="openRefSheet();document.getElementById('partner-nudge')?.remove()">Детальніше</button>
-      <button class="mn-close" onclick="this.closest('#partner-nudge').remove()" aria-label="Закрити">✕</button>`;
-    document.body.appendChild(nudge);
-    requestAnimationFrame(() => nudge.classList.add('mn-in'));
-    setTimeout(() => { nudge.classList.remove('mn-in'); setTimeout(() => nudge.remove(), 400); }, 8000);
-  }, 9000);
 }
 
 // ── PWA ───────────────────────────────────────────── */

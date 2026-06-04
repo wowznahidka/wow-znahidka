@@ -66,18 +66,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=7">
-<link rel="stylesheet" href="css/layout.css?v=7">
-<link rel="stylesheet" href="css/cards.css?v=7">
-<link rel="stylesheet" href="css/animations.css?v=7">
-<link rel="stylesheet" href="css/mobile.css?v=7">
+<link rel="stylesheet" href="css/base.css?v=8">
+<link rel="stylesheet" href="css/layout.css?v=8">
+<link rel="stylesheet" href="css/cards.css?v=8">
+<link rel="stylesheet" href="css/animations.css?v=8">
+<link rel="stylesheet" href="css/mobile.css?v=8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=7">
-<link rel="stylesheet" href="css/niche.css?v=7">
+<link rel="stylesheet" href="shared/css/premium.css?v=8">
+<link rel="stylesheet" href="css/niche.css?v=8">
 </head>
 <body>
 
@@ -328,87 +328,203 @@
   <!-- ── CONTACTS ── -->
   <section id="page-contacts" class="page" aria-label="Контакти">
     <div class="contacts-banner">
+      <div class="contacts-banner-tag" aria-hidden="true">PREMIUM SNEAKER STORE</div>
       <div class="contacts-banner-art" aria-hidden="true">
-        <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <linearGradient id="cb-shoe" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1a1a1a"/>
-              <stop offset="55%" stop-color="#2d2d2d"/>
-              <stop offset="100%" stop-color="#0d0d0d"/>
+            <linearGradient id="hero-shoe-body" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2a2a2c"/>
+              <stop offset="50%" stop-color="#161618"/>
+              <stop offset="100%" stop-color="#000"/>
             </linearGradient>
-            <linearGradient id="cb-sole" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#e8e8e8"/>
+            <linearGradient id="hero-sole" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#fafafa"/>
+              <stop offset="50%" stop-color="#ededed"/>
+              <stop offset="100%" stop-color="#d4d4d4"/>
             </linearGradient>
-            <linearGradient id="cb-swoosh" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="hero-midsole" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#f0f0f0"/>
+              <stop offset="100%" stop-color="#c2c2c2"/>
+            </linearGradient>
+            <linearGradient id="hero-accent" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#ff3e3e"/>
               <stop offset="100%" stop-color="#ff7a1a"/>
             </linearGradient>
-            <radialGradient id="cb-floor" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="rgba(0,0,0,0.18)"/>
+            <linearGradient id="hero-shine" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.16)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <radialGradient id="hero-floor" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(0,0,0,0.28)"/>
+              <stop offset="60%" stop-color="rgba(0,0,0,0.10)"/>
               <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
             </radialGradient>
-            <filter id="cb-blur" x="-10%" y="-10%" width="120%" height="120%">
-              <feGaussianBlur stdDeviation="2"/>
-            </filter>
           </defs>
 
-          <!-- Ambient glow circles -->
-          <circle class="cb-orb cb-orb-1" cx="80" cy="60" r="55" fill="#ff3e3e" opacity="0.10"/>
-          <circle class="cb-orb cb-orb-2" cx="330" cy="170" r="65" fill="#ff7a1a" opacity="0.10"/>
+          <!-- Ambient orbs (light) -->
+          <circle class="hero-orb hero-orb-1" cx="60" cy="60" r="48" fill="#ff3e3e" opacity="0.10"/>
+          <circle class="hero-orb hero-orb-2" cx="420" cy="200" r="60" fill="#ff7a1a" opacity="0.10"/>
+          <circle class="hero-orb hero-orb-3" cx="380" cy="50" r="28" fill="#ff3e3e" opacity="0.06"/>
 
-          <!-- Floor shadow -->
-          <ellipse cx="200" cy="212" rx="135" ry="10" fill="url(#cb-floor)"/>
+          <!-- Decorative dotted grid -->
+          <g fill="rgba(0,0,0,0.06)">
+            <circle cx="30"  cy="200" r="1.5"/>
+            <circle cx="45"  cy="210" r="1.5"/>
+            <circle cx="60"  cy="220" r="1.5"/>
+            <circle cx="440" cy="80"  r="1.5"/>
+            <circle cx="455" cy="90"  r="1.5"/>
+            <circle cx="425" cy="70"  r="1.5"/>
+          </g>
 
-          <!-- Sneaker silhouette -->
-          <g class="cb-shoe" filter="drop-shadow(0 16px 28px rgba(0,0,0,0.32))">
-            <!-- Sole -->
-            <path d="M55,195 Q55,210 75,212 L320,212 Q345,212 348,200 L350,188 Q320,185 290,184 L100,184 Q70,184 55,188 Z" fill="url(#cb-sole)" stroke="#d4d4d4" stroke-width="0.6"/>
-            <!-- Sole tread -->
-            <line x1="70"  y1="200" x2="345" y2="200" stroke="#c0c0c0" stroke-width="0.5"/>
-            <!-- Toe box -->
-            <path d="M68,184 Q60,160 75,140 L120,115 Q160,98 200,98 L240,98 Q270,100 290,118 L325,160 Q335,172 332,184 L100,184 Q80,184 68,184 Z" fill="url(#cb-shoe)"/>
-            <!-- Upper highlight -->
-            <path d="M120,115 Q160,100 200,100 L240,100 Q260,103 275,115 L250,148 Q230,158 200,158 L150,158 Q132,150 120,135 Z" fill="rgba(255,255,255,0.06)"/>
-            <!-- Heel -->
-            <path d="M55,195 Q50,170 70,148 L100,135 L100,184 L75,184 Q60,184 55,195 Z" fill="url(#cb-shoe)"/>
-            <!-- Laces panel -->
-            <path d="M155,108 L155,170 L235,170 L235,108 Z" fill="rgba(0,0,0,0.20)"/>
+          <!-- Floor shadow under shoe -->
+          <ellipse cx="240" cy="232" rx="170" ry="12" fill="url(#hero-floor)"/>
+
+          <!-- ── SNEAKER (low-top side profile, Air-Max inspired) ── -->
+          <g class="hero-shoe" filter="drop-shadow(0 18px 30px rgba(0,0,0,0.32))">
+
+            <!-- Midsole (gray foam) -->
+            <path d="M55,200
+                     Q55,222 80,222
+                     L405,222
+                     Q428,222 432,210
+                     L432,196
+                     Q422,192 408,192
+                     L75,192
+                     Q60,192 55,200 Z"
+                  fill="url(#hero-midsole)"/>
+
+            <!-- Outsole (white rubber) -->
+            <path d="M55,210
+                     Q55,228 82,228
+                     L408,228
+                     Q428,228 430,218
+                     L432,212
+                     Q400,210 360,210
+                     L100,210
+                     Q70,210 55,210 Z"
+                  fill="url(#hero-sole)"/>
+
+            <!-- Sole tread lines -->
+            <g stroke="#b0b0b0" stroke-width="0.7" opacity="0.55">
+              <line x1="85"  y1="222" x2="85"  y2="226"/>
+              <line x1="115" y1="222" x2="115" y2="226"/>
+              <line x1="145" y1="222" x2="145" y2="226"/>
+              <line x1="175" y1="222" x2="175" y2="226"/>
+              <line x1="205" y1="222" x2="205" y2="226"/>
+              <line x1="235" y1="222" x2="235" y2="226"/>
+              <line x1="265" y1="222" x2="265" y2="226"/>
+              <line x1="295" y1="222" x2="295" y2="226"/>
+              <line x1="325" y1="222" x2="325" y2="226"/>
+              <line x1="355" y1="222" x2="355" y2="226"/>
+              <line x1="385" y1="222" x2="385" y2="226"/>
+            </g>
+
+            <!-- Upper body (toe to heel, smoother profile) -->
+            <path d="M58,196
+                     Q50,170 65,148
+                     Q88,118 130,108
+                     L195,98
+                     Q250,94 300,108
+                     Q340,118 365,140
+                     Q400,170 410,192
+                     L75,192 Z"
+                  fill="url(#hero-shoe-body)"/>
+
+            <!-- Toe cap accent (smooth highlight on toe) -->
+            <path d="M385,150 Q405,170 412,185 L380,185 Q375,165 385,150 Z"
+                  fill="rgba(255,255,255,0.06)"/>
+
+            <!-- Heel counter -->
+            <path d="M58,196 Q50,170 65,148 L75,140 L88,148 L88,192 L75,192 Q60,192 58,196 Z"
+                  fill="#0a0a0c"/>
+            <!-- Heel pull tab -->
+            <rect x="60" y="130" width="20" height="14" rx="4" fill="#1a1a1a"/>
+            <rect x="64" y="134" width="12" height="6" rx="2" fill="url(#hero-accent)"/>
+
+            <!-- Mid-foot panel highlight -->
+            <path d="M120,118 Q170,102 240,98 Q290,96 330,108 L320,140 Q260,128 200,130 Q150,134 130,142 Z"
+                  fill="url(#hero-shine)"/>
+
+            <!-- Lacing panel (tongue area) -->
+            <path d="M170,110 L170,180 L260,180 L260,110 L235,100 L195,100 Z"
+                  fill="rgba(0,0,0,0.25)"/>
+
+            <!-- Tongue label -->
+            <rect x="200" y="116" width="30" height="14" rx="3" fill="#1a1a1a" stroke="#ff3e3e" stroke-width="0.8"/>
+            <text x="215" y="126" font-family="Sora,sans-serif" font-weight="900" font-size="8" fill="#ff3e3e" text-anchor="middle">WOW</text>
+
             <!-- Laces -->
-            <g stroke="#fafafa" stroke-width="2.4" stroke-linecap="round" fill="none">
-              <path d="M162,118 Q195,124 228,118"/>
-              <path d="M162,134 Q195,140 228,134"/>
-              <path d="M162,150 Q195,156 228,150"/>
+            <g stroke="#fafafa" stroke-width="2.8" stroke-linecap="round" fill="none">
+              <path d="M178,138 Q215,144 252,138"/>
+              <path d="M178,154 Q215,160 252,154"/>
+              <path d="M178,170 Q215,176 252,170"/>
             </g>
             <!-- Eyelets -->
-            <g fill="#1a1a1a">
-              <circle cx="162" cy="118" r="2.4"/><circle cx="228" cy="118" r="2.4"/>
-              <circle cx="162" cy="134" r="2.4"/><circle cx="228" cy="134" r="2.4"/>
-              <circle cx="162" cy="150" r="2.4"/><circle cx="228" cy="150" r="2.4"/>
+            <g fill="#0a0a0a">
+              <circle cx="178" cy="138" r="2.6"/><circle cx="252" cy="138" r="2.6"/>
+              <circle cx="178" cy="154" r="2.6"/><circle cx="252" cy="154" r="2.6"/>
+              <circle cx="178" cy="170" r="2.6"/><circle cx="252" cy="170" r="2.6"/>
             </g>
-            <!-- Swoosh / accent stripe -->
-            <path d="M85,178 Q160,168 240,150 Q300,135 325,118 L335,128 Q310,156 250,170 Q160,184 90,188 Z" fill="url(#cb-swoosh)" opacity="0.95"/>
-            <!-- Heel tab -->
-            <path d="M70,140 L88,135 L88,160 L70,170 Z" fill="#1a1a1a"/>
-            <circle cx="80" cy="148" r="2.5" fill="#ff3e3e"/>
+
+            <!-- Side accent stripe (the brand swoosh — modern arc) -->
+            <path d="M100,182
+                     Q170,170 250,158
+                     Q320,148 380,128
+                     L390,142
+                     Q330,168 250,182
+                     Q170,194 105,196 Z"
+                  fill="url(#hero-accent)" opacity="0.96"/>
+
+            <!-- Heel logo "Z" -->
+            <text x="80" y="178" font-family="Sora,sans-serif" font-weight="900" font-size="14" fill="#fff" opacity="0.92">Z</text>
+
+            <!-- Air bubble window (visible foam) -->
+            <ellipse cx="120" cy="208" rx="22" ry="6" fill="rgba(255,255,255,0.7)"/>
+            <ellipse cx="120" cy="208" rx="20" ry="4" fill="rgba(255,255,255,0.96)"/>
+            <ellipse cx="380" cy="208" rx="22" ry="6" fill="rgba(255,255,255,0.7)"/>
+            <ellipse cx="380" cy="208" rx="20" ry="4" fill="rgba(255,255,255,0.96)"/>
           </g>
 
-          <!-- Speed line behind shoe -->
-          <g stroke="#ff3e3e" stroke-width="2" stroke-linecap="round" opacity="0.20">
-            <line x1="20"  y1="100" x2="55"  y2="100"/>
-            <line x1="10"  y1="115" x2="50"  y2="115"/>
-            <line x1="25"  y1="130" x2="60"  y2="130"/>
+          <!-- Speed lines (left side, motion feel) -->
+          <g stroke="#ff3e3e" stroke-width="2.2" stroke-linecap="round" opacity="0.22">
+            <line class="hero-speed hero-speed-1" x1="15" y1="100" x2="55"  y2="100"/>
+            <line class="hero-speed hero-speed-2" x1="6"  y1="118" x2="42"  y2="118"/>
+            <line class="hero-speed hero-speed-3" x1="20" y1="136" x2="50"  y2="136"/>
           </g>
 
-          <!-- Brand mark -->
-          <g opacity="0.65">
-            <text x="375" y="40" font-family="Sora, sans-serif" font-weight="900" font-size="12" fill="#ff3e3e" text-anchor="end" letter-spacing="2">2026</text>
-            <text x="375" y="55" font-family="Inter, sans-serif" font-weight="700" font-size="9" fill="#888" text-anchor="end" letter-spacing="3">PREMIUM</text>
+          <!-- Year + premium mark (top-right) -->
+          <g>
+            <text x="455" y="30" font-family="Sora,sans-serif" font-weight="900" font-size="13" fill="#ff3e3e" text-anchor="end" letter-spacing="3">2026</text>
+            <line x1="380" y1="36" x2="455" y2="36" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+            <text x="455" y="50" font-family="Inter,sans-serif" font-weight="700" font-size="9" fill="rgba(0,0,0,0.45)" text-anchor="end" letter-spacing="3.5">EDITION</text>
+          </g>
+
+          <!-- Bottom-left ribbon -->
+          <g opacity="0.5">
+            <text x="22" y="262" font-family="Inter,sans-serif" font-weight="700" font-size="8" fill="rgba(0,0,0,0.6)" letter-spacing="2">UA · NEW POSHTA · COD</text>
           </g>
         </svg>
       </div>
+
       <h1 class="contacts-banner-title">WOW.ZNAHIDKA</h1>
       <p class="contacts-banner-sub">Преміум кросівки без передоплати.<br>Оплата після примірки на Новій Пошті.</p>
+
+      <div class="contacts-banner-stats" aria-label="Статистика">
+        <div class="cb-stat">
+          <div class="cb-stat-val">1300+</div>
+          <div class="cb-stat-lbl">моделей</div>
+        </div>
+        <div class="cb-stat-sep"></div>
+        <div class="cb-stat">
+          <div class="cb-stat-val">0₴</div>
+          <div class="cb-stat-lbl">передоплати</div>
+        </div>
+        <div class="cb-stat-sep"></div>
+        <div class="cb-stat">
+          <div class="cb-stat-val">1-3</div>
+          <div class="cb-stat-lbl">дні доставка</div>
+        </div>
+      </div>
     </div>
 
     <!-- Social action buttons -->
@@ -457,6 +573,29 @@
         </div>
       </div>
     </div>
+
+    <!-- ── РЕФЕРАЛЬНА ПРОГРАМА ── -->
+    <section class="ref-section" aria-label="Реферальна програма">
+      <div class="ref-section-card">
+        <div class="ref-section-head">
+          <span class="ref-section-tag">🤝 РЕФЕРАЛЬНА</span>
+          <h2 class="ref-section-title">Поділись і заробляй</h2>
+          <p class="ref-section-sub">
+            Поширюй своє посилання у соцмережах. За кожне замовлення друга — <b>250₴ на твій рахунок</b>.
+          </p>
+        </div>
+        <div class="ref-section-stats">
+          <div class="ref-stat"><div class="ref-stat-val">250₴</div><div class="ref-stat-lbl">за замовлення</div></div>
+          <div class="ref-stat"><div class="ref-stat-val">∞</div><div class="ref-stat-lbl">друзів</div></div>
+          <div class="ref-stat"><div class="ref-stat-val">7 днів</div><div class="ref-stat-lbl">cookie життя</div></div>
+        </div>
+        <button class="ref-section-btn" onclick="openRefSheet()">
+          <span>🔗 Отримати моє посилання</span>
+          <span class="i-arr-lg" aria-hidden="true"></span>
+        </button>
+        <p class="ref-section-hint">Виплати на TG @username після перевірки замовлень</p>
+      </div>
+    </section>
 
     <section class="faq-wrap" aria-label="FAQ">
       <div id="faq-list"></div>
@@ -751,20 +890,20 @@
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=7"             defer></script>
-<script src="js/state.js?v=7"              defer></script>
-<script src="js/lang.js?v=7"               defer></script>
-<script src="js/api.js?v=7"                defer></script>
-<script src="js/products.js?v=7"           defer></script>
-<script src="js/ui.js?v=7"                 defer></script>
-<script src="js/match.js?v=7"              defer></script>
-<script src="js/filters.js?v=7"            defer></script>
-<script src="js/cart.js?v=7"               defer></script>
-<script src="js/modal.js?v=7"              defer></script>
-<script src="js/deals.js?v=7"              defer></script>
-<script src="shared/js/referral.js?v=7" defer></script>
-<script src="js/app.js?v=7"                defer></script>
-<script src="shared/js/motion.js?v=7" defer></script>
+<script src="js/config.js?v=8"             defer></script>
+<script src="js/state.js?v=8"              defer></script>
+<script src="js/lang.js?v=8"               defer></script>
+<script src="js/api.js?v=8"                defer></script>
+<script src="js/products.js?v=8"           defer></script>
+<script src="js/ui.js?v=8"                 defer></script>
+<script src="js/match.js?v=8"              defer></script>
+<script src="js/filters.js?v=8"            defer></script>
+<script src="js/cart.js?v=8"               defer></script>
+<script src="js/modal.js?v=8"              defer></script>
+<script src="js/deals.js?v=8"              defer></script>
+<script src="shared/js/referral.js?v=8" defer></script>
+<script src="js/app.js?v=8"                defer></script>
+<script src="shared/js/motion.js?v=8" defer></script>
 
 </body>
 </html>
