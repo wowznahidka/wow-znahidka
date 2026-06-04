@@ -101,13 +101,25 @@ body { background: #f0eded; }
 }
 .header-actions { display: flex; gap: 6px; align-items: center; }
 .hdr-btn {
-  width: 44px; height: 44px; border-radius: var(--r-sm);
-  background: var(--bg3); display: flex; align-items: center; justify-content: center;
-  font-size: 18px; position: relative; transition: background var(--t-fast);
-  flex-shrink: 0; border: 1px solid var(--border);
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.04);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; position: relative;
+  transition: all var(--t-fast);
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.06);
 }
-.hdr-btn:active { background: var(--bg4); }
+.hdr-btn:active { background: rgba(0,0,0,0.10); transform: scale(.92); }
 .hdr-lang { font-size: 11px; font-weight: 900; letter-spacing: .5px; color: var(--text-dim); width: 38px; }
+.hdr-btn .badge {
+  border: 2px solid #fff;
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  min-width: 18px; height: 18px;
+  font-size: 10px;
+  top: -4px; right: -4px;
+}
 
 /* ── BOTTOM NAV ────────────────────────────────── */
 #bottom-nav {
@@ -252,7 +264,30 @@ body { background: #f0eded; }
 .section { padding: 14px 16px 6px; }
 .section + .section { padding-top: 8px; }
 .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.sec-head-l { display: flex; align-items: baseline; gap: 6px; }
 .sec-title { font-size: 19px; font-weight: 900; letter-spacing: -.2px; }
+.sec-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: rgba(0,0,0,0.4);
+}
+.rv-clear {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 100px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.rv-clear:hover {
+  background: rgba(255,62,62,0.08);
+  border-color: rgba(255,62,62,0.22);
+  color: var(--accent, #ff3e3e);
+}
+.rv-clear::after { display: none !important; }
 .sec-link  {
   font-size: 13px; color: var(--text-dim); font-weight: 700;
   transition: color var(--t-fast);
