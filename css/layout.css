@@ -1,3 +1,16 @@
+/* ============================================================
+   WOW.ZNAHIDKA — LAYOUT
+   Splash · Header · Nav · Gender · Pages · Sheets · Overlay
+   ============================================================ */
+
+/* ── APP CONTAINER — centered at 480px on all viewports ── */
+/*
+   Fixed elements can't be constrained by a parent, so we use
+   max(0px, calc(50% - 240px)) as both left and right. This computes to:
+     • 0px  when viewport ≤ 480px  → element fills the full screen (mobile)
+     • >0px when viewport  > 480px → element auto-centers at 480px (desktop)
+   No transform needed, so no conflict with translateY animations on sheets.
+*/
 :root {
   --half-max: 240px; --half-inset: 228px;
 }
@@ -119,13 +132,13 @@ body { background: #f0eded; }
 .nav-icon { font-size: 22px; line-height: 1; }
 .nav-item.active { color: var(--text); }
 .nav-item.active .nav-icon {
-  filter: drop-shadow(0 0 7px rgba(255,51,82,.55));
+  filter: drop-shadow(0 0 7px rgba(255,62,62,.55));
 }
 .nav-item.active::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
   width: 28px; height: 2.5px; background: var(--red);
   border-radius: 0 0 3px 3px;
-  box-shadow: 0 0 8px rgba(255,51,82,.5);
+  box-shadow: 0 0 8px rgba(255,62,62,.5);
 }
 
 /* ── GENDER TOGGLE — inline block under hero ────────── */
@@ -203,7 +216,7 @@ body { background: #f0eded; }
   content: '';
   position: absolute; top: -80px; left: -60px;
   width: 260px; height: 260px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,51,82,.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,62,62,.07) 0%, transparent 70%);
   animation: heroOrbA 10s ease-in-out infinite;
   pointer-events: none;
 }
@@ -918,3 +931,26 @@ body { background: #f0eded; }
   margin-top: 3px; font-weight: 600; letter-spacing: .3px;
 }
 
+/* ── DESKTOP 600px — wider grids ─────────────────── */
+@media (min-width: 640px) {
+  .prods-grid { grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .section { padding: 14px 20px 6px; }
+  .h-scroll { padding: 0 20px 12px; margin: 0 -20px; }
+  .brd-card { width: 155px; height: 220px; }
+  .dd-row { padding: 0 16px 20px; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── TABLET (481-899px) — лишаємо як мобайл, тільки centered ──
+   Всі речі, що ламаються між мобільним і десктопом — тут інлайн нема:
+   тільки мобайл-стиль у центрі полотна.
+   ≥900px desktop починається в niche.css */
+@media (min-width: 481px) and (max-width: 899.98px) {
+  body { padding: 20px 0; align-items: flex-start; }
+  #app-root {
+    border-radius: 24px;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.06),
+      0 24px 60px rgba(0,0,0,0.12),
+      0 6px 18px rgba(0,0,0,0.05);
+  }
+}
