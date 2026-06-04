@@ -155,6 +155,18 @@ function _giftBoxHtml() {
        aria-label="Відкрити подарунок дня"
        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();return openDailyGift(event);}">
     <div class="dd-gift" style="pointer-events:none">
+      <div class="dd-gift-brand">
+        <span class="dd-gift-brand-logo">WOW<span class="dd-gift-brand-dot">.</span>ZNAHIDKA</span>
+        <span class="dd-gift-brand-tag">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M2 11.5V5.5C2 4.67 2.67 4 3.5 4H10V11.5C10 12.33 9.33 13 8.5 13H3.5C2.67 13 2 12.33 2 11.5Z" stroke="currentColor" stroke-width="1.4"/>
+            <path d="M10 6.5H12.59C12.85 6.5 13.1 6.6 13.29 6.79L14.71 8.21C14.9 8.4 15 8.65 15 8.91V11.5C15 12.33 14.33 13 13.5 13H10V6.5Z" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="5" cy="13" r="1.4" fill="currentColor"/>
+            <circle cx="12" cy="13" r="1.4" fill="currentColor"/>
+          </svg>
+          Безкоштовна доставка
+        </span>
+      </div>
       <div class="dd-gift-box">
         <div class="dd-gift-lid">
           <div class="dd-gift-bow" aria-hidden="true"></div>
