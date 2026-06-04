@@ -147,10 +147,14 @@ function _markGiftOpened() {
 }
 
 function _giftBoxHtml() {
-  return `<div class="dd-gift-wrap" onclick="openDailyGift(event)" role="button" tabindex="0"
+  return `<div class="dd-gift-wrap"
+       onclick="return openDailyGift(event)"
+       onmousedown="event.stopPropagation()"
+       ontouchstart="event.stopPropagation()"
+       role="button" tabindex="0"
        aria-label="Відкрити подарунок дня"
-       onkeydown="if(event.key==='Enter'||event.key===' ')openDailyGift(event)">
-    <div class="dd-gift">
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();return openDailyGift(event);}">
+    <div class="dd-gift" style="pointer-events:none">
       <div class="dd-gift-box">
         <div class="dd-gift-lid">
           <div class="dd-gift-bow" aria-hidden="true"></div>
@@ -172,15 +176,18 @@ function _giftBoxHtml() {
 }
 
 function openDailyGift(evt) {
-  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+  if (evt) {
+    try { evt.preventDefault(); } catch(_) {}
+    try { evt.stopPropagation(); } catch(_) {}
+    try { evt.stopImmediatePropagation && evt.stopImmediatePropagation(); } catch(_) {}
+  }
   const sec  = document.getElementById('daily-deals-section');
-  if (!sec) return;
+  if (!sec) return false;
   const wrap = sec.querySelector('.dd-gift-wrap');
   const row  = sec.querySelector('.dd-row');
-  if (!wrap || wrap.classList.contains('dd-opening')) return;
+  if (!wrap || wrap.classList.contains('dd-opening')) return false;
 
   wrap.classList.add('dd-opening');
-  // легка вібрація для мобільних
   try { if (navigator.vibrate) navigator.vibrate([18, 22, 30]); } catch (_) {}
 
   setTimeout(() => {
@@ -192,6 +199,8 @@ function openDailyGift(evt) {
       if (typeof fbq  === 'function') fbq('trackCustom', 'GiftOpened');
     } catch (_) {}
   }, 1100);
+
+  return false; // запобігає default навігації
 }
 
 function renderDailyDeals(catalog) {
