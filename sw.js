@@ -1,9 +1,9 @@
 /* ============================================================
-   WOW.ZNAHIDKA — Service Worker  (wow-v11)
+   WOW.ZNAHIDKA — Service Worker  (wow-v12)
    Strategy: pre-cache shell → network-first nav → stale-while-revalidate assets
    ============================================================ */
 
-const V = 'wow-v11';
+const V = 'wow-v12';
 
 // Critical shell — install fails if these are missing (intentional)
 const SHELL = [

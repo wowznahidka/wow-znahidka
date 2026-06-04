@@ -32,6 +32,8 @@ const S = {
   catView:      'brands',  // 'brands' | 'products'
   catBrand:     null,
   catScrollTop: 0,
+  quickFilter:  'all',     // 'all' | 'discount' | 'new' | 'free'
+  sortMode:     'popular', // 'popular' | 'new' | 'price_asc' | 'price_desc' | 'discount'
 
   // ── Match engine ──
   matchPool: [],
