@@ -105,7 +105,6 @@ function prodCardHtml(p, opts = {}) {
     <div class="card-img-wrap">
       ${imgPart}
       ${badgePart}
-      <button class="prod-share" onclick="shareProduct(findProd('${p.id}'),event)" aria-label="Поділитись" title="Share">🔗</button>
     </div>
     <div class="card-body">
       <div class="card-brand">${esc(p.brand)}</div>
@@ -202,15 +201,26 @@ function setHomeGreeting() {
 function animateCounter(total) {
   const el = document.getElementById('models-counter');
   if (!el) return;
+  // Якщо вкладка прихована — ставимо фінальне значення зразу (rAF паузується)
+  if (document.hidden) { el.textContent = total; return; }
   let cur = 0;
-  const step = total / 60;
+  const step = Math.max(1, total / 60);
   const tick = () => {
     cur = Math.min(cur + step, total);
     el.textContent = Math.round(cur);
-    if (cur < total) requestAnimationFrame(tick);
+    if (cur < total) setTimeout(tick, 16); // setTimeout працює і у фоні
   };
-  requestAnimationFrame(tick);
+  tick();
 }
+// При поверненні до вкладки — заповнюємо counter якщо він застряг на 0
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  const el = document.getElementById('models-counter');
+  const total = (typeof S !== 'undefined' && S.catalog && S.catalog.all && S.catalog.all.length) || 0;
+  if (el && total && (el.textContent === '0' || el.textContent === '')) {
+    animateCounter(total);
+  }
+});
 
 // Summer months (May–Aug): push fur/winter products to the back
 function _isWinter(p) {

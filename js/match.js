@@ -12,6 +12,7 @@ async function initMatch() {
   clearTimeout(_swipeRenderTimer);
   _swipeRenderTimer = null;
   _swipeLocked = false;
+  _attachMatchKeyboard();
 
   const data = await fetchCatalog();
   if (!data || !data.length) return;
@@ -97,6 +98,26 @@ function _renderMatchDone(stage, counter) {
       🔄 Почати знову
     </button>
   </div>`;
+}
+
+// ── KEYBOARD SHORTCUTS (PC) ──────────────────────── */
+let _matchKbBound = false;
+function _attachMatchKeyboard() {
+  if (_matchKbBound) return;
+  _matchKbBound = true;
+  document.addEventListener('keydown', e => {
+    if (S.activeTab !== 'match') return;
+    if (_swipeLocked) return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (e.key === 'ArrowRight' || e.key === 'l' || e.key === 'L') {
+      e.preventDefault(); swipeCard('right');
+    } else if (e.key === 'ArrowLeft' || e.key === 'h' || e.key === 'H') {
+      e.preventDefault(); swipeCard('left');
+    } else if (e.code === 'Space' || e.key === 'Enter') {
+      e.preventDefault(); swipeCard('right');
+    }
+  });
 }
 
 // ── SWIPE LISTENER ───────────────────────────────── */
