@@ -383,3 +383,67 @@ function initKeyboardHandler() {
     }, 100);
   });
 }
+
+// ── TAP-TO-ZOOM ─────────────────────────────────── */
+// Натиснути на будь-яке зображення товару → fullscreen overlay
+// Підтримує: product cards, daily-find, match, product-detail, brand cards
+function openImageZoom(src, alt) {
+  if (!src) return;
+  closeImageZoom();
+  const ov = document.createElement('div');
+  ov.className = 'img-zoom-overlay';
+  ov.id = 'img-zoom-overlay';
+  ov.innerHTML = `<img src="${src}" alt="${(alt||'').replace(/"/g,'&quot;')}" draggable="false">
+    <button class="img-zoom-close" aria-label="Закрити">✕</button>`;
+  document.body.appendChild(ov);
+  document.body.style.overflow = 'hidden';
+  ov.addEventListener('click', (e) => {
+    // тап на бекграунд або ✕ → закриваємо; тап на img — не закриваємо (даємо pinch-zoom)
+    if (e.target.tagName !== 'IMG') closeImageZoom();
+  });
+  document.addEventListener('keydown', _zoomKeyHandler);
+}
+function closeImageZoom() {
+  const ov = document.getElementById('img-zoom-overlay');
+  if (ov) ov.remove();
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', _zoomKeyHandler);
+}
+function _zoomKeyHandler(e) {
+  if (e.key === 'Escape') closeImageZoom();
+}
+
+// Делегований клік: спрацьовує на всі продуктові/Match/бренд зображення.
+// НЕ перехоплює клік усередині .product-card (карта має свій onclick → відкриває деталі).
+// Працює: 1) у деталях товару — на головне фото; 2) на фото в TG-промо постах; 3) у Match лише lazy.
+// Для лонг-тапу 350ms по картці теж відкриваємо zoom (mobile).
+(function _bindZoomDelegation() {
+  let pressTimer = null;
+  let pressedImg = null;
+
+  function startPress(e) {
+    const img = e.target.closest('img.card-img, img.m-card-img, img.pd-hero-img, img.pd-photo, img.pd-thumb-img');
+    if (!img || !img.src || !img.src.startsWith('http')) return;
+    pressedImg = img;
+    pressTimer = setTimeout(() => {
+      if (pressedImg && pressedImg.src) {
+        openImageZoom(pressedImg.src, pressedImg.alt);
+        // Заблокувати наступний click щоб карта не відкрилась
+        const block = ev => { ev.stopPropagation(); ev.preventDefault(); document.removeEventListener('click', block, true); };
+        document.addEventListener('click', block, true);
+      }
+      pressTimer = null;
+    }, 400);
+  }
+  function cancelPress() {
+    if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+    pressedImg = null;
+  }
+  document.addEventListener('pointerdown', startPress, { passive: true });
+  document.addEventListener('pointerup', cancelPress, { passive: true });
+  document.addEventListener('pointercancel', cancelPress, { passive: true });
+  document.addEventListener('pointermove', (e) => {
+    // Якщо рух > 10px — це свайп/скрол, не довгий тап
+    if (pressTimer) cancelPress();
+  }, { passive: true });
+})();
