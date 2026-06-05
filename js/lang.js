@@ -337,6 +337,12 @@ function applyLang() {
   _setTextSel('.tg-cta-title', '', L.tgCtaTitle);
   _setTextSel('.tg-cta-sub', '', L.tgCtaSub);
 
+  // Gift box CTA (if rendered)
+  const giftStrong = document.querySelector('.dd-gift-cta strong');
+  const giftSpan   = document.querySelector('.dd-gift-cta span');
+  if (giftStrong) giftStrong.textContent = L.giftCtaTitle;
+  if (giftSpan)   giftSpan.innerHTML     = L.giftCtaSub;
+
   // Match
   _setTextSel('.match-hint', '', L.matchHint);
 
