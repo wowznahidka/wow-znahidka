@@ -447,3 +447,100 @@ function _zoomKeyHandler(e) {
     if (pressTimer) cancelPress();
   }, { passive: true });
 })();
+
+// ── ANTI-EXIT (3 mechanisms) ───────────────────────── */
+// 1. beforeunload — браузер питає "Залишити?" якщо кошик не порожній
+// 2. history pushState trap — mobile back-кнопка показує модал (не виходить)
+// 3. exit-intent — desktop мишка догори → модал
+let _exitModalShown = false;
+let _backTrapInstalled = false;
+
+function _shouldGuard() {
+  return (S?.cart?.length || 0) > 0 || (S?.favs?.length || 0) > 0;
+}
+
+function _stayOnSiteModal(reason) {
+  if (_exitModalShown) return;
+  if (document.getElementById('exit-modal')) return;
+  _exitModalShown = true;
+
+  const cartLen = S?.cart?.length || 0;
+  const favsLen = S?.favs?.length || 0;
+  const lead =
+    cartLen ? `У тебе в кошику <b>${cartLen}</b> пар${cartLen===1?'а':''} 🔥` :
+    favsLen ? `У Улюблених — <b>${favsLen}</b> пар${favsLen===1?'а':''} ❤️` :
+    `Знайди свою пару — <b>1300+ моделей</b> ✨`;
+
+  const html = `
+    <div id="exit-modal" class="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
+      <div class="exit-card">
+        <button class="exit-close" aria-label="Закрити" onclick="closeExitModal()">✕</button>
+        <div class="exit-eyebrow">🎁 ЗАЧЕКАЙ-НО</div>
+        <h3 id="exit-modal-title" class="exit-title">Не йди з порожніми руками</h3>
+        <p class="exit-lead">${lead}</p>
+        <p class="exit-bonus">Промокод <b>WOW100</b> — <b>−100₴</b> на твоє перше замовлення. Дійсний 24 години.</p>
+        <div class="exit-actions">
+          <button class="exit-cta" onclick="(${cartLen?`openSheet('sheet-cart');`:`openSheet('sheet-fav');`})closeExitModal();">
+            ${cartLen ? '🛒 Оформити кошик' : favsLen ? '❤️ Переглянути улюблені' : '👟 До каталогу'}
+          </button>
+          <a class="exit-tg" href="https://t.me/znahidkawow?text=${encodeURIComponent('Привіт! Хочу знижку WOW100')}" target="_blank" rel="noopener" onclick="closeExitModal()">
+            ✉️ Написати в Telegram
+          </a>
+        </div>
+        <button class="exit-leave" onclick="closeExitModal();_userChoseLeave=true;">Все одно піду</button>
+      </div>
+    </div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
+  document.body.style.overflow = 'hidden';
+  try { if (window.gtag) gtag('event','exit_modal_shown', { event_category:'engagement', reason }); } catch(_){}
+  try { if (window.fbq) fbq('trackCustom','ExitIntent', { reason }); } catch(_){}
+}
+
+function closeExitModal() {
+  const m = document.getElementById('exit-modal');
+  if (m) m.remove();
+  document.body.style.overflow = '';
+}
+
+let _userChoseLeave = false;
+
+function _installAntiExit() {
+  // (1) beforeunload — короткий
+  window.addEventListener('beforeunload', (e) => {
+    if (_userChoseLeave) return;
+    if (!_shouldGuard()) return;
+    e.preventDefault();
+    e.returnValue = 'У кошику ще є товари. Точно йдеш?';
+    return e.returnValue;
+  });
+
+  // (2) Back-button trap (mobile)
+  if (!_backTrapInstalled) {
+    _backTrapInstalled = true;
+    try {
+      history.pushState({_antiExit: true}, '', location.href);
+      window.addEventListener('popstate', (e) => {
+        // Якщо повертається до нашого pushState → показуємо модал і додаємо ще один
+        if (!_userChoseLeave && _shouldGuard()) {
+          history.pushState({_antiExit: true}, '', location.href);
+          _stayOnSiteModal('back_button');
+        }
+      });
+    } catch(_){}
+  }
+
+  // (3) Exit-intent (desktop, mouse leave top)
+  if (matchMedia('(pointer:fine)').matches) {
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY > 5) return;
+      if (_userChoseLeave) return;
+      if (!_shouldGuard()) return;
+      // тільки один раз за сесію
+      if (sessionStorage.getItem('wow_exit_shown')) return;
+      sessionStorage.setItem('wow_exit_shown', '1');
+      _stayOnSiteModal('mouse_exit');
+    });
+  }
+}
+window.addEventListener('DOMContentLoaded', _installAntiExit);
+
