@@ -152,7 +152,7 @@ async function bgRefreshCatalog() {
   } catch(e) {
     clearTimeout(timer);
     if (!S.catalog.all || !S.catalog.all.length) {
-      S.catalog.all = [...getDemoProducts('male'), ...getDemoProducts('female')];
+      S.catalog.all = []; // не підставляємо demo — щоб юзер не замовив demo_X при GAS-лагах
       if (S.activeTab === 'home')    renderHome();
       if (S.activeTab === 'catalog') renderCatalog();
     }
