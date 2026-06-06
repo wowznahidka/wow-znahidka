@@ -26,7 +26,9 @@ function openSizePicker(product) {
   // Product info row
   document.getElementById('sp-product-info').innerHTML = `
     ${product.image && product.image.startsWith('http')
-      ? `<img class="sp-img" src="${esc(product.image)}" alt="${esc(product.name)}" loading="lazy" onload="this.classList.add('loaded')">`
+      ? `<img class="sp-img" src="${esc(product.image)}" alt="${esc(product.name)}" loading="lazy"
+            onclick="event.stopPropagation();openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}')"
+            onload="this.classList.add('loaded')">`
       : `<div class="sp-img-ph" aria-hidden="true"></div>`}
     <div class="sp-info">
       <div class="sp-brand">${esc(product.brand)}</div>
@@ -206,7 +208,10 @@ function openProductDetail(product) {
   document.getElementById('product-detail-content').innerHTML = `
     <div class="pd-hero">
       ${product.image && product.image.startsWith('http')
-        ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async" onload="this.classList.add('loaded')">`
+        ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
+             onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}')"
+             onload="this.classList.add('loaded')">
+           <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
         : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}
       <div class="pd-hero-vignette" aria-hidden="true"></div>
       <button class="pd-fav-float ${faved ? 'on' : ''}" id="pd-fav-btn"
