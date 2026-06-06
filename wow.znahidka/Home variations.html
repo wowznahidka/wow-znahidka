@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WOW.ZNAHIDKA — Home page variations</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Archivo+Black&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eded; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; }
+
+  /* Direction notes shown above each artboard's content */
+  .dir-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 18px rgba(0,0,0,0.05);
+    margin: 24px auto 8px;
+    max-width: 1280px;
+  }
+  .dir-card h2 {
+    font-size: 14px; font-weight: 800; color: #1d1d1f;
+    margin: 0 0 8px; letter-spacing: -0.2px;
+  }
+  .dir-card p {
+    font-size: 13px; color: rgba(29,29,31,0.65);
+    margin: 0; line-height: 1.55;
+  }
+
+  /* Inline tag chips */
+  .tag-row { display: flex; gap: 6px; margin: 6px 0 0; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.4px;
+    padding: 3px 8px; border-radius: 100px;
+    background: rgba(0,0,0,0.05); color: rgba(29,29,31,0.65);
+  }
+</style>
+</head>
+<body>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="var-a.jsx"></script>
+<script type="text/babel" src="var-b.jsx"></script>
+<script type="text/babel" src="var-c.jsx"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection
+        id="home-variations"
+        title="Home page — 3 directions"
+        subtitle="Same brand DNA (white luxe, red signature, mobile-first) — three takes on what 'elevated' means. Drag any artboard fullscreen with the focus icon, or use ←/→ to step through.">
+
+        <DCArtboard id="var-a" label="A · Polished — refined default" width={390} height={2820}>
+          <VarA />
+        </DCArtboard>
+
+        <DCArtboard id="var-b" label="B · Editorial — magazine premium" width={390} height={3400}>
+          <VarB />
+        </DCArtboard>
+
+        <DCArtboard id="var-c" label="C · Heat — confident streetwear" width={390} height={3280}>
+          <VarC />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection
+        id="notes"
+        title="Design notes"
+        subtitle="What changed in each direction, and why.">
+
+        <DCArtboard id="notes-a" label="A · Notes" width={390} height={420}>
+          <div style={{ padding: 24, fontFamily: 'Inter, -apple-system, sans-serif', color: '#1d1d1f' }}>
+            <h3 style={{ fontSize: 18, fontWeight: 900, letterSpacing: '-0.3px', margin: 0 }}>A · Polished</h3>
+            <p style={{ fontSize: 13, color: 'rgba(29,29,31,0.65)', lineHeight: 1.6, marginTop: 10 }}>
+              The closest to your current site. Same type stack, same red-dot signature, same product card grammar — just dialled in.
+            </p>
+            <ul style={{ fontSize: 12.5, color: 'rgba(29,29,31,0.72)', lineHeight: 1.7, paddingLeft: 16, marginTop: 12 }}>
+              <li>Hero title softened to one emphatic word; gradient pulled into a single accent stroke.</li>
+              <li>Section eyebrows replace stacked emoji titles for cleaner rhythm.</li>
+              <li>Card shadows softened; image area gets more breathing room.</li>
+              <li>Daily deal timer is now monospace + tidy chip — no shouting.</li>
+              <li>Bottom nav: refined line icons in place of emoji.</li>
+            </ul>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="notes-b" label="B · Notes" width={390} height={500}>
+          <div style={{ padding: 24, fontFamily: 'Inter, -apple-system, sans-serif', color: '#1a1a1a' }}>
+            <h3 style={{ fontSize: 18, fontWeight: 900, letterSpacing: '-0.3px', margin: 0 }}>B · Editorial</h3>
+            <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.65)', lineHeight: 1.6, marginTop: 10 }}>
+              Same content, dressed for a magazine. Brings Instrument Serif italics into headlines and a monospace voice into UI chrome. Heavier on whitespace, lighter on chips and colour.
+            </p>
+            <ul style={{ fontSize: 12.5, color: 'rgba(0,0,0,0.72)', lineHeight: 1.7, paddingLeft: 16, marginTop: 12 }}>
+              <li>"ISSUE 23 · ВЕСНА 2026" header — turns the home page into an issue.</li>
+              <li>Asymmetric Editor's Pick replaces the daily-deals row with one curated hero product.</li>
+              <li>Sections numbered № 01 → 06 with thin rule lines; eyebrows in mono.</li>
+              <li>Reviews become a big pull quote + two trimmed companions.</li>
+              <li>Brand grid: type-led, no gradients — names do the work.</li>
+              <li>Nav loses labels, becomes icon-only.</li>
+            </ul>
+          </div>
+        </DCArtboard>
+
+        <DCArtboard id="notes-c" label="C · Notes" width={390} height={500}>
+          <div style={{ padding: 24, fontFamily: 'Inter, -apple-system, sans-serif', color: '#0e0e10' }}>
+            <h3 style={{ fontSize: 18, fontWeight: 900, letterSpacing: '-0.3px', margin: 0 }}>C · Heat</h3>
+            <p style={{ fontSize: 13, color: 'rgba(0,0,0,0.65)', lineHeight: 1.6, marginTop: 10 }}>
+              Streetwear shop energy. Archivo Black for everything that wants to shout, mono for whisper labels. Hard 2px borders, a red banner block, oversized hero numerals.
+            </p>
+            <ul style={{ fontSize: 12.5, color: 'rgba(0,0,0,0.72)', lineHeight: 1.7, paddingLeft: 16, marginTop: 12 }}>
+              <li>Hero "ЗНАЙДИ СВОЮ ПАРУ." at 84px — the page leads with confidence.</li>
+              <li>One edge-to-edge hero product with a dark overlay caption — your daily drop.</li>
+              <li>Red marquee strip rotates brand names across the page like a runway.</li>
+              <li>Red trust banner (0₴ · 1–3 дні · 100% оригінал) replaces fragmented chips.</li>
+              <li>Brand list becomes a type-led ranking, not a card grid.</li>
+              <li>Cart in header is a real "2 пари" badge rather than an icon counter.</li>
+            </ul>
+          </div>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>
