@@ -530,16 +530,39 @@ function _installAntiExit() {
   }
 
   // (3) Exit-intent (desktop, mouse leave top)
+  //   Guard'и щоб НЕ спрацьовувало одразу на вході:
+  //   • grace period 20с після завантаження
+  //   • engagement: користувач має скролити АБО рухнути миша нижче Y=120
+  //   • debounce: не зразу — після 2 швидких leave'ів у вікні 800мс
   if (matchMedia('(pointer:fine)').matches) {
+    const GRACE_MS = 20000;
+    const loadedAt = Date.now();
+    let engaged = false;
+    let leaveTimer = null;
+
+    function _markEngaged() { engaged = true; }
+    window.addEventListener('scroll', _markEngaged, { passive: true, once: true });
+    document.addEventListener('mousemove', (e) => {
+      if (e.clientY > 120) _markEngaged();
+    }, { passive: true });
+
     document.addEventListener('mouseleave', (e) => {
-      if (e.clientY > 5) return;
+      if (e.clientY > 8) return;
       if (_userChoseLeave) return;
       if (!_shouldGuard()) return;
-      // тільки один раз за сесію
+      if (Date.now() - loadedAt < GRACE_MS) return;
+      if (!engaged) return;
       if (sessionStorage.getItem('wow_exit_shown')) return;
-      sessionStorage.setItem('wow_exit_shown', '1');
-      _stayOnSiteModal('mouse_exit');
+
+      // debounce: чекаємо 600мс, якщо миша повернулася — скасовуємо
+      clearTimeout(leaveTimer);
+      leaveTimer = setTimeout(() => {
+        if (sessionStorage.getItem('wow_exit_shown')) return;
+        sessionStorage.setItem('wow_exit_shown', '1');
+        _stayOnSiteModal('mouse_exit');
+      }, 600);
     });
+    document.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); });
   }
 }
 window.addEventListener('DOMContentLoaded', _installAntiExit);
