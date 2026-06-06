@@ -93,7 +93,16 @@ body { background: #f0eded; }
   padding-left: 16px; padding-right: 12px;
   border-bottom: 1px solid var(--border);
 }
-.header-logo { font-size: 20px; font-weight: 900; letter-spacing: .5px; flex: 1; }
+.header-logo {
+  font-size: 20px; font-weight: 900; letter-spacing: .5px; flex: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.header-logo:hover  { opacity: .85; }
+.header-logo:active { opacity: .7; transform: scale(.98); }
+.header-logo:focus-visible { outline: 2px solid var(--accent, #ff3e3e); outline-offset: 3px; border-radius: 4px; }
 .header-logo .dot { color: var(--red); }
 .header-logo small {
   font-size: 9px; font-weight: 600; color: var(--text-muted);
