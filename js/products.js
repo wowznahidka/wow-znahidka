@@ -105,12 +105,12 @@ function prodCardHtml(p, opts = {}) {
     <div class="card-img-wrap">
       ${imgPart}
       ${badgePart}
+      <div class="card-cod-chip" aria-label="Оплата після примірки">✅ Після примірки</div>
     </div>
     <div class="card-body">
       <div class="card-brand">${esc(p.brand)}</div>
       <div class="card-name">${esc(p.name)}</div>
       <div class="card-price">${pricePart}</div>
-      <div class="card-cod">✅ Після примірки</div>
       <div class="card-sizes-preview${grid ? ' sz-quick-row' : ''}">${szList}</div>
       ${_scarcityText(p)}
       ${fomoHtml}
