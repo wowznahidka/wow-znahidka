@@ -3,7 +3,7 @@
    Strategy: pre-cache shell → network-first nav → stale-while-revalidate assets
    ============================================================ */
 
-const V = 'wow-v19';
+const V = 'wow-v20';
 
 // Critical shell — install fails if these are missing (intentional)
 const SHELL = [
