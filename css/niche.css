@@ -666,10 +666,9 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 
   #cart-sticky-bar { display: none !important; }
 
-  /* Desktop floating pill nav — прихований, навігація в шапці */
-  #bottom-nav { display: none !important; }
-  /* Padding знизу — немає плаваючого nav */
-  #pages { padding-bottom: 48px !important; }
+  /* Pill nav — залишається на desktop, users love it */
+  /* Padding знизу — враховуємо висоту pill nav (--nav-h 64px) */
+  #pages { padding-bottom: 88px !important; }
   #pwa-android, #pwa-ios { display: none !important; }
   #page-home > #gender-toggle,
   #page-match .g-compact,
@@ -872,12 +871,29 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   .cat-search { font-size: 16px !important; padding: 16px 44px 16px 48px !important; }
   .size-filter-wrap, .price-filter-wrap, #price-filter-wrap, .update-ts { padding: 0 0 12px !important; }
 
-  /* ── CONTACTS — широко ── */
+  /* ── CONTACTS — центрований стовпчик на desktop ── */
+  #page-contacts {
+    max-width: 860px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
   .contacts-banner { padding: 56px 32px !important; margin: 32px 0 !important; }
-  .social-actions { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 0 24px !important; max-width: 720px; }
-  .contacts-list { padding: 0 0 24px !important; max-width: 720px; }
-  .wow-stores-block { max-width: 720px; margin: 24px 0 !important; }
-  .faq-wrap { padding: 0 0 32px !important; max-width: 760px; }
+  /* Telegram CTA — прибираємо мобільний margin 16px, даємо max-width */
+  .tg-channel-cta { margin: 4px 0 18px !important; max-width: 720px; margin-left: auto !important; margin-right: auto !important; }
+  /* CAB кнопки (Замовити сайт / WOW.STUDIO) */
+  .contacts-action-row { margin: 16px 0 8px !important; max-width: 680px; margin-left: auto !important; margin-right: auto !important; }
+  /* Іконки соцмереж */
+  .social-actions { grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 0 24px !important; max-width: 720px; margin-left: auto !important; margin-right: auto !important; }
+  /* Список доставки */
+  .contacts-list { padding: 0 0 24px !important; max-width: 720px; margin-left: auto !important; margin-right: auto !important; }
+  /* WOW Ecosystem (WEAR / PARFUM) */
+  .wow-ecosystem { margin: 20px 0 4px !important; max-width: 680px; margin-left: auto !important; margin-right: auto !important; }
+  /* Інші магазини */
+  .wow-stores-block { max-width: 720px; margin: 24px auto !important; }
+  /* Реферальна секція */
+  .ref-section { padding: 8px 0 20px !important; max-width: 720px; margin-left: auto !important; margin-right: auto !important; }
+  /* FAQ */
+  .faq-wrap { padding: 0 0 32px !important; max-width: 760px; margin-left: auto !important; margin-right: auto !important; }
 
   /* ── SHEETS → CENTERED MODALS ── */
   .overlay { backdrop-filter: blur(10px) !important; -webkit-backdrop-filter: blur(10px) !important; background: rgba(0,0,0,0.55) !important; }
