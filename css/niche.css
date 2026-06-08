@@ -668,14 +668,6 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 
   /* Desktop floating pill nav — прихований, навігація в шапці */
   #bottom-nav { display: none !important; }
-    border-radius: 100px !important;
-    border: 1px solid rgba(255,255,255,0.08) !important;
-    box-shadow:
-      0 20px 50px rgba(0,0,0,0.32),
-      0 8px 20px rgba(0,0,0,0.16),
-      inset 0 1px 0 rgba(255,255,255,0.06) !important;
-    z-index: 250 !important;
-  }
   /* Padding знизу — немає плаваючого nav */
   #pages { padding-bottom: 48px !important; }
   #pwa-android, #pwa-ios { display: none !important; }
