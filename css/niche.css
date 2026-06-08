@@ -666,7 +666,8 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 
   #cart-sticky-bar { display: none !important; }
 
-  /* Pill nav — залишається на desktop, users love it */
+  /* Pill nav — залишається на desktop, але ховається на match (там свайп) */
+  body.on-match #bottom-nav { display: none !important; }
   /* Padding знизу — враховуємо висоту pill nav (--nav-h 64px) */
   #pages { padding-bottom: 88px !important; }
   #pwa-android, #pwa-ios { display: none !important; }
