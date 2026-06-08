@@ -64,7 +64,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!_tabParam || _tabParam === 'home') renderHome();
     checkDeepLink();
     updateCartBar();
-    startSocialProof();
     // Auto-apply promo from UTM campaign (e.g. ?utm_campaign=WOW150)
     (function() {
       const camp = (S.utm?.campaign || '').toUpperCase();
