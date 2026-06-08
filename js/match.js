@@ -141,8 +141,9 @@ function attachSwipeListeners(card, product) {
   _moveHandler = e => {
     if (!dragging) return;
     deltaX = e.clientX - startX;
-    const rot   = (deltaX / window.innerWidth) * 22;
-    const scale = 1 - Math.min(0.04, Math.abs(deltaX) / (window.innerWidth * 8));
+    const _swipeBase = Math.min(window.innerWidth, 480);
+    const rot   = (deltaX / _swipeBase) * 22;
+    const scale = 1 - Math.min(0.04, Math.abs(deltaX) / (_swipeBase * 8));
     card.style.transform = `translateX(${deltaX}px) rotate(${rot}deg) scale(${scale})`;
     const likeEl = document.getElementById('sw-like');
     const nopeEl = document.getElementById('sw-nope');
@@ -192,7 +193,7 @@ function swipeCard(dir) {
   card.style.pointerEvents = 'none';
   cleanupSwipe();
 
-  const flyX  = (dir === 'right' ? 1 : -1) * (window.innerWidth * 1.5 + 200);
+  const flyX  = (dir === 'right' ? 1 : -1) * (Math.min(window.innerWidth, 800) + 200);
   card.style.transition = 'transform .32s cubic-bezier(.55,0,.7,.4), opacity .22s ease';
   card.style.transform  = `translateX(${flyX}px) rotate(${dir === 'right' ? 30 : -30}deg) scale(0.9)`;
   card.style.opacity    = '0';
