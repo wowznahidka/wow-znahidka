@@ -335,13 +335,15 @@ body { background: #f0eded; }
 
 .hb-card {
   flex-shrink: 0;
-  width: 152px; height: 78px;
+  width: 156px; height: 94px;
   border-radius: 22px; overflow: hidden;
   position: relative; cursor: pointer;
   scroll-snap-align: start;
   box-shadow: 0 4px 18px var(--hb-glow, rgba(0,0,0,.28)), 0 1px 4px rgba(0,0,0,.12);
   transition: transform .18s var(--ease), box-shadow .2s var(--ease);
 }
+/* First brand (biggest by count) gets wider hero card on mobile scroll */
+.hb-card:nth-child(1) { width: 196px; }
 .hb-card:active { transform: scale(.91); }
 @media (hover: hover) {
   .hb-card:hover {
@@ -354,13 +356,13 @@ body { background: #f0eded; }
 .hb-bg-img {
   position: absolute;
   top: -10%; right: -6%;
-  width: 68%; height: 120%;
+  width: 72%; height: 122%;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center right;
-  opacity: 0.78;
-  -webkit-mask-image: linear-gradient(to left, black 15%, transparent 72%);
-  mask-image: linear-gradient(to left, black 15%, transparent 72%);
+  opacity: 0.85;
+  -webkit-mask-image: linear-gradient(to left, black 18%, transparent 68%);
+  mask-image: linear-gradient(to left, black 18%, transparent 68%);
   pointer-events: none;
 }
 
@@ -375,11 +377,11 @@ body { background: #f0eded; }
   font-size: 14px; font-weight: 900;
   color: #fff; line-height: 1.1;
   letter-spacing: -.3px;
-  text-shadow: 0 1px 4px rgba(0,0,0,.25);
+  text-shadow: 0 1px 6px rgba(0,0,0,.35);
 }
 .hb-cnt {
   font-size: 10px; font-weight: 600;
-  color: rgba(255,255,255,.55);
+  color: rgba(255,255,255,.60);
   margin-top: 4px; letter-spacing: .1px;
 }
 

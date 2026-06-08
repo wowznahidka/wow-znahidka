@@ -816,15 +816,59 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   .dd-gift-cta span { font-size: 13px; }
   #daily-deals-section .dd-header { max-width: 880px; }
 
-  /* Brands grid — 6 в ряд */
+  /* ── BRANDS — BENTO MOSAIC ── */
   .brands-grid {
     display: grid !important;
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 14px !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-auto-rows: 118px !important;
+    gap: 12px !important;
     padding: 0 !important;
     overflow: visible !important;
+    flex-wrap: unset !important;
   }
-  .hb-card { width: auto !important; height: 100px !important; }
+  .hb-card {
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border-radius: 18px !important;
+  }
+  /* Nike (rank 1) — 2×2 hero */
+  .hb-card:nth-child(1) {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+    border-radius: 22px !important;
+  }
+  .hb-card:nth-child(1) .hb-text {
+    justify-content: flex-end !important;
+    padding: 0 22px 20px !important;
+  }
+  .hb-card:nth-child(1) .hb-name { font-size: 26px !important; letter-spacing: -.6px !important; }
+  .hb-card:nth-child(1) .hb-cnt  { font-size: 12px !important; margin-top: 5px !important; }
+  .hb-card:nth-child(1) .hb-bg-img {
+    width: 78% !important; height: 130% !important;
+    top: -15% !important; right: -4% !important;
+    opacity: 0.92 !important;
+    -webkit-mask-image: linear-gradient(to left, black 22%, transparent 65%) !important;
+    mask-image: linear-gradient(to left, black 22%, transparent 65%) !important;
+  }
+  /* Shimmer on hero */
+  .hb-card:nth-child(1)::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
+    animation: hbHeroShimmer 3.8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes hbHeroShimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  /* New Balance (rank 2) — 2×1 wide */
+  .hb-card:nth-child(2) { grid-column: span 2 !important; }
+  .hb-card:nth-child(2) .hb-name,
+  .hb-card:nth-child(3) .hb-name { font-size: 16px !important; }
+  /* Adidas (rank 3) — 2×1 wide */
+  .hb-card:nth-child(3) { grid-column: span 2 !important; }
 
   /* Brand visual grid */
   .brand-visual-grid { grid-template-columns: repeat(6, 1fr) !important; gap: 16px !important; padding: 0 !important; }
