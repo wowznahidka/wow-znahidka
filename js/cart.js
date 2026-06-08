@@ -184,6 +184,53 @@ function _saveCustomerData(name, phone, city) {
   try { localStorage.setItem('wow_customer', JSON.stringify({ name, phone, city })); } catch(_) {}
 }
 
+// ── ABANDONED CHECKOUT CAPTURE ──────────────────────── */
+let _partialTimer = null;
+let _partialSent  = false;
+
+function _capturePartial() {
+  if (_partialSent) return;
+  clearTimeout(_partialTimer);
+  _partialTimer = setTimeout(() => {
+    const phone  = document.getElementById('f-phone')?.value.trim() || '';
+    const name   = document.getElementById('f-name')?.value.trim()  || '';
+    if (phone.replace(/\D/g,'').length < 9 || name.length < 3) return;
+    _partialSent = true;
+    const total = S.cart.reduce((s, p) => s + (Number(p.price)||0)*(p.qty||1), 0);
+    postData({
+      action:  'partial_order',
+      name, phone, total,
+      items: S.cart.map(c => `${c.brand} ${c.name}, розмір ${c.size} — ${c.price}₴`).join('; '),
+      cart: S.cart.map(c => ({ id: c.id, brand: c.brand||'', name: c.name||'', price: Number(c.price)||0, size: String(c.size), qty: c.qty||1 })),
+      utm: S.utm || null,
+    }).catch(() => {});
+  }, 4000);
+}
+
+// ── POST-PURCHASE UPSELL ─────────────────────────────── */
+function _renderSuccessUpsell() {
+  const el = document.getElementById('success-upsell');
+  if (!el) return;
+  const ordered = S.cart.map(c => c.id);
+  const brands  = [...new Set(S.cart.map(c => c.brand))];
+  const all     = S.catalog.all || [];
+  const pool    = all.filter(p => !ordered.includes(p.id) && brands.includes(p.brand) && p.image);
+  const items   = shuffleSeeded(pool, hashStr(ordered.join(','))).slice(0, 6);
+  if (!items.length) { el.style.display = 'none'; return; }
+  el.innerHTML = `
+    <div class="success-upsell-title">Може сподобатись</div>
+    <div class="success-upsell-row">
+      ${items.map(p => `
+        <div class="success-upsell-card" onclick="openProductDetail(findProd('${esc(p.id)}'))">
+          ${p.image
+            ? `<img src="${esc(p.image)}" alt="${esc(p.brand)} ${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')">`
+            : `<div class="success-upsell-card-ph">👟</div>`}
+          <div class="success-upsell-name">${esc(p.brand)} ${esc(p.name)}</div>
+          <div class="success-upsell-price">${p.price}₴</div>
+        </div>`).join('')}
+    </div>`;
+}
+
 function _prefillCheckout() {
   let saved;
   try { saved = JSON.parse(localStorage.getItem('wow_customer') || 'null'); } catch(_) { return; }
@@ -212,6 +259,7 @@ function _renderCheckoutSummary() {
 }
 
 function openCheckout() {
+  _partialSent = false;
   const subtotal = S.cart.reduce((s, p) => s + (Number(p.price) || 0) * (p.qty || 1), 0);
   const promoAmt = _calcPromoAmt(subtotal);
   const total    = Math.max(0, subtotal - promoAmt);
@@ -245,6 +293,7 @@ function setDelivTab(t) {
 }
 
 function formatPhone(inp) {
+  _capturePartial();
   let v = inp.value.replace(/\D/g,'');
   if (v.startsWith('380')) v = v.slice(3);
   if (v.startsWith('0'))   v = v.slice(1);
@@ -261,6 +310,7 @@ function formatPhone(inp) {
 }
 
 function validateField(inp, type) {
+  if (type === 'name') _capturePartial();
   const v     = inp.value.trim();
   let valid;
   if (type === 'depot') valid = v.length >= 1;
@@ -425,6 +475,7 @@ async function submitOrder() {
   }
   closeAllSheets();
   document.getElementById('view-success')?.classList.add('on');
+  _renderSuccessUpsell();
 
   S.cart          = [];
   S.promoFixed    = 0;
