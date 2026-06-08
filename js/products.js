@@ -102,7 +102,6 @@ function prodCardHtml(p, opts = {}) {
     <div class="card-img-wrap">
       ${imgPart}
       ${badgePart}
-      <div class="card-cod-chip" aria-label="Оплата після примірки">✅ Після примірки</div>
     </div>
     <div class="card-body">
       <div class="card-brand">${esc(p.brand)}</div>

@@ -17,7 +17,7 @@
 .prods-grid .product-card:nth-child(5)  { animation-delay: .20s; }
 .prods-grid .product-card:nth-child(6)  { animation-delay: .24s; }
 .prods-grid .product-card:nth-child(n+7) { animation-delay: .28s; }
-@media (min-width: 480px) { .prods-grid { grid-template-columns: repeat(3,1fr); } }
+@media (min-width: 580px) { .prods-grid { grid-template-columns: repeat(3,1fr); } }
 
 /* ── 2026 PREMIUM PRODUCT CARD ─────────────────────
    Принципи: чітка типографічна ієрархія (brand → name → price),
@@ -90,7 +90,7 @@
 }
 
 /* Card body */
-.card-body { padding: 11px 12px 13px; }
+.card-body { padding: 7px 11px 9px; }
 
 .card-brand {
   font-family: 'Sora', sans-serif;
@@ -100,22 +100,22 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 .card-name {
   font-family: 'Inter', sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: #0d0d0d;
-  line-height: 1.3;
+  line-height: 1.28;
   letter-spacing: -.005em;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .card-price {
   font-family: 'Sora', sans-serif;
-  font-size: 19.5px; font-weight: 900;
+  font-size: 18px; font-weight: 900;
   color: #0d0d0d;
-  margin-top: 7px;
+  margin-top: 5px;
   display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
   line-height: 1;
   letter-spacing: -.015em;
@@ -159,7 +159,7 @@
 /* Quick size buttons row (inline) */
 .sz-quick-row {
   display: flex; flex-wrap: wrap; gap: 4px;
-  margin-top: 10px;
+  margin-top: 6px;
 }
 .sz-quick-btn {
   min-width: 32px; height: 28px;
@@ -188,7 +188,7 @@
 /* Sizes preview strip (legacy) — стилізовано як sz-quick для консистентності */
 .card-sizes-preview {
   display: flex; flex-wrap: wrap; gap: 4px;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 .card-sizes-preview span,
 .card-sizes-preview button {
