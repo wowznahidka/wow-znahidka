@@ -882,6 +882,43 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
     user-select: text !important;
     -webkit-user-select: text !important;
   }
+
+  /* ── MATCH PAGE — PC CENTERED LAYOUT ── */
+  #page-match .match-top,
+  #page-match .card-stage,
+  #page-match .match-actions,
+  #page-match .match-kb-hint {
+    max-width: 480px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+  #page-match .match-hint { display: none !important; }
+  .card-stage { min-height: 380px !important; }
+  .m-card { cursor: grab !important; }
+  .m-card:active { cursor: grabbing !important; }
+  .m-card-img, .m-card-img-ph {
+    aspect-ratio: 4/3 !important;
+    max-height: 380px !important;
+  }
+  .match-actions {
+    gap: 48px !important;
+    padding: 20px 20px 8px !important;
+  }
+  .m-action {
+    width: 88px !important;
+    height: 88px !important;
+    font-size: 34px !important;
+  }
+  .match-kb-hint {
+    display: flex !important;
+    justify-content: space-between !important;
+    padding: 6px 8px 0 !important;
+    font-size: 12px !important;
+    color: var(--text-muted) !important;
+    font-weight: 600 !important;
+    opacity: .5 !important;
+  }
 }
 
 /* Дуже широкі екрани — 5 колонок */
@@ -913,6 +950,9 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 .ws-name { font-size: 11px; color: var(--text-muted, #888); font-weight: 500; text-align: center; }
 .success-stores { margin-top: 20px; width: 100%; }
 .success-stores-lbl { font-size: 13px; color: var(--text-muted, #888); text-align: center; margin-bottom: 10px; }
+
+/* ── MATCH KB HINT (hidden on mobile, shown via 900px block) ── */
+.match-kb-hint { display: none; }
 
 /* ── DESKTOP NAV ────────────────────────────────────── */
 #desktop-nav {
