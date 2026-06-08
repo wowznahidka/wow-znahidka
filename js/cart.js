@@ -46,7 +46,8 @@ function renderFavSheet() {
     }
     return `<div class="fav-item">
       ${p.image && p.image.startsWith('http')
-        ? `<img class="fav-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')">`
+        ? `<img class="fav-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')"
+             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}')" style="cursor:zoom-in">`
         : `<div class="fav-img-ph" aria-hidden="true">👟</div>`}
       <div class="fav-body">
         <div class="fav-brand">${esc(p.brand)}</div>
@@ -120,7 +121,8 @@ function renderCartSheet() {
     return `
     <div class="cart-item">
       ${p.image && p.image.startsWith('http')
-        ? `<img class="cart-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')">`
+        ? `<img class="cart-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')"
+             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}')" style="cursor:zoom-in">`
         : `<div class="cart-img-ph" aria-hidden="true"></div>`}
       <div class="cart-body">
         <div class="cart-brand">${esc(p.brand)}</div>
