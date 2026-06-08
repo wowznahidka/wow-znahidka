@@ -66,18 +66,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=28">
-<link rel="stylesheet" href="css/layout.css?v=28">
-<link rel="stylesheet" href="css/cards.css?v=28">
-<link rel="stylesheet" href="css/animations.css?v=28">
-<link rel="stylesheet" href="css/mobile.css?v=28">
+<link rel="stylesheet" href="css/base.css?v=29">
+<link rel="stylesheet" href="css/layout.css?v=29">
+<link rel="stylesheet" href="css/cards.css?v=29">
+<link rel="stylesheet" href="css/animations.css?v=29">
+<link rel="stylesheet" href="css/mobile.css?v=29">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=28">
-<link rel="stylesheet" href="css/niche.css?v=28">
+<link rel="stylesheet" href="shared/css/premium.css?v=29">
+<link rel="stylesheet" href="css/niche.css?v=29">
 </head>
 <body>
 
@@ -717,6 +717,7 @@
   <div class="sp-sublabel">Доступні розміри</div>
   <div class="sp-grid" id="sp-size-grid" role="group" aria-label="Розміри"></div>
   <div id="sp-urgency"></div>
+  <div id="sp-notify-wrap"></div>
   <div class="sp-actions">
     <button class="sp-photo-btn" onclick="requestPhoto()">Запросити фото</button>
     <button class="sp-confirm-btn" onclick="confirmSize()">Додати в кошик <span class="i-arr-lg" aria-hidden="true"></span></button>
@@ -882,6 +883,7 @@
     onclick="document.getElementById('view-success').classList.remove('on');changeTab('match')">
     🔥 Свайпати ще <span class="i-arr-lg" aria-hidden="true"></span>
   </button>
+  <div id="success-upsell" class="success-upsell"></div>
 </div>
 
 <!-- TOASTS -->
@@ -929,20 +931,20 @@
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=28"             defer></script>
-<script src="js/state.js?v=28"              defer></script>
-<script src="js/lang.js?v=28"               defer></script>
-<script src="js/api.js?v=28"                defer></script>
-<script src="js/products.js?v=28"           defer></script>
-<script src="js/ui.js?v=28"                 defer></script>
-<script src="js/match.js?v=28"              defer></script>
-<script src="js/filters.js?v=28"            defer></script>
-<script src="js/cart.js?v=28"               defer></script>
-<script src="js/modal.js?v=28"              defer></script>
-<script src="js/deals.js?v=28"              defer></script>
-<script src="shared/js/referral.js?v=28" defer></script>
-<script src="js/app.js?v=28"                defer></script>
-<script src="shared/js/motion.js?v=28" defer></script>
+<script src="js/config.js?v=29"             defer></script>
+<script src="js/state.js?v=29"              defer></script>
+<script src="js/lang.js?v=29"               defer></script>
+<script src="js/api.js?v=29"                defer></script>
+<script src="js/products.js?v=29"           defer></script>
+<script src="js/ui.js?v=29"                 defer></script>
+<script src="js/match.js?v=29"              defer></script>
+<script src="js/filters.js?v=29"            defer></script>
+<script src="js/cart.js?v=29"               defer></script>
+<script src="js/modal.js?v=29"              defer></script>
+<script src="js/deals.js?v=29"              defer></script>
+<script src="shared/js/referral.js?v=29" defer></script>
+<script src="js/app.js?v=29"                defer></script>
+<script src="shared/js/motion.js?v=29" defer></script>
 
 </body>
 </html>

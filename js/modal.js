@@ -88,6 +88,21 @@ function openSizePicker(product) {
     confirmBtn.style.boxShadow  = isLastSize ? 'var(--shadow-red)' : '';
   }
 
+  // Notify me panel
+  const notifyWrap = document.getElementById('sp-notify-wrap');
+  if (notifyWrap) {
+    notifyWrap.innerHTML = `
+      <button class="sp-notify-trigger" onclick="toggleNotifyPanel()">🔔 Немає мого розміру? Повідомити</button>
+      <div class="sp-notify-panel" id="sp-notify-panel">
+        <div class="sp-notify-label">Вкажіть бажаний розмір і телефон — ми повідомимо, коли з'явиться:</div>
+        <div class="sp-notify-row">
+          <input class="sp-notify-sz" id="sp-notify-sz" type="number" placeholder="Розмір" min="35" max="48">
+          <input class="sp-notify-phone" id="sp-notify-phone" type="tel" placeholder="+380...">
+        </div>
+        <button class="sp-notify-send" onclick="submitNotifyMe()">🔔 Повідомити мене</button>
+      </div>`;
+  }
+
   // Open sheet
   closeAllSheets();
   document.getElementById('sheet-size')?.classList.add('on');
@@ -254,6 +269,27 @@ function openProductDetail(product) {
     </div>`;
 
   openSheet('sheet-product');
+}
+
+// ── NOTIFY ME ─────────────────────────────────────────── */
+function toggleNotifyPanel() {
+  document.getElementById('sp-notify-panel')?.classList.toggle('open');
+}
+
+function submitNotifyMe() {
+  const sz    = document.getElementById('sp-notify-sz')?.value.trim()    || '';
+  const phone = document.getElementById('sp-notify-phone')?.value.trim() || '';
+  if (!sz || phone.replace(/\D/g,'').length < 9) {
+    toast('⚠️ Вкажіть розмір і номер телефону');
+    return;
+  }
+  const p = S.spProduct;
+  if (!p) return;
+  postData({ action: 'notify_me', product_id: p.id, brand: p.brand, name: p.name, size: sz, phone }).catch(() => {});
+  toast(`🔔 Збережено! Повідомимо, коли з'явиться розмір ${sz}`);
+  document.getElementById('sp-notify-panel')?.classList.remove('open');
+  const szEl = document.getElementById('sp-notify-sz'); if (szEl) szEl.value = '';
+  const phEl = document.getElementById('sp-notify-phone'); if (phEl) phEl.value = '';
 }
 
 function togglePdFav() {
