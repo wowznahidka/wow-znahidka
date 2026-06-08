@@ -169,10 +169,14 @@ function _giftBoxHtml() {
       </div>
       <div class="dd-gift-box">
         <div class="dd-gift-lid">
+          <div class="dd-shoe-lid-label" aria-hidden="true">ЗНАХІДКА ДНЯ</div>
           <div class="dd-gift-bow" aria-hidden="true"></div>
         </div>
         <div class="dd-gift-base">
-          <div class="dd-gift-ribbon-v" aria-hidden="true"></div>
+          <svg class="dd-shoe-swoosh" viewBox="0 0 110 42" fill="rgba(255,255,255,0.22)" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M110 2.5L26 40c-3.8 2.1-7.8 3.2-12.1 3.2-4.3 0-7.7-1.4-10.1-4.1C1.4 36.4 0 32.9 0 28.6c0-4.4 1.7-8.5 5.1-12.3.2-.3.5-.3.7-.1.1.1.1.2 0 .4C4 20 3.3 22.8 3.3 25.8c0 9.8 7.2 16.2 21.5 19.1L110 2.5z"/>
+          </svg>
+          <div class="dd-shoe-base-label" aria-hidden="true">WOW.ZNAHIDKA</div>
         </div>
         <div class="dd-gift-shine" aria-hidden="true"></div>
         <div class="dd-confetti" aria-hidden="true">
@@ -180,8 +184,8 @@ function _giftBoxHtml() {
         </div>
       </div>
       <div class="dd-gift-cta">
-        <strong>${(typeof L !== 'undefined' && L.giftCtaTitle) || '🎁 Відкрий подарунок дня'}</strong>
-        <span>${(typeof L !== 'undefined' && L.giftCtaSub) || '3 пари з <b>безкоштовною доставкою</b> · лише сьогодні'}</span>
+        <strong>👟 Відкрий знахідку дня</strong>
+        <span>3 пари з <b>безкоштовною доставкою</b> · лише сьогодні</span>
       </div>
     </div>
   </div>`;

@@ -957,6 +957,97 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 }
 .dsk-nav-btn.active, .dsk-nav-btn:hover { opacity: 1; background: rgba(255,62,62,0.08); color: var(--accent); }
 
+/* ── ЗНАХІДКА ДНЯ — NIKE SHOEBOX ─────────────────────── */
+@keyframes ddNikeGlow {
+  0%,100% { box-shadow: 0 10px 36px rgba(0,0,0,0.55), 0 0 0 0 rgba(242,99,34,0); }
+  50%     { box-shadow: 0 16px 50px rgba(0,0,0,0.65), 0 0 0 8px rgba(242,99,34,0.12); }
+}
+@keyframes ddNikeWiggle {
+  0%,100% { transform: rotate(-2deg) translateY(0); }
+  50%     { transform: rotate(2deg)  translateY(-3px); }
+}
+
+.dd-gift-wrap {
+  background: #111111 !important;
+  border: 1.5px solid rgba(255,255,255,0.07) !important;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.55) !important;
+  animation: ddNikeGlow 3s ease-in-out infinite !important;
+}
+.dd-gift-wrap::before { opacity: 0 !important; }
+.dd-gift-box { animation: ddNikeWiggle 3s ease-in-out infinite !important; }
+
+/* Base — Nike orange */
+.dd-gift-base {
+  background: linear-gradient(170deg, #F26322 0%, #C94E10 100%) !important;
+  box-shadow: 0 5px 18px rgba(194,78,16,0.5), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+  border-radius: 4px 4px 10px 10px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  padding: 6px 8px !important;
+}
+/* Lid — near-black */
+.dd-gift-lid {
+  background: linear-gradient(180deg, #2a2a2a 0%, #1c1c1c 100%) !important;
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  border-radius: 8px 8px 3px 3px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+/* Hide original ribbon & bow */
+.dd-gift-ribbon-v { display: none !important; }
+.dd-gift-bow      { display: none !important; }
+.dd-gift-bow::before { display: none !important; }
+.dd-gift-shine { opacity: 0.15 !important; width: 8px !important; left: 8px !important; }
+
+/* "ЗНАХІДКА ДНЯ" on lid */
+.dd-shoe-lid-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  white-space: nowrap;
+  pointer-events: none;
+}
+/* Nike Swoosh on box side */
+.dd-shoe-swoosh {
+  width: 100%;
+  height: 28px;
+  margin-bottom: 2px;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+/* "WOW.ZNAHIDKA" at bottom of box */
+.dd-shoe-base-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  pointer-events: none;
+  align-self: flex-end;
+}
+/* Confetti colors — Nike palette */
+.dd-confetti span:nth-child(3n+1) { background: #F26322 !important; }
+.dd-confetti span:nth-child(3n+2) { background: #ffffff !important; }
+.dd-confetti span:nth-child(3n)   { background: #222222 !important; }
+
+/* CTA text */
+.dd-gift-cta strong { color: #ffffff !important; }
+.dd-gift-cta span   { color: rgba(255,255,255,0.50) !important; }
+.dd-gift-cta b      { color: #F26322 !important; }
+/* Brand row */
+.dd-gift-brand-logo { color: #ffffff !important; }
+.dd-gift-brand-tag  { color: rgba(255,255,255,0.55) !important; border-color: rgba(255,255,255,0.18) !important; }
+.dd-gift-brand-tag svg path { stroke: rgba(255,255,255,0.55) !important; }
+
 /* ── SOCIAL PROOF TOAST ───────────────────────────────── */
 @keyframes proofIn  { from { transform: translateY(120%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes proofOut { from { transform: translateY(0);    opacity: 1; } to { transform: translateY(120%); opacity: 0; } }
