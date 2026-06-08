@@ -94,10 +94,7 @@ function prodCardHtml(p, opts = {}) {
         : `<span>${s}</span>`).join('') +
       (p.sizes.length > maxSz ? `<span class="sz-more">+${p.sizes.length - maxSz}</span>` : '');
 
-  const fomoCount = _fomoViewers(p.id);
-  const fomoHtml  = (grid && p.sizes.length <= 3)
-    ? `<div class="card-fomo">🔴 ${fomoCount} зараз дивляться</div>`
-    : '';
+  const fomoHtml  = '';
 
   return `<article class="product-card${gridCls}"
     onclick="openProductDetail(findProd('${p.id}'))"
