@@ -145,7 +145,6 @@ function handleRefShareTo(platform) {
   const urls = {
     facebook:  `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`,
     telegram:  `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Глянь — тут є круті речі 🔥')}`,
-    whatsapp:  `https://wa.me/?text=${text}`,
   };
   if (urls[platform]) {
     try { window.open(urls[platform], '_blank', 'noopener'); }
