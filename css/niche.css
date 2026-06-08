@@ -844,20 +844,22 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   }
   .hb-card:nth-child(1) .hb-name { font-size: 26px !important; letter-spacing: -.6px !important; }
   .hb-card:nth-child(1) .hb-cnt  { font-size: 12px !important; margin-top: 5px !important; }
+  /* Hero Nike — full-bleed, bigger image coverage */
   .hb-card:nth-child(1) .hb-bg-img {
-    width: 78% !important; height: 130% !important;
-    top: -15% !important; right: -4% !important;
-    opacity: 0.92 !important;
-    -webkit-mask-image: linear-gradient(to left, black 22%, transparent 65%) !important;
-    mask-image: linear-gradient(to left, black 22%, transparent 65%) !important;
+    width: 100% !important; height: 100% !important;
+    top: 0 !important; right: 0 !important;
+    background-position: center 30% !important;
+    opacity: 1 !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
-  /* Shimmer on hero */
+  /* Shimmer on hero — above overlay (z:1), below text (z:2) is z:3 */
   .hb-card:nth-child(1)::after {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
+    background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.11) 50%, transparent 65%);
     animation: hbHeroShimmer 3.8s ease-in-out infinite;
-    pointer-events: none;
+    pointer-events: none; z-index: 3;
   }
   @keyframes hbHeroShimmer {
     0%   { transform: translateX(-100%); }
