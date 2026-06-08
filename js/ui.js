@@ -101,6 +101,7 @@ function changeTab(tab) {
   document.getElementById('pages').scrollTop = 0;
   window.scrollTo(0, 0);
   document.body.classList.toggle('show-sidebar', tab === 'catalog');
+  document.body.classList.toggle('on-match', tab === 'match');
   if (tab === 'home')     renderHome();
   if (tab === 'match')    initMatch();
   if (tab === 'catalog')  renderCatalog();
