@@ -567,45 +567,4 @@ function _installAntiExit() {
 }
 window.addEventListener('DOMContentLoaded', _installAntiExit);
 
-// ── SOCIAL PROOF TICKER ───────────────────────────────── */
-let _proofStarted = false;
-function startSocialProof() {
-  if (_proofStarted) return;
-  _proofStarted = true;
-  const NAMES  = ['Олег','Аня','Катя','Дмитро','Маша','Сашко','Юля','Настя','Богдан','Іра','Вова','Таня'];
-  const CITIES = ['Київ','Харків','Львів','Одеса','Дніпро','Запоріжжя','Вінниця','Черкаси','Полтава','Суми'];
-
-  function _fire() {
-    const products = (S.catalog.all || []).filter(p => p.image && p.image.startsWith('http'));
-    if (!products.length) return;
-    const p    = products[Math.floor(Math.random() * Math.min(products.length, 80))];
-    const name = NAMES[Math.floor(Math.random()  * NAMES.length)];
-    const city = CITIES[Math.floor(Math.random() * CITIES.length)];
-    const sz   = p.sizes && p.sizes.length && p.sizes[0] !== 'ONE SIZE'
-      ? p.sizes[Math.floor(Math.random() * p.sizes.length)]
-      : null;
-
-    const el = document.createElement('div');
-    el.className = 'proof-toast';
-    el.innerHTML = `
-      <img src="${p.image}" alt="" onerror="this.parentNode.querySelector('.proof-toast-ico')?.style.setProperty('display','flex');this.remove()">
-      <div class="proof-toast-ico" style="display:none">👟</div>
-      <div class="proof-toast-body">
-        <b>${name} з ${city}</b> щойно замовив${name.endsWith('а')||name.endsWith('я')||name.endsWith('я')?'а':''}
-        <span>${p.brand} ${p.name}${sz ? ', розмір ' + sz : ''}</span>
-      </div>
-      <div class="proof-toast-dot"></div>`;
-    document.body.appendChild(el);
-
-    setTimeout(() => {
-      el.classList.add('out');
-      setTimeout(() => el.remove(), 340);
-    }, 4200);
-
-    const next = 22000 + Math.floor(Math.random() * 18000);
-    setTimeout(_fire, next);
-  }
-
-  setTimeout(_fire, 10000);
-}
 
