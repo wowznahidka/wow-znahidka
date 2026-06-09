@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WOW.RIDE — Велосипеди · Електросамокати · Самокати | Без передоплати</title>
+<meta name="description" content="Преміум вуличне спорядження без передоплати. Велосипеди, скейти, самокати по всій Україні.">
+<link rel="canonical" href="https://wowznahidka.github.io/wow-znahidka/ride/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WOW.RIDE — Велосипеди · Електросамокати · Самокати">
+<meta property="og:description" content="Вуличне спорядження без передоплати. Оплата при отриманні на Новій Пошті. Доставка по Україні 1-3 дні.">
+<meta property="og:url" content="https://wowznahidka.github.io/wow-znahidka/ride/">
+<meta property="og:image" content="https://wowznahidka.github.io/wow-znahidka/og-cover.png">
+<meta property="og:locale" content="uk_UA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;
+  --white:#f2f0eb;
+  --red:#e8000a;
+  --yellow:#ffe600;
+  --gray:#1c1c1c;
+  --gray2:#2a2a2a;
+  --muted:#5a5a5a;
+  --D:'Bebas Neue',sans-serif;
+  --B:'Space Grotesk',sans-serif;
+  --M:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--B);overflow-x:hidden;cursor:none}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");opacity:.4;mix-blend-mode:overlay}
+
+/* CURSOR */
+#cur{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);width:10px;height:10px;background:var(--yellow);mix-blend-mode:difference;transition:width .15s,height .15s}
+#cur.h{width:50px;height:50px}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto;z-index:300;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(8,8,8,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(242,240,235,.08)}
+.nlogo{font-family:var(--D);font-size:1.6rem;letter-spacing:.1em;text-decoration:none;color:var(--white);display:flex;align-items:center;gap:.1em}
+.nlogo .slash{color:var(--red)}
+.nlinks{display:flex;gap:2rem;list-style:none}
+.nlinks a{font-family:var(--M);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s}
+.nlinks a:hover{color:var(--white)}
+.ncta{background:var(--yellow);color:var(--black);font-family:var(--M);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.2rem;text-decoration:none;transition:all .2s}
+.ncta:hover{background:var(--white);transform:skewX(-4deg)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 60px;position:relative;overflow:hidden;background:var(--black)}
+.hero-stripes{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(242,240,235,.012) 40px,rgba(242,240,235,.012) 41px);animation:stripeMove 20s linear infinite}
+@keyframes stripeMove{to{background-position:200px 200px}}
+.hero-bg-text{position:absolute;font-family:var(--D);font-size:clamp(12rem,28vw,36rem);line-height:.8;color:rgba(242,240,235,.025);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:-.02em;animation:bgTextDrift 30s ease-in-out infinite alternate}
+@keyframes bgTextDrift{from{letter-spacing:-.02em}to{letter-spacing:.02em}}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);z-index:10}
+.hero-tag{font-family:var(--M);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--yellow);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;opacity:0;animation:fadeIn .6s .1s forwards}
+.hero-tag::before{content:'';width:20px;height:1px;background:var(--yellow)}
+h1.hero-title{font-family:var(--D);font-size:clamp(7rem,18vw,22rem);line-height:.82;letter-spacing:-.02em;margin-bottom:3rem;position:relative;z-index:2}
+h1.hero-title .ln{overflow:hidden;display:block}
+h1.hero-title .ln span{display:block;opacity:0;transform:translateY(105%);animation:slideUp .8s cubic-bezier(.16,1,.3,1) forwards}
+h1.hero-title .ln:nth-child(1) span{animation-delay:.15s}
+h1.hero-title .ln:nth-child(2) span{animation-delay:.25s;color:var(--red)}
+h1.hero-title .ln:nth-child(3) span{animation-delay:.35s;-webkit-text-stroke:2px var(--white);color:transparent}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;opacity:0;animation:fadeIn .7s .6s forwards;position:relative;z-index:2}
+.hero-sub{font-size:1rem;font-weight:300;color:rgba(242,240,235,.5);max-width:400px;line-height:1.75}
+.hero-sub strong{color:var(--white);font-weight:700}
+.hero-btns{display:flex;gap:.75rem;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;font-family:var(--M);font-weight:700;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 1.8rem;text-decoration:none;transition:all .2s;white-space:nowrap;cursor:pointer;border:none}
+.btn-y{background:var(--yellow);color:var(--black)}.btn-y:hover{background:var(--white);transform:skewX(-3deg)}
+.btn-bord{border:1px solid rgba(242,240,235,.25);color:var(--white);background:transparent}.btn-bord:hover{border-color:var(--white);transform:skewX(-3deg)}
+.scroll-line{position:absolute;bottom:0;left:40px;width:1px;height:80px;background:var(--red);opacity:0;animation:fadeIn 1s 1.2s forwards}
+
+/* TICKER */
+.ticker{overflow:hidden;background:var(--red);padding:.55rem 0;position:relative}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker::before{left:0;background:linear-gradient(to right,var(--red),transparent)}
+.ticker::after{right:0;background:linear-gradient(to left,var(--red),transparent)}
+.ttrack{display:flex;animation:tickRun 18s linear infinite;white-space:nowrap}
+.titem{font-family:var(--D);font-size:1.1rem;letter-spacing:.15em;color:#000;padding:0 2.5rem;flex-shrink:0}
+.titem .x{margin:0 .5rem;opacity:.4}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(242,240,235,.07)}
+.stat{padding:2.5rem 2rem;border-right:1px solid rgba(242,240,235,.07);position:relative;overflow:hidden}
+.stat:last-child{border-right:none}
+.stat::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.stat:hover::after{transform:scaleX(1)}
+.stat-n{font-family:var(--D);font-size:clamp(3rem,5vw,5.5rem);line-height:1;color:var(--white);margin-bottom:.3rem}
+.stat-n em{color:var(--yellow);font-style:normal}
+.stat-l{font-family:var(--M);font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;line-height:1.5}
+
+/* DEALS OF THE DAY */
+.deals{padding:80px 40px;background:var(--gray);position:relative;overflow:hidden}
+.deals::before{content:'DEALS';position:absolute;font-family:var(--D);font-size:22rem;color:rgba(232,0,10,.04);top:50%;right:-2rem;transform:translateY(-50%);pointer-events:none;white-space:nowrap}
+.deals-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:1rem}
+.deals-head-left{}
+.deals-eyebrow{font-family:var(--M);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+.deals-title{font-family:var(--D);font-size:clamp(3rem,6vw,7rem);line-height:.88}
+.deals-timer{display:flex;align-items:center;gap:.5rem}
+.deals-timer-label{font-family:var(--M);font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-right:.5rem}
+.timer-block{background:var(--black);border:1px solid rgba(242,240,235,.1);padding:.4rem .7rem;text-align:center;min-width:50px}
+.timer-num{font-family:var(--D);font-size:2rem;line-height:1;color:var(--yellow)}
+.timer-sep{font-family:var(--D);font-size:1.5rem;color:var(--red);margin:0 .1rem;line-height:1}
+.deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(242,240,235,.06)}
+
+/* PRODUCT CATEGORIES */
+.cats{padding:100px 40px;background:var(--black)}
+.cats-head{margin-bottom:60px}
+.cats-eyebrow{font-family:var(--M);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.cats-title{font-family:var(--D);font-size:clamp(4rem,8vw,10rem);line-height:.88}
+.cats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:rgba(242,240,235,.06)}
+.cat-card{background:var(--gray);padding:3rem 2.5rem;position:relative;overflow:hidden;cursor:pointer;text-decoration:none;color:var(--white);display:block;transition:background .3s}
+.cat-card:hover{background:var(--gray2)}
+.cat-card::before{content:attr(data-num);position:absolute;bottom:-20px;right:-10px;font-family:var(--D);font-size:14rem;color:rgba(242,240,235,.03);line-height:1;pointer-events:none;transition:color .3s}
+.cat-card:hover::before{color:rgba(232,0,10,.06)}
+.cat-card-inner{position:relative;z-index:2}
+.cat-icon{font-size:3.5rem;margin-bottom:1.5rem;display:block;line-height:1}
+.cat-name{font-family:var(--D);font-size:3.5rem;line-height:1;margin-bottom:.5rem}
+.cat-sub{font-family:var(--M);font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;line-height:1.6;margin-bottom:1.5rem}
+.cat-count{font-family:var(--D);font-size:1.5rem;color:var(--yellow);margin-bottom:1.5rem}
+.cat-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.ctag{font-family:var(--M);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border:1px solid rgba(242,240,235,.12);color:rgba(242,240,235,.4)}
+.ctag.hot{background:rgba(232,0,10,.1);color:var(--red);border-color:rgba(232,0,10,.25)}
+.cat-arrow{position:absolute;bottom:2rem;right:2rem;font-family:var(--D);font-size:2.5rem;color:rgba(242,240,235,.15);transition:color .3s,transform .3s}
+.cat-card:hover .cat-arrow{color:var(--yellow);transform:translate(4px,-4px)}
+
+/* BRANDS */
+.brands{padding:40px 0;border-top:1px solid rgba(242,240,235,.06);border-bottom:1px solid rgba(242,240,235,.06);overflow:hidden}
+.brands-track{display:flex;gap:0;animation:tickRun 25s linear infinite;white-space:nowrap}
+.brand-item{font-family:var(--D);font-size:1.5rem;color:rgba(242,240,235,.15);padding:0 3rem;letter-spacing:.1em;flex-shrink:0;transition:color .3s}
+.brand-item:hover{color:var(--yellow)}
+
+/* STREET CRED */
+.street{padding:80px 40px;background:var(--gray);position:relative;overflow:hidden}
+.street::before{content:'RIDE · SKATE · ROLL ·';position:absolute;font-family:var(--D);font-size:20rem;color:rgba(242,240,235,.02);white-space:nowrap;top:50%;transform:translateY(-50%);pointer-events:none;letter-spacing:.05em}
+.street-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.street-left h2{font-family:var(--D);font-size:clamp(4rem,7vw,9rem);line-height:.88;margin-bottom:1.5rem}
+.street-left h2 .outline{-webkit-text-stroke:2px var(--white);color:transparent}
+.street-left h2 .red{color:var(--red)}
+.street-left p{font-size:.9rem;color:rgba(242,240,235,.5);line-height:1.8;max-width:380px}
+.street-right{display:flex;flex-direction:column;gap:0}
+.feature{padding:1.5rem 0;border-bottom:1px solid rgba(242,240,235,.07);display:flex;gap:1.5rem;align-items:flex-start;transition:padding .2s}
+.feature:hover{padding-left:.75rem}
+.feat-num{font-family:var(--D);font-size:1rem;color:var(--red);flex-shrink:0;margin-top:.1rem;min-width:2rem}
+.feat-body h3{font-family:var(--D);font-size:1.8rem;margin-bottom:.25rem}
+.feat-body p{font-family:var(--M);font-size:.65rem;color:var(--muted);line-height:1.65;letter-spacing:.02em}
+
+/* CATALOG */
+.catalog{padding:100px 40px;background:var(--black)}
+.cat-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:1rem}
+.cat-header h2{font-family:var(--D);font-size:clamp(4rem,7vw,8rem);line-height:.88}
+
+/* FILTER TABS */
+.filter-bar{display:flex;gap:0;margin-bottom:2px;overflow-x:auto;scrollbar-width:none;background:rgba(242,240,235,.04)}
+.filter-bar::-webkit-scrollbar{display:none}
+.ftab{font-family:var(--M);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.8rem 1.5rem;color:var(--muted);background:transparent;border:none;cursor:pointer;white-space:nowrap;transition:all .2s;border-bottom:2px solid transparent;flex-shrink:0}
+.ftab:hover{color:var(--white);background:rgba(242,240,235,.04)}
+.ftab.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(242,240,235,.05)}
+.prod-card{background:var(--gray);padding:0;overflow:hidden;cursor:pointer;text-decoration:none;color:var(--white);display:block;position:relative;transition:background .25s}
+.prod-card:hover{background:var(--gray2)}
+.prod-card.hidden{display:none}
+.prod-img{width:100%;aspect-ratio:1;background:var(--gray2);display:flex;align-items:center;justify-content:center;font-size:5rem;position:relative;overflow:hidden}
+.prod-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,var(--gray) 100%)}
+.prod-badge{position:absolute;top:.75rem;left:.75rem;background:var(--red);font-family:var(--M);font-size:.52rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;z-index:2}
+.prod-badge.new{background:var(--yellow);color:var(--black)}
+.prod-badge.hot{background:#ff6b00;color:#000}
+.prod-body{padding:1.2rem}
+.prod-brand{font-family:var(--M);font-size:.58rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem}
+.prod-name{font-family:var(--D);font-size:1.6rem;line-height:1.05;margin-bottom:.5rem}
+.prod-price{font-family:var(--D);font-size:1.8rem;color:var(--yellow)}
+.prod-price .old{font-size:1rem;color:var(--muted);text-decoration:line-through;margin-right:.5rem}
+.prod-sizes{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.6rem}
+.sz{font-family:var(--M);font-size:.52rem;padding:.22rem .5rem;border:1px solid rgba(242,240,235,.12);color:rgba(242,240,235,.4)}
+.sz.avail{border-color:rgba(242,240,235,.3);color:rgba(242,240,235,.7)}
+.prod-quick{position:absolute;bottom:.75rem;right:.75rem;background:var(--yellow);color:var(--black);font-family:var(--M);font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .8rem;opacity:0;transition:opacity .2s;z-index:3}
+.prod-card:hover .prod-quick{opacity:1}
+
+/* PRODUCT MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);z-index:1001;width:min(900px,95vw);max-height:90vh;overflow-y:auto;background:var(--gray);border:1px solid rgba(242,240,235,.08);opacity:0;transition:opacity .3s,transform .3s;scrollbar-width:none}
+.modal.open{opacity:1;transform:translate(-50%,-50%)}
+.modal::-webkit-scrollbar{display:none}
+.modal-inner{display:grid;grid-template-columns:1fr 1fr}
+.modal-img-side{background:var(--gray2);display:flex;align-items:center;justify-content:center;font-size:10rem;min-height:360px;position:relative}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--black);color:var(--white);border:none;font-family:var(--D);font-size:1.2rem;width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s}
+.modal-close:hover{background:var(--red)}
+.modal-info{padding:2.5rem}
+.modal-brand{font-family:var(--M);font-size:.6rem;color:var(--red);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem}
+.modal-name{font-family:var(--D);font-size:3rem;line-height:.9;margin-bottom:1rem}
+.modal-price{font-family:var(--D);font-size:3.5rem;color:var(--yellow);margin-bottom:.5rem}
+.modal-price .old{font-size:1.5rem;color:var(--muted);text-decoration:line-through;margin-right:.5rem}
+.modal-desc{font-size:.85rem;color:rgba(242,240,235,.5);line-height:1.8;margin-bottom:1.5rem}
+.modal-sizes-label{font-family:var(--M);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.modal-sizes{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.msz{font-family:var(--M);font-size:.6rem;padding:.35rem .75rem;border:1px solid rgba(242,240,235,.15);color:rgba(242,240,235,.5);cursor:pointer;transition:all .15s}
+.msz:hover,.msz.sel{border-color:var(--yellow);color:var(--yellow)}
+.modal-cta{width:100%;background:var(--yellow);color:var(--black);font-family:var(--M);font-weight:700;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;padding:1.2rem 2rem;border:none;cursor:pointer;transition:all .2s;display:flex;justify-content:space-between;align-items:center}
+.modal-cta:hover{background:var(--white)}
+.modal-cta .arr{font-family:var(--D);font-size:1.8rem}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.mtag{font-family:var(--M);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(242,240,235,.1);color:rgba(242,240,235,.35)}
+
+/* ORDER SECTION */
+.order-sec{padding:100px 40px;background:var(--gray);position:relative;overflow:hidden}
+.order-bg{position:absolute;font-family:var(--D);font-size:25vw;color:rgba(242,240,235,.015);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:-.02em}
+.order-inner{position:relative;z-index:2;max-width:700px;margin:0 auto;text-align:center}
+.order-eyebrow{font-family:var(--M);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem}
+.order-title{font-family:var(--D);font-size:clamp(5rem,12vw,14rem);line-height:.85;margin-bottom:1rem}
+.order-title .y{color:var(--yellow)}
+.order-sub{font-size:.9rem;color:rgba(242,240,235,.4);margin-bottom:3rem;line-height:1.75}
+.fshell{background:var(--black);border:1px solid rgba(242,240,235,.08);text-align:left;overflow:hidden}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(242,240,235,.06)}
+.ff{background:var(--black);padding:1.4rem}
+.ff.full{grid-column:1/-1}
+.ff label{display:block;font-family:var(--M);font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem}
+.ff input,.ff textarea,.ff select{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(242,240,235,.08);padding:.55rem 0;color:var(--white);font-family:var(--B);font-size:.92rem;outline:none;transition:border-color .2s;appearance:none}
+.ff input:focus,.ff textarea:focus,.ff select:focus{border-color:var(--yellow)}
+.ff textarea{height:80px;resize:none}
+.ff select option{background:var(--gray)}
+.fsub{width:100%;background:var(--yellow);color:var(--black);font-family:var(--M);font-weight:700;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;padding:1.3rem 2rem;border:none;cursor:pointer;transition:all .2s;display:flex;justify-content:space-between;align-items:center}
+.fsub:hover{background:var(--white)}
+.fsub .arr{font-family:var(--D);font-size:2rem}
+#fok{display:none;padding:2rem;background:rgba(255,230,0,.06);border:1px solid rgba(255,230,0,.15);margin-top:1px;text-align:center}
+#fok .ft{font-family:var(--D);font-size:3rem;color:var(--yellow)}
+#fok p{font-family:var(--M);font-size:.72rem;color:var(--muted);margin-top:.4rem}
+
+/* FOOTER */
+footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:flex;justify-content:space-between;align-items:center;background:var(--black)}
+.flogo{font-family:var(--D);font-size:2rem;letter-spacing:.08em}
+.flogo .slash{color:var(--red)}
+.fcopy{font-family:var(--M);font-size:.58rem;color:var(--muted);letter-spacing:.08em}
+.fsoc{display:flex;gap:1.5rem}
+.fsoc a{font-family:var(--M);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.fsoc a:hover{color:var(--yellow)}
+
+.powered{text-align:center;padding:1rem;background:var(--gray);border-top:1px solid rgba(242,240,235,.05)}
+.powered a{font-family:var(--M);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.powered a:hover{color:var(--white)}
+.powered a span{color:var(--red)}
+
+/* REVEAL */
+.R{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.R.in{opacity:1;transform:none}
+
+@keyframes slideUp{to{opacity:1;transform:none}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes tickRun{to{transform:translateX(-50%)}}
+
+/* SHOW MORE */
+.show-more-wrap{text-align:center;padding:3rem 0 0}
+#show-more-btn{display:none}
+
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nlinks{display:none}
+  .hero{padding:0 20px 40px}
+  .stats{grid-template-columns:1fr 1fr}
+  .cats-grid{grid-template-columns:1fr}
+  .deals-grid{grid-template-columns:1fr}
+  .street-inner{grid-template-columns:1fr}
+  .product-grid{grid-template-columns:1fr 1fr}
+  .modal-inner{grid-template-columns:1fr}
+  .cats,.catalog,.street,.order-sec,.deals{padding:70px 20px}
+  footer{padding:2rem 20px;flex-direction:column;gap:1rem;text-align:center}
+  .frow{grid-template-columns:1fr}
+  body{cursor:auto}#cur{display:none}
+  .filter-bar{gap:0}
+  .ftab{padding:.7rem 1rem}
+}
+@media(hover:none),(pointer:coarse){body{cursor:auto}#cur{display:none}}
+@media(max-width:600px){
+  .product-grid{grid-template-columns:1fr}
+  .deals-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<nav>
+  <a href="#" class="nlogo">WOW<span class="slash">.</span>RIDE</a>
+  <ul class="nlinks">
+    <li><a href="#cats">Категорії</a></li>
+    <li><a href="#deals">Знижки дня</a></li>
+    <li><a href="#catalog">Каталог</a></li>
+    <li><a href="#order">Замовити</a></li>
+  </ul>
+  <a href="#order" class="ncta">Замовити зараз</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stripes"></div>
+  <div class="hero-bg-text">RIDE</div>
+  <div class="scroll-line"></div>
+  <div class="hero-tag">Без передоплати · Nova Poshta · Доставка 1–3 дні</div>
+  <h1 class="hero-title">
+    <span class="ln"><span>ВЕЛО.</span></span>
+    <span class="ln"><span>ЕЛЕКТРО.</span></span>
+    <span class="ln"><span>САМОКАТ.</span></span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">Преміум вуличне спорядження без передоплати. <strong>Оплата після отримання</strong> на Новій Пошті. По всій Україні.</p>
+    <div class="hero-btns">
+      <a href="#catalog" class="btn btn-y">Дивитись каталог</a>
+      <a href="#order" class="btn btn-bord">Замовити</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ttrack" id="tickerEl"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat R"><div class="stat-n"><em>0₴</em></div><div class="stat-l">Передоплати<br>платиш після</div></div>
+  <div class="stat R" style="transition-delay:.07s"><div class="stat-n"><em>1–3</em> дні</div><div class="stat-l">Доставка<br>Nova Poshta</div></div>
+  <div class="stat R" style="transition-delay:.14s"><div class="stat-n"><em>500</em>+</div><div class="stat-l">Моделей<br>в каталозі</div></div>
+  <div class="stat R" style="transition-delay:.21s"><div class="stat-n"><em>100</em>%</div><div class="stat-l">Повернення<br>безкоштовно</div></div>
+</div>
+
+<!-- DEALS OF THE DAY -->
+<section class="deals" id="deals">
+  <div class="deals-head R">
+    <div class="deals-head-left">
+      <div class="deals-eyebrow">Лише сьогодні</div>
+      <div class="deals-title">ЗНИЖКИ<br>ДНЯ.</div>
+    </div>
+    <div class="deals-timer">
+      <span class="deals-timer-label">Скінчиться через:</span>
+      <div class="timer-block"><div class="timer-num" id="th">00</div></div>
+      <span class="timer-sep">:</span>
+      <div class="timer-block"><div class="timer-num" id="tm">00</div></div>
+      <span class="timer-sep">:</span>
+      <div class="timer-block"><div class="timer-num" id="ts">00</div></div>
+    </div>
+  </div>
+  <div class="deals-grid R" style="transition-delay:.1s" id="deals-grid"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="cats" id="cats">
+  <div class="cats-head R">
+    <div class="cats-eyebrow">Категорії</div>
+    <h2 class="cats-title">Обери<br>своє.</h2>
+  </div>
+  <div class="cats-grid">
+    <a href="#catalog" class="cat-card" data-num="01" onclick="filterCat('bike')">
+      <div class="cat-card-inner">
+        <span class="cat-icon">🚲</span>
+        <div class="cat-name">ВЕЛОСИПЕДИ</div>
+        <div class="cat-sub">MTB · Road · Urban · BMX</div>
+        <div class="cat-count">7 моделей</div>
+        <div class="cat-tags">
+          <span class="ctag hot">Сезон 🔥</span>
+          <span class="ctag">Ardis</span><span class="ctag">Crossride</span><span class="ctag">26-29"</span>
+        </div>
+      </div>
+      <span class="cat-arrow">↗</span>
+    </a>
+    <a href="#catalog" class="cat-card" data-num="02" onclick="filterCat('escooter')">
+      <div class="cat-card-inner">
+        <span class="cat-icon">⚡</span>
+        <div class="cat-name">ЕЛЕКТРОСАМОКАТИ</div>
+        <div class="cat-sub">Місто · Позашляхові · AWD</div>
+        <div class="cat-count">4 моделі</div>
+        <div class="cat-tags">
+          <span class="ctag hot">Сезон 🔥</span><span class="ctag">Crosser</span><span class="ctag">до 70 км</span>
+        </div>
+      </div>
+      <span class="cat-arrow">↗</span>
+    </a>
+    <a href="#catalog" class="cat-card" data-num="03" onclick="filterCat('scooter')">
+      <div class="cat-card-inner">
+        <span class="cat-icon">🛴</span>
+        <div class="cat-name">САМОКАТИ</div>
+        <div class="cat-sub">Трюкові · Дитячі триколісні</div>
+        <div class="cat-count">7 моделей</div>
+        <div class="cat-tags">
+          <span class="ctag hot">Сезон 🔥</span>
+          <span class="ctag">Explode</span><span class="ctag">Scooter</span><span class="ctag">Maxi</span>
+        </div>
+      </div>
+      <span class="cat-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands">
+  <div class="brands-track" id="brandsEl"></div>
+</div>
+
+<!-- STREET CRED -->
+<section class="street">
+  <div class="street-inner">
+    <div class="street-left R">
+      <h2>
+        <span class="outline">STREET</span><br>
+        <span class="red">CULTURE</span><br>
+        <span>UKRAINE</span>
+      </h2>
+      <p>Ми не просто продаємо. Ми живемо вуличною культурою. Від берлінських скейт-парків до київських рамп — WOW.RIDE це про свободу руху.</p>
+    </div>
+    <div class="street-right R" style="transition-delay:.15s">
+      <div class="feature">
+        <div class="feat-num">01</div>
+        <div class="feat-body"><h3>Без передоплати</h3><p>Замовив → отримав → приміряв → сподобалось → заплатив. Не навпаки.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feat-num">02</div>
+        <div class="feat-body"><h3>Перевірені постачальники</h3><p>Ardis, Crossride, Crosser, Calibri — товар зі складів в Україні, відправка 1-2 дні.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feat-num">03</div>
+        <div class="feat-body"><h3>Знижка дня</h3><p>Щодня 3 моделі з жирними знижками. Таймер відраховує — не зівяй.</p></div>
+      </div>
+      <div class="feature">
+        <div class="feat-num">04</div>
+        <div class="feat-body"><h3>Сервіс в Telegram</h3><p>Відповідаємо за 15 хвилин. Підбираємо модель під твій стиль і бюджет.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section class="catalog" id="catalog">
+  <div class="cat-header R">
+    <div>
+      <div class="cats-eyebrow">Каталог</div>
+      <h2>Весь<br>асортимент.</h2>
+    </div>
+    <a href="#order" class="btn btn-y">Замовити будь-що</a>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="filter-bar R" style="transition-delay:.05s">
+    <button class="ftab active" onclick="filterCat('all',this)">Всі</button>
+    <button class="ftab" onclick="filterCat('bike',this)">🚲 Велосипеди</button>
+    <button class="ftab" onclick="filterCat('escooter',this)">⚡ Електро</button>
+    <button class="ftab" onclick="filterCat('scooter',this)">🛴 Самокати</button>
+    <button class="ftab" onclick="filterCat('protect',this)">🪖 Захист</button>
+  </div>
+
+  <div class="product-grid R" style="transition-delay:.1s" id="catalog-grid"></div>
+
+  <div class="show-more-wrap">
+    <button class="btn btn-bord" id="show-more-btn" onclick="showMore()">Показати більше →</button>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-sec" id="order">
+  <div class="order-bg">ORDER</div>
+  <div class="order-inner">
+    <div class="R">
+      <div class="order-eyebrow">Замовлення</div>
+      <h2 class="order-title">ЗАМОВ<br><span class="y">ЗАРАЗ.</span></h2>
+      <p class="order-sub">Без передоплати. Оплата після отримання на Новій Пошті.<br>Відповімо в Telegram протягом 2 годин.</p>
+    </div>
+    <div class="fshell R" style="transition-delay:.15s">
+      <div class="frow">
+        <div class="ff"><label>Ім'я</label><input type="text" placeholder="Олексій" id="fn"></div>
+        <div class="ff"><label>Telegram / Телефон</label><input type="text" placeholder="@username або +380..." id="fp"></div>
+      </div>
+      <div class="frow">
+        <div class="ff"><label>Категорія</label>
+          <select id="fcat">
+            <option value="">Оберіть...</option>
+            <option>Велосипед</option>
+            <option>Електросамокат</option>
+            <option>Самокат трюковий</option>
+            <option>Самокат міський / електро</option>
+            <option>Захист / Шолом</option>
+            <option>Аксесуари</option>
+          </select>
+        </div>
+        <div class="ff"><label>Бюджет</label>
+          <select id="fbud">
+            <option value="">Оберіть...</option>
+            <option>До 3 000₴</option>
+            <option>3 000–6 000₴</option>
+            <option>6 000–12 000₴</option>
+            <option>12 000–20 000₴</option>
+            <option>20 000+₴</option>
+          </select>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="ff full"><label>Що шукаєш?</label>
+          <textarea placeholder="Для якого стилю катання, розмір, колір, побажання..." id="fm"></textarea>
+        </div>
+      </div>
+      <button class="fsub" onclick="sendOrder()">
+        <span>Відправити замовлення</span>
+        <span class="arr">→</span>
+      </button>
+    </div>
+    <div id="fok">
+      <div class="ft">ЗАМОВЛЕНО!</div>
+      <p>Напишемо в Telegram найближчим часом 🔥</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">WOW<span class="slash">.</span>RIDE</div>
+  <div class="fcopy">© 2025 WOW.RIDE — UKRAINE</div>
+  <div class="fsoc">
+    <a href="https://t.me/znahidkawow" target="_blank">Telegram</a>
+    <a href="https://www.instagram.com/wow.znahidka/" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@wow.znahidka" target="_blank">TikTok</a>
+  </div>
+</footer>
+
+<div class="powered">
+  <a href="https://wowznahidka.github.io/wow-studio/" target="_blank">Зроблено студією <span>WOW.STUDIO</span> — замов свій сайт</a>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal()"></div>
+<div class="modal" id="modal">
+  <div class="modal-inner">
+    <div class="modal-img-side">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span id="modal-emoji">🚲</span>
+    </div>
+    <div class="modal-info">
+      <div class="modal-brand" id="modal-brand">Trek</div>
+      <div class="modal-name" id="modal-name">Назва</div>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-price" id="modal-price">0₴</div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <div class="modal-sizes-label" id="modal-sizes-label">Розміри / комплектація</div>
+      <div class="modal-sizes" id="modal-sizes"></div>
+      <button class="modal-cta" onclick="orderModal()">
+        <span>Замовити без передоплати</span>
+        <span class="arr">→</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== DATA ===== */
+const PRODUCTS = [
+  /* --- ВЕЛОСИПЕДИ — постачальник VeloMarket-24 (Bigopt), дроп --- */
+  {
+    id:'b1', cat:'bike', emoji:'🚲', brand:'Crossride', name:'MATRIX 27.5" MTB',
+    price:8990, badge:'new',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fed%2F18%2F16861574904586.jpg',
+    desc:'Гірський MTB на 27.5" колесах. Сталева рама 19", 21 швидкість, дискові гальма. Робоча конячка для міста й ґрунтовок.',
+    tags:["MTB", "27.5\"", "21 шв.", "Диск. гальма"],
+    sizes:["17\"", "19\""],
+    avail:["19\""]
+  },
+  {
+    id:'b2', cat:'bike', emoji:'🚵', brand:'Crossride', name:'WESTSIDE AM DB 27.5"',
+    price:8790, oldPrice:9990, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F01%2F3b%2F16861574909482.jpg',
+    desc:'Універсальний MTB для трейлів і міста. Рама 15/17/19", подвійні обода, дискові гальма спереду і ззаду.',
+    tags:["MTB", "27.5\"", "AM DB", "3 розміри"],
+    sizes:["15\"", "17\"", "19\""],
+    avail:["15\"", "17\"", "19\""]
+  },
+  {
+    id:'b3', cat:'bike', emoji:'🚲', brand:'Crossride', name:'Bullet 26" ST',
+    price:7790, oldPrice:8990, badge:'sale',
+    desc:'Надійний гірський велосипед на 26" колесах. Сталева рама, 18 швидкостей. Найпопулярніша модель у лінійці — баланс ціни і якості.',
+    tags:["MTB", "26\"", "Хіт продажів"],
+    sizes:["14\"", "15\"", "17\""],
+    avail:["14\"", "15\"", "17\""]
+  },
+  {
+    id:'b4', cat:'bike', emoji:'🚴', brand:'Ardis', name:'BLAZE 29" MTB AL',
+    price:15490, badge:'new',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fb2%2F8f%2F16844274849449.jpg',
+    desc:'Алюмінієвий найнер для швидких катань. Рама 19/21", 29" колеса, дискові гальма. Легкий і котючий.',
+    tags:["MTB", "29\"", "Алюміній"],
+    sizes:["19\"", "21\""],
+    avail:["19\"", "21\""]
+  },
+  {
+    id:'b5', cat:'bike', emoji:'🚵', brand:'Ardis', name:'SHULTZ 27.5" MTB AL',
+    price:13790, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fed%2F71%2F16844274731405.jpg',
+    desc:'Алюмінієвий MTB середнього класу. Рама 19", якісна навіска, відмінна геометрія для довгих маршрутів.',
+    tags:["MTB", "27.5\"", "Алюміній"],
+    sizes:["19\""],
+    avail:["19\""]
+  },
+  {
+    id:'b6', cat:'bike', emoji:'🚲', brand:'Ardis', name:'TITAN 29" HDB',
+    price:19990, oldPrice:22490, badge:'hot',
+    desc:'Топ лінійки: алюмінієвий найнер з гідравлічними дисковими гальмами. Рами 19" і 22". Для тих, хто хоче максимум.',
+    tags:["MTB", "29\"", "Гідравліка", "TOP"],
+    sizes:["19\"", "22\""],
+    avail:["19\"", "22\""]
+  },
+  {
+    id:'b7', cat:'bike', emoji:'🚴', brand:'Ardis', name:'SANTANA 24" CTB',
+    price:7290, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fd8%2F5a%2F16818329859946.jpg',
+    desc:'Підлітковий велосипед 24" зі сталевою рамою 15". Ідеальний перший «дорослий» велик для школяра.',
+    tags:["CTB", "24\"", "Підлітковий"],
+    sizes:["15\""],
+    avail:["15\""]
+  },
+  {
+    id:'b8', cat:'bike', emoji:'🚲', brand:'Crossride', name:'SHARK 24" MTB',
+    price:7190, oldPrice:7990, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F91%2F72%2F16852923668582.jpg',
+    desc:'Дитячо-підлітковий MTB 24" з рамою 11". 18 швидкостей, міцна сталь — переживе будь-які експерименти.',
+    tags:["MTB", "24\"", "Дитячий"],
+    sizes:["11\""],
+    avail:["11\""]
+  },
+  /* --- ЕЛЕКТРОСАМОКАТИ — постачальник Crosser (Одеса), дроп --- */
+  {
+    id:'e1', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'E9 Premium 10"',
+    price:14490, oldPrice:15990, badge:'sale',
+    desc:'Бестселер: складаний електросамокат з амортизацією, 10" колеса, запас ходу до 45 км. Місто — твоє.',
+    tags:["350W", "45 км", "10\"", "Складаний"],
+    sizes:["36V/7.5Ah", "36V/10Ah"],
+    avail:["36V/7.5Ah", "36V/10Ah"]
+  },
+  {
+    id:'e2', cat:'escooter', emoji:'🛴', brand:'Crosser', name:'M5 8.5"',
+    price:11990, badge:'',
+    desc:'Легкий міський електросамокат: 8.5" колеса, до 30 км ходу, вага 12 кг. Для щоденних поїздок на роботу.',
+    tags:["300W", "30 км", "12 кг"],
+    sizes:["Standard"],
+    avail:["Standard"]
+  },
+  {
+    id:'e3', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'T4 Turbo 60V',
+    price:28990, badge:'new',
+    desc:'Потужний позашляховий e-самокат: 60V, гідравлічна підвіска, до 70 км ходу. Для тих, кому мало.',
+    tags:["1000W+", "70 км", "Гідравліка"],
+    sizes:["60V/21Ah"],
+    avail:["60V/21Ah"]
+  },
+  {
+    id:'e4', cat:'escooter', emoji:'🔥', brand:'Crosser', name:'Rocket AWD 1600W×2',
+    price:43990, badge:'hot',
+    img:'https://static-host-3.bigopt.com/image-cache/?w=200&h=200&a=3&fi=49250&wt=0&f=static-files%2Fimg%2Fgoods%2Fe0%2Fc8%2F5135413831w640h6405135413831-jpg-1733599823-653.webp',
+    desc:'Звір повного приводу: 1600W на кожне колесо, 60V/25Ah. Максимальна динаміка серед самокатів в Україні.',
+    tags:["AWD", "3200W", "60V/25Ah"],
+    sizes:["60V/25Ah"],
+    avail:["60V/25Ah"]
+  },
+  /* --- САМОКАТИ / ДИТЯЧИЙ ТРАНСПОРТ — VeloMarket-24, дроп --- */
+  {
+    id:'s1', cat:'scooter', emoji:'🛴', brand:'Explode', name:'2003 Трюковий',
+    price:2890, badge:'hot',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F41%2F19%2F16775111643534.jpg',
+    desc:'Трюковий самокат для скейт-парку: посилена дека, алюмінієві диски, ABEC підшипники. Витримує жорсткі приземлення.',
+    tags:["Трюковий", "Алюміній", "100 кг"],
+    sizes:["Стандарт"],
+    avail:["Стандарт"]
+  },
+  {
+    id:'s2', cat:'scooter', emoji:'🛴', brand:'Explode', name:'HD-2005 Трюковий',
+    price:2690, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F52%2F3b%2F16775111687153.jpg',
+    desc:'Трюковий самокат початкового-середнього рівня. Міцний руль, неопренові гріпси, легкий розгін.',
+    tags:["Трюковий", "HD дека"],
+    sizes:["Стандарт"],
+    avail:["Стандарт"]
+  },
+  {
+    id:'s3', cat:'scooter', emoji:'🛴', brand:'Explode', name:'S2004 Трюковий',
+    price:2490, oldPrice:2890, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fb5%2F2f%2F16775100906411.jpg',
+    desc:'Найдоступніший трюковий самокат лінійки. Ідеальний перший «трюкач» для підлітка.',
+    tags:["Трюковий", "Старт"],
+    sizes:["Стандарт"],
+    avail:["Стандарт"]
+  },
+  {
+    id:'s4', cat:'scooter', emoji:'🛴', brand:'Scooter', name:'MG055 триколісний',
+    price:2590, badge:'new',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F5d%2F84%2F16775109417171.jpg',
+    desc:'Преміум триколісний самокат для дітей: світні колеса, регульований руль, нахилове кермування.',
+    tags:["3 колеса", "LED колеса", "3-8 років"],
+    sizes:["3-8 р."],
+    avail:["3-8 р."]
+  },
+  {
+    id:'s5', cat:'scooter', emoji:'🛴', brand:'Scooter', name:'MG002B Графіті',
+    price:1190, oldPrice:1390, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F51%2F60%2F16775109364079.jpg',
+    desc:'Триколісний дитячий самокат з яскравим принтом. Стійкий, легкий, з ремінцем для перенесення.',
+    tags:["3 колеса", "2-6 років"],
+    sizes:["2-6 р."],
+    avail:["2-6 р."]
+  },
+  {
+    id:'s6', cat:'scooter', emoji:'🛴', brand:'Scooter', name:'MG002A',
+    price:1090, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F51%2F4e%2F16775109317736.jpg',
+    desc:'Базовий триколісний самокат: 4 кольори, м\'які колеса PU, проста і надійна конструкція.',
+    tags:["3 колеса", "PU колеса", "4 кольори"],
+    sizes:["Червоний", "Блакитний", "Рожевий", "Салатовий"],
+    avail:["Червоний", "Блакитний", "Рожевий", "Салатовий"]
+  },
+  {
+    id:'s7', cat:'scooter', emoji:'🛴', brand:'Maxi Scooter', name:'KS022-909',
+    price:1090, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fb5%2Ff5%2F16775101401565.jpg',
+    desc:'Триколісний maxi-самокат з широкою декою. Помаранчевий, для дітей від 3 років.',
+    tags:["3 колеса", "Широка дека"],
+    sizes:["3+ р."],
+    avail:["3+ р."]
+  },
+  /* --- ЗАХИСТ І АКСЕСУАРИ — VeloMarket-24, дроп --- */
+  {
+    id:'p1', cat:'protect', emoji:'🪖', brand:'Calibri', name:'FSK-TX97 Шолом',
+    price:1290, badge:'hot',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F8c%2Fac%2F16775114208937.jpg',
+    desc:'Дорослий велошолом з вентиляцією і регулюванням розміру L (55-62). Кілька розцвіток.',
+    tags:["L 55-62", "Вентиляція"],
+    sizes:["Чорно-червоний", "Чорно-білий", "Жовто-зелений"],
+    avail:["Чорно-червоний", "Чорно-білий", "Жовто-зелений"]
+  },
+  {
+    id:'p2', cat:'protect', emoji:'🪖', brand:'Calibri', name:'FSK-503 Дитячий казанок',
+    price:590, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Faf%2F0e%2F16775112884052.jpg',
+    desc:'Дитячий шолом-казанок S (48-55): скейт, самокат, велик. Рожевий, чорний, білий, помаранчевий.',
+    tags:["S 48-55", "4 кольори"],
+    sizes:["S"],
+    avail:["S"]
+  },
+  {
+    id:'p3', cat:'protect', emoji:'🪖', brand:'WOW', name:'Шолом дитячий «Зірки»',
+    price:390, oldPrice:490, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F8a%2F91%2F16775121051901.jpg',
+    desc:'Легкий дитячий велошолом з принтом зірок. Перший захист для наймолодших райдерів.',
+    tags:["Дитячий", "Легкий"],
+    sizes:["Рожевий"],
+    avail:["Рожевий"]
+  },
+  {
+    id:'p4', cat:'protect', emoji:'🧤', brand:'Benotto', name:'LC-60080 Рукавички',
+    price:640, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Ff1%2F79%2F16775111146600.jpg',
+    desc:'Закриті велорукавички з гель-вставками. 4 кольори: червоні, бірюзові, помаранчеві, зелені.',
+    tags:["Гель", "Закриті", "4 кольори"],
+    sizes:["M", "L", "XL"],
+    avail:["M", "L"]
+  },
+  {
+    id:'p5', cat:'protect', emoji:'🎒', brand:'BAISK', name:'Сумка нарамна + тримач',
+    price:490, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fa6%2Fe3%2F16870218068503.webp',
+    desc:'Нарамна сумка для смартфона з виходом для навушників і відділом для інструментів. Маст-хев для міста.',
+    tags:["Смартфон", "Водостійка"],
+    sizes:["Стандарт"],
+    avail:["Стандарт"]
+  },
+  {
+    id:'p6', cat:'protect', emoji:'🔧', brand:'WOW', name:'Мультитул 7-в-1',
+    price:250, badge:'',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F10%2F30%2F16870218762570.webp',
+    desc:'Набір шестигранників 7-в-1 — завжди з собою в кишені чи підсумку. Підтяжка будь-якого болта в дорозі.',
+    tags:["7-в-1", "Кишеньковий"],
+    sizes:["Стандарт"],
+    avail:["Стандарт"]
+  }
+];
+
+const DEALS = PRODUCTS.filter(p=>p.badge==='sale').slice(0,3);
+
+/* ===== RENDER ===== */
+let currentFilter = 'all';
+const INITIAL_SHOW = 9;
+let showingAll = false;
+
+function priceFmt(n){return n.toLocaleString('uk-UA')+'₴'}
+
+function cardHTML(p, clickable=true, showBadge=true){
+  const badge = showBadge && p.badge ? `<div class="prod-badge ${p.badge}">${p.badge==='new'?'Новинка':p.badge==='hot'?'🔥 HOT':'-'+Math.round((1-p.price/p.oldPrice)*100)+'%'}</div>` : '';
+  const oldP = p.oldPrice ? `<span class="old">${priceFmt(p.oldPrice)}</span>` : '';
+  const sizes = p.sizes.map(s=>`<span class="sz ${p.avail.includes(s)?'avail':''}">${s}</span>`).join('');
+  return `
+  <${clickable?`a href="#" class="prod-card" data-id="${p.id}" onclick="openModal('${p.id}');return false;"`:'div class="prod-card"'}>
+    <div class="prod-img">
+      ${p.img?`<img src="${p.img}" alt="${p.brand} ${p.name}" loading="lazy" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;background:#f2f0eb" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div style="font-size:6rem;position:relative;z-index:1;display:none">${p.emoji}</div>`:`<div style="font-size:6rem;position:relative;z-index:1">${p.emoji}</div>`}
+      ${badge}
+    </div>
+    <div class="prod-body">
+      <div class="prod-brand">${p.brand}</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-price">${oldP}${priceFmt(p.price)}</div>
+      <div class="prod-sizes">${sizes}</div>
+    </div>
+    <div class="prod-quick">Детальніше →</div>
+  </${clickable?'a':'div'}>`;
+}
+
+function renderDeals(){
+  const g = document.getElementById('deals-grid');
+  if(!g) return;
+  g.innerHTML = DEALS.map(p=>cardHTML(p)).join('');
+}
+
+function renderCatalog(){
+  const g = document.getElementById('catalog-grid');
+  if(!g) return;
+  const filtered = currentFilter==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===currentFilter);
+  const toShow = showingAll ? filtered : filtered.slice(0, INITIAL_SHOW);
+  g.innerHTML = toShow.map(p=>cardHTML(p)).join('');
+  const btn = document.getElementById('show-more-btn');
+  if(filtered.length > INITIAL_SHOW && !showingAll){
+    btn.style.display='inline-flex';
+    btn.textContent=`Показати більше (ще ${filtered.length - INITIAL_SHOW}) →`;
+  } else {
+    btn.style.display='none';
+  }
+  // re-attach reveals
+  document.querySelectorAll('.prod-card').forEach(el=>{
+    if(!el.classList.contains('R')) return;
+  });
+  cursor_attach();
+}
+
+function filterCat(cat, btn){
+  currentFilter = cat;
+  showingAll = false;
+  // update tabs
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderCatalog();
+  // scroll to catalog if triggered from cat cards
+  if(!btn) document.getElementById('catalog')?.scrollIntoView({behavior:'smooth'});
+}
+
+function showMore(){
+  showingAll = true;
+  renderCatalog();
+}
+
+/* ===== MODAL ===== */
+let currentModalProduct = null;
+
+function openModal(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  currentModalProduct = p;
+  document.getElementById('modal-emoji').innerHTML = p.img?`<img src="${p.img}" alt="${p.brand} ${p.name}" style="max-width:100%;max-height:220px;object-fit:contain;background:#f2f0eb">`:p.emoji;
+  document.getElementById('modal-brand').textContent = p.brand;
+  document.getElementById('modal-name').textContent = p.name;
+  const oldP = p.oldPrice ? `<span class="old">${priceFmt(p.oldPrice)}</span>` : '';
+  document.getElementById('modal-price').innerHTML = oldP + priceFmt(p.price);
+  document.getElementById('modal-desc').textContent = p.desc;
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t=>`<span class="mtag">${t}</span>`).join('');
+  document.getElementById('modal-sizes-label').textContent = p.cat==='bike'?'Розміри рами':'Варіанти';
+  document.getElementById('modal-sizes').innerHTML = p.sizes.map((s,i)=>{
+    const av = p.avail.includes(s);
+    return `<span class="msz ${av?'':''}${i===0&&av?' sel':''}" onclick="selectSize(this)">${s}${av?'':' ✕'}</span>`;
+  }).join('');
+  document.getElementById('modal-bg').classList.add('open');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function selectSize(el){
+  document.querySelectorAll('.msz').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function orderModal(){
+  if(!currentModalProduct) return;
+  const selSize = document.querySelector('.msz.sel')?.textContent || '';
+  document.getElementById('fn').value='';
+  document.getElementById('fp').value='';
+  document.getElementById('fcat').value='';
+  document.getElementById('fm').value=`${currentModalProduct.brand} ${currentModalProduct.name}${selSize?', '+selSize:''} — ${priceFmt(currentModalProduct.price)}`;
+  closeModal();
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ===== TICKER ===== */
+const tickItems = ['ВЕЛОСИПЕДИ','ЕЛЕКТРОСАМОКАТИ','САМОКАТИ','ВУЛИЧНИЙ СТИЛЬ','БЕЗ ПЕРЕДОПЛАТИ','NOVA POSHTA','UKRAINE','RIDE FREE','ROLL HARDER'];
+const tickEl = document.getElementById('tickerEl');
+tickEl.innerHTML = [...tickItems,...tickItems].map(i=>`<span class="titem">${i}<span class="x">×</span></span>`).join('');
+
+/* ===== BRANDS ===== */
+const brands = ['ARDIS','CROSSRIDE','CROSSER','EXPLODE','CALIBRI','BENOTTO','SHIMANO','SCOOTER','MAXI SCOOTER','HAKUBA','CST','BAISK'];
+const brandsEl = document.getElementById('brandsEl');
+brandsEl.innerHTML = [...brands,...brands].map(b=>`<span class="brand-item">${b}</span>`).join('');
+
+/* ===== COUNTDOWN (midnight) ===== */
+function updateTimer(){
+  const now=new Date(), end=new Date(now);
+  end.setHours(23,59,59,999);
+  const diff=end-now;
+  const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+  document.getElementById('th').textContent=String(h).padStart(2,'0');
+  document.getElementById('tm').textContent=String(m).padStart(2,'0');
+  document.getElementById('ts').textContent=String(s).padStart(2,'0');
+}
+updateTimer(); setInterval(updateTimer,1000);
+
+/* ===== CURSOR ===== */
+const cur=document.getElementById('cur');
+let mx=0,my=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function cursor_attach(){
+  document.querySelectorAll('a,button,.cat-card,.prod-card,.msz').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('h'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('h'));
+  });
+}
+cursor_attach();
+
+/* ===== REVEAL ===== */
+const obs=new IntersectionObserver(ee=>{ee.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.R').forEach(el=>obs.observe(el));
+
+/* ===== SMOOTH SCROLL ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    const t=document.querySelector(href);
+    if(t&&href.length>1){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
+  });
+});
+
+/* ===== ORDER ===== */
+function sendOrder(){
+  const n=document.getElementById('fn').value.trim();
+  const p=document.getElementById('fp').value.trim();
+  const cat=document.getElementById('fcat').value;
+  const bud=document.getElementById('fbud').value;
+  const m=document.getElementById('fm').value;
+  if(!n||!p){alert('Заповніть ім\'я та контакт');return;}
+  const txt=`🛒 ЗАМОВЛЕННЯ WOW.RIDE%0A👤 ${encodeURIComponent(n)}%0A📱 ${encodeURIComponent(p)}${cat?'%0A📦 '+encodeURIComponent(cat):''}${bud?'%0A💰 '+encodeURIComponent(bud):''}${m?'%0A🚲 '+encodeURIComponent(m):''}`;
+  try{navigator.clipboard.writeText(decodeURIComponent(txt.replace(/%0A/g,'\n')));}catch(e){}
+  window.open(`https://t.me/znahidkawow?text=${txt}`,'_blank');
+  document.getElementById('fok').style.display='block';
+}
+
+/* ===== INIT ===== */
+renderDeals();
+renderCatalog();
+</script>
+</body>
+</html>
