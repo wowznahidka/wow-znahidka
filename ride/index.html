@@ -496,6 +496,10 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
         </div>
       </div>
       <div class="frow">
+        <div class="ff"><label>Місто</label><input type="text" placeholder="Київ" id="fcity"></div>
+        <div class="ff"><label>Відділення / Поштомат НП</label><input type="text" placeholder="№23" id="fdep"></div>
+      </div>
+      <div class="frow">
         <div class="ff full"><label>Що шукаєш?</label>
           <textarea placeholder="Для якого стилю катання, розмір, колір, побажання..." id="fm"></textarea>
         </div>
@@ -507,7 +511,7 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
     </div>
     <div id="fok">
       <div class="ft">ЗАМОВЛЕНО!</div>
-      <p>Напишемо в Telegram найближчим часом 🔥</p>
+      <p>Замовлення прийнято! Напишемо найближчим часом 🔥<br>Терміново? Пиши напряму: <a href="https://t.me/znahidkawow" target="_blank" style="color:var(--yellow)">@znahidkawow</a></p>
     </div>
   </div>
 </section>
@@ -946,17 +950,60 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 });
 
 /* ===== ORDER ===== */
-function sendOrder(){
+const GAS_URL='https://script.google.com/macros/s/AKfycbxnbKNfrT38T4c7drhOI5IomuFzLNCeXZPykGwBSQpgtZUkme6Ip91Zio9weRgQYs-mCw/exec';
+const UTM=(()=>{try{const q=new URLSearchParams(location.search);const u={};['utm_source','utm_medium','utm_campaign','utm_content'].forEach(k=>{if(q.get(k))u[k]=q.get(k)});return Object.keys(u).length?u:null}catch(e){return null}})();
+
+async function postGAS(payload){
+  const body=JSON.stringify(payload);
+  try{
+    const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),7000);
+    const res=await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body,signal:ctrl.signal});
+    clearTimeout(tid);return res.ok;
+  }catch(e){
+    try{fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body});return null}catch(_){return false}
+  }
+}
+
+let _orderLock=false;
+async function sendOrder(){
+  if(_orderLock)return;
   const n=document.getElementById('fn').value.trim();
   const p=document.getElementById('fp').value.trim();
+  const city=document.getElementById('fcity').value.trim();
+  const dep=document.getElementById('fdep').value.trim();
   const cat=document.getElementById('fcat').value;
   const bud=document.getElementById('fbud').value;
-  const m=document.getElementById('fm').value;
-  if(!n||!p){alert('Заповніть ім\'я та контакт');return;}
-  const txt=`🛒 ЗАМОВЛЕННЯ WOW.RIDE%0A👤 ${encodeURIComponent(n)}%0A📱 ${encodeURIComponent(p)}${cat?'%0A📦 '+encodeURIComponent(cat):''}${bud?'%0A💰 '+encodeURIComponent(bud):''}${m?'%0A🚲 '+encodeURIComponent(m):''}`;
-  try{navigator.clipboard.writeText(decodeURIComponent(txt.replace(/%0A/g,'\n')));}catch(e){}
-  window.open(`https://t.me/znahidkawow?text=${txt}`,'_blank');
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!p){alert("Заповніть ім'я та контакт");return;}
+  _orderLock=true;
+  const btn=document.querySelector('.fsub');
+  if(btn){btn.disabled=true;btn.querySelector('span').textContent='Відправляємо...';}
+
+  const prod=currentModalProduct;
+  const items=[m||'', cat?('Категорія: '+cat):'', bud?('Бюджет: '+bud):''].filter(Boolean).join('\n')||'Консультація';
+  const payload={
+    action:'new_order',
+    fio:n, phone:p, city:city||'—',
+    delivery:(city||'—')+(dep?', '+dep:''),
+    items:'[RIDE] '+items,
+    total:prod?prod.price:0,
+    promo:'', promo_amt:0,
+    cart:prod?[{id:prod.id,brand:prod.brand,name:prod.name,price:prod.price,size:(document.querySelector('.msz.sel')?.textContent||''),qty:1,supplier:'ride'}]:[],
+    utm:UTM, ref:'ride'
+  };
+  try{localStorage.setItem('wow_ride_pending',JSON.stringify({...payload,ts:Date.now()}))}catch(_){}
+
+  const ok=await postGAS(payload);
+  if(ok===false){
+    // мережа лягла повністю — відкриваємо Telegram з текстом замовлення
+    const txt=`🛒 ЗАМОВЛЕННЯ WOW.RIDE%0A👤 ${encodeURIComponent(n)}%0A📱 ${encodeURIComponent(p)}%0A🏙 ${encodeURIComponent(city+' '+dep)}%0A📦 ${encodeURIComponent(items.replace(/\n/g,' · '))}`;
+    window.open(`https://t.me/znahidkawow?text=${txt}`,'_blank');
+  }else{
+    try{localStorage.removeItem('wow_ride_pending')}catch(_){}
+  }
+  document.querySelector('.fshell').style.display='none';
   document.getElementById('fok').style.display='block';
+  document.getElementById('fok').scrollIntoView({behavior:'smooth',block:'center'});
 }
 
 /* ===== INIT ===== */
