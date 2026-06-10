@@ -207,6 +207,11 @@ h1.hero-title .ln:nth-child(3) span{animation-delay:.35s;-webkit-text-stroke:2px
 .modal-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
 .mtag{font-family:var(--M);font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border:1px solid rgba(242,240,235,.1);color:rgba(242,240,235,.35)}
 
+/* GALLERY */
+.modal-thumbs{position:absolute;bottom:.75rem;left:.75rem;right:.75rem;display:flex;gap:.4rem;justify-content:center;z-index:5;flex-wrap:wrap}
+.mthumb{width:46px;height:46px;object-fit:cover;border:2px solid rgba(242,240,235,.25);cursor:pointer;background:#f2f0eb;transition:border-color .15s}
+.mthumb:hover,.mthumb.act{border-color:var(--yellow)}
+
 /* ORDER SECTION */
 .order-sec{padding:100px 40px;background:var(--gray);position:relative;overflow:hidden}
 .order-bg{position:absolute;font-family:var(--D);font-size:25vw;color:rgba(242,240,235,.015);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:-.02em}
@@ -511,7 +516,9 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
     </div>
     <div id="fok">
       <div class="ft">ЗАМОВЛЕНО!</div>
-      <p>Замовлення прийнято! Напишемо найближчим часом 🔥<br>Терміново? Пиши напряму: <a href="https://t.me/znahidkawow" target="_blank" style="color:var(--yellow)">@znahidkawow</a></p>
+      <p>Замовлення прийнято! Напишемо найближчим часом 🔥</p>
+      <a id="fok-tg" href="https://t.me/znahidkawow" target="_blank" class="btn btn-y" style="margin-top:1.2rem">✈️ Продублювати в Telegram</a>
+      <p style="margin-top:.8rem">Так замовлення точно не загубиться — одразу в чат <a href="https://t.me/znahidkawow" target="_blank" style="color:var(--yellow)">@znahidkawow</a></p>
     </div>
   </div>
 </section>
@@ -537,6 +544,7 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
     <div class="modal-img-side">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <span id="modal-emoji">🚲</span>
+      <div class="modal-thumbs" id="modal-thumbs"></div>
     </div>
     <div class="modal-info">
       <div class="modal-brand" id="modal-brand">Trek</div>
@@ -562,6 +570,7 @@ const PRODUCTS = [
     id:'b1', cat:'bike', emoji:'🚲', brand:'Crossride', name:'MATRIX 27.5" MTB',
     price:8990, badge:'new',
     img:'img/b1.webp',
+    imgs:['img/b1_2.webp','img/b1_3.webp','img/b1_4.webp'],
     desc:'Гірський MTB на 27.5" колесах. Сталева рама 19", 21 швидкість, дискові гальма. Робоча конячка для міста й ґрунтовок.',
     tags:["MTB", "27.5\"", "21 шв.", "Диск. гальма"],
     sizes:["17\"", "19\""],
@@ -580,6 +589,7 @@ const PRODUCTS = [
     id:'b3', cat:'bike', emoji:'🚲', brand:'Crossride', name:'Bullet 26" ST',
     price:7790, oldPrice:8990, badge:'sale',
     img:'img/b3.webp',
+    imgs:['img/b3_2.webp','img/b3_3.webp','img/b3_4.webp'],
     desc:'Надійний гірський велосипед на 26" колесах. Сталева рама, 18 швидкостей. Найпопулярніша модель у лінійці — баланс ціни і якості.',
     tags:["MTB", "26\"", "Хіт продажів"],
     sizes:["14\"", "15\"", "17\""],
@@ -616,6 +626,7 @@ const PRODUCTS = [
     id:'b7', cat:'bike', emoji:'🚴', brand:'Ardis', name:'SANTANA 24" CTB',
     price:7290, badge:'',
     img:'img/b7.webp',
+    imgs:['img/b7_2.webp','img/b7_3.webp','img/b7_4.webp'],
     desc:'Підлітковий велосипед 24" зі сталевою рамою 15". Ідеальний перший «дорослий» велик для школяра.',
     tags:["CTB", "24\"", "Підлітковий"],
     sizes:["15\""],
@@ -625,6 +636,7 @@ const PRODUCTS = [
     id:'b8', cat:'bike', emoji:'🚲', brand:'Crossride', name:'SHARK 24" MTB',
     price:7190, oldPrice:7990, badge:'sale',
     img:'img/b8.webp',
+    imgs:['img/b8_2.webp','img/b8_3.webp'],
     desc:'Дитячо-підлітковий MTB 24" з рамою 11". 18 швидкостей, міцна сталь — переживе будь-які експерименти.',
     tags:["MTB", "24\"", "Дитячий"],
     sizes:["11\""],
@@ -634,6 +646,7 @@ const PRODUCTS = [
     id:'b9', cat:'bike', emoji:'🚲', brand:'Ardis', name:'BERTA 28" Міський',
     price:8490, badge:'new',
     img:'img/b9.webp',
+    imgs:['img/b9_2.webp','img/b9_3.webp','img/b9_4.webp'],
     desc:'Жіночий міський велосипед 28" з рамою 19" і низьким заходом. Біло-рожевий, з крилами — для прогулянок містом.',
     tags:["Міський", "28\"", "Жіночий"],
     sizes:["19\""],
@@ -643,6 +656,7 @@ const PRODUCTS = [
     id:'b10', cat:'bike', emoji:'🚴', brand:'Ardis', name:'ГЕТЬМАН 28" Гібрид',
     price:7990, badge:'',
     img:'img/b10.webp',
+    imgs:['img/b10_2.webp','img/b10_3.webp','img/b10_4.webp'],
     desc:'Чоловічий міський гібрид 28" — швидкий, невибагливий, практичний. Робоча конячка на щодень.',
     tags:["Гібрид", "28\"", "Місто"],
     sizes:["19\""],
@@ -652,6 +666,7 @@ const PRODUCTS = [
     id:'b11', cat:'bike', emoji:'🚲', brand:'Dorozhnik', name:'OBSIDIAN 28"',
     price:10490, badge:'',
     img:'img/b11.webp',
+    imgs:['img/b11_2.webp','img/b11_3.webp','img/b11_4.webp'],
     desc:'Дорожній велосипед 28" з рамою 19.5". Рубіновий колір, класична посадка, надійна навіска.',
     tags:["Дорожній", "28\""],
     sizes:["19.5\""],
@@ -661,6 +676,7 @@ const PRODUCTS = [
     id:'b12', cat:'bike', emoji:'🚲', brand:'Dorozhnik', name:'RETRO Velosteel 28"',
     price:11990, badge:'hot',
     img:'img/b12.webp',
+    imgs:['img/b12_2.webp','img/b12_3.webp'],
     desc:'Ретро-стиль у сучасному виконанні: сталева рама 19", втулка Velosteel. Найстильніший велик каталогу.',
     tags:["Ретро", "28\"", "Velosteel"],
     sizes:["19\""],
@@ -697,6 +713,7 @@ const PRODUCTS = [
     id:'b16', cat:'bike', emoji:'🤸', brand:'Crossride', name:'FREESTYLE BMX 20"',
     price:8390, badge:'',
     img:'img/b16.webp',
+    imgs:['img/b16_2.webp','img/b16_3.webp','img/b16_4.webp'],
     desc:'BMX для фрістайлу від Crossride. Міцна сталь, агресивна геометрія. Чорно-помаранчевий.',
     tags:["BMX", "20\"", "Freestyle"],
     sizes:["20\""],
@@ -743,6 +760,7 @@ const PRODUCTS = [
     id:'e6', cat:'escooter', emoji:'🔋', brand:'Formula', name:'MAGNUM 29" 350W E-Bike',
     price:34490, badge:'',
     img:'img/e6.webp',
+    imgs:['img/e6_2.webp','img/e6_3.webp','img/e6_4.webp'],
     desc:'Електро-найнер 29" з мотором 350Вт і батареєю 36В 12.5Аг. Рама 20.5" — для високих райдерів.',
     tags:["E-Bike", "29\"", "350W"],
     sizes:["20.5\""],
@@ -752,6 +770,7 @@ const PRODUCTS = [
     id:'e7', cat:'escooter', emoji:'⚡', brand:'Formula', name:'F-1 29" 500W E-Bike',
     price:46990, badge:'hot',
     img:'img/e7.webp',
+    imgs:['img/e7_2.webp','img/e7_3.webp'],
     desc:'Топовий електровелосипед: 500Вт, 48В 17.5Аг, 29" колеса. Максимальна швидкість і запас ходу в лінійці.',
     tags:["E-Bike", "500W", "48V 17.5Ah"],
     sizes:["21\""],
@@ -762,6 +781,7 @@ const PRODUCTS = [
     id:'e1', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'E9 MAX 15Ah 10"',
     price:21990, oldPrice:26999, badge:'sale',
     img:'https://crosser.com.ua/content/images/36/356x356l85nn0/crosser-e9-max-b-92420802140357.webp',
+    imgs:['https://crosser.com.ua/content/images/36/356x356l85nn0/crosser-e9-max-b-53916682699516.webp','https://crosser.com.ua/content/images/36/356x356l85nn0/crosser-e9-max-b-84411750041122.webp','https://crosser.com.ua/content/images/36/356x356l85nn0/crosser-e9-max-b-36671933000255.webp'],
     desc:'Бестселер Crosser: складаний електросамокат з батареєю 15Ah, 10" колеса. Запас ходу до 45-50 км — місто твоє. Pneumatic або HoneyComb (перфорація) колеса.',
     tags:["15Ah", "10\"", "до 50 км", "Складаний"],
     sizes:["Pneumatic", "HoneyComb"],
@@ -771,6 +791,7 @@ const PRODUCTS = [
     id:'e2', cat:'escooter', emoji:'🛴', brand:'Crosser', name:'E9 MAX Absorber 10"',
     price:22990, oldPrice:28999, badge:'hot',
     img:'https://crosser.com.ua/content/images/42/356x356l85nn0/crosser-e9-max-absorber-73317249623996.webp',
+    imgs:['https://crosser.com.ua/content/images/42/356x356l85nn0/crosser-e9-max-absorber-98005369708777.webp','https://crosser.com.ua/content/images/42/356x356l85nn0/crosser-e9-max-absorber-62614719446737.webp','https://crosser.com.ua/content/images/42/356x356l85nn0/78968983050524.webp'],
     desc:'E9 MAX з передніми і задніми амортизаторами — м\'яко навіть на розбитому асфальті. 10" колеса, складана конструкція.',
     tags:["Амортизатори", "10\"", "15Ah"],
     sizes:["Pneumatic", "HoneyComb"],
@@ -780,6 +801,7 @@ const PRODUCTS = [
     id:'e3', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'T4 Pneumatic 10"',
     price:22990, oldPrice:29999, badge:'sale',
     img:'https://crosser.com.ua/content/images/30/356x356l85nn0/elektrosamokat-crosser-t4-pneumatic-10-mt2771-eu-62729051646128.webp',
+    imgs:['https://crosser.com.ua/content/images/30/356x356l85nn0/elektrosamokat-crosser-t4-pneumatic-10-mt2771-eu-82148795948480.webp','https://crosser.com.ua/content/images/30/356x356l85nn0/elektrosamokat-crosser-t4-pneumatic-10-mt2771-eu-62894850246305.webp','https://crosser.com.ua/content/images/30/356x356l85nn0/elektrosamokat-crosser-t4-pneumatic-10-mt2771-eu-39320173946220.webp'],
     desc:'Потужний міський e-самокат Crosser T4: 10" пневмоколеса, амортизація, впевнена динаміка. Версії 2023 і 2024 року.',
     tags:["10\"", "Пневмо", "Амортизація"],
     sizes:["Standard", "2024"],
@@ -789,6 +811,7 @@ const PRODUCTS = [
     id:'e4', cat:'escooter', emoji:'🔥', brand:'Crosser', name:'T4 TURBO 10"',
     price:31790, oldPrice:39499, badge:'hot',
     img:'https://crosser.com.ua/content/images/31/356x356l85nn0/elektrosamokat-crosser-t4-turbo-pneumatic-10-nt9951-eu-97673529536054.webp',
+    imgs:['https://crosser.com.ua/content/images/31/356x356l85nn0/elektrosamokat-crosser-t4-turbo-pneumatic-10-nt9951-eu-63402853874842.webp','https://crosser.com.ua/content/images/31/356x356l85nn0/elektrosamokat-crosser-t4-turbo-pneumatic-10-nt9951-eu-91871651833687.webp','https://crosser.com.ua/content/images/31/356x356l85nn0/elektrosamokat-crosser-t4-turbo-pneumatic-10-nt9951-eu-88350902878169.webp'],
     desc:'Топ лінійки T4: версія TURBO з посиленим мотором і батареєю. Для тих, кому звичайного самоката мало. Є версія TURBO SPORT і комплектація з сидінням.',
     tags:["TURBO", "10\"", "MAX потужність"],
     sizes:["TURBO", "TURBO SPORT"],
@@ -826,6 +849,7 @@ const PRODUCTS = [
     id:'s4', cat:'scooter', emoji:'🛴', brand:'Scooter', name:'MG055 триколісний',
     price:2590, badge:'new',
     img:'img/s4.webp',
+    imgs:['img/s4_2.webp','img/s4_3.webp','img/s4_4.webp'],
     desc:'Преміум триколісний самокат для дітей: світні колеса, регульований руль, нахилове кермування.',
     tags:["3 колеса", "LED колеса", "3-8 років"],
     sizes:["3-8 р."],
@@ -835,6 +859,7 @@ const PRODUCTS = [
     id:'s5', cat:'scooter', emoji:'🛴', brand:'Scooter', name:'MG002B Графіті',
     price:1190, oldPrice:1390, badge:'sale',
     img:'img/s5.webp',
+    imgs:['img/s5_2.webp','img/s5_3.webp','img/s5_4.webp'],
     desc:'Триколісний дитячий самокат з яскравим принтом. Стійкий, легкий, з ремінцем для перенесення.',
     tags:["3 колеса", "2-6 років"],
     sizes:["2-6 р."],
@@ -872,6 +897,7 @@ const PRODUCTS = [
     id:'p2', cat:'protect', emoji:'🪖', brand:'Calibri', name:'FSK-503 Дитячий казанок',
     price:590, badge:'',
     img:'img/p2.webp',
+    imgs:['img/p2_2.webp','img/p2_3.webp','img/p2_4.webp'],
     desc:'Дитячий шолом-казанок S (48-55): скейт, самокат, велик. Рожевий, чорний, білий, помаранчевий.',
     tags:["S 48-55", "4 кольори"],
     sizes:["S"],
@@ -1038,7 +1064,10 @@ function openModal(id){
   const p = PRODUCTS.find(x=>x.id===id);
   if(!p) return;
   currentModalProduct = p;
-  document.getElementById('modal-emoji').innerHTML = p.img?`<img src="${p.img}" alt="${p.brand} ${p.name}" style="max-width:100%;max-height:220px;object-fit:contain;background:#f2f0eb">`:p.emoji;
+  const gallery = [p.img, ...(p.imgs||[])].filter(Boolean);
+  window.__gal = gallery;
+  document.getElementById('modal-emoji').innerHTML = gallery.length?`<img id="modal-main-img" src="${gallery[0]}" alt="${p.brand} ${p.name}" style="max-width:100%;max-height:300px;object-fit:contain;background:#f2f0eb">`:p.emoji;
+  document.getElementById('modal-thumbs').innerHTML = gallery.length>1?gallery.map((g,i)=>`<img class="mthumb${i===0?' act':''}" src="${g}" loading="lazy" onclick="swapImg(${i},this)">`).join(''):'';
   document.getElementById('modal-brand').textContent = p.brand;
   document.getElementById('modal-name').textContent = p.name;
   const oldP = p.oldPrice ? `<span class="old">${priceFmt(p.oldPrice)}</span>` : '';
@@ -1053,6 +1082,13 @@ function openModal(id){
   document.getElementById('modal-bg').classList.add('open');
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
+}
+
+function swapImg(i,el){
+  const m=document.getElementById('modal-main-img');
+  if(m&&window.__gal&&window.__gal[i]) m.src=window.__gal[i];
+  document.querySelectorAll('.mthumb').forEach(t=>t.classList.remove('act'));
+  if(el)el.classList.add('act');
 }
 
 function closeModal(){
@@ -1171,13 +1207,16 @@ async function sendOrder(){
   try{localStorage.setItem('wow_ride_pending',JSON.stringify({...payload,ts:Date.now()}))}catch(_){}
 
   const ok=await postGAS(payload);
+  const txt=`🛒 ЗАМОВЛЕННЯ WOW.RIDE%0A👤 ${encodeURIComponent(n)}%0A📱 ${encodeURIComponent(p)}%0A🏙 ${encodeURIComponent(city+' '+dep)}%0A📦 ${encodeURIComponent(items.replace(/\n/g,' · '))}`;
+  const tgUrl=`https://t.me/znahidkawow?text=${txt}`;
   if(ok===false){
     // мережа лягла повністю — відкриваємо Telegram з текстом замовлення
-    const txt=`🛒 ЗАМОВЛЕННЯ WOW.RIDE%0A👤 ${encodeURIComponent(n)}%0A📱 ${encodeURIComponent(p)}%0A🏙 ${encodeURIComponent(city+' '+dep)}%0A📦 ${encodeURIComponent(items.replace(/\n/g,' · '))}`;
-    window.open(`https://t.me/znahidkawow?text=${txt}`,'_blank');
+    window.open(tgUrl,'_blank');
   }else{
     try{localStorage.removeItem('wow_ride_pending')}catch(_){}
   }
+  const tgBtn=document.getElementById('fok-tg');
+  if(tgBtn) tgBtn.href=tgUrl;
   document.querySelector('.fshell').style.display='none';
   document.getElementById('fok').style.display='block';
   document.getElementById('fok').scrollIntoView({behavior:'smooth',block:'center'});
