@@ -324,7 +324,7 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
 <div class="stats">
   <div class="stat R"><div class="stat-n"><em>0₴</em></div><div class="stat-l">Передоплати<br>платиш після</div></div>
   <div class="stat R" style="transition-delay:.07s"><div class="stat-n"><em>1–3</em> дні</div><div class="stat-l">Доставка<br>Nova Poshta</div></div>
-  <div class="stat R" style="transition-delay:.14s"><div class="stat-n"><em>500</em>+</div><div class="stat-l">Моделей<br>в каталозі</div></div>
+  <div class="stat R" style="transition-delay:.14s"><div class="stat-n"><em>25</em>+</div><div class="stat-l">Моделей<br>в каталозі</div></div>
   <div class="stat R" style="transition-delay:.21s"><div class="stat-n"><em>100</em>%</div><div class="stat-l">Повернення<br>безкоштовно</div></div>
 </div>
 
@@ -359,7 +359,7 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
         <span class="cat-icon">🚲</span>
         <div class="cat-name">ВЕЛОСИПЕДИ</div>
         <div class="cat-sub">MTB · Road · Urban · BMX</div>
-        <div class="cat-count">7 моделей</div>
+        <div class="cat-count">8 моделей</div>
         <div class="cat-tags">
           <span class="ctag hot">Сезон 🔥</span>
           <span class="ctag">Ardis</span><span class="ctag">Crossride</span><span class="ctag">26-29"</span>
@@ -579,6 +579,7 @@ const PRODUCTS = [
   {
     id:'b3', cat:'bike', emoji:'🚲', brand:'Crossride', name:'Bullet 26" ST',
     price:7790, oldPrice:8990, badge:'sale',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2Fc9%2F9f%2F16775111413996.jpg',
     desc:'Надійний гірський велосипед на 26" колесах. Сталева рама, 18 швидкостей. Найпопулярніша модель у лінійці — баланс ціни і якості.',
     tags:["MTB", "26\"", "Хіт продажів"],
     sizes:["14\"", "15\"", "17\""],
@@ -605,6 +606,7 @@ const PRODUCTS = [
   {
     id:'b6', cat:'bike', emoji:'🚲', brand:'Ardis', name:'TITAN 29" HDB',
     price:19990, oldPrice:22490, badge:'hot',
+    img:'https://velomarket-24.bigopt.com/image-cache/?w=300&h=280&a=3&fi=64055&wt=0&f=static-files%2Fimg%2Fgoods%2F21%2F86%2F16826976747430.jpg',
     desc:'Топ лінійки: алюмінієвий найнер з гідравлічними дисковими гальмами. Рами 19" і 22". Для тих, хто хоче максимум.',
     tags:["MTB", "29\"", "Гідравліка", "TOP"],
     sizes:["19\"", "22\""],
@@ -630,37 +632,40 @@ const PRODUCTS = [
   },
   /* --- ЕЛЕКТРОСАМОКАТИ — постачальник Crosser (Одеса), дроп --- */
   {
-    id:'e1', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'E9 Premium 10"',
-    price:14490, oldPrice:15990, badge:'sale',
-    desc:'Бестселер: складаний електросамокат з амортизацією, 10" колеса, запас ходу до 45 км. Місто — твоє.',
-    tags:["350W", "45 км", "10\"", "Складаний"],
-    sizes:["36V/7.5Ah", "36V/10Ah"],
-    avail:["36V/7.5Ah", "36V/10Ah"]
+    id:'e1', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'E9 MAX 15Ah 10"',
+    price:21990, oldPrice:26999, badge:'sale',
+    img:'https://crosser.com.ua/content/images/36/356x356l85nn0/crosser-e9-max-b-92420802140357.webp',
+    desc:'Бестселер Crosser: складаний електросамокат з батареєю 15Ah, 10" колеса. Запас ходу до 45-50 км — місто твоє. Pneumatic або HoneyComb (перфорація) колеса.',
+    tags:["15Ah", "10\"", "до 50 км", "Складаний"],
+    sizes:["Pneumatic", "HoneyComb"],
+    avail:["Pneumatic", "HoneyComb"]
   },
   {
-    id:'e2', cat:'escooter', emoji:'🛴', brand:'Crosser', name:'M5 8.5"',
-    price:11990, badge:'',
-    desc:'Легкий міський електросамокат: 8.5" колеса, до 30 км ходу, вага 12 кг. Для щоденних поїздок на роботу.',
-    tags:["300W", "30 км", "12 кг"],
-    sizes:["Standard"],
-    avail:["Standard"]
+    id:'e2', cat:'escooter', emoji:'🛴', brand:'Crosser', name:'E9 MAX Absorber 10"',
+    price:22990, oldPrice:28999, badge:'hot',
+    img:'https://crosser.com.ua/content/images/42/356x356l85nn0/crosser-e9-max-absorber-73317249623996.webp',
+    desc:'E9 MAX з передніми і задніми амортизаторами — м\'яко навіть на розбитому асфальті. 10" колеса, складана конструкція.',
+    tags:["Амортизатори", "10\"", "15Ah"],
+    sizes:["Pneumatic", "HoneyComb"],
+    avail:["Pneumatic", "HoneyComb"]
   },
   {
-    id:'e3', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'T4 Turbo 60V',
-    price:28990, badge:'new',
-    desc:'Потужний позашляховий e-самокат: 60V, гідравлічна підвіска, до 70 км ходу. Для тих, кому мало.',
-    tags:["1000W+", "70 км", "Гідравліка"],
-    sizes:["60V/21Ah"],
-    avail:["60V/21Ah"]
+    id:'e3', cat:'escooter', emoji:'⚡', brand:'Crosser', name:'T4 Pneumatic 10"',
+    price:22990, oldPrice:29999, badge:'sale',
+    img:'https://crosser.com.ua/content/images/30/356x356l85nn0/elektrosamokat-crosser-t4-pneumatic-10-mt2771-eu-62729051646128.webp',
+    desc:'Потужний міський e-самокат Crosser T4: 10" пневмоколеса, амортизація, впевнена динаміка. Версії 2023 і 2024 року.',
+    tags:["10\"", "Пневмо", "Амортизація"],
+    sizes:["Standard", "2024"],
+    avail:["Standard", "2024"]
   },
   {
-    id:'e4', cat:'escooter', emoji:'🔥', brand:'Crosser', name:'Rocket AWD 1600W×2',
-    price:43990, badge:'hot',
-    img:'https://static-host-3.bigopt.com/image-cache/?w=200&h=200&a=3&fi=49250&wt=0&f=static-files%2Fimg%2Fgoods%2Fe0%2Fc8%2F5135413831w640h6405135413831-jpg-1733599823-653.webp',
-    desc:'Звір повного приводу: 1600W на кожне колесо, 60V/25Ah. Максимальна динаміка серед самокатів в Україні.',
-    tags:["AWD", "3200W", "60V/25Ah"],
-    sizes:["60V/25Ah"],
-    avail:["60V/25Ah"]
+    id:'e4', cat:'escooter', emoji:'🔥', brand:'Crosser', name:'T4 TURBO 10"',
+    price:31790, oldPrice:39499, badge:'hot',
+    img:'https://crosser.com.ua/content/images/31/356x356l85nn0/elektrosamokat-crosser-t4-turbo-pneumatic-10-nt9951-eu-97673529536054.webp',
+    desc:'Топ лінійки T4: версія TURBO з посиленим мотором і батареєю. Для тих, кому звичайного самоката мало. Є версія TURBO SPORT і комплектація з сидінням.',
+    tags:["TURBO", "10\"", "MAX потужність"],
+    sizes:["TURBO", "TURBO SPORT"],
+    avail:["TURBO", "TURBO SPORT"]
   },
   /* --- САМОКАТИ / ДИТЯЧИЙ ТРАНСПОРТ — VeloMarket-24, дроп --- */
   {
