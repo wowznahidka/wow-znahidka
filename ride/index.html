@@ -564,7 +564,7 @@ footer{padding:2.5rem 40px;border-top:1px solid rgba(242,240,235,.06);display:fl
 
 <script>
 /* ===== DATA ===== */
-const PRODUCTS = [
+let PRODUCTS = [
   /* --- ВЕЛОСИПЕДИ — постачальник VeloMarket-24 (Bigopt), дроп --- */
   {
     id:'b1', cat:'bike', emoji:'🚲', brand:'Crossride', name:'MATRIX 27.5" MTB',
@@ -986,7 +986,7 @@ const PRODUCTS = [
   }
 ];
 
-const DEALS = PRODUCTS.filter(p=>p.badge==='sale').slice(0,3);
+let DEALS = PRODUCTS.filter(p=>p.badge==='sale').slice(0,3);
 
 /* ===== RENDER ===== */
 let currentFilter = 'all';
@@ -1225,6 +1225,36 @@ async function sendOrder(){
 /* ===== INIT ===== */
 renderDeals();
 renderCatalog();
+
+/* ===== FLAGSHIP: статичний каталог з адмінки (data/products.json), хардкод — фолбек ===== */
+(async()=>{
+  try{
+    const res=await fetch('data/products.json?v='+Math.floor(Date.now()/300000),{cache:'no-store'});
+    if(!res.ok) return;
+    const j=await res.json();
+    if(!j||!Array.isArray(j.products)||!j.products.length) return;
+    const CAT_MAP={'Велосипеди':'bike','Дитячі':'bike','Дорослі':'bike','Електро':'escooter','Електросамокати':'escooter','Самокати':'scooter','Захист':'protect','Аксесуари':'protect'};
+    const mapped=j.products.map(p=>{
+      if(p.id&&p.name) return p; // нативний формат ride
+      // формат адмінки (publisher build_catalog)
+      const photos=Array.isArray(p['Фото всі'])&&p['Фото всі'].length?p['Фото всі']:(p['Фото']?[p['Фото']]:[]);
+      const sizes=String(p['Розміри']||'').split(/\s{2,}|,/).map(s=>s.replace(/\(\d+\)/,'').trim()).filter(Boolean);
+      return {
+        id:String(p.ID||p.id||''), cat:CAT_MAP[p['Категорія']]||'bike', emoji:'🚲',
+        brand:p['Бренд']||'', name:p['Назва']||'',
+        price:+p['Ціна']||0, oldPrice:+p['Стара ціна']||undefined,
+        badge:p['Нове']?'new':(+p['Стара ціна']>+p['Ціна']?'sale':null),
+        img:photos[0]||'', imgs:photos.slice(1),
+        desc:p['Опис']||'', tags:[], sizes:sizes, avail:sizes
+      };
+    }).filter(p=>p.id&&p.name&&p.price);
+    if(!mapped.length) return;
+    PRODUCTS=mapped;
+    DEALS=PRODUCTS.filter(p=>p.badge==='sale').slice(0,3);
+    renderDeals();
+    renderCatalog();
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
