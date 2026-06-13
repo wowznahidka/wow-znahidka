@@ -534,6 +534,12 @@ function _installAntiExit() {
     try {
       history.pushState({_antiExit: true}, '', location.href);
       window.addEventListener('popstate', (e) => {
+        // Якщо відкрита картка/шторка → спочатку закрити її, а не виходити
+        if (_openSheetId) {
+          history.pushState({_antiExit: true}, '', location.href);
+          closeAllSheets();
+          return;
+        }
         // Якщо повертається до нашого pushState → показуємо модал і додаємо ще один
         if (!_userChoseLeave && _shouldGuard()) {
           history.pushState({_antiExit: true}, '', location.href);
