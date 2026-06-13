@@ -279,6 +279,7 @@
         <input type="text" class="cat-search" id="cat-search"
           placeholder="Пошук по бренду або моделі…"
           oninput="onSearchInput(this.value)"
+          onblur="onSearchBlur()"
           autocomplete="off" autocorrect="off" spellcheck="false"
           aria-label="Пошук товарів">
         <button class="cat-search-clear" id="cat-search-clear" onclick="clearSearch()" aria-label="Очистити">✕</button>
