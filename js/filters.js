@@ -197,9 +197,15 @@ function onSearchInput(q) {
     S.searchQ = q.toLowerCase().trim();
     const data = getCatalog();
     if (!data) return;
-    if (S.searchQ) { _hideSuggestions(); renderSearchResults(data); }
+    // НЕ ховаємо підказки тут — вони залишаються щоб користувач міг клікнути
+    if (S.searchQ) renderSearchResults(data);
     else _renderUnifiedCatalog(data);
   }, 280);
+}
+
+function onSearchBlur() {
+  // Невелика затримка перед ховання — щоб клік по підказці встиг спрацювати
+  setTimeout(_hideSuggestions, 180);
 }
 
 function clearSearch() {
