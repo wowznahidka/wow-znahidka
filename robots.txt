@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://wowznahidka.github.io/wow-znahidka/sitemap.xml
+Sitemap: https://wow-znahidka.netlify.app/sitemap.xml
