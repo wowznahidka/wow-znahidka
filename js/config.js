@@ -5,10 +5,9 @@
 
 const CFG = {
   GAS_URL:  'https://script.google.com/macros/s/AKfycbxnbKNfrT38T4c7drhOI5IomuFzLNCeXZPykGwBSQpgtZUkme6Ip91Zio9weRgQYs-mCw/exec',
-  TG_URL:        'https://t.me/+8xhWEOzGMW5jNjJi', // ← TG КАНАЛ (приватний інвайт — перевір "No expiry / no usage limit" у Manage Channel → Invite Links)
-  TG_MANAGER:    'https://t.me/znahidkawow',     // ← МЕНЕДЖЕР DM (для запиту фото, питань)
-  IG_URL:   'https://www.instagram.com/wow.znahidka/',
-  TT_URL:   'https://www.tiktok.com/@wow.znahidka',
+  TG_URL:   'https://t.me/znahidkawow',
+  IG_URL:   'https://instagram.com/wow.znahidka',
+  TT_URL:   'https://www.tiktok.com/@wowznahidka',
 
   // ── Google Analytics 4 ───────────────────────── */
   // Вставте свій Measurement ID з analytics.google.com (вигляд: G-XXXXXXXXXX)
@@ -41,9 +40,7 @@ const CFG = {
   GRID_BATCH: 24,
   MATCH_HISTORY_KEY: 'wow_match_seen',
 
-  PROMO_FIXED: {
-    'WOW100': 100,
-  },
+  PROMO_FIXED: {},
 };
 
 const STATIC_REVIEWS = [
