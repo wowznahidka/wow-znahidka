@@ -73,14 +73,20 @@ const REF = {
 
   // ── Init sheet ────────────────────────────────── */
   initSheet() {
-    const inp = document.getElementById('ref-link-input');
-    if (inp) inp.value = this.getMyLink();
-
-    const tgInp = document.getElementById('ref-tg-inp');
-    const tgRow = document.getElementById('ref-tg-row');
     const saved = this.getMyTg();
-    if (saved && tgInp)  tgInp.value = saved;
-    if (tgRow) tgRow.style.display = '';
+    const tgInp = document.getElementById('ref-tg-inp');
+    if (tgInp && saved) tgInp.value = saved;
+
+    if (saved) {
+      // TG вже збережено — показуємо посилання одразу
+      const inp = document.getElementById('ref-link-input');
+      if (inp) inp.value = this.getMyLink();
+      _revealRefBlock();
+    } else {
+      // TG не збережено — показуємо підказку, ховаємо посилання
+      _lockRefBlock();
+      setTimeout(() => tgInp?.focus(), 350);
+    }
   },
 
   // ── Copy link ─────────────────────────────────── */
@@ -99,6 +105,21 @@ const REF = {
     }
   },
 };
+
+// ── Helper: show/hide ref link block ─────────────── */
+function _revealRefBlock() {
+  const block  = document.getElementById('ref-link-block');
+  const locked = document.getElementById('ref-locked-hint');
+  if (block)  { block.classList.add('revealed'); }
+  if (locked) { locked.style.display = 'none'; }
+}
+
+function _lockRefBlock() {
+  const block  = document.getElementById('ref-link-block');
+  const locked = document.getElementById('ref-locked-hint');
+  if (block)  { block.classList.remove('revealed'); }
+  if (locked) { locked.style.display = ''; }
+}
 
 // ── Open sheet ────────────────────────────────────── */
 function openRefSheet() {
@@ -122,7 +143,13 @@ function handleRefSaveTg() {
     inp?.focus(); return;
   }
   const ok = REF.saveTg(val);
-  if (ok && typeof toast === 'function') toast('✅ Збережено! Тепер поділіться посиланням.');
+  if (ok) {
+    // Показуємо посилання з анімацією
+    const linkInp = document.getElementById('ref-link-input');
+    if (linkInp) linkInp.value = REF.getMyLink();
+    _revealRefBlock();
+    if (typeof toast === 'function') toast('✅ Збережено! Ось твоє особисте посилання 👇');
+  }
 }
 
 // ── Copy ─────────────────────────────────────────── */
