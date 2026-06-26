@@ -255,7 +255,10 @@ function initPWA() {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') localStorage.setItem('wow_pwa_android','1');
+      if (outcome === 'accepted') {
+        localStorage.setItem('wow_pwa_android','1');
+        if (window.gtag) gtag('event', 'pwa_install', { method: 'android' });
+      }
       deferredPrompt = null;
     }
     dismissPwa('android');
@@ -286,6 +289,11 @@ function registerSW() {
   if (!('serviceWorker' in navigator)) return;
   navigator.serviceWorker.register('sw.js').catch(() => {});
 }
+
+window.addEventListener('appinstalled', () => {
+  if (window.gtag) gtag('event', 'pwa_install', { method: 'standalone' });
+  localStorage.setItem('wow_pwa_android', '1');
+});
 
 // ── SWIPE CLEANUP (used by tabs) ─────────────────── */
 let _moveHandler = null;
