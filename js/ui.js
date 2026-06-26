@@ -258,6 +258,7 @@ function initPWA() {
       if (outcome === 'accepted') {
         localStorage.setItem('wow_pwa_android','1');
         if (window.gtag) gtag('event', 'pwa_install', { method: 'android' });
+        _notifyPwaInstall('android');
       }
       deferredPrompt = null;
     }
@@ -293,7 +294,19 @@ function registerSW() {
 window.addEventListener('appinstalled', () => {
   if (window.gtag) gtag('event', 'pwa_install', { method: 'standalone' });
   localStorage.setItem('wow_pwa_android', '1');
+  _notifyPwaInstall('standalone');
 });
+
+function _notifyPwaInstall(method) {
+  try {
+    fetch(CFG.GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'pwa_install', method, site: location.hostname, ts: new Date().toISOString() }),
+      mode: 'no-cors',
+    });
+  } catch(_) {}
+}
 
 // ── SWIPE CLEANUP (used by tabs) ─────────────────── */
 let _moveHandler = null;
