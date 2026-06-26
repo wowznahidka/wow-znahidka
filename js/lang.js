@@ -44,7 +44,7 @@ const STRINGS = {
     reviewsTitle:'💬 Що кажуть покупці',
     leaveReview:'✍️ Залишити відгук',
     cartCheckout:'Оформити замовлення <span class="i-arr-lg" aria-hidden="true"></span>',
-    cartDelivery:'За тарифами НП',
+    cartDelivery:'~50-80₴ (оплата при отриманні)',
     cartToPay:'До сплати',
     chooseSizeTitle:'Оберіть розмір',
     mySizeLabel:'Мій розмір',
