@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_38273",
+      "brand": "Unknown",
+      "name": "✅ CКВОЗНА СІТКА ✅",
+      "price": 2800,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11353",
+      "material": "Сквозна сітка",
+      "sole": "Гума та пінка__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38273/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38273/1.jpg"
+    },
+    {
       "id": "tg_38264",
       "brand": "Додатковий",
       "name": "ДОДАТКОВИЙ КОНТЕНТ ✅",
