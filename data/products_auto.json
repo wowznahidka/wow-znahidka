@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71085",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Quartz Grey Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10782",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71085/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71085/1.jpg"
+    },
+    {
       "id": "tg_71077",
       "brand": "Nike",
       "name": "Nike V2K Run Premium",
