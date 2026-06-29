@@ -1,6 +1,23 @@
 {
   "products": [
     {
+      "id": "tg_38215",
+      "brand": "Сандалі",
+      "name": "Сандалі в стилі Gorpcore",
+      "price": 1590,
+      "sizes": [
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11339",
+      "material": "Текстиль, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38215/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38215/1.jpg"
+    },
+    {
       "id": "tg_38206",
       "brand": "Crocs",
       "name": "Crocs Echo Clog Black",
