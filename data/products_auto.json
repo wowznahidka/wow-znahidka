@@ -1,6 +1,26 @@
 {
   "products": [
     {
+      "id": "tg_38197",
+      "brand": "Adidas",
+      "name": "Шльопанці у стилі Adidas Yeezy",
+      "price": 1200,
+      "sizes": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11337",
+      "material": "Піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38197/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38197/1.jpg"
+    },
+    {
       "id": "tg_38188",
       "brand": "Adidas",
       "name": "Шльопанці у стилі Adidas Yeezy",
