@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_70867",
+      "brand": "Nike",
+      "name": "Nike X Supreme Shox Ride 2 Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11695",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/10.jpg"
+    },
+    {
       "id": "tg_70856",
       "brand": "Nike",
       "name": "Nike Intiator Premium",
@@ -3323,39 +3348,6 @@
         "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70879/9.jpg"
       ],
       "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70879/1.jpg"
-    },
-    {
-      "id": "tg_70867",
-      "brand": "Nike",
-      "name": "Nike X Supreme Shox Ride 2 Premium",
-      "price": 2600,
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45
-      ],
-      "gender": "Жінка",
-      "isNew": true,
-      "tgLink": "https://t.me/wooowznahidka/10706",
-      "images": [
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/1.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/2.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/3.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/4.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/5.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/6.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/7.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/8.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/9.jpg"
-      ],
-      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/1.jpg"
     },
     {
       "id": "tg_70844",
