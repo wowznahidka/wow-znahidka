@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71430",
+      "brand": "Adidas",
+      "name": "Adidas Samba White Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10891",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71430/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71430/1.jpg"
+    },
+    {
       "id": "tg_71417",
       "brand": "Adidas",
       "name": "Adidas Samba White Premium",
