@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71721",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Grey Premium",
+      "price": 2550,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11028",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71721/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71721/1.jpg"
+    },
+    {
       "id": "tg_71712",
       "brand": "Adidas",
       "name": "Adidas Samba White Premium",
