@@ -1,6 +1,26 @@
 {
   "products": [
     {
+      "id": "tg_38492",
+      "brand": "Nike",
+      "name": "Nike Initiator Grey",
+      "price": 2900,
+      "sizes": [
+        47,
+        48,
+        49
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10498",
+      "material": "Замша, текстиль",
+      "sole": "гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38492/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38492/1.jpg"
+    },
+    {
       "id": "tg_38483",
       "brand": "Nike",
       "name": "Nike Initiator Black/Grey",
