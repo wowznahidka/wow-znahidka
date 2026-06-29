@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_38593",
+      "brand": "Нова",
+      "name": "НОВА МОДЕЛЬ ✅",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10526",
+      "material": "Текстиль",
+      "sole": "Гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38593/1.jpg"
+    },
+    {
       "id": "tg_38584",
       "brand": "Asics",
       "name": "Asics Onitsuka Tiger Mexico 66 SD Kill Bill",
