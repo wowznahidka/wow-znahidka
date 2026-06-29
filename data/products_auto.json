@@ -1,1 +1,36 @@
-{"products":[]}
+{
+  "products": [
+    {
+      "id": "tg_38447",
+      "brand": "Salomon",
+      "name": "Salomon XT Pu.Re Advanced 🇻🇳",
+      "price": 2800,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10449",
+      "material": "Текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38447/1.jpg"
+    }
+  ]
+}
