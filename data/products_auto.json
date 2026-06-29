@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_38519",
+      "brand": "New Balance",
+      "name": "New Balance 1906R Black",
+      "price": 2900,
+      "sizes": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10501",
+      "material": "Нубук, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38519/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38519/1.jpg"
+    },
+    {
       "id": "tg_38510",
       "brand": "New Balance",
       "name": "New Balance 1906R Slate Grey",
