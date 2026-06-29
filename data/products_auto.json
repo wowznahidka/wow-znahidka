@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71055",
+      "brand": "Jordan",
+      "name": "Air Jordan Legacy Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11802",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/10.jpg"
+    },
+    {
       "id": "tg_71038",
       "brand": "Nike",
       "name": "Nike Zoom Vomero 5 Premium",
@@ -3330,35 +3351,6 @@
         "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71066/1.jpg"
       ],
       "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71066/1.jpg"
-    },
-    {
-      "id": "tg_71055",
-      "brand": "Jordan",
-      "name": "Air Jordan Legacy Premium",
-      "price": 2700,
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41
-      ],
-      "gender": "Жінка",
-      "isNew": true,
-      "tgLink": "https://t.me/wooowznahidka/10771",
-      "images": [
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/1.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/2.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/3.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/4.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/5.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/6.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/7.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/8.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/9.jpg"
-      ],
-      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71055/1.jpg"
     },
     {
       "id": "tg_71027",
