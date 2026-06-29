@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_38698",
+      "brand": "Asics",
+      "name": "Asics Onitsuka Tiger Mexico 66 SD Kill Bill",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10626",
+      "material": "Шкіра, замша__",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38698/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38698/1.jpg"
+    },
+    {
       "id": "tg_38689",
       "brand": "Nike",
       "name": "Nike Dunk Low Ironstone 🇻🇳",
