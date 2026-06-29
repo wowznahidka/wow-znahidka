@@ -105,7 +105,8 @@ function normalizeProduct(p) {
     isNew:    Boolean(p['Нове']  || p['нове']   || p.is_new || p.isNew),
     gender:   String(p['Стать']  || p['стать']  || p.gender || p.Gender || ''),
     supplier: Number(p['Постачальник'] || p.supplier || detectSupplier(sizesRaw)),
-    tgLink:   String(p['TG']     || p['tg']     || p.tgLink || p.tg_link || ''),
+    tgLink:     String(p['TG']     || p['tg']     || p.tgLink || p.tg_link || ''),
+    available:  p.available !== false,
   };
 }
 
@@ -147,7 +148,7 @@ async function _fetchAutoCatalog() {
     if (!res.ok) return [];
     const json = await res.json();
     if (!json || !Array.isArray(json.products)) return [];
-    return json.products.map(normalizeProduct);
+    return json.products.filter(p => p.available !== false).map(normalizeProduct);
   } catch(e) { return []; }
 }
 
