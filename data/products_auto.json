@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71538",
+      "brand": "Nike",
+      "name": "Nike Blazer Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10916",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71538/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71538/1.jpg"
+    },
+    {
       "id": "tg_71526",
       "brand": "Nike",
       "name": "Nike P-6000 Premium",
