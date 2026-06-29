@@ -1,6 +1,30 @@
 {
   "products": [
     {
+      "id": "tg_38237",
+      "brand": "Nike",
+      "name": "Nike Offline 2.0 Black",
+      "price": 2700,
+      "sizes": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11341",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38237/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38237/1.jpg"
+    },
+    {
       "id": "tg_38228",
       "brand": "Сандалі",
       "name": "Сандалі в стилі Suicoke",
