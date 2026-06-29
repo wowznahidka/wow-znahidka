@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_71027",
+      "brand": "New Balance",
+      "name": "New Balance 530 Silver/BlackPremium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10760",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71027/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71027/1.jpg"
+    },
+    {
       "id": "tg_71015",
       "brand": "New Balance",
       "name": "New Balance 740 Premium",
