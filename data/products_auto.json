@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_38903",
+      "brand": "Unknown",
+      "name": "✅ НОВИЙ КОНТЕНТ ✅",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10656",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38903/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38903/1.jpg"
+    },
+    {
       "id": "tg_38894",
       "brand": "Unknown",
       "name": "✅ СІТКА | ЛЕГКА МОДЕЛЬ ✅",
