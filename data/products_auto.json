@@ -1,6 +1,28 @@
 {
   "products": [
     {
+      "id": "tg_38161",
+      "brand": "Nike",
+      "name": "Nike KD 18 \"Slim Reaper\"",
+      "price": 3400,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11333",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38161/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38161/1.jpg"
+    },
+    {
       "id": "tg_38152",
       "brand": "Kappa",
       "name": "Kappa Fatty Gray  🇻🇳",
