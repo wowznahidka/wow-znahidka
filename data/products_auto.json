@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_71395",
+      "brand": "Поповнили✅",
+      "name": "Поповнили✅",
+      "price": 2300,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10880",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71395/1.jpg"
+    },
+    {
       "id": "tg_71383",
       "brand": "Ash",
       "name": "Ash Leopard  Premium",
