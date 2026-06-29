@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_70994",
+      "brand": "New Balance",
+      "name": "New Balance 530 Beige Premium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11769",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70994/2.jpg"
+    },
+    {
       "id": "tg_70981",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Premium",
