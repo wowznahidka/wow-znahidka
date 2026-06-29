@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_38255",
+      "brand": "Додатковий",
+      "name": "ДОДАТКОВИЙ КОНТЕНТ ✅",
+      "price": 2800,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11343",
+      "material": "Текстиль__",
+      "sole": "Пінка, поліуретан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38255/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38255/1.jpg"
+    },
+    {
       "id": "tg_38246",
       "brand": "Nike",
       "name": "Nike Offline 2.0 Beige Khaki",
