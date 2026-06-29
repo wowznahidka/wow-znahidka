@@ -88,6 +88,11 @@ function prodCardHtml(p, opts = {}) {
     ? ` data-cycle="${p.images.slice(0, 5).join('|')}"`
     : '';
 
+  const quickBtnLabel = p.sizes[0] === 'ONE SIZE' ? 'Замовити' : 'Розмір';
+  const quickBtn = grid
+    ? `<button class="card-quick-order" onclick="event.stopPropagation();openSizePicker(findProd('${p.id}'))" aria-label="Обрати розмір">${quickBtnLabel} →</button>`
+    : '';
+
   const pricePart = p.oldPrice && p.oldPrice > p.price
     ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
     : `${fmtPrice(p.price)}`;
@@ -115,7 +120,10 @@ function prodCardHtml(p, opts = {}) {
     <div class="card-body">
       <div class="card-brand">${esc(p.brand)}</div>
       <div class="card-name">${esc(p.name)}</div>
-      <div class="card-price">${pricePart}</div>
+      <div class="card-price-row">
+        <div class="card-price">${pricePart}</div>
+        ${quickBtn}
+      </div>
       <div class="card-sizes-preview${grid ? ' sz-quick-row' : ''}">${szList}</div>
       ${_scarcityText(p)}
       ${fomoHtml}
