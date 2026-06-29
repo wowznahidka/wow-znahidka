@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71120",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Whie Premium",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10801",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71120/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71120/1.jpg"
+    },
+    {
       "id": "tg_71108",
       "brand": "New Balance",
       "name": "New Balance 9060 Premium",
