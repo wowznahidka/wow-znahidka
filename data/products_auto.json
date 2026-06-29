@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_70856",
+      "brand": "Nike",
+      "name": "Nike Intiator Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11685",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/10.jpg"
+    },
+    {
       "id": "tg_70835",
       "brand": "Adidas",
       "name": "Adidas Samba White Premium",
@@ -3335,35 +3356,6 @@
         "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/9.jpg"
       ],
       "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70867/1.jpg"
-    },
-    {
-      "id": "tg_70856",
-      "brand": "Nike",
-      "name": "Nike Intiator Premium",
-      "price": 2700,
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41
-      ],
-      "gender": "Жінка",
-      "isNew": true,
-      "tgLink": "https://t.me/wooowznahidka/10697",
-      "images": [
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/1.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/2.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/3.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/4.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/5.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/6.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/7.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/8.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/9.jpg"
-      ],
-      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70856/1.jpg"
     },
     {
       "id": "tg_70844",
