@@ -1,6 +1,26 @@
 {
   "products": [
     {
+      "id": "tg_71488",
+      "brand": "Adidas",
+      "name": "Adidas Stan Smith Bonega Premium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10904",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71488/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71488/1.jpg"
+    },
+    {
       "id": "tg_71476",
       "brand": "Adidas",
       "name": "Adidas Spezial Premium",
