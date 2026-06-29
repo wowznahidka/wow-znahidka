@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_38680",
+      "brand": "New Balance",
+      "name": "New Balance 1906R All Gray 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10606",
+      "material": "Шкіра, текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38680/1.jpg"
+    },
+    {
       "id": "tg_38665",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Grey/White",
