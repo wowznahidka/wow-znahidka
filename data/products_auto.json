@@ -1,6 +1,28 @@
 {
   "products": [
     {
+      "id": "tg_38179",
+      "brand": "Adidas",
+      "name": "Шльопанці у стилі Adidas Yeezy",
+      "price": 1200,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11335",
+      "material": "Піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38179/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38179/1.jpg"
+    },
+    {
       "id": "tg_38170",
       "brand": "Off-White",
       "name": "Off-White Be Right Back МАЛОМІРЯТЬ 📦",
