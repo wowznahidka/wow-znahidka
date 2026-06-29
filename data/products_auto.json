@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71670",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Grey Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11000",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71670/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71670/1.jpg"
+    },
+    {
       "id": "tg_71658",
       "brand": "New Balance",
       "name": "New Balance 530 Beige Premium",
