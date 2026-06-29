@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71404",
+      "brand": "Поповнили✅😎",
+      "name": "Поповнили✅😎",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10889",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71404/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71404/1.jpg"
+    },
+    {
       "id": "tg_71395",
       "brand": "Поповнили✅",
       "name": "Поповнили✅",
