@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_38098",
+      "brand": "Raf",
+      "name": "Raf Simons Ultrasceptre Silver🇻🇳",
+      "price": 3550,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11282",
+      "material": "Шкіра",
+      "sole": "гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38098/1.jpg"
+    },
+    {
       "id": "tg_38089",
       "brand": "Off-White",
       "name": "Off-White Sponge Mid Top White/Grey🇻🇳",
