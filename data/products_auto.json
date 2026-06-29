@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_38743",
+      "brand": "New Balance",
+      "name": "New Balance 1906R Grey/Black 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10631",
+      "material": "Шкіра, текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38743/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38743/1.jpg"
+    },
+    {
       "id": "tg_38734",
       "brand": "Off-White",
       "name": "Off-White Sponge White/Black 🇻🇳",
