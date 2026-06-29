@@ -995,6 +995,23 @@
 }
 .pd-thumb img.loaded { opacity: 1; }
 
+/* Card cycling — photo indicator dots */
+.cc-dots {
+  position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 4px; z-index: 4;
+  pointer-events: none;
+}
+.cc-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(0,0,0,0.20);
+  transition: background .22s, transform .22s, width .22s;
+}
+.cc-dot.on {
+  background: rgba(0,0,0,0.65);
+  transform: scale(1.4);
+  width: 10px; border-radius: 3px;
+}
+
 /* Floating heart — clean glass на світлому фоні */
 .pd-fav-float {
   position: absolute; top: 16px; right: 16px;
