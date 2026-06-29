@@ -1,6 +1,26 @@
 {
   "products": [
     {
+      "id": "tg_71383",
+      "brand": "Ash",
+      "name": "Ash Leopard  Premium",
+      "price": 1600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10879",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71383/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71383/1.jpg"
+    },
+    {
       "id": "tg_71373",
       "brand": "Adidas",
       "name": "Adidas Samba White Premium",
