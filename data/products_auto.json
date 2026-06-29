@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_38107",
+      "brand": "Kappa",
+      "name": "Kappa Fatty Green/Blue🇻🇳",
+      "price": 3200,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11292",
+      "material": "Замша",
+      "sole": "гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38107/1.jpg"
+    },
+    {
       "id": "tg_38098",
       "brand": "Raf",
       "name": "Raf Simons Ultrasceptre Silver🇻🇳",
