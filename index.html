@@ -10,6 +10,8 @@
 }(window, document, 'ttq');
 </script>
 <!-- TikTok Pixel Code End -->
+<!-- Telegram Mini App -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1021,6 +1023,16 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <script src="shared/js/referral.js?v=40" defer></script>
 <script src="js/app.js?v=39"                defer></script>
 <script src="shared/js/motion.js?v=39" defer></script>
+<script>
+(function(){
+  const tg = window.Telegram?.WebApp;
+  if (!tg || !tg.initData) return;
+  tg.ready();
+  tg.expand();
+  // Close Mini App after successful order
+  document.addEventListener('wow:order_success', () => { setTimeout(() => tg.close(), 2000); });
+})();
+</script>
 
 </body>
 </html>
