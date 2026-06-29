@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_38716",
+      "brand": "Нова",
+      "name": "НОВА МОДЕЛЬ ✅",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10628",
+      "material": "Текстиль",
+      "sole": "Гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38716/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38716/1.jpg"
+    },
+    {
       "id": "tg_38707",
       "brand": "Нова",
       "name": "НОВА МОДЕЛЬ ✅",
