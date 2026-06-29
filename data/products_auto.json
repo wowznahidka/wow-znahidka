@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_37952",
+      "brand": "Amiri",
+      "name": "Amiri MA Skyline Black",
+      "price": 3600,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11132",
+      "material": "Шкіра",
+      "sole": "Піна , гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37952/1.jpg"
+    },
+    {
       "id": "tg_37943",
       "brand": "Balenciaga",
       "name": "Balenciaga Runner Vintage Bone",
