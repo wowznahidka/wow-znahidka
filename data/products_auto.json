@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_38537",
+      "brand": "Nike",
+      "name": "Nike Air Max 97 Triple White 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10503",
+      "material": "Лакована шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38537/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38537/1.jpg"
+    },
+    {
       "id": "tg_38528",
       "brand": "Salomon",
       "name": "Salomon XT Pu.Re Advanced 🇻🇳",
