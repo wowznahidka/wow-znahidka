@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_71614",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Beige Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10963",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/1.jpg"
+    },
+    {
       "id": "tg_71601",
       "brand": "Nike",
       "name": "Nike M2K Premium",
