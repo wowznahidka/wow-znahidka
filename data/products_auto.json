@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_71712",
+      "brand": "Adidas",
+      "name": "Adidas Samba White Premium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11019",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71712/1.jpg"
+    },
+    {
       "id": "tg_71702",
       "brand": "New Balance",
       "name": "New Balance 530 Premium",
