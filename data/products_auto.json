@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_37988",
+      "brand": "Nike",
+      "name": "Nike Ava Rover \"Celestial Gold\"",
+      "price": 3200,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11168",
+      "material": "Текстиль",
+      "sole": "Піна , гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37988/1.jpg"
+    },
+    {
       "id": "tg_37979",
       "brand": "Off-White",
       "name": "Off-White Be Right Back Gunmetal Blue",
