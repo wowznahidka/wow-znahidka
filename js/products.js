@@ -80,6 +80,10 @@ function prodCardHtml(p, opts = {}) {
       ? `<div class="prod-badge badge-low">LAST</div>`
       : '';
 
+  const photoCountBadge = (p.images && p.images.length > 1)
+    ? `<div class="card-photo-count">📷 ${p.images.length}</div>`
+    : '';
+
   const pricePart = p.oldPrice && p.oldPrice > p.price
     ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
     : `${fmtPrice(p.price)}`;
@@ -102,6 +106,7 @@ function prodCardHtml(p, opts = {}) {
     <div class="card-img-wrap">
       ${imgPart}
       ${badgePart}
+      ${photoCountBadge}
     </div>
     <div class="card-body">
       <div class="card-brand">${esc(p.brand)}</div>
