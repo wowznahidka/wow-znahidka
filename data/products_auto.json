@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_37997",
+      "brand": "Nike",
+      "name": "Nike Ava Rover Pink/White",
+      "price": 3200,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11177",
+      "material": "Текстиль",
+      "sole": "Піна , гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37997/1.jpg"
+    },
+    {
       "id": "tg_37988",
       "brand": "Nike",
       "name": "Nike Ava Rover \"Celestial Gold\"",
