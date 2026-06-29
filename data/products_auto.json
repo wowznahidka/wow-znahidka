@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_37970",
+      "brand": "Off-White",
+      "name": "Off-White Be Right Back White/Black",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11150",
+      "material": "Замша",
+      "sole": "Піна , гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37970/1.jpg"
+    },
+    {
       "id": "tg_37961",
       "brand": "Off-White",
       "name": "Off-White Be Right Back Paris",
