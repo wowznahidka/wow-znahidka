@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71453",
+      "brand": "Adidas",
+      "name": "Adidas Ozweego Black Premium",
+      "price": 2650,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10893",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71453/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71453/1.jpg"
+    },
+    {
       "id": "tg_71443",
       "brand": "Adidas",
       "name": "Adidas Samba Premium",
