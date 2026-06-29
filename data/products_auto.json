@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_71601",
+      "brand": "Nike",
+      "name": "Nike M2K Premium",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/12064",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/10.jpg"
+    },
+    {
       "id": "tg_71590",
       "brand": "Nike",
       "name": "Nike M2K Premium",
@@ -3014,39 +3039,6 @@
         "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/9.jpg"
       ],
       "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71614/1.jpg"
-    },
-    {
-      "id": "tg_71601",
-      "brand": "Nike",
-      "name": "Nike M2K Premium",
-      "price": 2500,
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41,
-        42,
-        43,
-        44,
-        45
-      ],
-      "gender": "Жінка",
-      "isNew": true,
-      "tgLink": "https://t.me/wooowznahidka/10954",
-      "images": [
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/1.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/2.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/3.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/4.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/5.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/6.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/7.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/8.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/9.jpg"
-      ],
-      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71601/1.jpg"
     },
     {
       "id": "tg_71579",
