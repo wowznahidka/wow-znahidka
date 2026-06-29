@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71006",
+      "brand": "Asics",
+      "name": "Asics Gel-Sonoma Premium",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10750",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71006/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71006/1.jpg"
+    },
+    {
       "id": "tg_70994",
       "brand": "New Balance",
       "name": "New Balance 530 Beige Premium",
