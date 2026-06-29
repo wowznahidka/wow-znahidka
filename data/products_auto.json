@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_38794",
+      "brand": "Сквозна",
+      "name": "СКВОЗНА СІТКА ✅",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10636",
+      "material": "Сквозна сітка, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38794/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38794/1.jpg"
+    },
+    {
       "id": "tg_38779",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Grey/White",
