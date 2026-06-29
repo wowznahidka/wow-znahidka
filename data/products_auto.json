@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_70918",
+      "brand": "Adidas",
+      "name": "Adidas Samba Black Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10734",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70918/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_70918/1.jpg"
+    },
+    {
       "id": "tg_70902",
       "brand": "Nike",
       "name": "Nike V2K Run Premium",
