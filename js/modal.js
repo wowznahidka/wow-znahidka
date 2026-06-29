@@ -172,6 +172,10 @@ function pdGalleryGo(idx) {
   _pdGalleryIdx = idx;
   track.style.transform = `translateX(-${idx * 100}%)`;
   document.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  document.querySelectorAll('.pd-thumb').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+    if (i === idx) d.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
 }
 
 function _initGalleryTouch(gallery) {
@@ -187,7 +191,7 @@ function _initGalleryTouch(gallery) {
     const dx = e.changedTouches[0].clientX - startX;
     const dy = e.changedTouches[0].clientY - startY;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      const total = document.querySelectorAll('.pd-dot').length;
+      const total = document.querySelectorAll('.pd-thumb').length || document.querySelectorAll('.pd-dot').length;
       if (dx < 0 && _pdGalleryIdx < total - 1) pdGalleryGo(_pdGalleryIdx + 1);
       else if (dx > 0 && _pdGalleryIdx > 0)    pdGalleryGo(_pdGalleryIdx - 1);
     }
@@ -266,9 +270,6 @@ function openProductDetail(product) {
                       onload="this.classList.add('loaded')">
                </div>`).join('')}
              </div>
-             <div class="pd-gallery-dots">
-               ${_imgs.map((_, i) => `<span class="pd-dot${i===0?' active':''}" onclick="pdGalleryGo(${i})"></span>`).join('')}
-             </div>
            </div>
            <div class="pd-zoom-hint" aria-hidden="true">↔ Свайп · тап для збільшення</div>`
         : product.image && product.image.startsWith('http')
@@ -284,6 +285,12 @@ function openProductDetail(product) {
       </button>
       ${scarcHtml}
     </div>
+
+    ${_imgs ? `<div class="pd-thumb-strip" id="pd-thumb-strip">
+      ${_imgs.map((url, i) => `<button class="pd-thumb${i===0?' active':''}" onclick="pdGalleryGo(${i})" aria-label="Фото ${i+1}">
+        <img src="${esc(url)}" loading="${i<4?'eager':'lazy'}" decoding="async" onload="this.classList.add('loaded')">
+      </button>`).join('')}
+    </div>` : ''}
 
     <div class="pd-info">
       <div class="pd-brand">${esc(product.brand)}</div>
@@ -310,7 +317,7 @@ function openProductDetail(product) {
       </button>
       <button class="pd-btn-tg" onclick="_pdPhotoTg()">
         ${tgIco}
-        Запросити фото в Telegram
+        ${_imgs ? 'Переглянути у Telegram' : 'Запросити фото в Telegram'}
       </button>
       <button class="pd-btn-brand" onclick="closeAllSheets();changeTab('catalog');setTimeout(()=>openBrand('${esc(product.brand)}'),220)">
         Ще від ${esc(product.brand)} <span class="i-arr" aria-hidden="true"></span>
