@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71179",
+      "brand": "Golden",
+      "name": "Golden Goose White Black Premium",
+      "price": 4500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10815",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71179/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71179/1.jpg"
+    },
+    {
       "id": "tg_71172",
       "brand": "Nike",
       "name": "Nike V2K Run Premium",
