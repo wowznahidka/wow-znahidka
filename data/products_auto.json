@@ -1,6 +1,30 @@
 {
   "products": [
     {
+      "id": "tg_38354",
+      "brand": "Unknown",
+      "name": "✅ РЕКЛАМНИЙ КОНТЕНТ ✅",
+      "price": 4000,
+      "sizes": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11370",
+      "material": "Denim",
+      "sole": "гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38354/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38354/1.jpg"
+    },
+    {
       "id": "tg_38345",
       "brand": "Unknown",
       "name": "✅ РЕКЛАМНИЙ КОНТЕНТ ✅",
