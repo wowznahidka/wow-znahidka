@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_38770",
+      "brand": "Nike",
+      "name": "Nike Dunk Low \"Triple White\"",
+      "price": 2900,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10634",
+      "material": "Шкіра",
+      "sole": "Піна, гума__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38770/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38770/1.jpg"
+    },
+    {
       "id": "tg_38761",
       "brand": "New Balance",
       "name": "New Balance 1906R All Gray 🇻🇳",
