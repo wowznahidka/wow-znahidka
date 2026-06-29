@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_38053",
+      "brand": "Nike",
+      "name": "Nike KD 18 \"Slim Reaper\"",
+      "price": 3400,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11232",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38053/1.jpg"
+    },
+    {
       "id": "tg_38044",
       "brand": "Kappa",
       "name": "Kappa Fatty Gray  🇻🇳",
