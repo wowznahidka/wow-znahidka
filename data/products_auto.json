@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_38510",
+      "brand": "New Balance",
+      "name": "New Balance 1906R Slate Grey",
+      "price": 2900,
+      "sizes": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10500",
+      "material": "Замша, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38510/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38510/1.jpg"
+    },
+    {
       "id": "tg_38501",
       "brand": "Salomon",
       "name": "Salomon XT-6 FT Beige Olive 🇻🇳",
