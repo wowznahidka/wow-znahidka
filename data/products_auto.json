@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_38170",
+      "brand": "Off-White",
+      "name": "Off-White Be Right Back МАЛОМІРЯТЬ 📦",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11334",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38170/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38170/1.jpg"
+    },
+    {
       "id": "tg_38161",
       "brand": "Nike",
       "name": "Nike KD 18 \"Slim Reaper\"",
