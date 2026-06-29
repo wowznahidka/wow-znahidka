@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_38912",
+      "brand": "Unknown",
+      "name": "✅ НОВИЙ КОНТЕНТ ✅",
+      "price": 2800,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10657",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38912/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38912/1.jpg"
+    },
+    {
       "id": "tg_38903",
       "brand": "Unknown",
       "name": "✅ НОВИЙ КОНТЕНТ ✅",
