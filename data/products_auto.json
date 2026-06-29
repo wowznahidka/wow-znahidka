@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71152",
+      "brand": "Nike",
+      "name": "Nike Initiator Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11847",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/10.jpg"
+    },
+    {
       "id": "tg_71129",
       "brand": "Поповнили✅😎",
       "name": "Поповнили✅😎",
@@ -3275,35 +3296,6 @@
         "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71218/1.jpg"
       ],
       "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71218/1.jpg"
-    },
-    {
-      "id": "tg_71152",
-      "brand": "Nike",
-      "name": "Nike Initiator Premium",
-      "price": 2700,
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40,
-        41
-      ],
-      "gender": "Жінка",
-      "isNew": true,
-      "tgLink": "https://t.me/wooowznahidka/10804",
-      "images": [
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/1.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/2.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/3.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/4.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/5.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/6.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/7.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/8.jpg",
-        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/9.jpg"
-      ],
-      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71152/1.jpg"
     },
     {
       "id": "tg_71142",
