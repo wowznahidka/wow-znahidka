@@ -1,6 +1,27 @@
 {
   "products": [
     {
+      "id": "tg_71739",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Beige Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11029",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71739/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71739/1.jpg"
+    },
+    {
       "id": "tg_71721",
       "brand": "Adidas",
       "name": "Adidas Campus 00S Grey Premium",
