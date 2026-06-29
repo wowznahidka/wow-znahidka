@@ -1,6 +1,28 @@
 {
   "products": [
     {
+      "id": "tg_38336",
+      "brand": "Unknown",
+      "name": "✅ РЕКЛАМНИЙ КОНТЕНТ ✅",
+      "price": 3400,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11368",
+      "material": "Шкіра",
+      "sole": "гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38336/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38336/1.jpg"
+    },
+    {
       "id": "tg_38327",
       "brand": "Unknown",
       "name": "✅ РЕКЛАМНИЙ КОНТЕНТ ✅",
