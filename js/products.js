@@ -84,6 +84,10 @@ function prodCardHtml(p, opts = {}) {
     ? `<div class="card-photo-count">📷 ${p.images.length}</div>`
     : '';
 
+  const cycleAttr = (p.images && p.images.length > 1)
+    ? ` data-cycle="${p.images.slice(0, 5).join('|')}"`
+    : '';
+
   const pricePart = p.oldPrice && p.oldPrice > p.price
     ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`
     : `${fmtPrice(p.price)}`;
@@ -103,7 +107,7 @@ function prodCardHtml(p, opts = {}) {
   return `<article class="product-card${gridCls}"
     onclick="openProductDetail(findProd('${p.id}'))"
     role="button" tabindex="0" aria-label="${esc(p.brand)} ${esc(p.name)}, ${p.price}₴">
-    <div class="card-img-wrap">
+    <div class="card-img-wrap"${cycleAttr}>
       ${imgPart}
       ${badgePart}
       ${photoCountBadge}
