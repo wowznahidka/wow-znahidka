@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_38006",
+      "brand": "Nike",
+      "name": "Nike Ava Rover Black Sage",
+      "price": 3000,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/11186",
+      "material": "Текстиль",
+      "sole": "Піна , гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_38006/1.jpg"
+    },
+    {
       "id": "tg_37997",
       "brand": "Nike",
       "name": "Nike Ava Rover Pink/White",
