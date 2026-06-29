@@ -1,6 +1,29 @@
 {
   "products": [
     {
+      "id": "tg_71650",
+      "brand": "Nike",
+      "name": "Nike M2K Black/White Premium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "tgLink": "https://t.me/wooowznahidka/10990",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71650/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_71650/1.jpg"
+    },
+    {
       "id": "tg_71641",
       "brand": "Nike",
       "name": "Nike AF1 Shadow White Premium",
