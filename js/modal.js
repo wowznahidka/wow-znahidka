@@ -164,6 +164,36 @@ function confirmSize() {
 
 // ── PRODUCT DETAIL ────────────────────────────────── */
 
+let _pdGalleryIdx = 0;
+
+function pdGalleryGo(idx) {
+  const track = document.getElementById('pd-gallery-track');
+  if (!track) return;
+  _pdGalleryIdx = idx;
+  track.style.transform = `translateX(-${idx * 100}%)`;
+  document.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+
+function _initGalleryTouch(gallery) {
+  let startX = 0, startY = 0, moved = false;
+  gallery.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    moved = false;
+  }, { passive: true });
+  gallery.addEventListener('touchmove', () => { moved = true; }, { passive: true });
+  gallery.addEventListener('touchend', e => {
+    if (!moved) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      const total = document.querySelectorAll('.pd-dot').length;
+      if (dx < 0 && _pdGalleryIdx < total - 1) pdGalleryGo(_pdGalleryIdx + 1);
+      else if (dx > 0 && _pdGalleryIdx > 0)    pdGalleryGo(_pdGalleryIdx - 1);
+    }
+  }, { passive: true });
+}
+
 function _pdPhotoTg() {
   const p = S.pdProduct;
   if (!p) return;
@@ -220,14 +250,33 @@ function openProductDetail(product) {
     <path d="M21.944 2.56a1.5 1.5 0 0 0-1.53-.22L2.53 9.6c-.96.37-1.02 1.7-.1 2.16l4.06 2.02 1.56 5.14c.2.65.99.87 1.49.41l2.3-2.12 4.48 3.29c.59.43 1.42.1 1.57-.61L22.44 4.04a1.5 1.5 0 0 0-.5-1.48zM9.4 14.83l-.83 2.72-.94-3.1 8.33-5.9-6.56 6.28z" fill="#fff"/>
   </svg>`;
 
+  _pdGalleryIdx = 0;
+  const _imgs = (product.images && product.images.length > 1) ? product.images : null;
+
   document.getElementById('product-detail-content').innerHTML = `
     <div class="pd-hero">
-      ${product.image && product.image.startsWith('http')
-        ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
-             onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}')"
-             onload="this.classList.add('loaded')">
-           <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
-        : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}
+      ${_imgs
+        ? `<div class="pd-gallery" id="pd-gallery">
+             <div class="pd-gallery-track" id="pd-gallery-track">
+               ${_imgs.map((url, i) => `<div class="pd-gallery-slide">
+                 <img class="pd-gallery-img${i===0?' loaded':''}" src="${esc(url)}"
+                      alt="${esc(product.brand)} ${esc(product.name)}"
+                      loading="${i===0?'eager':'lazy'}" decoding="async"
+                      onclick="openImageZoom('${esc(url)}','${esc(product.brand)} ${esc(product.name)}')"
+                      onload="this.classList.add('loaded')">
+               </div>`).join('')}
+             </div>
+             <div class="pd-gallery-dots">
+               ${_imgs.map((_, i) => `<span class="pd-dot${i===0?' active':''}" onclick="pdGalleryGo(${i})"></span>`).join('')}
+             </div>
+           </div>
+           <div class="pd-zoom-hint" aria-hidden="true">↔ Свайп · тап для збільшення</div>`
+        : product.image && product.image.startsWith('http')
+          ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
+               onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}')"
+               onload="this.classList.add('loaded')">
+             <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
+          : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}
       <div class="pd-hero-vignette" aria-hidden="true"></div>
       <button class="pd-fav-float ${faved ? 'on' : ''}" id="pd-fav-btn"
         onclick="togglePdFav()" aria-label="${faved ? 'Видалити з улюблених' : 'Додати в улюблені'}">
@@ -269,6 +318,12 @@ function openProductDetail(product) {
     </div>`;
 
   openSheet('sheet-product');
+
+  // Init swipe for gallery if multiple photos
+  if (_imgs) {
+    const gallery = document.getElementById('pd-gallery');
+    if (gallery) _initGalleryTouch(gallery);
+  }
 }
 
 // ── NOTIFY ME ─────────────────────────────────────────── */

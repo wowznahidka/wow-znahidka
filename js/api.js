@@ -90,15 +90,18 @@ function normalizeProduct(p) {
   let oldPrice   = Number(p['Стара ціна'] || p['стара ціна'] || p.oldPrice || p.old_price || 0);
   if (oldPrice > 0 && oldPrice <= price) oldPrice = 0;
 
+  const imageRaw = String(p['Фото'] || p['фото'] || p.image || p.img || p.photo || '');
+  const images   = Array.isArray(p.images) && p.images.length ? p.images : (imageRaw ? [imageRaw] : []);
   return {
     id:       String(p['ID'] || p['id'] || p['Артикул'] || Math.random().toString(36).slice(2)),
     brand:    String(p['Бренд']  || p['бренд']  || p.brand  || p.Brand  || 'Unknown'),
     name:     String(p['Назва']  || p['назва']  || p['Модель'] || p.name || p.model || ''),
     price,
     oldPrice,
-    image:    String(p['Фото']   || p['фото']   || p.image  || p.img   || p.photo || ''),
+    image:    images[0] || imageRaw,
+    images,
     sizes,
-    sizeQty,  // { 40: 2, 41: 1, 42: 3 } — кількість по кожному розміру
+    sizeQty,
     isNew:    Boolean(p['Нове']  || p['нове']   || p.is_new || p.isNew),
     gender:   String(p['Стать']  || p['стать']  || p.gender || p.Gender || ''),
     supplier: Number(p['Постачальник'] || p.supplier || detectSupplier(sizesRaw)),
@@ -127,7 +130,6 @@ async function fetchCatalog() {
 }
 
 // ── FLAGSHIP: статичний каталог (data/products.json з адмінки) ──
-// READ без GAS-лімітів і 502. GAS лишається фолбеком + для замовлень.
 async function _fetchStaticCatalog() {
   try {
     const res = await fetch('data/products.json?v=' + Math.floor(Date.now() / 300000), { cache: 'no-store' });
@@ -138,23 +140,40 @@ async function _fetchStaticCatalog() {
   } catch (e) { return null; }
 }
 
+// ── АВТО-КАТАЛОГ: товари з граббера (data/products_auto.json) ──
+async function _fetchAutoCatalog() {
+  try {
+    const res = await fetch('data/products_auto.json?v=' + Math.floor(Date.now() / 60000), { cache: 'no-store' });
+    if (!res.ok) return [];
+    const json = await res.json();
+    if (!json || !Array.isArray(json.products)) return [];
+    return json.products.map(normalizeProduct);
+  } catch(e) { return []; }
+}
+
 async function bgRefreshCatalog() {
-  // Спроба 1: статичний products.json (миттєво, без лімітів)
-  const staticJson = await _fetchStaticCatalog();
-  if (staticJson) {
-    const normalized = staticJson.products.map(normalizeProduct);
-    if (normalized.length >= CFG.MIN_PRODUCTS) {
-      S.catalog.all = normalized;
-      S.catalog.loadedFromServer = true;
-      _saveToCache(normalized);
-      S.lastFetchTime = new Date();
-      updateTimestamp();
-      if (S.activeTab === 'home')    renderHome();
-      if (S.activeTab === 'catalog') renderCatalog();
-      return getCatalog();
-    }
+  // Завантажуємо авто-каталог паралельно зі статичним
+  const autoPromise = _fetchAutoCatalog();
+
+  // Спроба 1: статичний products.json
+  const staticJson    = await _fetchStaticCatalog();
+  const autoProducts  = await autoPromise;
+  const staticProducts = staticJson ? staticJson.products.map(normalizeProduct) : [];
+  const merged = [...autoProducts, ...staticProducts];
+
+  if (merged.length >= CFG.MIN_PRODUCTS || staticProducts.length >= CFG.MIN_PRODUCTS) {
+    const normalized = merged.length ? merged : staticProducts;
+    S.catalog.all = normalized;
+    S.catalog.loadedFromServer = true;
+    _saveToCache(normalized);
+    S.lastFetchTime = new Date();
+    updateTimestamp();
+    if (S.activeTab === 'home')    renderHome();
+    if (S.activeTab === 'catalog') renderCatalog();
+    return getCatalog();
   }
-  // Спроба 2 (фолбек): GAS як раніше
+
+  // Спроба 2 (фолбек): GAS + авто-каталог
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 10000);
   try {
@@ -162,7 +181,8 @@ async function bgRefreshCatalog() {
     clearTimeout(timer);
     const json = await res.json();
     const raw  = json.products || json.data || (Array.isArray(json) ? json : []);
-    const normalized = raw.map(normalizeProduct);
+    const gasProducts = raw.map(normalizeProduct);
+    const normalized  = [...autoProducts, ...gasProducts];
     if (normalized.length >= CFG.MIN_PRODUCTS) {
       S.catalog.all = normalized;
       S.catalog.loadedFromServer = true;
@@ -179,11 +199,15 @@ async function bgRefreshCatalog() {
     return getCatalog();
   } catch(e) {
     clearTimeout(timer);
-    if (!S.catalog.all || !S.catalog.all.length) {
-      S.catalog.all = []; // не підставляємо demo — щоб юзер не замовив demo_X при GAS-лагах
-      if (S.activeTab === 'home')    renderHome();
-      if (S.activeTab === 'catalog') renderCatalog();
+    if (autoProducts.length) {
+      S.catalog.all = autoProducts;
+      S.catalog.loadedFromServer = true;
+      _saveToCache(autoProducts);
+    } else if (!S.catalog.all || !S.catalog.all.length) {
+      S.catalog.all = [];
     }
+    if (S.activeTab === 'home')    renderHome();
+    if (S.activeTab === 'catalog') renderCatalog();
     S.lastFetchTime = new Date();
     updateTimestamp();
     return getCatalog();
