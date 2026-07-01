@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_36677",
+      "brand": "Asics",
+      "name": "Asics Onitsuka Tiger Mexico 66 All Black 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36677/1.jpg"
+    },
+    {
       "id": "tg_36668",
       "brand": "Onitsuka",
       "name": "Onitsuka Tiger Mexico 66 Slip-On🇻🇳",
