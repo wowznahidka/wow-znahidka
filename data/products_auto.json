@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_36436",
+      "brand": "Nike",
+      "name": "Nike Initiator Custom White Black🇻🇳",
+      "price": 2900,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36436/1.jpg"
+    },
+    {
       "id": "tg_36427",
       "brand": "Off-White",
       "name": "Off-White Right Back Burgundy 🇻🇳",
