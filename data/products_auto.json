@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_66723",
+      "brand": "Nike",
+      "name": "Nike Court Legacy Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66723/1.jpg"
+    },
+    {
       "id": "tg_37580",
       "brand": "Adidas",
       "name": "Adidas LA Trainer Grey",
