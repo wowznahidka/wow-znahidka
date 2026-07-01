@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_37390",
+      "brand": "Nike",
+      "name": "Nike Air Jordan 1 Swarovski Stealth🇻🇳",
+      "price": 3300,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37390/1.jpg"
+    },
+    {
       "id": "tg_37381",
       "brand": "Nike",
       "name": "Nike Air Max 90 Grey🇻🇳",
