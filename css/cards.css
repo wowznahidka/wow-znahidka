@@ -335,6 +335,13 @@
   50%      { transform: scale(1.04); box-shadow: 0 4px 18px rgba(255,122,26,0.65); }
 }
 
+.badge-premium {
+  background: linear-gradient(135deg, #1a0533, #6b21a8);
+  color: #e9d5ff;
+  box-shadow: 0 2px 14px rgba(107,33,168,0.50);
+  letter-spacing: .05em;
+}
+
 /* share button */
 .prod-share {
   position: absolute; top: 8px; right: 8px;

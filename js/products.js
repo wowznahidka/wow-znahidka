@@ -74,11 +74,14 @@ function prodCardHtml(p, opts = {}) {
          loading="${eager ? 'eager' : 'lazy'}" decoding="async" onload="this.classList.add('loaded')">`
     : `<div class="card-img-placeholder" aria-hidden="true">👟</div>`;
 
-  const badgePart = p.isNew
-    ? `<div class="prod-badge badge-new">NEW</div>`
-    : low
-      ? `<div class="prod-badge badge-low">LAST</div>`
-      : '';
+  const isPremium = Number(p.price) >= 6000;
+  const badgePart = isPremium
+    ? `<div class="prod-badge badge-premium">💎 PREMIUM</div>`
+    : p.isNew
+      ? `<div class="prod-badge badge-new">NEW</div>`
+      : low
+        ? `<div class="prod-badge badge-low">LAST</div>`
+        : '';
 
   const photoCountBadge = (p.images && p.images.length > 1)
     ? `<div class="card-photo-count">📷 ${p.images.length}</div>`
