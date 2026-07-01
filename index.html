@@ -723,20 +723,40 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
      BOTTOM NAV
      ════════════════════════════════════════════════ -->
 <nav id="bottom-nav" aria-label="Навігація">
-  <button class="nav-item active" data-tab="home"     onclick="changeTab('home')">
-    <span class="nav-icon" aria-hidden="true">🏠</span>
+  <button class="nav-item active" data-tab="home" onclick="changeTab('home')" aria-label="Головна">
+    <span class="nav-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/>
+        <path d="M9 21V14h6v7"/>
+      </svg>
+    </span>
     <span class="nav-label">Головна</span>
   </button>
-  <button class="nav-item" data-tab="match"    onclick="changeTab('match')">
-    <span class="nav-icon" aria-hidden="true">🔥</span>
+  <button class="nav-item" data-tab="match" onclick="changeTab('match')" aria-label="Match">
+    <span class="nav-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/>
+        <path d="M12 2c0 5 4 7 4 11-1.5-1.5-3-2.5-4-6"/>
+      </svg>
+    </span>
     <span class="nav-label">Match</span>
   </button>
-  <button class="nav-item" data-tab="catalog"  onclick="changeTab('catalog')">
-    <span class="nav-icon" aria-hidden="true">👟</span>
+  <button class="nav-item" data-tab="catalog" onclick="changeTab('catalog')" aria-label="Каталог">
+    <span class="nav-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 17h18c.7 0 1.2-.6 1.2-1.3v-1.4L18.5 13"/>
+        <path d="M5 17v-4.5c0-1.2 1-2.2 2.2-2.2H10l3 4.7h5.5"/>
+        <path d="M3.5 15.5L5.5 11"/>
+      </svg>
+    </span>
     <span class="nav-label">Каталог</span>
   </button>
-  <button class="nav-item" data-tab="contacts" onclick="changeTab('contacts')">
-    <span class="nav-icon" aria-hidden="true">💬</span>
+  <button class="nav-item" data-tab="contacts" onclick="changeTab('contacts')" aria-label="Контакти">
+    <span class="nav-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+      </svg>
+    </span>
     <span class="nav-label">Контакти</span>
   </button>
 </nav>
