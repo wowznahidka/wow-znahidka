@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35624",
+      "brand": "Unknown",
+      "name": "✅ СКВОЗНА СІТКА ✅",
+      "price": 2800,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка __(див.коментарі)__",
+      "sole": "Піна та гума__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35624/1.jpg"
+    },
+    {
       "id": "tg_35615",
       "brand": "Unknown",
       "name": "✅ СКВОЗНА СІТКА ✅",
