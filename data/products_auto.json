@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_66777",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 White Premium",
+      "price": 2350,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66777/1.jpg"
+    },
+    {
       "id": "tg_66765",
       "brand": "Jordan",
       "name": "Air Jordan Low Paris Premium",
