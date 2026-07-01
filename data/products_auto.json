@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_34321",
+      "brand": "Adidas",
+      "name": "Adidas Vento XLG Deluxe Black White",
+      "price": 3600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34321/1.jpg"
+    },
+    {
       "id": "tg_34312",
       "brand": "Adidas",
       "name": "Adidas Edge Runner",
