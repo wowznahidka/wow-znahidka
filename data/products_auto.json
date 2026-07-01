@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_37195",
+      "brand": "Nike",
+      "name": "Nike Air Max 90 Gorge Green 🇻🇳",
+      "price": 2800,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37195/1.jpg"
+    },
+    {
       "id": "tg_37186",
       "brand": "New Balance",
       "name": "New Balance 1906A Dragon Berry🇻🇳",
