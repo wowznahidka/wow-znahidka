@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_35956",
+      "brand": "Nike",
+      "name": "Nike Zoom Winflo Light Grey",
+      "price": 2800,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка",
+      "sole": "Гума та пінка__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35956/1.jpg"
+    },
+    {
       "id": "tg_35947",
       "brand": "Nike",
       "name": "Nike Zoom Winflo Light Grey",
