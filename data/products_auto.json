@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_69365",
+      "brand": "Nike",
+      "name": "Nike SB Dunk Low Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69365/1.jpg"
+    },
+    {
       "id": "tg_69353",
       "brand": "Поповнили✅🔥",
       "name": "Поповнили✅🔥",
