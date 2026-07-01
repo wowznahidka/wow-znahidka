@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_68062",
+      "brand": "Nike",
+      "name": "Nike Court Legacy Lift Premium",
+      "price": 2550,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68062/1.jpg"
+    },
+    {
       "id": "tg_68050",
       "brand": "Nike",
       "name": "Nike SB Dunk Brown Premium",
