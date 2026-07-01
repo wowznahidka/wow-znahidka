@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_33875",
+      "brand": "Nike",
+      "name": "Nike Shox Z \"Black Iridescent\"",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Піна та поліуритан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33875/1.jpg"
+    },
+    {
       "id": "tg_33865",
       "brand": "Nike",
       "name": "Nike Dunk Low LTD 'Wizard'",
