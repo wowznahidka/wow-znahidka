@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35938",
+      "brand": "Unknown",
+      "name": "✅ НОВІ ФОТО ✅",
+      "price": 2800,
+      "sizes": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка",
+      "sole": "Гума та пінка__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35938/1.jpg"
+    },
+    {
       "id": "tg_35929",
       "brand": "Nike",
       "name": "Nike Air Pegasus Road Running Black",
