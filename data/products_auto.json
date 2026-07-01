@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_36695",
+      "brand": "Balenciaga",
+      "name": "Balenciaga Runner Grey 🇻🇳",
+      "price": 5300,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36695/1.jpg"
+    },
+    {
       "id": "tg_36686",
       "brand": "Nike",
       "name": "Nike V5 RNR Custom Pink 🇻🇳",
