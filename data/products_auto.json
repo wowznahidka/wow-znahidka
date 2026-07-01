@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_33924",
+      "brand": "Adidas",
+      "name": "Pharrell Williams x Adidas Adistar Jellyfish \"Triple Black\"",
+      "price": 3500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33924/1.jpg"
+    },
+    {
       "id": "tg_33911",
       "brand": "Nike",
       "name": "Nike Luka 4 PF 'Gone Ranching'",
