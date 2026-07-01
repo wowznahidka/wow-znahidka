@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_36454",
+      "brand": "Nike",
+      "name": "Nike Zoomx Structure Plus 🇻🇳",
+      "price": 3000,
+      "sizes": [
+        37
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36454/1.jpg"
+    },
+    {
       "id": "tg_36436",
       "brand": "Nike",
       "name": "Nike Initiator Custom White Black🇻🇳",
