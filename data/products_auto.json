@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_33987",
+      "brand": "Nike",
+      "name": "Nike Air Zoom Pegasus Premium",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка (дихаюча)",
+      "sole": "Піна, гума, балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33987/1.jpg"
+    },
+    {
       "id": "tg_33978",
       "brand": "Nike",
       "name": "Nike Shox R4 Sail/Black/Fauna Brown",
