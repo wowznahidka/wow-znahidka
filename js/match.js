@@ -81,29 +81,6 @@ function setMatchSize(sz) {
   renderMatchCard();
 }
 
-function _buildSizeChips(pool) {
-  const wrap = document.getElementById('match-size-filter');
-  if (!wrap) return;
-  const sizes = new Set();
-  pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?') sizes.add(v); }));
-  const sorted = [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
-  wrap.innerHTML = `<button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
-    sorted.map(s => `<button class="match-sz-chip" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
-}
-
-function setMatchSize(sz) {
-  S.matchSizeFilter = sz;
-  document.querySelectorAll('.match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
-  S.matchPool = sz === 'all'
-    ? [...S.matchFullPool]
-    : S.matchFullPool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
-  S.matchIdx = 0;
-  _matchCombo = 0;
-  clearTimeout(_comboTimer);
-  _updateComboUI();
-  renderMatchCard();
-}
-
 function renderMatchCard() {
   const stage   = document.getElementById('card-stage');
   const counter = document.getElementById('match-counter');
@@ -259,15 +236,8 @@ function attachSwipeListeners(card, product) {
     deltaY = 0;
   };
 
-<<<<<<< Updated upstream
-  // Pointer Events API handles both mouse and touch
   card.addEventListener('pointerdown', onDown);
-  document.addEventListener('pointermove', _moveHandler, { passive: true });
-=======
-  card.addEventListener('pointerdown', onDown);
-  // Non-passive so we can preventDefault vertical scroll during horizontal swipe
   document.addEventListener('pointermove', _moveHandler, { passive: false });
->>>>>>> Stashed changes
   document.addEventListener('pointerup', _upHandler);
   document.addEventListener('pointercancel', _upHandler);
 }
