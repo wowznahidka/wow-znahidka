@@ -128,6 +128,9 @@ function attachSwipeListeners(card, product) {
   const FLING_DIST     = 24;
   const FLING_VEL      = 0.30;
 
+  card.style.userSelect = 'none';
+  card.style.webkitUserSelect = 'none';
+
   const onDown = e => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
     dragging  = true;
@@ -135,7 +138,7 @@ function attachSwipeListeners(card, product) {
     startX    = e.clientX;
     deltaX    = 0;
     card.style.transition = 'none';
-    card.setPointerCapture?.(e.pointerId);
+    try { card.setPointerCapture(e.pointerId); } catch(_) {}
   };
 
   _moveHandler = e => {
@@ -174,8 +177,8 @@ function attachSwipeListeners(card, product) {
     deltaX = 0;
   };
 
-  // Pointer Events API handles both mouse and touch — no duplicate touch handlers needed
-  card.addEventListener('pointerdown', onDown, { passive: true });
+  // Pointer Events API handles both mouse and touch
+  card.addEventListener('pointerdown', onDown);
   document.addEventListener('pointermove', _moveHandler, { passive: true });
   document.addEventListener('pointerup', _upHandler);
   document.addEventListener('pointercancel', _upHandler);
