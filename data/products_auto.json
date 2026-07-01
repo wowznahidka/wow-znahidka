@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_69438",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69438/1.jpg"
+    },
+    {
       "id": "tg_69426",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Premium",
