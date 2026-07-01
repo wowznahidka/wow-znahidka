@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_33902",
+      "brand": "Nike",
+      "name": "Nike Air Max 95 x Undefeated Black/Grey/Blue",
+      "price": 3200,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна, гума, балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33902/1.jpg"
+    },
+    {
       "id": "tg_33893",
       "brand": "Nike",
       "name": "Nike Air Force 1 Low Kobe Bryant",
