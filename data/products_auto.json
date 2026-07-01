@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_36291",
+      "brand": "Asics",
+      "name": "Asics Onitsuka Tiger Mexico 66 SD Kill Bill",
+      "price": 2700,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36291/1.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36291/1.jpg"
+    },
+    {
       "id": "tg_36282",
       "brand": "Unknown",
       "name": "✅ НОВИЙ КОНТЕНТ ✅",
