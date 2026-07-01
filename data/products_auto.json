@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36641",
+      "brand": "Asics",
+      "name": "Asics Gel-Pickax Black🇻🇳",
+      "price": 2700,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36641/1.jpg"
+    },
+    {
       "id": "tg_36623",
       "brand": "Nike",
       "name": "Nike Dunk Low Pearl Pink Sail 🇻🇳",
