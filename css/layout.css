@@ -15,8 +15,8 @@
   --half-max: 240px; --half-inset: 228px;
 }
 @media (min-width: 640px)  { :root { --half-max: 270px;  --half-inset: 258px; } }
-@media (min-width: 1024px) { :root { --half-max: 300px;  --half-inset: 288px; } }
-@media (min-width: 1280px) { :root { --half-max: 330px;  --half-inset: 318px; } }
+@media (min-width: 1024px) { :root { --half-max: 400px;  --half-inset: 388px; } }
+@media (min-width: 1440px) { :root { --half-max: 500px;  --half-inset: 488px; } }
 
 body { background: #f0eded; }
 
@@ -1537,13 +1537,30 @@ body { background: #f0eded; }
   margin-top: 3px; font-weight: 600; letter-spacing: .3px;
 }
 
-/* ── DESKTOP 600px — wider grids ─────────────────── */
+/* ── DESKTOP 640px — wider grids ─────────────────── */
 @media (min-width: 640px) {
   .prods-grid { grid-template-columns: repeat(3,1fr); gap: 12px; }
   .section { padding: 14px 20px 6px; }
   .h-scroll { padding: 0 20px 12px; margin: 0 -20px; }
   .brd-card { width: 155px; height: 220px; }
   .dd-row { padding: 0 16px 20px; gap: 12px; grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ── DESKTOP 1024px — 4 columns, hover states ───── */
+@media (min-width: 1024px) {
+  .prods-grid { grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .dd-row { grid-template-columns: repeat(4, 1fr); }
+  .section { padding: 16px 24px 8px; }
+  /* card hover lift */
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.14); }
+  /* match card bigger */
+  .card-stage { min-height: 480px; }
+  .m-card-img { aspect-ratio: 3/2; }
+  /* match: bigger action buttons */
+  .m-action { width: 80px; height: 80px; font-size: 34px; }
+  /* nav hover */
+  .nav-item:hover { color: var(--text); }
+  .nav-item.active:hover { color: var(--red); }
 }
 
 /* ── TABLET (481-899px) — лишаємо як мобайл, тільки centered ──
