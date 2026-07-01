@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36508",
+      "brand": "Unknown",
+      "name": "✅ НОВІ ФОТО ✅",
+      "price": 2600,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Дихаючий текстиль__",
+      "sole": "М'яка пінка, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36508/1.jpg"
+    },
+    {
       "id": "tg_36499",
       "brand": "Nike",
       "name": "Nike V5 RNR White",
