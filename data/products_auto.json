@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_35147",
+      "brand": "Asics",
+      "name": "Asics Gel Kahana 8 Beige/Grey",
+      "price": 2650,
+      "sizes": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "__Шкіра, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35147/1.jpg"
+    },
+    {
       "id": "tg_35138",
       "brand": "Asics",
       "name": "Asics Gel Kahana 8",
