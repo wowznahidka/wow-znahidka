@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_35078",
+      "brand": "✅Топ",
+      "name": "✅ТОП КОНТЕНТ✅",
+      "price": 2400,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35078/1.jpg"
+    },
+    {
       "id": "tg_35069",
       "brand": "New Balance",
       "name": "New Balance 1906 R Grey/Black",
