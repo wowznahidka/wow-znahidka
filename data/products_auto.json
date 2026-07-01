@@ -1,6 +1,34 @@
 {
   "products": [
     {
+      "id": "tg_68868",
+      "brand": "Adidas",
+      "name": "Adidas Samba White Premium",
+      "price": 2550,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68868/1.jpg"
+    },
+    {
       "id": "tg_68856",
       "brand": "New Balance",
       "name": "New Balance 530 Silver/BlackPremium",
