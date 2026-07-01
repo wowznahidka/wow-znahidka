@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_37553",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 Black Великан",
+      "price": 2700,
+      "sizes": [
+        47,
+        48,
+        49
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37553/2.jpg"
+    },
+    {
       "id": "tg_37544",
       "brand": "Salomon",
       "name": "Salomon XT-6 Ft White Великан",
