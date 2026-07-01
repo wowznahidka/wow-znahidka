@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_34293",
+      "brand": "Nike",
+      "name": "Nike Wmns Structure Plus 🇻🇳",
+      "price": 3000,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34293/1.jpg"
+    },
+    {
       "id": "tg_34284",
       "brand": "Nike",
       "name": "Nike Pegasus Premium \"Black/Bright Crimson\" 🇻🇳",
