@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_34484",
+      "brand": "Nike",
+      "name": "Nike Air Max 95 Camo \"Court Purple\" 🇻🇳",
+      "price": 2850,
+      "sizes": [
+        37
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра__",
+      "sole": "Піна, поліуритан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34484/1.jpg"
+    },
+    {
       "id": "tg_34475",
       "brand": "Nike",
       "name": "Nike Initiator Black/White",
