@@ -230,15 +230,16 @@ function setHomeGreeting() {
 
 function animateCounter(total) {
   const el = document.getElementById('models-counter');
+  const el2 = document.getElementById('cb-stat-models');
+  if (el2) el2.textContent = total + '+';
   if (!el) return;
-  // Якщо вкладка прихована — ставимо фінальне значення зразу (rAF паузується)
   if (document.hidden) { el.textContent = total; return; }
   let cur = 0;
   const step = Math.max(1, total / 60);
   const tick = () => {
     cur = Math.min(cur + step, total);
     el.textContent = Math.round(cur);
-    if (cur < total) setTimeout(tick, 16); // setTimeout працює і у фоні
+    if (cur < total) setTimeout(tick, 16);
   };
   tick();
 }

@@ -161,11 +161,13 @@ body { background: #f0eded; }
   filter: drop-shadow(0 0 6px rgba(255,62,62,.45));
   transform: scale(1.08);
 }
-.nav-item.active::before {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+#nav-indicator {
+  position: absolute; top: 0; left: 0;
   width: 32px; height: 3px; background: var(--red);
   border-radius: 0 0 4px 4px;
   box-shadow: 0 0 10px rgba(255,62,62,.55);
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
 }
 
 /* ── GENDER TOGGLE — inline block under hero ────────── */
@@ -1168,9 +1170,12 @@ body { background: #f0eded; }
   font-size: 22px; font-weight: 700;
   color: #fff;
   flex-shrink: 0;
-  transition: transform .18s ease;
+  animation: arrowPulse 1.6s ease-in-out infinite;
 }
-.tg-channel-cta:hover .tg-cta-arrow { transform: translateX(4px); }
+@keyframes arrowPulse {
+  0%,100% { transform: translateX(0); }
+  50%      { transform: translateX(5px); }
+}
 
 @keyframes heroFloat {
   0%,100% { transform: translateY(0); }
@@ -1418,16 +1423,31 @@ body { background: #f0eded; }
 .social-btn-ico { display: flex; align-items: center; justify-content: center; line-height: 1; }
 .social-btn.tg {
   background: linear-gradient(145deg, #0077b6, #0096c7);
-  box-shadow: 0 6px 24px rgba(0,136,204,0.35);
+  box-shadow: 0 6px 24px rgba(0,136,204,0.45), 0 0 0 0 rgba(0,150,199,0);
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.social-btn.tg:hover {
+  box-shadow: 0 8px 32px rgba(0,136,204,0.65), 0 0 20px rgba(0,150,199,0.3);
+  transform: translateY(-2px);
 }
 .social-btn.ig {
   background: linear-gradient(145deg, #833ab4 0%, #e1306c 50%, #f77737 100%);
-  box-shadow: 0 6px 24px rgba(225,48,108,0.35);
+  box-shadow: 0 6px 24px rgba(225,48,108,0.45), 0 0 0 0 rgba(225,48,108,0);
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.social-btn.ig:hover {
+  box-shadow: 0 8px 32px rgba(225,48,108,0.65), 0 0 20px rgba(183,58,180,0.3);
+  transform: translateY(-2px);
 }
 .social-btn.tt {
   background: linear-gradient(145deg, #010101, #1a1a2e);
-  box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 24px rgba(105,201,208,0.35), 0 0 0 0 rgba(105,201,208,0);
   border: 1px solid rgba(105,201,208,0.3);
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.social-btn.tt:hover {
+  box-shadow: 0 8px 32px rgba(105,201,208,0.5), 0 0 20px rgba(105,201,208,0.2);
+  transform: translateY(-2px);
 }
 
 /* ── SEARCH SUGGESTIONS ──────────────────────────── */

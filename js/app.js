@@ -60,6 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ── INIT ─────────────────────────────────────── */
   updateBadges();
+  setTimeout(() => _updateNavIndicator(S.activeTab), 50);
   fetchCatalog().then(() => {
     if (!_tabParam || _tabParam === 'home') renderHome();
     checkDeepLink();

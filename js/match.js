@@ -43,6 +43,42 @@ async function initMatch() {
   clearTimeout(_comboTimer);
   _updateComboUI();
   renderMatchCard();
+  _preloadMatchImages();
+}
+
+function _preloadMatchImages() {
+  const pool = S.matchPool || [];
+  const idx  = S.matchIdx  || 0;
+  for (let i = 1; i <= 3; i++) {
+    const p = pool[idx + i];
+    if (p && p.image && p.image.startsWith('http')) {
+      const img = new Image();
+      img.src = p.image;
+    }
+  }
+}
+
+function _buildSizeChips(pool) {
+  const wrap = document.getElementById('match-size-filter');
+  if (!wrap) return;
+  const sizes = new Set();
+  pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?') sizes.add(v); }));
+  const sorted = [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
+  wrap.innerHTML = `<button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
+    sorted.map(s => `<button class="match-sz-chip" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
+}
+
+function setMatchSize(sz) {
+  S.matchSizeFilter = sz;
+  document.querySelectorAll('.match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
+  S.matchPool = sz === 'all'
+    ? [...S.matchFullPool]
+    : S.matchFullPool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
+  S.matchIdx = 0;
+  _matchCombo = 0;
+  clearTimeout(_comboTimer);
+  _updateComboUI();
+  renderMatchCard();
 }
 
 function _buildSizeChips(pool) {
@@ -161,7 +197,7 @@ function _attachMatchKeyboard() {
 // ── SWIPE LISTENER ───────────────────────────────── */
 function attachSwipeListeners(card, product) {
   cleanupSwipe();
-  let startX = 0, deltaX = 0, startTime = 0, dragging = false;
+  let startX = 0, startY = 0, deltaX = 0, deltaY = 0, startTime = 0, dragging = false;
   const DIST_THRESHOLD = Math.min(60, window.innerWidth * 0.14);
   const FLING_DIST     = 24;
   const FLING_VEL      = 0.30;
@@ -174,7 +210,9 @@ function attachSwipeListeners(card, product) {
     dragging  = true;
     startTime = Date.now();
     startX    = e.clientX;
+    startY    = e.clientY;
     deltaX    = 0;
+    deltaY    = 0;
     card.style.transition = 'none';
     try { card.setPointerCapture(e.pointerId); } catch(_) {}
   };
@@ -182,10 +220,15 @@ function attachSwipeListeners(card, product) {
   _moveHandler = e => {
     if (!dragging) return;
     deltaX = e.clientX - startX;
+    deltaY = e.clientY - startY;
+    // Prevent vertical page scroll when swiping horizontally
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 8) {
+      e.preventDefault();
+    }
     const _swipeBase = Math.min(window.innerWidth, 480);
     const rot   = (deltaX / _swipeBase) * 22;
     const scale = 1 - Math.min(0.04, Math.abs(deltaX) / (_swipeBase * 8));
-    card.style.transform = `translateX(${deltaX}px) rotate(${rot}deg) scale(${scale})`;
+    card.style.transform = `translate(${deltaX}px, ${deltaY * 0.3}px) rotate(${rot}deg) scale(${scale})`;
     const likeEl = document.getElementById('sw-like');
     const nopeEl = document.getElementById('sw-nope');
     const lr = Math.min(1, Math.max(0, (deltaX  - 10) / 55));
@@ -206,18 +249,25 @@ function attachSwipeListeners(card, product) {
       swipeCard(deltaX > 0 ? 'right' : 'left');
     } else {
       card.style.transition = 'transform .4s cubic-bezier(.34,1.56,.64,1)';
-      card.style.transform  = 'translateX(0) rotate(0deg)';
+      card.style.transform  = 'translate(0, 0) rotate(0deg)';
       const likeEl = document.getElementById('sw-like');
       const nopeEl = document.getElementById('sw-nope');
       if (likeEl) { likeEl.style.opacity = '0'; likeEl.classList.remove('visible'); }
       if (nopeEl) { nopeEl.style.opacity = '0'; nopeEl.classList.remove('visible'); }
     }
     deltaX = 0;
+    deltaY = 0;
   };
 
+<<<<<<< Updated upstream
   // Pointer Events API handles both mouse and touch
   card.addEventListener('pointerdown', onDown);
   document.addEventListener('pointermove', _moveHandler, { passive: true });
+=======
+  card.addEventListener('pointerdown', onDown);
+  // Non-passive so we can preventDefault vertical scroll during horizontal swipe
+  document.addEventListener('pointermove', _moveHandler, { passive: false });
+>>>>>>> Stashed changes
   document.addEventListener('pointerup', _upHandler);
   document.addEventListener('pointercancel', _upHandler);
 }
@@ -256,6 +306,7 @@ function swipeCard(dir) {
   }
 
   S.matchIdx++;
+  _preloadMatchImages();
   clearTimeout(_swipeRenderTimer);
   _swipeRenderTimer = setTimeout(() => {
     _swipeLocked      = false;
