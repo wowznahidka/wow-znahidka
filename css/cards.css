@@ -887,14 +887,15 @@
 
 #sheet-product { background: #fff !important; }
 
-/* Hero — image block з градієнтним фоном і художньою композицією */
+/* Hero — image block ~80% of first screen */
 .pd-hero {
   position: relative; width: 100%;
-  aspect-ratio: 5 / 4;
+  height: 68svh; min-height: 300px; max-height: 580px;
   background:
     radial-gradient(circle at 50% 35%, #f5f5f7 0%, #e8e8ea 100%);
   overflow: hidden;
   cursor: zoom-in;
+  flex-shrink: 0;
 }
 .pd-img { cursor: zoom-in; }
 .pd-zoom-hint {
@@ -1149,12 +1150,16 @@
   font-weight: 800 !important;
 }
 
-/* ── CTA section — sticky-feeling primary button ── */
+/* ── CTA section — sticky buy bar ── */
 .pd-cta {
-  padding: 12px 22px calc(18px + var(--safe-bottom));
+  position: sticky;
+  bottom: 0; z-index: 10;
+  padding: 12px 20px calc(16px + env(safe-area-inset-bottom, 0px));
   display: flex; flex-direction: column; gap: 8px;
-  background:
-    linear-gradient(180deg, transparent 0%, rgba(255,255,255,1) 25%);
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.08);
 }
 .pd-btn-size {
   width: 100%; padding: 17px 24px;
@@ -1789,3 +1794,37 @@
 }
 .scroll-nudge p     { font-size: 14px; font-weight: 700; color: var(--text-dim); }
 .scroll-nudge small { font-size: 11px; color: var(--text-muted); }
+
+/* ── PRODUCT DETAIL — TRUST BAR ── */
+.pd-trust-bar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding: 12px 20px 0;
+}
+.pd-trust-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: #0e9b46;
+  background: rgba(14,155,70,0.08);
+  border: 1px solid rgba(14,155,70,0.14);
+  border-radius: 100px;
+  padding: 5px 11px;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ── PRODUCT DETAIL — SIMILAR ITEMS ── */
+.pd-similar {
+  padding: 24px 0 32px;
+  background: var(--bg2, #f5f5f7);
+}
+.pd-similar-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px; font-weight: 900;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 16px 12px;
+}
+.pd-similar-row {
+  padding: 0 16px 8px !important;
+}
+.pd-similar .product-card { min-width: 152px; width: 152px; }
