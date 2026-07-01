@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_35024",
+      "brand": "Adidas",
+      "name": "Adidas Edge Runner",
+      "price": 2640,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Гума та піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35024/1.jpg"
+    },
+    {
       "id": "tg_35015",
       "brand": "Adidas",
       "name": "Adidas Ozmillen Silver/Black 🇻🇳",
