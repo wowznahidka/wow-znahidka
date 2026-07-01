@@ -93,7 +93,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="shared/css/premium.css?v=54">
-<link rel="stylesheet" href="css/niche.css?v=54">
+<link rel="stylesheet" href="css/niche.css?v=55">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -837,16 +837,18 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <!-- Checkout -->
 <div class="sheet" id="sheet-checkout" role="dialog" aria-modal="true" aria-label="Оформлення замовлення">
   <div class="sh-handle" aria-hidden="true"></div>
-  <h2 class="sh-title">📦 Оформлення</h2>
+  <h2 class="sh-title">Оформлення</h2>
   <div class="cod-banner" role="note">
     <div class="cod-ico" aria-hidden="true">🤝</div>
     <div>
       <div class="cod-title">Оплата після примірки</div>
-      <div class="cod-sub">Без передоплати · Нова Пошта</div>
+      <div class="cod-sub">Без передоплати · Нова Пошта · Повернення безкоштовно</div>
     </div>
   </div>
 
   <div id="checkout-items-summary" aria-label="Товари у замовленні"></div>
+
+  <div class="checkout-section-label">Контактна інформація</div>
 
   <div class="form-field">
     <label class="form-lbl" for="f-name"><span class="form-lbl-ico" aria-hidden="true">👤</span> Ваше ім'я</label>
@@ -878,6 +880,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     <div class="form-err-msg" id="f-city-err" role="alert">Введіть назву міста</div>
   </div>
 
+  <div class="checkout-section-label" style="margin-top:6px">Доставка</div>
   <div class="deliv-tabs" role="group" aria-label="Тип доставки">
     <button class="deliv-tab on" id="dtab-dept" onclick="setDelivTab('dept')" aria-pressed="true">🏢 Відділення</button>
     <button class="deliv-tab"    id="dtab-post" onclick="setDelivTab('post')" aria-pressed="false">📮 Поштомат</button>
@@ -909,7 +912,11 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
   <button class="checkout-submit" id="checkout-submit-btn" onclick="submitOrder()">
     ✅ Підтвердити замовлення
   </button>
-  <div style="height:8px"></div>
+  <div class="checkout-trust-strip">
+    <span>📦 Нова Пошта</span>
+    <span>🔄 Повернення</span>
+    <span>🛡 Безпечно</span>
+  </div>
 </div>
 
 <!-- Review Form -->
