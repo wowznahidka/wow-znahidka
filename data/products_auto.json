@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_68905",
+      "brand": "Nike",
+      "name": "Nike X Supreme Shox Ride 2 Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68905/1.jpg"
+    },
+    {
       "id": "tg_68892",
       "brand": "Balenciaga",
       "name": "Balenciaga Track White Premium",
