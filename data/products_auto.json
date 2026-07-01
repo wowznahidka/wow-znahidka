@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35174",
+      "brand": "Dior",
+      "name": "Christian Dior Walk'n'Dior White/Grey",
+      "price": 3500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Гума, піна",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35174/1.jpg"
+    },
+    {
       "id": "tg_35165",
       "brand": "Unknown",
       "name": "✅ ТОП КОНТЕНТ ✅",
