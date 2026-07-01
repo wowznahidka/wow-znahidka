@@ -407,10 +407,17 @@ function initKeyboardHandler() {
 }
 
 // ── PREMIUM LIGHTBOX ────────────────────────────── */
-// Свайп вниз → закрити, дабл-тап → зум ×2.5, пінч → масштаб, spring анімація
-function openImageZoom(src, alt) {
+// Свайп вниз → закрити, свайп ліво/право → інші фото, дабл-тап → зум, пінч → масштаб
+let _zoomKeyHandler = null;
+
+function openImageZoom(src, alt, imgs) {
   if (!src) return;
   closeImageZoom();
+
+  const images = (imgs && imgs.length > 1) ? imgs : [src];
+  let curIdx = images.indexOf(src);
+  if (curIdx < 0) curIdx = 0;
+  const hasDots = images.length > 1;
 
   const ov = document.createElement('div');
   ov.className = 'izv-overlay';
@@ -418,19 +425,21 @@ function openImageZoom(src, alt) {
   ov.innerHTML = `
     <div class="izv-backdrop" id="izv-bd"></div>
     <div class="izv-wrap" id="izv-wrap">
-      <img class="izv-img" id="izv-img"
+      <img class="izv-img loaded" id="izv-img"
            src="${src}" alt="${(alt||'').replace(/"/g,'&quot;')}" draggable="false">
     </div>
     <button class="izv-close" onclick="closeImageZoom()" aria-label="Закрити">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
-    <div class="izv-hint">↕ Свайп вниз · дабл-тап для зуму</div>
+    ${hasDots ? `<div class="izv-dots" id="izv-dots">${images.map((_,i) => `<span class="izv-dot${i===curIdx?' izv-dot-a':''}"></span>`).join('')}</div>` : ''}
+    <div class="izv-hint">${hasDots ? '← → свайп між фото · ↕ закрити · дабл-тап зум' : '↕ Свайп вниз · дабл-тап для зуму'}</div>
   `;
   document.body.appendChild(ov);
   document.body.style.overflow = 'hidden';
 
-  const bd   = document.getElementById('izv-bd');
-  const wrap = document.getElementById('izv-wrap');
+  const bd    = document.getElementById('izv-bd');
+  const wrap  = document.getElementById('izv-wrap');
+  const imgEl = document.getElementById('izv-img');
 
   requestAnimationFrame(() => {
     bd.style.opacity = '1';
@@ -438,14 +447,43 @@ function openImageZoom(src, alt) {
   });
 
   let scale = 1, tx = 0, ty = 0;
-  let lastTap = 0;
-  let dragMode = null;
-  let sx = 0, sy = 0;
+  let lastTap = 0, dragMode = null;
+  let sx = 0, sy = 0, imgDX = 0;
   let pinchD0 = 0, pinchS0 = 1;
+  let navigating = false;
 
   function applyT(anim) {
     wrap.style.transition = anim ? 'transform .25s cubic-bezier(.34,1.56,.64,1)' : 'none';
     wrap.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+  }
+
+  function updateDots() {
+    const d = document.getElementById('izv-dots');
+    if (!d) return;
+    d.querySelectorAll('.izv-dot').forEach((dot, i) => dot.classList.toggle('izv-dot-a', i === curIdx));
+  }
+
+  function navTo(idx, dir) {
+    if (navigating || idx < 0 || idx >= images.length) return;
+    navigating = true;
+    scale = 1; tx = 0; ty = 0;
+    const outX = dir === 1 ? -window.innerWidth : window.innerWidth;
+    wrap.style.transition = 'transform .2s ease-in';
+    wrap.style.transform = `translateX(${outX}px)`;
+    setTimeout(() => {
+      curIdx = idx;
+      imgEl.classList.remove('loaded');
+      imgEl.src = images[curIdx];
+      imgEl.onload = () => imgEl.classList.add('loaded');
+      wrap.style.transition = 'none';
+      wrap.style.transform = `translateX(${-outX}px) scale(1)`;
+      requestAnimationFrame(() => {
+        wrap.style.transition = 'transform .22s ease-out';
+        wrap.style.transform = 'none';
+        setTimeout(() => { navigating = false; }, 230);
+      });
+      updateDots();
+    }, 200);
   }
 
   ov.addEventListener('touchstart', e => {
@@ -453,7 +491,8 @@ function openImageZoom(src, alt) {
       pinchD0 = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
       pinchS0 = scale; dragMode = 'pinch'; e.preventDefault(); return;
     }
-    sx = e.touches[0].clientX; sy = e.touches[0].clientY; dragMode = null;
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+    dragMode = null; imgDX = 0;
     const now = Date.now();
     if (now - lastTap < 280) {
       e.preventDefault();
@@ -478,11 +517,16 @@ function openImageZoom(src, alt) {
     }
     const dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
     if (!dragMode) {
-      if (scale <= 1 && Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) dragMode = 'dismiss';
+      if (hasDots && scale <= 1 && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) dragMode = 'nav';
+      else if (scale <= 1 && Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) dragMode = 'dismiss';
       else if (scale > 1) dragMode = 'pan';
       else dragMode = 'none';
     }
-    if (dragMode === 'dismiss') {
+    if (dragMode === 'nav') {
+      imgDX = dx;
+      wrap.style.transition = 'none';
+      wrap.style.transform = `translateX(${dx * 0.55}px)`;
+    } else if (dragMode === 'dismiss') {
       const p = Math.abs(dy) / 260;
       wrap.style.transition = 'none';
       wrap.style.transform = `translateY(${dy}px) scale(${Math.max(.8, 1 - p * .15)})`;
@@ -495,23 +539,34 @@ function openImageZoom(src, alt) {
   }, { passive: false });
 
   ov.addEventListener('touchend', e => {
-    const dy = (e.changedTouches[0]?.clientY || sy) - sy;
-    if (dragMode === 'dismiss') {
+    const endY = e.changedTouches[0]?.clientY || sy;
+    const dy = endY - sy;
+    if (dragMode === 'nav') {
+      if (imgDX < -60 && curIdx < images.length - 1) navTo(curIdx + 1, 1);
+      else if (imgDX > 60 && curIdx > 0) navTo(curIdx - 1, -1);
+      else { wrap.style.transition = 'transform .25s cubic-bezier(.34,1.56,.64,1)'; wrap.style.transform = 'none'; }
+    } else if (dragMode === 'dismiss') {
       if (Math.abs(dy) > 90) {
         wrap.style.transition = 'transform .18s ease-in, opacity .18s ease-in';
         wrap.style.transform = `translateY(${dy > 0 ? '110vh' : '-110vh'}) scale(.8)`;
         wrap.style.opacity = '0';
         bd.style.transition = 'opacity .18s ease-in'; bd.style.opacity = '0';
         setTimeout(() => { ov.remove(); document.body.style.overflow = ''; }, 190);
-        document.removeEventListener('keydown', _zoomKeyHandler); return;
+        if (_zoomKeyHandler) document.removeEventListener('keydown', _zoomKeyHandler); return;
       }
       bd.style.transition = 'opacity .22s ease'; bd.style.opacity = '1';
       applyT(true);
     }
-    pinchD0 = 0; dragMode = null;
+    pinchD0 = 0; dragMode = null; imgDX = 0;
   });
 
   ov.addEventListener('click', e => { if (e.target === ov || e.target === bd) closeImageZoom(); });
+
+  _zoomKeyHandler = e => {
+    if (e.key === 'Escape') { closeImageZoom(); return; }
+    if (hasDots && e.key === 'ArrowRight' && curIdx < images.length - 1) navTo(curIdx + 1, 1);
+    if (hasDots && e.key === 'ArrowLeft'  && curIdx > 0) navTo(curIdx - 1, -1);
+  };
   document.addEventListener('keydown', _zoomKeyHandler);
 }
 
@@ -523,9 +578,8 @@ function closeImageZoom() {
   if (wrap) { wrap.style.transition = 'transform .18s ease-in, opacity .18s ease-in'; wrap.style.transform = 'scale(.85)'; wrap.style.opacity = '0'; }
   if (bd) { bd.style.transition = 'opacity .18s ease-in'; bd.style.opacity = '0'; }
   setTimeout(() => { ov.remove(); document.body.style.overflow = ''; }, 190);
-  document.removeEventListener('keydown', _zoomKeyHandler);
+  if (_zoomKeyHandler) { document.removeEventListener('keydown', _zoomKeyHandler); _zoomKeyHandler = null; }
 }
-function _zoomKeyHandler(e) { if (e.key === 'Escape') closeImageZoom(); }
 
 // Делегований клік: спрацьовує на всі продуктові/Match/бренд зображення.
 // НЕ перехоплює клік усередині .product-card (карта має свій onclick → відкриває деталі).
@@ -541,7 +595,8 @@ function _zoomKeyHandler(e) { if (e.key === 'Escape') closeImageZoom(); }
     pressedImg = img;
     pressTimer = setTimeout(() => {
       if (pressedImg && pressedImg.src) {
-        openImageZoom(pressedImg.src, pressedImg.alt);
+        const ctxImgs = S.spProduct?.images || null;
+        openImageZoom(pressedImg.src, pressedImg.alt, ctxImgs);
         // Заблокувати наступний click щоб карта не відкрилась
         const block = ev => { ev.stopPropagation(); ev.preventDefault(); document.removeEventListener('click', block, true); };
         document.addEventListener('click', block, true);
