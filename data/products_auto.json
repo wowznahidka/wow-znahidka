@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_35006",
+      "brand": "Adidas",
+      "name": "Adidas Ozmillen Silver/Black 🇻🇳",
+      "price": 2450,
+      "sizes": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Пінка, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35006/1.jpg"
+    },
+    {
       "id": "tg_34997",
       "brand": "Adidas",
       "name": "Adidas Ozmillen Silver/Blue 🇻🇳",
