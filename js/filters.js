@@ -91,7 +91,7 @@ function filterBySize(products) {
 }
 
 // ── PRICE SLIDER ─────────────────────────────────── */
-const PRICE_MAX = 6000;
+const PRICE_MAX = 12000;
 
 function renderPriceSlider() {
   const wrap = document.getElementById('price-filter-wrap');
@@ -163,7 +163,7 @@ function _resetPriceSlider() {
 
 function filterByPrice(products) {
   const min = S.priceMin || 0;
-  const max = (S.priceMax !== undefined && S.priceMax <= PRICE_MAX) ? S.priceMax : PRICE_MAX;
+  const max = (S.priceMax !== undefined && S.priceMax < PRICE_MAX) ? S.priceMax : PRICE_MAX;
   if (min <= 0 && max >= PRICE_MAX) return products;
   return products.filter(p => {
     const price = Number(p.price) || 0;
