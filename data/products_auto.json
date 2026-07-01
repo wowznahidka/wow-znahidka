@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_34248",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Moon Daze 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34248/1.jpg"
+    },
+    {
       "id": "tg_34239",
       "brand": "Nike",
       "name": "Nike Air Max 95 Camo \"Court Purple\" 🇻🇳",
