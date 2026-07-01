@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_35255",
+      "brand": "Asics",
+      "name": "Asics Gel-Kinsei Blast Black",
+      "price": 3000,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль__",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35255/1.jpg"
+    },
+    {
       "id": "tg_35246",
       "brand": "Asics",
       "name": "ASICS Gel-Preleus",
