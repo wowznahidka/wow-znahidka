@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36010",
+      "brand": "Unknown",
+      "name": "✅ НОВІ ФОТО ✅",
+      "price": 2700,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Дихаючий текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36010/1.jpg"
+    },
+    {
       "id": "tg_36001",
       "brand": "Nike",
       "name": "Nike Air Pegasus Road Running",
