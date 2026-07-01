@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_67899",
+      "brand": "Nike",
+      "name": "Nike SB Dunk Low Grey Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67899/1.jpg"
+    },
+    {
       "id": "tg_67888",
       "brand": "Пополнение",
       "name": "Пополнение ✅",
