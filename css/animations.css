@@ -67,17 +67,17 @@
 
 .fire-anim { display: inline-block; animation: fireBurn 1.4s ease-in-out infinite; }
 
-/* ── CARD ENTRANCE ──────────────────────────────── */
+/* ── CARD ENTRANCE (spring) ─────────────────────── */
 @keyframes cardEnter {
-  from { opacity:0; transform: translateY(20px) scale(.95); }
+  from { opacity:0; transform: translateY(24px) scale(.93); }
   to   { opacity:1; transform: none; }
 }
-.card-enter { animation: cardEnter .4s cubic-bezier(.16,1,.3,1) both; }
+.card-enter { animation: cardEnter .36s cubic-bezier(.34,1.56,.64,1) both; }
 
-/* ── PAGE SLIDE ─────────────────────────────────── */
+/* ── PAGE SLIDE (spring, muted overshoot) ────────── */
 @keyframes pgSlideIn {
-  from { opacity:0; transform: translateX(18px); }
-  to   { opacity:1; transform: translateX(0); }
+  from { opacity:0; transform: translateY(12px) scale(.98); }
+  to   { opacity:1; transform: none; }
 }
 
 /* ── SWIPE LABEL POP ────────────────────────────── */
@@ -138,14 +138,14 @@ img[loading="lazy"].loaded, img.loaded { opacity: 1; }
   .product-card:hover::before { animation: cardShine .55s ease forwards; }
 }
 
-/* ── SECTION STAGGER ENTRANCE ───────────────────── */
-.page.active .section { animation: secSlideIn .42s var(--ease) both; }
-.page.active .section:nth-child(1) { animation-delay:  30ms; }
-.page.active .section:nth-child(2) { animation-delay:  90ms; }
-.page.active .section:nth-child(3) { animation-delay: 150ms; }
-.page.active .section:nth-child(4) { animation-delay: 210ms; }
-.page.active .section:nth-child(5) { animation-delay: 270ms; }
-.page.active .section:nth-child(6) { animation-delay: 330ms; }
+/* ── SECTION STAGGER ENTRANCE (spring, 8-pt timing) ── */
+.page.active .section { animation: secSlideIn .32s cubic-bezier(.34,1.56,.64,1) both; }
+.page.active .section:nth-child(1) { animation-delay:  16ms; }
+.page.active .section:nth-child(2) { animation-delay:  64ms; }
+.page.active .section:nth-child(3) { animation-delay: 112ms; }
+.page.active .section:nth-child(4) { animation-delay: 160ms; }
+.page.active .section:nth-child(5) { animation-delay: 208ms; }
+.page.active .section:nth-child(6) { animation-delay: 256ms; }
 
 /* ── URGENCY BREATHING ───────────────────────────── */
 .urgency-hot, .urgency-low { animation: urgencyBreath 2s ease-in-out infinite; }
