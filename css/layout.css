@@ -275,6 +275,70 @@ body { background: #f0eded; }
   background: var(--red); animation: blink 1.6s ease infinite;
 }
 
+/* desktop-only helper */
+.desktop-only { display: none; }
+
+/* hero CTA btn (hidden mobile) */
+.hero-cta-btn {
+  display: none;
+  margin-top: 20px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #ff3e3e, #d42840);
+  color: #fff; border-radius: var(--r-full);
+  font-size: 15px; font-weight: 800; letter-spacing: .2px;
+  align-items: center; gap: 8px;
+  box-shadow: 0 8px 28px rgba(255,62,62,.38);
+  transition: transform .16s ease, box-shadow .16s ease;
+  cursor: pointer;
+}
+.hero-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,62,62,.48); }
+.hero-cta-btn:active { transform: scale(.97); }
+
+/* floating sneaker */
+.hero-sneaker-wrap {
+  position: relative; display: none;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-sneaker-glow {
+  position: absolute; inset: -30%;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,62,62,.18) 0%, transparent 70%);
+  pointer-events: none; z-index: 0;
+  animation: heroOrbA 6s ease-in-out infinite;
+}
+.hero-sneaker-img {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,.18)) drop-shadow(0 4px 16px rgba(255,62,62,.14));
+  animation: floatSneaker 3.5s ease-in-out infinite;
+  pointer-events: none; user-select: none;
+}
+@keyframes floatSneaker {
+  0%,100% { transform: translateY(0) rotate(-6deg) scale(1); }
+  50%      { transform: translateY(-14px) rotate(-3deg) scale(1.02); }
+}
+
+/* ── DESKTOP 1024px hero layout ───────────────── */
+@media (min-width: 1024px) {
+  .desktop-only { display: flex; }
+  .hero-cta-btn { display: inline-flex; }
+  .hero-sneaker-wrap { display: flex; }
+  .home-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 36px 32px 28px;
+    min-height: 300px;
+  }
+  .home-hero-content { position: relative; z-index: 1; }
+  .home-title {
+    font-size: clamp(32px, 4vw, 48px);
+  }
+  .home-counter-chip { margin-top: 16px; }
+}
+
 /* ── SECTION ────────────────────────────────────── */
 .section { padding: 24px 16px 8px; }
 .section + .section { padding-top: 8px; }
