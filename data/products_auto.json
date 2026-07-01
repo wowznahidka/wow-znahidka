@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_34979",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00s Brown",
+      "price": 2600,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34979/1.jpg"
+    },
+    {
       "id": "tg_34970",
       "brand": "Adidas",
       "name": "Adidas Campus 00s Japanese Garden",
