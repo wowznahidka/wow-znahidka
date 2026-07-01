@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_36472",
+      "brand": "Nike",
+      "name": "Nike Dunk Low “Triple Black Corduroy” 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36472/1.jpg"
+    },
+    {
       "id": "tg_36463",
       "brand": "Nike",
       "name": "Nike Shox R4 Black/Metallic Silver 🇻🇳",
