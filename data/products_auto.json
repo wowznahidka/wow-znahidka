@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35790",
+      "brand": "Unknown",
+      "name": "✅ НОВА МОДЕЛЬ ✅",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, сітка",
+      "sole": "Піна та гума__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35790/1.jpg"
+    },
+    {
       "id": "tg_35781",
       "brand": "Unknown",
       "name": "✅ НОВА МОДЕЛЬ ✅",
