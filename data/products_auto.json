@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36310",
+      "brand": "New Balance",
+      "name": "New Balance 530 White/Black",
+      "price": 2200,
+      "sizes": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Гума, пінка",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36310/1.jpg"
+    },
+    {
       "id": "tg_36301",
       "brand": "Unknown",
       "name": "✅ НОВИЙ КОНТЕНТ ✅",
