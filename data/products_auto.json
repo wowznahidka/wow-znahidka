@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_68297",
+      "brand": "Adidas",
+      "name": "Adidas Samba Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68297/1.jpg"
+    },
+    {
       "id": "tg_68285",
       "brand": "New Balance",
       "name": "New Balance 1906D White Premium",
