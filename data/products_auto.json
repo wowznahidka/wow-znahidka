@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_34421",
+      "brand": "Nike",
+      "name": "Nike Air Max 95 Yardrunners FAMU",
+      "price": 3200,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34421/1.jpg"
+    },
+    {
       "id": "tg_34412",
       "brand": "Nike",
       "name": "Nike Air Jordan 5 Retro Off-White Sail",
