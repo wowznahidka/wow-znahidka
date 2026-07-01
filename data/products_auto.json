@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36811",
+      "brand": "Nike",
+      "name": "Nike Dunk Low \"Malt Mini Swoosh\"",
+      "price": 2900,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36811/1.jpg"
+    },
+    {
       "id": "tg_36802",
       "brand": "Nike",
       "name": "Nike Dunk Low Lace Pack/Regal Beige",
