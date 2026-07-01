@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_68849",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Beige Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68849/1.jpg"
+    },
+    {
       "id": "tg_68831",
       "brand": "Vans",
       "name": "Vans KNU Skool Premium",
