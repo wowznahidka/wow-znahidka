@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_66765",
+      "brand": "Jordan",
+      "name": "Air Jordan Low Paris Premium",
+      "price": 2550,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66765/2.jpg"
+    },
+    {
       "id": "tg_66756",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Black Premium",
