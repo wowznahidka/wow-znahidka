@@ -391,6 +391,11 @@
 .match-size-filter {
   display: flex; gap: 8px; padding: 0 20px 12px;
   overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+<<<<<<< Updated upstream
+=======
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+>>>>>>> Stashed changes
 }
 .match-size-filter::-webkit-scrollbar { display: none; }
 .match-sz-chip {

@@ -102,10 +102,22 @@ function changeTab(tab) {
   window.scrollTo(0, 0);
   document.body.classList.toggle('show-sidebar', tab === 'catalog');
   document.body.classList.toggle('on-match', tab === 'match');
+  _updateNavIndicator(tab);
   if (tab === 'home')     renderHome();
   if (tab === 'match')    initMatch();
   if (tab === 'catalog')  renderCatalog();
   if (tab === 'contacts') _renderContactsHeroShoe();
+}
+
+function _updateNavIndicator(tab) {
+  const indicator = document.getElementById('nav-indicator');
+  const activeBtn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+  if (!indicator || !activeBtn) return;
+  const nav = document.getElementById('bottom-nav');
+  const navRect = nav.getBoundingClientRect();
+  const btnRect = activeBtn.getBoundingClientRect();
+  const center  = btnRect.left - navRect.left + btnRect.width / 2;
+  indicator.style.transform = `translateX(calc(${center}px - 50%))`;
 }
 
 // ── CONTACTS HERO — рандомна фотка крос з каталогу ──
@@ -645,7 +657,7 @@ function _stayOnSiteModal(reason) {
   const lead =
     cartLen ? `У кошику <b>${cartLen}</b> пар${cartLen===1?'а':cartLen<5?'и':''} — ще пів кроку до замовлення 🔥` :
     favsLen ? `У Улюблених — <b>${favsLen}</b> пар${favsLen===1?'а':''} ❤️` :
-    `Знайди свою пару — <b>1300+ моделей</b> ✨`;
+    `Знайди свою пару — <b>${(S.catalog.all || []).length || 1300}+ моделей</b> ✨`;
   const bonusHtml = showPromo
     ? `<p class="exit-bonus">Промокод <b>WOW100</b> — <b>−100₴</b> на твоє перше замовлення. Дійсний 24 години.</p>`
     : '';
