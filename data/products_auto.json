@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_69119",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Light Grey Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69119/1.jpg"
+    },
+    {
       "id": "tg_69107",
       "brand": "Adidas",
       "name": "Adidas Campus X Bad Bunny Premium",
