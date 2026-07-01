@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_36328",
+      "brand": "New Balance",
+      "name": "New Balance 204L Black Timberwolf 🇻🇳",
+      "price": 3000,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Лакована шкіра, сітка__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36328/1.jpg"
+    },
+    {
       "id": "tg_36319",
       "brand": "New Balance",
       "name": "New Balance 530 Custom Edition",
