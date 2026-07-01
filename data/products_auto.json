@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_68446",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Quartz Grey Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68446/1.jpg"
+    },
+    {
       "id": "tg_68434",
       "brand": "New Balance",
       "name": "New Balance 9060 Beige Premium",
