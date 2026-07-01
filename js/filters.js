@@ -544,18 +544,24 @@ function setSortMode(mode) {
 
 function sortProducts(products) {
   const m = S.sortMode || 'popular';
-  const arr = [...products];
-  switch (m) {
-    case 'price_asc':  return arr.sort((a, b) => (a.price || 0) - (b.price || 0));
-    case 'price_desc': return arr.sort((a, b) => (b.price || 0) - (a.price || 0));
-    case 'new':        return arr.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
-    case 'discount':   return arr.sort((a, b) => {
-      const da = (a.oldPrice || 0) - (a.price || 0);
-      const db = (b.oldPrice || 0) - (b.price || 0);
-      return db - da;
-    });
-    default: return arr; // popular = catalog default order (seeded shuffle elsewhere)
+  const hasImg = p => p.image && p.image.startsWith('http');
+  const withPhoto = [...products].filter(hasImg);
+  const noPhoto   = [...products].filter(p => !hasImg(p));
+
+  function byMode(a, b) {
+    switch (m) {
+      case 'price_asc':  return (a.price || 0) - (b.price || 0);
+      case 'price_desc': return (b.price || 0) - (a.price || 0);
+      case 'new':        return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+      case 'discount': {
+        const da = (a.oldPrice || 0) - (a.price || 0);
+        const db = (b.oldPrice || 0) - (b.price || 0);
+        return db - da;
+      }
+      default: return 0;
+    }
   }
+  return [...withPhoto.sort(byMode), ...noPhoto.sort(byMode)];
 }
 
 // ── ACTIVE FILTERS CHIPS (видно які фільтри активні) ──
