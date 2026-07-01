@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_67667",
+      "brand": "Nike",
+      "name": "Nike V2K Run Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67667/1.jpg"
+    },
+    {
       "id": "tg_67656",
       "brand": "New Balance",
       "name": "New Balance 9060 Brown Premium",
