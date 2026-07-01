@@ -1,6 +1,22 @@
 {
   "products": [
     {
+      "id": "tg_36923",
+      "brand": "Дроп:",
+      "name": "Дроп: 4700",
+      "price": 5300,
+      "sizes": [],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36923/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36923/2.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36923/1.jpg"
+    },
+    {
       "id": "tg_36922",
       "brand": "Дроп:",
       "name": "Дроп: 2600",
