@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_68384",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68384/1.jpg"
+    },
+    {
       "id": "tg_68367",
       "brand": "Nike",
       "name": "Nike P-6000 Premium",
