@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36028",
+      "brand": "Nike",
+      "name": "Nike Air Max TN Plus White/Blue",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36028/1.jpg"
+    },
+    {
       "id": "tg_36019",
       "brand": "Nike",
       "name": "Nike Pegasus Trail 3 Light Soft Pink",
