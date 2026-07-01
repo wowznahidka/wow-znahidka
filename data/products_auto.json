@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_34493",
+      "brand": "Nike",
+      "name": "Nike Air Max 95 X Future Movement \"Sketch With The Past\" 🇻🇳",
+      "price": 3200,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, замша__",
+      "sole": "Піна, поліуритан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34493/1.jpg"
+    },
+    {
       "id": "tg_34484",
       "brand": "Nike",
       "name": "Nike Air Max 95 Camo \"Court Purple\" 🇻🇳",
