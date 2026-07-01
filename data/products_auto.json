@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35893",
+      "brand": "Adidas",
+      "name": "Adidas LA Trainer OG Navi",
+      "price": 2700,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35893/1.jpg"
+    },
+    {
       "id": "tg_35884",
       "brand": "Adidas",
       "name": "Adidas LA Trainer OG Black",
