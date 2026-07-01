@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36176",
+      "brand": "New Balance",
+      "name": "New Balance 2000 Cherry Pink 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36176/1.jpg"
+    },
+    {
       "id": "tg_36167",
       "brand": "Nike",
       "name": "Nike Initiator Custom White Black🇻🇳",
