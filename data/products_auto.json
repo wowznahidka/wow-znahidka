@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36046",
+      "brand": "Nike",
+      "name": "Nike V5 RNR Grey",
+      "price": 3000,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36046/1.jpg"
+    },
+    {
       "id": "tg_36037",
       "brand": "Adidas",
       "name": "Adidas Superstar x Bape Glow",
