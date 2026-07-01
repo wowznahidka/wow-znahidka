@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36282",
+      "brand": "Unknown",
+      "name": "✅ НОВИЙ КОНТЕНТ ✅",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36282/1.jpg"
+    },
+    {
       "id": "tg_36273",
       "brand": "Unknown",
       "name": "✅ НОВИЙ КОНТЕНТ ✅",
