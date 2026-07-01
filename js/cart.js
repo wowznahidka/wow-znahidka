@@ -203,7 +203,7 @@ function _capturePartial() {
       action:  'partial_order',
       name, phone, total,
       items: S.cart.map(c => `${c.brand} ${c.name}, розмір ${c.size} — ${c.price}₴`).join('; '),
-      cart: S.cart.map(c => ({ id: c.id, brand: c.brand||'', name: c.name||'', price: Number(c.price)||0, size: String(c.size), qty: c.qty||1 })),
+      cart: S.cart.map(c => ({ id: c.id, brand: c.brand||'', name: c.name||'', price: Number(c.price)||0, size: String(c.size), qty: c.qty||1, supplier: c.supplier || (String(c.id).startsWith('gas_') ? 1 : 0) })),
       utm: S.utm || null,
     }).catch(() => {});
   }, 4000);
@@ -422,7 +422,7 @@ async function submitOrder() {
     total,
     promo:    S.promoCode || document.getElementById('f-promo')?.value.trim() || '',
     promo_amt: _calcPromoAmt(subtotal),
-    cart:     S.cart.map(c => ({ id: c.id, brand: c.brand || '', name: c.name || '', price: Number(c.price) || 0, size: String(c.size), qty: c.qty || 1, supplier: c.supplier || 0 })),
+    cart:     S.cart.map(c => ({ id: c.id, brand: c.brand || '', name: c.name || '', price: Number(c.price) || 0, size: String(c.size), qty: c.qty || 1, supplier: c.supplier || (String(c.id).startsWith('gas_') ? 1 : 0) })),
     utm:      S.utm || null,
     ref:      (typeof REF !== 'undefined' ? REF.getReferrerLabel() : ''),
   };
