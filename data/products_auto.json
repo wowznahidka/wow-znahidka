@@ -1,6 +1,34 @@
 {
   "products": [
     {
+      "id": "tg_69250",
+      "brand": "Nike",
+      "name": "Nike Shox Premium",
+      "price": 2850,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/7.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69250/1.jpg"
+    },
+    {
       "id": "tg_69240",
       "brand": "Nike",
       "name": "Nike Shox Premium",
