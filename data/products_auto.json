@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_68569",
+      "brand": "New Balance",
+      "name": "New Balance 530 Premium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68569/2.jpg"
+    },
+    {
       "id": "tg_68562",
       "brand": "Nike",
       "name": "Nike Cortez Brown Premium",
