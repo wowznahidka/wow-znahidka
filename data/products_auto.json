@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36273",
+      "brand": "Unknown",
+      "name": "✅ НОВИЙ КОНТЕНТ ✅",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Дихаючий текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36273/1.jpg"
+    },
+    {
       "id": "tg_36264",
       "brand": "Nike",
       "name": "Nike Air Max 97 Triple White 🇻🇳",
