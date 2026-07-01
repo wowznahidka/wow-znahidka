@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_69200",
+      "brand": "Nike",
+      "name": "Nike Initiator Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69200/1.jpg"
+    },
+    {
       "id": "tg_69185",
       "brand": "Adidas",
       "name": "Adidas Astir Premium",
