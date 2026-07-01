@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36121",
+      "brand": "Nike",
+      "name": "Nike Air Max 97 Reflective 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36121/1.jpg"
+    },
+    {
       "id": "tg_36112",
       "brand": "Nike",
       "name": "Nike Dunk LX White/Maroon 🇻🇳",
