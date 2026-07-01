@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_37186",
+      "brand": "New Balance",
+      "name": "New Balance 1906A Dragon Berry🇻🇳",
+      "price": 2800,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37186/1.jpg"
+    },
+    {
       "id": "tg_37177",
       "brand": "Loewe",
       "name": "Loewe x On Cloudtilt 2.0🇻🇳",
