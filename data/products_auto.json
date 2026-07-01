@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_34284",
+      "brand": "Nike",
+      "name": "Nike Pegasus Premium \"Black/Bright Crimson\" 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль__",
+      "sole": "Піна, гума, балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34284/1.jpg"
+    },
+    {
       "id": "tg_34275",
       "brand": "Nike",
       "name": "Nike Giannis Freak 7 🇻🇳",
