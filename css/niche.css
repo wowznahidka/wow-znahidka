@@ -1414,3 +1414,55 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 .ref-soc-fb  { background: rgba(66,103,178,0.08); border-color: rgba(66,103,178,0.25); color: #829ce8; }
 .ref-soc-more { font-size: 12px; color: var(--text-muted); }
 .success-upsell-price { font-size: 12px; color: var(--accent); font-weight: 700; margin-top: 1px; }
+
+/* ── PERFECTIONIST TOUCH POLISH ─────────────────────── */
+
+/* Match size chips */
+.match-sz-chip { -webkit-tap-highlight-color: transparent; transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform .15s cubic-bezier(.34,1.56,.64,1) !important; }
+.match-sz-chip:active { transform: scale(.88) !important; }
+.match-sz-chip.active { box-shadow: 0 3px 10px rgba(0,0,0,0.22); }
+
+/* Contact items */
+.contact-item { transition: background var(--t-fast), transform .15s ease, box-shadow .15s ease !important; }
+.contact-item:hover { transform: translateY(-1px) !important; box-shadow: 0 4px 18px rgba(0,0,0,0.07) !important; }
+.contact-item:active { transform: scale(.97) !important; background: var(--bg3) !important; }
+.ci-arr { transition: transform .2s cubic-bezier(.34,1.56,.64,1); }
+.contact-item:active .ci-arr { transform: translateX(4px) !important; }
+
+/* FAQ accordion */
+.faq-q { transition: background var(--t-fast) !important; -webkit-tap-highlight-color: transparent; }
+.faq-q:active { background: var(--bg3) !important; }
+
+/* Match done-state buttons */
+.match-restart-btn { transition: transform .15s ease, box-shadow .15s ease !important; }
+.match-restart-btn:active { transform: scale(.95) !important; }
+.match-go-favs-btn { transition: transform .15s ease !important; }
+.match-go-favs-btn:active { transform: scale(.95) !important; }
+
+/* Favorites sheet */
+.fav-to-cart { transition: background var(--t-fast), transform .15s ease !important; }
+.fav-to-cart:active { transform: scale(.92) !important; }
+.fav-rm { transition: background var(--t-fast), transform .15s ease !important; }
+.fav-rm:active { transform: scale(.92) !important; background: var(--red-dim) !important; }
+
+/* Size picker similar cards */
+.sp-sim-card { transition: opacity var(--t-fast), transform .15s ease !important; }
+.sp-sim-card:active { opacity: 1 !important; transform: scale(.93) !important; }
+
+/* Photo picker button */
+.sp-photo-btn { transition: background var(--t-fast), transform .15s ease !important; }
+.sp-photo-btn:active { transform: scale(.96) !important; background: var(--bg4) !important; }
+
+/* Nav items — add spring on active */
+.nav-item { -webkit-tap-highlight-color: transparent !important; }
+.nav-item:active { transform: scale(.90) !important; }
+
+/* Brand carousel bubbles */
+.cat-story { -webkit-tap-highlight-color: transparent !important; }
+
+/* Catalog card quick-order button */
+.card-quick-order { transition: background .18s, transform .15s cubic-bezier(.34,1.56,.64,1) !important; }
+
+/* Search clear button */
+.rv-clear, .cat-search-clear { transition: all var(--t-fast) !important; }
+.rv-clear:active, .cat-search-clear:active { transform: scale(.85) !important; }
