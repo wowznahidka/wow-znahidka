@@ -406,34 +406,126 @@ function initKeyboardHandler() {
   });
 }
 
-// ── TAP-TO-ZOOM ─────────────────────────────────── */
-// Натиснути на будь-яке зображення товару → fullscreen overlay
-// Підтримує: product cards, daily-find, match, product-detail, brand cards
+// ── PREMIUM LIGHTBOX ────────────────────────────── */
+// Свайп вниз → закрити, дабл-тап → зум ×2.5, пінч → масштаб, spring анімація
 function openImageZoom(src, alt) {
   if (!src) return;
   closeImageZoom();
+
   const ov = document.createElement('div');
-  ov.className = 'img-zoom-overlay';
+  ov.className = 'izv-overlay';
   ov.id = 'img-zoom-overlay';
-  ov.innerHTML = `<img src="${src}" alt="${(alt||'').replace(/"/g,'&quot;')}" draggable="false">
-    <button class="img-zoom-close" aria-label="Закрити">✕</button>`;
+  ov.innerHTML = `
+    <div class="izv-backdrop" id="izv-bd"></div>
+    <div class="izv-wrap" id="izv-wrap">
+      <img class="izv-img" id="izv-img"
+           src="${src}" alt="${(alt||'').replace(/"/g,'&quot;')}" draggable="false">
+    </div>
+    <button class="izv-close" onclick="closeImageZoom()" aria-label="Закрити">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="izv-hint">↕ Свайп вниз · дабл-тап для зуму</div>
+  `;
   document.body.appendChild(ov);
   document.body.style.overflow = 'hidden';
-  ov.addEventListener('click', (e) => {
-    // тап на бекграунд або ✕ → закриваємо; тап на img — не закриваємо (даємо pinch-zoom)
-    if (e.target.tagName !== 'IMG') closeImageZoom();
+
+  const bd   = document.getElementById('izv-bd');
+  const wrap = document.getElementById('izv-wrap');
+
+  requestAnimationFrame(() => {
+    bd.style.opacity = '1';
+    wrap.style.animation = 'izvIn .32s cubic-bezier(.34,1.56,.64,1) both';
   });
+
+  let scale = 1, tx = 0, ty = 0;
+  let lastTap = 0;
+  let dragMode = null;
+  let sx = 0, sy = 0;
+  let pinchD0 = 0, pinchS0 = 1;
+
+  function applyT(anim) {
+    wrap.style.transition = anim ? 'transform .25s cubic-bezier(.34,1.56,.64,1)' : 'none';
+    wrap.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+  }
+
+  ov.addEventListener('touchstart', e => {
+    if (e.touches.length === 2) {
+      pinchD0 = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+      pinchS0 = scale; dragMode = 'pinch'; e.preventDefault(); return;
+    }
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; dragMode = null;
+    const now = Date.now();
+    if (now - lastTap < 280) {
+      e.preventDefault();
+      if (scale > 1) { scale = 1; tx = 0; ty = 0; applyT(true); }
+      else {
+        scale = 2.5;
+        tx = (window.innerWidth / 2 - sx) * (scale - 1) / scale;
+        ty = (window.innerHeight / 2 - sy) * (scale - 1) / scale;
+        applyT(true);
+      }
+      lastTap = 0; return;
+    }
+    lastTap = now;
+  }, { passive: false });
+
+  ov.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 2 && pinchD0) {
+      const d = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+      scale = Math.max(0.5, Math.min(5, pinchS0 * d / pinchD0));
+      applyT(false); return;
+    }
+    const dx = e.touches[0].clientX - sx, dy = e.touches[0].clientY - sy;
+    if (!dragMode) {
+      if (scale <= 1 && Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) dragMode = 'dismiss';
+      else if (scale > 1) dragMode = 'pan';
+      else dragMode = 'none';
+    }
+    if (dragMode === 'dismiss') {
+      const p = Math.abs(dy) / 260;
+      wrap.style.transition = 'none';
+      wrap.style.transform = `translateY(${dy}px) scale(${Math.max(.8, 1 - p * .15)})`;
+      bd.style.opacity = String(Math.max(0, 1 - p));
+    } else if (dragMode === 'pan') {
+      tx += e.touches[0].clientX - sx; ty += e.touches[0].clientY - sy;
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+      applyT(false);
+    }
+  }, { passive: false });
+
+  ov.addEventListener('touchend', e => {
+    const dy = (e.changedTouches[0]?.clientY || sy) - sy;
+    if (dragMode === 'dismiss') {
+      if (Math.abs(dy) > 90) {
+        wrap.style.transition = 'transform .18s ease-in, opacity .18s ease-in';
+        wrap.style.transform = `translateY(${dy > 0 ? '110vh' : '-110vh'}) scale(.8)`;
+        wrap.style.opacity = '0';
+        bd.style.transition = 'opacity .18s ease-in'; bd.style.opacity = '0';
+        setTimeout(() => { ov.remove(); document.body.style.overflow = ''; }, 190);
+        document.removeEventListener('keydown', _zoomKeyHandler); return;
+      }
+      bd.style.transition = 'opacity .22s ease'; bd.style.opacity = '1';
+      applyT(true);
+    }
+    pinchD0 = 0; dragMode = null;
+  });
+
+  ov.addEventListener('click', e => { if (e.target === ov || e.target === bd) closeImageZoom(); });
   document.addEventListener('keydown', _zoomKeyHandler);
 }
+
 function closeImageZoom() {
   const ov = document.getElementById('img-zoom-overlay');
-  if (ov) ov.remove();
-  document.body.style.overflow = '';
+  if (!ov) return;
+  const wrap = ov.querySelector('.izv-wrap');
+  const bd = ov.querySelector('.izv-backdrop');
+  if (wrap) { wrap.style.transition = 'transform .18s ease-in, opacity .18s ease-in'; wrap.style.transform = 'scale(.85)'; wrap.style.opacity = '0'; }
+  if (bd) { bd.style.transition = 'opacity .18s ease-in'; bd.style.opacity = '0'; }
+  setTimeout(() => { ov.remove(); document.body.style.overflow = ''; }, 190);
   document.removeEventListener('keydown', _zoomKeyHandler);
 }
-function _zoomKeyHandler(e) {
-  if (e.key === 'Escape') closeImageZoom();
-}
+function _zoomKeyHandler(e) { if (e.key === 'Escape') closeImageZoom(); }
 
 // Делегований клік: спрацьовує на всі продуктові/Match/бренд зображення.
 // НЕ перехоплює клік усередині .product-card (карта має свій onclick → відкриває деталі).
