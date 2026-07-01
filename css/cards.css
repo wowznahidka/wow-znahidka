@@ -1264,21 +1264,27 @@
 
 /* Desktop — двоколонкова композиція */
 @media (min-width: 900px) {
-  #sheet-product { max-width: 1080px !important; padding: 0; }
+  #sheet-product { max-width: 1080px !important; padding: 0; overflow: hidden; }
   #product-detail-content {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
-    align-items: stretch;
+    grid-template-rows: auto auto auto auto;
+    align-items: start;
+    min-height: 600px;
   }
-  .pd-hero { aspect-ratio: auto; min-height: 600px; }
-  .pd-info {
-    padding: 56px 48px 16px;
-    border-top: none;
-    border-left: 1px solid rgba(0,0,0,0.05);
-  }
-  .pd-cta { padding: 16px 48px 48px; }
-  .pd-name { font-size: clamp(32px, 3vw, 44px); }
-  .pd-price { font-size: 34px; }
+  /* Ліва колонка: фото + мініатюри */
+  .pd-hero       { grid-column: 1; grid-row: 1 / 5; aspect-ratio: auto; min-height: 520px; }
+  .pd-thumb-strip { grid-column: 1; grid-row: 5; }
+  /* Права колонка: інфо, trust-bar, кнопки, схожі */
+  .pd-info       { grid-column: 2; grid-row: 1; padding: 40px 40px 8px; border-top: none; border-left: 1px solid rgba(0,0,0,0.05); }
+  .pd-trust-bar  { grid-column: 2; grid-row: 2; padding: 0 40px; }
+  .pd-cta        { grid-column: 2; grid-row: 3; padding: 12px 40px 24px; }
+  .pd-similar    { grid-column: 2; grid-row: 4; padding-bottom: 32px; overflow: hidden; }
+  .pd-name  { font-size: clamp(22px, 2.4vw, 34px); }
+  .pd-price { font-size: 30px; }
+  .pd-similar-title { padding: 0 40px 10px; }
+  .pd-similar-row   { padding: 0 40px 0; }
+  .pd-zoom-hint { display: none; }
 }
 
 /* ── DAILY DEALS SECTION ────────────────────────── */
