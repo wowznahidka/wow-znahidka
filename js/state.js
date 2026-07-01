@@ -89,8 +89,18 @@ function findProd(id) {
 function getCatalog() {
   const all = S.catalog.all || [];
   if (S.gender === 'mixed') return all;
-  const gLabel = S.gender === 'female' ? 'Жінка' : 'Чоловік';
-  return all.filter(p => p.gender === gLabel);
+  return all.filter(p => {
+    if (p.gender === 'Чоловік') return S.gender === 'male';
+    if (p.gender === 'Жінка')   return S.gender === 'female';
+    // Інферуємо стать з розмірів для "Змішана"
+    const sz = p.sizes || [];
+    if (!sz.length) return true;
+    const min = Math.min(...sz);
+    const max = Math.max(...sz);
+    if (max <= 40) return S.gender === 'female'; // суто жіночі розміри
+    if (min >= 43) return S.gender === 'male';   // суто чоловічі розміри
+    return true; // дійсно змішані — показуємо всім
+  });
 }
 
 function isFav(id)   { return S.favs.some(f => f.id === id); }
