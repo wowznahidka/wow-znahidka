@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_37309",
+      "brand": "Onitsuka",
+      "name": "Onitsuka Tiger Mexico 66 Vintage Beige🇻🇳",
+      "price": 2700,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, замша",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37309/1.jpg"
+    },
+    {
       "id": "tg_37303",
       "brand": "Adidas",
       "name": "Adidas Raf Simons Antei Blue🇻🇳",
