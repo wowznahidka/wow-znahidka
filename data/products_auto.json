@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_34439",
+      "brand": "Nike",
+      "name": "Nike P-6000 Black/White",
+      "price": 2650,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34439/1.jpg"
+    },
+    {
       "id": "tg_34430",
       "brand": "Nike",
       "name": "Nike P-6000 Beige/White🇻🇳",
