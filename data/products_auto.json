@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36544",
+      "brand": "Nike",
+      "name": "Nike Runtekk V2K Pink Flowers 🇻🇳",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36544/1.jpg"
+    },
+    {
       "id": "tg_36535",
       "brand": "Nike",
       "name": "Nike Air Max TN Plus Black/Grey",
