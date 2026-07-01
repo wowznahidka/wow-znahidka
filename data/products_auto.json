@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_68649",
+      "brand": "Nike",
+      "name": "Nike Court Legacy Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68649/1.jpg"
+    },
+    {
       "id": "tg_68642",
       "brand": "Adidas",
       "name": "Adidas Samba Platform Premium",
