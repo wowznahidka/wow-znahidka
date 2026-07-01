@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_69041",
+      "brand": "Nike",
+      "name": "Nike Air More Uptempo 96 Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69041/2.jpg"
+    },
+    {
       "id": "tg_69030",
       "brand": "New Balance",
       "name": "New Balance 1906R Grey Premium",
