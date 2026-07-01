@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_69514",
+      "brand": "Nike",
+      "name": "Nike V2K Run Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69514/1.jpg"
+    },
+    {
       "id": "tg_69503",
       "brand": "Adidas",
       "name": "Adidas Forum Low Grey Premium",
