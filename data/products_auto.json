@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_36418",
+      "brand": "Off-White",
+      "name": "Off-White Be Right Back Silver/White🇻🇳",
+      "price": 3400,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36418/1.jpg"
+    },
+    {
       "id": "tg_36409",
       "brand": "Nike",
       "name": "Nike Dunk Low LX Dark Team Red Croc🇻🇳",
