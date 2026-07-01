@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_36775",
+      "brand": "Asics",
+      "name": "Asics Onitsuka Tiger Tokuten",
+      "price": 2700,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36775/1.jpg"
+    },
+    {
       "id": "tg_36766",
       "brand": "Unknown",
       "name": "✅ СКВОЗНА СІТКА ✅",
