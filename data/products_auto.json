@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_67538",
+      "brand": "Asics",
+      "name": "Asics Gel-NYC Premium",
+      "price": 2900,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/7.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67538/1.jpg"
+    },
+    {
       "id": "tg_67528",
       "brand": "Adidas",
       "name": "Adidas Samba Premium",
