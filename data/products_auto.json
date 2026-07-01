@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_67716",
+      "brand": "Vans",
+      "name": "Vans KNU Skool Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67716/1.jpg"
+    },
+    {
       "id": "tg_67702",
       "brand": "Поповнили",
       "name": "Поповнили 🥰",
