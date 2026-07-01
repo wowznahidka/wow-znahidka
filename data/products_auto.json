@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_36185",
+      "brand": "Nike",
+      "name": "Nike Dunk Low LX Dark Team Red Croc🇻🇳",
+      "price": 3000,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Лакована шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36185/1.jpg"
+    },
+    {
       "id": "tg_36176",
       "brand": "New Balance",
       "name": "New Balance 2000 Cherry Pink 🇻🇳",
