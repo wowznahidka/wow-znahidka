@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_66959",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Whie Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/7.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66959/1.jpg"
+    },
+    {
       "id": "tg_66943",
       "brand": "New Balance",
       "name": "New Balance 9060 Grey Premium",
