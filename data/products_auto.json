@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_33893",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 Low Kobe Bryant",
+      "price": 3100,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_33893/1.jpg"
+    },
+    {
       "id": "tg_33884",
       "brand": "Nike",
       "name": "Nike Shox R4 SE Lemon Twist",
