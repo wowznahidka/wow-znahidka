@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35965",
+      "brand": "Nike",
+      "name": "Nike Air Max Plus OG TN 'Grid'",
+      "price": 2800,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Гума та балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35965/1.jpg"
+    },
+    {
       "id": "tg_35956",
       "brand": "Nike",
       "name": "Nike Zoom Winflo Light Grey",
