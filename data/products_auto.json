@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35911",
+      "brand": "Adidas",
+      "name": "Adidas LA Trainer OG Gray",
+      "price": 2700,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35911/1.jpg"
+    },
+    {
       "id": "tg_35902",
       "brand": "Adidas",
       "name": "Adidas LA Trainer OG Green",
