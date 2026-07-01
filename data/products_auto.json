@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_36364",
+      "brand": "Nike",
+      "name": "Nike Air Zoom Pegasus Premium",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка (дихаюча)",
+      "sole": "Піна, гума, балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36364/1.jpg"
+    },
+    {
       "id": "tg_36355",
       "brand": "Nike",
       "name": "Nike Initiator Custom Pink 2.0 🇻🇳",
