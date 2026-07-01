@@ -201,7 +201,22 @@ function renderHome() {
     animateCounter(data.length);
     _setupScrollNudge(data.length);
     _updateGenderCounts(data);
+    _initHeroSneaker(data);
   });
+}
+
+function _initHeroSneaker(data) {
+  const el = document.getElementById('hero-sneaker-img');
+  if (!el) return;
+  const TOP_BRANDS = ['Nike', 'Adidas', 'New Balance', 'Jordan', 'Puma', 'Balenciaga', 'Off-White'];
+  const pool = data.filter(p =>
+    TOP_BRANDS.some(b => (p.brand || '').includes(b)) &&
+    p.image && p.image.startsWith('http')
+  );
+  if (!pool.length) return;
+  const pick = pool[Math.floor(Math.random() * Math.min(pool.length, 30))];
+  el.src = pick.image;
+  el.alt = pick.name || '';
 }
 
 function setHomeGreeting() {
