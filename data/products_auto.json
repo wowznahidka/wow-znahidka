@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_37297",
+      "brand": "New Balance",
+      "name": "New Balance 1906A Dragon Berry🇻🇳",
+      "price": 2800,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37297/1.jpg"
+    },
+    {
       "id": "tg_37291",
       "brand": "Nike",
       "name": "Nike Air Max 90 Gorge Green 🇻🇳",
