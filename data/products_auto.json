@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_35102",
+      "brand": "New Balance",
+      "name": "New Balance 1906 R COMME des GARÇONS 🇻🇳",
+      "price": 2950,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра__",
+      "sole": "Пінка, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35102/1.jpg"
+    },
+    {
       "id": "tg_35093",
       "brand": "New Balance",
       "name": "New Balance 1906 A Silver/Grey 🇻🇳",
