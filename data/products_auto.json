@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36204",
+      "brand": "Unknown",
+      "name": "✅ НОВІ ФОТО ✅",
+      "price": 2700,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36204/1.jpg"
+    },
+    {
       "id": "tg_36185",
       "brand": "Nike",
       "name": "Nike Dunk Low LX Dark Team Red Croc🇻🇳",
