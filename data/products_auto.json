@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_35237",
+      "brand": "Vans",
+      "name": "Vans Knu Skool x Potato🇻🇳",
+      "price": 2100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35237/1.jpg"
+    },
+    {
       "id": "tg_35228",
       "brand": "Vans",
       "name": "Vans Rowley XLT Beige",
