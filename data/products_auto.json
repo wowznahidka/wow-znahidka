@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_69081",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69081/3.jpg"
+    },
+    {
       "id": "tg_69068",
       "brand": "Asics",
       "name": "Asics Gel-NYC Premium",
