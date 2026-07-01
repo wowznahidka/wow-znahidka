@@ -1717,6 +1717,23 @@
 }
 .img-zoom-hint { cursor: zoom-in; }
 
+/* Lightbox navigation dots */
+.izv-dots {
+  position: absolute; z-index: 2;
+  bottom: calc(max(20px, env(safe-area-inset-bottom, 20px)) + 28px);
+  left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; align-items: center;
+}
+.izv-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  transition: background .18s, transform .18s;
+  flex-shrink: 0;
+}
+.izv-dot-a {
+  background: #fff; transform: scale(1.4);
+}
+
 /* ── EXIT-INTENT MODAL ─────────────────────────────── */
 .exit-modal {
   position: fixed; inset: 0; z-index: 10500;
