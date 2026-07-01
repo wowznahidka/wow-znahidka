@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_35884",
+      "brand": "Adidas",
+      "name": "Adidas LA Trainer OG Black",
+      "price": 2700,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35884/1.jpg"
+    },
+    {
       "id": "tg_35864",
       "brand": "Unknown",
       "name": "✅ НОВА МОДЕЛЬ ✅",
