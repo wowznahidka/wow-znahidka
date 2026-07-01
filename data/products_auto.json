@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_35808",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 Low Black Premium",
+      "price": 2400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Натуральна шкіра",
+      "sole": "Гума та балон__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35808/1.jpg"
+    },
+    {
       "id": "tg_35799",
       "brand": "Nike",
       "name": "Nike Air Max 95 OG",
