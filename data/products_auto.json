@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_36730",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 Low Kobe Bryant",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36730/1.jpg"
+    },
+    {
       "id": "tg_36704",
       "brand": "Balenciaga",
       "name": "Balenciaga Runner Burgundy Grey🇻🇳",
