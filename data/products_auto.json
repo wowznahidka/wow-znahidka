@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_34826",
+      "brand": "Nike",
+      "name": "Nike P-6000 Anthracite Smoke",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Гума та балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34826/1.jpg"
+    },
+    {
       "id": "tg_34808",
       "brand": "Nike",
       "name": "Nike Initiator Custom Grey 🇻🇳",
