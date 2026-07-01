@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_69309",
+      "brand": "Nike",
+      "name": "Nike Initiator Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69309/1.jpg"
+    },
+    {
       "id": "tg_69292",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Muslin Premium",
