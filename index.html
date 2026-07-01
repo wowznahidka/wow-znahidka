@@ -82,18 +82,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=53">
-<link rel="stylesheet" href="css/layout.css?v=53">
-<link rel="stylesheet" href="css/cards.css?v=53">
-<link rel="stylesheet" href="css/animations.css?v=53">
-<link rel="stylesheet" href="css/mobile.css?v=53">
+<link rel="stylesheet" href="css/base.css?v=54">
+<link rel="stylesheet" href="css/layout.css?v=54">
+<link rel="stylesheet" href="css/cards.css?v=54">
+<link rel="stylesheet" href="css/animations.css?v=54">
+<link rel="stylesheet" href="css/mobile.css?v=54">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=53">
-<link rel="stylesheet" href="css/niche.css?v=53">
+<link rel="stylesheet" href="shared/css/premium.css?v=54">
+<link rel="stylesheet" href="css/niche.css?v=54">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -643,7 +643,21 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     </a>
 
 
-    <!-- Action buttons: розробляємо сайти — дрібна підказка внизу -->
+    <!-- Action buttons: Web order + Collab -->
+    <div class="contacts-action-row">
+      <a class="cab cab-order" href="https://t.me/znahidkawow?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BC%D0%BE%D0%B2%D0%B8%D1%82%D0%B8%20%D1%81%D0%B0%D0%B9%D1%82.%20%D0%AF%20%D0%B7%D1%96%20%D0%B7%D0%BD%D0%B0%D1%85%D1%96%D0%B4%D0%BA%D0%B8." onclick="return openLink(this.href)" rel="noopener noreferrer" aria-label="Замовити сайт">
+        <div class="cab-shine" aria-hidden="true"></div>
+        <span class="cab-icon">🌐</span>
+        <span class="cab-label">Замовити сайт</span>
+        <span class="cab-sub">магазин · PWA · лендінг</span>
+      </a>
+      <a class="cab cab-collab" href="https://wow-studio.netlify.app/" onclick="return openLink(this.href)" rel="noopener noreferrer" aria-label="WOW.STUDIO — веб-студія">
+        <div class="cab-shine" aria-hidden="true"></div>
+        <span class="cab-icon">✦</span>
+        <span class="cab-label">WOW.STUDIO</span>
+        <span class="cab-sub">наші роботи · портфоліо</span>
+      </a>
+    </div>
 
 
     <!-- Delivery info -->
@@ -1033,21 +1047,21 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=53"             defer></script>
-<script src="js/state.js?v=53"              defer></script>
-<script src="js/lang.js?v=53"               defer></script>
-<script src="js/api.js?v=53"                defer></script>
-<script src="js/products.js?v=53"           defer></script>
-<script src="js/ui.js?v=53"                 defer></script>
-<script src="js/match.js?v=53"              defer></script>
-<script src="js/filters.js?v=53"            defer></script>
-<script src="js/cart.js?v=53"               defer></script>
-<script src="js/modal.js?v=53"              defer></script>
-<script src="js/deals.js?v=53"              defer></script>
-<script src="shared/js/referral.js?v=53" defer></script>
-<script src="js/app.js?v=53"                defer></script>
-<script src="js/cycle.js?v=53"               defer></script>
-<script src="shared/js/motion.js?v=53" defer></script>
+<script src="js/config.js?v=54"             defer></script>
+<script src="js/state.js?v=54"              defer></script>
+<script src="js/lang.js?v=54"               defer></script>
+<script src="js/api.js?v=54"                defer></script>
+<script src="js/products.js?v=54"           defer></script>
+<script src="js/ui.js?v=54"                 defer></script>
+<script src="js/match.js?v=54"              defer></script>
+<script src="js/filters.js?v=54"            defer></script>
+<script src="js/cart.js?v=54"               defer></script>
+<script src="js/modal.js?v=54"              defer></script>
+<script src="js/deals.js?v=54"              defer></script>
+<script src="shared/js/referral.js?v=54" defer></script>
+<script src="js/app.js?v=54"                defer></script>
+<script src="js/cycle.js?v=54"               defer></script>
+<script src="shared/js/motion.js?v=54" defer></script>
 <script>
 (function(){
   const tg = window.Telegram?.WebApp;
