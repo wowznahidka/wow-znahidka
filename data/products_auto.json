@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36650",
+      "brand": "Asics",
+      "name": "Asics Gel-Pickax Clay Grey/Mink🇻🇳",
+      "price": 2900,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36650/1.jpg"
+    },
+    {
       "id": "tg_36641",
       "brand": "Asics",
       "name": "Asics Gel-Pickax Black🇻🇳",
