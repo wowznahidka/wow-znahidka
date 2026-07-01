@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_67741",
+      "brand": "Jordan",
+      "name": "Air Jordan 4 Retro Military Premium",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67741/1.jpg"
+    },
+    {
       "id": "tg_67727",
       "brand": "Balenciaga",
       "name": "Balenciaga Track White Premium",
