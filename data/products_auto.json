@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_37225",
+      "brand": "Nike",
+      "name": "Nike Initiator Custom White Black🇻🇳",
+      "price": 2700,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37225/1.jpg"
+    },
+    {
       "id": "tg_37216",
       "brand": "Adidas",
       "name": "Adidas Raf Simons Antei Blue🇻🇳",
