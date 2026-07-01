@@ -50,8 +50,8 @@ function discPct(p) {
 function _scarcityText(p) {
   if (!p.sizes || !p.sizes.length || p.sizes[0] === 'ONE SIZE') return '';
   const n = p.sizes.length;
-  if (n === 1) return `<div class="scarcity-chip">${L.scarcity1 || '⚡️ Останній розмір!'}</div>`;
-  if (n <= 3)  return `<div class="scarcity-chip">${L.scarcityLow || '🔥 Лише'} ${n}${L.scarcityLowSuffix || ' розміри'}</div>`;
+  if (n === 1) return `<div class="scarcity-chip">${L.scarcity1 || '⚡️ Остання пара!'}</div>`;
+  if (n <= 5)  return `<div class="scarcity-chip">${L.scarcityLow || '🔥 Залишилось'} ${n}${L.scarcityLowSuffix || ' пари'}</div>`;
   return '';
 }
 
@@ -188,6 +188,8 @@ function renderHome() {
   const newEl = document.getElementById('new-row');
   if (popEl && !popEl.querySelector('.product-card')) popEl.innerHTML = skelCards(5);
   if (newEl && !newEl.querySelector('.product-card')) newEl.innerHTML = skelCards(5);
+  const allEl = document.getElementById('home-all-grid');
+  if (allEl && !allEl.querySelector('.product-card')) allEl.innerHTML = skelGridCards(8);
 
   fetchCatalog().then(data => {
     if (!data || !data.length) return;
