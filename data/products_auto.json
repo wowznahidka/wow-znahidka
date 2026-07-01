@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_36319",
+      "brand": "New Balance",
+      "name": "New Balance 530 Custom Edition",
+      "price": 3000,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36319/1.jpg"
+    },
+    {
       "id": "tg_36310",
       "brand": "New Balance",
       "name": "New Balance 530 White/Black",
