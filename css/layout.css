@@ -276,9 +276,9 @@ body { background: #f0eded; }
 }
 
 /* ── SECTION ────────────────────────────────────── */
-.section { padding: 14px 16px 6px; }
+.section { padding: 24px 16px 8px; }
 .section + .section { padding-top: 8px; }
-.sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .sec-head-l { display: flex; align-items: baseline; gap: 6px; }
 .sec-title { font-size: 19px; font-weight: 900; letter-spacing: -.2px; }
 .sec-meta {
@@ -322,8 +322,8 @@ body { background: #f0eded; }
 
 /* ── H-SCROLL ROW ───────────────────────────────── */
 .h-scroll {
-  display: flex; gap: 10px; overflow-x: auto;
-  padding: 0 16px 10px; margin: 0 -16px;
+  display: flex; gap: 12px; overflow-x: auto;
+  padding: 0 16px 16px; margin: 0 -16px;
   scrollbar-width: none; -webkit-overflow-scrolling: touch;
   scroll-snap-type: x proximity; contain: content;
 }
