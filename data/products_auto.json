@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_36427",
+      "brand": "Off-White",
+      "name": "Off-White Right Back Burgundy 🇻🇳",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль__",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36427/1.jpg"
+    },
+    {
       "id": "tg_36418",
       "brand": "Off-White",
       "name": "Off-White Be Right Back Silver/White🇻🇳",
