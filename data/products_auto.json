@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_37252",
+      "brand": "Off-White",
+      "name": "Off-White Be Right Back Black/Grey 🇻🇳",
+      "price": 3400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37252/1.jpg"
+    },
+    {
       "id": "tg_37246",
       "brand": "Off-White",
       "name": "Off-White Be Right Back White/Blue 🇻🇳",
