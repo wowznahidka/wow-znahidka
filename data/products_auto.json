@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_37097",
+      "brand": "Nike",
+      "name": "Nike Air Force 1 Low \"Independence Day\" White",
+      "price": 3200,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37097/1.jpg"
+    },
+    {
       "id": "tg_37091",
       "brand": "Unknown",
       "name": "DC Shoes Court Graffik Black Sabbath",
