@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_34682",
+      "brand": "Nike",
+      "name": "Nike Air More Uptempo 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра__",
+      "sole": "Піна, гума, балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34682/1.jpg"
+    },
+    {
       "id": "tg_34673",
       "brand": "New Balance",
       "name": "New Balance 1906R Gray Black 🇻🇳",
