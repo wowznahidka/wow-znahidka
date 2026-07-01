@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_34303",
+      "brand": "Adidas",
+      "name": "Adidas Vento XLG Deluxe Beige/Green",
+      "price": 4000,
+      "sizes": [
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34303/1.jpg"
+    },
+    {
       "id": "tg_34293",
       "brand": "Nike",
       "name": "Nike Wmns Structure Plus 🇻🇳",
