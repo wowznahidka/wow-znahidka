@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_69663",
+      "brand": "New Balance",
+      "name": "New Balance 530 Premium",
+      "price": 2400,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69663/1.jpg"
+    },
+    {
       "id": "tg_69651",
       "brand": "New Balance",
       "name": "New Balance 9060 Grey Premium",
