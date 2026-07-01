@@ -82,18 +82,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=42">
-<link rel="stylesheet" href="css/layout.css?v=42">
-<link rel="stylesheet" href="css/cards.css?v=42">
-<link rel="stylesheet" href="css/animations.css?v=42">
-<link rel="stylesheet" href="css/mobile.css?v=42">
+<link rel="stylesheet" href="css/base.css?v=43">
+<link rel="stylesheet" href="css/layout.css?v=43">
+<link rel="stylesheet" href="css/cards.css?v=43">
+<link rel="stylesheet" href="css/animations.css?v=43">
+<link rel="stylesheet" href="css/mobile.css?v=43">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=42">
-<link rel="stylesheet" href="css/niche.css?v=42">
+<link rel="stylesheet" href="shared/css/premium.css?v=43">
+<link rel="stylesheet" href="css/niche.css?v=43">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -182,18 +182,28 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
   <!-- ── HOME ── -->
   <section id="page-home" class="page active" aria-labelledby="home-title">
     <div class="home-hero">
-      <div class="home-greeting" id="home-greeting">Привіт! 👋</div>
-      <h1 class="home-title" id="home-title">Твої ідеальні<br><span>кросівки тут <span class="fire-anim">🔥</span></span></h1>
-      <div class="home-counter-chip" aria-live="polite">
-        <span class="live-dot" aria-hidden="true"></span>
-        <span id="models-counter">0</span> моделей в наявності
+      <div class="home-hero-content">
+        <div class="home-greeting" id="home-greeting">Привіт! 👋</div>
+        <h1 class="home-title" id="home-title">Твої ідеальні<br><span>кросівки тут <span class="fire-anim">🔥</span></span></h1>
+        <div class="home-counter-chip" aria-live="polite">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span id="models-counter">0</span> моделей в наявності
+        </div>
+        <div class="hero-trust" aria-label="Переваги">
+          <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>0₴ передоплати</span>
+          <span class="hero-trust-sep" aria-hidden="true"></span>
+          <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Топ якість</span>
+          <span class="hero-trust-sep" aria-hidden="true"></span>
+          <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>1–3 дні</span>
+        </div>
+        <button class="hero-cta-btn desktop-only" onclick="changeTab('catalog')" aria-label="Перейти до каталогу">
+          Переглянути каталог
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-      <div class="hero-trust" aria-label="Переваги">
-        <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>0₴ передоплати</span>
-        <span class="hero-trust-sep" aria-hidden="true"></span>
-        <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Топ якість</span>
-        <span class="hero-trust-sep" aria-hidden="true"></span>
-        <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>1–3 дні</span>
+      <div class="hero-sneaker-wrap desktop-only" id="hero-sneaker-wrap" aria-hidden="true">
+        <div class="hero-sneaker-glow"></div>
+        <img class="hero-sneaker-img" id="hero-sneaker-img" alt="" draggable="false">
       </div>
     </div>
 
@@ -288,6 +298,9 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="g-chip" data-gender="mixed"  onclick="setGender('mixed')" >Всі</button>
       <button class="g-chip" data-gender="male"   onclick="setGender('male')"  >Чоловіки</button>
       <button class="g-chip" data-gender="female" onclick="setGender('female')">Жінки</button>
+    </div>
+    <div class="match-size-filter" id="match-size-filter">
+      <button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')">Всі розміри</button>
     </div>
     <p class="match-hint">Свайп вправо — ❤️ в Улюблені · вліво — пропустити</p>
     <div class="card-stage" id="card-stage" role="region" aria-label="Картка товару">
@@ -1029,21 +1042,21 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=42"             defer></script>
-<script src="js/state.js?v=42"              defer></script>
-<script src="js/lang.js?v=42"               defer></script>
-<script src="js/api.js?v=42"                defer></script>
-<script src="js/products.js?v=42"           defer></script>
-<script src="js/ui.js?v=42"                 defer></script>
-<script src="js/match.js?v=42"              defer></script>
-<script src="js/filters.js?v=42"            defer></script>
-<script src="js/cart.js?v=42"               defer></script>
-<script src="js/modal.js?v=42"              defer></script>
-<script src="js/deals.js?v=42"              defer></script>
-<script src="shared/js/referral.js?v=42" defer></script>
-<script src="js/app.js?v=42"                defer></script>
-<script src="js/cycle.js?v=42"               defer></script>
-<script src="shared/js/motion.js?v=42" defer></script>
+<script src="js/config.js?v=43"             defer></script>
+<script src="js/state.js?v=43"              defer></script>
+<script src="js/lang.js?v=43"               defer></script>
+<script src="js/api.js?v=43"                defer></script>
+<script src="js/products.js?v=43"           defer></script>
+<script src="js/ui.js?v=43"                 defer></script>
+<script src="js/match.js?v=43"              defer></script>
+<script src="js/filters.js?v=43"            defer></script>
+<script src="js/cart.js?v=43"               defer></script>
+<script src="js/modal.js?v=43"              defer></script>
+<script src="js/deals.js?v=43"              defer></script>
+<script src="shared/js/referral.js?v=43" defer></script>
+<script src="js/app.js?v=43"                defer></script>
+<script src="js/cycle.js?v=43"               defer></script>
+<script src="shared/js/motion.js?v=43" defer></script>
 <script>
 (function(){
   const tg = window.Telegram?.WebApp;
