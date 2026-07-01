@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_68344",
+      "brand": "Adidas",
+      "name": "Adidas Spezial Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68344/1.jpg"
+    },
+    {
       "id": "tg_68337",
       "brand": "Nike",
       "name": "Nike Initiator Premium",
