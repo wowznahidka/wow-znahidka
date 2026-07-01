@@ -1385,7 +1385,10 @@ body { background: #f0eded; }
 .sugg-item:last-child { border-bottom: none; }
 .sugg-item:active { background: var(--bg3); }
 .sugg-ico { font-size: 16px; flex-shrink: 0; }
+.sugg-text { flex: 1; }
+.sugg-count { font: 600 11px/1 'Inter',sans-serif; color: var(--text-muted); background: var(--bg3); border-radius: 100px; padding: 2px 7px; }
 .sugg-brand { font-weight: 800; }
+.search-results-header { padding: 8px 16px 4px; font: 600 12px/1 'Inter',sans-serif; color: var(--text-muted); }
 
 /* ── PRICE SLIDER ────────────────────────────────── */
 .price-slider-box { padding: 6px 16px 8px; }
