@@ -188,23 +188,48 @@ function _applyFilters() {
 // ── SEARCH ───────────────────────────────────────── */
 let _searchTimer = null;
 
+// Псевдоніми для швидкого пошуку популярних моделей
+const _SEARCH_ALIASES = {
+  'nb': 'new balance', 'af1': 'air force 1', 'af': 'air force',
+  'aj': 'air jordan', 'aj1': 'air jordan 1', 'j1': 'jordan 1',
+  'sb': 'dunk', 'yzy': 'yeezy', 'ub': 'ultra boost',
+  'vmax': 'vapormax', 'zm': 'zoom', 'tf': 'total foamposite',
+};
+
+function _resolveQuery(raw) {
+  const q = raw.toLowerCase().trim();
+  return _SEARCH_ALIASES[q] || q;
+}
+
+// Рахує релевантність: -1 = не збігається, >0 = є збіг (більше = точніше)
+function _scoreProduct(p, tokens) {
+  const hay = (p.brand + ' ' + p.name).toLowerCase();
+  let score = 0;
+  for (const t of tokens) {
+    if (!hay.includes(t)) return -1;
+    if (p.name.toLowerCase() === t) score += 10;
+    else if (p.name.toLowerCase().startsWith(t)) score += 5;
+    else if (hay.startsWith(t)) score += 3;
+    else score += 1;
+  }
+  return score;
+}
+
 function onSearchInput(q) {
   const clr = document.getElementById('cat-search-clear');
   if (clr) clr.classList.toggle('vis', q.length > 0);
   _showSearchSuggestions(q);
   clearTimeout(_searchTimer);
   _searchTimer = setTimeout(() => {
-    S.searchQ = q.toLowerCase().trim();
+    S.searchQ = _resolveQuery(q);
     const data = getCatalog();
     if (!data) return;
-    // НЕ ховаємо підказки тут — вони залишаються щоб користувач міг клікнути
     if (S.searchQ) renderSearchResults(data);
     else _renderUnifiedCatalog(data);
-  }, 280);
+  }, 200);
 }
 
 function onSearchBlur() {
-  // Невелика затримка перед ховання — щоб клік по підказці встиг спрацювати
   setTimeout(_hideSuggestions, 180);
 }
 
@@ -226,20 +251,31 @@ function _showSearchSuggestions(q) {
   if (q.length < 2) { _hideSuggestions(); return; }
   const data = getCatalog();
   if (!data) return;
-  const ql = q.toLowerCase();
+  const ql = _resolveQuery(q);
+  const tokens = ql.split(/\s+/).filter(Boolean);
+
   const brandSet = new Set();
-  const modelSet = new Set();
+  const modelMap = new Map(); // key=model_id, val={name, brand, count}
   data.forEach(p => {
     if (p.brand.toLowerCase().includes(ql)) brandSet.add(p.brand);
-    if (p.name.toLowerCase().includes(ql) && modelSet.size < 4)
-      modelSet.add(p.name.split(' ').slice(0, 3).join(' '));
+    if (_scoreProduct(p, tokens) >= 0) {
+      // Extract model core: brand + key model identifier (number/name)
+      const modelKey = p.name.replace(/[🇻🇳🇺🇸🇬🇧✓]+/g,'').trim().split(/\s+/).slice(0,4).join(' ');
+      if (!modelMap.has(modelKey)) modelMap.set(modelKey, { name: modelKey, brand: p.brand, count: 1 });
+      else modelMap.get(modelKey).count++;
+    }
   });
-  const brands = [...brandSet].slice(0, 3);
-  const models = [...modelSet].slice(0, 3);
+
+  const brands = [...brandSet].slice(0, 2);
+  // Sort models by count (popularity), take top 4
+  const models = [...modelMap.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 4 - brands.length);
+
   if (!brands.length && !models.length) { _hideSuggestions(); return; }
   box.innerHTML = [
-    ...brands.map(b => `<button class="sugg-item sugg-brand" onclick="_pickSugg('${esc(b)}')" ><span class="sugg-ico">👟</span>${esc(b)}</button>`),
-    ...models.map(m => `<button class="sugg-item" onclick="_pickSugg('${esc(m)}')"><span class="sugg-ico">🔍</span>${esc(m)}</button>`),
+    ...brands.map(b => `<button class="sugg-item sugg-brand" onclick="_pickSugg('${esc(b)}')"><span class="sugg-ico">👟</span><span class="sugg-text">${esc(b)}</span></button>`),
+    ...models.map(m => `<button class="sugg-item" onclick="_pickSugg('${esc(m.name)}')"><span class="sugg-ico">🔍</span><span class="sugg-text">${esc(m.name)}</span><span class="sugg-count">${m.count}</span></button>`),
   ].join('');
   box.classList.add('vis');
 }
@@ -253,7 +289,7 @@ function _pickSugg(text) {
   const inp = document.getElementById('cat-search');
   if (inp) { inp.value = text; inp.blur(); }
   _hideSuggestions();
-  S.searchQ = text.toLowerCase().trim();
+  S.searchQ = _resolveQuery(text);
   const data = getCatalog();
   if (data) renderSearchResults(data);
 }
@@ -261,21 +297,29 @@ function _pickSugg(text) {
 function renderSearchResults(data) {
   const el = document.getElementById('catalog-view');
   if (!el) return;
-  const results = filterByPrice(filterBySize(data)).filter(p =>
-    p.brand.toLowerCase().includes(S.searchQ) ||
-    p.name.toLowerCase().includes(S.searchQ)
-  );
-  if (!results.length) {
+  const tokens = S.searchQ.split(/\s+/).filter(Boolean);
+  const scored = filterByPrice(filterBySize(data))
+    .map(p => ({ p, s: _scoreProduct(p, tokens) }))
+    .filter(x => x.s >= 0)
+    .sort((a, b) => b.s - a.s);
+
+  if (!scored.length) {
     el.innerHTML = `<div class="cat-empty">
       <div class="cat-empty-ico">🔍</div>
-      <p>Не знайдено за запитом «${esc(S.searchQ)}»</p>
+      <p>Не знайдено «${esc(S.searchQ)}»</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Спробуй: Nike, Adidas, 9060, Dunk, Gazelle</p>
       <a class="tg-link-btn" href="${CFG.TG_URL}" target="_blank" rel="noopener noreferrer">💬 Написати нам</a>
     </div>`;
     return;
   }
-  el.innerHTML = `<div class="prods-grid" style="padding:0 16px">
-    ${results.slice(0, 48).map(p => prodCardHtml(p, { grid: true })).join('')}
-  </div>`;
+  const count = scored.length;
+  el.innerHTML = `
+    <div class="search-results-header">
+      <span>${count} результат${count===1?'':count<5?'и':'ів'} — «${esc(S.searchQ)}»</span>
+    </div>
+    <div class="prods-grid" style="padding:0 16px">
+      ${scored.slice(0, 60).map(x => prodCardHtml(x.p, { grid: true })).join('')}
+    </div>`;
 }
 
 // ── UNIFIED CATALOG (Stories + Grid) ─────────────── */
