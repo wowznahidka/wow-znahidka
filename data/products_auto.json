@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_69020",
+      "brand": "New Balance",
+      "name": "New Balance 1906D White Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69020/1.jpg"
+    },
+    {
       "id": "tg_69008",
       "brand": "New Balance",
       "name": "New Balance 530 Premium",
