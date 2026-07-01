@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_69375",
+      "brand": "Vans",
+      "name": "Vans KNU Skool Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69375/1.jpg"
+    },
+    {
       "id": "tg_69365",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Premium",
