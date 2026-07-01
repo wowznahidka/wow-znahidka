@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_67578",
+      "brand": "Adidas",
+      "name": "Adidas Campus 00S Beige Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67578/1.jpg"
+    },
+    {
       "id": "tg_67571",
       "brand": "Asics",
       "name": "Asics Gel-Sonoma Premium",
