@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36535",
+      "brand": "Nike",
+      "name": "Nike Air Max TN Plus Black/Grey",
+      "price": 2500,
+      "sizes": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Гума та балон",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36535/1.jpg"
+    },
+    {
       "id": "tg_36526",
       "brand": "Unknown",
       "name": "✅ НОВІ ФОТО ✅",
