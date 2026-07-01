@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_67453",
+      "brand": "Adidas",
+      "name": "Adidas Forum Low White/Black Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67453/2.jpg"
+    },
+    {
       "id": "tg_67441",
       "brand": "New Balance",
       "name": "New Balance 574 Premium",
