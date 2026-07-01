@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_35192",
+      "brand": "Unknown",
+      "name": "ON Cloudtilt Cloudsurfer Max Black",
+      "price": 3050,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка",
+      "sole": "Пінка, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35192/1.jpg"
+    },
+    {
       "id": "tg_35183",
       "brand": "Dior",
       "name": "Christian Dior Walk'n'Dior White/Beige/Black",
