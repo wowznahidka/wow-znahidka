@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_34086",
+      "brand": "Unknown",
+      "name": "✅ НОВА МОДЕЛЬ ✅",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Піна, поліуритан__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34086/1.jpg"
+    },
+    {
       "id": "tg_34077",
       "brand": "Unknown",
       "name": "✅ НОВА МОДЕЛЬ ✅",
