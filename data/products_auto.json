@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_37363",
+      "brand": "Amiri",
+      "name": "Amiri MA-1 Black/White🇻🇳",
+      "price": 3800,
+      "sizes": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, нубук",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37363/1.jpg"
+    },
+    {
       "id": "tg_37354",
       "brand": "Adidas",
       "name": "Adidas Handball Spezial Brown🇻🇳",
