@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_68856",
+      "brand": "New Balance",
+      "name": "New Balance 530 Silver/BlackPremium",
+      "price": 2450,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68856/2.jpg"
+    },
+    {
       "id": "tg_68849",
       "brand": "Adidas",
       "name": "Adidas Campus 00S Beige Premium",
