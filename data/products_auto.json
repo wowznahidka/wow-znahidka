@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_35138",
+      "brand": "Asics",
+      "name": "Asics Gel Kahana 8",
+      "price": 2398,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35138/1.jpg"
+    },
+    {
       "id": "tg_35129",
       "brand": "Asics",
       "name": "Asics Gel NYC Gray 🇻🇳",
