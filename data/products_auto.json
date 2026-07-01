@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_35864",
+      "brand": "Unknown",
+      "name": "✅ НОВА МОДЕЛЬ ✅",
+      "price": 2850,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Легкий текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35864/1.jpg"
+    },
+    {
       "id": "tg_35855",
       "brand": "Nike",
       "name": "Nike Air Max Moto 2K",
