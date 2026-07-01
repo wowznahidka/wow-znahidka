@@ -1670,35 +1670,52 @@
 }
 
 /* ── Tap-to-zoom: будь-яке зображення на сайті ────── */
-.img-zoom-overlay {
+/* ── PREMIUM LIGHTBOX ──────────────────────────── */
+@keyframes izvIn { from { opacity:0; transform:scale(.78); } to { opacity:1; transform:scale(1); } }
+
+.izv-overlay {
   position: fixed; inset: 0; z-index: 10000;
-  background: rgba(0,0,0,0.94);
   display: flex; align-items: center; justify-content: center;
-  animation: zoomFadeIn .18s ease-out;
-  cursor: zoom-out;
-  touch-action: pinch-zoom;
+  touch-action: none; overflow: hidden;
 }
-.img-zoom-overlay img {
-  max-width: 100vw; max-height: 100vh;
-  object-fit: contain;
+.izv-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.93);
+  opacity: 0; transition: opacity .25s ease;
+}
+.izv-wrap {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  max-width: 100vw; max-height: 100svh;
+  transform-origin: center; will-change: transform;
+}
+.izv-img {
+  max-width: 100vw; max-height: 100svh;
+  object-fit: contain; display: block;
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
-  animation: zoomScaleIn .22s cubic-bezier(.34,1.56,.64,1);
 }
-.img-zoom-close {
-  position: fixed; top: max(14px, env(safe-area-inset-top, 0)); right: 14px;
-  z-index: 10001;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,0.92); color: #000;
-  border: none; cursor: pointer;
-  font-size: 22px; line-height: 1;
+.izv-close {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top, 0px)); right: 16px;
+  z-index: 2; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  transition: background .15s;
 }
-@keyframes zoomFadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes zoomScaleIn { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
-.img-zoom-hint {
-  cursor: zoom-in;
+.izv-close:active { background: rgba(255,255,255,.28); transform: scale(.9); }
+.izv-hint {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  left: 50%; transform: translateX(-50%);
+  font: 500 11px/1 'Inter', sans-serif;
+  color: rgba(255,255,255,.4); white-space: nowrap; z-index: 2;
+  animation: fadeUp .4s .8s ease both;
+  pointer-events: none;
 }
+.img-zoom-hint { cursor: zoom-in; }
 
 /* ── EXIT-INTENT MODAL ─────────────────────────────── */
 .exit-modal {
