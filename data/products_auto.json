@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_37345",
+      "brand": "Adidas",
+      "name": "Adidas Samba Black Swarovski🇻🇳",
+      "price": 3000,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37345/1.jpg"
+    },
+    {
       "id": "tg_37327",
       "brand": "Loewe",
       "name": "Loewe x On Cloudtilt 2.0🇻🇳",
