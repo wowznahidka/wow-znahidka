@@ -1,6 +1,32 @@
 {
   "products": [
     {
+      "id": "tg_68096",
+      "brand": "Jordan",
+      "name": "Air Jordan 4 Retro White/Pink Premium",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/5.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68096/1.jpg"
+    },
+    {
       "id": "tg_68085",
       "brand": "New Balance",
       "name": "New Balance 530 Premium",
