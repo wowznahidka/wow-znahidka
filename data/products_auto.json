@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_34330",
+      "brand": "Asics",
+      "name": "Asics Gel Kahana 8 Beige / Brown",
+      "price": 2650,
+      "sizes": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "__Шкіра, текстиль",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34330/1.jpg"
+    },
+    {
       "id": "tg_34321",
       "brand": "Adidas",
       "name": "Adidas Vento XLG Deluxe Black White",
