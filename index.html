@@ -82,18 +82,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=45">
-<link rel="stylesheet" href="css/layout.css?v=45">
-<link rel="stylesheet" href="css/cards.css?v=45">
-<link rel="stylesheet" href="css/animations.css?v=45">
-<link rel="stylesheet" href="css/mobile.css?v=45">
+<link rel="stylesheet" href="css/base.css?v=46">
+<link rel="stylesheet" href="css/layout.css?v=46">
+<link rel="stylesheet" href="css/cards.css?v=46">
+<link rel="stylesheet" href="css/animations.css?v=46">
+<link rel="stylesheet" href="css/mobile.css?v=46">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=45">
-<link rel="stylesheet" href="css/niche.css?v=45">
+<link rel="stylesheet" href="shared/css/premium.css?v=46">
+<link rel="stylesheet" href="css/niche.css?v=46">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -217,9 +217,9 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     <section id="daily-deals-section" hidden>
       <div class="dd-header">
         <div class="dd-title-wrap">
-          <div class="sec-eyebrow"><span class="sec-eyebrow-dot" aria-hidden="true"></span>Випадкові 3 пари</div>
-          <h2 class="dd-title">Знахідка дня</h2>
-          <p class="dd-subtitle">3 моделі щодня <b>з безкоштовною доставкою</b></p>
+          <div class="sec-eyebrow"><span class="sec-eyebrow-dot" aria-hidden="true"></span>✨ Підібрано сьогодні</div>
+          <h2 class="dd-title">🔥 Знахідка дня</h2>
+          <p class="dd-subtitle">3 пари — оплата <b>після примірки</b>, без передоплати</p>
         </div>
         <div class="dd-timer-wrap" aria-label="Оновлення через">
           <span class="dd-timer-lbl">До оновлення:</span>
@@ -747,20 +747,16 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     <span class="nav-label">Головна</span>
   </button>
   <button class="nav-item" data-tab="match" onclick="changeTab('match')" aria-label="Match">
-    <span class="nav-icon" aria-hidden="true">
-      <svg class="fire-anim" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2C9 7 5 11 5 15a7 7 0 0014 0c0-4-4-8-7-13z"/>
-        <path d="M12 2c0 5 4 7 4 11-1.5-1.5-3-2.5-4-6"/>
-      </svg>
-    </span>
+    <span class="nav-icon nav-icon-emoji fire-anim" aria-hidden="true">🔥</span>
     <span class="nav-label">Match</span>
   </button>
   <button class="nav-item" data-tab="catalog" onclick="changeTab('catalog')" aria-label="Каталог">
     <span class="nav-icon" aria-hidden="true">
-      <svg width="24" height="24" viewBox="0 0 24 21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M2 17h18c.7 0 1.2-.6 1.2-1.3v-1.4L18.5 13"/>
-        <path d="M5 17v-4.5c0-1.2 1-2.2 2.2-2.2H10l3 4.7h5.5"/>
-        <path d="M3.5 15.5L5.5 11"/>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
       </svg>
     </span>
     <span class="nav-label">Каталог</span>
@@ -1043,21 +1039,21 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=44"             defer></script>
-<script src="js/state.js?v=44"              defer></script>
-<script src="js/lang.js?v=44"               defer></script>
-<script src="js/api.js?v=44"                defer></script>
-<script src="js/products.js?v=44"           defer></script>
-<script src="js/ui.js?v=44"                 defer></script>
-<script src="js/match.js?v=44"              defer></script>
-<script src="js/filters.js?v=44"            defer></script>
-<script src="js/cart.js?v=44"               defer></script>
-<script src="js/modal.js?v=44"              defer></script>
-<script src="js/deals.js?v=44"              defer></script>
-<script src="shared/js/referral.js?v=44" defer></script>
-<script src="js/app.js?v=44"                defer></script>
-<script src="js/cycle.js?v=44"               defer></script>
-<script src="shared/js/motion.js?v=44" defer></script>
+<script src="js/config.js?v=46"             defer></script>
+<script src="js/state.js?v=46"              defer></script>
+<script src="js/lang.js?v=46"               defer></script>
+<script src="js/api.js?v=46"                defer></script>
+<script src="js/products.js?v=46"           defer></script>
+<script src="js/ui.js?v=46"                 defer></script>
+<script src="js/match.js?v=46"              defer></script>
+<script src="js/filters.js?v=46"            defer></script>
+<script src="js/cart.js?v=46"               defer></script>
+<script src="js/modal.js?v=46"              defer></script>
+<script src="js/deals.js?v=46"              defer></script>
+<script src="shared/js/referral.js?v=46" defer></script>
+<script src="js/app.js?v=46"                defer></script>
+<script src="js/cycle.js?v=46"               defer></script>
+<script src="shared/js/motion.js?v=46" defer></script>
 <script>
 (function(){
   const tg = window.Telegram?.WebApp;
