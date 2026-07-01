@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_34997",
+      "brand": "Adidas",
+      "name": "Adidas Ozmillen Silver/Blue 🇻🇳",
+      "price": 2150,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Пінка, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34997/1.jpg"
+    },
+    {
       "id": "tg_34988",
       "brand": "Adidas",
       "name": "Adidas Campus  00S х Youth Of Paris Grey",
