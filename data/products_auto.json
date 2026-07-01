@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36140",
+      "brand": "Nike",
+      "name": "Nike Initiator Custom Pink 2.0 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36140/1.jpg"
+    },
+    {
       "id": "tg_36131",
       "brand": "New Balance",
       "name": "New Balance 2000 Light Blue Pastel 🇻🇳",
