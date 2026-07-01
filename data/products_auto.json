@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_35642",
+      "brand": "Asics",
+      "name": "Asics Gel-Kayano 20 Blue/Black",
+      "price": 2900,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Сквозна сітка __(див. коментарі) __",
+      "sole": "Піна та гума__",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_35642/1.jpg"
+    },
+    {
       "id": "tg_35633",
       "brand": "Asics",
       "name": "Asics Gel-Kayano 20 Obsidian Green",
