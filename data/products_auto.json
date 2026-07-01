@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_68460",
+      "brand": "Adidas",
+      "name": "Adidas Spezial Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68460/1.jpg"
+    },
+    {
       "id": "tg_68446",
       "brand": "New Balance",
       "name": "New Balance 9060 Quartz Grey Premium",
