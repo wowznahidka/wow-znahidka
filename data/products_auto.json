@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_67080",
+      "brand": "New Balance",
+      "name": "New Balance 530 Silver/BlackPremium",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67080/1.jpg"
+    },
+    {
       "id": "tg_67070",
       "brand": "New Balance",
       "name": "New Balance 530 Premium",
