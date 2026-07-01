@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_37234",
+      "brand": "Nike",
+      "name": "Nike Nocta Hot Step 2 Black🇻🇳",
+      "price": 3500,
+      "sizes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, поліуритан",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37234/1.jpg"
+    },
+    {
       "id": "tg_37225",
       "brand": "Nike",
       "name": "Nike Initiator Custom White Black🇻🇳",
