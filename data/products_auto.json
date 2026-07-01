@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_69799",
+      "brand": "New Balance",
+      "name": "New Balance 9060 Premium",
+      "price": 9660,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69799/1.jpg"
+    },
+    {
       "id": "tg_69789",
       "brand": "Nike",
       "name": "Nike M2K Premium",
