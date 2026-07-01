@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36686",
+      "brand": "Nike",
+      "name": "Nike V5 RNR Custom Pink 🇻🇳",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36686/1.jpg"
+    },
+    {
       "id": "tg_36677",
       "brand": "Asics",
       "name": "Asics Onitsuka Tiger Mexico 66 All Black 🇻🇳",
