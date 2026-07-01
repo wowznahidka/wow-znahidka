@@ -142,9 +142,9 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   align-items: center !important;
   gap: 5px !important;
   font-family: 'Inter', sans-serif !important;
-  font-size: 11px !important;
+  font-size: 12.5px !important;
   font-weight: 700 !important;
-  color: rgba(13,13,13,0.65) !important;
+  color: rgba(13,13,13,0.68) !important;
   white-space: nowrap !important;
 }
 .hero-trust-item svg { color: var(--accent) !important; flex-shrink: 0; }
@@ -757,20 +757,35 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   /* ── HOME PAGE — широка композиція ── */
   #page-home, #page-match, #page-catalog, #page-contacts {
     max-width: 100%;
-    padding: 0 32px;
+    padding: 0 40px;
   }
   .home-hero {
-    padding: 56px 0 32px !important;
+    padding: 64px 0 40px !important;
     text-align: left;
     background: none !important;
     animation: none !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    align-items: center !important;
+    gap: 48px !important;
+    min-height: 340px !important;
   }
-  .home-title { font-size: clamp(48px, 5vw, 80px) !important; }
-  .home-hero::before, .home-hero::after { display: none; }
+  .home-hero-content { max-width: 560px; }
+  .home-title {
+    font-size: clamp(48px, 4.5vw, 76px) !important;
+    line-height: 1.05 !important;
+  }
+  .home-greeting { font-size: 13px !important; margin-bottom: 12px !important; }
+  .home-counter-chip { margin-top: 18px !important; }
+  .hero-trust { margin-top: 16px !important; }
+  .hero-trust-item { font-size: 13px !important; }
+  .hero-cta-btn { display: inline-flex !important; margin-top: 24px !important; }
+  .hero-sneaker-wrap { display: flex !important; }
+  .home-hero::before, .home-hero::after { display: none !important; }
 
   /* секції: ширші padding */
-  .section { padding: 24px 0 8px !important; }
-  .sec-title { font-size: 28px !important; }
+  .section { padding: 28px 0 10px !important; }
+  .sec-title { font-size: 30px !important; letter-spacing: -0.01em !important; }
 
   /* h-scroll рядки — на десктопі робимо їх 4-5 видимими */
   .h-scroll {
@@ -927,6 +942,25 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
     transform: translateY(-6px) !important;
     box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06) !important;
   }
+
+  /* ── DESKTOP CARD TEXT — крупніше для читабельності ── */
+  .card-name { font-size: 15px !important; line-height: 1.35 !important; }
+  .card-price { font-size: 22px !important; }
+  .card-body { padding: 14px 16px 18px !important; }
+  .card-brand { font-size: 11px !important; letter-spacing: 0.22em !important; margin-bottom: 6px !important; }
+
+  /* ── DESKTOP FAQs ── */
+  .faq-q { font-size: 16px !important; padding: 18px 20px !important; }
+  .faq-a { font-size: 15px !important; padding: 0 20px !important; }
+  .faq-item.open .faq-a { padding: 0 20px 18px !important; }
+
+  /* ── DESKTOP REVIEWS ── */
+  .rev-bub-text { font-size: 14.5px !important; }
+  .rev-bub-name { font-size: 13px !important; }
+
+  /* ── DESKTOP CONTACTS ── */
+  .ci-title { font-size: 17px !important; }
+  .ci-sub   { font-size: 14px !important; }
 
   /* Можна вибирати/копіювати текст товарів */
   .card-name, .card-brand, .card-price,
