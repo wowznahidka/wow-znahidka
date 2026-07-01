@@ -150,16 +150,22 @@ body { background: #f0eded; }
   font-size: 10px; font-weight: 700; letter-spacing: .2px;
   transition: color var(--t-base); position: relative;
 }
-.nav-icon { font-size: 22px; line-height: 1; }
-.nav-item.active { color: var(--text); }
+.nav-icon {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1);
+}
+.nav-icon svg { width: 24px; height: 24px; display: block; }
+.nav-item.active { color: var(--red); }
 .nav-item.active .nav-icon {
-  filter: drop-shadow(0 0 7px rgba(255,62,62,.55));
+  filter: drop-shadow(0 0 6px rgba(255,62,62,.45));
+  transform: scale(1.08);
 }
 .nav-item.active::before {
   content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 28px; height: 2.5px; background: var(--red);
-  border-radius: 0 0 3px 3px;
-  box-shadow: 0 0 8px rgba(255,62,62,.5);
+  width: 32px; height: 3px; background: var(--red);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 10px rgba(255,62,62,.55);
 }
 
 /* ── GENDER TOGGLE — inline block under hero ────────── */
