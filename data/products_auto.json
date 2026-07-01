@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_34230",
+      "brand": "Nike",
+      "name": "Nike Air Max 95 X Future Movement \"Sketch With The Past\" 🇻🇳",
+      "price": 3200,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, замша__",
+      "sole": "Піна, поліуритан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34230/1.jpg"
+    },
+    {
       "id": "tg_34221",
       "brand": "Louis Vuitton",
       "name": "Louis Vuitton Skate Black Crystal 🇻🇳",
