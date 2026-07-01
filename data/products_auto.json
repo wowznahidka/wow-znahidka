@@ -1,6 +1,31 @@
 {
   "products": [
     {
+      "id": "tg_66800",
+      "brand": "Adidas",
+      "name": "Adidas Campus x Bad Bunny Grey Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66800/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66800/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66800/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66800/4.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66800/1.jpg"
+    },
+    {
       "id": "tg_66789",
       "brand": "Пополнение",
       "name": "Пополнение ✅",
