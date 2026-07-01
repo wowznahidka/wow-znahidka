@@ -156,6 +156,7 @@ body { background: #f0eded; }
   transition: transform .18s cubic-bezier(.34,1.56,.64,1);
 }
 .nav-icon svg { width: 24px; height: 24px; display: block; }
+.nav-icon-emoji { font-size: 22px; line-height: 24px; }
 .nav-item.active { color: var(--red); }
 .nav-item.active .nav-icon {
   filter: drop-shadow(0 0 6px rgba(255,62,62,.45));
