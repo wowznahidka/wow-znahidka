@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_34760",
+      "brand": "Nike",
+      "name": "Nike Dunk Low «Valentine's Day»",
+      "price": 3000,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34760/1.jpg"
+    },
+    {
       "id": "tg_34751",
       "brand": "Nike",
       "name": "Nike Air Force 1 Low \"Year of the Horse\"",
