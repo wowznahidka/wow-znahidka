@@ -1,6 +1,39 @@
 {
   "products": [
     {
+      "id": "tg_68517",
+      "brand": "New Balance",
+      "name": "New Balance 1906D Grey Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68517/2.jpg"
+    },
+    {
       "id": "tg_68501",
       "brand": "New Balance",
       "name": "New Balance 530 Premium",
