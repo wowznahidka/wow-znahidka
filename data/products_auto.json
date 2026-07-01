@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_69503",
+      "brand": "Adidas",
+      "name": "Adidas Forum Low Grey Premium",
+      "price": 2650,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69503/2.jpg"
+    },
+    {
       "id": "tg_69494",
       "brand": "New Balance",
       "name": "New Balance 9060 Premium",
