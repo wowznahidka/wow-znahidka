@@ -1,6 +1,42 @@
 {
   "products": [
     {
+      "id": "tg_36856",
+      "brand": "Nike",
+      "name": "Nike Hot Step Air Terra Х NOCTA",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36856/1.jpg"
+    },
+    {
       "id": "tg_36847",
       "brand": "Nike",
       "name": "Nike Court Legacy Lift",
