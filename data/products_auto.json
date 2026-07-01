@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_37544",
+      "brand": "Salomon",
+      "name": "Salomon XT-6 Ft White Великан",
+      "price": 2800,
+      "sizes": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37544/1.jpg"
+    },
+    {
       "id": "tg_37535",
       "brand": "Salomon",
       "name": "Salomon XT-6 Ft Grey Великан",
