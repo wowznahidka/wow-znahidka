@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36865",
+      "brand": "Unknown",
+      "name": "DC Shoes Court Graffik Black Sabbath",
+      "price": 2850,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Нубук",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36865/1.jpg"
+    },
+    {
       "id": "tg_36856",
       "brand": "Nike",
       "name": "Nike Hot Step Air Terra Х NOCTA",
