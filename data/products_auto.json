@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_67365",
+      "brand": "Nike",
+      "name": "Nike Court Legacy Lift Premium",
+      "price": 2500,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/6.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_67365/1.jpg"
+    },
+    {
       "id": "tg_67357",
       "brand": "New Balance",
       "name": "New Balance 9060 Premium",
