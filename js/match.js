@@ -14,6 +14,18 @@ async function initMatch() {
   _swipeLocked = false;
   _attachMatchKeyboard();
 
+  const _stageEl = document.getElementById('card-stage');
+  if (_stageEl) _stageEl.innerHTML = `
+    <div class="m-card" aria-hidden="true" style="pointer-events:none;cursor:default">
+      <div class="m-card-media"><div class="skel" style="width:100%;aspect-ratio:4/3;border-radius:0"></div></div>
+      <div class="m-card-body">
+        <div class="skel" style="height:9px;width:45%;border-radius:4px;margin-bottom:10px"></div>
+        <div class="skel" style="height:19px;width:80%;border-radius:4px;margin-bottom:7px"></div>
+        <div class="skel" style="height:21px;width:35%;border-radius:4px;margin-bottom:5px"></div>
+        <div class="skel" style="height:9px;width:60%;border-radius:4px"></div>
+      </div>
+    </div>`;
+
   const data = await fetchCatalog();
   if (!data || !data.length) return;
 
