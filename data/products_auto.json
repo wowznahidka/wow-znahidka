@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_37517",
+      "brand": "Asics",
+      "name": "Asics Gel-Kahana 8  Великан",
+      "price": 2900,
+      "sizes": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_37517/1.jpg"
+    },
+    {
       "id": "tg_37505",
       "brand": "Dior",
       "name": "Dior B44 Blade х Lewis Hamilton🇻🇳",
