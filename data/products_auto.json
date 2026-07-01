@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36382",
+      "brand": "Nike",
+      "name": "Nike P-6000 Premium Iron Ore 🇻🇳",
+      "price": 2300,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Текстиль, шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36382/1.jpg"
+    },
+    {
       "id": "tg_36364",
       "brand": "Nike",
       "name": "Nike Air Zoom Pegasus Premium",
