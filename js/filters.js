@@ -582,8 +582,8 @@ function updateActiveFiltersChips() {
     const ql = { discount: '🔥 Знижки', new: '✨ Новинки', free: '🚚 Безкоштовна' }[S.quickFilter] || '';
     if (ql) chips.push({ k: 'quick', label: ql });
   }
-  if ((S.priceMin > 0) || (S.priceMax && S.priceMax < 6000)) {
-    chips.push({ k: 'price', label: _priceLabel(S.priceMin || 0, S.priceMax || 6000) });
+  if ((S.priceMin > 0) || (S.priceMax && S.priceMax < PRICE_MAX)) {
+    chips.push({ k: 'price', label: _priceLabel(S.priceMin || 0, S.priceMax || PRICE_MAX) });
   }
   if (!chips.length) { box.innerHTML = ''; box.classList.remove('vis'); return; }
   box.innerHTML = chips.map(c =>
@@ -597,7 +597,7 @@ function clearOneFilter(kind) {
   else if (kind === 'size')   clearSizeFilters();
   else if (kind === 'brand')  _selectBrandStory(null);
   else if (kind === 'quick')  setQuickFilter('all');
-  else if (kind === 'price')  { S.priceMin = 0; S.priceMax = 6000; renderPriceSlider(); _applyFilters(); }
+  else if (kind === 'price')  { S.priceMin = 0; S.priceMax = PRICE_MAX; renderPriceSlider(); _applyFilters(); }
   updateActiveFiltersChips();
 }
 
@@ -607,7 +607,7 @@ function clearAllFilters() {
   S.catBrand = null;
   S.quickFilter = 'all';
   S.priceMin = 0;
-  S.priceMax = 6000;
+  S.priceMax = PRICE_MAX;
   document.querySelectorAll('.g-chip').forEach(b => b.classList.toggle('active', b.dataset.gender === 'mixed'));
   document.querySelectorAll('.cat-quick').forEach(b => b.classList.toggle('on', b.dataset.quick === 'all'));
   renderSizeChips();
