@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_69172",
+      "brand": "Vans",
+      "name": "Vans KNU Skool Premium",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69172/1.jpg"
+    },
+    {
       "id": "tg_69161",
       "brand": "New Balance",
       "name": "New Balance 9060 Premium",
