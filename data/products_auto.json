@@ -1,6 +1,35 @@
 {
   "products": [
     {
+      "id": "tg_69448",
+      "brand": "Adidas",
+      "name": "Adidas Samba White Premium",
+      "price": 2550,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69448/1.jpg"
+    },
+    {
       "id": "tg_69438",
       "brand": "New Balance",
       "name": "New Balance 9060 Premium",
