@@ -1,6 +1,40 @@
 {
   "products": [
     {
+      "id": "tg_36094",
+      "brand": "Nike",
+      "name": "Nike Initiator Custom 3.0 Purple 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36094/1.jpg"
+    },
+    {
       "id": "tg_36085",
       "brand": "Nike",
       "name": "Nike Initiator Custom Pink🇻🇳",
