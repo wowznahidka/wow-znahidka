@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36784",
+      "brand": "Adidas",
+      "name": "Adidas Samba OG",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Замша, шкіра",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36784/1.jpg"
+    },
+    {
       "id": "tg_36775",
       "brand": "Asics",
       "name": "Asics Onitsuka Tiger Tokuten",
