@@ -1,6 +1,41 @@
 {
   "products": [
     {
+      "id": "tg_34541",
+      "brand": "__✅__",
+      "name": "__✅__ ТОП КОНТЕНТ ✅",
+      "price": 5300,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34541/1.jpg"
+    },
+    {
       "id": "tg_34532",
       "brand": "__✅__",
       "name": "__✅__ ТОП КОНТЕНТ ✅",
