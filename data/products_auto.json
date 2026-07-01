@@ -1,6 +1,33 @@
 {
   "products": [
     {
+      "id": "tg_34203",
+      "brand": "Nike",
+      "name": "Nike Shox R4 Black/Metallic Silver 🇻🇳",
+      "price": 3100,
+      "sizes": [
+        36
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль__",
+      "sole": "Піна, поліуритан",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_34203/1.jpg"
+    },
+    {
       "id": "tg_34194",
       "brand": "Gucci",
       "name": "Gucci Re-Web Trainer  🇻🇳",
