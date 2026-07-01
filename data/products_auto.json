@@ -1,6 +1,37 @@
 {
   "products": [
     {
+      "id": "tg_68630",
+      "brand": "Adidas",
+      "name": "Adidas Samba Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68630/2.jpg"
+    },
+    {
       "id": "tg_68621",
       "brand": "Nike",
       "name": "Nike SB Dunk Low Black Premium",
