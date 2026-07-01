@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_69052",
+      "brand": "Dior",
+      "name": "Dior B23 P Black Premium",
+      "price": 3800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_69052/1.jpg"
+    },
+    {
       "id": "tg_69041",
       "brand": "Nike",
       "name": "Nike Air More Uptempo 96 Premium",
