@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_36802",
+      "brand": "Nike",
+      "name": "Nike Dunk Low Lace Pack/Regal Beige",
+      "price": 2800,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Шкіра, текстиль",
+      "sole": "Піна та гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/9.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36802/1.jpg"
+    },
+    {
       "id": "tg_36793",
       "brand": "Nike",
       "name": "Nike V5 RNR Burgundy Crush/College Grey",
