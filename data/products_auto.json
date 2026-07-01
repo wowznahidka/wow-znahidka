@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_68552",
+      "brand": "Adidas",
+      "name": "Adidas Forum Low Grey Premium",
+      "price": 2700,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_68552/2.jpg"
+    },
+    {
       "id": "tg_68542",
       "brand": "Adidas",
       "name": "Adidas Campus 00S Whie Premium",
