@@ -311,6 +311,12 @@ function openProductDetail(product) {
       </div>
     </div>
 
+    <div class="pd-trust-bar">
+      <span class="pd-trust-pill">✓ Без передоплати</span>
+      <span class="pd-trust-pill">✓ Примірка на пошті</span>
+      <span class="pd-trust-pill">✓ Повернення</span>
+    </div>
+
     <div class="pd-cta">
       <button class="pd-btn-size" onclick="openSizePicker(S.pdProduct)">
         Обрати розмір
@@ -322,15 +328,29 @@ function openProductDetail(product) {
       <button class="pd-btn-brand" onclick="closeAllSheets();changeTab('catalog');setTimeout(()=>openBrand('${esc(product.brand)}'),220)">
         Ще від ${esc(product.brand)} <span class="i-arr" aria-hidden="true"></span>
       </button>
-    </div>`;
+    </div>
+
+    ${_pdSimilarHtml(product)}`;
 
   openSheet('sheet-product');
 
-  // Init swipe for gallery if multiple photos
   if (_imgs) {
     const gallery = document.getElementById('pd-gallery');
     if (gallery) _initGalleryTouch(gallery);
   }
+}
+
+function _pdSimilarHtml(product) {
+  const all = (S.catalog && S.catalog.all) || [];
+  const similar = all
+    .filter(p => p.id !== product.id && p.brand === product.brand && p.image)
+    .slice(0, 8);
+  if (!similar.length) return '';
+  const cards = similar.map(p => prodCardHtml(p, { grid: false })).join('');
+  return `<div class="pd-similar">
+    <div class="pd-similar-title">Ще від ${esc(product.brand)}</div>
+    <div class="h-scroll pd-similar-row">${cards}</div>
+  </div>`;
 }
 
 // ── NOTIFY ME ─────────────────────────────────────────── */
