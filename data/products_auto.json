@@ -1,6 +1,36 @@
 {
   "products": [
     {
+      "id": "tg_36264",
+      "brand": "Nike",
+      "name": "Nike Air Max 97 Triple White 🇻🇳",
+      "price": 2900,
+      "sizes": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ],
+      "gender": "Чоловік",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "material": "Лакована шкіра",
+      "sole": "Піна, гума",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/8.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_36264/1.jpg"
+    },
+    {
       "id": "tg_36255",
       "brand": "Nike",
       "name": "Nike Air Zoom Pegasus Grey/Blue 🇻🇳",
