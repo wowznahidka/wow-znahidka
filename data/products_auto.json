@@ -1,6 +1,38 @@
 {
   "products": [
     {
+      "id": "tg_66817",
+      "brand": "Nike",
+      "name": "Nike AF1 Shadow White Premium",
+      "price": 2600,
+      "sizes": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "gender": "Жінка",
+      "isNew": true,
+      "available": true,
+      "tgLink": "https://t.me/znahidkakrosiv_bot",
+      "images": [
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/1.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/2.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/3.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/4.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/5.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/6.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/7.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/8.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/9.jpg",
+        "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/10.jpg"
+      ],
+      "image": "https://wowznahidka.github.io/wow-znahidka/data/photos/tg_66817/1.jpg"
+    },
+    {
       "id": "tg_66806",
       "brand": "Nike",
       "name": "Nike P-6000 Premium",
