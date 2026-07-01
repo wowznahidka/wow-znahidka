@@ -22,9 +22,35 @@ async function initMatch() {
     const j = Math.floor(Math.random() * (i + 1));
     [_pool[i], _pool[j]] = [_pool[j], _pool[i]];
   }
-  S.matchPool  = _pool;
-  S.matchIdx   = 0;
+  S.matchFullPool  = _pool;
+  S.matchPool      = _pool;
+  S.matchIdx       = 0;
+  S.matchSizeFilter = 'all';
+  _buildSizeChips(_pool);
   _matchCombo  = 0;
+  clearTimeout(_comboTimer);
+  _updateComboUI();
+  renderMatchCard();
+}
+
+function _buildSizeChips(pool) {
+  const wrap = document.getElementById('match-size-filter');
+  if (!wrap) return;
+  const sizes = new Set();
+  pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?') sizes.add(v); }));
+  const sorted = [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
+  wrap.innerHTML = `<button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
+    sorted.map(s => `<button class="match-sz-chip" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
+}
+
+function setMatchSize(sz) {
+  S.matchSizeFilter = sz;
+  document.querySelectorAll('.match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
+  S.matchPool = sz === 'all'
+    ? [...S.matchFullPool]
+    : S.matchFullPool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
+  S.matchIdx = 0;
+  _matchCombo = 0;
   clearTimeout(_comboTimer);
   _updateComboUI();
   renderMatchCard();
