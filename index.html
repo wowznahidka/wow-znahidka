@@ -31,7 +31,7 @@
 <meta property="og:description" content="Преміум кросівки Nike, Adidas, New Balance, Jordan без передоплати. Оплата після примірки на Новій Пошті. Доставка по всій Україні.">
 <meta property="og:locale"      content="uk_UA">
 <meta property="og:url"         content="https://wowznahidka.github.io/wow-znahidka/">
-<meta property="og:image"       content="https://wowznahidka.github.io/wow-znahidka/og-cover.png">
+<meta property="og:image"       content="https://wowznahidka.github.io/wow-znahidka/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height"content="630">
 
@@ -39,7 +39,7 @@
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="WOW.ZNAHIDKA — Преміум кросівки без передоплати">
 <meta name="twitter:description" content="Преміум кросівки Nike, Adidas, New Balance, Jordan без передоплати. Оплата після примірки на Новій Пошті. Доставка по всій Україні.">
-<meta name="twitter:image"       content="https://wowznahidka.github.io/wow-znahidka/og-cover.png">
+<meta name="twitter:image"       content="https://wowznahidka.github.io/wow-znahidka/og-cover.jpg">
 
 <!-- ── Canonical ── -->
 <link rel="canonical" href="https://wowznahidka.github.io/wow-znahidka/">
@@ -63,8 +63,8 @@
   "@context": "https://schema.org",
   "@type": "Store",
   "name": "WOW.ZNAHIDKA",
-  "url": "https://wow-znahidka.netlify.app/",
-  "image": "https://wow-znahidka.netlify.app/og-cover.png",
+  "url": "https://wowznahidka.github.io/wow-znahidka/",
+  "image": "https://wowznahidka.github.io/wow-znahidka/og-cover.jpg",
   "description": "Преміум кросівки без передоплати. Оплата після примірки на Новій Пошті.",
   "sameAs": ["https://t.me/wooowznahidka", "https://www.instagram.com/wow.znahidka"],
   "priceRange": "₴₴",
@@ -82,18 +82,18 @@
 
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
-<link rel="stylesheet" href="css/base.css?v=54">
-<link rel="stylesheet" href="css/layout.css?v=54">
-<link rel="stylesheet" href="css/cards.css?v=54">
-<link rel="stylesheet" href="css/animations.css?v=54">
-<link rel="stylesheet" href="css/mobile.css?v=54">
+<link rel="stylesheet" href="css/base.css?v=56">
+<link rel="stylesheet" href="css/layout.css?v=56">
+<link rel="stylesheet" href="css/cards.css?v=56">
+<link rel="stylesheet" href="css/animations.css?v=56">
+<link rel="stylesheet" href="css/mobile.css?v=56">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="shared/css/premium.css?v=54">
-<link rel="stylesheet" href="css/niche.css?v=55">
+<link rel="stylesheet" href="shared/css/premium.css?v=56">
+<link rel="stylesheet" href="css/niche.css?v=56">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -196,9 +196,13 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
           <span class="hero-trust-sep" aria-hidden="true"></span>
           <span class="hero-trust-item"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><circle cx="6" cy="6" r="5.5" stroke="currentColor"/><path d="M3.5 6l2 2 3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>1–3 дні</span>
         </div>
-        <button class="hero-cta-btn desktop-only" onclick="changeTab('catalog')" aria-label="Перейти до каталогу">
+        <button class="hero-cta-btn" onclick="changeTab('catalog')" aria-label="Перейти до каталогу">
           Переглянути каталог
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="hero-cta-btn hero-cta-match" onclick="changeTab('match')" aria-label="Підібрати пару свайпами"
+          style="margin-top:10px;background:transparent;border:1.5px solid var(--red,#ff3e3e);color:var(--red,#ff3e3e)">
+          🔥 Підібрати свайпами в Match
         </button>
       </div>
       <div class="hero-sneaker-wrap desktop-only" id="hero-sneaker-wrap" aria-hidden="true">
@@ -338,12 +342,6 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="cat-quick" data-quick="all" onclick="setQuickFilter('all')" aria-pressed="true">
         <span>Всі</span>
       </button>
-      <button class="cat-quick" data-quick="discount" onclick="setQuickFilter('discount')">
-        <span>🔥 Знижки</span>
-      </button>
-      <button class="cat-quick" data-quick="new" onclick="setQuickFilter('new')">
-        <span>✨ Новинки</span>
-      </button>
       <button class="cat-quick" data-quick="free" onclick="setQuickFilter('free')">
         <span>🚚 Безкоштовна</span>
       </button>
@@ -358,10 +356,8 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       </div>
       <select class="cat-sort" id="cat-sort" onchange="setSortMode(this.value)" aria-label="Сортувати">
         <option value="popular">🔥 Популярне</option>
-        <option value="new">✨ Новинки</option>
         <option value="price_asc">↑ Ціна: дешевше</option>
         <option value="price_desc">↓ Ціна: дорожче</option>
-        <option value="discount">🎁 Найбільша знижка</option>
       </select>
     </div>
 
@@ -868,6 +864,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <span class="form-status-ico" id="f-phone-ico" aria-hidden="true"></span>
     </div>
     <div class="form-err-msg" id="f-phone-err" role="alert">Введіть повний номер телефону</div>
+    <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">🔒 Потрібен лише для ТТН Нової Пошти — не дзвонимо без потреби і не спамимо</div>
   </div>
 
   <div class="form-field">
@@ -892,16 +889,20 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <span id="depot-label">Номер відділення</span>
     </label>
     <div class="form-inp-wrap">
-      <input type="text" class="form-inp" id="f-depot" placeholder="Наприклад: 12"
+      <input type="text" class="form-inp" id="f-depot" placeholder="Наприклад: 12 (можна пропустити)"
         oninput="validateField(this,'depot')" inputmode="numeric">
       <span class="form-status-ico" id="f-depot-ico" aria-hidden="true"></span>
     </div>
     <div class="form-err-msg" id="f-depot-err" role="alert">Введіть номер відділення або поштомату</div>
-    <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">Не знаєш номер? <a href="https://novaposhta.ua/branches/city" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none;font-weight:600">Знайти відділення НП →</a></div>
+    <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">Не пам'ятаєш номер? Залиш порожнім — уточнимо при підтвердженні 👌</div>
   </div>
 
-  <div class="promo-row">
-    <input type="text" class="promo-inp" id="f-promo" placeholder="Промокод (якщо є)" autocomplete="off" aria-label="Промокод">
+  <div style="margin:2px 0 10px;font-size:12.5px">
+    <a id="promo-toggle-link" onclick="document.getElementById('promo-row-wrap').style.display='flex';this.style.display='none'"
+       style="color:var(--text-muted);text-decoration:underline;cursor:pointer">Маю промокод</a>
+  </div>
+  <div class="promo-row" id="promo-row-wrap" style="display:none">
+    <input type="text" class="promo-inp" id="f-promo" placeholder="Промокод" autocomplete="off" aria-label="Промокод">
     <button class="promo-apply" onclick="applyPromo()">Застосувати</button>
   </div>
 
@@ -909,6 +910,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     📦 <b style="color:var(--text)">Доставка: ~50-80₴</b> — оплачується при отриманні на відділенні НП.<br>
     Не підійшли — повертаєш безкоштовно, нічого не платиш.
   </div>
+  <div style="text-align:center;font-size:12px;color:var(--text-muted);margin-bottom:8px">💳 Зараз платити нічого не треба — оплата при отриманні</div>
   <button class="checkout-submit" id="checkout-submit-btn" onclick="submitOrder()">
     ✅ Підтвердити замовлення
   </button>
@@ -1054,21 +1056,21 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <!-- ════════════════════════════════════════════════
      JS MODULES  (load order matters)
      ════════════════════════════════════════════════ -->
-<script src="js/config.js?v=54"             defer></script>
-<script src="js/state.js?v=54"              defer></script>
-<script src="js/lang.js?v=54"               defer></script>
-<script src="js/api.js?v=54"                defer></script>
-<script src="js/products.js?v=54"           defer></script>
-<script src="js/ui.js?v=54"                 defer></script>
-<script src="js/match.js?v=54"              defer></script>
-<script src="js/filters.js?v=54"            defer></script>
-<script src="js/cart.js?v=54"               defer></script>
-<script src="js/modal.js?v=54"              defer></script>
-<script src="js/deals.js?v=54"              defer></script>
-<script src="shared/js/referral.js?v=54" defer></script>
-<script src="js/app.js?v=54"                defer></script>
-<script src="js/cycle.js?v=54"               defer></script>
-<script src="shared/js/motion.js?v=54" defer></script>
+<script src="js/config.js?v=56"             defer></script>
+<script src="js/state.js?v=56"              defer></script>
+<script src="js/lang.js?v=56"               defer></script>
+<script src="js/api.js?v=56"                defer></script>
+<script src="js/products.js?v=56"           defer></script>
+<script src="js/ui.js?v=56"                 defer></script>
+<script src="js/match.js?v=56"              defer></script>
+<script src="js/filters.js?v=56"            defer></script>
+<script src="js/cart.js?v=56"               defer></script>
+<script src="js/modal.js?v=56"              defer></script>
+<script src="js/deals.js?v=56"              defer></script>
+<script src="shared/js/referral.js?v=56" defer></script>
+<script src="js/app.js?v=56"                defer></script>
+<script src="js/cycle.js?v=56"               defer></script>
+<script src="shared/js/motion.js?v=56" defer></script>
 <script>
 (function(){
   const tg = window.Telegram?.WebApp;
