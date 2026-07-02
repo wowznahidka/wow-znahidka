@@ -864,7 +864,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <span class="form-status-ico" id="f-phone-ico" aria-hidden="true"></span>
     </div>
     <div class="form-err-msg" id="f-phone-err" role="alert">Введіть повний номер телефону</div>
-    <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">🔒 Потрібен лише для ТТН Нової Пошти — не дзвонимо без потреби і не спамимо</div>
+    <div style="margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--text-dim,rgba(29,29,31,0.6))">🔒 Потрібен лише для ТТН Нової Пошти — не дзвонимо без потреби і не спамимо</div>
   </div>
 
   <div class="form-field">
@@ -894,23 +894,23 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <span class="form-status-ico" id="f-depot-ico" aria-hidden="true"></span>
     </div>
     <div class="form-err-msg" id="f-depot-err" role="alert">Введіть номер відділення або поштомату</div>
-    <div style="margin-top:4px;font-size:11px;color:var(--text-muted)">Не пам'ятаєш номер? Залиш порожнім — уточнимо при підтвердженні 👌</div>
+    <div style="margin-top:5px;font-size:12.5px;line-height:1.45;color:var(--text-dim,rgba(29,29,31,0.6))">Не пам'ятаєш номер? Залиш порожнім — уточнимо при підтвердженні 👌</div>
   </div>
 
-  <div style="margin:2px 0 10px;font-size:12.5px">
+  <div style="margin:2px 20px 10px;font-size:13px">
     <a id="promo-toggle-link" onclick="document.getElementById('promo-row-wrap').style.display='flex';this.style.display='none'"
-       style="color:var(--text-muted);text-decoration:underline;cursor:pointer">Маю промокод</a>
+       style="color:var(--text-dim,rgba(29,29,31,0.6));text-decoration:underline;cursor:pointer">Маю промокод</a>
   </div>
   <div class="promo-row" id="promo-row-wrap" style="display:none">
     <input type="text" class="promo-inp" id="f-promo" placeholder="Промокод" autocomplete="off" aria-label="Промокод">
     <button class="promo-apply" onclick="applyPromo()">Застосувати</button>
   </div>
 
-  <div style="background:var(--surface2,#1a1a1a);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--text-muted);line-height:1.6">
-    📦 <b style="color:var(--text)">Доставка: ~50-80₴</b> — оплачується при отриманні на відділенні НП.<br>
+  <div style="background:var(--bg2,#f5f5f7);border:1px solid var(--border,rgba(0,0,0,0.07));border-radius:12px;padding:12px 16px;margin:0 20px 12px;font-size:13px;color:var(--text-dim,rgba(29,29,31,0.6));line-height:1.6">
+    📦 <b style="color:var(--text,#1d1d1f)">Доставка: ~50-80₴</b> — оплачується при отриманні на відділенні НП.<br>
     Не підійшли — повертаєш безкоштовно, нічого не платиш.
   </div>
-  <div style="text-align:center;font-size:12px;color:var(--text-muted);margin-bottom:8px">💳 Зараз платити нічого не треба — оплата при отриманні</div>
+  <div style="text-align:center;font-size:13px;color:var(--text-dim,rgba(29,29,31,0.6));margin-bottom:8px">💳 Зараз платити нічого не треба — оплата при отриманні</div>
   <button class="checkout-submit" id="checkout-submit-btn" onclick="submitOrder()">
     ✅ Підтвердити замовлення
   </button>

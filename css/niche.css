@@ -1510,14 +1510,14 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   background: rgba(24,199,90,0.02) !important;
 }
 .form-inp.err { border-color: rgba(255,62,62,0.5) !important; }
-.form-inp::placeholder { color: rgba(0,0,0,0.28) !important; }
+.form-inp::placeholder { color: rgba(0,0,0,0.40) !important; }
 
 /* Form labels — refined */
 .form-lbl {
-  font-size: 10.5px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.6px !important;
-  color: rgba(13,13,13,0.40) !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px !important;
+  color: rgba(13,13,13,0.72) !important;
   margin-bottom: 7px !important;
 }
 
@@ -1532,7 +1532,7 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   border-radius: 11px !important;
   border: none !important;
   background: transparent !important;
-  color: rgba(0,0,0,0.45) !important;
+  color: rgba(0,0,0,0.58) !important;
   font-size: 14px !important;
   font-weight: 700 !important;
   padding: 12px 8px !important;
@@ -1557,7 +1557,7 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 }
 .cod-ico { font-size: 24px !important; }
 .cod-title { font-size: 15px !important; font-weight: 900 !important; }
-.cod-sub { font-size: 12px !important; margin-top: 3px !important; color: rgba(0,201,122,0.55) !important; }
+.cod-sub { font-size: 12.5px !important; margin-top: 3px !important; color: rgba(0,140,84,0.92) !important; }
 
 /* Promo row */
 .promo-inp {
@@ -1579,14 +1579,14 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 .checkout-trust-strip {
   display: flex; justify-content: center; gap: 20px;
   padding: 4px 20px 14px;
-  font-size: 11px; font-weight: 600; color: rgba(0,0,0,0.32);
+  font-size: 12px; font-weight: 600; color: rgba(0,0,0,0.55);
 }
 .checkout-trust-strip span { display: flex; align-items: center; gap: 4px; }
 
 /* Checkout form section header */
 .checkout-section-label {
-  font-size: 10px; font-weight: 800;
-  letter-spacing: 0.8px; text-transform: uppercase;
-  color: rgba(0,0,0,0.3); padding: 0 20px;
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 0.7px; text-transform: uppercase;
+  color: rgba(0,0,0,0.65); padding: 0 20px;
   margin: 4px 0 10px;
 }
