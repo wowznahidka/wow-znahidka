@@ -317,7 +317,7 @@ function validateField(inp, type) {
   if (type === 'name') _capturePartial();
   const v     = inp.value.trim();
   let valid;
-  if (type === 'depot') valid = v.length >= 1;
+  if (type === 'depot') valid = true; // № відділення необов'язковий — уточнюємо при підтвердженні
   else if (type === 'name') valid = v.length >= 3 && /[а-яёіїєa-z]/i.test(v);
   else valid = v.length >= 2;
   _setFieldState(inp, type, valid, v.length > 0);
@@ -386,7 +386,7 @@ async function submitOrder() {
   const nameValid  = name.length >= 3 && /[а-яёіїєa-z]/i.test(name);
   const phoneValid = phoneFormatted.replace(/\D/g,'').length >= 9;
   const cityValid  = city.length >= 2;
-  const depotValid = depot.length >= 1;
+  const depotValid = true; // необов'язкове поле — менеджер уточнює відділення при підтвердженні
 
   if (!nameValid) {
     toast('⚠️ Введіть коректне ім\'я (мінімум 3 символи)');
@@ -410,7 +410,7 @@ async function submitOrder() {
   const subtotal = S.cart.reduce((s, p) => s + (Number(p.price) || 0) * (p.qty || 1), 0);
   const promoAmt = _calcPromoAmt(subtotal);
   const total    = Math.max(0, subtotal - promoAmt);
-  const delivLabel = `${S.delivType === 'dept' ? 'Відділення' : 'Поштомат'} №${depot}`;
+  const delivLabel = `${S.delivType === 'dept' ? 'Відділення' : 'Поштомат'} ${depot ? '№' + depot : '(№ уточнити у клієнта)'}`;
 
   const payload = {
     action:   'new_order',
@@ -476,8 +476,9 @@ async function submitOrder() {
          </div>`
       : '';
     info.innerHTML = `<b>${esc(name)}</b> · ${esc(phone)}<br>
-      ${esc(city)}, ${S.delivType === 'dept' ? 'відд.' : 'поштомат'} ${esc(depot)}<br>
-      ${S.cart.map(c => `${esc(c.brand)} ${esc(c.name)} (${c.size})`).join(', ')}${tgFallback}`;
+      ${esc(city)}, ${S.delivType === 'dept' ? 'відд.' : 'поштомат'} ${depot ? esc(depot) : '(уточнимо)'}<br>
+      ${S.cart.map(c => `${esc(c.brand)} ${esc(c.name)} (${c.size})`).join(', ')}
+      <div style="margin-top:8px;font-size:12.5px;color:var(--green,#2ecc71);font-weight:600">⏱ Підтвердимо замовлення протягом 15–30 хв у Telegram або дзвінком</div>${tgFallback}`;
   }
   closeAllSheets();
   document.getElementById('view-success')?.classList.add('on');

@@ -14,8 +14,9 @@ const CFG = {
   GA_ID: 'G-9L346ZDWLK',
 
   // ── Meta Pixel ───────────────────────────────── */
-  // Вставте свій Pixel ID з business.facebook.com (вигляд: 1234567890)
-  FB_PIXEL_ID: '970568042186153',
+  // ПОРОЖНЬО НАВМИСНО: канонічний піксель 1578292430419094 захардкоджений у <head> index.html.
+  // Другий ID тут дублював ініціалізацію — всі події стріляли у два пікселі одночасно.
+  FB_PIXEL_ID: '',
 
   // ── TikTok Pixel ─────────────────────────────── */
   // Вставте свій Pixel ID з TikTok Ads Manager
@@ -23,7 +24,7 @@ const CFG = {
 
   // ── OG Image ─────────────────────────────────── */
   // Абсолютний URL банера 1200×630 для превʼю посилань
-  OG_IMAGE: 'https://wowznahidka.github.io/wow-znahidka/og-cover.png',
+  OG_IMAGE: 'https://wowznahidka.github.io/wow-znahidka/og-cover.jpg',
 
 
   CACHE_KEY:    'wow_catalog_v3',
