@@ -23,7 +23,7 @@ GITHUB_BRANCH  = 'main'
 SITE_BASE      = 'https://wowznahidka.github.io/wow-znahidka'
 AUTO_JSON      = 'data/products_auto.json'
 ENV_PATH       = '/home/vitro/wow-assistant/.env'
-SESSION_FILE   = 'grabber_session'
+SESSION_FILE   = '/home/vitro/wow-assistant/.secrets/watcher'  # поза git — сесії ніколи не комітяться
 
 SKIP_NAMES = [
     'додатковий контент', 'рекламний контент', 'новий контент',
