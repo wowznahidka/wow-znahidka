@@ -198,6 +198,48 @@ function _initGalleryTouch(gallery) {
   }, { passive: true });
 }
 
+// ── Вибір розміру прямо в картці + головна CTA ──
+function pdSelectSize(btn, size) {
+  S.pdSize = size;
+  _haptic(8);
+  document.querySelectorAll('#pd-size-grid .pd-size-sel').forEach(b => b.classList.toggle('on', b === btn));
+  const hint = document.getElementById('pd-size-hint');
+  if (hint) { hint.textContent = '✓ розмір ' + size; hint.classList.add('ok'); }
+  const main = document.getElementById('pd-btn-main');
+  if (main) { main.textContent = `🛒 В кошик · розмір ${size}`; main.classList.add('ready'); }
+}
+
+function pdMainCta() {
+  const p = S.pdProduct;
+  if (!p) return;
+  const oneSize = p.sizes[0] === 'ONE SIZE';
+  if (!oneSize && !S.pdSize) {
+    // м'яко підсвічуємо сітку розмірів
+    const grid = document.getElementById('pd-size-grid');
+    if (grid) {
+      grid.classList.remove('pd-size-nudge'); void grid.offsetWidth;
+      grid.classList.add('pd-size-nudge');
+      grid.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    toast('👟 Спочатку обери розмір');
+    return;
+  }
+  const sz = oneSize ? 'ONE SIZE' : S.pdSize;
+  const exists = S.cart.find(c => c.id === p.id && String(c.size) === String(sz));
+  if (!exists) S.cart.push({ ...p, size: oneSize ? sz : Number(sz), qty: 1 });
+  else exists.qty = (exists.qty || 1) + 1;
+  saveCart(); updateBadges();
+  _haptic([10, 30, 10]);
+  const main = document.getElementById('pd-btn-main');
+  if (main) main.textContent = '✅ У кошику · Оформити →';
+  if (main && !main.dataset.added) {
+    main.dataset.added = '1';
+    main.onclick = () => { closeAllSheets(); openSheet('sheet-cart'); };
+  }
+  toast(`✅ ${esc(p.brand)} ${esc(p.name)}, розмір ${sz} — в кошику!`);
+  try { if (window.fbq) fbq('track', 'AddToCart', { currency: 'UAH', value: Number(p.price) || 0, content_ids: [p.id], content_type: 'product' }); } catch(_) {}
+}
+
 function _pdPhotoTg() {
   const p = S.pdProduct;
   if (!p) return;
@@ -239,14 +281,17 @@ function openProductDetail(product) {
        ${pct > 0 ? `<span class="pd-disc-tag">−${pct}%</span>` : ''}`
     : `<span class="pd-price">${product.price}₴</span>`;
 
-  // Size preview chips (non-interactive, max 7)
-  const CHIP_MAX = 7;
-  const sizesToShow = product.sizes.slice(0, CHIP_MAX);
-  const moreCount   = product.sizes.length - sizesToShow.length;
+  // Інтерактивна сітка розмірів — вибір прямо в картці, без окремого кроку
+  S.pdSize = null;
   const sizeChips = product.sizes[0] === 'ONE SIZE' ? '' :
-    `<div class="pd-sizes-pre">
-      ${sizesToShow.map(s => `<span class="pd-size-chip">${s}</span>`).join('')}
-      ${moreCount > 0 ? `<span class="pd-size-chip chip-more">+${moreCount}</span>` : ''}
+    `<div class="pd-size-block">
+      <div class="pd-size-head">
+        <span class="pd-size-lbl">Розмір</span>
+        <span class="pd-size-hint" id="pd-size-hint">обери свій</span>
+      </div>
+      <div class="pd-size-grid" id="pd-size-grid">
+        ${product.sizes.map(s => `<button class="pd-size-sel" onclick="pdSelectSize(this, '${s}')">${s}</button>`).join('')}
+      </div>
     </div>`;
 
   // TG SVG icon (inline, no external requests)
@@ -293,7 +338,7 @@ function openProductDetail(product) {
     </div>` : ''}
 
     <div class="pd-info">
-      <div class="pd-brand">${esc(product.brand)}</div>
+      <button class="pd-brand pd-brand-chip" onclick="closeAllSheets();changeTab('catalog');setTimeout(()=>openBrand('${esc(product.brand)}'),220)">${esc(product.brand)} →</button>
       <h2 class="pd-name">${esc(product.name)}</h2>
       <div class="pd-price-row">${priceHtml}</div>
       <p class="pd-lead">
@@ -318,15 +363,12 @@ function openProductDetail(product) {
     </div>
 
     <div class="pd-cta">
-      <button class="pd-btn-size" onclick="openSizePicker(S.pdProduct)">
-        Обрати розмір
+      <button class="pd-btn-main" id="pd-btn-main" onclick="pdMainCta()">
+        ${product.sizes[0] === 'ONE SIZE' ? '🛒 Додати в кошик' : 'Обери розмір вище 👆'}
       </button>
-      <button class="pd-btn-tg" onclick="_pdPhotoTg()">
+      <button class="pd-tg-link" onclick="_pdPhotoTg()">
         ${tgIco}
-        ${_imgs ? 'Переглянути у Telegram' : 'Запросити фото в Telegram'}
-      </button>
-      <button class="pd-btn-brand" onclick="closeAllSheets();changeTab('catalog');setTimeout(()=>openBrand('${esc(product.brand)}'),220)">
-        Ще від ${esc(product.brand)} <span class="i-arr" aria-hidden="true"></span>
+        <span>${_imgs ? 'Переглянути у Telegram' : 'Запросити живі фото в Telegram'}</span>
       </button>
     </div>
 

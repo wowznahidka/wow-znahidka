@@ -1904,3 +1904,139 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   box-shadow: 0 2px 6px rgba(0,0,0,0.22) !important;
   border-radius: 50% !important;
 }
+
+/* ── КАРТКА ТОВАРУ 2.0: сітка розмірів + одна головна CTA ── */
+.pd-size-block { margin: 14px 0 4px; }
+.pd-size-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 9px; }
+.pd-size-lbl {
+  font-family: 'Sora', sans-serif; font-size: 12px; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(0,0,0,0.45);
+}
+.pd-size-hint { font-size: 12px; color: rgba(0,0,0,0.35); font-weight: 600; }
+.pd-size-hint.ok { color: #1d9a3f; }
+.pd-size-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.pd-size-sel {
+  min-width: 48px; padding: 10px 0; text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+  border: 1px solid rgba(0,0,0,0.12); border-radius: 10px;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.06);
+  font-family: 'Inter', sans-serif; font-size: 14.5px; font-weight: 700; color: #1d1d1f;
+  cursor: pointer; transition: all .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.pd-size-sel:active { transform: scale(.94); }
+.pd-size-sel.on {
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%);
+  border-color: rgba(200,20,20,0.55); color: #fff;
+  box-shadow: 0 2px 10px rgba(240,53,53,0.35), inset 0 1px 0 rgba(255,255,255,0.18);
+}
+@keyframes pdNudge { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+.pd-size-nudge { animation: pdNudge .3s ease 2; }
+
+.pd-cta { display: flex; flex-direction: column; gap: 10px; padding: 6px 16px 18px; }
+.pd-btn-main {
+  width: 100%; padding: 16px;
+  background: linear-gradient(180deg, #2c2c2e 0%, #1a1a1c 100%);
+  border: none; border-radius: 14px;
+  color: #fff; font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 800;
+  cursor: pointer; transition: all .2s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+.pd-btn-main.ready, .pd-btn-main[data-added] {
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%);
+  box-shadow: 0 5px 20px rgba(240,53,53,0.4), inset 0 1px 0 rgba(255,255,255,0.16);
+}
+.pd-btn-main:active { transform: scale(.98); }
+.pd-tg-link {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  background: none; border: none; padding: 8px;
+  color: #2a7fd4; font-size: 13.5px; font-weight: 600; cursor: pointer;
+}
+.pd-tg-link .pd-btn-tg-ico { width: 16px; height: 16px; }
+.pd-tg-link .pd-btn-tg-ico path { fill: #2a7fd4 !important; }
+.pd-brand-chip {
+  display: inline-block; align-self: flex-start;
+  background: rgba(120,120,128,0.10) !important;
+  border: none !important; border-radius: 100px !important;
+  padding: 5px 12px !important; cursor: pointer;
+  font-size: 11.5px !important; font-weight: 800 !important;
+  letter-spacing: .06em !important; text-transform: uppercase !important;
+  color: rgba(0,0,0,0.55) !important;
+}
+
+/* десктоп: двоколонкова картка товару */
+@media (min-width: 900px) {
+  #product-detail-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-areas: "hero info" "thumbs info" "similar similar";
+    column-gap: 26px; align-items: start; padding: 10px 22px 20px;
+  }
+  #product-detail-content .pd-hero { grid-area: hero; border-radius: 18px; overflow: hidden; }
+  #product-detail-content .pd-thumb-strip { grid-area: thumbs; }
+  #product-detail-content .pd-info { grid-area: info; padding-top: 8px; }
+  #product-detail-content .pd-trust-bar,
+  #product-detail-content .pd-cta { grid-area: info; position: static; }
+  /* info-стек: складаємо у колонку */
+  #product-detail-content .pd-info, #product-detail-content .pd-trust-bar, #product-detail-content .pd-cta {
+    grid-area: auto;
+  }
+  #product-detail-content > .pd-info,
+  #product-detail-content > .pd-trust-bar,
+  #product-detail-content > .pd-cta { grid-column: 2; }
+  #product-detail-content > .pd-hero { grid-column: 1; grid-row: 1 / span 3; }
+  #product-detail-content > .pd-thumb-strip { grid-column: 1; grid-row: 4; }
+  #product-detail-content > .pd-similar-sec { grid-column: 1 / -1; }
+}
+
+/* ── ЗНАХІДКА ДНЯ: тизер з реальним фото ── */
+.dd-teaser { padding: 4px 0 8px !important; }
+.dd-teaser-card {
+  position: relative; overflow: hidden;
+  border-radius: 20px;
+  min-height: 240px;
+  display: flex; align-items: flex-end;
+  box-shadow: 0 14px 44px rgba(0,0,0,0.16);
+}
+.dd-teaser-img {
+  position: absolute; inset: -12px;
+  width: calc(100% + 24px); height: calc(100% + 24px);
+  object-fit: cover;
+  filter: blur(14px) saturate(1.15) brightness(.92);
+  transform: scale(1.06);
+}
+.dd-teaser-shade {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,10,12,0.06) 0%, rgba(10,10,12,0.62) 78%, rgba(10,10,12,0.78) 100%);
+}
+.dd-teaser-body {
+  position: relative; width: 100%;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 26px 18px 22px; text-align: center;
+}
+.dd-teaser-chip {
+  background: rgba(255,255,255,0.16); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff; border-radius: 100px; padding: 6px 14px;
+  font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+}
+.dd-teaser-title {
+  font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 800;
+  color: #fff; letter-spacing: -.3px; text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.dd-teaser-sub { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; }
+.dd-teaser-btn {
+  margin-top: 8px;
+  background: #ffffff; color: #0d0d0d;
+  border-radius: 12px; padding: 12px 30px;
+  font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 800;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.28);
+  transition: transform .15s ease;
+}
+.dd-teaser:active .dd-teaser-btn { transform: scale(.96); }
+.dd-teaser.dd-opening .dd-teaser-card { animation: ddTeaserOpen .45s ease forwards; }
+@keyframes ddTeaserOpen { to { transform: scale(1.05); opacity: 0; } }
+@media (min-width: 900px) {
+  .dd-teaser-card { min-height: 300px; }
+  .dd-teaser:hover .dd-teaser-img { filter: blur(11px) saturate(1.2) brightness(.95); }
+}

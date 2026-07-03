@@ -146,7 +146,33 @@ function _markGiftOpened() {
   } catch (_) {}
 }
 
-function _giftBoxHtml() {
+function _giftBoxHtml(deals) {
+  // Тизер з РЕАЛЬНИМ фото пари дня (розмите) — замість CSS-коробки
+  const teaserImg = deals && deals[0] && deals[0].image && deals[0].image.startsWith('http') ? deals[0].image : '';
+  if (teaserImg) {
+    return `<div class="dd-gift-wrap dd-teaser"
+       onclick="return openDailyGift(event)"
+       onmousedown="event.stopPropagation()"
+       ontouchstart="event.stopPropagation()"
+       role="button" tabindex="0"
+       aria-label="Відкрити знахідку дня"
+       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();return openDailyGift(event);}">
+      <div class="dd-teaser-card" style="pointer-events:none">
+        <img class="dd-teaser-img" src="${esc(teaserImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <div class="dd-teaser-shade" aria-hidden="true"></div>
+        <div class="dd-teaser-body">
+          <span class="dd-teaser-chip">🎁 Знахідка дня</span>
+          <strong class="dd-teaser-title">3 пари з безкоштовною доставкою</strong>
+          <span class="dd-teaser-sub">ховаються за цим фото · лише сьогодні</span>
+          <span class="dd-teaser-btn">Відкрити 👀</span>
+        </div>
+      </div>
+    </div>`;
+  }
+  return _giftBoxLegacyHtml();
+}
+
+function _giftBoxLegacyHtml() {
   return `<div class="dd-gift-wrap"
        onclick="return openDailyGift(event)"
        onmousedown="event.stopPropagation()"
@@ -242,7 +268,7 @@ function renderDailyDeals(catalog) {
   if (!opened) {
     if (!existingGift) {
       const header = sec.querySelector('.dd-header');
-      header && header.insertAdjacentHTML('afterend', _giftBoxHtml());
+      header && header.insertAdjacentHTML('afterend', _giftBoxHtml(deals));
     }
     row && row.classList.remove('dd-revealed');
   } else {
