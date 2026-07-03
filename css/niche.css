@@ -1599,3 +1599,266 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   color: rgba(0,0,0,0.65); padding: 0 20px;
   margin: 4px 0 10px;
 }
+
+/* ═════════════════════════════════════════════════════════════════
+   MACOS PACK — сегменти, чіпи, кнопки, бренд-кола, Знахідка дня
+   (додано 3 липня 2026: запит власника «кнопки в стилі macOS»)
+   ═════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Сегментовані контроли (стать) — як у macOS ── */
+.g-compact, #gender-toggle {
+  display: inline-flex !important;
+  gap: 2px !important;
+  padding: 2px !important;
+  background: rgba(120,120,128,0.14) !important;
+  border-radius: 10px !important;
+  border: none !important;
+  box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.04) !important;
+}
+.g-chip, .g-btn {
+  padding: 7px 16px !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(0,0,0,0.6) !important;
+  background: transparent !important;
+  border: none !important;
+  line-height: 1.1 !important;
+  transition: background .18s ease, color .18s ease, transform .12s ease !important;
+}
+.g-chip:active, .g-btn:active { transform: scale(.96) !important; }
+.g-chip.active, .g-btn.active {
+  background: #ffffff !important;
+  color: #0d0d0d !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.13), 0 0 0 0.5px rgba(0,0,0,0.04) !important;
+}
+.g-btn .g-lbl { font: inherit !important; color: inherit !important; letter-spacing: inherit !important; text-transform: none !important; }
+
+/* ── 2. Кнопки-пігулки — macOS push buttons ── */
+.cat-quick, .sz-chip, .sz-clear, .cat-af-chip, .cat-af-clear,
+.dsf-chip, .niche-fam-chip, .cat-story-reset {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%) !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.06) !important;
+  color: #1d1d1f !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  transition: background .15s ease, border-color .15s ease, transform .1s ease, box-shadow .15s ease !important;
+}
+.cat-quick:active, .sz-chip:active, .dsf-chip:active { transform: scale(.96) !important; }
+.cat-quick[aria-pressed="true"], .cat-quick.active,
+.sz-chip.on, .dsf-chip.active, .niche-fam-chip.active {
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%) !important;
+  border-color: rgba(200,20,20,0.55) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(240,53,53,0.32), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+}
+.cat-af-chip, .cat-af-clear { border-radius: 100px !important; }
+.cat-af-chip {
+  background: rgba(255,62,62,0.08) !important;
+  border-color: rgba(255,62,62,0.25) !important;
+  color: #d21f1f !important;
+}
+
+/* ── 3. Сортування — macOS pop-up button ── */
+.cat-sort {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%) !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.06) !important;
+  color: #1d1d1f !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+}
+
+/* ── 4. Пошук — macOS search field ── */
+.cat-search-inner {
+  background: rgba(120,120,128,0.10) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  transition: background .18s ease, border-color .18s ease, box-shadow .18s ease !important;
+}
+.cat-search-inner:focus-within {
+  background: #ffffff !important;
+  border-color: rgba(255,62,62,0.45) !important;
+  box-shadow: 0 0 0 3.5px rgba(255,62,62,0.12) !important;
+}
+.cat-search { font-size: 14.5px !important; }
+
+/* ── 5. Бренд-кола — чисті macOS-тайли замість insta-сторіз ── */
+.cat-story-ring {
+  padding: 0 !important;
+  background: transparent !important;
+  transition: transform .16s cubic-bezier(.32,1.4,.5,1) !important;
+}
+.cat-story-inner {
+  background: linear-gradient(180deg, #ffffff 0%, #f2f2f4 100%) !important;
+  border: 1px solid rgba(0,0,0,0.10) !important;
+  box-shadow: 0 2px 7px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+.cat-story-abbr {
+  color: var(--sc1, #1d1d1f) !important;
+  text-shadow: none !important;
+  font-size: 16px !important;
+  letter-spacing: 0.4px !important;
+}
+.cat-story-ring.active {
+  background: linear-gradient(180deg, #ff4d4d, #f03535) !important;
+  padding: 2.5px !important;
+  box-shadow: 0 4px 14px rgba(240,53,53,0.30) !important;
+}
+.cat-story:hover .cat-story-ring { transform: translateY(-2px); }
+.cat-story.active .cat-story-lbl { color: #d21f1f !important; font-weight: 800 !important; }
+
+/* ── 6. ЗНАХІДКА ДНЯ — преміум-тайл ── */
+#daily-deals-section {
+  margin: 18px 14px !important;
+  padding: 20px 16px 22px !important;
+  background:
+    radial-gradient(120% 90% at 85% 0%, rgba(255,99,34,0.07) 0%, rgba(255,99,34,0) 55%),
+    linear-gradient(180deg, #ffffff 0%, #f8f8fa 100%) !important;
+  border: 1px solid rgba(0,0,0,0.07) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.06) !important;
+}
+.dd-timer-wrap {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(120,120,128,0.12) !important;
+  border: none !important;
+  border-radius: 9px !important;
+  padding: 6px 11px !important;
+}
+.dd-timer {
+  font-family: 'SF Mono', ui-monospace, 'JetBrains Mono', monospace !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: #1d1d1f !important;
+}
+.dd-timer-lbl {
+  font-size: 10.5px !important; font-weight: 700 !important;
+  letter-spacing: 0.06em !important; text-transform: uppercase !important;
+  color: rgba(0,0,0,0.45) !important;
+}
+/* коробка: більша, з м'яким сяйвом і плаванням */
+.dd-gift-wrap { padding: 10px 0 4px !important; }
+.dd-gift-box {
+  width: 150px !important; height: 150px !important;
+  animation: ddFloatSoft 4.2s ease-in-out infinite !important;
+  filter: drop-shadow(0 18px 22px rgba(194,78,16,0.28));
+}
+@keyframes ddFloatSoft {
+  0%, 100% { transform: translateY(0) rotate(-1.2deg); }
+  50%      { transform: translateY(-7px) rotate(1.2deg); }
+}
+.dd-gift-wrap::after {
+  content: '';
+  position: absolute; left: 50%; top: 46%;
+  width: 210px; height: 210px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,99,34,0.13) 0%, rgba(255,99,34,0) 68%);
+  pointer-events: none;
+  z-index: -1;
+}
+.dd-gift-lid {
+  background: linear-gradient(180deg, #303032 0%, #1a1a1c 100%) !important;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.09) !important;
+}
+.dd-shoe-lid-label {
+  font-size: 9px !important;
+  letter-spacing: 0.22em !important;
+  color: rgba(255,255,255,0.72) !important;
+}
+.dd-gift-base {
+  background: linear-gradient(168deg, #ff7a36 0%, #f26322 45%, #cf4f0e 100%) !important;
+  box-shadow: 0 6px 22px rgba(194,78,16,0.42), inset 0 1px 0 rgba(255,255,255,0.22), inset 0 -8px 18px rgba(0,0,0,0.12) !important;
+}
+.dd-gift-cta strong {
+  display: block;
+  font-family: 'Sora', sans-serif !important;
+  font-size: 21px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.3px !important;
+  color: #0d0d0d !important;
+  margin-top: 10px;
+}
+.dd-gift-cta span { font-size: 13.5px !important; color: rgba(0,0,0,0.5) !important; }
+.dd-gift-brand-tag {
+  background: rgba(120,120,128,0.10) !important;
+  border: none !important;
+  border-radius: 100px !important;
+  padding: 5px 11px !important;
+}
+
+/* ── 7. Відгуки: чесний стан «збираємо» ── */
+.rev-collecting {
+  margin: 4px 16px 10px;
+  padding: 26px 20px;
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f8fa 100%);
+  border: 1px dashed rgba(0,0,0,0.14);
+  border-radius: 20px;
+}
+.rev-collect-ico { font-size: 34px; margin-bottom: 8px; }
+.rev-collect-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px; font-weight: 800; color: #0d0d0d;
+  margin-bottom: 6px;
+}
+.rev-collecting p {
+  font-size: 13.5px; color: rgba(0,0,0,0.5);
+  line-height: 1.55; max-width: 420px; margin: 0 auto;
+}
+.add-review-btn {
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%) !important;
+  border: 1px solid rgba(200,20,20,0.55) !important;
+  border-radius: 12px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  box-shadow: 0 3px 12px rgba(240,53,53,0.28), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+}
+
+/* ── 8. Улюблені — macOS-пігулки розмірів ── */
+.fav-sz-quick {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%) !important;
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  border-radius: 9px !important;
+  color: #1d1d1f !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 1.5px rgba(0,0,0,0.06) !important;
+}
+.fav-sz-quick.sel {
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%) !important;
+  border-color: rgba(200,20,20,0.55) !important;
+  color: #fff !important;
+}
+.sh-empty { padding: 40px 20px !important; }
+.sh-empty-cta {
+  display: inline-block; margin-top: 14px;
+  padding: 11px 22px;
+  background: linear-gradient(180deg, #ff4d4d 0%, #f03535 100%);
+  border: none; border-radius: 12px;
+  color: #fff; font-weight: 700; font-size: 14px;
+  box-shadow: 0 3px 12px rgba(240,53,53,0.28);
+  cursor: pointer;
+}
+
+/* ── Десктоп-акценти ── */
+@media (min-width: 900px) {
+  #daily-deals-section { margin: 26px auto !important; max-width: 880px; padding: 28px 32px 30px !important; }
+  .dd-gift-box { width: 170px !important; height: 170px !important; }
+  .dd-gift-wrap:hover .dd-gift-box { animation-play-state: paused; transform: translateY(-6px) scale(1.03); transition: transform .3s ease; }
+  .cat-quick:hover, .sz-chip:hover:not(.on), .dsf-chip:hover:not(.active), .cat-sort:hover {
+    background: #ffffff !important;
+    border-color: rgba(0,0,0,0.2) !important;
+  }
+}

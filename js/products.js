@@ -340,6 +340,15 @@ function clearRecentlyViewed() {
 function renderReviews() {
   const row = document.getElementById('reviews-row');
   if (!row) return;
+  if (!S.reviews.length) {
+    row.innerHTML = `<div class="rev-collecting" role="note">
+      <div class="rev-collect-ico">⭐</div>
+      <div class="rev-collect-title">Збираємо перші відгуки</div>
+      <p>Ми не малюємо собі відгуки — тут будуть лише справжні.
+      Вже замовляв(-ла) у нас? Поділись враженням — це допоможе іншим 👇</p>
+    </div>`;
+    return;
+  }
   row.innerHTML = S.reviews.map((r, i) => `
     <article class="rev-bubble${i % 2 === 1 ? ' rev-alt' : ''}" role="article">
       <div class="rev-bub-head">

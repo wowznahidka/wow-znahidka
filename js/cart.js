@@ -27,6 +27,7 @@ function renderFavSheet() {
     el.innerHTML = `<div class="sh-empty">
       <div class="sh-empty-ico">🤍</div>
       <p>${L.favsEmpty}</p>
+      <button class="sh-empty-cta" onclick="closeAllSheets();changeTab('catalog')">Перейти в каталог →</button>
     </div>`;
     return;
   }
