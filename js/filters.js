@@ -94,8 +94,13 @@ function filterBySize(products) {
 const PRICE_MAX = 12000;
 
 function renderPriceSlider() {
-  const wrap = document.getElementById('price-filter-wrap');
+  // на десктопі (сайдбар видно) слайдер живе в сайдбарі, на мобілці — в колонці
+  const desktop = window.matchMedia('(min-width: 1100px)').matches;
+  const wrap = (desktop && document.getElementById('price-filter-wrap-dsf'))
+            || document.getElementById('price-filter-wrap');
   if (!wrap) return;
+  const other = desktop ? document.getElementById('price-filter-wrap') : document.getElementById('price-filter-wrap-dsf');
+  if (other) other.innerHTML = '';
   const min = S.priceMin || 0;
   const max = (S.priceMax !== undefined && S.priceMax <= PRICE_MAX) ? S.priceMax : PRICE_MAX;
   wrap.innerHTML = `
@@ -117,6 +122,11 @@ function renderPriceSlider() {
     </div>`;
   _updatePriceFill();
 }
+
+// перемкнули розмір вікна через поріг 1100px → слайдер переїжджає між колонкою і сайдбаром
+try {
+  window.matchMedia('(min-width: 1100px)').addEventListener('change', () => renderPriceSlider());
+} catch (_) {}
 
 function _priceLabel(min, max) {
   if (min <= 0 && max >= PRICE_MAX) return 'Будь-яка ціна';

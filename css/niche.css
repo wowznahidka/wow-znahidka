@@ -1862,3 +1862,45 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
     border-color: rgba(0,0,0,0.2) !important;
   }
 }
+
+/* ── ДЕСКТОП-КАТАЛОГ: одна панель фільтрів (сайдбар), без дублів ── */
+@media (min-width: 1100px) {
+  /* дублікати фільтрів у центральній колонці — геть */
+  body.show-sidebar #page-catalog .cat-bar .g-compact { display: none !important; }
+  body.show-sidebar #page-catalog .size-filter-wrap   { display: none !important; }
+  body.show-sidebar #page-catalog #price-filter-wrap  { display: none !important; }
+
+  /* тулбар: швидкі фільтри зліва, сортування справа — один рядок */
+  body.show-sidebar #page-catalog .cat-quicks { float: left; margin-bottom: 0 !important; }
+  body.show-sidebar #page-catalog .cat-bar {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-top: 0 !important;
+  }
+  body.show-sidebar #page-catalog .cat-meta { clear: both; padding-top: 10px; }
+
+  /* сайдбар — macOS-панель */
+  #desktop-filter-sidebar {
+    background: rgba(255,255,255,0.72) !important;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
+/* macOS-слайдер ціни (усюди) */
+.price-track-bg   { height: 4px !important; border-radius: 4px !important; background: rgba(120,120,128,0.2) !important; }
+.price-track-fill { height: 4px !important; border-radius: 4px !important; background: linear-gradient(90deg,#ff4d4d,#f03535) !important; }
+.price-range-inp::-webkit-slider-thumb {
+  width: 22px !important; height: 22px !important;
+  background: #ffffff !important;
+  border: 0.5px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.02) !important;
+  border-radius: 50% !important;
+}
+.price-range-inp::-moz-range-thumb {
+  width: 22px !important; height: 22px !important;
+  background: #ffffff !important;
+  border: 0.5px solid rgba(0,0,0,0.08) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.22) !important;
+  border-radius: 50% !important;
+}
