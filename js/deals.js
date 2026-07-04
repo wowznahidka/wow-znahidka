@@ -55,6 +55,7 @@ function getDailyDeals(catalog, count) {
   // Client-side selection fallback (stable sort ensures same result if IDs are consistent)
   const eligible = catalog
     .filter(p => p.sizes.length > 0 && !(p.sizes.length === 1 && p.sizes[0] === 'ONE SIZE'))
+    .filter(p => p.image && String(p.image).startsWith('http'))
     .sort((a, b) => String(a.id) < String(b.id) ? -1 : String(a.id) > String(b.id) ? 1 : 0);
   if (!eligible.length) return [];
 
@@ -158,7 +159,8 @@ function _giftBoxHtml(deals) {
        aria-label="Відкрити знахідку дня"
        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();return openDailyGift(event);}">
       <div class="dd-teaser-card" style="pointer-events:none">
-        <img class="dd-teaser-img" src="${esc(teaserImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <img class="dd-teaser-img" src="${esc(teaserImg)}" alt="" aria-hidden="true" loading="lazy" decoding="async"
+             onerror="this.closest('.dd-teaser-card').classList.add('img-fail')">
         <div class="dd-teaser-shade" aria-hidden="true"></div>
         <div class="dd-teaser-body">
           <span class="dd-teaser-chip">🎁 Знахідка дня</span>

@@ -883,7 +883,11 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   .brand-visual-grid { grid-template-columns: repeat(6, 1fr) !important; gap: 16px !important; padding: 0 !important; }
 
   /* ── CATALOG — search bar повноширинний ── */
-  .cat-search-wrap { padding: 16px 0 12px !important; background: transparent !important; }
+  .cat-search-wrap {
+    padding: 12px 0 10px !important;
+    background: var(--bg) !important;
+    box-shadow: 0 10px 18px -14px rgba(0,0,0,.30);
+  }
   .cat-search { font-size: 16px !important; padding: 16px 44px 16px 48px !important; }
   .size-filter-wrap, .price-filter-wrap, #price-filter-wrap, .update-ts { padding: 0 0 12px !important; }
 
@@ -1997,7 +2001,17 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   min-height: 240px;
   display: flex; align-items: flex-end;
   box-shadow: 0 14px 44px rgba(0,0,0,0.16);
+  /* Брендований фон: видно поки фото вантажиться або якщо воно 404 —
+     ніколи не світимо голу сіру коробку */
+  background: linear-gradient(135deg, #17171c 0%, #2b2b34 55%, #3a3a45 100%);
 }
+.dd-teaser-card::before {
+  content: '👟';
+  position: absolute; right: -14px; top: -10px;
+  font-size: 130px; opacity: .12; transform: rotate(-18deg);
+  pointer-events: none;
+}
+.dd-teaser-card.img-fail .dd-teaser-img { display: none; }
 .dd-teaser-img {
   position: absolute; inset: -12px;
   width: calc(100% + 24px); height: calc(100% + 24px);

@@ -111,9 +111,13 @@ def parse_caption(text: str) -> dict | None:
             else:
                 p['name'] = _clean_field(raw)
         elif '💰' in line or 'Ціна:' in line:
-            m = re.search(r'(\d[\d\s]*)\s*грн', line)
-            if m:
-                p['price'] = int(re.sub(r'\s', '', m.group(1)))
+            # У пості може бути кілька чисел (стара ціна + нова) — беремо
+            # останню адекватну, бо реальна ціна завжди йде після перекресленої
+            matches = re.findall(r'(\d[\d\s]*)\s*грн', line)
+            if matches:
+                prices = [int(re.sub(r'\s', '', m)) for m in matches]
+                valid  = [x for x in prices if 500 <= x <= 8000]
+                p['price'] = valid[-1] if valid else prices[-1]
         elif '📏' in line or 'Розміри:' in line:
             raw_sizes = re.sub(r'.*Розміри:\s*', '', line).strip()
             # extract fit notes before stripping
@@ -127,6 +131,9 @@ def parse_caption(text: str) -> dict | None:
         elif '👟' in line or 'Підошва:' in line:
             p['sole'] = _clean_field(re.sub(r'.*Підошва:\s*', '', line))
     if not p.get('name') or not p.get('price'):
+        return None
+    if not (500 <= p['price'] <= 8000):
+        print(f"⚠️ Пропущено «{p.get('name')}» — підозріла ціна {p['price']} грн")
         return None
     return p
 

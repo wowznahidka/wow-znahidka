@@ -204,21 +204,41 @@ const _SEARCH_ALIASES = {
   'aj': 'air jordan', 'aj1': 'air jordan 1', 'j1': 'jordan 1',
   'sb': 'dunk', 'yzy': 'yeezy', 'ub': 'ultra boost',
   'vmax': 'vapormax', 'zm': 'zoom', 'tf': 'total foamposite',
+  // Кирилиця — люди шукають як чують
+  'найк': 'nike', 'найкі': 'nike', 'нью баланс': 'new balance',
+  'ньюбаланс': 'new balance', 'нб': 'new balance', 'адідас': 'adidas',
+  'адидас': 'adidas', 'джордан': 'jordan', 'джордани': 'jordan',
+  'пума': 'puma', 'асікс': 'asics', 'асикс': 'asics',
+  'саломон': 'salomon', 'рібок': 'reebok', 'рибок': 'reebok',
+  'ванс': 'vans', 'вансы': 'vans', 'конверс': 'converse',
+  'єзі': 'yeezy', 'ізі': 'yeezy', 'изи': 'yeezy', 'данк': 'dunk',
+  'данки': 'dunk', 'аір форс': 'air force', 'аир форс': 'air force',
+  'форси': 'air force', 'газель': 'gazelle', 'газелі': 'gazelle',
+  'самба': 'samba', 'кампус': 'campus',
 };
+
+function _searchNorm(s) {
+  return String(s).toLowerCase().replace(/['’ʼ`\-‑.]/g, '');
+}
 
 function _resolveQuery(raw) {
   const q = raw.toLowerCase().trim();
-  return _SEARCH_ALIASES[q] || q;
+  if (_SEARCH_ALIASES[q]) return _SEARCH_ALIASES[q];
+  // Аліаси і по окремих словах: «найк данк» → «nike dunk»
+  return q.split(/\s+/).map(t => _SEARCH_ALIASES[t] || t).join(' ');
 }
 
 // Рахує релевантність: -1 = не збігається, >0 = є збіг (більше = точніше)
 function _scoreProduct(p, tokens) {
-  const hay = (p.brand + ' ' + p.name).toLowerCase();
+  const hay  = _searchNorm(p.brand + ' ' + p.name);
+  const name = _searchNorm(p.name);
   let score = 0;
-  for (const t of tokens) {
+  for (const t0 of tokens) {
+    const t = _searchNorm(t0);
+    if (!t) continue;
     if (!hay.includes(t)) return -1;
-    if (p.name.toLowerCase() === t) score += 10;
-    else if (p.name.toLowerCase().startsWith(t)) score += 5;
+    if (name === t) score += 10;
+    else if (name.startsWith(t)) score += 5;
     else if (hay.startsWith(t)) score += 3;
     else score += 1;
   }
