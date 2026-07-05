@@ -275,18 +275,34 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     <div class="section">
       <div class="sec-head">
         <h2 class="sec-title">Популярне</h2>
-        <button class="sec-link" onclick="changeTab('catalog')">Всі</button>
+        <button class="sec-link" onclick="changeTab('catalog')">дивитися всі →</button>
       </div>
+      <div class="sec-divider"></div>
     </div>
     <div class="h-scroll" id="popular-row" role="list" aria-label="Популярні товари">
       <div class="loading-wrap"><div class="spinner" aria-label="Завантаження"></div></div>
     </div>
 
+    <!-- ── MATCH HERO CTA ── -->
+    <div class="match-hero-cta" onclick="changeTab('match')" role="button" tabindex="0" aria-label="Відкрити Match">
+      <div class="match-hero-cta-bg"></div>
+      <div class="match-hero-cta-content">
+        <span class="match-hero-cta-fire">🔥</span>
+        <div class="match-hero-cta-text">
+          <h3>Не знаєш що вибрати?</h3>
+          <p>Свайпай як Tinder — знайди свою пару</p>
+        </div>
+        <button class="match-hero-cta-btn" tabindex="-1">Спробувати →</button>
+      </div>
+    </div>
+
     <div class="section">
       <div class="sec-head">
         <h2 class="sec-title">Новинки</h2>
-        <button class="sec-link" onclick="changeTab('catalog')">Всі</button>
+        <button class="sec-link" onclick="changeTab('catalog')">дивитися всі →</button>
       </div>
+      <div class="sec-divider"></div>
+    </div>
     </div>
     <div class="h-scroll" id="new-row" role="list" aria-label="Новинки"></div>
 

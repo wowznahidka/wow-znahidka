@@ -256,10 +256,36 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 #bottom-nav {
   background: rgba(255,255,255,0.97) !important;
   border-top: 1px solid rgba(0,0,0,0.06) !important;
+  padding: 4px 8px !important;
+}
+
+/* ── iOS CAPSULE NAV ── */
+.nav-item {
+  position: relative !important;
+  border-radius: 14px !important;
+  padding: 6px 8px 5px !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+}
+.nav-item::before {
+  content: '' !important;
+  position: absolute !important; inset: 0 !important;
+  border-radius: 14px !important;
+  background: transparent !important;
+  transition: background .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease !important;
+  z-index: -1 !important;
 }
 .nav-item.active { color: var(--accent) !important; }
-.nav-item.active .nav-icon::after { background: var(--accent) !important; }
-.nav-item.active::before { background: var(--accent) !important; }
+.nav-item.active::before {
+  background: rgba(255,255,255,1) !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06), inset 0 0 0 0.5px rgba(0,0,0,0.04) !important;
+}
+.nav-item.active .nav-icon {
+  color: var(--accent) !important;
+  filter: none !important;
+  transform: scale(1.04) !important;
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1) !important;
+}
 
 .product-card {
   background: #ffffff !important;
@@ -2111,4 +2137,171 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 @media (min-width: 900px) {
   .dd-teaser-card { min-height: 300px; }
   .dd-teaser:hover .dd-teaser-img { filter: blur(11px) saturate(1.2) brightness(.95); }
+}
+
+/* ══════════════════════════════════════════
+   PREMIUM UI 2026 — design system updates
+   ══════════════════════════════════════════ */
+
+/* ── HERO GRADIENT — warm subtle glow ── */
+.home-hero {
+  background: linear-gradient(180deg,
+    rgba(255,248,244,0.80) 0%,
+    rgba(255,255,255,0)    60%,
+    rgba(255,255,255,0)    100%) !important;
+}
+.home-hero::before {
+  background: radial-gradient(circle, rgba(255,62,62,.10) 0%, transparent 65%) !important;
+  width: 300px !important; height: 300px !important;
+}
+
+/* ── HEADER — logo bigger, icons tighter ── */
+.header-logo {
+  font-size: 24px !important;
+}
+.hdr-btn {
+  width: 36px !important; height: 36px !important;
+  border-radius: 10px !important;
+  font-size: 16px !important;
+}
+
+/* ── GENDER SEGMENTED CONTROL — iOS style, spring ── */
+.g-compact, #gender-toggle {
+  padding: 3px !important;
+  gap: 2px !important;
+}
+.g-chip, .g-btn {
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 9px !important;
+  transition: background .22s cubic-bezier(.34,1.56,.64,1),
+              color .18s ease,
+              transform .22s cubic-bezier(.34,1.56,.64,1),
+              box-shadow .22s ease !important;
+}
+.g-chip.active, .g-btn.active {
+  transform: scale(1.0) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06) !important;
+}
+
+/* ── SECTION HEADERS — divider + see all ── */
+.sec-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.08) 0%, transparent 80%);
+  margin-top: 12px;
+}
+.sec-link {
+  font-size: 13px !important;
+  color: rgba(0,0,0,0.45) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.01em !important;
+}
+
+/* ── MATCH HERO CTA BLOCK ── */
+.match-hero-cta {
+  margin: 8px 16px 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #111 0%, #1a1a1a 40%, #220000 100%);
+  overflow: hidden; position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+}
+.match-hero-cta:hover  { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,0.22); }
+.match-hero-cta:active { transform: scale(.97); }
+.match-hero-cta-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 80% at 90% 50%, rgba(255,62,62,.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(255,122,26,.12) 0%, transparent 60%);
+}
+.match-hero-cta-content {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 16px;
+}
+.match-hero-cta-fire {
+  font-size: 32px; flex-shrink: 0;
+  filter: drop-shadow(0 0 12px rgba(255,80,0,.6));
+}
+.match-hero-cta-text { flex: 1; }
+.match-hero-cta-text h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px; font-weight: 900; color: #fff;
+  margin: 0 0 3px; letter-spacing: -.2px;
+}
+.match-hero-cta-text p {
+  font-size: 12px; color: rgba(255,255,255,0.55); margin: 0;
+}
+.match-hero-cta-btn {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #ff3e3e, #d42840);
+  color: #fff; border: none; border-radius: 100px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; font-weight: 800;
+  white-space: nowrap; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255,62,62,.4);
+}
+
+/* ── PRODUCT CARD — photo 75%, glass badge, bigger price ── */
+.card-img { padding: 2% !important; }
+
+/* Glass badges */
+.prod-badge {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255,255,255,0.4) !important;
+  color: #0d0d0d !important;
+  font-size: 9.5px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+}
+.badge-premium { color: #8b6914 !important; background: rgba(255,245,200,0.88) !important; }
+.badge-new     { color: #0a6640 !important; background: rgba(200,255,230,0.88) !important; }
+.badge-low     { color: #c00 !important;    background: rgba(255,220,220,0.88) !important; }
+
+/* Bigger price */
+.card-price-main {
+  font-size: 22px !important;
+  font-weight: 900 !important;
+  letter-spacing: -.03em !important;
+}
+
+/* ── CARD ENTRANCE ANIMATION — spring ── */
+@keyframes cardSpring {
+  0%   { opacity: 0; transform: translateY(20px) scale(.94); }
+  60%  { opacity: 1; transform: translateY(-3px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.prods-grid .product-card {
+  animation: cardSpring .5s cubic-bezier(.34,1.56,.64,1) both !important;
+}
+.prods-grid .product-card:nth-child(1)  { animation-delay: .03s !important; }
+.prods-grid .product-card:nth-child(2)  { animation-delay: .07s !important; }
+.prods-grid .product-card:nth-child(3)  { animation-delay: .11s !important; }
+.prods-grid .product-card:nth-child(4)  { animation-delay: .15s !important; }
+.prods-grid .product-card:nth-child(n+5){ animation-delay: .19s !important; }
+
+/* ── HEART ANIMATION on wishlist tap ── */
+@keyframes heartPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  70%  { transform: scale(.9); }
+  100% { transform: scale(1); }
+}
+.card-fav-btn.is-fav { animation: heartPop .35s cubic-bezier(.34,1.56,.64,1); }
+
+/* ── H-SCROLL CARDS — wider on mobile for premium feel ── */
+.h-scroll .product-card {
+  min-width: 200px !important;
+  width: 200px !important;
+}
+@media (min-width: 400px) {
+  .h-scroll .product-card {
+    min-width: 210px !important;
+    width: 210px !important;
+  }
 }
