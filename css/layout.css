@@ -112,9 +112,11 @@ body { background: #f0eded; }
   filter: drop-shadow(0 1px 4px rgba(0,0,0,.12));
 }
 .header-logo-text {
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.header-logo-brand {
   font-size: 18px; font-weight: 900; letter-spacing: .3px;
-  white-space: nowrap;
+  white-space: nowrap; line-height: 1;
 }
 .header-logo-text .dot { color: var(--red); }
 .header-logo small {
