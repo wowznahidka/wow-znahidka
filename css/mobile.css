@@ -16,6 +16,46 @@
 }
 #page-contacts { touch-action: pan-y; overflow-y: auto; }
 
+/* ── HORIZONTAL SCROLL: prevent swipe-back navigation on iOS ──── */
+.h-scroll,
+.match-size-filter,
+.cat-stories-row,
+.cat-quicks,
+.size-chips-row,
+.price-chips-row,
+.brd-carousel,
+.brands-grid {
+  overscroll-behavior-x: contain;
+}
+
+/* ── MATCH PAGE: prevent iOS rubber-band scroll while swiping ─── */
+body.on-match #pages {
+  overscroll-behavior: none;
+}
+body.on-match {
+  overscroll-behavior: none;
+}
+
+/* ── SHEET: prevent scroll leak to background page ───────────── */
+.sheet {
+  overscroll-behavior: contain;
+}
+
+/* ── MATCH PAGE HEIGHT: use svh (small viewport) on modern mobile ─ */
+@supports (min-height: 100svh) {
+  #page-match {
+    min-height: calc(100svh - var(--header-h) - var(--nav-h) - var(--safe-top) - var(--safe-bottom));
+  }
+}
+
+/* ── CARD STAGE: vertical center even on small screens ─────────── */
+@media (max-height: 700px) {
+  .card-stage { min-height: 300px; }
+  .m-card-img, .m-card-img-ph { aspect-ratio: 3/2; }
+  .match-page-title { font-size: 26px; }
+  .match-top { padding: 10px 20px 0; }
+}
+
 /* ── SAFE AREA INSETS ───────────────────────────── */
 /* Already applied via CSS vars in layout.css; this reinforces for older WebKit */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {

@@ -196,6 +196,7 @@ function openSheet(id) {
   if (!sh) return;
   sh.classList.add('on');
   ov.classList.add('on');
+  document.body.style.overflow = 'hidden';
   _openSheetId = id;
   if (id === 'sheet-fav')    renderFavSheet();
   if (id === 'sheet-cart')   renderCartSheet();
@@ -205,6 +206,7 @@ function openSheet(id) {
 function closeAllSheets() {
   document.querySelectorAll('.sheet').forEach(s => s.classList.remove('on'));
   document.getElementById('overlay')?.classList.remove('on');
+  document.body.style.overflow = '';
   _openSheetId = null;
   updateCartBar();
 }
