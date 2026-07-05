@@ -2374,21 +2374,64 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   height: unset !important;
 }
 
-/* Timer — dark with orange glow */
-.dd-timer-wrap {
-  background: #1a1714 !important;
-  border: 1px solid rgba(242,99,34,0.28) !important;
-  border-radius: 12px !important;
+/* ── TIMER — premium dark + orange glow (high specificity) ── */
+#daily-deals-section .dd-timer-wrap {
+  background: #18120c !important;
+  border: 1.5px solid rgba(242,99,34,0.40) !important;
+  border-radius: 14px !important;
+  padding: 8px 14px !important;
+  box-shadow: 0 0 18px rgba(242,99,34,0.15), inset 0 1px 0 rgba(255,255,255,0.04) !important;
 }
-.dd-timer {
-  color: #F26322 !important;
-  font-size: 17px !important;
+#daily-deals-section .dd-timer {
+  color: #FF6B35 !important;
+  font-size: 20px !important;
   font-weight: 900 !important;
-  letter-spacing: 3px !important;
-  text-shadow: 0 0 10px rgba(242,99,34,0.45) !important;
+  letter-spacing: 4px !important;
+  text-shadow: 0 0 16px rgba(242,99,34,0.70), 0 0 4px rgba(242,99,34,0.40) !important;
+  font-family: 'SF Mono', ui-monospace, monospace !important;
 }
-.dd-timer-lbl {
-  color: rgba(255,255,255,0.48) !important;
+#daily-deals-section .dd-timer-lbl {
+  color: rgba(255,255,255,0.45) !important;
+  font-size: 10px !important;
+}
+
+/* ── SHOEBOX — premium Pinterest style ── */
+#daily-deals-section .dd-gift-wrap {
+  background: linear-gradient(160deg, #f5f0ea 0%, #ede7df 100%) !important;
+  border-radius: 32px !important;
+  border: 1px solid rgba(0,0,0,0.07) !important;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.08) !important;
+}
+#daily-deals-section .dd-gift-box {
+  width: 170px !important;
+  height: 170px !important;
+  filter: drop-shadow(0 20px 28px rgba(180,70,10,0.32)) !important;
+  animation: ddFloatSoft 4.2s ease-in-out infinite !important;
+}
+#daily-deals-section .dd-gift-lid {
+  background: linear-gradient(175deg, #2e2b28 0%, #1a1714 100%) !important;
+  border-radius: 10px 10px 3px 3px !important;
+  box-shadow: 0 -4px 14px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10) !important;
+  height: 38px !important;
+}
+#daily-deals-section .dd-gift-base {
+  background: linear-gradient(168deg, #ff7c38 0%, #F26322 38%, #d44f10 70%, #b03808 100%) !important;
+  border-radius: 3px 3px 12px 12px !important;
+  box-shadow:
+    0 8px 28px rgba(200,78,20,0.50),
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    inset 0 -10px 20px rgba(0,0,0,0.18) !important;
+}
+#daily-deals-section .dd-shoe-lid-label {
+  font-size: 9px !important;
+  letter-spacing: 0.25em !important;
+  color: rgba(255,255,255,0.65) !important;
+  font-weight: 900 !important;
+}
+#daily-deals-section .dd-shoe-base-label {
+  font-size: 8px !important;
+  letter-spacing: 0.22em !important;
+  color: rgba(255,255,255,0.32) !important;
 }
 
 /* Desktop catalog: 4 columns at 1024px+ */
