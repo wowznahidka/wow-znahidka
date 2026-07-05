@@ -243,9 +243,10 @@ function renderHome() {
 function _initHeroSneaker() {
   const el = document.getElementById('hero-sneaker-img');
   if (!el) return;
-  el.src = 'hero-sneaker.jpg';
-  el.alt = 'Nike sneaker';
-  el.style.objectFit = 'cover';
+  el.src = 'logo-circle.png';
+  el.alt = 'WOW.ZNAHIDKA';
+  el.style.objectFit = 'contain';
+  el.style.borderRadius = '50%';
 }
 
 function setHomeGreeting() {
