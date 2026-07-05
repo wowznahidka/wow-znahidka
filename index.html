@@ -147,6 +147,11 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 </header>
 
 <div id="desktop-filter-sidebar" style="display:none">
+  <div class="dsf-header">
+    <span class="dsf-header-title">Каталог</span>
+    <span class="dsf-header-count" id="dsf-count">0 моделей</span>
+  </div>
+
   <div class="dsf-section">
     <div class="dsf-title">Стать</div>
     <div class="dsf-chips">
@@ -155,9 +160,10 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="dsf-chip" onclick="dsfGender('female')">♀ Жіночі</button>
     </div>
   </div>
-  <div class="dsf-section" style="margin-top:14px">
+
+  <div class="dsf-section">
     <div class="dsf-title">Розмір</div>
-    <div class="dsf-chips" style="flex-wrap:wrap">
+    <div class="dsf-chips dsf-chips-grid">
       <button class="dsf-chip" onclick="dsfSize(35)">35</button>
       <button class="dsf-chip" onclick="dsfSize(36)">36</button>
       <button class="dsf-chip" onclick="dsfSize(37)">37</button>
@@ -171,7 +177,27 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="dsf-chip" onclick="dsfSize(45)">45</button>
     </div>
   </div>
-  <div style="margin-top:16px;padding:0 2px" id="price-filter-wrap-dsf"></div>
+
+  <div class="dsf-section" id="price-filter-wrap-dsf"></div>
+
+  <div class="dsf-section">
+    <div class="dsf-title">Статус</div>
+    <label class="dsf-check">
+      <input type="checkbox" id="dsf-in-stock" onchange="dsfStatusFilter()">
+      <span class="dsf-check-box"></span>
+      <span class="dsf-check-label">В наявності <span class="dsf-check-cnt" id="dsf-cnt-stock"></span></span>
+    </label>
+    <label class="dsf-check">
+      <input type="checkbox" id="dsf-last-pair" onchange="dsfStatusFilter()">
+      <span class="dsf-check-box"></span>
+      <span class="dsf-check-label">Остання пара</span>
+    </label>
+  </div>
+
+  <div class="dsf-footer">
+    <button class="dsf-clear-btn" onclick="dsfClearAll()">Очистити фільтри</button>
+    <button class="dsf-show-btn" id="dsf-show-btn" onclick="">Показати <span id="dsf-show-count">0</span> моделей</button>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════════

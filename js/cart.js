@@ -12,6 +12,23 @@ function addToFavs(p) {
   }
 }
 
+function quickToggleFav(id, btn) {
+  const p = findProd(id);
+  if (!p) return;
+  if (isFav(id)) {
+    S.favs = S.favs.filter(f => f.id !== id);
+  } else {
+    S.favs.push(p);
+  }
+  saveFavs();
+  updateBadges();
+  const active = isFav(id);
+  if (btn) {
+    btn.classList.toggle('is-fav', active);
+    btn.textContent = active ? '❤️' : '🤍';
+  }
+}
+
 function removeFromFavs(id, e) {
   if (e) e.stopPropagation();
   S.favs = S.favs.filter(f => f.id !== id);

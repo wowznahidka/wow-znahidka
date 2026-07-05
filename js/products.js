@@ -61,6 +61,29 @@ function isTrendingSize(sz, gender) {
   return hot.includes(Number(sz));
 }
 
+// ── BRAND LABEL COLOR ────────────────────────────── */
+const BRAND_LABEL_CLR = {
+  'Nike':        '#c8102e',
+  'Adidas':      '#000000',
+  'New Balance': '#0e3064',
+  'Jordan':      '#1a1a1a',
+  'Puma':        '#b80000',
+  'Asics':       '#102090',
+  'Reebok':      '#1a1a38',
+  'Vans':        '#1a1a1a',
+  'Salomon':     '#b84000',
+  'Converse':    '#141414',
+  'Fila':        '#002880',
+  'Hoka':        '#c84000',
+  'Yeezy':       '#4a4a4a',
+  'Off White':   '#111111',
+  'Prada':       '#111111',
+  'Balenciaga':  '#111111',
+  'Dior':        '#222222',
+  'Chanel':      '#111111',
+  'Gucci':       '#1a4a1a',
+};
+
 // ── CARD HTML ────────────────────────────────────── */
 /* opts: { grid?: bool, eager?: bool } */
 function prodCardHtml(p, opts = {}) {
@@ -91,9 +114,11 @@ function prodCardHtml(p, opts = {}) {
     ? ` data-cycle="${p.images.slice(0, 5).join('|')}"`
     : '';
 
-  const quickBtnLabel = p.sizes[0] === 'ONE SIZE' ? 'Замовити' : 'Розмір';
-  const quickBtn = grid
-    ? `<button class="card-quick-order" onclick="event.stopPropagation();openSizePicker(findProd('${p.id}'))" aria-label="Обрати розмір">${quickBtnLabel} →</button>`
+  const favActive = typeof isFav === 'function' && isFav(p.id);
+  const favBtn = grid
+    ? `<button class="card-fav-btn${favActive ? ' is-fav' : ''}"
+        onclick="event.stopPropagation();quickToggleFav('${p.id}',this)"
+        aria-label="В улюблені">${favActive ? '❤️' : '🤍'}</button>`
     : '';
 
   const pricePart = p.oldPrice && p.oldPrice > p.price
@@ -110,7 +135,13 @@ function prodCardHtml(p, opts = {}) {
         : `<span>${s}</span>`).join('') +
       (p.sizes.length > maxSz ? `<span class="sz-more">+${p.sizes.length - maxSz}</span>` : '');
 
-  const fomoHtml  = '';
+  const actionRow = grid ? `
+    <div class="card-action-row">
+      <button class="card-btn-cart" onclick="event.stopPropagation();openSizePicker(findProd('${p.id}'))" aria-label="Купити">🛒</button>
+      <button class="card-btn-detail" onclick="event.stopPropagation();openProductDetail(findProd('${p.id}'))">Детальніше →</button>
+    </div>` : '';
+
+  const brandClr = BRAND_LABEL_CLR[p.brand] || '#ff3e3e';
 
   return `<article class="product-card${gridCls}"
     onclick="openProductDetail(findProd('${p.id}'))"
@@ -119,17 +150,15 @@ function prodCardHtml(p, opts = {}) {
       ${imgPart}
       ${badgePart}
       ${photoCountBadge}
+      ${favBtn}
     </div>
     <div class="card-body">
-      <div class="card-brand">${esc(p.brand)}</div>
+      <div class="card-brand" style="color:${brandClr}">${esc(p.brand)}</div>
       <div class="card-name">${esc(p.name)}</div>
-      <div class="card-price-row">
-        <div class="card-price">${pricePart}</div>
-        ${quickBtn}
-      </div>
+      <div class="card-price"><span class="card-price-main">${pricePart}</span></div>
       <div class="card-sizes-preview${grid ? ' sz-quick-row' : ''}">${szList}</div>
       ${_scarcityText(p)}
-      ${fomoHtml}
+      ${actionRow}
     </div>
   </article>`;
 }

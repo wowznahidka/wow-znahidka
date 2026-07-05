@@ -523,15 +523,30 @@ function backToBrands() {
 }
 
 function dsfGender(gender) {
-  document.querySelectorAll('#desktop-filter-sidebar .dsf-section:nth-child(1) .dsf-chip')
+  document.querySelectorAll('#desktop-filter-sidebar .dsf-chips:first-of-type .dsf-chip')
     .forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${gender}'`)));
   if (typeof setGender === 'function') setGender(gender, false);
 }
 function dsfSize(sz) {
   if (typeof toggleSizeFilter === 'function') toggleSizeFilter(sz);
-  document.querySelectorAll('#desktop-filter-sidebar .dsf-section:nth-child(2) .dsf-chip')
-    .forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(String(sz)+')')
-      ? !b.classList.contains('active') : b.classList.contains('active')));
+  const btn = [...document.querySelectorAll('.dsf-chips-grid .dsf-chip')]
+    .find(b => b.getAttribute('onclick')?.includes(String(sz)));
+  if (btn) btn.classList.toggle('active');
+}
+function dsfStatusFilter() {
+  const data = getCatalog ? getCatalog() : null;
+  if (data) { if (typeof _applyFilters === 'function') _applyFilters(); }
+}
+function dsfClearAll() {
+  if (typeof clearSizeFilters === 'function') clearSizeFilters();
+  if (typeof _resetPriceSlider === 'function') _resetPriceSlider();
+  document.querySelectorAll('.dsf-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.dsf-chip[onclick*="mixed"]').forEach(b => b.classList.add('active'));
+  const cbIn = document.getElementById('dsf-in-stock');
+  const cbLp = document.getElementById('dsf-last-pair');
+  if (cbIn) cbIn.checked = false;
+  if (cbLp) cbLp.checked = false;
+  if (typeof setGender === 'function') setGender('mixed', false);
 }
 document.addEventListener('DOMContentLoaded', () => {
   const dsf = document.getElementById('desktop-filter-sidebar');
