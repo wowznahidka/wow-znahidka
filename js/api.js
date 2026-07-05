@@ -92,7 +92,13 @@ function normalizeProduct(p) {
 
   const imageRaw = String(p['Фото'] || p['фото'] || p.image || p.img || p.photo || '');
   const _rawImgs = Array.isArray(p.images) && p.images.length ? p.images : (imageRaw ? [imageRaw] : []);
-  const images   = [...new Set(_rawImgs.filter(u => u && String(u).startsWith('http')))];
+  // Filter: only real http URLs, skip EasyDrop generic supplier images (/base/)
+  const images   = [...new Set(_rawImgs.filter(u => u && String(u).startsWith('http') && !String(u).includes('/base/')))];
+  // Fallback: if filtering removed everything, use first available url (even if /base/)
+  if (!images.length) {
+    const fb = _rawImgs.find(u => u && String(u).startsWith('http'));
+    if (fb) images.push(fb);
+  }
   return {
     id:       String(p['ID'] || p['id'] || p['Артикул'] || Math.random().toString(36).slice(2)),
     brand:    String(p['Бренд']  || p['бренд']  || p.brand  || p.Brand  || 'Unknown'),
