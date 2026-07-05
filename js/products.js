@@ -240,18 +240,11 @@ function renderHome() {
   });
 }
 
-const HERO_IMAGES = [
-  { src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&h=700&fit=crop&q=85', alt: 'Nike sneaker' },
-  { src: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=700&h=700&fit=crop&q=85', alt: 'Nike Air sneaker' },
-  { src: 'https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=700&h=700&fit=crop&q=85', alt: 'Premium sneaker' },
-];
-
 function _initHeroSneaker() {
   const el = document.getElementById('hero-sneaker-img');
   if (!el) return;
-  const pick = HERO_IMAGES[Math.floor(Date.now() / 86400000) % HERO_IMAGES.length];
-  el.src  = pick.src;
-  el.alt  = pick.alt;
+  el.src = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&h=700&fit=crop&q=85';
+  el.alt = 'Nike sneaker';
   el.style.objectFit = 'cover';
 }
 
