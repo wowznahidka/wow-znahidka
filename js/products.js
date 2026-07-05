@@ -11,6 +11,7 @@ function esc(str) {
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+
 function fmtPrice(n) {
   return (Math.round(Number(n) || 0)) + '₴';
 }

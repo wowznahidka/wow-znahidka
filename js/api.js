@@ -95,7 +95,7 @@ function normalizeProduct(p) {
   return {
     id:       String(p['ID'] || p['id'] || p['Артикул'] || Math.random().toString(36).slice(2)),
     brand:    String(p['Бренд']  || p['бренд']  || p.brand  || p.Brand  || 'Unknown'),
-    name:     String(p['Назва']  || p['назва']  || p['Модель'] || p.name || p.model || ''),
+    name:     String(p['Назва']  || p['назва']  || p['Модель'] || p.name || p.model || '').replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]|[\u{FE00}-\u{FEFF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA00}-\u{1FA6F}]|\u{200D}|\u{FE0F}/gu, '').trim(),
     price,
     oldPrice,
     image:    images[0] || imageRaw,
