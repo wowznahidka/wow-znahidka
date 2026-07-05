@@ -91,7 +91,8 @@ function normalizeProduct(p) {
   if (oldPrice > 0 && oldPrice <= price) oldPrice = 0;
 
   const imageRaw = String(p['Фото'] || p['фото'] || p.image || p.img || p.photo || '');
-  const images   = Array.isArray(p.images) && p.images.length ? p.images : (imageRaw ? [imageRaw] : []);
+  const _rawImgs = Array.isArray(p.images) && p.images.length ? p.images : (imageRaw ? [imageRaw] : []);
+  const images   = [...new Set(_rawImgs.filter(u => u && String(u).startsWith('http')))];
   return {
     id:       String(p['ID'] || p['id'] || p['Артикул'] || Math.random().toString(36).slice(2)),
     brand:    String(p['Бренд']  || p['бренд']  || p.brand  || p.Brand  || 'Unknown'),

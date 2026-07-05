@@ -50,10 +50,12 @@ body.on-match {
 
 /* ── CARD STAGE: vertical center even on small screens ─────────── */
 @media (max-height: 700px) {
-  .card-stage { min-height: 300px; }
-  .m-card-img, .m-card-img-ph { aspect-ratio: 3/2; }
+  .card-stage { min-height: 280px; }
+  .m-card-img, .m-card-img-ph { aspect-ratio: 4/3; }
   .match-page-title { font-size: 26px; }
   .match-top { padding: 10px 20px 0; }
+  .m-card-name { font-size: 18px; }
+  .m-card-price { font-size: 22px; }
 }
 
 /* ── SAFE AREA INSETS ───────────────────────────── */

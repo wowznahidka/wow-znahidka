@@ -98,21 +98,26 @@ function renderMatchCard() {
   const card = document.createElement('div');
   card.className = 'm-card' + (faved ? ' is-fav' : '');
   card.id = 'current-match-card';
+  const sizesStr = p.sizes.map(String).filter(s => s !== '?').join(' · ') || '?';
   card.innerHTML = `
     <div class="m-card-media">
       ${p.image && p.image.startsWith('http')
         ? `<img class="m-card-img" src="${esc(p.image)}" alt="${esc(p.brand)} ${esc(p.name)}"
              loading="lazy" onload="this.classList.add('loaded')">`
         : `<div class="m-card-img-ph" aria-hidden="true">👟</div>`}
+      <div class="m-card-gradient" aria-hidden="true"></div>
+      <div class="m-card-overlay">
+        <div class="m-card-brand">${esc(p.brand)}</div>
+        <div class="m-card-name">${esc(p.name)}</div>
+        <div class="m-card-price-row">
+          <span class="m-card-price">${p.price}₴</span>
+          ${p.oldPrice > p.price ? `<span class="m-card-old-price">${p.oldPrice}₴</span>` : ''}
+        </div>
+        <div class="m-card-sizes">${sizesStr}</div>
+      </div>
       ${faved ? `<div class="m-card-fav-badge" aria-hidden="true">❤️</div>` : ''}
       <div class="swipe-label like" id="sw-like">${L.matchLike}</div>
       <div class="swipe-label nope" id="sw-nope">${L.matchNope}</div>
-    </div>
-    <div class="m-card-body">
-      <div class="m-card-brand">${esc(p.brand)}</div>
-      <div class="m-card-name">${esc(p.name)}</div>
-      <div class="m-card-price">${p.price}₴</div>
-      <div class="m-card-sizes">${L.sizesIn}${p.sizes.map(String).join(', ') || '?'}</div>
     </div>
   `;
 

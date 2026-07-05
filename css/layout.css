@@ -99,11 +99,23 @@ body { background: #f0eded; }
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   transition: opacity .15s ease, transform .15s ease;
+  display: flex; align-items: center; gap: 10px;
 }
 .header-logo:hover  { opacity: .85; }
 .header-logo:active { opacity: .7; transform: scale(.98); }
 .header-logo:focus-visible { outline: 2px solid var(--accent, #ff3e3e); outline-offset: 3px; border-radius: 4px; }
-.header-logo .dot { color: var(--red); }
+.header-logo-img {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.12));
+}
+.header-logo-text {
+  display: flex; flex-direction: column;
+  font-size: 20px; font-weight: 900; letter-spacing: .5px;
+}
+.header-logo-text .dot { color: var(--red); }
 .header-logo small {
   font-size: 9px; font-weight: 600; color: var(--text-muted);
   letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-top: 2px;
