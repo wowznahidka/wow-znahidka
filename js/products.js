@@ -243,7 +243,7 @@ function renderHome() {
 function _initHeroSneaker() {
   const el = document.getElementById('hero-sneaker-img');
   if (!el) return;
-  el.src = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&h=700&fit=crop&q=85';
+  el.src = 'hero-sneaker.jpg';
   el.alt = 'Nike sneaker';
   el.style.objectFit = 'cover';
 }
