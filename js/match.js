@@ -327,3 +327,26 @@ function _spawnHearts(card) {
     setTimeout(() => el.remove(), 1200);
   }
 }
+
+function setCatalogView(mode) {
+  const view = document.getElementById('catalog-view');
+  const btnGrid = document.getElementById('view-btn-grid');
+  const btnReel = document.getElementById('view-btn-reel');
+  if (!view) return;
+  if (mode === 'reel') {
+    view.classList.add('reel-mode');
+    if (btnReel) btnReel.classList.add('active');
+    if (btnGrid) btnGrid.classList.remove('active');
+    try { localStorage.setItem('wow_catalog_view', 'reel'); } catch(_) {}
+  } else {
+    view.classList.remove('reel-mode');
+    if (btnGrid) btnGrid.classList.add('active');
+    if (btnReel) btnReel.classList.remove('active');
+    try { localStorage.setItem('wow_catalog_view', 'grid'); } catch(_) {}
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    if (localStorage.getItem('wow_catalog_view') === 'reel') setCatalogView('reel');
+  } catch(_) {}
+});
