@@ -239,18 +239,19 @@ function renderHome() {
   });
 }
 
-function _initHeroSneaker(data) {
+const HERO_IMAGES = [
+  { src: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&h=700&fit=crop&q=85', alt: 'Nike sneaker' },
+  { src: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=700&h=700&fit=crop&q=85', alt: 'Nike Air sneaker' },
+  { src: 'https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=700&h=700&fit=crop&q=85', alt: 'Premium sneaker' },
+];
+
+function _initHeroSneaker() {
   const el = document.getElementById('hero-sneaker-img');
   if (!el) return;
-  const TOP_BRANDS = ['Nike', 'Adidas', 'New Balance', 'Jordan', 'Puma', 'Balenciaga', 'Off-White'];
-  const pool = data.filter(p =>
-    TOP_BRANDS.some(b => (p.brand || '').includes(b)) &&
-    p.image && p.image.startsWith('http')
-  );
-  if (!pool.length) return;
-  const pick = pool[Math.floor(Math.random() * Math.min(pool.length, 30))];
-  el.src = pick.image;
-  el.alt = pick.name || '';
+  const pick = HERO_IMAGES[Math.floor(Date.now() / 86400000) % HERO_IMAGES.length];
+  el.src  = pick.src;
+  el.alt  = pick.alt;
+  el.style.objectFit = 'cover';
 }
 
 function setHomeGreeting() {
