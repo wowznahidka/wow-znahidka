@@ -1053,6 +1053,11 @@
   cursor: zoom-in;
   flex-shrink: 0;
 }
+/* Вертикальне (портретне) фото — більше висоти, щоб було видно повністю
+   без відкриття zoom. Клас додає/знімає JS (_pdSyncHeroOrientation,
+   js/modal.js) за реальними пропорціями поточного фото. Горизонтальні
+   фото цей клас не отримують — висота лишається як була. */
+.pd-hero.is-portrait { height: 82svh; max-height: 720px; }
 .pd-img { cursor: zoom-in; }
 .pd-zoom-hint {
   position: absolute; bottom: 12px; right: 12px;
@@ -1210,7 +1215,7 @@
 
 /* ── INFO BLOCK — editorial typography ── */
 .pd-info {
-  padding: 18px 22px 6px;
+  padding: 18px 20px 6px;
   border-top: 1px solid rgba(0,0,0,0.06);
 }
 .pd-brand {
