@@ -166,6 +166,20 @@ function confirmSize() {
 
 let _pdGalleryIdx = 0;
 
+// Вертикальне (портретне) фото в hero-контейнері картки товару — не має
+// обрізатись/бути ледь видимим, поки не відкрито zoom. Порівнюємо реальні
+// naturalWidth/naturalHeight фото і додаємо/знімаємо .is-portrait на
+// .pd-hero (CSS-правило — css/cards.css). Для мультифото-галереї синкаємо
+// тільки те фото, яке зараз активне (data-idx === _pdGalleryIdx), щоб
+// фонове довантаження інших слайдів не перебивало висоту контейнера.
+function _pdSyncHeroOrientation(imgEl) {
+  if (!imgEl || !imgEl.naturalWidth || !imgEl.naturalHeight) return;
+  if (imgEl.classList.contains('pd-gallery-img') && Number(imgEl.dataset.idx) !== _pdGalleryIdx) return;
+  const hero = imgEl.closest('.pd-hero');
+  if (!hero) return;
+  hero.classList.toggle('is-portrait', imgEl.naturalHeight > imgEl.naturalWidth * 1.05);
+}
+
 function pdGalleryGo(idx) {
   const track = document.getElementById('pd-gallery-track');
   if (!track) return;
@@ -176,6 +190,8 @@ function pdGalleryGo(idx) {
     d.classList.toggle('active', i === idx);
     if (i === idx) d.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
+  const activeImg = track.querySelector(`.pd-gallery-img[data-idx="${idx}"]`);
+  if (activeImg) _pdSyncHeroOrientation(activeImg);
 }
 
 function _initGalleryTouch(gallery) {
@@ -308,11 +324,11 @@ function openProductDetail(product) {
         ? `<div class="pd-gallery" id="pd-gallery">
              <div class="pd-gallery-track" id="pd-gallery-track">
                ${_imgs.map((url, i) => `<div class="pd-gallery-slide">
-                 <img class="pd-gallery-img${i===0?' loaded':''}" src="${esc(url)}"
+                 <img class="pd-gallery-img${i===0?' loaded':''}" src="${esc(url)}" data-idx="${i}"
                       alt="${esc(product.brand)} ${esc(product.name)}"
                       loading="${i===0?'eager':'lazy'}" decoding="async"
                       onclick="openImageZoom('${esc(url)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
-                      onload="this.classList.add('loaded')">
+                      onload="this.classList.add('loaded');_pdSyncHeroOrientation(this)">
                </div>`).join('')}
              </div>
            </div>
@@ -320,7 +336,7 @@ function openProductDetail(product) {
         : product.image && product.image.startsWith('http')
           ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
                onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
-               onload="this.classList.add('loaded')">
+               onload="this.classList.add('loaded');_pdSyncHeroOrientation(this)">
              <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
           : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}
       <div class="pd-hero-vignette" aria-hidden="true"></div>
@@ -347,13 +363,6 @@ function openProductDetail(product) {
           : `Замовляй <b>без передоплати</b> — оплата після примірки на відділенні Нової Пошти. Не підійшло — відмов без зайвих питань.`}
       </p>
       ${sizeChips}
-      <div class="pd-trust">
-        <span class="pd-trust-item">✅ Без передоплати</span>
-        <span class="pd-trust-sep">·</span>
-        ${product.isFreeShipping
-          ? `<span class="pd-trust-item pd-trust-free">🚚 Безкоштовна доставка</span>`
-          : `<span class="pd-trust-item">📦 Нова Пошта</span><span class="pd-trust-sep">·</span><span class="pd-trust-item">↩️ Примірка</span>`}
-      </div>
     </div>
 
     <div class="pd-trust-bar">
