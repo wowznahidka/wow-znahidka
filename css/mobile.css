@@ -1,0 +1,114 @@
+/* ============================================================
+   WOW.ZNAHIDKA — MOBILE-FIRST OVERRIDES
+   Safe areas, touch targets, platform-specific
+   ============================================================ */
+
+/* ── MINIMUM TOUCH TARGET (44px — WCAG AA) ──────── */
+.sz-btn, .sz-chip, .fav-sz-quick, .g-btn, .nav-item, .hdr-btn,
+.hb-card, .deliv-tab, .fav-rm, .cart-rm, .cart-qty-btn,
+.pwa-install-btn, .pwa-ios-ok, .add-review-btn {
+  min-height: 44px;
+}
+
+/* ── iOS MOMENTUM SCROLL ────────────────────────── */
+#pages, .sheet, .h-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+#page-contacts { touch-action: pan-y; overflow-y: auto; }
+
+/* ── HORIZONTAL SCROLL: prevent swipe-back navigation on iOS ──── */
+.h-scroll,
+.match-size-filter,
+.cat-stories-row,
+.cat-quicks,
+.size-chips-row,
+.price-chips-row,
+.brd-carousel,
+.brands-grid {
+  overscroll-behavior-x: contain;
+}
+
+/* ── MATCH PAGE: prevent iOS rubber-band scroll while swiping ─── */
+body.on-match #pages {
+  overscroll-behavior: none;
+}
+body.on-match {
+  overscroll-behavior: none;
+}
+
+/* ── SHEET: prevent scroll leak to background page ───────────── */
+.sheet {
+  overscroll-behavior: contain;
+}
+
+/* ── MATCH PAGE HEIGHT: use svh (small viewport) on modern mobile ─ */
+@supports (min-height: 100svh) {
+  #page-match {
+    min-height: calc(100svh - var(--header-h) - var(--nav-h) - var(--safe-top) - var(--safe-bottom));
+  }
+}
+
+/* ── CARD STAGE: vertical center even on small screens ─────────── */
+@media (max-height: 700px) {
+  .card-stage { min-height: 280px; }
+  .m-card-img, .m-card-img-ph { aspect-ratio: 4/3; }
+  .match-page-title { font-size: 26px; }
+  .match-top { padding: 10px 20px 0; }
+  .m-card-name { font-size: 18px; }
+  .m-card-price { font-size: 22px; }
+}
+
+/* ── SAFE AREA INSETS ───────────────────────────── */
+/* Already applied via CSS vars in layout.css; this reinforces for older WebKit */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  #pages { padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 8px); }
+  #bottom-nav { bottom: env(safe-area-inset-bottom); }
+  #cart-sticky-bar { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 8px); }
+  #pwa-android, #pwa-ios { bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 10px); }
+}
+
+/* ── SMALL PHONES (< 375px) ─────────────────────── */
+@media (max-width: 374px) {
+  .prods-grid { grid-template-columns: repeat(2,1fr); gap: 8px; padding: 0 12px; }
+  .m-card-name { font-size: 18px; }
+  .m-card-price { font-size: 24px; }
+}
+
+/* ── STANDARD MOBILE (375–479px) ────────────────── */
+@media (max-width: 479px) {
+  .section { padding: 12px 12px 5px; }
+  .h-scroll { padding: 0 12px 10px; margin: 0 -12px; }
+}
+
+/* ── TABLET (768px+) ────────────────────────────── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .prods-grid { grid-template-columns: repeat(3,1fr); }
+  .hb-card { width: 168px; height: 94px; }
+  .hb-card:nth-child(1) { width: 210px; }
+  .brd-card { width: 200px; }
+}
+
+/* ── SCROLLBAR STYLE (desktop only) ─────────────── */
+@media (min-width: 1024px) {
+  body, .sheet {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.12) transparent;
+  }
+  body::-webkit-scrollbar, .sheet::-webkit-scrollbar { width: 4px; }
+  body::-webkit-scrollbar-thumb, .sheet::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.12); border-radius: 2px;
+  }
+}
+
+/* ── REDUCED MOTION ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ── LANDSCAPE MOBILE ───────────────────────────── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .card-stage { min-height: 260px; }
+  .m-card-img, .m-card-img-ph { aspect-ratio: 16/7; }
+  .match-actions { padding: 8px 20px 12px; }
+  .m-action { width: 52px; height: 52px; font-size: 22px; }
+}

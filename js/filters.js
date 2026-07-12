@@ -1,0 +1,709 @@
+/* ============================================================
+   WOW.ZNAHIDKA — CATALOG & FILTERS
+   Search, size filters, price slider, 3D brand carousel.
+   ============================================================ */
+
+// ── BRAND ACCENT COLORS ──────────────────────────── */
+const BRAND_CLR = {
+  'Nike':        ['#c01010','#e83030'],
+  'Adidas':      ['#181818','#323232'],
+  'New Balance': ['#0e2278','#1a3ab8'],
+  'Jordan':      ['#1a1a1a','#3a3a3a'],
+  'Puma':        ['#b80000','#e01818'],
+  'Asics':       ['#102090','#1e38c8'],
+  'Reebok':      ['#1a1a38','#2a2a5a'],
+  'Vans':        ['#1a1a1a','#383838'],
+  'Salomon':     ['#b84000','#e06000'],
+  'Converse':    ['#141414','#2e2e2e'],
+  'Fila':        ['#002880','#0044c8'],
+  'Saucony':     ['#1a3888','#2a52c0'],
+  'On':          ['#1a2e1a','#2e4a2e'],
+  'DC Shoes':    ['#181828','#282840'],
+  'Hoka':        ['#c84000','#e86000'],
+};
+
+function _brandGrad(brand) {
+  const c = BRAND_CLR[brand];
+  if (c) return `linear-gradient(135deg,${c[0]} 0%,${c[1]} 100%)`;
+  let h = 5381;
+  for (let i = 0; i < brand.length; i++) h = ((h << 5) + h + brand.charCodeAt(i)) & 0x7fffffff;
+  const hue = h % 360;
+  return `linear-gradient(135deg,hsl(${hue},50%,14%),hsl(${(hue+28)%360},44%,22%))`;
+}
+
+function _brandGlow(brand) {
+  const c = BRAND_CLR[brand];
+  if (c) {
+    const hex = c[0].replace('#', '');
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+    return `rgba(${r},${g},${b},0.45)`;
+  }
+  return 'rgba(0,0,0,0.28)';
+}
+
+// ── RENDER CATALOG ───────────────────────────────── */
+async function renderCatalog() {
+  const cv = document.getElementById('catalog-view');
+  if (cv && !cv.querySelector('.product-card')) {
+    cv.innerHTML = `<div class="prods-grid cat-main-grid">${skelGridCards(6)}</div>`;
+  }
+  const data = await fetchCatalog();
+  updateTimestamp();
+  renderSizeChips();
+  renderPriceSlider();
+  if (S.searchQ) renderSearchResults(data);
+  else _renderUnifiedCatalog(data);
+}
+
+// ── SIZE CHIPS ───────────────────────────────────── */
+function renderSizeChips() {
+  const row = document.getElementById('size-chips-row');
+  if (!row) return;
+  const chips = CFG.SIZES_ALL.map(sz =>
+    `<button class="sz-chip ${S.sizeFilters.includes(sz) ? 'on' : ''}"
+       onclick="toggleSizeFilter(${sz})" aria-pressed="${S.sizeFilters.includes(sz)}">${sz}</button>`
+  ).join('');
+  const clearBtn = `<button class="sz-clear ${S.sizeFilters.length ? 'vis' : ''}"
+    id="sz-clear-btn" onclick="clearSizeFilters()">× Скинути</button>`;
+  row.innerHTML = chips + clearBtn;
+}
+
+function toggleSizeFilter(sz) {
+  const idx = S.sizeFilters.indexOf(sz);
+  if (idx > -1) S.sizeFilters.splice(idx, 1);
+  else          S.sizeFilters.push(sz);
+  _haptic(8);
+  renderSizeChips();
+  _applyFilters();
+}
+
+function clearSizeFilters() {
+  S.sizeFilters = [];
+  renderSizeChips();
+  _applyFilters();
+}
+
+function filterBySize(products) {
+  if (!S.sizeFilters.length) return products;
+  return products.filter(p => S.sizeFilters.some(sz => p.sizes.includes(sz)));
+}
+
+// ── PRICE SLIDER ─────────────────────────────────── */
+const PRICE_MAX = 12000;
+
+function renderPriceSlider() {
+  // на десктопі (сайдбар видно) слайдер живе в сайдбарі, на мобілці — в колонці
+  const desktop = window.matchMedia('(min-width: 1100px)').matches;
+  const wrap = (desktop && document.getElementById('price-filter-wrap-dsf'))
+            || document.getElementById('price-filter-wrap');
+  if (!wrap) return;
+  const other = desktop ? document.getElementById('price-filter-wrap') : document.getElementById('price-filter-wrap-dsf');
+  if (other) other.innerHTML = '';
+  const min = S.priceMin || 0;
+  const max = (S.priceMax !== undefined && S.priceMax <= PRICE_MAX) ? S.priceMax : PRICE_MAX;
+  wrap.innerHTML = `
+    <div class="price-slider-box">
+      <div class="price-slider-head">
+        <span class="price-slider-lbl">💰 Ціна</span>
+        <span class="price-slider-vals" id="price-slider-vals">${_priceLabel(min, max)}</span>
+      </div>
+      <div class="price-dual-track">
+        <div class="price-track-bg"></div>
+        <div class="price-track-fill" id="price-track-fill"></div>
+        <input type="range" class="price-range-inp" id="price-rng-min"
+          min="0" max="${PRICE_MAX}" step="100" value="${min}"
+          oninput="onPriceMin(this.value)">
+        <input type="range" class="price-range-inp" id="price-rng-max"
+          min="0" max="${PRICE_MAX}" step="100" value="${max}"
+          oninput="onPriceMax(this.value)">
+      </div>
+    </div>`;
+  _updatePriceFill();
+}
+
+// перемкнули розмір вікна через поріг 1100px → слайдер переїжджає між колонкою і сайдбаром
+try {
+  window.matchMedia('(min-width: 1100px)').addEventListener('change', () => renderPriceSlider());
+} catch (_) {}
+
+function _priceLabel(min, max) {
+  if (min <= 0 && max >= PRICE_MAX) return 'Будь-яка ціна';
+  if (max >= PRICE_MAX) return `від ${min}₴`;
+  return `${min}₴ — ${max}₴`;
+}
+
+function _updatePriceFill() {
+  const minI = document.getElementById('price-rng-min');
+  const maxI = document.getElementById('price-rng-max');
+  const fill = document.getElementById('price-track-fill');
+  const vals = document.getElementById('price-slider-vals');
+  if (!minI || !maxI || !fill) return;
+  const min = +minI.value, max = +maxI.value;
+  fill.style.left  = (min / PRICE_MAX * 100) + '%';
+  fill.style.width = ((max - min) / PRICE_MAX * 100) + '%';
+  if (vals) vals.textContent = _priceLabel(min, max);
+}
+
+function onPriceMin(v) {
+  const maxI = document.getElementById('price-rng-max');
+  if (maxI && +v > +maxI.value) { document.getElementById('price-rng-min').value = maxI.value; v = maxI.value; }
+  S.priceMin = +v;
+  _updatePriceFill();
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(_applyFilters, 200);
+}
+
+function onPriceMax(v) {
+  const minI = document.getElementById('price-rng-min');
+  if (minI && +v < +minI.value) { document.getElementById('price-rng-max').value = minI.value; v = minI.value; }
+  S.priceMax = +v;
+  _updatePriceFill();
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(_applyFilters, 200);
+}
+
+function _resetPriceSlider() {
+  S.priceMin = 0;
+  S.priceMax = PRICE_MAX;
+  renderPriceSlider();
+  _applyFilters();
+}
+
+function filterByPrice(products) {
+  const min = S.priceMin || 0;
+  const max = (S.priceMax !== undefined && S.priceMax < PRICE_MAX) ? S.priceMax : PRICE_MAX;
+  if (min <= 0 && max >= PRICE_MAX) return products;
+  return products.filter(p => {
+    const price = Number(p.price) || 0;
+    return price >= min && price <= max;
+  });
+}
+
+// ── APPLY FILTERS ────────────────────────────────── */
+function _applyFilters() {
+  const cv = document.getElementById('catalog-view');
+  if (cv) cv.classList.add('filtering');
+  requestAnimationFrame(() => {
+    const data = getCatalog();
+    if (!data) { if (cv) cv.classList.remove('filtering'); return; }
+    if (S.searchQ)                                  renderSearchResults(data);
+    else if (document.getElementById('cat-stories-row')) _updateCatalogGrid(data);
+    else                                             _renderUnifiedCatalog(data);
+    if (cv) cv.classList.remove('filtering');
+  });
+}
+
+// ── SEARCH ───────────────────────────────────────── */
+let _searchTimer = null;
+
+// Псевдоніми для швидкого пошуку популярних моделей
+const _SEARCH_ALIASES = {
+  'nb': 'new balance', 'af1': 'air force 1', 'af': 'air force',
+  'aj': 'air jordan', 'aj1': 'air jordan 1', 'j1': 'jordan 1',
+  'sb': 'dunk', 'yzy': 'yeezy', 'ub': 'ultra boost',
+  'vmax': 'vapormax', 'zm': 'zoom', 'tf': 'total foamposite',
+  // Кирилиця — люди шукають як чують
+  'найк': 'nike', 'найкі': 'nike', 'нью баланс': 'new balance',
+  'ньюбаланс': 'new balance', 'нб': 'new balance', 'адідас': 'adidas',
+  'адидас': 'adidas', 'джордан': 'jordan', 'джордани': 'jordan',
+  'пума': 'puma', 'асікс': 'asics', 'асикс': 'asics',
+  'саломон': 'salomon', 'рібок': 'reebok', 'рибок': 'reebok',
+  'ванс': 'vans', 'вансы': 'vans', 'конверс': 'converse',
+  'єзі': 'yeezy', 'ізі': 'yeezy', 'изи': 'yeezy', 'данк': 'dunk',
+  'данки': 'dunk', 'аір форс': 'air force', 'аир форс': 'air force',
+  'форси': 'air force', 'газель': 'gazelle', 'газелі': 'gazelle',
+  'самба': 'samba', 'кампус': 'campus',
+};
+
+function _searchNorm(s) {
+  return String(s).toLowerCase().replace(/['’ʼ`\-‑.]/g, '');
+}
+
+function _resolveQuery(raw) {
+  const q = raw.toLowerCase().trim();
+  if (_SEARCH_ALIASES[q]) return _SEARCH_ALIASES[q];
+  // Аліаси і по окремих словах: «найк данк» → «nike dunk»
+  return q.split(/\s+/).map(t => _SEARCH_ALIASES[t] || t).join(' ');
+}
+
+// Рахує релевантність: -1 = не збігається, >0 = є збіг (більше = точніше)
+function _scoreProduct(p, tokens) {
+  const hay  = _searchNorm(p.brand + ' ' + p.name);
+  const name = _searchNorm(p.name);
+  let score = 0;
+  for (const t0 of tokens) {
+    const t = _searchNorm(t0);
+    if (!t) continue;
+    if (!hay.includes(t)) return -1;
+    if (name === t) score += 10;
+    else if (name.startsWith(t)) score += 5;
+    else if (hay.startsWith(t)) score += 3;
+    else score += 1;
+  }
+  return score;
+}
+
+function onSearchInput(q) {
+  const clr = document.getElementById('cat-search-clear');
+  if (clr) clr.classList.toggle('vis', q.length > 0);
+  _showSearchSuggestions(q);
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => {
+    S.searchQ = _resolveQuery(q);
+    const data = getCatalog();
+    if (!data) return;
+    if (S.searchQ) renderSearchResults(data);
+    else _renderUnifiedCatalog(data);
+  }, 200);
+}
+
+function onSearchBlur() {
+  setTimeout(_hideSuggestions, 180);
+}
+
+function clearSearch() {
+  const inp = document.getElementById('cat-search');
+  if (inp) inp.value = '';
+  _hideSuggestions();
+  S.searchQ  = '';
+  S.catBrand = null;
+  const clr = document.getElementById('cat-search-clear');
+  if (clr) clr.classList.remove('vis');
+  const data = getCatalog();
+  if (data) _renderUnifiedCatalog(data);
+}
+
+function _showSearchSuggestions(q) {
+  const box = document.getElementById('search-sugg');
+  if (!box) return;
+  if (q.length < 2) { _hideSuggestions(); return; }
+  const data = getCatalog();
+  if (!data) return;
+  const ql = _resolveQuery(q);
+  const tokens = ql.split(/\s+/).filter(Boolean);
+
+  const brandSet = new Set();
+  const modelMap = new Map(); // key=model_id, val={name, brand, count}
+  data.forEach(p => {
+    if (p.brand.toLowerCase().includes(ql)) brandSet.add(p.brand);
+    if (_scoreProduct(p, tokens) >= 0) {
+      // Extract model core: brand + key model identifier (number/name)
+      const modelKey = p.name.replace(/[🇻🇳🇺🇸🇬🇧✓]+/g,'').trim().split(/\s+/).slice(0,4).join(' ');
+      if (!modelMap.has(modelKey)) modelMap.set(modelKey, { name: modelKey, brand: p.brand, count: 1 });
+      else modelMap.get(modelKey).count++;
+    }
+  });
+
+  const brands = [...brandSet].slice(0, 2);
+  // Sort models by count (popularity), take top 4
+  const models = [...modelMap.values()]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 4 - brands.length);
+
+  if (!brands.length && !models.length) { _hideSuggestions(); return; }
+  box.innerHTML = [
+    ...brands.map(b => `<button class="sugg-item sugg-brand" onclick="_pickSugg('${esc(b)}')"><span class="sugg-ico">👟</span><span class="sugg-text">${esc(b)}</span></button>`),
+    ...models.map(m => `<button class="sugg-item" onclick="_pickSugg('${esc(m.name)}')"><span class="sugg-ico">🔍</span><span class="sugg-text">${esc(m.name)}</span><span class="sugg-count">${m.count}</span></button>`),
+  ].join('');
+  box.classList.add('vis');
+}
+
+function _hideSuggestions() {
+  const box = document.getElementById('search-sugg');
+  if (box) { box.innerHTML = ''; box.classList.remove('vis'); }
+}
+
+function _pickSugg(text) {
+  const inp = document.getElementById('cat-search');
+  if (inp) { inp.value = text; inp.blur(); }
+  _hideSuggestions();
+  S.searchQ = _resolveQuery(text);
+  const data = getCatalog();
+  if (data) renderSearchResults(data);
+}
+
+function renderSearchResults(data) {
+  const el = document.getElementById('catalog-view');
+  if (!el) return;
+  const tokens = S.searchQ.split(/\s+/).filter(Boolean);
+  const scored = filterByPrice(filterBySize(data))
+    .map(p => ({ p, s: _scoreProduct(p, tokens) }))
+    .filter(x => x.s >= 0)
+    .sort((a, b) => b.s - a.s);
+
+  if (!scored.length) {
+    el.innerHTML = `<div class="cat-empty">
+      <div class="cat-empty-ico">🔍</div>
+      <p>Не знайдено «${esc(S.searchQ)}»</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Спробуй: Nike, Adidas, 9060, Dunk, Gazelle</p>
+      <a class="tg-link-btn" href="${CFG.TG_URL}" target="_blank" rel="noopener noreferrer">💬 Написати нам</a>
+    </div>`;
+    return;
+  }
+  const count = scored.length;
+  el.innerHTML = `
+    <div class="search-results-header">
+      <span>${count} результат${count===1?'':count<5?'и':'ів'} — «${esc(S.searchQ)}»</span>
+    </div>
+    <div class="prods-grid" style="padding:0 16px">
+      ${scored.slice(0, 60).map(x => prodCardHtml(x.p, { grid: true })).join('')}
+    </div>`;
+}
+
+// ── UNIFIED CATALOG (Stories + Grid) ─────────────── */
+
+const _BRAND_ABBR = {
+  'Nike':'NK','Adidas':'AD','New Balance':'NB','Jordan':'JB',
+  'Puma':'PM','Asics':'AS','Reebok':'RBK','Vans':'VNS',
+  'Converse':'CVS','Salomon':'SLM','Fila':'FLA','Saucony':'SAU',
+  'On':'ON','DC Shoes':'DC','Hoka':'HOK',
+};
+function _brandAbbr(brand) {
+  return _BRAND_ABBR[brand] || brand.replace(/\s+/g,'').slice(0,3).toUpperCase();
+}
+
+function _buildBrandMap(data) {
+  const map = {};
+  data.forEach(p => {
+    if (!map[p.brand]) map[p.brand] = { count: 0, img: null };
+    map[p.brand].count++;
+    if (!map[p.brand].img && p.image && p.image.startsWith('http'))
+      map[p.brand].img = p.image;
+  });
+  return Object.entries(map).sort((a, b) => b[1].count - a[1].count);
+}
+
+// ── CATALOG GRID — INCREMENTAL RENDERER ──────────── */
+let _catGridData     = [];
+let _catGridRendered = 0;
+let _catGridObserver = null;
+let _catGridGen      = 0;
+
+function _renderCatalogGrid(container, products) {
+  if (_catGridObserver) { _catGridObserver.disconnect(); _catGridObserver = null; }
+  _catGridGen++;
+  if (!products.length) {
+    container.innerHTML = `<div class="cat-empty">
+      <div class="cat-empty-ico">🔍</div>
+      <p>Немає товарів з вибраними фільтрами</p>
+      <button class="tg-link-btn" onclick="clearSizeFilters();_resetPriceSlider()">× Скинути фільтри</button>
+    </div>`;
+    return;
+  }
+  _catGridData     = products;
+  _catGridRendered = 0;
+  const grid = document.createElement('div');
+  grid.className = 'prods-grid cat-main-grid';
+  container.innerHTML = '';
+  container.appendChild(grid);
+  _renderCatGridBatch(grid, _catGridGen);
+}
+
+function _renderCatGridBatch(grid, gen) {
+  if (gen !== _catGridGen) return;
+  const batch = _catGridData.slice(_catGridRendered, _catGridRendered + CFG.GRID_BATCH);
+  if (!batch.length) return;
+  const frag = document.createDocumentFragment();
+  batch.forEach(p => {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = prodCardHtml(p, { grid: true });
+    if (tmp.firstElementChild) frag.appendChild(tmp.firstElementChild);
+  });
+  grid.appendChild(frag);
+  _catGridRendered += batch.length;
+  if (_catGridRendered < _catGridData.length) {
+    const sentinel = document.createElement('div');
+    sentinel.style.height = '1px';
+    grid.appendChild(sentinel);
+    _catGridObserver = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting || gen !== _catGridGen) return;
+      _catGridObserver.disconnect(); _catGridObserver = null;
+      _renderCatGridBatch(grid, gen);
+    }, { rootMargin: '400px' });
+    _catGridObserver.observe(sentinel);
+  }
+}
+
+function _renderUnifiedCatalog(data) {
+  const el = document.getElementById('catalog-view');
+  if (!el) return;
+  const filtered     = filterByPrice(filterBySize(data));
+  const brandEntries = _buildBrandMap(data);
+  const activeBrand  = S.catBrand;
+  const products     = activeBrand ? filtered.filter(p => p.brand === activeBrand) : filtered;
+
+  const storyAll = `<div class="cat-story ${!activeBrand ? 'active' : ''}" data-brand=""
+    onclick="_selectBrandStory(null)" role="button" aria-label="Всі бренди"
+    style="--sc1:#1a2a1a;--sc2:#284028">
+    <div class="cat-story-ring ${!activeBrand ? 'active' : ''}">
+      <div class="cat-story-inner">
+        <span class="cat-story-ph">👟</span>
+      </div>
+    </div>
+    <div class="cat-story-lbl">Всі</div>
+  </div>`;
+
+  const storiesHtml = brandEntries.map(([brand, info]) => {
+    const clrs    = BRAND_CLR[brand] || ['#2a2a2a', '#404040'];
+    const isActive = activeBrand === brand;
+    const abbr    = _brandAbbr(brand);
+    return `<div class="cat-story ${isActive ? 'active' : ''}" data-brand="${esc(brand)}"
+        onclick="_selectBrandStory('${esc(brand)}')" role="button" aria-label="${esc(brand)}"
+        style="--sc1:${clrs[0]};--sc2:${clrs[1]}">
+      <div class="cat-story-ring ${isActive ? 'active' : ''}">
+        <div class="cat-story-inner">
+          <span class="cat-story-abbr">${abbr}</span>
+        </div>
+      </div>
+      <div class="cat-story-lbl">${esc(brand)}</div>
+    </div>`;
+  }).join('');
+
+  const salt = activeBrand ? (activeBrand.charCodeAt(0) * 31 + activeBrand.length) | 0 : 99;
+  el.innerHTML = `
+    <div class="cat-stories-hdr">
+      <span class="cat-vibe-line">Знайди свою пару</span>
+      <span class="cat-vibe-fire">🔥</span>
+      ${activeBrand ? `<button class="cat-story-reset" onclick="_selectBrandStory(null)">× ${esc(activeBrand)}</button>` : ''}
+    </div>
+    <div class="cat-stories-row" id="cat-stories-row" role="list" aria-label="Фільтр по бренду">
+      ${storyAll}${storiesHtml}
+    </div>
+    <div id="cat-grid-wrap"></div>`;
+  _renderCatalogGrid(document.getElementById('cat-grid-wrap'), shuffleSeeded(products, salt));
+}
+
+function _updateCatalogGrid(data) {
+  const filtered = filterByPrice(filterBySize(data));
+  const products  = S.catBrand ? filtered.filter(p => p.brand === S.catBrand) : filtered;
+  const gw = document.getElementById('cat-grid-wrap');
+  if (!gw) return;
+  const salt = S.catBrand ? (S.catBrand.charCodeAt(0) * 31 + S.catBrand.length) | 0 : 99;
+  _renderCatalogGrid(gw, shuffleSeeded(products, salt));
+}
+
+function _selectBrandStory(brand) {
+  S.catBrand = brand || null;
+  _haptic(8);
+  document.querySelectorAll('.cat-story').forEach(s => {
+    const b    = s.dataset.brand || null;
+    const active = brand ? (b === brand) : (!b || b === '');
+    s.classList.toggle('active', active);
+    s.querySelector('.cat-story-ring')?.classList.toggle('active', active);
+  });
+  const hdr = document.querySelector('.cat-stories-hdr');
+  if (hdr) {
+    let btn = hdr.querySelector('.cat-story-reset');
+    if (brand && !btn) {
+      btn = document.createElement('button');
+      btn.className = 'cat-story-reset';
+      btn.onclick   = () => _selectBrandStory(null);
+      hdr.appendChild(btn);
+    }
+    if (btn) btn.textContent = brand ? `× ${brand}` : '';
+    if (!brand && btn) btn.remove();
+  }
+  const data = getCatalog();
+  if (!data) return;
+  _updateCatalogGrid(data);
+  const gw = document.getElementById('cat-grid-wrap');
+  if (gw) gw.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function openBrand(brand) {
+  S.catBrand = brand || null;
+  const data = getCatalog();
+  if (data) _renderUnifiedCatalog(data);
+}
+
+function backToBrands() {
+  _selectBrandStory(null);
+}
+
+function dsfGender(gender) {
+  document.querySelectorAll('#desktop-filter-sidebar .dsf-chips:first-of-type .dsf-chip')
+    .forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${gender}'`)));
+  if (typeof setGender === 'function') setGender(gender, false);
+}
+function dsfSize(sz) {
+  if (typeof toggleSizeFilter === 'function') toggleSizeFilter(sz);
+  const btn = [...document.querySelectorAll('.dsf-chips-grid .dsf-chip')]
+    .find(b => b.getAttribute('onclick')?.includes(String(sz)));
+  if (btn) btn.classList.toggle('active');
+}
+function dsfStatusFilter() {
+  const data = getCatalog ? getCatalog() : null;
+  if (data) { if (typeof _applyFilters === 'function') _applyFilters(); }
+}
+function dsfClearAll() {
+  if (typeof clearSizeFilters === 'function') clearSizeFilters();
+  if (typeof _resetPriceSlider === 'function') _resetPriceSlider();
+  document.querySelectorAll('.dsf-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.dsf-chip[onclick*="mixed"]').forEach(b => b.classList.add('active'));
+  const cbIn = document.getElementById('dsf-in-stock');
+  const cbLp = document.getElementById('dsf-last-pair');
+  if (cbIn) cbIn.checked = false;
+  if (cbLp) cbLp.checked = false;
+  if (typeof setGender === 'function') setGender('mixed', false);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const dsf = document.getElementById('desktop-filter-sidebar');
+  if (window.innerWidth >= 1024 && dsf) dsf.style.display = 'block';
+  window.addEventListener('resize', () => {
+    if (dsf) dsf.style.display = window.innerWidth >= 1024 ? 'block' : 'none';
+  });
+});
+
+/* ============================================================
+   CATALOG 2026 — QUICK FILTERS / SORT / ACTIVE CHIPS / COUNTER
+   ============================================================ */
+
+// ── QUICK FILTERS (all / discount / new / free) ─────
+function setQuickFilter(mode) {
+  S.quickFilter = mode || 'all';
+  _haptic(8);
+  document.querySelectorAll('.cat-quick').forEach(b => {
+    const on = b.dataset.quick === S.quickFilter;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  _applyFilters();
+}
+
+function filterByQuick(products) {
+  const q = S.quickFilter || 'all';
+  if (q === 'all')      return products;
+  if (q === 'discount') return products.filter(p => p.oldPrice && p.oldPrice > p.price);
+  if (q === 'new')      return products.filter(p => p.isNew);
+  if (q === 'free')     return products.filter(p => p.isFreeShipping);
+  return products;
+}
+
+// ── SORT ─────────────────────────────────────────────
+function setSortMode(mode) {
+  S.sortMode = mode || 'popular';
+  _applyFilters();
+}
+
+// Товар має "живі" доп.фото (не лише 1 стокове), напр. з Telegram-імпорту
+function _hasExtraPhotos(p) {
+  return !!(p.images && p.images.length > 1);
+}
+
+function sortProducts(products) {
+  const m = S.sortMode || 'popular';
+  const hasImg = p => p.image && p.image.startsWith('http');
+  const withPhoto = [...products].filter(hasImg);
+  const noPhoto   = [...products].filter(p => !hasImg(p));
+
+  function byMode(a, b) {
+    switch (m) {
+      case 'price_asc':  return (a.price || 0) - (b.price || 0);
+      case 'price_desc': return (b.price || 0) - (a.price || 0);
+      case 'new':        return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+      case 'discount': {
+        const da = (a.oldPrice || 0) - (a.price || 0);
+        const db = (b.oldPrice || 0) - (b.price || 0);
+        return db - da;
+      }
+      default: return 0;
+    }
+  }
+  // Товари з доп.фото (кілька живих знімків) — завжди вище, всередині групи діє обраний режим сортування
+  const withExtra   = withPhoto.filter(_hasExtraPhotos);
+  const singlePhoto = withPhoto.filter(p => !_hasExtraPhotos(p));
+  return [...withExtra.sort(byMode), ...singlePhoto.sort(byMode), ...noPhoto.sort(byMode)];
+}
+
+// ── ACTIVE FILTERS CHIPS (видно які фільтри активні) ──
+function updateActiveFiltersChips() {
+  const box = document.getElementById('cat-active-filters');
+  if (!box) return;
+  const chips = [];
+  if (S.gender && S.gender !== 'mixed') {
+    chips.push({ k: 'gender', label: S.gender === 'male' ? '♂ Чоловіки' : '♀ Жінки' });
+  }
+  if (S.sizeFilters && S.sizeFilters.length) {
+    chips.push({ k: 'size', label: `Розмір ${S.sizeFilters.join(', ')}` });
+  }
+  if (S.catBrand) {
+    chips.push({ k: 'brand', label: S.catBrand });
+  }
+  if (S.quickFilter && S.quickFilter !== 'all') {
+    const ql = { discount: '🔥 Знижки', new: '✨ Новинки', free: '🚚 Безкоштовна' }[S.quickFilter] || '';
+    if (ql) chips.push({ k: 'quick', label: ql });
+  }
+  if ((S.priceMin > 0) || (S.priceMax && S.priceMax < PRICE_MAX)) {
+    chips.push({ k: 'price', label: _priceLabel(S.priceMin || 0, S.priceMax || PRICE_MAX) });
+  }
+  if (!chips.length) { box.innerHTML = ''; box.classList.remove('vis'); return; }
+  box.innerHTML = chips.map(c =>
+    `<button class="cat-af-chip" onclick="clearOneFilter('${c.k}')">${esc(c.label)} <span aria-hidden="true">×</span></button>`
+  ).join('') + `<button class="cat-af-clear" onclick="clearAllFilters()">Скинути все</button>`;
+  box.classList.add('vis');
+}
+
+function clearOneFilter(kind) {
+  if      (kind === 'gender') setGender('mixed');
+  else if (kind === 'size')   clearSizeFilters();
+  else if (kind === 'brand')  _selectBrandStory(null);
+  else if (kind === 'quick')  setQuickFilter('all');
+  else if (kind === 'price')  { S.priceMin = 0; S.priceMax = PRICE_MAX; renderPriceSlider(); _applyFilters(); }
+  updateActiveFiltersChips();
+}
+
+function clearAllFilters() {
+  S.gender = 'mixed';
+  S.sizeFilters = [];
+  S.catBrand = null;
+  S.quickFilter = 'all';
+  S.priceMin = 0;
+  S.priceMax = PRICE_MAX;
+  document.querySelectorAll('.g-chip').forEach(b => b.classList.toggle('active', b.dataset.gender === 'mixed'));
+  document.querySelectorAll('.cat-quick').forEach(b => b.classList.toggle('on', b.dataset.quick === 'all'));
+  renderSizeChips();
+  renderPriceSlider();
+  _applyFilters();
+  updateActiveFiltersChips();
+}
+
+// ── RESULTS COUNTER ──────────────────────────────────
+function updateResultsCount(n) {
+  const el = document.getElementById('cat-count');
+  if (!el) return;
+  if (n == null || n === undefined) { el.textContent = ''; return; }
+  const word = (n % 10 === 1 && n % 100 !== 11) ? 'модель' :
+               (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'моделі' : 'моделей';
+  el.innerHTML = `<b>${n}</b> ${word}`;
+}
+
+// ── INTEGRATE WITH FILTER CHAIN ──────────────────────
+// Override the existing _renderUnifiedCatalog to include quick + sort + counter + active chips
+const __origUnified = _renderUnifiedCatalog;
+_renderUnifiedCatalog = function(data) {
+  const filtered = filterByPrice(filterBySize(filterByQuick(data)));
+  __origUnified(filtered);
+  // After unified render, _renderCatalogGrid was called inside; show count of products after brand filter
+  const finalCount = (S.catBrand ? filtered.filter(p => p.brand === S.catBrand) : filtered).length;
+  updateResultsCount(finalCount);
+  updateActiveFiltersChips();
+};
+
+const __origUpdateGrid = _updateCatalogGrid;
+_updateCatalogGrid = function(data) {
+  const filtered = filterByPrice(filterBySize(filterByQuick(data)));
+  __origUpdateGrid(filtered);
+  const finalCount = (S.catBrand ? filtered.filter(p => p.brand === S.catBrand) : filtered).length;
+  updateResultsCount(finalCount);
+  updateActiveFiltersChips();
+};
+
+// Restore sort if any
+const __origRenderCatalogGrid = typeof _renderCatalogGrid === 'function' ? _renderCatalogGrid : null;
+if (__origRenderCatalogGrid) {
+  _renderCatalogGrid = function(container, products) {
+    return __origRenderCatalogGrid(container, sortProducts(products));
+  };
+}

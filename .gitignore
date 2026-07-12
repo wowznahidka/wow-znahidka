@@ -1,0 +1,5 @@
+
+# ніколи не комітити: телеграм-сесії та локальні кеші
+*.session
+*.session-journal
+tools/.photo_hashes.json
