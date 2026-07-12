@@ -1,0 +1,58 @@
+name: Deploy Pages (excluding data/photos)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (sparse, without data/photos)
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            /*
+            !/data/photos/
+          sparse-checkout-cone-mode: false
+
+      - name: Safety net — ensure data/photos is not in the build output
+        run: rm -rf data/photos
+
+      - name: Verify photos are excluded
+        run: |
+          if [ -d data/photos ] && [ -n "$(find data/photos -type f -print -quit)" ]; then
+            echo "ERROR: data/photos still contains files"
+            exit 1
+          fi
+          echo "data/photos successfully excluded"
+          du -sh .
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
