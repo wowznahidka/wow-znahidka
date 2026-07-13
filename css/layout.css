@@ -296,11 +296,11 @@ body { background: #f0eded; }
 /* desktop-only helper */
 .desktop-only { display: none; }
 
-/* hero CTA btn (hidden mobile) */
+/* hero CTA: головна дія видима і на мобілці */
 .hero-cta-btn {
-  display: none;
-  margin-top: 20px;
-  padding: 14px 28px;
+  display: inline-flex;
+  margin-top: 18px; margin-right: 8px;
+  padding: 14px 24px;
   background: linear-gradient(135deg, #ff3e3e, #d42840);
   color: #fff; border-radius: var(--r-full);
   font-size: 15px; font-weight: 800; letter-spacing: .2px;
@@ -308,40 +308,84 @@ body { background: #f0eded; }
   box-shadow: 0 8px 28px rgba(255,62,62,.38);
   transition: transform .16s ease, box-shadow .16s ease;
   cursor: pointer;
+  position: relative; z-index: 1;
 }
 .hero-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,62,62,.48); }
 .hero-cta-btn:active { transform: scale(.97); }
+.hero-cta-btn.hero-cta-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border-hover, rgba(0,0,0,0.14));
+  box-shadow: none;
+}
+.hero-cta-btn.hero-cta-ghost:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
 
-/* floating sneaker */
-.hero-sneaker-wrap {
-  position: relative; display: none;
-  align-items: center; justify-content: center;
-  flex-shrink: 0;
+/* ── HERO DEMO: стек карток, що сам свайпається ── */
+.hero-demo {
+  position: relative;
+  width: 152px; height: 200px;
+  margin: 22px auto 6px;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
 }
-.hero-sneaker-glow {
-  position: absolute; inset: -30%;
-  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,62,62,.18) 0%, transparent 70%);
-  pointer-events: none; z-index: 0;
-  animation: heroOrbA 6s ease-in-out infinite;
+.hd-card {
+  position: absolute; inset: 0;
+  border-radius: 18px; overflow: hidden;
+  background: #f4f4f5;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+  transition: transform .45s cubic-bezier(.34,1.2,.5,1), opacity .4s ease;
 }
-.hero-sneaker-img {
-  position: relative; z-index: 1;
-  width: 100%; max-width: 320px;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 48px rgba(0,0,0,.18)) drop-shadow(0 4px 16px rgba(255,62,62,.14));
-  animation: floatSneaker 3.5s ease-in-out infinite;
-  pointer-events: none; user-select: none;
+.hd-card:nth-of-type(1) { z-index: 3; }
+.hd-card:nth-of-type(2) { z-index: 2; transform: translate(10px, 8px) rotate(4deg); }
+.hd-card:nth-of-type(3) { z-index: 1; transform: translate(-10px, 14px) rotate(-5deg); }
+.hd-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .35s;
 }
-@keyframes floatSneaker {
-  0%,100% { transform: translateY(0) rotate(-6deg) scale(1); }
-  50%      { transform: translateY(-14px) rotate(-3deg) scale(1.02); }
+.hd-card img.loaded { opacity: 1; }
+.hd-price {
+  position: absolute; bottom: 6px; left: 6px;
+  background: rgba(0,0,0,0.55); color: #fff;
+  font-size: 11px; font-weight: 800;
+  border-radius: 8px; padding: 3px 7px;
 }
+.hd-card.hd-fly-r { transform: translateX(150%) rotate(22deg) !important; opacity: 0; z-index: 4; }
+.hd-card.hd-fly-l { transform: translateX(-150%) rotate(-22deg) !important; opacity: 0; z-index: 4; }
+.hd-like {
+  position: absolute; top: -8px; right: -12px;
+  font-size: 26px; opacity: 0; z-index: 5;
+  pointer-events: none;
+}
+.hd-like.pop { animation: hdLikePop .9s ease forwards; }
+@keyframes hdLikePop {
+  0%   { opacity: 0; transform: scale(.4) translateY(4px); }
+  25%  { opacity: 1; transform: scale(1.25) translateY(-4px); }
+  60%  { opacity: 1; transform: scale(1) translateY(-10px); }
+  100% { opacity: 0; transform: scale(.9) translateY(-24px); }
+}
+/* на низьких екранах демо ховаємо, щоб не з'їдало перший екран */
+@media (max-height: 640px) { .hero-demo { display: none; } }
+
+/* ── ШВИДКІ ДОБІРКИ (чіпи під hero) ─────────────── */
+.home-quick-chips { padding: 6px 16px 4px; gap: 8px; }
+.hq-chip {
+  flex-shrink: 0; height: 38px; padding: 0 16px;
+  border-radius: 100px; font-size: 13.5px; font-weight: 700;
+  background: var(--bg-card, #fff); color: var(--text);
+  border: 1.5px solid var(--border, rgba(0,0,0,0.1));
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  cursor: pointer; white-space: nowrap;
+  transition: transform .15s ease, border-color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.hq-chip:active { transform: scale(.95); }
+.hq-chip:hover { border-color: var(--text); }
 
 /* ── DESKTOP 1024px hero layout ───────────────── */
 @media (min-width: 1024px) {
   .desktop-only { display: flex; }
-  .hero-cta-btn { display: inline-flex; }
-  .hero-sneaker-wrap { display: flex; }
   .home-hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -355,6 +399,8 @@ body { background: #f0eded; }
     font-size: clamp(32px, 4vw, 48px);
   }
   .home-counter-chip { margin-top: 16px; }
+  .hero-demo { width: 240px; height: 320px; margin: 0 auto; }
+  .hd-price { font-size: 14px; padding: 4px 10px; }
 }
 
 /* ── SECTION ────────────────────────────────────── */

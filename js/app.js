@@ -87,12 +87,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(_observe, 600);
   }
 
-  // ── IDLE NUDGE ───────────────────────────────── */
-  ['touchstart','mousemove','scroll','click','keydown'].forEach(ev =>
-    document.addEventListener(ev, resetIdleTimer, { passive: true })
-  );
-  resetIdleTimer();
-
   // ── KEYBOARD ACCESSIBILITY ────────────────────── */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeAllSheets();

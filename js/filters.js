@@ -533,6 +533,27 @@ function openBrand(brand) {
   if (data) _renderUnifiedCatalog(data);
 }
 
+// Чіпи-добірки з головної: каталог з уже встановленим фільтром за 1 тап
+function openQuickCollection(kind, val) {
+  S.catBrand  = null;
+  S.searchQ   = '';
+  S.priceMin  = 0;
+  S.priceMax  = PRICE_MAX;
+  S.sizeFilters = [];
+  const inp = document.getElementById('cat-search');
+  if (inp) inp.value = '';
+  if (kind === 'budget') S.priceMax = Number(val);
+  if (kind === 'brand')  S.catBrand = val;
+  if (kind === 'color')  { S.searchQ = String(val); if (inp) inp.value = String(val); }
+  changeTab('catalog');
+  setTimeout(() => {
+    renderPriceSlider();
+    _applyFilters();
+    updateActiveFiltersChips();
+  }, 60);
+  if (window.gtag) gtag('event', 'quick_collection', { kind, val: String(val) });
+}
+
 function backToBrands() {
   _selectBrandStory(null);
 }

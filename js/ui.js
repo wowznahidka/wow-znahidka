@@ -241,35 +241,6 @@ function toggleFaq(el) {
   if (tog) tog.textContent = el.classList.contains('open') ? '−' : '+';
 }
 
-// ── IDLE NUDGE ────────────────────────────────────── */
-let _idleTimer     = null;
-let _idleNudgeDone = false;
-
-function resetIdleTimer() {
-  clearTimeout(_idleTimer);
-  if (_idleNudgeDone) return;
-  _idleTimer = setTimeout(_fireIdleNudge, 11000);
-}
-
-function _fireIdleNudge() {
-  if (_idleNudgeDone || S.activeTab !== 'home') return;
-  _idleNudgeDone = true;
-
-  const nudge = document.createElement('div');
-  nudge.id = 'match-nudge';
-  nudge.innerHTML = `
-    <div class="mn-ico">🔥</div>
-    <div class="mn-body">
-      <div class="mn-title">Спробуй Match</div>
-      <div class="mn-sub">Свайпай кросівки — як Tinder, але для взуття</div>
-    </div>
-    <button class="mn-btn" onclick="changeTab('match');document.getElementById('match-nudge')?.remove()">Спробувати</button>
-    <button class="mn-close" onclick="this.closest('#match-nudge').remove()" aria-label="Закрити">✕</button>`;
-  document.body.appendChild(nudge);
-  requestAnimationFrame(() => nudge.classList.add('mn-in'));
-  setTimeout(() => { nudge.classList.remove('mn-in'); setTimeout(() => nudge.remove(), 400); }, 7000);
-}
-
 // ── PWA ───────────────────────────────────────────── */
 let deferredPrompt = null;
 

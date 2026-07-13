@@ -230,17 +230,49 @@ function renderHome() {
     animateCounter(data.length);
     _setupScrollNudge(data.length);
     _updateGenderCounts(data);
-    _initHeroSneaker(data);
+    renderHeroDemo(data);
   });
 }
 
-function _initHeroSneaker() {
-  const el = document.getElementById('hero-sneaker-img');
-  if (!el) return;
-  el.src = 'logo-circle.png';
-  el.alt = 'WOW.ZNAHIDKA';
-  el.style.objectFit = 'contain';
-  el.style.borderRadius = '50%';
+// ── HERO DEMO: живий стек карток, які самі свайпаються ──
+// Показує механіку Match ще до першого тапа. Тап по стеку веде в Match.
+let _heroDemoTimer = null;
+
+function renderHeroDemo(data) {
+  const wrap = document.getElementById('hero-demo');
+  if (!wrap) return;
+  if (wrap.querySelector('.hd-card')) return; // вже живе
+  const summer = _isSummer();
+  const pool = data.filter(p => p.image && p.image.startsWith('http') && !(summer && _isWinter(p)));
+  const picks = shuffleSeeded(pool, 5).slice(0, 3);
+  if (picks.length < 3) { wrap.hidden = true; return; }
+  wrap.hidden = false;
+  wrap.innerHTML = picks.map((p, i) => `
+    <div class="hd-card">
+      <img src="${esc(p.image)}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" onload="this.classList.add('loaded')">
+      <div class="hd-price">${p.price}₴</div>
+    </div>`).join('') + `<div class="hd-like" aria-hidden="true">❤️</div>`;
+
+  clearInterval(_heroDemoTimer);
+  let flip = 0;
+  _heroDemoTimer = setInterval(() => {
+    if (document.hidden || S.activeTab !== 'home') return;
+    const cards = wrap.querySelectorAll('.hd-card');
+    if (cards.length < 2) return;
+    const top = cards[0];
+    flip++;
+    const liked = flip % 2 === 1;
+    top.classList.add(liked ? 'hd-fly-r' : 'hd-fly-l');
+    if (liked) {
+      const like = wrap.querySelector('.hd-like');
+      if (like) { like.classList.remove('pop'); void like.offsetWidth; like.classList.add('pop'); }
+    }
+    setTimeout(() => {
+      top.classList.remove('hd-fly-r', 'hd-fly-l');
+      const likeEl = wrap.querySelector('.hd-like');
+      wrap.insertBefore(top, likeEl); // у кінець стеку, перед ❤️
+    }, 480);
+  }, 2400);
 }
 
 function setHomeGreeting() {
