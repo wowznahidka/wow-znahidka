@@ -58,6 +58,15 @@ window.addEventListener('DOMContentLoaded', () => {
   if (['match','catalog','contacts'].includes(_tabParam)) changeTab(_tabParam);
   else if (_tabParam === 'cart') fetchCatalog().then(() => openSheet('sheet-cart'));
 
+  // ── FILTERS FROM URL (?brand=&min=&max=&size=&q=&sort=) ── */
+  const _hadUrlFilters = restoreFiltersFromUrl();
+  if (_hadUrlFilters && !['match', 'contacts', 'cart'].includes(_tabParam)) {
+    fetchCatalog().then(() => {
+      if (S.activeTab !== 'catalog') changeTab('catalog');
+      setTimeout(() => { renderPriceSlider(); _applyFilters(); updateActiveFiltersChips(); }, 80);
+    });
+  }
+
   // ── INIT ─────────────────────────────────────── */
   updateBadges();
   setTimeout(() => _updateNavIndicator(S.activeTab), 50);

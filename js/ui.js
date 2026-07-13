@@ -195,6 +195,8 @@ let _sheetHistPushed = false;
 let _sheetClosingViaPop = false;
 let _sheetSwitching = false;
 
+let _scrollBeforeSheet = null;
+
 function openSheet(id) {
   _sheetSwitching = true;
   closeAllSheets();
@@ -202,6 +204,7 @@ function openSheet(id) {
   const sh = document.getElementById(id);
   const ov = document.getElementById('overlay');
   if (!sh) return;
+  if (_scrollBeforeSheet === null) _scrollBeforeSheet = window.scrollY;
   sh.classList.add('on');
   ov.classList.add('on');
   document.body.style.overflow = 'hidden';
@@ -220,6 +223,12 @@ function closeAllSheets() {
   document.body.style.overflow = '';
   _openSheetId = null;
   updateCartBar();
+  // повертаємо стрічку туди, де юзер був до відкриття шторки
+  if (_scrollBeforeSheet !== null && !_sheetSwitching) {
+    const y = _scrollBeforeSheet;
+    _scrollBeforeSheet = null;
+    requestAnimationFrame(() => window.scrollTo(0, y));
+  }
   if (_sheetHistPushed && !_sheetSwitching) {
     _sheetHistPushed = false;
     if (!_sheetClosingViaPop) { try { history.back(); } catch(_){} }

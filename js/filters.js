@@ -207,7 +207,56 @@ function _applyFilters() {
     else if (document.getElementById('cat-stories-row')) _updateCatalogGrid(data);
     else                                             _renderUnifiedCatalog(data);
     if (cv) cv.classList.remove('filtering');
+    _syncFiltersToUrl();
   });
+}
+
+// ── ФІЛЬТРИ В URL ────────────────────────────────────
+// Стан фільтрів живе в адресі (?brand=&min=&max=&size=&q=&sort=):
+// перезавантаження і шерабельні лінки на добірки працюють з коробки.
+const _URL_FILTER_KEYS = ['brand', 'min', 'max', 'size', 'q', 'sort'];
+
+function _syncFiltersToUrl() {
+  try {
+    const params = new URLSearchParams(location.search);
+    _URL_FILTER_KEYS.forEach(k => params.delete(k));
+    if (S.catBrand) params.set('brand', S.catBrand);
+    if (S.priceMin > 0) params.set('min', S.priceMin);
+    if (S.priceMax !== undefined && S.priceMax < PRICE_MAX) params.set('max', S.priceMax);
+    if (S.sizeFilters && S.sizeFilters.length) params.set('size', S.sizeFilters.join(','));
+    if (S.searchQ) params.set('q', S.searchQ);
+    if (S.sortMode && S.sortMode !== 'popular') params.set('sort', S.sortMode);
+    const qs = params.toString();
+    history.replaceState(history.state, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  } catch (_) {}
+}
+
+function restoreFiltersFromUrl() {
+  const p = new URLSearchParams(location.search);
+  let had = false;
+  if (p.get('brand')) { S.catBrand = p.get('brand'); had = true; }
+  if (p.get('min'))   { S.priceMin = Math.max(0, Number(p.get('min')) || 0); had = true; }
+  if (p.get('max'))   { const v = Number(p.get('max')); if (v > 0) { S.priceMax = v; had = true; } }
+  if (p.get('size'))  {
+    S.sizeFilters = p.get('size').split(',').map(Number).filter(n => n >= 30 && n <= 50);
+    had = had || S.sizeFilters.length > 0;
+  }
+  if (p.get('q'))     {
+    S.searchQ = String(p.get('q')).slice(0, 60);
+    const inp = document.getElementById('cat-search');
+    if (inp) inp.value = S.searchQ;
+    had = true;
+  }
+  if (p.get('sort'))  {
+    const v = p.get('sort');
+    if (['popular', 'price_asc', 'price_desc'].includes(v)) {
+      S.sortMode = v;
+      const sel = document.getElementById('cat-sort');
+      if (sel) sel.value = v;
+      had = true;
+    }
+  }
+  return had;
 }
 
 // ── SEARCH ───────────────────────────────────────── */
@@ -402,8 +451,10 @@ function _renderCatalogGrid(container, products) {
   if (!products.length) {
     container.innerHTML = `<div class="cat-empty">
       <div class="cat-empty-ico">🔍</div>
-      <p>Немає товарів з вибраними фільтрами</p>
-      <button class="tg-link-btn" onclick="clearSizeFilters();_resetPriceSlider()">× Скинути фільтри</button>
+      <p>Під ці фільтри нічого нема</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:4px">Спробуй прибрати розмір або збільшити бюджет</p>
+      <button class="tg-link-btn" onclick="clearAllFilters()">× Скинути всі фільтри</button>
+      <a class="tg-link-btn" style="margin-top:8px" href="${CFG.TG_URL}" target="_blank" rel="noopener noreferrer">💬 Напиши розмір і бюджет — підберемо</a>
     </div>`;
     return;
   }
@@ -531,6 +582,7 @@ function openBrand(brand) {
   S.catBrand = brand || null;
   const data = getCatalog();
   if (data) _renderUnifiedCatalog(data);
+  _syncFiltersToUrl();
 }
 
 // Чіпи-добірки з головної: каталог з уже встановленим фільтром за 1 тап
