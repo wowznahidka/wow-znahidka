@@ -1418,7 +1418,7 @@ body { background: #f0eded; }
 
 /* ── CONTACTS SOCIAL BUTTONS ─────────────────────── */
 .social-actions {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 10px; padding: 4px 16px 20px;
 }
 .social-btn {
@@ -1463,6 +1463,16 @@ body { background: #f0eded; }
 }
 .social-btn.tt:hover {
   box-shadow: 0 8px 32px rgba(105,201,208,0.5), 0 0 20px rgba(105,201,208,0.2);
+  transform: translateY(-2px);
+}
+.social-btn.th {
+  background: linear-gradient(145deg, #0d0d0d, #2a2a2e);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35), 0 0 0 0 rgba(255,255,255,0);
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: transform .15s ease, box-shadow .25s ease;
+}
+.social-btn.th:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.12);
   transform: translateY(-2px);
 }
 

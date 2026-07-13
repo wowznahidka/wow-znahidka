@@ -91,9 +91,24 @@ function filterBySize(products) {
 }
 
 // ── PRICE SLIDER ─────────────────────────────────── */
-const PRICE_MAX = 12000;
+// Стеля слайдера — з реальних цін каталогу (округлено вгору до 500),
+// щоб половина шкали не була мертвою зоною. 12000 — лише fallback до завантаження.
+let PRICE_MAX = 12000;
+
+function _syncPriceMax() {
+  const all = S?.catalog?.all;
+  if (!all || !all.length) return;
+  const realMax = all.reduce((m, p) => Math.max(m, Number(p.price) || 0), 0);
+  if (!realMax) return;
+  const ceil = Math.ceil(realMax / 500) * 500;
+  if (ceil === PRICE_MAX) return;
+  const wasUnbounded = S.priceMax === undefined || S.priceMax >= PRICE_MAX;
+  PRICE_MAX = ceil;
+  if (wasUnbounded || S.priceMax > ceil) S.priceMax = ceil;
+}
 
 function renderPriceSlider() {
+  _syncPriceMax();
   // на десктопі (сайдбар видно) слайдер живе в сайдбарі, на мобілці — в колонці
   const desktop = window.matchMedia('(min-width: 1100px)').matches;
   const wrap = (desktop && document.getElementById('price-filter-wrap-dsf'))

@@ -188,9 +188,17 @@ function setGender(g, skipFade) {
 
 // ── SHEETS ────────────────────────────────────────── */
 let _openSheetId = null;
+// Системна кнопка «назад» має закривати відкриту шторку, а не вести з сайту.
+// Тому відкриття шторки кладе один запис в history, закриття хрестиком його
+// споживає (history.back), а popstate закриває шторку без повторного back.
+let _sheetHistPushed = false;
+let _sheetClosingViaPop = false;
+let _sheetSwitching = false;
 
 function openSheet(id) {
+  _sheetSwitching = true;
   closeAllSheets();
+  _sheetSwitching = false;
   const sh = document.getElementById(id);
   const ov = document.getElementById('overlay');
   if (!sh) return;
@@ -198,6 +206,9 @@ function openSheet(id) {
   ov.classList.add('on');
   document.body.style.overflow = 'hidden';
   _openSheetId = id;
+  if (!_sheetHistPushed) {
+    try { history.pushState({ wowSheet: true }, '', location.href); _sheetHistPushed = true; } catch(_){}
+  }
   if (id === 'sheet-fav')    renderFavSheet();
   if (id === 'sheet-cart')   renderCartSheet();
   if (id === 'sheet-review') resetReviewForm();
@@ -209,7 +220,19 @@ function closeAllSheets() {
   document.body.style.overflow = '';
   _openSheetId = null;
   updateCartBar();
+  if (_sheetHistPushed && !_sheetSwitching) {
+    _sheetHistPushed = false;
+    if (!_sheetClosingViaPop) { try { history.back(); } catch(_){} }
+  }
 }
+
+window.addEventListener('popstate', () => {
+  if (_openSheetId) {
+    _sheetClosingViaPop = true;
+    closeAllSheets();
+    _sheetClosingViaPop = false;
+  }
+});
 
 // ── FAQ ───────────────────────────────────────────── */
 function toggleFaq(el) {
@@ -221,7 +244,6 @@ function toggleFaq(el) {
 // ── IDLE NUDGE ────────────────────────────────────── */
 let _idleTimer     = null;
 let _idleNudgeDone = false;
-let _partnerNudgeDone = false;
 
 function resetIdleTimer() {
   clearTimeout(_idleTimer);
@@ -246,15 +268,6 @@ function _fireIdleNudge() {
   document.body.appendChild(nudge);
   requestAnimationFrame(() => nudge.classList.add('mn-in'));
   setTimeout(() => { nudge.classList.remove('mn-in'); setTimeout(() => nudge.remove(), 400); }, 7000);
-
-  _maybeShowPartnerNudge();
-}
-
-function _maybeShowPartnerNudge() {
-  // Partner-nudge popup прибраний — реферальна програма тепер у Контактах.
-  // Залишаємо лічильник відвідувань для майбутньої аналітики.
-  const visits = Number(localStorage.getItem('wow_visit_count') || 0) + 1;
-  localStorage.setItem('wow_visit_count', visits);
 }
 
 // ── PWA ───────────────────────────────────────────── */
@@ -631,106 +644,5 @@ function closeImageZoom() {
   }, { passive: true });
 })();
 
-// ── ANTI-EXIT ─────────────────────────────────────── */
-let _exitModalShown = false;
-let _backTrapInstalled = false;
-
-function _shouldGuard() {
-  return (S?.cart?.length || 0) > 0 || (S?.favs?.length || 0) > 0;
-}
-
-function _stayOnSiteModal(reason) {
-  if (_exitModalShown) return;
-  if (document.getElementById('exit-modal')) return;
-  _exitModalShown = true;
-
-  const cartLen = S?.cart?.length || 0;
-  const favsLen = S?.favs?.length || 0;
-
-  const title = cartLen
-    ? 'Твій кошик чекає оформлення 🛒'
-    : 'Не йди з порожніми руками';
-  const lead =
-    cartLen ? `У кошику <b>${cartLen}</b> пар${cartLen===1?'а':cartLen<5?'и':''} — ще пів кроку до замовлення 🔥` :
-    favsLen ? `У Улюблених — <b>${favsLen}</b> пар${favsLen===1?'а':''} ❤️` :
-    `Знайди свою пару — <b>${(S.catalog.all || []).length || 1300}+ моделей</b> ✨`;
-
-  const html = `
-    <div id="exit-modal" class="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title">
-      <div class="exit-card">
-        <button class="exit-close" aria-label="Закрити" onclick="closeExitModal()">✕</button>
-        <div class="exit-eyebrow">🎁 ЗАЧЕКАЙ-НО</div>
-        <h3 id="exit-modal-title" class="exit-title">${title}</h3>
-        <p class="exit-lead">${lead}</p>
-        <div class="exit-actions">
-          <button class="exit-cta" onclick="${cartLen?`openSheet('sheet-cart');`:favsLen?`openSheet('sheet-fav');`:`changeTab('catalog');`}closeExitModal();">
-            ${cartLen ? '🛒 Оформити кошик' : favsLen ? '❤️ Переглянути улюблені' : '👟 До каталогу'}
-          </button>
-          <a class="exit-tg" href="https://t.me/znahidkawow" target="_blank" rel="noopener" onclick="closeExitModal()">
-            ✉️ Написати в Telegram
-          </a>
-        </div>
-        <button class="exit-leave" onclick="closeExitModal();_userChoseLeave=true;">Все одно піду</button>
-      </div>
-    </div>`;
-  document.body.insertAdjacentHTML('beforeend', html);
-  document.body.style.overflow = 'hidden';
-  try { if (window.gtag) gtag('event','exit_modal_shown', { event_category:'engagement', reason }); } catch(_){}
-}
-
-function closeExitModal() {
-  const m = document.getElementById('exit-modal');
-  if (m) m.remove();
-  document.body.style.overflow = '';
-}
-
-let _userChoseLeave = false;
-
-function _installAntiExit() {
-  // back-кнопка: спочатку закриває шторку
-  if (!_backTrapInstalled) {
-    _backTrapInstalled = true;
-    try {
-      history.pushState({ _wow: true }, '', location.href);
-      window.addEventListener('popstate', () => {
-        if (_openSheetId) {
-          history.pushState({ _wow: true }, '', location.href);
-          closeAllSheets();
-          return;
-        }
-        if (!_userChoseLeave && _shouldGuard()) {
-          history.pushState({ _wow: true }, '', location.href);
-          _stayOnSiteModal('back_button');
-        }
-      });
-    } catch(_){}
-  }
-
-  // десктоп: мишка виходить вгору
-  if (matchMedia('(pointer:fine)').matches) {
-    const GRACE_MS = 20000;
-    const loadedAt = Date.now();
-    let engaged = false;
-    let leaveTimer = null;
-
-    window.addEventListener('scroll', () => { engaged = true; }, { passive: true, once: true });
-    document.addEventListener('mousemove', (e) => { if (e.clientY > 120) engaged = true; }, { passive: true });
-
-    document.addEventListener('mouseleave', (e) => {
-      if (e.clientY > 8) return;
-      if (_userChoseLeave || !_shouldGuard()) return;
-      if (Date.now() - loadedAt < GRACE_MS || !engaged) return;
-      if (sessionStorage.getItem('wow_exit_shown')) return;
-      clearTimeout(leaveTimer);
-      leaveTimer = setTimeout(() => {
-        if (sessionStorage.getItem('wow_exit_shown')) return;
-        sessionStorage.setItem('wow_exit_shown', '1');
-        _stayOnSiteModal('mouse_exit');
-      }, 600);
-    });
-    document.addEventListener('mouseenter', () => { clearTimeout(leaveTimer); });
-  }
-}
-window.addEventListener('DOMContentLoaded', _installAntiExit);
 
 

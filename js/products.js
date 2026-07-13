@@ -16,12 +16,6 @@ function fmtPrice(n) {
   return (Math.round(Number(n) || 0)) + '₴';
 }
 
-function _fomoViewers(id) {
-  const slot = Math.floor(Date.now() / 30000);
-  const h    = Math.abs(hashStr(id + slot));
-  return 2 + (h % 5);
-}
-
 function quickGridSize(productId, size) {
   const p = findProd(productId);
   if (!p) return;
@@ -309,15 +303,21 @@ function renderPopularRow(data) {
   el.innerHTML = items.map((p, i) => prodCardHtml(p, { eager: i < 4 })).join('');
 }
 
+// «Новинки» показуються лише коли в даних є справжні isNew-товари —
+// підставляти випадкові моделі під виглядом новинок не можна.
 function renderNewRow(data) {
-  const el = document.getElementById('new-row');
+  const el  = document.getElementById('new-row');
+  const sec = document.getElementById('new-section');
   if (!el) return;
   const summer = _isSummer();
-  const withPhoto = data.filter(p => p.image && p.image.startsWith('http'));
-  const news  = withPhoto.filter(p => p.isNew && !(summer && _isWinter(p)));
-  const pool  = news.length >= 3 ? news : withPhoto.filter(p => !(summer && _isWinter(p))).slice(0, 40);
-  const items = shuffleSeeded(pool.length >= 3 ? pool : withPhoto.slice(0, 40), 2).slice(0, 8);
-  el.innerHTML = items.map((p, i) => prodCardHtml(p, { eager: i < 4 })).join('');
+  const news = data.filter(p => p.isNew && p.image && p.image.startsWith('http') && !(summer && _isWinter(p)));
+  if (news.length < 3) {
+    if (sec) sec.hidden = true;
+    el.innerHTML = '';
+    return;
+  }
+  if (sec) sec.hidden = false;
+  el.innerHTML = shuffleSeeded(news, 2).slice(0, 8).map((p, i) => prodCardHtml(p, { eager: i < 4 })).join('');
 }
 
 function renderHomeBrands(data) {
