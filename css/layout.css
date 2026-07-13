@@ -1285,29 +1285,29 @@ body { background: #f0eded; }
   border-radius: var(--r-lg); animation: slideUp .4s var(--ease);
   box-shadow: var(--shadow-lg);
 }
-#pwa-android { display: none; align-items: center; gap: 12px; padding: 14px 14px 14px 16px; }
+#pwa-android { display: none; align-items: center; gap: 12px; padding: 12px 14px 12px 14px; }
 #pwa-android.on { display: flex; }
-#pwa-ios { display: none; flex-direction: column; gap: 8px; padding: 16px; }
+#pwa-ios { display: none; align-items: center; gap: 12px; padding: 12px 14px 12px 14px; }
 #pwa-ios.on { display: flex; }
-.pwa-ico   { font-size: 38px; flex-shrink: 0; }
-.pwa-text  { flex: 1; }
+.pwa-app-icon { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+.pwa-text  { flex: 1; min-width: 0; }
 .pwa-title { font-size: 14px; font-weight: 900; }
 .pwa-sub   { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.pwa-rating { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+.pwa-rating span { margin-left: 4px; }
 .pwa-install-btn {
-  background: var(--text); color: var(--accent-inv);
-  padding: 10px 14px; border-radius: var(--r-sm);
-  font-size: 13px; font-weight: 900; flex-shrink: 0; white-space: nowrap;
+  background: #0a84ff; color: #fff;
+  padding: 8px 14px; border-radius: 20px;
+  font-size: 13px; font-weight: 700; flex-shrink: 0; white-space: nowrap;
 }
 .pwa-close {
   position: absolute; top: 8px; right: 10px;
-  font-size: 18px; color: var(--text-muted); padding: 4px;
+  font-size: 16px; color: var(--text-muted); padding: 4px;
 }
-.pwa-ios-title { font-size: 15px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
-.pwa-ios-steps { font-size: 13px; color: var(--text-dim); line-height: 1.75; }
+.pwa-ios-steps { font-size: 11px; color: var(--text-dim); margin-top: 4px; line-height: 1.5; }
 .pwa-ios-ok {
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: var(--r-sm); padding: 11px;
-  font-size: 14px; font-weight: 800; text-align: center; color: var(--text-dim);
+  background: #0a84ff; color: #fff; border-radius: 20px;
+  padding: 8px 14px; font-size: 13px; font-weight: 700; flex-shrink: 0; white-space: nowrap;
 }
 
 /* ── STICKY CART BAR ────────────────────────────── */

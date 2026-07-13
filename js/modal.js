@@ -155,6 +155,7 @@ function confirmSize() {
   renderCartSheet();
   closeAllSheets();
   _haptic([10, 30, 10]);
+  tryShowPWAAfterLike();
   // GA4 + Meta Pixel
   if (window.gtag) gtag('event', 'add_to_cart', { currency: 'UAH', value: p.price, items: [{ item_id: p.id, item_name: `${p.brand} ${p.name}`, price: p.price }] });
   if (window.fbq)  fbq('track', 'AddToCart', { currency: 'UAH', value: p.price, content_ids: [p.id], content_type: 'product' });
@@ -246,7 +247,7 @@ function pdMainCta() {
   const exists = S.cart.find(c => c.id === p.id && String(c.size) === String(sz));
   if (!exists) S.cart.push({ ...p, size: oneSize ? sz : Number(sz), qty: 1 });
   else exists.qty = (exists.qty || 1) + 1;
-  saveCart(); updateBadges();
+  saveCart(); updateBadges(); tryShowPWAAfterLike();
   _haptic([10, 30, 10]);
   const main = document.getElementById('pd-btn-main');
   if (main) main.textContent = '✅ У кошику · Оформити →';

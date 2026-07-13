@@ -263,7 +263,7 @@ let deferredPrompt = null;
 function initPWA() {
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault(); deferredPrompt = e;
-    if (!localStorage.getItem('wow_pwa_android')) setTimeout(_showAndroidBanner, 45000);
+    if (!localStorage.getItem('wow_pwa_android')) setTimeout(_showAndroidBanner, 20000);
   });
   document.getElementById('pwa-install-btn')?.addEventListener('click', async () => {
     if (deferredPrompt) {
@@ -281,7 +281,7 @@ function initPWA() {
   const isIOS        = /iphone|ipad|ipod/i.test(navigator.userAgent);
   const isStandalone = window.navigator.standalone === true;
   if (isIOS && !isStandalone && !localStorage.getItem('wow_pwa_ios')) {
-    setTimeout(_showIOSBanner, 35000);
+    setTimeout(_showIOSBanner, 25000);
   }
 }
 

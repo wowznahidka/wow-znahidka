@@ -65,7 +65,7 @@ function renderFavSheet() {
     return `<div class="fav-item">
       ${p.image && p.image.startsWith('http')
         ? `<img class="fav-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')"
-             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}',${JSON.stringify(p.images||[p.image])})" style="cursor:zoom-in">`
+             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}',findProd('${esc(p.id)}')?.images)" style="cursor:zoom-in">`
         : `<div class="fav-img-ph" aria-hidden="true">👟</div>`}
       <div class="fav-body">
         <div class="fav-brand">${esc(p.brand)}</div>
@@ -107,6 +107,7 @@ function quickAddToCart(productId, size, btnEl) {
   saveCart();
   updateBadges();
   rememberSize(sz);
+  tryShowPWAAfterLike();
   // Swap buttons
   const acts = btnEl.closest('.fav-item')?.querySelector('.fav-acts');
   if (acts) {
@@ -140,7 +141,7 @@ function renderCartSheet() {
     <div class="cart-item">
       ${p.image && p.image.startsWith('http')
         ? `<img class="cart-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onload="this.classList.add('loaded')"
-             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}',${JSON.stringify(p.images||[p.image])})" style="cursor:zoom-in">`
+             onclick="event.stopPropagation();openImageZoom('${esc(p.image)}','${esc(p.brand)} ${esc(p.name)}',findProd('${esc(p.id)}')?.images)" style="cursor:zoom-in">`
         : `<div class="cart-img-ph" aria-hidden="true"></div>`}
       <div class="cart-body">
         <div class="cart-brand">${esc(p.brand)}</div>
