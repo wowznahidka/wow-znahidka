@@ -8,6 +8,14 @@ let _swipeRenderTimer = null;
 let _matchCombo       = 0;
 let _comboTimer       = null;
 
+// Match працює серіями по 20 карток: в кінці серії — екран «Твої матчі»
+// з лайкнутими за серію і виходом у кошик або Telegram.
+const MATCH_SESSION_LEN = 20;
+let _matchHistory  = [];  // останні свайпи для undo: {dir, id, added}
+let _sessionLikes  = [];  // id лайкнутих у поточній серії
+let _sessionStart  = 0;   // matchIdx, з якого почалась поточна серія
+let _likeBarTimer  = null;
+
 async function initMatch() {
   clearTimeout(_swipeRenderTimer);
   _swipeRenderTimer = null;
@@ -34,16 +42,12 @@ async function initMatch() {
     const j = Math.floor(Math.random() * (i + 1));
     [_pool[i], _pool[j]] = [_pool[j], _pool[i]];
   }
-  S.matchFullPool  = _pool;
-  S.matchPool      = _pool;
-  S.matchIdx       = 0;
+  S.matchFullPool   = _pool;
   S.matchSizeFilter = 'all';
+  S.matchBudget     = 'all';
   _buildSizeChips(_pool);
-  _matchCombo  = 0;
-  clearTimeout(_comboTimer);
-  _updateComboUI();
-  renderMatchCard();
-  _preloadMatchImages();
+  _buildBudgetChips();
+  _applyMatchFilters();
 }
 
 function _preloadMatchImages() {
@@ -70,15 +74,44 @@ function _buildSizeChips(pool) {
 
 function setMatchSize(sz) {
   S.matchSizeFilter = sz;
-  document.querySelectorAll('.match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
-  S.matchPool = sz === 'all'
-    ? [...S.matchFullPool]
-    : S.matchFullPool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
-  S.matchIdx = 0;
+  document.querySelectorAll('#match-size-filter .match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
+  _applyMatchFilters();
+}
+
+function _buildBudgetChips() {
+  const wrap = document.getElementById('match-budget-filter');
+  if (!wrap) return;
+  const opts = [['all', 'Без різниці'], ['2000', 'до 2000₴'], ['2500', 'до 2500₴'], ['3000', 'до 3000₴']];
+  wrap.innerHTML = opts.map(([v, label]) =>
+    `<button class="match-sz-chip match-b-chip${v === 'all' ? ' active' : ''}" data-b="${v}" onclick="setMatchBudget('${v}')">${label}</button>`
+  ).join('');
+}
+
+function setMatchBudget(b) {
+  S.matchBudget = b;
+  document.querySelectorAll('#match-budget-filter .match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.b === String(b)));
+  _applyMatchFilters();
+}
+
+// Спільне перефільтрування пулу (розмір + бюджет) і старт нової серії
+function _applyMatchFilters() {
+  let pool = [...(S.matchFullPool || [])];
+  const sz = S.matchSizeFilter;
+  if (sz && sz !== 'all') pool = pool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
+  const b = S.matchBudget;
+  if (b && b !== 'all') pool = pool.filter(p => (Number(p.price) || 0) <= Number(b));
+  S.matchPool   = pool;
+  S.matchIdx    = 0;
+  _matchHistory  = [];
+  _sessionLikes  = [];
+  _sessionStart  = 0;
   _matchCombo = 0;
   clearTimeout(_comboTimer);
   _updateComboUI();
+  _updateUndoBtn();
+  _hideLikeBar();
   renderMatchCard();
+  _preloadMatchImages();
 }
 
 function renderMatchCard() {
@@ -90,10 +123,16 @@ function renderMatchCard() {
     _renderMatchDone(stage, counter);
     return;
   }
+  // Кінець серії з 20 карток — показуємо результат, а не наступну картку
+  if (S.matchIdx - _sessionStart >= MATCH_SESSION_LEN) {
+    _renderSessionResults(stage, counter);
+    return;
+  }
 
   const p     = S.matchPool[S.matchIdx];
   const faved = isFav(p.id);
-  counter.textContent = `${S.matchIdx + 1} / ${S.matchPool.length}`;
+  const sessionLen = Math.min(MATCH_SESSION_LEN, S.matchPool.length - _sessionStart);
+  counter.textContent = `${S.matchIdx - _sessionStart + 1} / ${sessionLen}`;
 
   const card = document.createElement('div');
   card.className = 'm-card' + (faved ? ' is-fav' : '');
@@ -124,6 +163,64 @@ function renderMatchCard() {
   stage.innerHTML = '';
   stage.appendChild(card);
   attachSwipeListeners(card, p);
+}
+
+// Екран «Твої матчі» після серії з 20 свайпів — головний вихід у замовлення
+function _renderSessionResults(stage, counter) {
+  _hideLikeBar();
+  const liked = _sessionLikes.map(id => findProd(id) || S.favs.find(f => f.id === id)).filter(Boolean);
+  counter.textContent = `${Math.min(MATCH_SESSION_LEN, S.matchPool.length - _sessionStart)} / ${Math.min(MATCH_SESSION_LEN, S.matchPool.length - _sessionStart)}`;
+  const cartCount = S.cart.length;
+
+  const likedGrid = liked.length ? `
+    <div class="ms-grid">
+      ${liked.slice(0, 8).map(p => `
+        <button class="ms-item" onclick="openProductDetail(findProd('${esc(p.id)}'))" aria-label="${esc(p.brand)} ${esc(p.name)}">
+          <img src="${esc(p.image)}" alt="" loading="lazy" onload="this.classList.add('loaded')">
+          <span class="ms-item-price">${p.price}₴</span>
+        </button>`).join('')}
+    </div>` : '';
+
+  stage.innerHTML = `<div class="match-empty match-session-end">
+    <div class="match-empty-ico">${liked.length ? '🎯' : '🤔'}</div>
+    <h3 style="font-size:22px;font-weight:900;margin-top:4px">${liked.length ? 'Твої матчі' : 'Нічого не зачепило?'}</h3>
+    <p style="font-size:14px;color:var(--text-dim);line-height:1.5;max-width:280px;text-align:center;margin:2px 0 6px">
+      ${liked.length
+        ? `<strong style="color:var(--text)">${liked.length}</strong> ${liked.length === 1 ? 'пара' : liked.length < 5 ? 'пари' : 'пар'} за цю серію. Тапни, щоб обрати розмір.`
+        : 'Спробуй інший бюджет чи розмір — або ще одну серію.'}
+    </p>
+    ${likedGrid}
+    ${liked.length ? `
+    <button class="match-restart-btn" style="background:var(--red);box-shadow:var(--shadow-red);margin-top:6px"
+      onclick="${cartCount ? `openSheet('sheet-cart')` : `openSheet('sheet-fav')`}">
+      🛒 Оформити${cartCount ? ` · ${cartCount} в кошику` : ''}
+    </button>
+    <button class="match-restart-btn" style="background:#2a7fd4;margin-top:8px" onclick="_matchTgShare()">
+      ✈️ Скинути менеджеру — підберемо розмір
+    </button>` : ''}
+    <button class="match-go-favs-btn" style="margin-top:8px" onclick="matchNextSession()">
+      ▶️ Ще ${Math.min(MATCH_SESSION_LEN, S.matchPool.length - S.matchIdx)} пар
+    </button>
+  </div>`;
+}
+
+function matchNextSession() {
+  _sessionStart = S.matchIdx;
+  _sessionLikes = [];
+  _matchHistory = [];
+  _updateUndoBtn();
+  renderMatchCard();
+  _preloadMatchImages();
+}
+
+// Лайки серії — менеджеру в Telegram готовим списком
+function _matchTgShare() {
+  const items = _sessionLikes.map(id => findProd(id) || S.favs.find(f => f.id === id)).filter(Boolean);
+  if (!items.length) return;
+  const lines = items.slice(0, 10).map(p => `• ${p.brand} ${p.name} — ${p.price}₴ (${p.id})`).join('\n');
+  const msg = `Привіт! 👋 Мої лайки з Match:\n${lines}\n\nМій розмір: \nПідберіть, будь ласка 🙏`;
+  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
+  if (window.gtag) gtag('event', 'match_tg_share', { items: items.length });
 }
 
 function _renderMatchDone(stage, counter) {
@@ -172,6 +269,8 @@ function _attachMatchKeyboard() {
       e.preventDefault(); swipeCard('left');
     } else if (e.code === 'Space' || e.key === 'Enter') {
       e.preventDefault(); swipeCard('right');
+    } else if (e.key === 'Backspace' || e.key === 'u' || e.key === 'U') {
+      e.preventDefault(); undoMatchSwipe();
     }
   });
 }
@@ -264,10 +363,16 @@ function swipeCard(dir) {
   card.style.transform  = `translateX(${flyX}px) rotate(${dir === 'right' ? 30 : -30}deg) scale(0.9)`;
   card.style.opacity    = '0';
 
+  const wasFav = isFav(p.id);
+  _matchHistory.push({ dir, id: p.id, added: dir === 'right' && !wasFav });
+  if (_matchHistory.length > 3) _matchHistory.shift();
+
   if (dir === 'right') {
     addToFavs(p);
+    if (!_sessionLikes.includes(p.id)) _sessionLikes.push(p.id);
     _haptic(30);
-    tryShowPWAAfterLike();
+    // PWA-банер не перебиває перший лайк — пропонуємо тільки залученим
+    if (S.favs.length >= 5) tryShowPWAAfterLike();
     _matchCombo++;
     clearTimeout(_comboTimer);
     _comboTimer = setTimeout(() => { _matchCombo = 0; _updateComboUI(); }, 3500);
@@ -277,10 +382,13 @@ function swipeCard(dir) {
     else if (_matchCombo === 5)  toast('🔥🔥 Комбо ×5! Майстер!');
     else if (_matchCombo === 10) toast('💎 ×10 — ЛЕГЕНДА!');
     else if (_matchCombo > 10 && _matchCombo % 5 === 0) toast(`💎 ×${_matchCombo} — UNSTOPPABLE!`);
-    else toast(`❤️ Додано! <a onclick="openSheet('sheet-fav')">Переглянути →</a>`);
+    _showLikeBar(p);
+  } else {
+    _hideLikeBar();
   }
 
   S.matchIdx++;
+  _updateUndoBtn();
   _preloadMatchImages();
   clearTimeout(_swipeRenderTimer);
   _swipeRenderTimer = setTimeout(() => {
@@ -288,6 +396,79 @@ function swipeCard(dir) {
     _swipeRenderTimer = null;
     renderMatchCard();
   }, 310);
+}
+
+// ── UNDO ─────────────────────────────────────────── */
+function undoMatchSwipe() {
+  if (_swipeLocked || !_matchHistory.length) return;
+  if (S.matchIdx <= _sessionStart) return;
+  const last = _matchHistory.pop();
+  S.matchIdx--;
+  if (last.dir === 'right') {
+    if (last.added) {
+      S.favs = S.favs.filter(f => f.id !== last.id);
+      saveFavs();
+      updateBadges();
+    }
+    _sessionLikes = _sessionLikes.filter(id => id !== last.id);
+  }
+  _matchCombo = 0;
+  clearTimeout(_comboTimer);
+  _updateComboUI();
+  _updateUndoBtn();
+  _hideLikeBar();
+  _haptic(15);
+  renderMatchCard();
+}
+
+function _updateUndoBtn() {
+  const btn = document.getElementById('match-undo-btn');
+  if (btn) btn.disabled = !_matchHistory.length || S.matchIdx <= _sessionStart;
+}
+
+// ── LIKE BAR: розмір одним тапом після лайку ─────── */
+function _showLikeBar(p) {
+  if (!p.sizes || !p.sizes.length) return;
+  _hideLikeBar();
+  const bar = document.createElement('div');
+  bar.id = 'match-like-bar';
+  const oneSize = p.sizes[0] === 'ONE SIZE';
+  const sizes = oneSize
+    ? `<button class="mlb-sz" onclick="matchQuickSize('${esc(p.id)}','ONE SIZE',this)">В кошик</button>`
+    : p.sizes.slice(0, 6).map(s => `<button class="mlb-sz" onclick="matchQuickSize('${esc(p.id)}','${s}',this)">${s}</button>`).join('');
+  bar.innerHTML = `
+    <span class="mlb-label">❤️ ${esc(p.brand)} · розмір:</span>
+    <span class="mlb-sizes">${sizes}</span>`;
+  document.getElementById('page-match')?.appendChild(bar);
+  requestAnimationFrame(() => bar.classList.add('on'));
+  clearTimeout(_likeBarTimer);
+  _likeBarTimer = setTimeout(_hideLikeBar, 4000);
+}
+
+function _hideLikeBar() {
+  clearTimeout(_likeBarTimer);
+  const bar = document.getElementById('match-like-bar');
+  if (!bar) return;
+  bar.classList.remove('on');
+  setTimeout(() => bar.remove(), 250);
+}
+
+function matchQuickSize(id, sz, btn) {
+  const p = findProd(id) || S.favs.find(f => f.id === id);
+  if (!p) return;
+  const size = String(sz).toUpperCase() === 'ONE SIZE' ? 'ONE SIZE' : Number(sz);
+  const exists = S.cart.find(c => c.id === p.id && String(c.size) === String(size));
+  if (!exists) S.cart.push({ ...p, size, qty: 1 });
+  else exists.qty = (exists.qty || 1) + 1;
+  saveCart();
+  updateBadges();
+  _haptic([10, 30, 10]);
+  if (window.gtag) gtag('event', 'add_to_cart', { currency: 'UAH', value: p.price, items: [{ item_id: p.id, item_name: `${p.brand} ${p.name}`, price: p.price }] });
+  if (window.fbq)  fbq('track', 'AddToCart', { currency: 'UAH', value: p.price, content_ids: [p.id], content_type: 'product' });
+  const wrap = btn?.closest('#match-like-bar')?.querySelector('.mlb-sizes');
+  if (wrap) wrap.innerHTML = `<span class="mlb-done">✅ У кошику · <a onclick="openSheet('sheet-cart')">оформити →</a></span>`;
+  clearTimeout(_likeBarTimer);
+  _likeBarTimer = setTimeout(_hideLikeBar, 2500);
 }
 
 // ── COMBO UI ─────────────────────────────────────── */

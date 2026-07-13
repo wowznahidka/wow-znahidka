@@ -486,6 +486,79 @@
   border-color: var(--text);
 }
 
+/* Бюджет-чіпи — той самий стиль, автоширина, активний = червоний */
+.match-budget-row { padding-top: 0; }
+.match-b-chip { width: auto; padding: 0 14px; border-radius: 50px; font-size: 13px; }
+.match-b-chip.active {
+  background: var(--red); border-color: var(--red); color: #fff;
+}
+
+/* Undo — менша нейтральна кнопка між ✕ і ❤️ */
+.m-action.m-undo {
+  width: 44px; height: 44px; font-size: 18px;
+  background: var(--bg3, #f4f4f6); color: var(--text-dim);
+  border: 1.5px solid var(--border, rgba(0,0,0,0.08));
+  align-self: center;
+}
+.m-action.m-undo:disabled { opacity: .35; pointer-events: none; }
+
+/* Міні-бар після лайку: розмір одним тапом, не перебиваючи гру */
+#match-like-bar {
+  position: fixed; left: 12px; right: 12px;
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  z-index: 250;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 16px;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.16);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .22s ease, transform .22s cubic-bezier(.34,1.56,.64,1);
+  max-width: 560px; margin: 0 auto;
+}
+#match-like-bar.on { opacity: 1; transform: translateY(0); }
+.mlb-label {
+  font-size: 12.5px; font-weight: 800; color: var(--text);
+  white-space: nowrap; flex-shrink: 0;
+}
+.mlb-sizes {
+  display: flex; gap: 6px; overflow-x: auto;
+  scrollbar-width: none; flex: 1;
+}
+.mlb-sizes::-webkit-scrollbar { display: none; }
+.mlb-sz {
+  flex-shrink: 0; min-width: 40px; height: 36px; padding: 0 10px;
+  border-radius: 10px; font-size: 14px; font-weight: 800;
+  background: var(--text); color: #fff; border: none; cursor: pointer;
+}
+.mlb-sz:active { transform: scale(.94); }
+.mlb-done { font-size: 13px; font-weight: 700; color: var(--text); }
+.mlb-done a { color: var(--red); cursor: pointer; }
+
+/* Сітка «Твої матчі» в кінці серії */
+.ms-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; width: 100%; max-width: 340px; margin: 4px 0;
+}
+.ms-item {
+  position: relative; aspect-ratio: 1/1;
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #f4f4f5; padding: 0; cursor: pointer;
+}
+.ms-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .3s;
+}
+.ms-item img.loaded { opacity: 1; }
+.ms-item-price {
+  position: absolute; bottom: 4px; left: 4px;
+  font-size: 10px; font-weight: 800; color: #fff;
+  background: rgba(0,0,0,0.55); border-radius: 6px; padding: 2px 5px;
+}
+
 /* ── MATCH HINT ── */
 .match-hint {
   padding: 0 20px 8px;

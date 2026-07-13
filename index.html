@@ -84,7 +84,7 @@
 <!-- base.css is render-critical — stays synchronous -->
 <link rel="stylesheet" href="css/base.css?v=56">
 <link rel="stylesheet" href="css/layout.css?v=62">
-<link rel="stylesheet" href="css/cards.css?v=58">
+<link rel="stylesheet" href="css/cards.css?v=59">
 <link rel="stylesheet" href="css/animations.css?v=56">
 <link rel="stylesheet" href="css/mobile.css?v=56">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -354,12 +354,19 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
     <div class="match-size-filter" id="match-size-filter">
       <button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')" style="width:auto;padding:0 14px;border-radius:50px">Всі</button>
     </div>
+    <div class="match-size-filter match-budget-row" id="match-budget-filter" role="group" aria-label="Бюджет">
+      <button class="match-sz-chip match-b-chip active" data-b="all" onclick="setMatchBudget('all')">Без різниці</button>
+      <button class="match-sz-chip match-b-chip" data-b="2000" onclick="setMatchBudget('2000')">до 2000₴</button>
+      <button class="match-sz-chip match-b-chip" data-b="2500" onclick="setMatchBudget('2500')">до 2500₴</button>
+      <button class="match-sz-chip match-b-chip" data-b="3000" onclick="setMatchBudget('3000')">до 3000₴</button>
+    </div>
     <p class="match-hint">Свайп вправо — ❤️ в улюблені &bull; вліво — пропустити</p>
     <div class="card-stage" id="card-stage" role="region" aria-label="Картка товару">
       <div class="loading-wrap"><div class="spinner" aria-label="Завантаження"></div></div>
     </div>
     <div class="match-actions" role="group" aria-label="Дії">
       <button class="m-action m-nope" onclick="swipeCard('left')"  aria-label="Пропустити">✕</button>
+      <button class="m-action m-undo" id="match-undo-btn" onclick="undoMatchSwipe()" aria-label="Повернути попередню" disabled>↩</button>
       <button class="m-action m-like" onclick="swipeCard('right')" aria-label="Лайк">❤️</button>
     </div>
     <div class="match-kb-hint" aria-hidden="true">
@@ -1126,7 +1133,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 <script src="js/api.js?v=58"                defer></script>
 <script src="js/products.js?v=59"           defer></script>
 <script src="js/ui.js?v=57"                 defer></script>
-<script src="js/match.js?v=56"              defer></script>
+<script src="js/match.js?v=57"              defer></script>
 <script src="js/filters.js?v=59"            defer></script>
 <script src="js/cart.js?v=57"               defer></script>
 <script src="js/modal.js?v=58"              defer></script>
