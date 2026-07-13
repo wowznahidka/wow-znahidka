@@ -79,6 +79,9 @@ const STRINGS = {
       {q:'Чи є доставка за кордон?', a:'Так! Відправляємо у Польщу, Чехію, Словаччину та інші країни ЄС через міжнародні служби доставки. Уточнення деталей і вартості — через Telegram.'},
       {q:'Як обрати правильний розмір?', a:'Напиши нам у Telegram — підберемо розмір за довжиною стопи або звичним розміром. Також можна примірювати прямо на відділенні: відкрив посилку, виміряв — і вирішив. Ніяких ризиків!'},
       {q:'Що якщо не підійшли?', a:'Просто відмовся від посилки на відділенні або поверни назад — без жодних витрат з твого боку. Ми покриваємо зворотню доставку. Ніяких питань, ніяких проблем.'},
+      {q:'Як проходить примірка на відділенні?', a:'Отримуєш посилку на Новій Пошті, відкриваєш прямо на відділенні, міряєш. Підійшло — оплачуєш. Ні — віддаєш працівнику і йдеш, нічого не платиш.'},
+      {q:'Як оплатити замовлення?', a:'Оплата при отриманні, після примірки — на відділенні Нової Пошти. Передоплати нема взагалі.'},
+      {q:'Не знаю, що обрати. Допоможете?', a:'Так! Напиши в Telegram свій розмір і бюджет — підберемо кілька пар під тебе. Або спробуй Match: свайпай кросівки і збирай свої фаворити.'},
     ],
     // ── 2026 нові рядки ──
     trustNoPrepay:'0₴ передоплати', trustTopQuality:'Топ якість', trustFast:'1–3 дні',
@@ -180,6 +183,9 @@ const STRINGS = {
       {q:'Do you ship internationally?', a:'Yes! We ship to Poland, Czech Republic, Slovakia and other EU countries. Contact us on Telegram for details and shipping costs.'},
       {q:'How to choose the right size?', a:'Message us on Telegram — we\'ll recommend a size based on foot length or your usual size. You can also try on at the branch: open the parcel, check the fit — and decide. Zero risk!'},
       {q:'What if it doesn\'t fit?', a:'Simply refuse the parcel at the branch or return it — at no cost to you. We cover return shipping. No questions asked, no hassle.'},
+      {q:'How does the try-on work?', a:'Pick up your parcel at Nova Poshta, open it right at the branch and try the shoes on. Fits — you pay. Doesn\'t — hand it back and walk away, free of charge.'},
+      {q:'How do I pay?', a:'Payment on delivery, after the try-on — at the Nova Poshta branch. No prepayment at all.'},
+      {q:'Not sure what to pick?', a:'Message us on Telegram with your size and budget — we\'ll suggest a few pairs. Or try Match: swipe sneakers and collect your favourites.'},
     ],
     // ── 2026 strings ──
     trustNoPrepay:'₴0 prepayment', trustTopQuality:'Top quality', trustFast:'1–3 days',

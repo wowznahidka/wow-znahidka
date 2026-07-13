@@ -479,6 +479,16 @@ function _renderCatGridBatch(grid, gen) {
   });
   grid.appendChild(frag);
   _catGridRendered += batch.length;
+  // Після ~2 екранів скролу — тихий рядок допомоги (не popup)
+  if (_catGridRendered >= 48 && !grid.querySelector('.cat-help-row')) {
+    const help = document.createElement('a');
+    help.className = 'cat-help-row';
+    help.href = CFG.TG_URL;
+    help.target = '_blank';
+    help.rel = 'noopener noreferrer';
+    help.innerHTML = `<span>Не знайшов своє? Напиши розмір і бюджет — підберемо 2–3 пари 👟</span><b>Написати →</b>`;
+    grid.appendChild(help);
+  }
   if (_catGridRendered < _catGridData.length) {
     const sentinel = document.createElement('div');
     sentinel.style.height = '1px';
