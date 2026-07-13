@@ -184,7 +184,8 @@ function pdGalleryGo(idx) {
   const track = document.getElementById('pd-gallery-track');
   if (!track) return;
   _pdGalleryIdx = idx;
-  track.style.transform = `translateX(-${idx * 100}%)`;
+  const slideW = (track.parentElement || track).clientWidth;
+  track.style.transform = `translateX(-${idx * slideW}px)`;
   document.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
   document.querySelectorAll('.pd-thumb').forEach((d, i) => {
     d.classList.toggle('active', i === idx);
