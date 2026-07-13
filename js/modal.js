@@ -121,15 +121,10 @@ function selectSize(sz) {
   _haptic(12);
 }
 
+// Прямих TG-лінків не даємо — фото запитуються формою-заявкою
 function requestPhoto() {
   if (!S.spProduct) return;
-  const p = S.spProduct;
-  // Якщо в товара є посилання на пост в каналі — там вже альбом фото, кидаємо туди
-  if (p.tgLink) { openTgLink(p.tgLink); return; }
-  const szText = S.spSelectedSize ? `Розмір: ${S.spSelectedSize}` : 'Розмір: уточнимо';
-  const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
-  const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n${szText}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
+  openRequestSheet('photos', { product: S.spProduct });
 }
 
 function confirmSize() {
@@ -255,11 +250,7 @@ function pdMainCta() {
 function _pdPhotoTg() {
   const p = S.pdProduct;
   if (!p) return;
-  // Якщо в товара є пост в каналі — там альбом, відкриваємо напряму
-  if (p.tgLink) { openTgLink(p.tgLink); return; }
-  const productUrl = `${location.origin}${location.pathname}?product=${p.id}`;
-  const msg = `Привіт! 👋 Хочу побачити більше фото 📸\n👟 ${p.brand} ${p.name}\n💰 ${p.price}₴\n🔗 ${productUrl}`;
-  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
+  openRequestSheet('photos', { product: p });
 }
 
 function openProductDetail(product) {
@@ -305,11 +296,6 @@ function openProductDetail(product) {
         ${product.sizes.map(s => `<button class="pd-size-sel" onclick="pdSelectSize(this, '${s}')">${s}</button>`).join('')}
       </div>
     </div>`;
-
-  // TG SVG icon (inline, no external requests)
-  const tgIco = `<svg class="pd-btn-tg-ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21.944 2.56a1.5 1.5 0 0 0-1.53-.22L2.53 9.6c-.96.37-1.02 1.7-.1 2.16l4.06 2.02 1.56 5.14c.2.65.99.87 1.49.41l2.3-2.12 4.48 3.29c.59.43 1.42.1 1.57-.61L22.44 4.04a1.5 1.5 0 0 0-.5-1.48zM9.4 14.83l-.83 2.72-.94-3.1 8.33-5.9-6.56 6.28z" fill="#fff"/>
-  </svg>`;
 
   _pdGalleryIdx = 0;
   const _imgs = (product.images && product.images.length > 1) ? product.images : null;
@@ -369,8 +355,7 @@ function openProductDetail(product) {
 
     <div class="pd-tg-row">
       <button class="pd-tg-link" onclick="_pdPhotoTg()">
-        ${tgIco}
-        <span>${_imgs ? 'Переглянути у Telegram' : 'Запросити живі фото в Telegram'}</span>
+        <span>📸 Потрібно більше фото? Надішлемо</span>
       </button>
     </div>
 

@@ -196,7 +196,7 @@ function _renderSessionResults(stage, counter) {
       🛒 Оформити${cartCount ? ` · ${cartCount} в кошику` : ''}
     </button>
     <button class="match-restart-btn" style="background:#2a7fd4;margin-top:8px" onclick="_matchTgShare()">
-      ✈️ Скинути менеджеру — підберемо розмір
+      🎯 Підберіть під мої лайки
     </button>` : ''}
     <button class="match-go-favs-btn" style="margin-top:8px" onclick="matchNextSession()">
       ▶️ Ще ${Math.min(MATCH_SESSION_LEN, S.matchPool.length - S.matchIdx)} пар
@@ -213,14 +213,12 @@ function matchNextSession() {
   _preloadMatchImages();
 }
 
-// Лайки серії — менеджеру в Telegram готовим списком
+// Лайки серії — формою-заявкою (без прямого TG-контакту)
 function _matchTgShare() {
   const items = _sessionLikes.map(id => findProd(id) || S.favs.find(f => f.id === id)).filter(Boolean);
   if (!items.length) return;
-  const lines = items.slice(0, 10).map(p => `• ${p.brand} ${p.name} — ${p.price}₴ (${p.id})`).join('\n');
-  const msg = `Привіт! 👋 Мої лайки з Match:\n${lines}\n\nМій розмір: \nПідберіть, будь ласка 🙏`;
-  openTgLink(`https://t.me/znahidkawow?text=${encodeURIComponent(msg)}`);
-  if (window.gtag) gtag('event', 'match_tg_share', { items: items.length });
+  const lines = items.slice(0, 10).map(p => `${p.brand} ${p.name} — ${p.price}₴ (${p.id})`);
+  openRequestSheet('match', { items: lines });
 }
 
 function _renderMatchDone(stage, counter) {

@@ -83,8 +83,8 @@
 <!-- ── CSS MODULES ── -->
 <!-- base.css is render-critical — stays synchronous -->
 <link rel="stylesheet" href="css/base.css?v=56">
-<link rel="stylesheet" href="css/layout.css?v=64">
-<link rel="stylesheet" href="css/cards.css?v=60">
+<link rel="stylesheet" href="css/layout.css?v=65">
+<link rel="stylesheet" href="css/cards.css?v=61">
 <link rel="stylesheet" href="css/animations.css?v=56">
 <link rel="stylesheet" href="css/mobile.css?v=56">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -368,9 +368,6 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="g-chip" data-gender="male"   onclick="setGender('male')"  >Чоловік</button>
       <button class="g-chip" data-gender="female" onclick="setGender('female')">Жінка</button>
     </div>
-    <div class="match-size-label-row">
-      <span>Розмір (EU)</span>
-    </div>
     <div class="match-size-filter" id="match-size-filter">
       <button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')" style="width:auto;padding:0 14px;border-radius:50px">Всі</button>
     </div>
@@ -380,7 +377,6 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <button class="match-sz-chip match-b-chip" data-b="2500" onclick="setMatchBudget('2500')">до 2500₴</button>
       <button class="match-sz-chip match-b-chip" data-b="3000" onclick="setMatchBudget('3000')">до 3000₴</button>
     </div>
-    <p class="match-hint">Свайп вправо — ❤️ в улюблені &bull; вліво — пропустити</p>
     <div class="card-stage" id="card-stage" role="region" aria-label="Картка товару">
       <div class="loading-wrap"><div class="spinner" aria-label="Завантаження"></div></div>
     </div>
@@ -403,6 +399,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
         <span class="cat-search-ico" aria-hidden="true">🔍</span>
         <input type="text" class="cat-search" id="cat-search"
           placeholder="Пошук по бренду або моделі…"
+          maxlength="60"
           oninput="onSearchInput(this.value)"
           onblur="onSearchBlur()"
           autocomplete="off" autocorrect="off" spellcheck="false"
@@ -673,15 +670,15 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       </div>
     </div>
 
-    <!-- Головна дія контактів: персональний підбір через Telegram -->
-    <a class="pick-for-me-cta" href="https://t.me/znahidkawow?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82%21%20%F0%9F%91%8B%20%D0%9F%D1%96%D0%B4%D0%B1%D0%B5%D1%80%D1%96%D1%82%D1%8C%20%D0%BC%D0%B5%D0%BD%D1%96%20%D0%BA%D1%80%D0%BE%D1%81%D1%96%D0%B2%D0%BA%D0%B8.%0A%D0%9C%D1%96%D0%B9%20%D1%80%D0%BE%D0%B7%D0%BC%D1%96%D1%80%3A%20%0A%D0%91%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%3A%20%0A%D0%A1%D1%82%D0%B8%D0%BB%D1%8C/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%20%28%D1%8F%D0%BA%D1%89%D0%BE%20%D1%94%29%3A%20" onclick="return openLink(this.href)" rel="noopener noreferrer" aria-label="Підберемо за тебе">
+    <!-- Головна дія контактів: персональний підбір через форму-заявку -->
+    <button class="pick-for-me-cta" onclick="openRequestSheet('pick')" aria-label="Підберемо за тебе">
       <span class="pfm-ico" aria-hidden="true">👟</span>
       <span class="pfm-body">
         <span class="pfm-title">Підберемо за тебе</span>
-        <span class="pfm-sub">Напиши розмір і бюджет — скинемо 2–3 пари під тебе</span>
+        <span class="pfm-sub">Залиш розмір і бюджет — скинемо 2–3 пари під тебе</span>
       </span>
       <span class="pfm-arrow" aria-hidden="true">→</span>
-    </a>
+    </button>
 
     <!-- Social action buttons -->
     <nav class="social-actions" aria-label="Соціальні мережі">
@@ -730,7 +727,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 
     <!-- Action buttons: Web order + Collab -->
     <div class="contacts-action-row">
-      <a class="cab cab-order" href="https://t.me/znahidkawow?text=%D0%9F%D1%80%D0%B8%D0%B2%D1%96%D1%82%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BC%D0%BE%D0%B2%D0%B8%D1%82%D0%B8%20%D1%81%D0%B0%D0%B9%D1%82.%20%D0%AF%20%D0%B7%D1%96%20%D0%B7%D0%BD%D0%B0%D1%85%D1%96%D0%B4%D0%BA%D0%B8." onclick="return openLink(this.href)" rel="noopener noreferrer" aria-label="Замовити сайт">
+      <a class="cab cab-order" href="javascript:void(0)" onclick="openRequestSheet('website');return false;" aria-label="Замовити сайт">
         <div class="cab-shine" aria-hidden="true"></div>
         <span class="cab-icon">🌐</span>
         <span class="cab-label">Замовити сайт</span>
@@ -806,22 +803,22 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
           <span>🔗 Отримати моє посилання</span>
           <span class="i-arr-lg" aria-hidden="true"></span>
         </button>
-        <p class="ref-section-hint">Пиши менеджеру в Telegram — обговоримо умови</p>
+        <p class="ref-section-hint">Тисни кнопку — отримаєш своє посилання й умови</p>
       </div>
     </section>
 
     <section class="faq-wrap" aria-label="FAQ">
       <div id="faq-list"></div>
     </section>
+
+    <!-- Studio footnote: тільки в контактах, не на кожній вкладці -->
+    <div style="text-align:center;padding:12px 16px 24px;font-size:11px;color:rgba(13,13,13,0.35);">
+      Потрібен свій сайт-магазин?
+      <a href="https://wowznahidka.github.io/wow-studio/" onclick="return openLink(this.href)" rel="noopener noreferrer"
+         style="color:rgba(13,13,13,0.5);text-decoration:underline;font-weight:600;">WOW.STUDIO →</a>
+    </div>
     <div style="height:16px"></div>
   </section>
-
-  <!-- Studio footnote -->
-  <div style="text-align:center;padding:12px 16px 24px;font-size:11px;color:rgba(13,13,13,0.35);">
-    Потрібен свій сайт-магазин?
-    <a href="https://wowznahidka.github.io/wow-studio/" onclick="return openLink(this.href)" rel="noopener noreferrer"
-       style="color:rgba(13,13,13,0.5);text-decoration:underline;font-weight:600;">WOW.STUDIO →</a>
-  </div>
 
 </main>
 
@@ -1035,6 +1032,23 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
 </div>
 
 <!-- Product Detail -->
+<div class="sheet" id="sheet-request" role="dialog" aria-modal="true" aria-label="Заявка">
+  <div class="sh-handle" aria-hidden="true"></div>
+  <h2 class="sh-title" id="req-title">👟 Підберемо за тебе</h2>
+  <p class="req-sub" id="req-sub">Залиш контакт — підберемо 2–3 пари під тебе і надішлемо фото</p>
+  <div class="req-form">
+    <input type="text" class="form-inp req-inp" id="req-name" placeholder="Ім'я" autocomplete="name" aria-label="Ім'я">
+    <input type="tel" class="form-inp req-inp" id="req-phone" placeholder="+380 (__) ___-__-__" autocomplete="tel" inputmode="tel" aria-label="Телефон">
+    <div class="req-row">
+      <input type="text" class="form-inp req-inp" id="req-size" placeholder="Розмір" inputmode="decimal" maxlength="5" aria-label="Розмір">
+      <input type="text" class="form-inp req-inp" id="req-budget" placeholder="Бюджет, ₴" inputmode="numeric" maxlength="6" aria-label="Бюджет">
+    </div>
+    <textarea class="form-inp req-inp req-ta" id="req-msg" placeholder="Коментар (необов'язково)" maxlength="300" aria-label="Коментар"></textarea>
+    <button class="req-submit" id="req-submit" onclick="submitRequest()">Надіслати заявку</button>
+    <p class="req-note">Відповімо в Telegram або подзвонимо — як тобі зручніше</p>
+  </div>
+</div>
+
 <div class="sheet" id="sheet-product" role="dialog" aria-modal="true" aria-label="Деталі товару">
   <div class="sh-handle" aria-hidden="true"></div>
   <div id="product-detail-content"></div>
@@ -1153,14 +1167,14 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
      ════════════════════════════════════════════════ -->
 <script src="js/config.js?v=57"             defer></script>
 <script src="js/state.js?v=58"              defer></script>
-<script src="js/lang.js?v=57"               defer></script>
+<script src="js/lang.js?v=58"               defer></script>
 <script src="js/api.js?v=58"                defer></script>
 <script src="js/products.js?v=61"           defer></script>
 <script src="js/ui.js?v=59"                 defer></script>
-<script src="js/match.js?v=57"              defer></script>
-<script src="js/filters.js?v=63"            defer></script>
-<script src="js/cart.js?v=57"               defer></script>
-<script src="js/modal.js?v=58"              defer></script>
+<script src="js/match.js?v=58"              defer></script>
+<script src="js/filters.js?v=64"            defer></script>
+<script src="js/cart.js?v=58"               defer></script>
+<script src="js/modal.js?v=59"              defer></script>
 <script src="js/deals.js?v=57"              defer></script>
 <script src="shared/js/referral.js?v=56" defer></script>
 <script src="js/app.js?v=58"                defer></script>

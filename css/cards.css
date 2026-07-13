@@ -537,13 +537,16 @@
   display: flex; align-items: center; gap: 4px;
 }
 
-/* ── CARD STAGE ── */
+/* ── CARD STAGE ──
+   Картка заповнює рівно простір між фільтрами і кнопками дій (inset:0),
+   тому фізично не може перекрити сусідні блоки на жодній висоті екрана. */
 .card-stage {
   flex: 1; display: flex; align-items: center; justify-content: center;
-  position: relative; padding: 8px 16px; min-height: 400px;
+  position: relative; margin: 10px 16px 4px; padding: 0; min-height: 320px;
 }
 .m-card {
-  position: absolute; width: calc(100% - 32px);
+  position: absolute; inset: 0; width: auto;
+  display: flex; flex-direction: column;
   background: var(--bg-card); border-radius: 24px;
   overflow: hidden; cursor: grab; touch-action: none;
   box-shadow: 0 12px 48px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.06);
@@ -558,17 +561,18 @@
 /* ── FULL-BLEED IMAGE — Tinder / Nike SNKRS style ── */
 .m-card-media {
   position: relative; width: 100%;
+  flex: 1; min-height: 0;
   background: #1a1a1a;
 }
 .m-card-img {
-  width: 100%; aspect-ratio: 3 / 4;
+  width: 100%; height: 100%;
   object-fit: cover;
   pointer-events: none; display: block;
   opacity: 0; transition: opacity .35s ease;
 }
 .m-card-img.loaded { opacity: 1; }
 .m-card-img-ph {
-  width: 100%; aspect-ratio: 3 / 4;
+  width: 100%; height: 100%;
   background: #1e1e22;
   display: flex; align-items: center; justify-content: center;
   font-size: 88px; pointer-events: none;
@@ -672,7 +676,8 @@
 
 .match-actions {
   display: flex; justify-content: center; align-items: center; gap: 28px;
-  padding: 16px 20px 22px;
+  padding: 12px 20px 16px;
+  flex-shrink: 0;
 }
 .m-action {
   border-radius: 50%;

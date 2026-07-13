@@ -400,16 +400,16 @@ function renderSearchResults(data) {
   if (!scored.length) {
     el.innerHTML = `<div class="cat-empty">
       <div class="cat-empty-ico">🔍</div>
-      <p>Не знайдено «${esc(S.searchQ)}»</p>
+      <p>Не знайдено «${esc(S.searchQ.length > 38 ? S.searchQ.slice(0,38) + '…' : S.searchQ)}»</p>
       <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Спробуй: Nike, Adidas, 9060, Dunk, Gazelle</p>
-      <a class="tg-link-btn" href="${CFG.TG_URL}" target="_blank" rel="noopener noreferrer">💬 Написати нам</a>
+      <button class="tg-link-btn" onclick="openRequestSheet('pick')">💬 Підберемо за тебе</button>
     </div>`;
     return;
   }
   const count = scored.length;
   el.innerHTML = `
     <div class="search-results-header">
-      <span>${count} результат${count===1?'':count<5?'и':'ів'} — «${esc(S.searchQ)}»</span>
+      <span>${count} результат${count===1?'':count<5?'и':'ів'} — «${esc(S.searchQ.length > 38 ? S.searchQ.slice(0,38) + '…' : S.searchQ)}»</span>
     </div>
     <div class="prods-grid" style="padding:0 16px">
       ${scored.slice(0, 60).map(x => prodCardHtml(x.p, { grid: true })).join('')}
@@ -454,7 +454,7 @@ function _renderCatalogGrid(container, products) {
       <p>Під ці фільтри нічого нема</p>
       <p style="font-size:13px;color:var(--text-muted);margin-top:4px">Спробуй прибрати розмір або збільшити бюджет</p>
       <button class="tg-link-btn" onclick="clearAllFilters()">× Скинути всі фільтри</button>
-      <a class="tg-link-btn" style="margin-top:8px" href="${CFG.TG_URL}" target="_blank" rel="noopener noreferrer">💬 Напиши розмір і бюджет — підберемо</a>
+      <button class="tg-link-btn" style="margin-top:8px" onclick="openRequestSheet('pick')">💬 Залиш розмір і бюджет — підберемо</button>
     </div>`;
     return;
   }
@@ -481,12 +481,10 @@ function _renderCatGridBatch(grid, gen) {
   _catGridRendered += batch.length;
   // Після ~2 екранів скролу — тихий рядок допомоги (не popup)
   if (_catGridRendered >= 48 && !grid.querySelector('.cat-help-row')) {
-    const help = document.createElement('a');
+    const help = document.createElement('button');
     help.className = 'cat-help-row';
-    help.href = CFG.TG_URL;
-    help.target = '_blank';
-    help.rel = 'noopener noreferrer';
-    help.innerHTML = `<span>Не знайшов своє? Напиши розмір і бюджет — підберемо 2–3 пари 👟</span><b>Написати →</b>`;
+    help.onclick = () => openRequestSheet('pick');
+    help.innerHTML = `<span>Не знайшов своє? Залиш розмір і бюджет — підберемо 2–3 пари 👟</span><b>Заявка →</b>`;
     grid.appendChild(help);
   }
   if (_catGridRendered < _catGridData.length) {

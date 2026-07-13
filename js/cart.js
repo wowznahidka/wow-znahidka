@@ -491,7 +491,7 @@ async function submitOrder() {
     const tgFallback = ok === null
       ? `<div style="margin-top:10px;font-size:12px;color:var(--text-muted);line-height:1.6">
            Якщо не зв'яжемось протягом години —
-           <a href="${CFG.TG_URL}" target="_blank" style="color:var(--blue);font-weight:700">напишіть нам у Telegram</a>
+           <a onclick="openRequestSheet('pick')" style="color:var(--blue);font-weight:700;cursor:pointer">залиш заявку ще раз</a>
          </div>`
       : '';
     info.innerHTML = `<b>${esc(name)}</b> · ${esc(phone)}<br>
@@ -566,5 +566,95 @@ async function submitReview() {
   renderReviews();
   closeAllSheets();
   resetReviewForm();
-  toast(`⭐ Дякуємо за відгук! <a href="${CFG.TG_URL}" target="_blank" rel="noopener">Написати у Telegram →</a>`);
+  toast('⭐ Дякуємо за відгук!');
 }
+
+/* ── ЗАЯВКА (універсальна форма замість прямих TG-лінків) ──
+   Кожен «напиши нам» на сайті відкриває цю шторку. Дані летять у GAS
+   (action: help_request) і приходять власнику повідомленням — покупець
+   не отримує прямий контакт. */
+let _reqCtx = { kind: 'pick' };
+
+const _REQ_COPY = {
+  pick:    ['👟 Підберемо за тебе', 'Залиш контакт — підберемо 2–3 пари під тебе і надішлемо фото'],
+  photos:  ['📸 Більше фото цієї пари', 'Залиш контакт — надішлемо живі фото й відео цієї моделі'],
+  match:   ['🎯 Підбір за твоїми лайками', 'Надішлемо наявність і фото твоїх матчів під твій розмір'],
+  website: ['🌐 Замовити сайт', 'Залиш контакт — обговоримо твій магазин чи лендінг'],
+};
+
+function openRequestSheet(kind, opts) {
+  _reqCtx = { kind: kind || 'pick', ...(opts || {}) };
+  const copy = _REQ_COPY[_reqCtx.kind] || _REQ_COPY.pick;
+  const tEl = document.getElementById('req-title');
+  const sEl = document.getElementById('req-sub');
+  if (tEl) tEl.textContent = copy[0];
+  if (sEl) sEl.textContent = copy[1];
+  // передзаповнюємо розмір/бюджет з Match-фільтрів, якщо юзер їх обирав
+  const szI = document.getElementById('req-size');
+  const bI  = document.getElementById('req-budget');
+  if (szI && !szI.value && S.matchSizeFilter && S.matchSizeFilter !== 'all') szI.value = S.matchSizeFilter;
+  if (bI  && !bI.value  && S.matchBudget && S.matchBudget !== 'all') bI.value = S.matchBudget;
+  const btn = document.getElementById('req-submit');
+  if (btn) { btn.disabled = false; btn.textContent = 'Надіслати заявку'; }
+  openSheet('sheet-request');
+  try { if (window.gtag) gtag('event', 'request_open', { kind: _reqCtx.kind }); } catch(_) {}
+}
+
+function _reqPhoneFmt(inp) {
+  let v = inp.value.replace(/\D/g, '');
+  if (v.startsWith('380')) v = v.slice(3);
+  if (v.startsWith('0'))   v = v.slice(1);
+  v = v.slice(0, 9);
+  let fmt = '+380 ';
+  if (v.length > 0) fmt += '(' + v.slice(0, 2);
+  if (v.length >= 2) fmt += ') ' + v.slice(2, 5);
+  if (v.length >= 5) fmt += '-' + v.slice(5, 7);
+  if (v.length >= 7) fmt += '-' + v.slice(7, 9);
+  inp.value = fmt;
+}
+
+async function submitRequest() {
+  const phoneEl = document.getElementById('req-phone');
+  const digits = (phoneEl?.value || '').replace(/\D/g, '');
+  if (digits.length < 11) {
+    toast('⚠️ Вкажи номер телефону — інакше не зможемо відповісти');
+    phoneEl?.focus();
+    return;
+  }
+  const btn = document.getElementById('req-submit');
+  if (btn) { btn.disabled = true; btn.textContent = 'Надсилаємо…'; }
+  const p = _reqCtx.product;
+  const payload = {
+    action:  'help_request',
+    kind:    _reqCtx.kind,
+    name:    document.getElementById('req-name')?.value.trim() || '',
+    phone:   phoneEl.value.trim(),
+    size:    document.getElementById('req-size')?.value.trim() || '',
+    budget:  document.getElementById('req-budget')?.value.trim() || '',
+    message: document.getElementById('req-msg')?.value.trim() || '',
+    product: p ? `${p.brand} ${p.name} (${p.id}) — ${p.price}₴` : '',
+    items:   _reqCtx.items || [],
+    utm:     S.utm || null,
+    ts:      new Date().toISOString(),
+  };
+  const res = await postData(payload);
+  if (res === false) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Надіслати заявку'; }
+    toast('⚠️ Немає зв’язку. Спробуй ще раз');
+    return;
+  }
+  ['req-name', 'req-phone', 'req-size', 'req-budget', 'req-msg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  closeAllSheets();
+  toast('✅ Заявку отримали! Відповімо найближчим часом');
+  try {
+    if (window.gtag) gtag('event', 'help_request', { kind: _reqCtx.kind });
+    if (window.fbq)  fbq('trackCustom', 'HelpRequest', { kind: _reqCtx.kind });
+  } catch(_) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('req-phone')?.addEventListener('input', e => _reqPhoneFmt(e.target));
+});
