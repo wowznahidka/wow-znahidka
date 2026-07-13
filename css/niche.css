@@ -2014,7 +2014,7 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 @keyframes pdNudge { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 .pd-size-nudge { animation: pdNudge .3s ease 2; }
 
-.pd-cta { display: flex; flex-direction: column; gap: 10px; padding: 6px 20px 18px; }
+.pd-cta { display: flex; flex-direction: column; gap: 10px; padding: 6px 20px calc(18px + env(safe-area-inset-bottom, 0px)); }
 .pd-btn-main {
   width: 100%; padding: 16px;
   background: linear-gradient(180deg, #2c2c2e 0%, #1a1a1c 100%);

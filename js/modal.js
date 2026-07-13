@@ -184,7 +184,8 @@ function pdGalleryGo(idx) {
   const track = document.getElementById('pd-gallery-track');
   if (!track) return;
   _pdGalleryIdx = idx;
-  const slideW = (track.parentElement || track).clientWidth;
+  const gallery = document.getElementById('pd-gallery') || track.parentElement;
+  const slideW = gallery ? gallery.getBoundingClientRect().width : track.getBoundingClientRect().width;
   track.style.transform = `translateX(-${idx * slideW}px)`;
   document.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
   document.querySelectorAll('.pd-thumb').forEach((d, i) => {
@@ -372,17 +373,17 @@ function openProductDetail(product) {
       <span class="pd-trust-pill">✓ Повернення</span>
     </div>
 
+    ${_pdSimilarHtml(product)}
+
     <div class="pd-cta">
       <button class="pd-btn-main" id="pd-btn-main" onclick="pdMainCta()">
-        ${product.sizes[0] === 'ONE SIZE' ? '🛒 Додати в кошик' : 'Обери розмір вище 👆'}
+        🛒 В кошик
       </button>
       <button class="pd-tg-link" onclick="_pdPhotoTg()">
         ${tgIco}
         <span>${_imgs ? 'Переглянути у Telegram' : 'Запросити живі фото в Telegram'}</span>
       </button>
-    </div>
-
-    ${_pdSimilarHtml(product)}`;
+    </div>`;
 
   openSheet('sheet-product');
 
