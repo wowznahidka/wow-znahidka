@@ -167,53 +167,46 @@ function confirmSize() {
 
 let _pdGalleryIdx = 0;
 
-// Вертикальне (портретне) фото в hero-контейнері картки товару — не має
-// обрізатись/бути ледь видимим, поки не відкрито zoom. Порівнюємо реальні
-// naturalWidth/naturalHeight фото і додаємо/знімаємо .is-portrait на
-// .pd-hero (CSS-правило — css/cards.css). Для мультифото-галереї синкаємо
-// тільки те фото, яке зараз активне (data-idx === _pdGalleryIdx), щоб
-// фонове довантаження інших слайдів не перебивало висоту контейнера.
-function _pdSyncHeroOrientation(imgEl) {
-  if (!imgEl || !imgEl.naturalWidth || !imgEl.naturalHeight) return;
-  if (imgEl.classList.contains('pd-gallery-img') && Number(imgEl.dataset.idx) !== _pdGalleryIdx) return;
-  const hero = imgEl.closest('.pd-hero');
-  if (!hero) return;
-  hero.classList.toggle('is-portrait', imgEl.naturalHeight > imgEl.naturalWidth * 1.05);
+// Галерея працює на нативному горизонтальному скролі з CSS scroll-snap
+// (css/cards.css .pd-gallery). Позиція слайда — це scrollLeft контейнера,
+// тому resize, поворот екрана чи клавіатура не можуть її розсинхронити,
+// на відміну від старого підходу з translateX у пікселях.
+function pdGalleryGo(idx) {
+  const gallery = document.getElementById('pd-gallery');
+  if (!gallery) return;
+  gallery.scrollTo({ left: idx * gallery.clientWidth, behavior: 'smooth' });
+  _pdSetGalleryIdx(idx);
 }
 
-function pdGalleryGo(idx) {
-  const track = document.getElementById('pd-gallery-track');
-  if (!track) return;
+function _pdSetGalleryIdx(idx) {
   _pdGalleryIdx = idx;
-  const gallery = document.getElementById('pd-gallery') || track.parentElement;
-  const slideW = gallery ? gallery.getBoundingClientRect().width : track.getBoundingClientRect().width;
-  track.style.transform = `translateX(-${idx * slideW}px)`;
   document.querySelectorAll('.pd-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
   document.querySelectorAll('.pd-thumb').forEach((d, i) => {
     d.classList.toggle('active', i === idx);
     if (i === idx) d.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   });
-  const activeImg = track.querySelector(`.pd-gallery-img[data-idx="${idx}"]`);
-  if (activeImg) _pdSyncHeroOrientation(activeImg);
 }
 
-function _initGalleryTouch(gallery) {
-  let startX = 0, startY = 0, moved = false;
-  gallery.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    moved = false;
-  }, { passive: true });
-  gallery.addEventListener('touchmove', () => { moved = true; }, { passive: true });
-  gallery.addEventListener('touchend', e => {
-    if (!moved) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      const total = document.querySelectorAll('.pd-thumb').length || document.querySelectorAll('.pd-dot').length;
-      if (dx < 0 && _pdGalleryIdx < total - 1) pdGalleryGo(_pdGalleryIdx + 1);
-      else if (dx > 0 && _pdGalleryIdx > 0)    pdGalleryGo(_pdGalleryIdx - 1);
-    }
+// Поворот екрана / поява клавіатури: повертаємось до поточного слайда,
+// щоб браузерний re-snap не зсунув галерею на сусідній
+window.addEventListener('resize', () => {
+  const g = document.getElementById('pd-gallery');
+  if (g) g.scrollTo({ left: _pdGalleryIdx * g.clientWidth });
+});
+
+// Тримає активну мініатюру/дот у синхроні з тим, що юзер догорнув пальцем
+function _initGallerySync(gallery) {
+  let raf = null;
+  gallery.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      const w = gallery.clientWidth;
+      if (!w) return;
+      const total = gallery.querySelectorAll('.pd-gallery-slide').length;
+      const idx = Math.max(0, Math.min(Math.round(gallery.scrollLeft / w), total - 1));
+      if (idx !== _pdGalleryIdx) _pdSetGalleryIdx(idx);
+    });
   }, { passive: true });
 }
 
@@ -331,7 +324,7 @@ function openProductDetail(product) {
                       alt="${esc(product.brand)} ${esc(product.name)}"
                       loading="${i===0?'eager':'lazy'}" decoding="async"
                       onclick="openImageZoom('${esc(url)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
-                      onload="this.classList.add('loaded');_pdSyncHeroOrientation(this)">
+                      onload="this.classList.add('loaded')">
                </div>`).join('')}
              </div>
            </div>
@@ -339,7 +332,7 @@ function openProductDetail(product) {
         : product.image && product.image.startsWith('http')
           ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
                onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
-               onload="this.classList.add('loaded');_pdSyncHeroOrientation(this)">
+               onload="this.classList.add('loaded')">
              <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
           : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}
       <div class="pd-hero-vignette" aria-hidden="true"></div>
@@ -374,15 +367,22 @@ function openProductDetail(product) {
       <span class="pd-trust-pill">✓ Повернення</span>
     </div>
 
-    ${_pdSimilarHtml(product)}
-
-    <div class="pd-cta">
-      <button class="pd-btn-main" id="pd-btn-main" onclick="pdMainCta()">
-        🛒 В кошик
-      </button>
+    <div class="pd-tg-row">
       <button class="pd-tg-link" onclick="_pdPhotoTg()">
         ${tgIco}
         <span>${_imgs ? 'Переглянути у Telegram' : 'Запросити живі фото в Telegram'}</span>
+      </button>
+    </div>
+
+    ${_pdSimilarHtml(product)}
+
+    <div class="pd-cta">
+      <div class="pd-cta-price">
+        <span class="pd-cta-price-val">${product.price}₴</span>
+        <span class="pd-cta-price-sub">оплата після примірки</span>
+      </div>
+      <button class="pd-btn-main" id="pd-btn-main" onclick="pdMainCta()">
+        ${product.sizes[0] === 'ONE SIZE' ? '🛒 В кошик' : 'Обрати розмір'}
       </button>
     </div>`;
 
@@ -390,7 +390,7 @@ function openProductDetail(product) {
 
   if (_imgs) {
     const gallery = document.getElementById('pd-gallery');
-    if (gallery) _initGalleryTouch(gallery);
+    if (gallery) _initGallerySync(gallery);
   }
 }
 

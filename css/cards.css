@@ -1053,11 +1053,9 @@
   cursor: zoom-in;
   flex-shrink: 0;
 }
-/* Вертикальне (портретне) фото — більше висоти, щоб було видно повністю
-   без відкриття zoom. Клас додає/знімає JS (_pdSyncHeroOrientation,
-   js/modal.js) за реальними пропорціями поточного фото. Горизонтальні
-   фото цей клас не отримують — висота лишається як була. */
-.pd-hero.is-portrait { height: 82svh; max-height: 720px; }
+/* Висота hero однакова для всіх слайдів — вертикальні фото вписуються через
+   object-fit: contain. Динамічна зміна висоти під орієнтацію фото ламала
+   вирівнювання галереї посеред гортання, тому її прибрано. */
 .pd-img { cursor: zoom-in; }
 .pd-zoom-hint {
   position: absolute; bottom: 12px; right: 12px;
@@ -1099,14 +1097,27 @@
 }
 .pd-hero-vignette { display: none; }
 
-/* ── Gallery carousel (multiple photos) ── */
-.pd-gallery { position: relative; width: 100%; height: 100%; overflow: hidden; }
+/* ── Gallery carousel (multiple photos) ──
+   Нативний горизонтальний скрол + scroll-snap: позиція слайда живе в
+   scrollLeft і переживає resize/поворот/клавіатуру без жодного JS. */
+.pd-gallery {
+  position: relative; width: 100%; height: 100%;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pd-gallery::-webkit-scrollbar { display: none; }
 .pd-gallery-track {
   display: flex; width: 100%; height: 100%;
-  transition: transform .32s cubic-bezier(.4,0,.2,1);
-  will-change: transform;
 }
-.pd-gallery-slide { flex: 0 0 100%; height: 100%; }
+.pd-gallery-slide {
+  flex: 0 0 100%; height: 100%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
 .pd-gallery-img {
   width: 100%; height: 100%;
   object-fit: contain; display: block;
@@ -1410,8 +1421,9 @@
   /* Права колонка: інфо, trust-bar, кнопки, схожі */
   .pd-info       { grid-column: 2; grid-row: 1; padding: 40px 40px 8px; border-top: none; border-left: 1px solid rgba(0,0,0,0.05); }
   .pd-trust-bar  { grid-column: 2; grid-row: 2; padding: 0 40px; }
-  .pd-cta        { grid-column: 2; grid-row: 3; padding: 12px 40px 24px; }
-  .pd-similar    { grid-column: 2; grid-row: 4; padding-bottom: 32px; overflow: hidden; }
+  .pd-tg-row     { grid-column: 2; grid-row: 3; padding: 0 40px; }
+  .pd-cta        { grid-column: 2; grid-row: 4; padding: 12px 40px 24px; }
+  .pd-similar    { grid-column: 2; grid-row: 5; padding-bottom: 32px; overflow: hidden; }
   .pd-name  { font-size: clamp(22px, 2.4vw, 34px); }
   .pd-price { font-size: 30px; }
   .pd-similar-title { padding: 0 40px 10px; }
