@@ -136,35 +136,6 @@
 .card-fav-btn:active { transform: scale(.88); }
 .card-fav-btn.is-fav { background: rgba(255,245,245,0.94); }
 
-/* ── ACTION ROW (cart + detail buttons) ── */
-.card-action-row {
-  display: flex; gap: 8px; margin-top: 10px;
-}
-.card-btn-cart {
-  flex-shrink: 0; width: 44px; height: 44px;
-  border-radius: 10px;
-  background: #f4f4f6; border: 1px solid rgba(0,0,0,0.08);
-  font-size: 16px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s, transform .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.card-btn-cart:hover  { background: #e8e8eb; transform: scale(1.08); }
-.card-btn-cart:active { transform: scale(.9); }
-.card-btn-detail {
-  flex: 1; height: 44px;
-  border-radius: 10px;
-  background: #0d0d0d; color: #fff;
-  font-family: 'Sora', sans-serif;
-  font-size: 12px; font-weight: 800;
-  border: none; cursor: pointer;
-  transition: background .15s, transform .15s;
-  -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
-}
-.card-btn-detail:hover  { background: #ff3e3e; }
-.card-btn-detail:active { transform: scale(.96); }
-
 /* Price row with quick-order button */
 .card-price-row {
   display: flex; align-items: center; justify-content: space-between;

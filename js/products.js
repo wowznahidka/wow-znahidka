@@ -102,7 +102,7 @@ function prodCardHtml(p, opts = {}) {
         : '';
 
   const photoCountBadge = (p.images && p.images.length > 1)
-    ? `<div class="card-photo-count">📷 ${p.images.length}</div>`
+    ? `<div class="card-photo-count"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M21 8v10a3 3 0 0 1-3 3H8"/></svg> ${p.images.length}</div>`
     : '';
 
   const cycleAttr = (p.images && p.images.length > 1)
@@ -130,12 +130,6 @@ function prodCardHtml(p, opts = {}) {
         : `<span>${s}</span>`).join('') +
       (p.sizes.length > maxSz ? `<span class="sz-more">+${p.sizes.length - maxSz}</span>` : '');
 
-  const actionRow = grid ? `
-    <div class="card-action-row">
-      <button class="card-btn-cart" onclick="event.stopPropagation();openSizePicker(findProd('${p.id}'))" aria-label="Купити">🛒</button>
-      <button class="card-btn-detail" onclick="event.stopPropagation();openProductDetail(findProd('${p.id}'))">Детальніше →</button>
-    </div>` : '';
-
   const brandClr = BRAND_LABEL_CLR[p.brand] || '#ff3e3e';
 
   return `<article class="product-card${gridCls}"
@@ -153,7 +147,6 @@ function prodCardHtml(p, opts = {}) {
       <div class="card-price"><span class="card-price-main">${pricePart}</span></div>
       <div class="card-sizes-preview${grid ? ' sz-quick-row' : ''}">${szList}</div>
       ${_scarcityText(p)}
-      ${actionRow}
     </div>
   </article>`;
 }

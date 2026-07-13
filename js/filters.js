@@ -772,9 +772,9 @@ function updateResultsCount(n) {
   const el = document.getElementById('cat-count');
   if (!el) return;
   if (n == null || n === undefined) { el.textContent = ''; return; }
-  const word = (n % 10 === 1 && n % 100 !== 11) ? 'модель' :
-               (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'моделі' : 'моделей';
-  el.innerHTML = `<b>${n}</b> ${word}`;
+  const word = (n % 10 === 1 && n % 100 !== 11) ? 'пара' :
+               (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'пари' : 'пар';
+  el.innerHTML = `<b>${n}</b> ${word} під твій вибір`;
 }
 
 // ── INTEGRATE WITH FILTER CHAIN ──────────────────────
