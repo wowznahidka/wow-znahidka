@@ -171,7 +171,7 @@ function handleRefShareTo(platform) {
   const text = encodeURIComponent('Глянь — тут є круті речі 🔥 ' + link);
   const urls = {
     facebook:  `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(link)}`,
-    telegram:  `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Глянь — тут є круті речі 🔥')}`,
+    telegram:  `https://telegram.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent('Глянь — тут є круті речі 🔥')}`,
   };
   if (urls[platform]) {
     try { window.open(urls[platform], '_blank', 'noopener'); }

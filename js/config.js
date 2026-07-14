@@ -5,7 +5,7 @@
 
 const CFG = {
   GAS_URL:  'https://script.google.com/macros/s/AKfycbxnbKNfrT38T4c7drhOI5IomuFzLNCeXZPykGwBSQpgtZUkme6Ip91Zio9weRgQYs-mCw/exec',
-  TG_URL:   'https://t.me/znahidkawow',
+  TG_URL:   'https://telegram.me/znahidkawow',
   IG_URL:   'https://instagram.com/wow.znahidka',
   TT_URL:   'https://www.tiktok.com/@wowznahidka',
 
