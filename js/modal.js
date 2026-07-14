@@ -241,7 +241,10 @@ function pdMainCta() {
   if (main) main.textContent = '✅ У кошику · Оформити →';
   if (main && !main.dataset.added) {
     main.dataset.added = '1';
-    main.onclick = () => { closeAllSheets(); openSheet('sheet-cart'); };
+    // openSheet сам закриває поточну шторку без history.back().
+    // Окремий closeAllSheets() перед ним створює гонку: його history.back()
+    // прилітає popstate'ом уже ПІСЛЯ відкриття кошика і закриває його.
+    main.onclick = () => { openSheet('sheet-cart'); };
   }
   toast(`✅ ${esc(p.brand)} ${esc(p.name)}, розмір ${sz} — в кошику!`);
   try { if (window.fbq) fbq('track', 'AddToCart', { currency: 'UAH', value: Number(p.price) || 0, content_ids: [p.id], content_type: 'product' }); } catch(_) {}

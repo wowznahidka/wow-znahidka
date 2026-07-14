@@ -112,3 +112,16 @@ body.on-match {
   .match-actions { padding: 8px 20px 12px; }
   .m-action { width: 52px; height: 52px; font-size: 22px; }
 }
+
+/* ── ДУЖЕ НИЗЬКІ ЕКРАНИ (iPhone SE 320×568 і подібні) ─────────
+   Матч має влазити повністю: картка менша, кнопки дій завжди видно */
+@media (max-height: 610px) {
+  .match-page-title { font-size: 21px; }
+  .match-subtitle { display: none; }
+  .card-stage { min-height: 210px; margin: 6px 14px 2px; }
+  .m-card-img, .m-card-img-ph { aspect-ratio: 4/3.4; }
+  .match-size-filter, .match-budget-row { margin-top: 4px; }
+  .match-sz-chip { height: 30px; font-size: 12px; }
+  .match-actions { padding: 6px 20px 8px; gap: 14px; }
+  .m-action { width: 50px; height: 50px; font-size: 21px; }
+}

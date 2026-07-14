@@ -112,10 +112,10 @@ function quickAddToCart(productId, size, btnEl) {
   const acts = btnEl.closest('.fav-item')?.querySelector('.fav-acts');
   if (acts) {
     acts.innerHTML = `
-      <button class="fav-to-cart" onclick="closeAllSheets();openSheet('sheet-cart')" style="background:var(--green)">Кошик</button>
+      <button class="fav-to-cart" onclick="openSheet('sheet-cart')" style="background:var(--green)">Кошик</button>
       <button class="fav-rm" onclick="removeFromFavs('${esc(p.id)}',event)" aria-label="Видалити"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg></button>`;
   }
-  toast(`✅ Розмір ${sz} — в кошику! <a onclick="closeAllSheets();openSheet('sheet-cart')">Переглянути →</a>`);
+  toast(`✅ Розмір ${sz} — в кошику! <a onclick="openSheet('sheet-cart')">Переглянути →</a>`);
 }
 
 // ── CART ─────────────────────────────────────────── */
