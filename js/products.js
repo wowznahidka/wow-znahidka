@@ -235,9 +235,11 @@ function renderHeroDemo(data) {
   const picks = shuffleSeeded(pool, 5).slice(0, 3);
   if (picks.length < 3) { wrap.hidden = true; return; }
   wrap.hidden = false;
-  wrap.innerHTML = picks.map((p, i) => `
+  // Всі 3 фото eager: задня картка без фото — це сірий прямокутник,
+  // який власник бачить як "сіре щось плаває"
+  wrap.innerHTML = picks.map(p => `
     <div class="hd-card">
-      <img src="${esc(p.image)}" alt="" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" onload="this.classList.add('loaded')">
+      <img src="${esc(p.image)}" alt="" loading="eager" decoding="async" onload="this.classList.add('loaded')">
       <div class="hd-price">${p.price}₴</div>
     </div>`).join('') + `<div class="hd-like" aria-hidden="true">❤️</div>`;
 
