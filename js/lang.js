@@ -71,7 +71,7 @@ const STRINGS = {
     revTextPh:'Розкажіть про ваш досвід замовлення…',
     priceAll:'Всі ціни', priceLow:'До 2000₴', priceMid:'2000–3500₴', priceHigh:'3500₴+',
     cartRowItems:'Товари', cartRowDelivery:'Доставка', csbLabel:'пар у кошику',
-    scarcity1:'⚡️ Остання пара!', scarcityLow:'🔥 Залишилось', scarcityLowSuffix:' пари',
+    scarcity1:'Останній розмір', scarcityLow:'Залишилось', scarcityLowSuffix:' розміри',
     faqTitle:'❓ Часті запитання',
     faqItems:[
       {q:'Як оплатити?', a:'Оплата після примірки на відділенні Нової Пошти. Передоплати нема взагалі.'},
@@ -172,7 +172,7 @@ const STRINGS = {
     revTextPh:'Tell us about your experience…',
     priceAll:'All prices', priceLow:'Under ₴2000', priceMid:'₴2000–3500', priceHigh:'₴3500+',
     cartRowItems:'Items', cartRowDelivery:'Delivery', csbLabel:'pairs in cart',
-    scarcity1:'⚡️ Last size!', scarcityLow:'🔥 Only', scarcityLowSuffix:' sizes left',
+    scarcity1:'Last size', scarcityLow:'Only', scarcityLowSuffix:' sizes left',
     faqTitle:'❓ FAQ',
     faqItems:[
       {q:'How do I pay?', a:'Payment after try-on at the Nova Poshta branch. No prepayment at all.'},

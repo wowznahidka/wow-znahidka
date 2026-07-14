@@ -42,11 +42,11 @@ function discPct(p) {
   return Math.round((1 - p.price / p.oldPrice) * 100);
 }
 
+// Чесний статус: тільки коли лишився один розмір. Кількість пар ми не знаємо,
+// тому «Остання пара» чи «Залишилось N» тут були б вигадкою.
 function _scarcityText(p) {
   if (!p.sizes || !p.sizes.length || p.sizes[0] === 'ONE SIZE') return '';
-  const n = p.sizes.length;
-  if (n === 1) return `<div class="scarcity-chip">${L.scarcity1 || '⚡️ Остання пара!'}</div>`;
-  if (n <= 5)  return `<div class="scarcity-chip">${L.scarcityLow || '🔥 Залишилось'} ${n}${L.scarcityLowSuffix || ' пари'}</div>`;
+  if (p.sizes.length === 1) return `<div class="scarcity-chip">${L.scarcity1 || 'Останній розмір'}</div>`;
   return '';
 }
 
@@ -92,14 +92,9 @@ function prodCardHtml(p, opts = {}) {
          loading="${eager ? 'eager' : 'lazy'}" decoding="async" onload="this.classList.add('loaded')">`
     : `<div class="card-img-placeholder" aria-hidden="true">👟</div>`;
 
-  const isPremium = Number(p.price) >= 6000;
-  const badgePart = isPremium
-    ? `<div class="prod-badge badge-premium">💎 PREMIUM</div>`
-    : p.isNew
-      ? `<div class="prod-badge badge-new">NEW</div>`
-      : low
-        ? `<div class="prod-badge badge-low">LAST</div>`
-        : '';
+  // Один чесний бейдж: NEW тільки з даних. «Останній розмір» показує чип у тілі
+  // картки, дублювати його бейджем не треба.
+  const badgePart = p.isNew ? `<div class="prod-badge badge-new">NEW</div>` : '';
 
   const photoCountBadge = (p.images && p.images.length > 1)
     ? `<div class="card-photo-count"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M21 8v10a3 3 0 0 1-3 3H8"/></svg> ${p.images.length}</div>`
@@ -110,11 +105,13 @@ function prodCardHtml(p, opts = {}) {
     : '';
 
   const favActive = typeof isFav === 'function' && isFav(p.id);
-  const favBtn = grid
-    ? `<button class="card-fav-btn${favActive ? ' is-fav' : ''}"
+  // Серце на кожній картці (не тільки в гріді) — друга дія картки за ТЗ.
+  // SVG замість емоджі: стан керується класом .is-fav, JS текст не міняє.
+  const favBtn = `<button class="card-fav-btn${favActive ? ' is-fav' : ''}"
         onclick="event.stopPropagation();quickToggleFav('${p.id}',this)"
-        aria-label="В улюблені">${favActive ? '❤️' : '🤍'}</button>`
-    : '';
+        aria-label="В улюблені" aria-pressed="${favActive}">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-6.7-4.35-9.33-8.11C.9 10.36 1.7 6.6 4.86 5.3c2.06-.85 4.4-.14 5.9 1.5L12 8.06l1.24-1.26c1.5-1.64 3.84-2.35 5.9-1.5 3.16 1.3 3.96 5.06 2.19 7.59C18.7 16.65 12 21 12 21z"/></svg>
+      </button>`;
 
   const pricePart = p.oldPrice && p.oldPrice > p.price
     ? `${fmtPrice(p.price)}<span class="prod-card-old">${fmtPrice(p.oldPrice)}</span>${pct > 0 ? `<span class="prod-card-disc">-${pct}%</span>` : ''}`

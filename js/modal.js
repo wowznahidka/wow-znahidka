@@ -271,10 +271,12 @@ function openProductDetail(product) {
     ? qKeys.reduce((s, k) => s + (qty[k] || 1), 0)
     : product.sizes.length;
   const hasRealSizes = product.sizes.length > 0 && product.sizes[0] !== 'ONE SIZE';
-  const scarcHtml = hasRealSizes && total === 1
-    ? `<div class="pd-scarc-hero sc-last">🔥 Остання пара!</div>`
-    : hasRealSizes && total === 2
-      ? `<div class="pd-scarc-hero sc-low">⚡ Залишилось 2 пари</div>`
+  // «Остання пара» — тільки коли sizeQty реально це підтверджує.
+  // Без даних кількості чесний максимум — «Останній розмір».
+  const scarcHtml = hasRealSizes && qKeys.length > 0 && total === 1
+    ? `<div class="pd-scarc-hero sc-last">Остання пара</div>`
+    : hasRealSizes && !qKeys.length && product.sizes.length === 1
+      ? `<div class="pd-scarc-hero sc-last">Останній розмір</div>`
       : '';
 
   // Price row

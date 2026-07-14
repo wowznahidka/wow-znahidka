@@ -25,7 +25,7 @@ function quickToggleFav(id, btn) {
   const active = isFav(id);
   if (btn) {
     btn.classList.toggle('is-fav', active);
-    btn.textContent = active ? '❤️' : '🤍';
+    btn.setAttribute('aria-pressed', String(active));
   }
 }
 
