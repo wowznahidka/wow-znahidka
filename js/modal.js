@@ -309,7 +309,7 @@ function openProductDetail(product) {
                  <img class="pd-gallery-img${i===0?' loaded':''}" src="${esc(url)}" data-idx="${i}"
                       alt="${esc(product.brand)} ${esc(product.name)}"
                       loading="${i===0?'eager':'lazy'}" decoding="async"
-                      onclick="openImageZoom('${esc(url)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
+                      onclick="openImageZoom('${esc(url)}','${esc(product.brand)} ${esc(product.name)}',S.pdProduct?.images)"
                       onload="this.classList.add('loaded')">
                </div>`).join('')}
              </div>
@@ -317,7 +317,7 @@ function openProductDetail(product) {
            <div class="pd-zoom-hint" aria-hidden="true">↔ Свайп · тап для збільшення</div>`
         : product.image && product.image.startsWith('http')
           ? `<img class="pd-img" src="${esc(product.image)}" alt="${esc(product.brand)} ${esc(product.name)}" loading="lazy" decoding="async"
-               onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}',S.spProduct?.images)"
+               onclick="openImageZoom('${esc(product.image)}','${esc(product.brand)} ${esc(product.name)}',S.pdProduct?.images)"
                onload="this.classList.add('loaded')">
              <div class="pd-zoom-hint" aria-hidden="true">🔍 Тап для збільшення</div>`
           : `<div class="pd-img-ph" aria-hidden="true">👟</div>`}

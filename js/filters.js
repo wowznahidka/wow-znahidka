@@ -201,13 +201,18 @@ function _applyFilters() {
   const cv = document.getElementById('catalog-view');
   if (cv) cv.classList.add('filtering');
   requestAnimationFrame(() => {
-    const data = getCatalog();
-    if (!data) { if (cv) cv.classList.remove('filtering'); return; }
-    if (S.searchQ)                                  renderSearchResults(data);
-    else if (document.getElementById('cat-stories-row')) _updateCatalogGrid(data);
-    else                                             _renderUnifiedCatalog(data);
-    if (cv) cv.classList.remove('filtering');
-    _syncFiltersToUrl();
+    // finally гарантує зняття напівпрозорості навіть якщо рендер впав —
+    // інакше каталог назавжди лишається тьмяним (opacity .45)
+    try {
+      const data = getCatalog();
+      if (!data) return;
+      if (S.searchQ)                                  renderSearchResults(data);
+      else if (document.getElementById('cat-stories-row')) _updateCatalogGrid(data);
+      else                                             _renderUnifiedCatalog(data);
+      _syncFiltersToUrl();
+    } finally {
+      if (cv) cv.classList.remove('filtering');
+    }
   });
 }
 

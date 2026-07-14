@@ -560,7 +560,14 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
   body {
     padding: 0 !important;
     display: block !important;
-    background: #f6f4f4 !important;
+    /* Преміальний ambient-фон: теплий беж + два дуже тихих кольорових
+       сяйва, закріплені на в'юпорті — сайт лежить на «повітрі», не на
+       голому сірому */
+    background:
+      radial-gradient(900px 600px at 8% -5%, rgba(255,62,62,0.05) 0%, transparent 60%),
+      radial-gradient(1100px 700px at 100% 12%, rgba(60,90,220,0.04) 0%, transparent 60%),
+      linear-gradient(180deg, #f7f5f4 0%, #f3f1ef 100%) !important;
+    background-attachment: fixed !important;
     min-height: 100vh;
   }
   body::before {
@@ -2087,7 +2094,8 @@ body { font-family: 'Inter', var(--niche-font-body), sans-serif; }
 .dd-teaser.dd-opening .dd-teaser-card { animation: ddTeaserOpen .45s ease forwards; }
 @keyframes ddTeaserOpen { to { transform: scale(1.05); opacity: 0; } }
 @media (min-width: 900px) {
-  .dd-teaser-card { min-height: 260px; }
+  /* на десктопі тизер не розтягується на всю ширину — компактна центрована картка */
+  .dd-teaser-card { min-height: 250px; max-width: 640px; margin: 0 auto; }
   .dd-teaser-body { max-width: 420px; }
   .dd-teaser:hover .dd-teaser-img { filter: blur(13px) saturate(1.15) brightness(1.06); }
 }

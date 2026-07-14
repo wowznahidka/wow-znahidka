@@ -37,17 +37,130 @@ async function initMatch() {
   const data = await fetchCatalog();
   if (!data || !data.length) return;
 
+  // Перший вхід у Match — короткий опросник (3 кроки) замість повної колоди
+  if (!_mqDone()) { _renderMatchQuiz(); return; }
+
+  _startMatchDeck(data);
+}
+
+function _startMatchDeck(data) {
   const _pool = [...data];
   for (let i = _pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [_pool[i], _pool[j]] = [_pool[j], _pool[i]];
   }
-  S.matchFullPool   = _pool;
-  S.matchSizeFilter = 'all';
-  S.matchBudget     = 'all';
+  S.matchFullPool = _pool;
+  // Прапорці з опросника застосовуються один раз, далі — що обрав юзер чіпами
+  if (_mqPrefs) {
+    S.matchSizeFilter = _mqPrefs.size   || 'all';
+    S.matchBudget     = _mqPrefs.budget || 'all';
+    _mqPrefs = null;
+  } else {
+    S.matchSizeFilter = S.matchSizeFilter || 'all';
+    S.matchBudget     = S.matchBudget     || 'all';
+  }
   _buildSizeChips(_pool);
   _buildBudgetChips();
   _applyMatchFilters();
+}
+
+// ── MATCH ONBOARDING QUIZ ────────────────────────────
+// 3 швидких кроки (для кого / розмір / бюджет) → колода одразу під людину.
+// Показується один раз; далі керування — звичайними чіпами фільтрів.
+const MATCH_QUIZ_KEY = 'wow_match_quiz_v1';
+let _mq = null;        // поточний стан проходження
+let _mqPrefs = null;   // {size,budget} — застосувати при найближчому старті колоди
+
+function _mqDone() {
+  try { return !!localStorage.getItem(MATCH_QUIZ_KEY); } catch(_) { return true; }
+}
+
+function _renderMatchQuiz() {
+  _mq = { step: 1, gender: null, size: null, budget: null };
+  document.getElementById('page-match')?.classList.add('quiz-on');
+  _mqRenderStep();
+}
+
+function _mqSizesFor(gender) {
+  const all = (S.catalog && S.catalog.all) || [];
+  const pool = gender && gender !== 'mixed'
+    ? all.filter(p => p.gender === (gender === 'male' ? 'Чоловік' : 'Жінка'))
+    : all;
+  const sizes = new Set();
+  pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?' && v !== 'ONE SIZE') sizes.add(v); }));
+  return [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
+}
+
+function _mqRenderStep() {
+  const stage = document.getElementById('card-stage');
+  if (!stage || !_mq) return;
+  const dots = [1, 2, 3].map(i => `<span class="mq-dot${i === _mq.step ? ' on' : ''}"></span>`).join('');
+  let body = '';
+  if (_mq.step === 1) {
+    body = `
+      <div class="mq-q">Для кого шукаємо?</div>
+      <div class="mq-opts">
+        <button class="mq-opt" onclick="mqPick('gender','male')">Чоловічі</button>
+        <button class="mq-opt" onclick="mqPick('gender','female')">Жіночі</button>
+        <button class="mq-opt mq-opt-soft" onclick="mqPick('gender','mixed')">Неважливо</button>
+      </div>`;
+  } else if (_mq.step === 2) {
+    const sizes = _mqSizesFor(_mq.gender);
+    body = `
+      <div class="mq-q">Який розмір?</div>
+      <div class="mq-sizes">
+        ${sizes.map(s => `<button class="mq-sz" onclick="mqPick('size','${s}')">${s}</button>`).join('')}
+      </div>
+      <button class="mq-skip-step" onclick="mqPick('size',null)">Пропустити</button>`;
+  } else {
+    body = `
+      <div class="mq-q">Бюджет?</div>
+      <div class="mq-opts">
+        <button class="mq-opt" onclick="mqPick('budget','2500')">до 2500₴</button>
+        <button class="mq-opt" onclick="mqPick('budget','3000')">2500–3000₴</button>
+        <button class="mq-opt" onclick="mqPick('budget',null)">3000₴+</button>
+        <button class="mq-opt mq-opt-soft" onclick="mqPick('budget',null)">Неважливо</button>
+      </div>`;
+  }
+  stage.innerHTML = `
+    <div class="mq-card">
+      <div class="mq-eyebrow">ШВИДКИЙ ПІДБІР · 15 СЕКУНД</div>
+      ${body}
+      <div class="mq-foot">
+        <div class="mq-dots">${dots}</div>
+        <button class="mq-skip-all" onclick="mqSkipAll()">Показати все →</button>
+      </div>
+    </div>`;
+}
+
+function mqPick(field, val) {
+  if (!_mq) return;
+  _mq[field] = val;
+  _haptic(10);
+  if (_mq.step < 3) { _mq.step++; _mqRenderStep(); return; }
+  _mqFinish();
+}
+
+function mqSkipAll() {
+  _mq = { step: 3, gender: null, size: null, budget: null };
+  _mqFinish();
+}
+
+function _mqFinish() {
+  try { localStorage.setItem(MATCH_QUIZ_KEY, '1'); } catch(_) {}
+  const stage = document.getElementById('card-stage');
+  if (stage) stage.innerHTML = `
+    <div class="mq-card mq-ready">
+      <div class="mq-ready-ico">🔥</div>
+      <div class="mq-q">Зібрали колоду під тебе</div>
+    </div>`;
+  if (_mq.gender) setGender(_mq.gender, true);
+  _mqPrefs = { size: _mq.size || 'all', budget: _mq.budget || 'all' };
+  _mq = null;
+  setTimeout(() => {
+    document.getElementById('page-match')?.classList.remove('quiz-on');
+    _startMatchDeck(getCatalog());
+  }, 650);
 }
 
 function _preloadMatchImages() {
@@ -68,8 +181,9 @@ function _buildSizeChips(pool) {
   const sizes = new Set();
   pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?') sizes.add(v); }));
   const sorted = [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
-  wrap.innerHTML = `<button class="match-sz-chip active" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
-    sorted.map(s => `<button class="match-sz-chip" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
+  const cur = String(S.matchSizeFilter || 'all');
+  wrap.innerHTML = `<button class="match-sz-chip${cur === 'all' ? ' active' : ''}" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
+    sorted.map(s => `<button class="match-sz-chip${cur === String(s) ? ' active' : ''}" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
 }
 
 function setMatchSize(sz) {
@@ -82,8 +196,9 @@ function _buildBudgetChips() {
   const wrap = document.getElementById('match-budget-filter');
   if (!wrap) return;
   const opts = [['all', 'Без різниці'], ['2000', 'до 2000₴'], ['2500', 'до 2500₴'], ['3000', 'до 3000₴']];
+  const cur = String(S.matchBudget || 'all');
   wrap.innerHTML = opts.map(([v, label]) =>
-    `<button class="match-sz-chip match-b-chip${v === 'all' ? ' active' : ''}" data-b="${v}" onclick="setMatchBudget('${v}')">${label}</button>`
+    `<button class="match-sz-chip match-b-chip${v === cur ? ' active' : ''}" data-b="${v}" onclick="setMatchBudget('${v}')">${label}</button>`
   ).join('');
 }
 
