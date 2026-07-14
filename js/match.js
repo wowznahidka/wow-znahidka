@@ -490,11 +490,9 @@ function swipeCard(dir) {
     clearTimeout(_comboTimer);
     _comboTimer = setTimeout(() => { _matchCombo = 0; _updateComboUI(); }, 3500);
     _spawnHearts(card);
+    // Комбо показує тільки тихий лічильник (m-combo) — тости кожні N лайків
+    // перебивали гру і виглядали дешево
     _updateComboUI();
-    if (_matchCombo === 3)       toast('🔥 Три поспіль! Смак є!');
-    else if (_matchCombo === 5)  toast('🔥🔥 Комбо ×5! Майстер!');
-    else if (_matchCombo === 10) toast('💎 ×10 — ЛЕГЕНДА!');
-    else if (_matchCombo > 10 && _matchCombo % 5 === 0) toast(`💎 ×${_matchCombo} — UNSTOPPABLE!`);
     _showLikeBar(p);
   } else {
     _hideLikeBar();
@@ -550,7 +548,7 @@ function _showLikeBar(p) {
     ? `<button class="mlb-sz" onclick="matchQuickSize('${esc(p.id)}','ONE SIZE',this)">В кошик</button>`
     : p.sizes.slice(0, 6).map(s => `<button class="mlb-sz" onclick="matchQuickSize('${esc(p.id)}','${s}',this)">${s}</button>`).join('');
   bar.innerHTML = `
-    <span class="mlb-label">❤️ ${esc(p.brand)} · розмір:</span>
+    <span class="mlb-label">${esc(p.brand)} · розмір:</span>
     <span class="mlb-sizes">${sizes}</span>`;
   document.getElementById('page-match')?.appendChild(bar);
   requestAnimationFrame(() => bar.classList.add('on'));

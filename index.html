@@ -84,7 +84,7 @@
 <!-- base.css is render-critical — stays synchronous -->
 <link rel="stylesheet" href="css/base.css?v=56">
 <link rel="stylesheet" href="css/layout.css?v=73">
-<link rel="stylesheet" href="css/cards.css?v=70">
+<link rel="stylesheet" href="css/cards.css?v=74">
 <link rel="stylesheet" href="css/animations.css?v=56">
 <link rel="stylesheet" href="css/mobile.css?v=72">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,7 +351,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
   <section id="page-match" class="page" aria-label="Match">
     <div class="match-top">
       <div class="match-top-left">
-        <h1 class="match-page-title">🔥 MATCH</h1>
+        <h1 class="match-page-title">MATCH</h1>
         <p class="match-subtitle">Знайди свою пару</p>
       </div>
       <div style="display:flex;align-items:center;gap:8px">
@@ -377,9 +377,15 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
       <div class="loading-wrap"><div class="spinner" aria-label="Завантаження"></div></div>
     </div>
     <div class="match-actions" role="group" aria-label="Дії">
-      <button class="m-action m-nope" onclick="swipeCard('left')"  aria-label="Пропустити">✕</button>
-      <button class="m-action m-undo" id="match-undo-btn" onclick="undoMatchSwipe()" aria-label="Повернути попередню" disabled>↩</button>
-      <button class="m-action m-like" onclick="swipeCard('right')" aria-label="Лайк">❤️</button>
+      <button class="m-action m-nope" onclick="swipeCard('left')"  aria-label="Пропустити">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button class="m-action m-undo" id="match-undo-btn" onclick="undoMatchSwipe()" aria-label="Повернути попередню" disabled>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+      </button>
+      <button class="m-action m-like" onclick="swipeCard('right')" aria-label="Лайк">
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 21s-6.7-4.35-9.33-8.11C.9 10.36 1.7 6.6 4.86 5.3c2.06-.85 4.4-.14 5.9 1.5L12 8.06l1.24-1.26c1.5-1.64 3.84-2.35 5.9-1.5 3.16 1.3 3.96 5.06 2.19 7.59C18.7 16.65 12 21 12 21z"/></svg>
+      </button>
     </div>
     <div class="match-kb-hint" aria-hidden="true">
       <span>← Пропустити</span>
@@ -413,7 +419,7 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
         <button class="g-chip" data-gender="female" onclick="setGender('female')">Жінки</button>
       </div>
       <select class="cat-sort" id="cat-sort" onchange="setSortMode(this.value)" aria-label="Сортувати">
-        <option value="popular">🔥 Популярне</option>
+        <option value="popular">Популярне</option>
         <option value="price_asc">↑ Ціна: дешевше</option>
         <option value="price_desc">↓ Ціна: дорожче</option>
       </select>
@@ -1078,12 +1084,12 @@ src="https://www.facebook.com/tr?id=1578292430419094&ev=PageView&noscript=1"
      ════════════════════════════════════════════════ -->
 <script src="js/config.js?v=69"             defer></script>
 <script src="js/state.js?v=58"              defer></script>
-<script src="js/lang.js?v=70"               defer></script>
+<script src="js/lang.js?v=74"               defer></script>
 <script src="js/api.js?v=58"                defer></script>
 <script src="js/products.js?v=73"           defer></script>
 <script src="js/ui.js?v=68"                 defer></script>
-<script src="js/match.js?v=68"              defer></script>
-<script src="js/filters.js?v=68"            defer></script>
+<script src="js/match.js?v=74"              defer></script>
+<script src="js/filters.js?v=74"            defer></script>
 <script src="js/cart.js?v=72"               defer></script>
 <script src="js/modal.js?v=72"              defer></script>
 <script src="js/deals.js?v=57"              defer></script>

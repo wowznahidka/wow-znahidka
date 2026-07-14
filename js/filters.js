@@ -544,7 +544,6 @@ function _renderUnifiedCatalog(data) {
   el.innerHTML = `
     <div class="cat-stories-hdr">
       <span class="cat-vibe-line">Знайди свою пару</span>
-      <span class="cat-vibe-fire">🔥</span>
       ${activeBrand ? `<button class="cat-story-reset" onclick="_selectBrandStory(null)">× ${esc(activeBrand)}</button>` : ''}
     </div>
     <div class="cat-stories-row" id="cat-stories-row" role="list" aria-label="Фільтр по бренду">
