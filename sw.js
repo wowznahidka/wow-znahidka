@@ -1,9 +1,9 @@
 /* ============================================================
-   WOW.ZNAHIDKA — Service Worker  (wow-v42)
+   WOW.ZNAHIDKA — Service Worker  (wow-v43)
    Strategy: pre-cache shell → network-first nav → stale-while-revalidate assets
    ============================================================ */
 
-const V = 'wow-v42';
+const V = 'wow-v43';
 
 // Critical shell — install fails if these are missing (intentional)
 const SHELL = [
