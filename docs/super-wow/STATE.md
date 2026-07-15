@@ -79,3 +79,21 @@ FACT:
 NEXT TASK:
 
 аудит js/app.js та js/ui.js
+
+TASK 001 — COMPLETED
+
+Прочитано:
+
+js/products.js
+js/state.js
+
+Створено:
+
+docs/super-wow/audit/02_PRODUCTS_STATE.md
+
+NEXT TASK:
+
+прочитати тільки:
+
+js/app.js
+js/ui.js
