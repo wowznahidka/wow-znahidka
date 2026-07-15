@@ -18,6 +18,10 @@ js/config.js
 
 js/api.js
 
+js/products.js
+
+js/state.js
+
 FACT:
 
 js/config.js містить центральну конфігурацію сайту.
@@ -56,28 +60,22 @@ FACT:
 
 data/extra_photos.json доповнює фотографії товарів.
 
-Потребує перевірки:
+FACT:
 
-структура глобального стану S;
+js/state.js є єдиним джерелом істини (S): зберігає persistent стан (gender, favs, cart) та UI стан (tabs, filters, match pool).
 
-роль getCatalog;
+FACT:
 
-логіка products.js;
+js/products.js є основним движком рендерингу: генерує HTML для товарів та головної сторінки.
 
-логіка state.js;
+FACT:
 
-renderHome;
+функція getCatalog() обробляє динамічну фільтрацію за статтю, ціною, пошуком та сезонність.
 
-renderCatalog;
+FACT:
 
-фактичний runtime-потік;
-
-реальна поведінка старого кешу.
+використовується "Seeded Shuffle" для стабільності порядку товарів усередині сеансу.
 
 NEXT TASK:
 
-прочитати тільки:
-
-js/products.js
-
-js/state.js
+аудит js/app.js та js/ui.js
