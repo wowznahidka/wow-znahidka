@@ -74,7 +74,7 @@ FACT:
 
 FACT:
 
-використовується "Seeded Shuffle" для стабільності порядку товарів усередині сеансу.
+використовується \"Seeded Shuffle\" для стабільності порядку товарів усередині сеансу.
 
 NEXT TASK:
 
@@ -97,3 +97,18 @@ NEXT TASK:
 
 js/app.js
 js/ui.js
+
+TASK 002 — COMPLETED
+
+Прочитано:
+
+js/app.js
+js/ui.js
+
+Створено:
+
+docs/super-wow/audit/03_APP_UI.md
+
+NEXT TASK:
+
+аудит js/match.js та js/modal.js
