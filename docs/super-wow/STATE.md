@@ -58,10 +58,6 @@ data/products_auto.json присутній як резервне джерело.
 
 FACT:
 
-data/extra_photos.json доповнює фотографії товарів.
-
-FACT:
-
 js/state.js є єдиним джерелом істини (S): зберігає persistent стан (gender, favs, cart) та UI стан (tabs, filters, match pool).
 
 FACT:
@@ -85,6 +81,7 @@ TASK 001 — COMPLETED
 Прочитано:
 
 js/products.js
+
 js/state.js
 
 Створено:
@@ -96,6 +93,7 @@ NEXT TASK:
 прочитати тільки:
 
 js/app.js
+
 js/ui.js
 
 TASK 002 — COMPLETED
@@ -103,6 +101,7 @@ TASK 002 — COMPLETED
 Прочитано:
 
 js/app.js
+
 js/ui.js
 
 Створено:
@@ -112,3 +111,19 @@ docs/super-wow/audit/03_APP_UI.md
 NEXT TASK:
 
 аудит js/match.js та js/modal.js
+
+TASK 003 — COMPLETED
+
+Прочитано:
+
+js/match.js
+
+js/modal.js
+
+Створено:
+
+docs/super-wow/audit/04_MATCH_MODAL.md
+
+NEXT TASK:
+
+None
