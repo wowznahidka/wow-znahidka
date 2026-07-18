@@ -17,7 +17,8 @@ from zernio_autopost import post_product as zernio_post
 api_id   = 39155326
 api_hash = 'f5fdd929b4bcc48bb9970aa3b2945c18'
 
-SOURCE_CHANNEL = 'wooowznahidka'
+SOURCE_CHANNEL  = 'wooowznahidka'
+PUBLISH_CHANNEL = 'wooowznahidka'       # канал де постимо нові товари
 GITHUB_REPO    = 'wowznahidka/wow-znahidka'
 GITHUB_BRANCH  = 'main'
 SITE_BASE      = 'https://wowznahidka.github.io/wow-znahidka'
@@ -40,12 +41,91 @@ KNOWN_BRANDS = [
     'Kappa', 'Numeris', 'Crocs', 'Suicoke', 'Crep', 'Hoka',
 ]
 
+PRICE_MARGIN = 600  # додаємо до ціни з каналу
+
 client = TelegramClient(SESSION_FILE, api_id, api_hash)
 
 album_buffer: dict = {}
 
 
 # ── GITHUB ────────────────────────────────────────────────────
+def _bot_token() -> str:
+    try:
+        with open(ENV_PATH) as f:
+            for line in f:
+                if line.startswith('TELEGRAM_BOT_TOKEN='):
+                    return line.split('=', 1)[1].strip()
+    except Exception:
+        pass
+    return os.environ.get('TELEGRAM_BOT_TOKEN', '')
+
+
+def _owner_id() -> str:
+    try:
+        with open(ENV_PATH) as f:
+            for line in f:
+                if line.startswith('TELEGRAM_OWNER_ID='):
+                    return line.split('=', 1)[1].strip()
+    except Exception:
+        pass
+    return ''
+
+
+def format_post_caption(product: dict, original_price: int) -> str:
+    """Формує гарний підпис для посту в канал."""
+    sizes = product.get('sizes', [])
+    sizes_str = '–'.join([str(s) for s in [min(sizes), max(sizes)]]) if len(sizes) >= 2 else ', '.join(str(s) for s in sizes)
+    brand = product.get('brand', '')
+    name  = product.get('name', '')
+    price = product.get('price', 0)
+    gender_emoji = '👠' if product.get('gender') == 'Жінка' else '👟'
+
+    caption = (
+        f"✅ {brand} {name}\n\n"
+        f"💰 Ціна: {price} грн\n"
+        f"{gender_emoji} Розміри: {sizes_str}\n\n"
+        f"🔗 Замовити: https://t.me/znahidkawow\n"
+        f"🛍 Каталог: https://wowznahidka.github.io/wow-znahidka/"
+    )
+    return caption
+
+
+def send_to_channel(caption: str, photo_url: str = None):
+    """Надсилає пост у канал через Bot API."""
+    token = _bot_token()
+    if not token:
+        return
+    base = f'https://api.telegram.org/bot{token}'
+    try:
+        if photo_url:
+            req_lib.post(f'{base}/sendPhoto', json={
+                'chat_id': f'@{PUBLISH_CHANNEL}',
+                'photo': photo_url,
+                'caption': caption,
+            }, timeout=20)
+        else:
+            req_lib.post(f'{base}/sendMessage', json={
+                'chat_id': f'@{PUBLISH_CHANNEL}',
+                'text': caption,
+            }, timeout=15)
+    except Exception as e:
+        print(f'  ⚠️ TG post: {e}')
+
+
+def notify_owner(text: str):
+    """Короткий нотиф власнику в DM."""
+    owner = _owner_id()
+    token = _bot_token()
+    if not owner or not token:
+        return
+    try:
+        req_lib.post(f'https://api.telegram.org/bot{token}/sendMessage', json={
+            'chat_id': owner, 'text': text,
+        }, timeout=10)
+    except Exception:
+        pass
+
+
 def _gh_token() -> str:
     try:
         with open(ENV_PATH) as f:
@@ -163,13 +243,14 @@ async def process_album(messages: list):
         print(f"⏭ Скіп: {snippet}")
         return
 
-    name     = parsed['name']
-    price    = parsed.get('price', 0)
-    gender   = parsed.get('gender', '')
-    sizes_r  = parsed.get('sizes_raw', '')
-    prod_id  = f'tg_{main_msg.id}'
-    tg_link  = f'https://t.me/wooowznahidka/{main_msg.id}'
-    print(f"\n📦 {name} | {price} грн | {prod_id}")
+    name          = parsed['name']
+    original_price = parsed.get('price', 0)
+    price         = original_price + PRICE_MARGIN   # маржа +600
+    gender        = parsed.get('gender', '')
+    sizes_r       = parsed.get('sizes_raw', '')
+    prod_id       = f'tg_{main_msg.id}'
+    tg_link       = f'https://t.me/wooowznahidka/{main_msg.id}'
+    print(f"\n📦 {name} | {original_price}→{price} грн (+{PRICE_MARGIN}) | {prod_id}")
 
     photo_urls = []
     for i, msg in enumerate(messages, 1):
@@ -190,9 +271,10 @@ async def process_album(messages: list):
         print(f"  ⚠️ Жодного фото для {prod_id}")
         return
 
+    sizes_list = sizes_to_list(sizes_r)
     product = {
         'id': prod_id, 'brand': extract_brand(name), 'name': name,
-        'price': price, 'sizes': sizes_to_list(sizes_r), 'gender': gender,
+        'price': price, 'sizes': sizes_list, 'gender': gender,
         'isNew': True, 'available': True, 'tgLink': tg_link,
         'images': photo_urls, 'image': photo_urls[0],
     }
@@ -216,6 +298,15 @@ async def process_album(messages: list):
     ok = gh_put_file(AUTO_JSON, new_bytes, f'add {prod_id}', sha)
     if ok:
         print(f"  ✅ products_auto.json: {len(catalog['products'])} товарів")
+
+        # Пост у канал @wooowznahidka з маржою
+        caption = format_post_caption(product, original_price)
+        send_to_channel(caption, photo_urls[0] if photo_urls else None)
+        print(f"  📢 Запостили в @{PUBLISH_CHANNEL}")
+
+        # Нотиф власнику
+        notify_owner(f"✅ Новий товар: {extract_brand(name)} {name}\n💰 {price}₴")
+
         # Auto-post to Instagram & TikTok
         try:
             zernio_post(product)

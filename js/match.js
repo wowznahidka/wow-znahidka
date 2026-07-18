@@ -52,8 +52,8 @@ function _startMatchDeck(data) {
   S.matchFullPool = _pool;
   // Прапорці з опросника застосовуються один раз, далі — що обрав юзер чіпами
   if (_mqPrefs) {
-    S.matchSizeFilter = _mqPrefs.size   || 'all';
-    S.matchBudget     = _mqPrefs.budget || 'all';
+    S.matchSizeFilter = (_mqPrefs.sizes && _mqPrefs.sizes.length) ? _mqPrefs.sizes : 'all';
+    S.matchBudget     = 'all';
     _mqPrefs = null;
   } else {
     S.matchSizeFilter = S.matchSizeFilter || 'all';
@@ -65,18 +65,18 @@ function _startMatchDeck(data) {
 }
 
 // ── MATCH ONBOARDING QUIZ ────────────────────────────
-// 3 швидких кроки (для кого / розмір / бюджет) → колода одразу під людину.
+// 2 швидких кроки (для кого / розміри-мультивибір) → колода одразу під людину.
 // Показується один раз; далі керування — звичайними чіпами фільтрів.
 const MATCH_QUIZ_KEY = 'wow_match_quiz_v1';
 let _mq = null;        // поточний стан проходження
-let _mqPrefs = null;   // {size,budget} — застосувати при найближчому старті колоди
+let _mqPrefs = null;   // {sizes:[]} — застосувати при найближчому старті колоди
 
 function _mqDone() {
   try { return !!localStorage.getItem(MATCH_QUIZ_KEY); } catch(_) { return true; }
 }
 
 function _renderMatchQuiz() {
-  _mq = { step: 1, gender: null, size: null, budget: null };
+  _mq = { step: 1, gender: null, sizes: [] };
   document.getElementById('page-match')?.classList.add('quiz-on');
   _mqRenderStep();
 }
@@ -94,7 +94,7 @@ function _mqSizesFor(gender) {
 function _mqRenderStep() {
   const stage = document.getElementById('card-stage');
   if (!stage || !_mq) return;
-  const dots = [1, 2, 3].map(i => `<span class="mq-dot${i === _mq.step ? ' on' : ''}"></span>`).join('');
+  const dots = [1, 2].map(i => `<span class="mq-dot${i === _mq.step ? ' on' : ''}"></span>`).join('');
   let body = '';
   if (_mq.step === 1) {
     body = `
@@ -104,23 +104,16 @@ function _mqRenderStep() {
         <button class="mq-opt" onclick="mqPick('gender','female')">Жіночі</button>
         <button class="mq-opt mq-opt-soft" onclick="mqPick('gender','mixed')">Неважливо</button>
       </div>`;
-  } else if (_mq.step === 2) {
+  } else {
     const sizes = _mqSizesFor(_mq.gender);
     body = `
       <div class="mq-q">Який розмір?</div>
+      <div class="mq-hint">Можна кілька — повторний тап знімає вибір</div>
       <div class="mq-sizes">
-        ${sizes.map(s => `<button class="mq-sz" onclick="mqPick('size','${s}')">${s}</button>`).join('')}
+        ${sizes.map(s => `<button class="mq-sz${_mq.sizes.includes(String(s)) ? ' on' : ''}" onclick="mqToggleSize('${s}', this)">${s}</button>`).join('')}
       </div>
-      <button class="mq-skip-step" onclick="mqPick('size',null)">Пропустити</button>`;
-  } else {
-    body = `
-      <div class="mq-q">Бюджет?</div>
-      <div class="mq-opts">
-        <button class="mq-opt" onclick="mqPick('budget','2500')">до 2500₴</button>
-        <button class="mq-opt" onclick="mqPick('budget','3000')">2500–3000₴</button>
-        <button class="mq-opt" onclick="mqPick('budget',null)">3000₴+</button>
-        <button class="mq-opt mq-opt-soft" onclick="mqPick('budget',null)">Неважливо</button>
-      </div>`;
+      <button class="mq-go" onclick="_mqFinish()">Знайти мою пару</button>
+      <button class="mq-skip-step" onclick="_mq.sizes=[];_mqFinish()">Пропустити розмір</button>`;
   }
   stage.innerHTML = `
     <div class="mq-card">
@@ -137,16 +130,28 @@ function mqPick(field, val) {
   if (!_mq) return;
   _mq[field] = val;
   _haptic(10);
-  if (_mq.step < 3) { _mq.step++; _mqRenderStep(); return; }
-  _mqFinish();
+  _mq.step = 2;
+  _mqRenderStep();
+}
+
+// Мультивибір розмірів: тап додає, повторний тап знімає
+function mqToggleSize(s, btn) {
+  if (!_mq) return;
+  const v = String(s);
+  const i = _mq.sizes.indexOf(v);
+  if (i >= 0) _mq.sizes.splice(i, 1);
+  else _mq.sizes.push(v);
+  if (btn) btn.classList.toggle('on', i < 0);
+  _haptic(8);
 }
 
 function mqSkipAll() {
-  _mq = { step: 3, gender: null, size: null, budget: null };
+  _mq = { step: 2, gender: null, sizes: [] };
   _mqFinish();
 }
 
 function _mqFinish() {
+  if (!_mq) return;
   try { localStorage.setItem(MATCH_QUIZ_KEY, '1'); } catch(_) {}
   const stage = document.getElementById('card-stage');
   if (stage) stage.innerHTML = `
@@ -155,7 +160,7 @@ function _mqFinish() {
       <div class="mq-q">Зібрали колоду під тебе</div>
     </div>`;
   if (_mq.gender) setGender(_mq.gender, true);
-  _mqPrefs = { size: _mq.size || 'all', budget: _mq.budget || 'all' };
+  _mqPrefs = { sizes: [..._mq.sizes] };
   _mq = null;
   setTimeout(() => {
     document.getElementById('page-match')?.classList.remove('quiz-on');
@@ -175,20 +180,37 @@ function _preloadMatchImages() {
   }
 }
 
+// S.matchSizeFilter: 'all' або масив розмірів-рядків (товар підходить,
+// якщо має ХОЧА Б ОДИН із вибраних — 41 АБО 42 АБО 43)
+function _matchSizesSel() {
+  return Array.isArray(S.matchSizeFilter) ? S.matchSizeFilter : [];
+}
+
 function _buildSizeChips(pool) {
   const wrap = document.getElementById('match-size-filter');
   if (!wrap) return;
   const sizes = new Set();
   pool.forEach(p => (p.sizes || []).forEach(s => { const v = String(s); if (v && v !== '?') sizes.add(v); }));
   const sorted = [...sizes].sort((a, b) => parseFloat(a) - parseFloat(b));
-  const cur = String(S.matchSizeFilter || 'all');
-  wrap.innerHTML = `<button class="match-sz-chip${cur === 'all' ? ' active' : ''}" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
-    sorted.map(s => `<button class="match-sz-chip${cur === String(s) ? ' active' : ''}" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
+  const sel = _matchSizesSel();
+  wrap.innerHTML = `<button class="match-sz-chip${sel.length ? '' : ' active'}" data-sz="all" onclick="setMatchSize('all')">Всі</button>` +
+    sorted.map(s => `<button class="match-sz-chip${sel.includes(String(s)) ? ' active' : ''}" data-sz="${s}" onclick="setMatchSize('${s}')">${s}</button>`).join('');
 }
 
 function setMatchSize(sz) {
-  S.matchSizeFilter = sz;
-  document.querySelectorAll('#match-size-filter .match-sz-chip').forEach(c => c.classList.toggle('active', c.dataset.sz === sz));
+  if (sz === 'all') {
+    S.matchSizeFilter = 'all';
+  } else {
+    const v = String(sz);
+    const sel = [..._matchSizesSel()];
+    const i = sel.indexOf(v);
+    if (i >= 0) sel.splice(i, 1); else sel.push(v);
+    S.matchSizeFilter = sel.length ? sel : 'all';
+  }
+  const sel = _matchSizesSel();
+  document.querySelectorAll('#match-size-filter .match-sz-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.sz === 'all' ? !sel.length : sel.includes(c.dataset.sz));
+  });
   _applyMatchFilters();
 }
 
@@ -211,8 +233,8 @@ function setMatchBudget(b) {
 // Спільне перефільтрування пулу (розмір + бюджет) і старт нової серії
 function _applyMatchFilters() {
   let pool = [...(S.matchFullPool || [])];
-  const sz = S.matchSizeFilter;
-  if (sz && sz !== 'all') pool = pool.filter(p => p.sizes && p.sizes.map(String).includes(String(sz)));
+  const sel = _matchSizesSel();
+  if (sel.length) pool = pool.filter(p => p.sizes && p.sizes.map(String).some(s => sel.includes(s)));
   const b = S.matchBudget;
   if (b && b !== 'all') pool = pool.filter(p => (Number(p.price) || 0) <= Number(b));
   S.matchPool   = pool;

@@ -40,7 +40,7 @@ async def auth():
         print("Скануй QR-код в Telegram → Налаштування → Пристрої → Підключити пристрій")
         print("Очікую...")
 
-        await qr_login.wait()
+        await qr_login.wait(timeout=300)
         print()
         print("✅ Авторизація успішна! Тепер можна запускати grabber_general_stores.py")
 

@@ -2111,3 +2111,19 @@
 .m-nope { color: #2a2a2e; }
 .m-like { color: #fff; }
 .m-like svg { width: 30px; height: 30px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15)); }
+
+/* Квіз: мультивибір розмірів + головна кнопка */
+.mq-hint { font-size: 12.5px; color: rgba(13,13,13,0.45); font-weight: 500; margin-top: -10px; }
+.mq-sz.on {
+  background: var(--red, #ff3e3e); border-color: var(--red, #ff3e3e);
+  color: #fff; box-shadow: 0 4px 14px rgba(255,62,62,0.3);
+}
+.mq-go {
+  width: 100%; max-width: 300px; padding: 15px 18px;
+  font-family: 'Sora', sans-serif; font-size: 15.5px; font-weight: 800;
+  color: #fff; background: linear-gradient(145deg, #ff3e3e 0%, #e8103a 100%);
+  border: none; border-radius: 14px; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255,62,62,0.35);
+  transition: transform .15s ease;
+}
+.mq-go:active { transform: scale(.97); }
