@@ -49,6 +49,8 @@ async function renderCatalog() {
   if (cv && !cv.querySelector('.product-card')) {
     cv.innerHTML = `<div class="prods-grid cat-main-grid">${skelGridCards(6)}</div>`;
   }
+  // Поки каталог ще не завантажений — нейтральний стан лічильників замість «0 моделей»
+  if (!_catalogReady()) _setCatalogCountsLoading();
   const data = await fetchCatalog();
   updateTimestamp();
   renderSizeChips();
@@ -409,9 +411,12 @@ function renderSearchResults(data) {
       <p style="font-size:13px;color:var(--text-muted);margin-top:6px">Спробуй: Nike, Adidas, 9060, Dunk, Gazelle</p>
       <button class="tg-link-btn" onclick="openRequestSheet('pick')">💬 Підберемо за тебе</button>
     </div>`;
+    // Головний лічильник має відповідати пошуку, а не всьому каталогу
+    updateResultsCount(0);
     return;
   }
   const count = scored.length;
+  updateResultsCount(count);
   el.innerHTML = `
     <div class="search-results-header">
       <span>${count} результат${count===1?'':count<5?'и':'ів'} — «${esc(S.searchQ.length > 38 ? S.searchQ.slice(0,38) + '…' : S.searchQ)}»</span>
@@ -761,23 +766,88 @@ function clearAllFilters() {
   S.quickFilter = 'all';
   S.priceMin = 0;
   S.priceMax = PRICE_MAX;
+  // Пошук — теж фільтр: без цього після «Скинути все» лишався активний запит,
+  // хрестик × у полі та результати пошуку замість повного каталогу.
+  S.searchQ = '';
+  const searchInp = document.getElementById('cat-search');
+  if (searchInp) searchInp.value = '';
+  document.getElementById('cat-search-clear')?.classList.remove('vis');
+  if (typeof _hideSuggestions === 'function') _hideSuggestions();
   document.querySelectorAll('.g-chip').forEach(b => b.classList.toggle('active', b.dataset.gender === 'mixed'));
   document.querySelectorAll('.cat-quick').forEach(b => b.classList.toggle('on', b.dataset.quick === 'all'));
+  _syncDesktopSidebarReset();
   renderSizeChips();
   renderPriceSlider();
-  _applyFilters();
+  // Повний ререндер, а не _updateCatalogGrid: інакше brand-stories лишаються
+  // з активним кільцем і чипом «× Nike» попри вже скинутий S.catBrand.
+  const data = getCatalog();
+  if (data) _renderUnifiedCatalog(data);
+  _syncFiltersToUrl();
   updateActiveFiltersChips();
 }
 
-// ── RESULTS COUNTER ──────────────────────────────────
-function updateResultsCount(n) {
-  const el = document.getElementById('cat-count');
-  if (!el) return;
-  if (n == null || n === undefined) { el.textContent = ''; return; }
-  const word = (n % 10 === 1 && n % 100 !== 11) ? 'пара' :
-               (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'пари' : 'пар';
-  el.innerHTML = `<b>${n}</b> ${word} під твій вибір`;
+// Desktop-сайдбар має власні чипи/чекбокси — тримаємо їх у синхроні зі станом S
+function _syncDesktopSidebarReset() {
+  const sb = document.getElementById('desktop-filter-sidebar');
+  if (!sb) return;
+  sb.querySelectorAll('.dsf-chip').forEach(b => b.classList.remove('active'));
+  sb.querySelectorAll('.dsf-chip[onclick*="mixed"]').forEach(b => b.classList.add('active'));
+  const cbIn = document.getElementById('dsf-in-stock');
+  const cbLp = document.getElementById('dsf-last-pair');
+  if (cbIn) cbIn.checked = false;
+  if (cbLp) cbLp.checked = false;
 }
+
+// ── RESULTS COUNTER ──────────────────────────────────
+function _pairsWord(n) {
+  return (n % 10 === 1 && n % 100 !== 11) ? 'пара' :
+         (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'пари' : 'пар';
+}
+
+function _modelsWord(n) {
+  return (n % 10 === 1 && n % 100 !== 11) ? 'модель' :
+         (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'моделі' : 'моделей';
+}
+
+function _catalogReady() {
+  return !!(typeof S !== 'undefined' && S.catalog && S.catalog.all && S.catalog.all.length);
+}
+
+// Нейтральний loading-стан: користувач ніколи не бачить «0 моделей»
+// до того, як каталог реально завантажився.
+function _setCatalogCountsLoading() {
+  const cat = document.getElementById('cat-count');
+  if (cat) cat.innerHTML = '';
+  const dsf = document.getElementById('dsf-count');
+  if (dsf) { dsf.textContent = '…'; dsf.classList.add('is-loading'); }
+  const btn = document.getElementById('dsf-show-btn');
+  if (btn) {
+    btn.innerHTML = 'Показати <span id="dsf-show-count">…</span>';
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+  }
+}
+
+// Єдине джерело істини для всіх лічильників каталогу:
+// #cat-count (колонка), #dsf-count і #dsf-show-btn (desktop-сайдбар).
+function updateResultsCount(n) {
+  if (n == null || !_catalogReady()) { _setCatalogCountsLoading(); return; }
+  const el = document.getElementById('cat-count');
+  if (el) el.innerHTML = `<b>${n}</b> ${_pairsWord(n)} під твій вибір`;
+  const dsf = document.getElementById('dsf-count');
+  if (dsf) { dsf.textContent = `${n} ${_modelsWord(n)}`; dsf.classList.remove('is-loading'); }
+  const btn = document.getElementById('dsf-show-btn');
+  if (btn) {
+    btn.innerHTML = `Показати <span id="dsf-show-count">${n}</span> ${_pairsWord(n)}`;
+    btn.disabled = (n === 0);
+    btn.classList.remove('is-loading');
+  }
+}
+
+// Стартовий стан: до першого рендера каталогу — «…», не «0 моделей»
+document.addEventListener('DOMContentLoaded', () => {
+  if (!_catalogReady()) _setCatalogCountsLoading();
+});
 
 // ── INTEGRATE WITH FILTER CHAIN ──────────────────────
 // Override the existing _renderUnifiedCatalog to include quick + sort + counter + active chips
